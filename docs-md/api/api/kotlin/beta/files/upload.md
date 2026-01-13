@@ -1,0 +1,170 @@
+# Upload File
+
+Copy page
+
+Kotlin
+
+# Upload File
+
+beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none()) : [FileMetadata](api/beta.md)
+
+post/v1/files
+
+Upload File
+
+##### ParametersExpand Collapse
+
+params: FileUploadParams
+
+betas: Optional<List<AnthropicBeta>>
+
+Optional header to specify the beta version(s) you want to use.
+
+MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+
+PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+
+COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+
+COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+
+PDFS\_2024\_09\_25("pdfs-2024-09-25")
+
+TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+
+TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+
+OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+
+FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+
+MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+
+MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+
+DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+
+INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+
+CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+
+EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+
+CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+
+CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+
+MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+
+SKILLS\_2025\_10\_02("skills-2025-10-02")
+
+file: String
+
+The file to upload
+
+formatbinary
+
+##### ReturnsExpand Collapse
+
+class FileMetadata:
+
+id: String
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+createdAt: LocalDateTime
+
+RFC 3339 datetime string representing when the file was created.
+
+formatdate-time
+
+filename: String
+
+Original filename of the uploaded file.
+
+maxLength500
+
+minLength1
+
+mimeType: String
+
+MIME type of the file.
+
+maxLength255
+
+minLength1
+
+sizeBytes: Long
+
+Size of the file in bytes.
+
+minimum0
+
+type: JsonValue; "file"constant"file"constant
+
+Object type.
+
+For files, this is always `"file"`.
+
+Accepts one of the following:
+
+FILE("file")
+
+downloadable: Optional<Boolean>
+
+Whether the file can be downloaded.
+
+Upload File
+
+Kotlin
+
+```shiki
+package com.anthropic.example
+
+import com.anthropic.client.AnthropicClient
+import com.anthropic.client.okhttp.AnthropicOkHttpClient
+import com.anthropic.models.beta.files.FileMetadata
+import com.anthropic.models.beta.files.FileUploadParams
+import java.io.ByteArrayInputStream
+
+fun main() {
+    val client: AnthropicClient = AnthropicOkHttpClient.fromEnv()
+
+    val params: FileUploadParams = FileUploadParams.builder()
+        .file("some content".byteInputStream())
+        .build()
+    val fileMetadata: FileMetadata = client.beta().files().upload(params)
+}
+```
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```

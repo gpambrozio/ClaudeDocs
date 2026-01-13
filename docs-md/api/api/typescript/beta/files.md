@@ -1,0 +1,105 @@
+# Files
+
+Copy page
+
+TypeScript
+
+# Files
+
+##### [Upload File](api/beta/files/upload.md)
+
+client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+
+post/v1/files
+
+##### [List Files](api/beta/files/list.md)
+
+client.beta.files.list(FileListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 4 more } >
+
+get/v1/files
+
+##### [Download File](api/beta/files/download.md)
+
+client.beta.files.download(stringfileID, FileDownloadParams { betas } params?, RequestOptionsoptions?): Response
+
+get/v1/files/{file\_id}/content
+
+##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
+
+client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+
+get/v1/files/{file\_id}
+
+##### [Delete File](api/beta/files/delete.md)
+
+client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta.md) { id, type }
+
+delete/v1/files/{file\_id}
+
+##### ModelsExpand Collapse
+
+DeletedFile { id, type }
+
+id: string
+
+ID of the deleted file.
+
+type?: "file\_deleted"
+
+Deleted object type.
+
+For file deletion, this is always `"file_deleted"`.
+
+Accepts one of the following:
+
+"file\_deleted"
+
+FileMetadata { id, created\_at, filename, 4 more }
+
+id: string
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+RFC 3339 datetime string representing when the file was created.
+
+formatdate-time
+
+filename: string
+
+Original filename of the uploaded file.
+
+maxLength500
+
+minLength1
+
+mime\_type: string
+
+MIME type of the file.
+
+maxLength255
+
+minLength1
+
+size\_bytes: number
+
+Size of the file in bytes.
+
+minimum0
+
+type: "file"
+
+Object type.
+
+For files, this is always `"file"`.
+
+Accepts one of the following:
+
+"file"
+
+downloadable?: boolean
+
+Whether the file can be downloaded.

@@ -13,6 +13,7 @@ Usage:
 #     "beautifulsoup4>=4.12",
 #     "markdownify>=0.11",
 #     "lxml>=5.0",
+#     "httpx>=0.27",
 # ]
 # ///
 
@@ -23,7 +24,9 @@ import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
+from xml.etree import ElementTree
 
+import httpx
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 from playwright.async_api import async_playwright
@@ -37,11 +40,14 @@ SITES = [
         "name": "claude-code",
         "start_url": "https://code.claude.com/docs/en/",
         "url_pattern": r"^https://code\.claude\.com/docs/en",
+        "use_sitemap": False,
     },
     {
         "name": "api",
         "start_url": "https://platform.claude.com/docs/en/",
         "url_pattern": r"^https://platform\.claude\.com/docs/en",
+        "sitemap_url": "https://platform.claude.com/sitemap.xml",
+        "use_sitemap": True,
     },
 ]
 
@@ -179,14 +185,60 @@ def url_to_filepath(url: str, site_name: str) -> Path:
     return OUTPUT_DIR / site_name / f"{rel_path}.md"
 
 
+async def get_sitemap_urls(sitemap_url: str, url_pattern: str) -> list[str]:
+    """Fetch and parse sitemap to get all matching URLs."""
+    pattern = re.compile(url_pattern)
+    urls = []
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(sitemap_url, timeout=30)
+        response.raise_for_status()
+
+        # Parse XML
+        root = ElementTree.fromstring(response.content)
+
+        # Handle both sitemap index and urlset
+        ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+
+        # Check for sitemap index
+        sitemaps = root.findall(".//sm:sitemap/sm:loc", ns)
+        if sitemaps:
+            # It's a sitemap index, fetch each sub-sitemap
+            for sitemap in sitemaps:
+                sub_url = sitemap.text
+                if sub_url:
+                    try:
+                        sub_response = await client.get(sub_url, timeout=30)
+                        sub_root = ElementTree.fromstring(sub_response.content)
+                        for loc in sub_root.findall(".//sm:url/sm:loc", ns):
+                            if loc.text and pattern.match(loc.text):
+                                urls.append(loc.text)
+                    except Exception as e:
+                        print(f"  Error fetching sub-sitemap {sub_url}: {e}")
+        else:
+            # It's a regular urlset
+            for loc in root.findall(".//sm:url/sm:loc", ns):
+                if loc.text and pattern.match(loc.text):
+                    urls.append(loc.text)
+
+    return urls
+
+
 async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
     """Crawl a documentation site and return list of (url, title, markdown) tuples."""
     results = []
     visited = set()
-    to_visit = [site["start_url"]]
     pattern = re.compile(site["url_pattern"])
 
     print(f"\nCrawling {site['name']}...")
+
+    # Get URLs to visit
+    if site.get("use_sitemap") and site.get("sitemap_url"):
+        print(f"  Fetching URLs from sitemap...")
+        to_visit = await get_sitemap_urls(site["sitemap_url"], site["url_pattern"])
+        print(f"  Found {len(to_visit)} URLs in sitemap")
+    else:
+        to_visit = [site["start_url"]]
 
     page = await browser.new_page()
 
@@ -208,11 +260,10 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
             response = await page.goto(url, wait_until="networkidle", timeout=30000)
 
             if not response or response.status >= 400:
-                print(f"  Skipping {url} (HTTP {response.status if response else 'None'})")
                 continue
 
             # Wait for content to render
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(2000)
 
             # Get rendered HTML
             html = await page.content()
@@ -221,7 +272,6 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
             # Skip pages that didn't load
             body_text = soup.body.get_text() if soup.body else ""
             if body_text.count("Loading...") > 5:
-                print(f"  Skipping {url} (still loading)")
                 continue
 
             # Extract content
@@ -239,7 +289,6 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
 
             # Skip very short content
             if len(markdown) < 100:
-                print(f"  Skipping {url} (content too short)")
                 continue
 
             # Add title if not present
@@ -249,19 +298,20 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
             results.append((url, title, markdown))
             print(f"  {title}")
 
-            # Find more links
-            for link in soup.find_all("a", href=True):
-                href = link["href"]
-                if href.startswith(("#", "mailto:", "javascript:")):
-                    continue
+            # If not using sitemap, discover more links
+            if not site.get("use_sitemap"):
+                for link in soup.find_all("a", href=True):
+                    href = link["href"]
+                    if href.startswith(("#", "mailto:", "javascript:")):
+                        continue
 
-                if not href.startswith(("http://", "https://")):
-                    href = urljoin(url, href)
+                    if not href.startswith(("http://", "https://")):
+                        href = urljoin(url, href)
 
-                href = href.split("#")[0].rstrip("/")
+                    href = href.split("#")[0].rstrip("/")
 
-                if href and href not in visited and pattern.match(href):
-                    to_visit.append(href)
+                    if href and href not in visited and pattern.match(href):
+                        to_visit.append(href)
 
         except Exception as e:
             print(f"  Error: {url} - {e}")
