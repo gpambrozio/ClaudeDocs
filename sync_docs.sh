@@ -8,8 +8,8 @@ echo "=== Claude Docs Sync ==="
 echo "Date: $(date)"
 echo ""
 
-# Run the Playwright-based crawler
-uv run sync_docs.py
+# Run the Playwright-based crawler (unbuffered for real-time output with tee)
+PYTHONUNBUFFERED=1 uv run sync_docs.py
 
 echo ""
 echo "=== Sync Complete ==="
