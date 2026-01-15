@@ -19,7 +19,6 @@ Usage:
 
 import asyncio
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -229,21 +228,35 @@ async def get_sitemap_urls(sitemap_url: str, url_pattern: str) -> list[str]:
     return urls
 
 
-async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
-    """Crawl a documentation site and return list of (url, title, markdown) tuples."""
+async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], set[str]]:
+    """Crawl a documentation site and return (results, valid_urls).
+
+    Results is a list of (url, title, markdown) tuples.
+    valid_urls is the set of all URLs that should exist (from sitemap or discovery).
+    """
     results = []
     visited = set()
+    valid_urls = set()  # All URLs that should exist (even if they timeout)
     pattern = re.compile(site["url_pattern"])
 
     print(f"\nCrawling {site['name']}...")
 
     # Get URLs to visit
     if site.get("use_sitemap") and site.get("sitemap_url"):
-        print(f"  Fetching URLs from sitemap...")
+        print("  Fetching URLs from sitemap...")
         to_visit = await get_sitemap_urls(site["sitemap_url"], site["url_pattern"])
+        # All sitemap URLs are valid (even if they timeout during crawl)
+        for url in to_visit:
+            normalized = url.split("#")[0].rstrip("/")
+            if normalized and normalized not in SKIP_URLS:
+                valid_urls.add(normalized)
         print(f"  Found {len(to_visit)} URLs in sitemap")
     else:
         to_visit = [site["start_url"]]
+        # Add start URL as valid for link discovery mode
+        start_normalized = site["start_url"].split("#")[0].rstrip("/")
+        if start_normalized:
+            valid_urls.add(start_normalized)
 
     page = await browser.new_page()
 
@@ -318,14 +331,16 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
 
                     href = href.split("#")[0].rstrip("/")
 
-                    if href and href not in visited and pattern.match(href):
-                        to_visit.append(href)
+                    if href and pattern.match(href) and href not in SKIP_URLS:
+                        valid_urls.add(href)  # Track as valid even if not yet visited
+                        if href not in visited:
+                            to_visit.append(href)
 
         except Exception as e:
             print(f"  Error: {url} - {e}")
 
     await page.close()
-    return results
+    return results, valid_urls
 
 
 async def main():
@@ -340,18 +355,22 @@ async def main():
         capture_output=True,
     )
 
-    # Clean output
-    if OUTPUT_DIR.exists():
-        shutil.rmtree(OUTPUT_DIR)
-    OUTPUT_DIR.mkdir(parents=True)
+    # Ensure output directory exists
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     total = 0
+    all_valid_filepaths = set()
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
 
         for site in SITES:
-            results = await crawl_site(site, browser)
+            results, valid_urls = await crawl_site(site, browser)
+
+            # Track all valid filepaths for this site
+            for url in valid_urls:
+                filepath = url_to_filepath(url, site["name"])
+                all_valid_filepaths.add(filepath)
 
             # Write files
             for url, title, markdown in results:
@@ -364,7 +383,20 @@ async def main():
 
         await browser.close()
 
-    print(f"\nTotal: {total} files saved to {OUTPUT_DIR}/")
+    # Remove files that are no longer in the docs
+    removed = 0
+    for filepath in OUTPUT_DIR.rglob("*.md"):
+        if filepath not in all_valid_filepaths:
+            filepath.unlink()
+            removed += 1
+            print(f"  Removed: {filepath.relative_to(OUTPUT_DIR)}")
+
+    # Clean up empty directories
+    for dirpath in sorted(OUTPUT_DIR.rglob("*"), reverse=True):
+        if dirpath.is_dir() and not any(dirpath.iterdir()):
+            dirpath.rmdir()
+
+    print(f"\nTotal: {total} files saved, {removed} removed from {OUTPUT_DIR}/")
 
 
 if __name__ == "__main__":
