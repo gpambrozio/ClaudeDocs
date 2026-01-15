@@ -22,20 +22,20 @@ After determining all changes commit all doc changes. Note the new commit hash.
 Then create a markdown in this format:
 
 ```
-# [Claude docs changes for <today's date, ie Sept, 10th 2025>](https://github.com/gpambrozio/ClaudeDocs/tree/{commit-hash})
+# [Claude docs changes for <today's date, ie Sept, 10th 2025>](https://github.com/gpambrozio/ClaudeDocs/tree/{commit-hash}) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/{commit-hash})]
 
 ## New Documents
 
-### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Original](link_to_source)]
+### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
 
 New file that describes the new X feature. It shows how to use it and how to configure it...
 
 ## Changed documents
 
-### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Original](link_to_source)]
+### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
 
-* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)] [[Original](link_to_source#anchor)]
-* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)] [[Original](link_to_source#anchor)]
+* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)] [[Source](link_to_source#anchor)]
+* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)] [[Source](link_to_source#anchor)]
 ```
 
 To determine link_to_source you need to map the file name here using this mapping logic:
@@ -50,7 +50,7 @@ docs-md/claude-code/common-workflows.md
 docs-md/api/build-with-claude/vision.md
   → https://platform.claude.com/docs/en/build-with-claude/vision
 
-The anchor to use on the original link is the closest anchor right above the given change. If necessary read the full file to determine that.
+The anchor to use on the source link is the closest anchor right above the given change. If necessary read the full file to determine that.
 
 File names on link descriptions should not include the .md extension. Order files by name in the doc.
 
