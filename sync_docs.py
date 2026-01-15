@@ -34,6 +34,11 @@ from playwright.async_api import async_playwright
 
 OUTPUT_DIR = Path("docs-md")
 
+# URLs to skip (e.g., pages that always timeout or fail)
+SKIP_URLS = {
+    "https://code.claude.com/docs/en/changelog",
+}
+
 # Documentation sites to crawl
 SITES = [
     {
@@ -248,6 +253,9 @@ async def crawl_site(site: dict, browser) -> list[tuple[str, str, str]]:
         # Normalize URL (remove fragment, trailing slash)
         url = url.split("#")[0].rstrip("/")
         if not url:
+            continue
+
+        if url in SKIP_URLS:
             continue
 
         if url in visited or not pattern.match(url):
