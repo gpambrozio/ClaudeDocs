@@ -228,6 +228,9 @@ async def get_sitemap_urls(sitemap_url: str, url_pattern: str) -> list[str]:
     return urls
 
 
+MAX_RETRIES = 2  # Number of retries for timeouts
+
+
 async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], set[str]]:
     """Crawl a documentation site and return (results, valid_urls).
 
@@ -237,6 +240,7 @@ async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], s
     results = []
     visited = set()
     valid_urls = set()  # All URLs that should exist (even if they timeout)
+    retry_count: dict[str, int] = {}  # Track retries per URL
     pattern = re.compile(site["url_pattern"])
 
     print(f"\nCrawling {site['name']}...")
@@ -337,7 +341,16 @@ async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], s
                             to_visit.append(href)
 
         except Exception as e:
-            print(f"  Error: {url} - {e}")
+            is_timeout = "Timeout" in str(e)
+            retries = retry_count.get(url, 0)
+
+            if is_timeout and retries < MAX_RETRIES:
+                retry_count[url] = retries + 1
+                visited.discard(url)  # Allow retry
+                to_visit.append(url)
+                print(f"  Timeout (retry {retries + 1}/{MAX_RETRIES}): {url}")
+            else:
+                print(f"  Error: {url} - {e}")
 
     await page.close()
     return results, valid_urls
