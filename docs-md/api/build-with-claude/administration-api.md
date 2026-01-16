@@ -16,6 +16,7 @@ When you use the Admin API:
 
 1. You make requests using your Admin API key in the `x-api-key` header
 2. The API allows you to manage:
+
    - Organization members and their roles
    - Organization member invites
    - Workspaces and their members
@@ -77,7 +78,7 @@ curl --request POST "https://api.anthropic.com/v1/organizations/invites" \
   --header "anthropic-version: 2023-06-01" \
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
   --data '{
-    "email": "[email protected]",
+    "email": "newuser@domain.com",
     "role": "developer"
   }'
 

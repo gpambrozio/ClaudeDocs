@@ -114,11 +114,11 @@ Manage issues, projects & team workflows in Linear
 
 URL
 
-`https://mcp.linear.app/sse`
+`https://mcp.linear.app/mcp`
 
 [Netlify](https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/)
 
-Create, deploy, manage, and secure websites on Netlify
+Create, deploy, manage, and secure websites on Netlify.
 
 URL
 
@@ -134,11 +134,11 @@ URL
 
 [Hugging Face](https://huggingface.co/settings/mcp)
 
-Access the HF Hub and thousands of Gradio Apps
+Access the Hugging Face Hub and thousands of Gradio Apps
 
 URL
 
-`https://huggingface.co/mcp?login`
+`https://huggingface.co/mcp?login&gradio=none`
 
 [ActiveCampaign](https://developers.activecampaign.com/page/mcp)
 
@@ -174,7 +174,7 @@ Access and analyze blockchain data
 
 URL
 
-`https://mcp.blockscout.com/mcp`
+`https://mcp.blockscout.com/mcp/`
 
 [MT Newswires](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
@@ -194,7 +194,7 @@ URL
 
 [Canva](https://www.canva.dev/docs/connect/canva-mcp-server-setup/)
 
-Search, create, autofill, and export Canva designs from a prompt
+Search, create, autofill, and export Canva designs
 
 URL
 
@@ -208,7 +208,7 @@ URL
 
 `https://mcp.cloud.cdata.com/mcp`
 
-[PubMed](https://support.claude.com/en/articles/12614801-using-the-pubmed-connector-in-claude)
+[PubMed](https://support.claude.com/en/)
 
 Search biomedical literature from PubMed
 
@@ -226,19 +226,19 @@ URL
 
 [Close](mcp-server.md)
 
-Securely connect Claude to your Close data
+Connect Claude to Close CRM to securely access and act on your sales data
 
 URL
 
 `https://mcp.close.com/mcp`
 
-[Cloudflare](https://developers.cloudflare.com/agents/model-context-protocol/mcp-servers-for-cloudflare/)
+[Cloudflare Developer Platform](https://www.support.cloudflare.com/)
 
 Build applications with compute, storage, and AI
 
 URL
 
-`https://docs.mcp.cloudflare.com/mcp`
+`https://bindings.mcp.cloudflare.com/mcp`
 
 [Cloudinary](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
 
@@ -264,7 +264,7 @@ URL
 
 `https://mcp.crypto.com/market-data/mcp`
 
-[Daloopa](https://docs.daloopa.com/docs/daloopa-mcp)
+[Daloopa](https://docs.daloopa.com/docs/daloopa-mcp#/)
 
 Financial fundamental data and KPIs with hyperlinks
 
@@ -280,7 +280,7 @@ Requires user-specific URL. [Get your URL here](https://docs.databricks.com/aws/
 
 [Egnyte](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
-Securely access and analyze Egnyte content.
+Securely access and analyze Egnyte content
 
 URL
 
@@ -316,7 +316,7 @@ URL
 
 `https://api.godaddy.com/v1/domains/mcp`
 
-[Hubspot](https://developers.hubspot.com/mcp)
+[HubSpot](https://knowledge.hubspot.com/integrations/set-up-and-use-the-hubspot-connector-for-claude)
 
 Chat with your CRM data to get personalized insights
 
@@ -342,13 +342,13 @@ URL
 
 [Intercom](https://developers.intercom.com/docs/guides/mcp)
 
-AI access to Intercom data for better customer insights
+Access to Intercom data for better customer insights
 
 URL
 
 `https://mcp.intercom.com/mcp`
 
-[Jotform](https://www.jotform.com/developers/mcp)
+[Jotform](https://www.jotform.com/developers/mcp/)
 
 Create forms & analyze submissions inside Claude
 
@@ -366,7 +366,7 @@ URL
 
 [S&P Global](https://docs.kensho.com/llmreadyapi/mcp)
 
-Query a range of S&P Global datasets, like Financials
+Query a range of S&P Global datasets
 
 URL
 
@@ -390,7 +390,7 @@ URL
 
 [LSEG](https://www.lseg.com/en/solutions/ai-finance-solutions/anthropic)
 
-Access best in class data & analytics across a broad spectrum of asset classes
+Access best in class data & analytics across a broad spectrum of asset classes.
 
 URL
 
@@ -412,7 +412,7 @@ URL
 
 `https://mcp.mercury.com/mcp`
 
-[Monday](https://developer.monday.com/apps/docs/mondaycom-mcp-integration)
+[monday.com](https://developer.monday.com/apps/docs/mondaycom-mcp-integration)
 
 Manage projects, boards, and workflows in monday.com
 
@@ -420,7 +420,7 @@ URL
 
 `https://mcp.monday.com/mcp`
 
-[Moody's Analytics](https://www.moodys.com/web/en/us/genai/model-context-protocol.html)
+[Moody's](https://www.moodys.com/web/en/us/genai/model-context-protocol.html)
 
 Risk insights, analytics, and decision intelligence
 
@@ -460,7 +460,7 @@ URL
 
 `https://mcp.k.owkin.com/mcp`
 
-[PayPal](https://developer.paypal.com/tools/mcp-server/)
+[PayPal](https://mcp.paypal.com/)
 
 Access PayPal payments platform
 
@@ -468,7 +468,7 @@ URL
 
 `https://mcp.paypal.com/mcp`
 
-[PitchBook](https://help.pitchbook.com/s/article/PitchBook-Premium-for-Claude-by-Anthropic)
+[PitchBook Premium](https://help.pitchbook.com/s/article/PitchBook-Premium-for-Claude-by-Anthropic)
 
 PitchBook data, embedded in the way you work.
 
@@ -520,7 +520,7 @@ Analyze, debug, and manage projects and deployments
 
 URL
 
-`https://mcp.vercel.com`
+`https://mcp.vercel.com/`
 
 [Visier](https://docs.visier.com/developer/agents/mcp/mcp-server.htm)
 
@@ -578,7 +578,7 @@ Access business data from hundreds of sources
 
 URL
 
-`https://mcp.coupler.io/mcp`
+`https://mcp.coupler.io/mcp/`
 
 [Dice](https://www.dice.com/about/mcp)
 

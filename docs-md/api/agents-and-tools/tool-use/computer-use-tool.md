@@ -298,7 +298,7 @@ Available in Claude 4 models and Claude Sonnet 3.7:
 - **right\_click**, **middle\_click** - Additional mouse buttons
 - **double\_click**, **triple\_click** - Multiple clicks
 - **left\_mouse\_down**, **left\_mouse\_up** - Fine-grained click control
-- **hold\_key** - Hold a key while performing other actions
+- **hold\_key** - Hold down a key for a specified duration (in seconds)
 - **wait** - Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
@@ -308,6 +308,8 @@ Available in Claude Opus 4.5:
 - **zoom** - View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
 
 ### Example actions
+
+### Modifier keys with click and scroll actions
 
 ### Tool parameters
 

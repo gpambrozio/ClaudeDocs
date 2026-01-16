@@ -36,9 +36,7 @@ In-depth production guides for building common use cases with Claude.](about-cla
 
 Key terms and concepts for working with Claude and language models.](about-claude/glossary.md)
 
-## 
-
-Resources for AI ingestion
+## Resources for AI ingestion
 
 [API primer for Claude ingestion
 

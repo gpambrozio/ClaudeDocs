@@ -323,7 +323,7 @@ Tips:
 
 ## [​](#use-plan-mode-for-safe-code-analysis) Use Plan Mode for safe code analysis
 
-Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely.
+Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](settings.md) to gather requirements and clarify your goals before proposing a plan.
 
 ### [​](#when-to-use-plan-mode) When to use Plan Mode
 
@@ -403,6 +403,47 @@ Ask AI
 ```
 
 See [settings documentation](settings.md) for more configuration options.
+
+## [​](#let-claude-interview-you) Let Claude interview you
+
+For large features, start with a minimal spec and let Claude interview you to fill in the details:
+
+Copy
+
+Ask AI
+
+```shiki
+> Interview me about this feature before you start: user notification system
+```
+
+Copy
+
+Ask AI
+
+```shiki
+> Help me think through the requirements for authentication by asking questions
+```
+
+Copy
+
+Ask AI
+
+```shiki
+> Ask me clarifying questions to build out this spec: payment processing
+```
+
+Claude uses the [`AskUserQuestion`](settings.md) tool to ask you multiple-choice questions for gathering requirements, clarifying ambiguity, and understanding your preferences before writing any code. This collaborative approach produces better specs than trying to anticipate every requirement upfront.
+This behavior is most active in Plan Mode. To encourage it in other modes, add guidance to your `CLAUDE.md` file:
+
+Copy
+
+Ask AI
+
+```shiki
+Always ask clarifying questions when there are multiple valid approaches to a task.
+```
+
+If you’re building applications with the Agent SDK and want to surface clarifying questions to your users programmatically, see [Handle approvals and user input](agent-sdk/user-input.md).
 
 ---
 

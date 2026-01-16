@@ -139,7 +139,7 @@ The API returns data in the following format:
       "date": "2025-09-01T00:00:00Z",
       "actor": {
         "type": "user_actor",
-        "email_address": "[email protected]"
+        "email_address": "developer@company.com"
       },
       "organization_id": "dc9f6c26-b22c-4831-8d01-0446bada88f1",
       "customer_type": "api",

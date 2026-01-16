@@ -109,7 +109,7 @@ Response 200
     {
       "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "added_at": "2024-10-30T23:58:27.427722Z",
-      "email": "[email protected]",
+      "email": "user@emaildomain.com",
       "name": "Jane Doe",
       "role": "user",
       "type": "user"
@@ -131,7 +131,7 @@ Response 200
     {
       "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "added_at": "2024-10-30T23:58:27.427722Z",
-      "email": "[email protected]",
+      "email": "user@emaildomain.com",
       "name": "Jane Doe",
       "role": "user",
       "type": "user"

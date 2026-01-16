@@ -12,17 +12,21 @@ Copy page
 > Categories:
 >
 > - Product Features and Functionality
+>
 >   - Core Features - Positive
 >     User Experience and Design
 >   - Ease of Use - Positive
 >   - Visual Design and Aesthetics - Positive
 > - Mobile and Cross-Platform Compatibility
+>
 >   - Mobile App Functionality - Negative
 >   - Responsive Design - Negative
 >   - Device and OS Compatibility - Negative
 > - Third-Party Integrations and API
+>
 >   - Integration Functionality and Reliability - Negative
 > - Customer Support and Service
+>
 >   - Responsiveness and Availability - Positive
 >   - Issue Resolution and Follow-up - Positive
 

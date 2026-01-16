@@ -201,7 +201,7 @@ Response 200
   "data": [
     {
       "actor": {
-        "email_address": "[email protected]",
+        "email_address": "user@emaildomain.com",
         "type": "user_actor"
       },
       "core_metrics": {
@@ -280,7 +280,7 @@ Response 200
   "data": [
     {
       "actor": {
-        "email_address": "[email protected]",
+        "email_address": "user@emaildomain.com",
         "type": "user_actor"
       },
       "core_metrics": {

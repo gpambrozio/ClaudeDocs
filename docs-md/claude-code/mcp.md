@@ -114,7 +114,7 @@ Manage issues, projects & team workflows in LinearCommand
 
 [**Netlify**](https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/)
 
-Create, deploy, manage, and secure websites on NetlifyCommand
+Create, deploy, manage, and secure websites on Netlify.Command
 
 `claude mcp add --transport http netlify https://netlify-mcp.netlify.app/mcp`
 
@@ -126,7 +126,7 @@ Discover, evaluate, and buy solutions for the cloudCommand
 
 [**Hugging Face**](https://huggingface.co/settings/mcp)
 
-Access the HF Hub and thousands of Gradio AppsCommand
+Access the Hugging Face Hub and thousands of Gradio AppsCommand
 
 `claude mcp add --transport http hugging-face https://huggingface.co/mcp`
 
@@ -134,17 +134,17 @@ Access the HF Hub and thousands of Gradio AppsCommand
 
 Autonomous marketing to transform how you workRequires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp).
 
-[**Asana**](https://developers.asana.com/docs/using-asanas-model-control-protocol-mcp-server)
+[**Asana**](https://developers.asana.com/docs/mcp-server)
 
-Connect to Asana to coordinate tasks, projects, and goals Command
+Connect to Asana to coordinate tasks, projects, and goalsCommand
 
 `claude mcp add --transport sse asana https://mcp.asana.com/sse`
 
-[**Atlassian Rovo**](https://www.atlassian.com/platform/remote-mcp-server)
+[**Atlassian**](https://community.atlassian.com/forums/Atlassian-Platform-articles/Using-the-Atlassian-Remote-MCP-Server-beta/ba-p/3005104)
 
 Access Jira & Confluence from ClaudeCommand
 
-`claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp`
+`claude mcp add --transport sse atlassian https://mcp.atlassian.com/v1/sse`
 
 [**Aura**](https://docs.getaura.ai/)
 
@@ -172,7 +172,7 @@ Shorten links, generate QR Codes, and track performanceCommand
 
 Access and analyze blockchain dataCommand
 
-`claude mcp add blockscout --transport http https://mcp.blockscout.com/mcp`
+`claude mcp add blockscout --transport http https://mcp.blockscout.com/mcp/`
 
 [**MT Newswires**](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
@@ -182,7 +182,7 @@ Trusted real-time global financial news providerCommand
 
 [**Canva**](https://www.canva.dev/docs/connect/canva-mcp-server-setup/)
 
-Search, create, autofill, and export Canva designs from a promptCommand
+Search, create, autofill, and export Canva designsCommand
 
 `claude mcp add --transport http canva https://mcp.canva.com/mcp`
 
@@ -192,7 +192,7 @@ Managed MCP platform for 350 sourcesCommand
 
 `claude mcp add cdata-connect-ai --transport http https://mcp.cloud.cdata.com/mcp`
 
-[**PubMed**](https://support.claude.com/en/articles/12614801-using-the-pubmed-connector-in-claude)
+[**PubMed**](https://support.claude.com/en/)
 
 Search biomedical literature from PubMedCommand
 
@@ -204,7 +204,7 @@ Project management & collaboration for teams & agentsCommand
 
 `claude mcp add clickup --transport http https://mcp.clickup.com/mcp`
 
-[**Cloudflare**](https://developers.cloudflare.com/agents/model-context-protocol/mcp-servers-for-cloudflare/)
+[**Cloudflare Developer Platform**](https://www.support.cloudflare.com/)
 
 Build applications with compute, storage, and AICommand
 
@@ -234,7 +234,7 @@ Managed MCP servers with Unity Catalog and Mosaic AIRequires user-specific URL. 
 
 [**Egnyte**](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
-Securely access and analyze Egnyte content.Command
+Securely access and analyze Egnyte contentCommand
 
 `claude mcp add --transport http egnyte https://mcp-server.egnyte.com/mcp`
 
@@ -268,11 +268,11 @@ Clinical trial software and site ranking toolsCommand
 
 [**Intercom**](https://developers.intercom.com/docs/guides/mcp)
 
-AI access to Intercom data for better customer insightsCommand
+Access to Intercom data for better customer insightsCommand
 
 `claude mcp add --transport http intercom https://mcp.intercom.com/mcp`
 
-[**Jotform**](https://www.jotform.com/developers/mcp)
+[**Jotform**](https://www.jotform.com/developers/mcp/)
 
 Create forms & analyze submissions inside ClaudeCommand
 
@@ -302,7 +302,7 @@ Search, analyze and understand your finances on MercuryCommand
 
 `claude mcp add mercury --transport http https://mcp.mercury.com/mcp`
 
-[**Monday**](https://developer.monday.com/apps/docs/mondaycom-mcp-integration)
+[**monday.com**](https://developer.monday.com/apps/docs/mondaycom-mcp-integration)
 
 Manage projects, boards, and workflows in monday.comCommand
 
@@ -326,7 +326,7 @@ Interact with AI agents built for biologyCommand
 
 `claude mcp add owkin --transport http https://mcp.k.owkin.com/mcp`
 
-[**PayPal**](https://developer.paypal.com/tools/mcp-server/)
+[**PayPal**](https://mcp.paypal.com/)
 
 Access PayPal payments platformCommand
 
@@ -356,7 +356,7 @@ Payment processing and financial infrastructure toolsCommand
 
 [**Trivago**](https://mcp.trivago.com/docs)
 
-Find your ideal hotel at the best price. Command
+Find your ideal hotel at the best price.Command
 
 `claude mcp add --transport http trivago https://mcp.trivago.com/mcp`
 
