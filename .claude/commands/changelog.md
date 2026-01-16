@@ -95,6 +95,6 @@ The anchor to use on the source link is the closest anchor right above the given
 
 File names on link descriptions should not include the .md extension. Order files by name in the doc.
 
-Save this summary to a file in the `changelogs` folder. Name it `changelog-YYYY-mm-dd.md`.
+Save this summary to a markdown named `changelog-YYYY-mm-dd.md` with today's date in the `changelogs/YYYY/mm` folder.
 
 Commit this file and push.
