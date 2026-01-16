@@ -41,6 +41,8 @@ Ask AI
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
+Native installations automatically update in the background to keep you on the latest version.
+
 Copy
 
 Ask AI
@@ -49,6 +51,8 @@ Ask AI
 brew install --cask claude-code
 ```
 
+Homebrew installations do not auto-update. Run `brew upgrade claude-code` periodically to get the latest features and security fixes.
+
 Copy
 
 Ask AI
@@ -56,6 +60,8 @@ Ask AI
 ```shiki
 winget install Anthropic.ClaudeCode
 ```
+
+WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 **Start using Claude Code:**
 
@@ -70,7 +76,7 @@ claude
 
 You’ll be prompted to log in on first use. That’s it! [Continue with Quickstart (5 minutes) →](quickstart.md)
 
-Claude Code automatically keeps itself up to date. See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [troubleshooting](troubleshooting.md) if you hit issues.
+See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [troubleshooting](troubleshooting.md) if you hit issues.
 
 ## [​](#what-claude-code-does-for-you) What Claude Code does for you
 

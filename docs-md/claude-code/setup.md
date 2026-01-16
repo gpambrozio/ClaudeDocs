@@ -1,6 +1,6 @@
 ## [​](#system-requirements) System requirements
 
-- **Operating Systems**: macOS 10.15+, Ubuntu 20.04+/Debian 10+, or Windows 10+ (with WSL 1, WSL 2, or Git for Windows)
+- **Operating Systems**: macOS 13.0+, Ubuntu 20.04+/Debian 10+, or Windows 10+ (with WSL 1, WSL 2, or Git for Windows)
 - **Hardware**: 4 GB+ RAM
 - **Network**: Internet connection required (see [network configuration](network-config.md))
 - **Shell**: Works best in Bash or Zsh
@@ -49,6 +49,8 @@ Ask AI
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
+Native installations automatically update in the background to keep you on the latest version.
+
 Copy
 
 Ask AI
@@ -57,6 +59,8 @@ Ask AI
 brew install --cask claude-code
 ```
 
+Homebrew installations do not auto-update. Run `brew upgrade claude-code` periodically to get the latest features and security fixes.
+
 Copy
 
 Ask AI
@@ -64,6 +68,8 @@ Ask AI
 ```shiki
 winget install Anthropic.ClaudeCode
 ```
+
+WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 After the installation process completes, navigate to your project and start Claude Code:
 

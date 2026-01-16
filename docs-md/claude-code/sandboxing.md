@@ -207,4 +207,4 @@ For implementation details and source code, visit the [GitHub repository](https:
 - [Security](security.md) - Comprehensive security features and best practices
 - [IAM](iam.md) - Permission configuration and access control
 - [Settings](settings.md) - Complete configuration reference
-- [CLI reference](cli-reference.md) - Command-line options including `-sb`
+- [CLI reference](cli-reference.md) - Command-line options

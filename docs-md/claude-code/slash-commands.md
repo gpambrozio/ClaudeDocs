@@ -8,10 +8,10 @@
 | `/bug` | Report bugs (sends conversation to Anthropic) |
 | `/clear` | Clear conversation history |
 | `/compact [instructions]` | Compact conversation with optional focus instructions |
-| `/config` | Open the Settings interface (Config tab) |
+| `/config` | Open the Settings interface (Config tab). Type to search and filter settings |
 | `/context` | Visualize current context usage as a colored grid |
 | `/cost` | Show token usage statistics. See [cost tracking guide](costs.md) for subscription-specific details. |
-| `/doctor` | Checks the health of your Claude Code installation |
+| `/doctor` | Checks installation health. Shows Updates section with auto-update channel and available npm versions |
 | `/exit` | Exit the REPL |
 | `/export [filename]` | Export the current conversation to a file or clipboard |
 | `/help` | Get usage help |
@@ -38,7 +38,7 @@
 | `/rewind` | Rewind the conversation and/or code |
 | `/sandbox` | Enable sandboxed bash tool with filesystem and network isolation for safer, more autonomous execution |
 | `/security-review` | Complete a security review of pending changes on the current branch |
-| `/stats` | Visualize daily usage, session history, streaks, and model preferences |
+| `/stats` | Visualize daily usage, session history, streaks, and model preferences. Press `r` to cycle date ranges (Last 7 days, Last 30 days, All time) |
 | `/status` | Open the Settings interface (Status tab) showing version, model, account, and connectivity |
 | `/statusline` | Set up Claude Code’s status line UI |
 | `/teleport` | Resume a remote session from claude.ai by session ID, or open a picker (claude.ai subscribers) |

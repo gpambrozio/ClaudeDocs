@@ -2070,15 +2070,15 @@ const result = await query({
     sandbox: {
       enabled: true,
       autoAllowBashIfSandboxed: true,
-      excludedCommands: ["docker"],
       network: {
-        allowLocalBinding: true,
-        allowUnixSockets: ["/var/run/docker.sock"]
+        allowLocalBinding: true
       }
     }
   }
 });
 ```
+
+**Unix socket security**: The `allowUnixSockets` option can grant access to powerful system services. For example, allowing `/var/run/docker.sock` effectively grants full host system access through the Docker API, bypassing sandbox isolation. Only allow Unix sockets that are strictly necessary and understand the security implications of each.
 
 ### `NetworkSandboxSettings`
 
@@ -2160,6 +2160,8 @@ This pattern enables you to:
 - **Add approval workflows**: Require explicit authorization for privileged operations
 
 Commands running with `dangerouslyDisableSandbox: true` have full system access. Ensure your `canUseTool` handler validates these requests carefully.
+
+If `permissionMode` is set to `bypassPermissions` and `allowUnsandboxedCommands` is enabled, the model can autonomously execute commands outside the sandbox without any approval prompts. This combination effectively allows the model to escape sandbox isolation silently.
 
 ## See also
 

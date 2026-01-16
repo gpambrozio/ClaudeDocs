@@ -156,6 +156,8 @@ Ask AI
 | `awsAuthRefresh` | Custom script that modifies the `.aws` directory (see [advanced credential configuration](amazon-bedrock.md)) | `aws sso login --profile myprofile` |
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `alwaysThinkingEnabled` | Enable [extended thinking](common-workflows.md) by default for all sessions. Typically configured via the `/config` command rather than editing directly | `true` |
+| `plansDirectory` | Customize where plan files are stored. Path is relative to project root. Default: `~/.claude/plans` | `"./plans"` |
+| `showTurnDuration` | Show turn duration messages after responses (e.g., “Cooked for 1m 6s”). Set to `false` to hide these messages | `true` |
 | `language` | Configure Claude’s preferred response language (e.g., `"japanese"`, `"spanish"`, `"french"`). Claude will respond in this language by default | `"japanese"` |
 | `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release | `"stable"` |
 
@@ -768,6 +770,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_CLIENT_KEY` | Path to client private key file for mTLS authentication |
 | `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to disable Anthropic API-specific `anthropic-beta` headers. Use this if experiencing issues like “Unexpected value(s) for the `anthropic-beta` header” when using an LLM gateway with third-party providers |
 | `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to disable all background task functionality, including the `run_in_background` parameter on Bash and subagent tools, auto-backgrounding, and the Ctrl+B shortcut |
+| `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |
 | `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS` | Override the default token limit for file reads. Useful when you need to read larger files in full |
@@ -795,10 +798,11 @@ All environment variables can also be configured in [`settings.json`](#available
 | `DISABLE_PROMPT_CACHING_OPUS` | Set to `1` to disable prompt caching for Opus models |
 | `DISABLE_PROMPT_CACHING_SONNET` | Set to `1` to disable prompt caching for Sonnet models |
 | `DISABLE_TELEMETRY` | Set to `1` to opt out of Statsig telemetry (note that Statsig events do not include user data like code, file paths, or bash commands) |
+| `ENABLE_TOOL_SEARCH` | Controls [MCP tool search](mcp.md). Values: `auto` (default, enables at 10% context), `auto:N` (custom threshold, e.g., `auto:5` for 5%), `true` (always on), `false` (disabled) |
 | `HTTP_PROXY` | Specify HTTP proxy server for network connections |
 | `HTTPS_PROXY` | Specify HTTPS proxy server for network connections |
 | `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens (default: 25000) |
-| `MAX_THINKING_TOKENS` | Enable [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) and set the token budget for the thinking process. Extended thinking improves performance on complex reasoning and coding tasks but impacts [prompt caching efficiency](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#caching-with-thinking-blocks). Disabled by default. |
+| `MAX_THINKING_TOKENS` | Override the [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) token budget. Thinking is enabled at max budget (31,999 tokens) by default. Use this to limit the budget (for example, `MAX_THINKING_TOKENS=10000`) or disable thinking entirely (`MAX_THINKING_TOKENS=0`). Extended thinking improves performance on complex reasoning and coding tasks but impacts [prompt caching efficiency](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#caching-with-thinking-blocks). |
 | `MCP_TIMEOUT` | Timeout in milliseconds for MCP server startup |
 | `MCP_TOOL_TIMEOUT` | Timeout in milliseconds for MCP tool execution |
 | `NO_PROXY` | List of domains and IPs to which requests will be directly issued, bypassing proxy |

@@ -54,6 +54,8 @@ The SDK supports these permission modes:
 | `dontAsk` | Skip approval prompts | Auto-deny tools unless explicitly allowed by an [allow rule](settings.md) |
 | `bypassPermissions` | Bypass all permission checks | All tools run without permission prompts (use with caution) |
 
+**Subagent inheritance**: When using `bypassPermissions`, all subagents inherit this mode and it cannot be overridden. Subagents may have different system prompts and less constrained behavior than your main agent. Enabling `bypassPermissions` grants them full, autonomous system access without any approval prompts.
+
 `plan` mode is not currently supported in the SDK.
 
 ### Set permission mode

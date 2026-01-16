@@ -2,8 +2,6 @@
 
 Copy page
 
-Go
-
 # Upload File
 
 client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta.md), error)
@@ -125,60 +123,3 @@ Whether the file can be downloaded.
 Upload File
 
 Go
-
-```shiki
-package main
-
-import (
-  "bytes"
-  "context"
-  "fmt"
-  "io"
-
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
-)
-
-func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  fileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
-    File: io.Reader(bytes.NewBuffer([]byte("some file contents"))),
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", fileMetadata.ID)
-}
-```
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```

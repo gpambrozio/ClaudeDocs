@@ -281,4 +281,4 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](mailto:sales@anthropic.com) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#5023313c352310313e2438223f2039337e333f3d) if you need higher limits for your use case
