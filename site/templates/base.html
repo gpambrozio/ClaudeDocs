@@ -58,7 +58,7 @@
                         {% block calendar %}{% endblock %}
                     </div>
                 </div>
-                <a href="{{ base_url }}/feed.xml" class="rss-link" title="RSS Feed">RSS</a>
+                <button class="rss-link" id="rss-copy" title="Copy RSS Feed URL" data-url="{{ base_url }}/feed.xml">RSS</button>
             </div>
         </div>
     </header>
@@ -125,6 +125,21 @@
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener');
         });
+
+        // RSS copy to clipboard
+        document.getElementById('rss-copy').onclick = function() {
+            const btn = this;
+            const url = window.location.origin + btn.getAttribute('data-url');
+            navigator.clipboard.writeText(url).then(function() {
+                const original = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = original;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        };
     </script>
 </body>
 </html>

@@ -220,12 +220,22 @@ a:hover {
     border: 1px solid var(--color-accent);
     border-radius: 4px;
     font-size: 0.875rem;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
 }
 
 .rss-link:hover {
     background: var(--color-accent);
     color: var(--color-header-bg);
     text-decoration: none;
+}
+
+.rss-link.copied {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
 }
 
 /* Layout - single column now */
