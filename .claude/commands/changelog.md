@@ -104,7 +104,7 @@ docs-md/claude-code/common-workflows.md
 docs-md/api/build-with-claude/vision.md
   → https://platform.claude.com/docs/en/build-with-claude/vision
 
-The anchor to use on the source link is the closest anchor right above the given change. If necessary read the full file to determine that.
+The anchor to use on the source link is the closest anchor right above the given change in the source md file. If necessary read the full file to determine that. An anchor in markdown looks like this: `[​](#anchor-to-content)`
 
 File names on link descriptions should not include the .md extension. Order files by name in the doc.
 
