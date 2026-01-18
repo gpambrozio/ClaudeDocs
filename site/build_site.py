@@ -88,20 +88,14 @@ def discover_changelogs() -> list[ChangelogEntry]:
     return sorted(entries, key=lambda e: e.date, reverse=True)
 
 
-def build_calendar_data(
-    changelogs: list[ChangelogEntry], viewing_date: date
-) -> dict:
-    """Build calendar display data for templates."""
-    # Index changelogs by date for O(1) lookup
-    changelog_dates = {cl.date: cl for cl in changelogs}
-
-    # Current month calendar grid (Sunday start)
+def build_month_grid(year: int, month: int, changelog_dates: dict, viewing_date: date) -> list:
+    """Build calendar grid for a specific month."""
     cal = Calendar(firstweekday=6)
     weeks = []
-    for week in cal.monthdatescalendar(viewing_date.year, viewing_date.month):
+    for week in cal.monthdatescalendar(year, month):
         week_data = []
         for day in week:
-            if day.month != viewing_date.month:
+            if day.month != month:
                 week_data.append({"number": None, "has_changelog": False})
             else:
                 has_changelog = day in changelog_dates
@@ -116,43 +110,41 @@ def build_calendar_data(
                     }
                 )
         weeks.append(week_data)
+    return weeks
 
-    # Group previous months (excluding current month)
-    previous_months = []
-    seen_months = set()
+
+def build_calendar_data(
+    changelogs: list[ChangelogEntry], viewing_date: date
+) -> dict:
+    """Build calendar display data for templates."""
+    # Index changelogs by date for O(1) lookup
+    changelog_dates = {cl.date: cl for cl in changelogs}
+
+    # Get all unique months that have changelogs
+    all_months = set()
     for cl in changelogs:
-        month_key = (cl.date.year, cl.date.month)
-        if month_key == (viewing_date.year, viewing_date.month):
-            continue
-        if month_key not in seen_months:
-            seen_months.add(month_key)
-            entries = [
-                c
-                for c in changelogs
-                if c.date.year == cl.date.year and c.date.month == cl.date.month
-            ]
-            previous_months.append(
-                {
-                    "year": cl.date.year,
-                    "month": cl.date.month,
-                    "name": cl.date.strftime("%B"),
-                    "entries": sorted(
-                        [{"day": e.date.day, "url": e.url} for e in entries],
-                        key=lambda x: x["day"],
-                    ),
-                }
-            )
+        all_months.add((cl.date.year, cl.date.month))
 
-    # Sort previous months by date (most recent first)
-    previous_months.sort(key=lambda m: (m["year"], m["month"]), reverse=True)
+    # Sort months chronologically (oldest first for navigation)
+    sorted_months = sorted(all_months)
+
+    # Build calendar data for all months
+    months_data = []
+    current_month_index = 0
+    for i, (year, month) in enumerate(sorted_months):
+        month_date = date(year, month, 1)
+        if year == viewing_date.year and month == viewing_date.month:
+            current_month_index = i
+        months_data.append({
+            "year": year,
+            "month": month,
+            "name": month_date.strftime("%B"),
+            "weeks": build_month_grid(year, month, changelog_dates, viewing_date),
+        })
 
     return {
-        "current_month": {
-            "year": viewing_date.year,
-            "name": viewing_date.strftime("%B"),
-            "weeks": weeks,
-        },
-        "previous_months": previous_months,
+        "months": months_data,
+        "current_index": current_month_index,
     }
 
 

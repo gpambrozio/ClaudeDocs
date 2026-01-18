@@ -1,6 +1,12 @@
 <div class="calendar-section">
-    <h3>{{ calendar.current_month.name }} {{ calendar.current_month.year }}</h3>
-    <table class="calendar">
+    <div class="calendar-header">
+        <button class="calendar-nav-btn" id="cal-prev" aria-label="Previous month">&larr;</button>
+        <h3 id="calendar-title"></h3>
+        <button class="calendar-nav-btn" id="cal-next" aria-label="Next month">&rarr;</button>
+    </div>
+
+    {% for month in calendar.months %}
+    <table class="calendar" data-month-index="{{ loop.index0 }}" {% if loop.index0 != calendar.current_index %}style="display: none;"{% endif %}>
         <thead>
             <tr>
                 <th>S</th>
@@ -13,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for week in calendar.current_month.weeks %}
+            {% for week in month.weeks %}
             <tr>
                 {% for day in week %}
                 <td class="{% if day.has_changelog %}has-entry{% endif %}{% if day.is_current %} current{% endif %}">
@@ -28,20 +34,49 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
-
-{% if calendar.previous_months %}
-<div class="archive-section">
-    <h3>Archive</h3>
-    {% for month in calendar.previous_months %}
-    <div class="archive-month">
-        <h4>{{ month.name }} {{ month.year }}</h4>
-        <ul>
-            {% for entry in month.entries %}
-            <li><a href="{{ base_url }}{{ entry.url }}">{{ entry.day }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
     {% endfor %}
 </div>
-{% endif %}
+
+<script>
+(function() {
+    const months = {{ calendar.months | tojson }};
+    let currentIndex = {{ calendar.current_index }};
+
+    const title = document.getElementById('calendar-title');
+    const prevBtn = document.getElementById('cal-prev');
+    const nextBtn = document.getElementById('cal-next');
+    const tables = document.querySelectorAll('.calendar[data-month-index]');
+
+    function updateDisplay() {
+        const month = months[currentIndex];
+        title.textContent = month.name + ' ' + month.year;
+
+        tables.forEach((table, i) => {
+            table.style.display = i === currentIndex ? '' : 'none';
+        });
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === months.length - 1;
+        prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+        nextBtn.style.visibility = currentIndex === months.length - 1 ? 'hidden' : 'visible';
+    }
+
+    prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateDisplay();
+        }
+    });
+
+    nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (currentIndex < months.length - 1) {
+            currentIndex++;
+            updateDisplay();
+        }
+    });
+
+    updateDisplay();
+})();
+</script>

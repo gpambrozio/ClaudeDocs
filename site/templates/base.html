@@ -11,14 +11,26 @@
     <header class="site-header">
         <div class="header-content">
             <h1 class="site-title"><a href="{{ base_url }}/">ClaudeDocs Changelog</a></h1>
-            <a href="{{ base_url }}/feed.xml" class="rss-link" title="RSS Feed">RSS</a>
+            <div class="header-actions">
+                <div class="calendar-dropdown">
+                    <button class="calendar-toggle" title="Calendar" aria-label="Toggle calendar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </button>
+                    <div class="calendar-popup" id="calendar-popup">
+                        {% block calendar %}{% endblock %}
+                    </div>
+                </div>
+                <a href="{{ base_url }}/feed.xml" class="rss-link" title="RSS Feed">RSS</a>
+            </div>
         </div>
     </header>
 
     <div class="layout">
-        <aside class="sidebar">
-            {% block sidebar %}{% endblock %}
-        </aside>
         <main class="content">
             <nav class="changelog-nav">
                 {% block nav %}{% endblock %}
@@ -32,5 +44,30 @@
     <footer class="site-footer">
         <p>Tracking changes to <a href="https://code.claude.com">Claude Code</a> and <a href="https://docs.anthropic.com">Claude API</a> documentation.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.querySelector('.calendar-toggle');
+            const popup = document.getElementById('calendar-popup');
+
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                popup.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!popup.contains(e.target) && !toggle.contains(e.target)) {
+                    popup.classList.remove('active');
+                }
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
