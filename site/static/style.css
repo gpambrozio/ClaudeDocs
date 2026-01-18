@@ -88,10 +88,9 @@ a:hover {
 .calendar-section h3,
 .archive-section h3 {
     margin: 0 0 1rem 0;
-    font-size: 1rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+    color: #333;
+    font-weight: 600;
 }
 
 /* Calendar */
@@ -99,13 +98,15 @@ a:hover {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
+    table-layout: fixed;
 }
 
 .calendar th {
-    padding: 0.5rem;
+    padding: 0.5rem 0.25rem;
     font-size: 0.75rem;
-    color: #999;
-    font-weight: normal;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .calendar td {
@@ -119,7 +120,7 @@ a:hover {
     width: 32px;
     height: 32px;
     line-height: 32px;
-    color: #999;
+    color: #666;
 }
 
 .calendar td.has-entry a {
