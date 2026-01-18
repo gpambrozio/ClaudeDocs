@@ -61,7 +61,7 @@ docs-md/
 
 The project includes a static changelog site deployed to GitHub Pages.
 
-**Live site:** https://gpambrozio.github.io/ClaudeDocs/
+**Live site:** https://ccc.gustavo.eng.br/
 
 ### Build Locally
 
