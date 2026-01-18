@@ -19,6 +19,12 @@ The `versions` folder contains release notes for new versions of claude code. Ig
 ** Existing feature improvements
 ** Major bug fixes
 
+If there are multiple versions released, note what version was responsible for a bullet point in brackets before the text, like this:
+
+```
+* [2.0.3] Added a new command line option
+```
+
 For files in the `docs-md` folder:
 
 * Ignore removed file
@@ -28,7 +34,7 @@ For files in the `docs-md` folder:
 - If there is not, summarize the file
 * For modified files, look at the diff and for every significant change create a quick bullet point about it. Ignore very small changes that do not add any new relevant information in the context of technical documents. Examples of changes that should be ignores include, but are not limited to, spelling fixes, capitalization changes, company name changes, small url changes, etc.
 
-After determining all changes commit all doc changes. Note the new commit hash.
+After determining all changes commit changes to the `docs-md` and `versions` folders. Note the new commit hash.
 
 Then create a markdown in this format. Files in `docs-md/claude-code` go in the `Claude Code changes` section and files in `docs-md/api` go in the `API changes` section:
 
@@ -39,9 +45,16 @@ Then create a markdown in this format. Files in `docs-md/claude-code` go in the 
 
 ### New features
 
+* Added a new cli option to help with debugging
+* Added a new hook called Whatever
+
 ### Existing feature improvements
 
+* Improved caching
+
 ### Major bug fixes
+
+* Fixed bug where hook was not called
 
 -----
 
