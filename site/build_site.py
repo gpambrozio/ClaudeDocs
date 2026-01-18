@@ -31,14 +31,22 @@ CHANGELOGS_DIR = Path("changelogs")
 SITE_DIR = Path("site")
 OUTPUT_DIR = Path("_site")
 
-# Detect URLs for GitHub Pages (project pages are at /<repo-name>/)
+# Detect URLs for GitHub Pages
 def get_urls() -> tuple[str, str]:
     """Get base URL path and full site URL for GitHub Pages."""
     # Check for explicit overrides
     if base := os.environ.get("BASE_URL"):
         site_url = os.environ.get("SITE_URL", "")
         return base.rstrip("/"), site_url.rstrip("/")
-    # GitHub Actions sets GITHUB_REPOSITORY as "owner/repo"
+
+    # Check for custom domain via CNAME file
+    cname_file = Path("CNAME")
+    if cname_file.exists():
+        custom_domain = cname_file.read_text().strip()
+        if custom_domain:
+            return "", f"https://{custom_domain}"
+
+    # GitHub Actions: project pages are at /<repo-name>/
     if repo := os.environ.get("GITHUB_REPOSITORY"):
         owner, repo_name = repo.split("/")
         base_url = f"/{repo_name}"
@@ -252,6 +260,12 @@ def build_site():
     if static_src.exists():
         shutil.copytree(static_src, static_dst)
         print("Copied static files")
+
+    # Copy CNAME file for custom domain
+    cname_file = Path("CNAME")
+    if cname_file.exists():
+        shutil.copy(cname_file, OUTPUT_DIR / "CNAME")
+        print("Copied CNAME file")
 
     # Load templates
     changelog_template = env.get_template("changelog.html")
