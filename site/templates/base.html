@@ -58,7 +58,16 @@
                         {% block calendar %}{% endblock %}
                     </div>
                 </div>
-                <button class="rss-link" id="rss-copy" title="Copy RSS Feed URL" data-url="{{ base_url }}/feed.xml">RSS</button>
+                <button class="rss-btn" id="rss-copy" title="Copy RSS Feed URL" data-url="{{ base_url }}/feed.xml">
+                    <svg class="rss-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 11a9 9 0 0 1 9 9"></path>
+                        <path d="M4 4a16 16 0 0 1 16 16"></path>
+                        <circle cx="5" cy="19" r="1"></circle>
+                    </svg>
+                    <svg class="rss-check" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -131,11 +140,8 @@
             const btn = this;
             const url = window.location.origin + btn.getAttribute('data-url');
             navigator.clipboard.writeText(url).then(function() {
-                const original = btn.textContent;
-                btn.textContent = 'Copied!';
                 btn.classList.add('copied');
                 setTimeout(function() {
-                    btn.textContent = original;
                     btn.classList.remove('copied');
                 }, 2000);
             });

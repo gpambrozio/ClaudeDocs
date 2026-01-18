@@ -214,28 +214,46 @@ a:hover {
     transform: translateY(0);
 }
 
-.rss-link {
-    color: var(--color-accent);
-    padding: 0.5rem 1rem;
+.rss-btn {
+    background: transparent;
     border: 1px solid var(--color-accent);
     border-radius: 4px;
-    font-size: 0.875rem;
-    background: transparent;
+    padding: 0.5rem;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.rss-link:hover {
+.rss-btn:hover {
     background: var(--color-accent);
     color: var(--color-header-bg);
-    text-decoration: none;
 }
 
-.rss-link.copied {
+.rss-btn svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.rss-btn .rss-check {
+    display: none;
+}
+
+.rss-btn.copied {
     background: #22c55e;
     border-color: #22c55e;
     color: white;
+}
+
+.rss-btn.copied .rss-icon {
+    display: none;
+}
+
+.rss-btn.copied .rss-check {
+    display: block;
 }
 
 /* Layout - single column now */
