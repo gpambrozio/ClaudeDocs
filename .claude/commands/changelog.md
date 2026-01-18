@@ -19,12 +19,6 @@ The `versions` folder contains release notes for new versions of claude code. Ig
 ** Existing feature improvements
 ** Major bug fixes
 
-If there are multiple versions released, note what version was responsible for a bullet point in brackets before the text, like this:
-
-```
-* [2.0.3] Added a new command line option
-```
-
 For files in the `docs-md` folder:
 
 * Ignore removed file
@@ -41,20 +35,28 @@ Then create a markdown in this format. Files in `docs-md/claude-code` go in the 
 ```
 # [Claude docs changes for <today's date, ie Sept, 10th 2025>](https://github.com/gpambrozio/ClaudeDocs/tree/{commit-hash}) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/{commit-hash})]
 
-## New Claude Code version ([version](https://github.com/gpambrozio/ClaudeDocs/versions/version.md))
+## New Claude Code versions
 
-### New features
+### [2.1.10](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/versions/2.1.10.md)
+
+#### New features
 
 * Added a new cli option to help with debugging
 * Added a new hook called Whatever
 
-### Existing feature improvements
+#### Existing feature improvements
 
 * Improved caching
 
-### Major bug fixes
+#### Major bug fixes
 
 * Fixed bug where hook was not called
+
+### [2.1.11](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/versions/2.1.11.md)
+
+#### Major bug fixes
+
+* Fixed excessive MCP connection requests
 
 -----
 
