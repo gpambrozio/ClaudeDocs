@@ -14,6 +14,7 @@ Usage:
 # ]
 # ///
 
+import os
 import re
 import shutil
 from calendar import Calendar
@@ -29,7 +30,20 @@ from jinja2 import Environment, FileSystemLoader
 CHANGELOGS_DIR = Path("changelogs")
 SITE_DIR = Path("site")
 OUTPUT_DIR = Path("_site")
-BASE_URL = ""  # Will be set based on GitHub Pages URL
+
+# Detect base URL for GitHub Pages (project pages are at /<repo-name>/)
+def get_base_url() -> str:
+    """Get base URL, detecting GitHub Pages project sites."""
+    # Check for explicit override
+    if base := os.environ.get("BASE_URL"):
+        return base.rstrip("/")
+    # GitHub Actions sets GITHUB_REPOSITORY as "owner/repo"
+    if repo := os.environ.get("GITHUB_REPOSITORY"):
+        repo_name = repo.split("/")[-1]
+        return f"/{repo_name}"
+    return ""
+
+BASE_URL = get_base_url()
 
 
 @dataclass
