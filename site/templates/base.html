@@ -119,6 +119,12 @@
                 document.getElementById('calendar-popup').classList.remove('active');
             }
         });
+
+        // Open all changelog links in new window
+        document.querySelectorAll('.changelog-content a').forEach(function(link) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener');
+        });
     </script>
 </body>
 </html>
