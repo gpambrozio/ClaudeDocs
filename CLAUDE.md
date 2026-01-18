@@ -57,6 +57,50 @@ docs-md/
     └── ...
 ```
 
+## Changelog Site
+
+The project includes a static changelog site deployed to GitHub Pages.
+
+**Live site:** https://gpambrozio.github.io/ClaudeDocs/
+
+### Build Locally
+
+```bash
+uv run site/build_site.py
+```
+
+Output is generated in `_site/` (gitignored).
+
+### Site Structure
+
+```
+site/
+├── build_site.py              # Main build script (PEP 723 dependencies)
+├── templates/
+│   ├── base.html              # Base layout with theme toggle, calendar
+│   ├── changelog.html         # Single changelog page
+│   └── partials/
+│       ├── calendar.html      # Month calendar with navigation
+│       └── nav.html           # Prev/next navigation
+└── static/
+    └── style.css              # Styles with dark/light mode
+```
+
+### Deployment
+
+GitHub Actions workflow (`.github/workflows/pages.yml`) automatically builds and deploys on push to main when files change in:
+- `changelogs/**`
+- `site/**`
+- `.github/workflows/pages.yml`
+
+### Features
+
+- Home page shows latest changelog
+- Calendar dropdown with clickable days that have changelogs
+- Prev/next navigation between changelog entries
+- Dark/light mode with auto detection and manual toggle
+- RSS feed at `/feed.xml`
+
 ## Dependencies
 
 Declared inline in sync_docs.py using PEP 723 format:
@@ -65,3 +109,8 @@ Declared inline in sync_docs.py using PEP 723 format:
 - markdownify - HTML to Markdown conversion
 - lxml - XML parsing for sitemaps
 - httpx - Async HTTP client
+
+Declared inline in site/build_site.py:
+- jinja2 - HTML templating
+- markdown - Markdown to HTML conversion
+- feedgen - RSS feed generation
