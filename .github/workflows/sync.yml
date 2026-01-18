@@ -1,0 +1,62 @@
+name: Sync Documentation
+
+on:
+  # schedule:
+  #   - cron: '0 9 * * *'  # Daily at 9 AM UTC - uncomment after testing
+  workflow_dispatch:     # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install Playwright browsers
+        run: uv run playwright install chromium
+
+      - name: Run documentation sync
+        run: ./sync_docs.sh
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read changelog prompt
+        if: steps.changes.outputs.has_changes == 'true'
+        id: prompt
+        run: |
+          # Extract content after YAML frontmatter (skip lines between first two ---)
+          CONTENT=$(awk 'BEGIN{p=0} /^---$/{p++; next} p>=2{print}' .claude/commands/changelog.md)
+          # Use delimiter for multiline output
+          echo "content<<EOF" >> $GITHUB_OUTPUT
+          echo "$CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Run Claude Code for changelog
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ steps.prompt.outputs.content }}
+          claude_args: |
+            --allowedTools Bash(git:*),Read,Write
+
+      - name: Push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: git push
