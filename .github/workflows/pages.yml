@@ -2,7 +2,7 @@ name: Build and Deploy Changelog Site
 
 on:
   push:
-    branches: [main, feature/github-pages-changelog]
+    branches: [main]
     paths:
       - 'changelogs/**'
       - 'site/**'
