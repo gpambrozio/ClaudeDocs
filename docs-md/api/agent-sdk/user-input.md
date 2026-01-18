@@ -193,6 +193,8 @@ async def can_use_tool(tool_name, input_data, context):
 
 When Claude needs more direction on a task with multiple valid approaches, it calls the `AskUserQuestion` tool. This triggers your `canUseTool` callback with `toolName` set to `AskUserQuestion`. The input contains Claude's questions as multiple-choice options, which you display to the user and return their selections.
 
+Clarifying questions are especially common in [`plan` mode](agent-sdk/permissions.md), where Claude explores the codebase and asks questions before proposing a plan. This makes plan mode ideal for interactive workflows where you want Claude to gather requirements before making changes.
+
 The following steps show how to handle clarifying questions:
 
 1. 1
