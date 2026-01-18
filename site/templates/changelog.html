@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "partials/calendar.html" %}
+{% endblock %}
+
+{% block nav %}
+{% include "partials/nav.html" %}
+{% endblock %}
+
+{% block content %}
+{{ content | safe }}
+{% endblock %}

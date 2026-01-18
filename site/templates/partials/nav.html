@@ -1,0 +1,19 @@
+<div class="nav-prev">
+    {% if prev %}
+        <a href="{{ base_url }}{{ prev.url }}">&larr; {{ prev.date }}</a>
+    {% else %}
+        <span class="disabled">&larr; Previous</span>
+    {% endif %}
+</div>
+
+<div class="nav-current">
+    {{ current_date }}
+</div>
+
+<div class="nav-next">
+    {% if next %}
+        <a href="{{ base_url }}{{ next.url }}">{{ next.date }} &rarr;</a>
+    {% else %}
+        <span class="disabled">Next &rarr;</span>
+    {% endif %}
+</div>

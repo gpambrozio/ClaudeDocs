@@ -1,0 +1,47 @@
+<div class="calendar-section">
+    <h3>{{ calendar.current_month.name }} {{ calendar.current_month.year }}</h3>
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>S</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>T</th>
+                <th>F</th>
+                <th>S</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for week in calendar.current_month.weeks %}
+            <tr>
+                {% for day in week %}
+                <td class="{% if day.has_changelog %}has-entry{% endif %}{% if day.is_current %} current{% endif %}">
+                    {% if day.has_changelog %}
+                        <a href="{{ base_url }}{{ day.url }}">{{ day.number }}</a>
+                    {% elif day.number %}
+                        <span>{{ day.number }}</span>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if calendar.previous_months %}
+<div class="archive-section">
+    <h3>Archive</h3>
+    {% for month in calendar.previous_months %}
+    <div class="archive-month">
+        <h4>{{ month.name }} {{ month.year }}</h4>
+        <ul>
+            {% for entry in month.entries %}
+            <li><a href="{{ base_url }}{{ entry.url }}">{{ entry.day }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

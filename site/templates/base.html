@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - ClaudeDocs Changelog</title>
+    <link rel="stylesheet" href="{{ base_url }}/static/style.css">
+    <link rel="alternate" type="application/rss+xml" title="ClaudeDocs Changelog" href="{{ base_url }}/feed.xml">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title"><a href="{{ base_url }}/">ClaudeDocs Changelog</a></h1>
+            <a href="{{ base_url }}/feed.xml" class="rss-link" title="RSS Feed">RSS</a>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            {% block sidebar %}{% endblock %}
+        </aside>
+        <main class="content">
+            <nav class="changelog-nav">
+                {% block nav %}{% endblock %}
+            </nav>
+            <article class="changelog-content">
+                {% block content %}{% endblock %}
+            </article>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p>Tracking changes to <a href="https://code.claude.com">Claude Code</a> and <a href="https://docs.anthropic.com">Claude API</a> documentation.</p>
+    </footer>
+</body>
+</html>
