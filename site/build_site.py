@@ -31,19 +31,22 @@ CHANGELOGS_DIR = Path("changelogs")
 SITE_DIR = Path("site")
 OUTPUT_DIR = Path("_site")
 
-# Detect base URL for GitHub Pages (project pages are at /<repo-name>/)
-def get_base_url() -> str:
-    """Get base URL, detecting GitHub Pages project sites."""
-    # Check for explicit override
+# Detect URLs for GitHub Pages (project pages are at /<repo-name>/)
+def get_urls() -> tuple[str, str]:
+    """Get base URL path and full site URL for GitHub Pages."""
+    # Check for explicit overrides
     if base := os.environ.get("BASE_URL"):
-        return base.rstrip("/")
+        site_url = os.environ.get("SITE_URL", "")
+        return base.rstrip("/"), site_url.rstrip("/")
     # GitHub Actions sets GITHUB_REPOSITORY as "owner/repo"
     if repo := os.environ.get("GITHUB_REPOSITORY"):
-        repo_name = repo.split("/")[-1]
-        return f"/{repo_name}"
-    return ""
+        owner, repo_name = repo.split("/")
+        base_url = f"/{repo_name}"
+        site_url = f"https://{owner}.github.io/{repo_name}"
+        return base_url, site_url
+    return "", ""
 
-BASE_URL = get_base_url()
+BASE_URL, SITE_URL = get_urls()
 
 
 @dataclass
@@ -198,20 +201,21 @@ def get_navigation(
     return (prev_nav, next_nav)
 
 
-def generate_rss(changelogs: list[ChangelogEntry], base_url: str, output_dir: Path):
+def generate_rss(changelogs: list[ChangelogEntry], site_url: str, output_dir: Path):
     """Generate RSS feed for changelogs."""
     fg = FeedGenerator()
-    fg.id(base_url or "https://example.com")
+    feed_url = site_url or "https://example.com"
+    fg.id(feed_url)
     fg.title("ClaudeDocs Changelog")
     fg.description("Daily changes to Claude documentation")
-    fg.link(href=base_url or "https://example.com", rel="alternate")
-    fg.link(href=f"{base_url}/feed.xml", rel="self")
+    fg.link(href=feed_url, rel="alternate")
+    fg.link(href=f"{feed_url}/feed.xml", rel="self")
     fg.language("en")
 
     # Add last 20 changelogs
     for cl in changelogs[:20]:
         fe = fg.add_entry()
-        entry_url = f"{base_url}{cl.url}"
+        entry_url = f"{feed_url}{cl.url}"
         fe.id(entry_url)
         fe.title(cl.title)
         fe.link(href=entry_url)
@@ -293,7 +297,7 @@ def build_site():
     print("Generated index.html")
 
     # Generate RSS feed
-    generate_rss(changelogs, BASE_URL, OUTPUT_DIR)
+    generate_rss(changelogs, SITE_URL, OUTPUT_DIR)
     print("Generated RSS feed")
 
     print(f"\nSite built successfully in {OUTPUT_DIR}/")
