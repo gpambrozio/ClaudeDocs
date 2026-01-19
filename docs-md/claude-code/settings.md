@@ -167,12 +167,102 @@ Ask AI
 
 | Keys | Description | Example |
 | --- | --- | --- |
-| `allow` | Array of [permission rules](iam.md) to allow tool use. **Note:** Bash rules use prefix matching, not regex | `[ "Bash(git diff:*)" ]` |
-| `ask` | Array of [permission rules](iam.md) to ask for confirmation upon tool use. | `[ "Bash(git push:*)" ]` |
-| `deny` | Array of [permission rules](iam.md) to deny tool use. Use this to also exclude sensitive files from Claude Code access. **Note:** Bash patterns are prefix matches and can be bypassed (see [Bash permission limitations](iam.md)) | `[ "WebFetch", "Bash(curl:*)", "Read(./.env)", "Read(./secrets/**)" ]` |
+| `allow` | Array of permission rules to allow tool use. See [Permission rule syntax](#permission-rule-syntax) below for pattern matching details | `[ "Bash(git diff:*)" ]` |
+| `ask` | Array of permission rules to ask for confirmation upon tool use. See [Permission rule syntax](#permission-rule-syntax) below | `[ "Bash(git push:*)" ]` |
+| `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](iam.md) | `[ "WebFetch", "Bash(curl:*)", "Read(./.env)", "Read(./secrets/**)" ]` |
 | `additionalDirectories` | Additional [working directories](iam.md) that Claude has access to | `[ "../docs/" ]` |
 | `defaultMode` | Default [permission mode](iam.md) when opening Claude Code | `"acceptEdits"` |
 | `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. See [managed settings](iam.md) | `"disable"` |
+
+### [​](#permission-rule-syntax) Permission rule syntax
+
+Permission rules follow the format `Tool` or `Tool(specifier)`. Understanding the syntax helps you write rules that match exactly what you intend.
+
+#### [​](#rule-evaluation-order) Rule evaluation order
+
+When multiple rules could match the same tool use, rules are evaluated in this order:
+
+1. **Deny** rules are checked first
+2. **Ask** rules are checked second
+3. **Allow** rules are checked last
+
+The first matching rule determines the behavior. This means deny rules always take precedence over allow rules, even if both match the same command.
+
+#### [​](#matching-all-uses-of-a-tool) Matching all uses of a tool
+
+To match all uses of a tool, use just the tool name without parentheses:
+
+| Rule | Effect |
+| --- | --- |
+| `Bash` | Matches **all** Bash commands |
+| `WebFetch` | Matches **all** web fetch requests |
+| `Read` | Matches **all** file reads |
+
+`Bash(*)` does **not** match all Bash commands. The `*` wildcard only matches within the specifier context. To allow or deny all uses of a tool, use just the tool name: `Bash`, not `Bash(*)`.
+
+#### [​](#using-specifiers-for-fine-grained-control) Using specifiers for fine-grained control
+
+Add a specifier in parentheses to match specific tool uses:
+
+| Rule | Effect |
+| --- | --- |
+| `Bash(npm run build)` | Matches the exact command `npm run build` |
+| `Read(./.env)` | Matches reading the `.env` file in the current directory |
+| `WebFetch(domain:example.com)` | Matches fetch requests to example.com |
+
+#### [​](#wildcard-patterns) Wildcard patterns
+
+Two wildcard syntaxes are available for Bash rules:
+
+| Wildcard | Position | Behavior | Example |
+| --- | --- | --- | --- |
+| `:*` | End of pattern only | **Prefix matching** - matches commands starting with the prefix | `Bash(npm run:*)` matches `npm run test`, `npm run build` |
+| `*` | Anywhere in pattern | **Glob matching** - matches any sequence of characters at that position | `Bash(* install)` matches `npm install`, `yarn install` |
+
+**Prefix matching with `:*`**
+The `:*` suffix matches any command that starts with the specified prefix. This works with multi-word commands. The following configuration allows npm and git commit commands while blocking git push and rm -rf:
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(git commit:*)",
+      "Bash(docker compose:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(rm -rf:*)"
+    ]
+  }
+}
+```
+
+**Glob matching with `*`**
+The `*` wildcard can appear at the beginning, middle, or end of a pattern. The following configuration allows any git command targeting main (like `git checkout main`, `git merge main`) and any version check command (like `node --version`, `npm --version`):
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "permissions": {
+    "allow": [
+      "Bash(git * main)",
+      "Bash(* --version)"
+    ]
+  }
+}
+```
+
+Bash permission rules use pattern matching and can be bypassed using shell features like command flags, variables, or redirects. For example, `Bash(curl:*)` can be bypassed with `curl -X GET` reordered to `curl http://example.com -X GET`. Do not rely on Bash deny rules as a security boundary.
+
+For detailed information about tool-specific permission patterns—including Read, Edit, WebFetch, MCP, Task rules, and Bash permission limitations—see [Tool-specific permission rules](iam.md).
 
 ### [​](#sandbox-settings) Sandbox settings
 
@@ -928,8 +1018,9 @@ files by blocking Write operations to certain paths.
 
 ## [​](#see-also) See also
 
-- [Identity and Access Management](iam.md) - Learn about Claude Code’s permission system
-- [IAM and access control](iam.md) - Managed policy configuration
+- [Identity and Access Management](iam.md) - Permission system overview and how allow/ask/deny rules interact
+- [Tool-specific permission rules](iam.md) - Detailed patterns for Bash, Read, Edit, WebFetch, MCP, and Task tools, including security limitations
+- [Managed settings](iam.md) - Managed policy configuration for organizations
 - [Troubleshooting](troubleshooting.md) - Solutions for common configuration issues
 
 ---

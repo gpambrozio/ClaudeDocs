@@ -22,7 +22,7 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--agent` | Specify an agent for the current session (overrides the `agent` setting) | `claude --agent my-custom-agent` |
 | `--agents` | Define custom [subagents](sub-agents.md) dynamically via JSON (see below for format) | `claude --agents '{"reviewer":{"description":"Reviews code","prompt":"You are a code reviewer"}}'` |
 | `--allow-dangerously-skip-permissions` | Enable permission bypassing as an option without immediately activating it. Allows composing with `--permission-mode` (use with caution) | `claude --permission-mode plan --allow-dangerously-skip-permissions` |
-| `--allowedTools` | Tools that execute without prompting for permission. To restrict which tools are available, use `--tools` instead | `"Bash(git log:*)" "Bash(git diff:*)" "Read"` |
+| `--allowedTools` | Tools that execute without prompting for permission. See [permission rule syntax](settings.md) for pattern matching. To restrict which tools are available, use `--tools` instead | `"Bash(git log:*)" "Bash(git diff:*)" "Read"` |
 | `--append-system-prompt` | Append custom text to the end of the default system prompt (works in both interactive and print modes) | `claude --append-system-prompt "Always use TypeScript"` |
 | `--append-system-prompt-file` | Load additional system prompt text from a file and append to the default prompt (print mode only) | `claude -p --append-system-prompt-file ./extra-rules.txt "query"` |
 | `--betas` | Beta headers to include in API requests (API key users only) | `claude --betas interleaved-thinking` |

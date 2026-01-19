@@ -108,6 +108,14 @@ URL
 
 `https://fellow.app/mcp`
 
+[Gamma](https://gamma.app/docs/Gamma-MCP-Server-Documentation-m6p43kobgzy15zj?mode=doc)
+
+Create presentations, docs, socials, and sites with AI
+
+URL
+
+`https://mcp.gamma.app/mcp`
+
 [Linear](https://linear.app/docs/mcp)
 
 Manage issues, projects & team workflows in Linear
@@ -302,6 +310,14 @@ URL
 
 `https://mcp.getclockwise.com/mcp`
 
+[Guru](https://help.getguru.com/docs/connecting-gurus-mcp-server)
+
+Search and interact with your company knowledge
+
+URL
+
+`https://mcp.api.getguru.com/mcp`
+
 [Glean](https://docs.glean.com/administration/platform/mcp/about)
 
 Bring enterprise context to Claude and your AI tools
@@ -379,6 +395,14 @@ Search flights in Claude
 URL
 
 `https://mcp.kiwi.com`
+
+[Klaviyo](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
+
+Report, strategize & create with real-time Klaviyo data
+
+URL
+
+`https://mcp.klaviyo.com/mcp`
 
 [lastminute.com](http://mcp.lastminute.com/docs)
 
@@ -528,6 +552,14 @@ Find people, productivity and business impact insights
 
 Requires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm)
 
+[Wix](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
+
+Manage and build sites and apps on Wix
+
+URL
+
+`https://mcp.wix.com/mcp`
+
 [Workato](https://docs.workato.com/en/mcp/mcp-cloud.html)
 
 Automate workflows and connect your business apps
@@ -608,6 +640,14 @@ Connect to Pendo for product and user insights
 
 Requires user-specific URL. [Get your URL here](https://support.pendo.io/hc/en-us/articles/41102236924955)
 
+[Port IO](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
+
+Search your context lake and safely run actions
+
+URL
+
+`https://mcp.port.io/v1`
+
 [Candid](https://support.claude.com/en/articles/12923235-using-the-candid-connector-in-claude)
 
 Research nonprofits and funders using Candid's data
@@ -647,6 +687,14 @@ Interact with your Chronograph data directly in Claude
 URL
 
 `https://ai.chronograph.pe/mcp`
+
+[Hex](https://learn.hex.tech/docs/administration/mcp-server)
+
+Answer questions with the Hex agent
+
+URL
+
+`https://app.hex.tech/mcp`
 
 [Hex](https://learn.hex.tech/docs/administration/mcp-server)
 

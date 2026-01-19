@@ -112,6 +112,8 @@ claude -p "Look at my staged changes and create an appropriate commit" \
   --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git commit:*)"
 ```
 
+The `--allowedTools` flag uses [permission rule syntax](settings.md). The `:*` suffix enables prefix matching, so `Bash(git diff:*)` allows any command starting with `git diff`.
+
 [Slash commands](slash-commands.md) like `/commit` are only available in interactive mode. In `-p` mode, describe the task you want to accomplish instead.
 
 ### [​](#customize-the-system-prompt) Customize the system prompt

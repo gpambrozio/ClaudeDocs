@@ -106,6 +106,12 @@ Connect 325+ marketing, analytics and CRM data sourcesCommand
 
 `claude mcp add windsor-ai --transport http https://mcp.windsor.ai`
 
+[**Gamma**](https://gamma.app/docs/Gamma-MCP-Server-Documentation-m6p43kobgzy15zj?mode=doc)
+
+Create presentations, docs, socials, and sites with AICommand
+
+`claude mcp add gamma --transport http https://mcp.gamma.app/mcp`
+
 [**Linear**](https://linear.app/docs/mcp)
 
 Manage issues, projects & team workflows in LinearCommand
@@ -144,7 +150,7 @@ Connect to Asana to coordinate tasks, projects, and goalsCommand
 
 Access Jira & Confluence from ClaudeCommand
 
-`claude mcp add --transport sse atlassian https://mcp.atlassian.com/v1/sse`
+`claude mcp add --transport sse atlassian https://mcp.atlassian.com/v1/mcp`
 
 [**Aura**](https://docs.getaura.ai/)
 
@@ -250,6 +256,12 @@ Advanced scheduling and time management for work.Command
 
 `claude mcp add --transport http clockwise https://mcp.getclockwise.com/mcp`
 
+[**Guru**](https://help.getguru.com/docs/connecting-gurus-mcp-server)
+
+Search and interact with your company knowledgeCommand
+
+`claude mcp add guru --transport http https://mcp.api.getguru.com/mcp`
+
 [**Glean**](https://docs.glean.com/administration/platform/mcp/about)
 
 Bring enterprise context to Claude and your AI toolsRequires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about).
@@ -283,6 +295,12 @@ Create forms & analyze submissions inside ClaudeCommand
 Connect and use PlayMCP servers in your toolboxCommand
 
 `claude mcp add playmcp --transport http https://playmcp.kakao.com/mcp`
+
+[**Klaviyo**](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
+
+Report, strategize & create with real-time Klaviyo dataCommand
+
+`claude mcp add klaviyo --transport http https://mcp.klaviyo.com/mcp`
 
 [**lastminute.com**](http://mcp.lastminute.com/docs)
 
@@ -376,6 +394,12 @@ Analyze, debug, and manage projects and deploymentsCommand
 
 Find people, productivity and business impact insightsRequires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm).
 
+[**Wix**](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
+
+Manage and build sites and apps on WixCommand
+
+`claude mcp add wix --transport http https://mcp.wix.com/mcp`
+
 [**Workato**](https://docs.workato.com/en/mcp/mcp-cloud.html)
 
 Automate workflows and connect your business appsRequires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp).
@@ -432,6 +456,12 @@ Access and run your n8n workflowsRequires user-specific URL. [Get your URL here]
 
 Connect to Pendo for product and user insightsRequires user-specific URL. [Get your URL here](https://support.pendo.io/hc/en-us/articles/41102236924955).
 
+[**Port IO**](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
+
+Search your context lake and safely run actionsCommand
+
+`claude mcp add port-io --transport http https://mcp.port.io/v1`
+
 [**Candid**](https://support.claude.com/en/articles/12923235-using-the-candid-connector-in-claude)
 
 Research nonprofits and funders using Candid's dataCommand
@@ -455,6 +485,12 @@ Search and metadata tools for Synapse scientific dataCommand
 Interact with your Chronograph data directly in ClaudeCommand
 
 `claude mcp add --transport http chronograph https://ai.chronograph.pe/mcp`
+
+[**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
+
+Answer questions with the Hex agentCommand
+
+`claude mcp add --transport http hex https://app.hex.tech/mcp`
 
 [**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
 
