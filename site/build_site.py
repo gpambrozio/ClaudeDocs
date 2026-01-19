@@ -214,8 +214,8 @@ def generate_rss(changelogs: list[ChangelogEntry], site_url: str, output_dir: Pa
     fg = FeedGenerator()
     feed_url = site_url or "https://example.com"
     fg.id(feed_url)
-    fg.title("ClaudeDocs Changelog")
-    fg.description("Daily changes to Claude documentation")
+    fg.title("ClaudeCodeChanges")
+    fg.description("Daily changes to Claude Code documentation")
     fg.link(href=feed_url, rel="alternate")
     fg.link(href=f"{feed_url}/feed.xml", rel="self")
     fg.language("en")
