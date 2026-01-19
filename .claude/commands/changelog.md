@@ -5,7 +5,6 @@ allowed-tools:
   - Bash(git:*)
   - Read
   - Write
-  - AskUserQuestion
 ---
 
 Look at the current git changes.
