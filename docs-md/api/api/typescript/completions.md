@@ -136,3 +136,7 @@ For Text Completions, this is always `"completion"`.
 Accepts one of the following:
 
 "completion"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -48,3 +48,7 @@ message = client.messages.create(
 )
 print(message.content)
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

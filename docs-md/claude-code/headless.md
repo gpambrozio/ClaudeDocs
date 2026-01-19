@@ -169,3 +169,7 @@ Explore all CLI flags and options](cli-reference.md)[## GitHub Actions
 Use the Agent SDK in GitHub workflows](github-actions.md)[## GitLab CI/CD
 
 Use the Agent SDK in GitLab pipelines](gitlab-ci-cd.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

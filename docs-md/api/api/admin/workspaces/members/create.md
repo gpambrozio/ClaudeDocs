@@ -103,3 +103,7 @@ Response 200
   "workspace_role": "workspace_user"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

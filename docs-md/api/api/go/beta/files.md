@@ -103,3 +103,7 @@ const FileFile File = "file"
 Downloadable booloptional
 
 Whether the file can be downloaded.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -609,3 +609,7 @@ Learn more about [Agent Skills](skills.md).
 - [CLI reference](cli-reference.md) - Command-line flags and options
 - [Settings](settings.md) - Configuration options
 - [Memory management](memory.md) - Managing Claude’s memory across sessions
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

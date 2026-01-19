@@ -240,3 +240,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 - **Anthropic pricing details**: [Pricing documentation](about-claude/pricing.md)
 - **Authentication guide**: See the [authentication section](#authentication) above
 - **Azure portal**: [portal.azure.com](https://portal.azure.com/)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

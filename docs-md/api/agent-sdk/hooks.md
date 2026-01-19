@@ -573,3 +573,7 @@ The `systemMessage` field adds context to the conversation that the model sees, 
 - [Custom Tools](agent-sdk/custom-tools.md): build tools to extend agent capabilities
 - [TypeScript SDK Reference](agent-sdk/typescript.md)
 - [Python SDK Reference](agent-sdk/python.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

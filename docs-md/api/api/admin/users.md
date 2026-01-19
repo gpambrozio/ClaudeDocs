@@ -67,3 +67,7 @@ For Users, this is always `"user"`.
 Accepts one of the following:
 
 "user"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

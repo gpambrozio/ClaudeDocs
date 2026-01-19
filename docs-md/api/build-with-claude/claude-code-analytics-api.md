@@ -261,3 +261,7 @@ The Claude Code Analytics API helps you understand and optimize your team's deve
 - [Usage and Cost API](build-with-claude/usage-cost-api.md) - Track API usage across all Anthropic services
 - [Identity and access management](iam.md)
 - [Monitoring usage with OpenTelemetry](monitoring-usage.md) for custom metrics and alerting
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

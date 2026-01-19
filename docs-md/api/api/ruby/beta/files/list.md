@@ -191,3 +191,7 @@ Response 200
   "last_id": "last_id"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

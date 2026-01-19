@@ -59,3 +59,7 @@ We also suggest following our general [prompt engineering guidelines](build-with
 Master the art of prompt crafting to get the most out of Claude.](build-with-claude/prompt-engineering/overview.md)[Prompt Library
 
 Find a wide range of pre-crafted prompts for various tasks and industries. Perfect for inspiration or quick starts.](resources/prompt-library.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

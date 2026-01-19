@@ -161,3 +161,7 @@ For most use cases, `--append-system-prompt` or `--append-system-prompt-file` is
 - [Common workflows](common-workflows.md) - Advanced workflows and patterns
 - [Settings](settings.md) - Configuration options
 - [SDK documentation](https://docs.claude.com/en/docs/agent-sdk) - Programmatic usage and integrations
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

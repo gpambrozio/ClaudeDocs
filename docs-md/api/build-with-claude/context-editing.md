@@ -619,3 +619,7 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 - Tasks requiring precise recall of early conversation details
 - Workflows using server-side tools extensively
 - Tasks that need to maintain exact state across many variables
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

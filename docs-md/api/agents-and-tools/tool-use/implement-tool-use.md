@@ -718,3 +718,7 @@ There are a few different types of errors that can occur when using tools with C
 ### Server tool errors
 
 ### Parallel tool calls not working
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

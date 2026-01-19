@@ -789,3 +789,7 @@ Ask AI
 - [Hooks](hooks.md) - Event handling and automation
 - [MCP](mcp.md) - External tool integration
 - [Settings](settings.md) - Configuration options for plugins
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

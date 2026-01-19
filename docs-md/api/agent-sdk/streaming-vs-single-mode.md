@@ -160,3 +160,7 @@ for await (const message of query({
   }
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -29,3 +29,7 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 - **External knowledge restriction**: Explicitly instruct Claude to only use information from provided documents and not its general knowledge.
 
 Remember, while these techniques significantly reduce hallucinations, they don't eliminate them entirely. Always validate critical information, especially for high-stakes decisions.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

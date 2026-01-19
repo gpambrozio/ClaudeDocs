@@ -245,3 +245,7 @@ Site-level permissions are inherited from the Chrome extension. Manage permissio
 - [CLI reference](cli-reference.md) - Command-line flags including `--chrome`
 - [Common workflows](common-workflows.md) - More ways to use Claude Code
 - [Getting started with Claude for Chrome](https://support.anthropic.com/en/articles/12012173-getting-started-with-claude-for-chrome) - Full documentation for the Chrome extension, including shortcuts, scheduling, and permissions
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -177,3 +177,7 @@ Copy page
 - Vietnam
 - Zambia
 - Zimbabwe
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

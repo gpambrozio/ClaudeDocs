@@ -31,3 +31,7 @@ For Organizations, this is always `"organization"`.
 Accepts one of the following:
 
 "organization"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -111,3 +111,7 @@ If you receive an error “Failed to get token from azureADTokenProvider: Chaine
 - [Microsoft Foundry documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry)
 - [Microsoft Foundry models](https://ai.azure.com/explore/models)
 - [Microsoft Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

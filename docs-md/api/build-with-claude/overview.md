@@ -41,3 +41,7 @@ These features enable Claude to interact with external systems, execute code, an
 | [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | Scale to thousands of tools by dynamically discovering and loading tools on-demand using regex-based search, optimizing context usage and improving tool selection accuracy. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | Claude API (Beta)  Microsoft Foundry (Beta) |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | Claude API  Google Cloud's Vertex AI  Microsoft Foundry |
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

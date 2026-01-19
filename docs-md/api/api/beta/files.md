@@ -93,3 +93,7 @@ Accepts one of the following:
 downloadable: optional boolean
 
 Whether the file can be downloaded.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

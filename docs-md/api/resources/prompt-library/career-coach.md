@@ -78,3 +78,7 @@ print(message.content)
 ```inline-block
 
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

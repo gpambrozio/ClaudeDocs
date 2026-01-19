@@ -80,3 +80,7 @@ For questions about beta features:
 3. Contact support for assistance with production usage
 
 Remember that beta features are provided "as-is" and may not have the same SLA guarantees as stable API features.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

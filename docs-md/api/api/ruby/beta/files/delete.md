@@ -119,3 +119,7 @@ Response 200
   "type": "file_deleted"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

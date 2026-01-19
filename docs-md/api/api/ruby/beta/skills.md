@@ -55,3 +55,7 @@ get/v1/skills/{skill\_id}/versions/{version}
 beta.skills.versions.delete(version, \*\*kwargs) -> [VersionDeleteResponse](api/beta.md) { id, type }
 
 delete/v1/skills/{skill\_id}/versions/{version}
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

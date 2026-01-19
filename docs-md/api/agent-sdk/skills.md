@@ -219,3 +219,7 @@ For general Skills troubleshooting (YAML syntax, debugging, etc.), see the [Clau
 - [SDK Overview](agent-sdk/overview.md): General SDK concepts
 - [TypeScript SDK Reference](agent-sdk/typescript.md): Complete API documentation
 - [Python SDK Reference](agent-sdk/python.md): Complete API documentation
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

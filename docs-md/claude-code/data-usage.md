@@ -75,3 +75,7 @@ By default, we disable all non-essential traffic (including error reporting, tel
 | **Claude API (`/bug` reports)** | Default on. `DISABLE_BUG_COMMAND=1` to disable. | Default off. `CLAUDE_CODE_USE_VERTEX` must be 1. | Default off. `CLAUDE_CODE_USE_BEDROCK` must be 1. |
 
 All environment variables can be checked into `settings.json` ([read more](settings.md)).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

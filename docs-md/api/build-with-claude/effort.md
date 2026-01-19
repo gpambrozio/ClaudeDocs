@@ -100,3 +100,7 @@ For best performance on complex reasoning tasks, use high effort (the default) w
 2. **Use low for speed-sensitive or simple tasks**: When latency matters or tasks are straightforward, low effort can significantly reduce response times and costs.
 3. **Test your use case**: The impact of effort levels varies by task type. Evaluate performance on your specific use cases before deploying.
 4. **Consider dynamic effort**: Adjust effort based on task complexity. Simple queries may warrant low effort while agentic coding and complex reasoning benefit from high effort.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

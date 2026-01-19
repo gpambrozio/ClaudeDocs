@@ -26765,3 +26765,7 @@ type: JsonValue; "succeeded"constant"succeeded"constant
 Accepts one of the following:
 
 SUCCEEDED("succeeded")
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -87,3 +87,7 @@ puts(response)
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -279,3 +279,7 @@ Create workspaces for specific projects or products to track usage and costs sep
 - [Admin API reference](api/admin.md)
 - [Rate limits](api/rate-limits.md)
 - [Usage and Cost API](build-with-claude/usage-cost-api.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

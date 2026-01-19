@@ -337,3 +337,7 @@ If you want to review changes before persisting them, an overlay filesystem lets
 - [Docker Security Best Practices](https://docs.docker.com/engine/security/)
 - [gVisor Documentation](https://gvisor.dev/docs/)
 - [Firecracker Documentation](https://firecracker-microvm.github.io/)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

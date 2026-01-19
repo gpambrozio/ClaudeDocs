@@ -30,3 +30,7 @@ Anthropic manages our security program through HackerOne. [Use this form to repo
 ---
 
 © Anthropic PBC. All rights reserved. Use is subject to applicable Anthropic Terms of Service.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

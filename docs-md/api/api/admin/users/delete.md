@@ -57,3 +57,7 @@ Response 200
   "type": "user_deleted"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

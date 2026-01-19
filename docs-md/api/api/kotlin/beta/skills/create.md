@@ -163,3 +163,7 @@ Response 200
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

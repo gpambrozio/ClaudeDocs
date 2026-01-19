@@ -675,3 +675,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

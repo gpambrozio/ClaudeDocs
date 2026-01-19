@@ -131,3 +131,7 @@ To begin using Priority Tier:
 1. [Contact sales](https://claude.com/contact-sales/priority-tier) to complete provisioning
 2. (Optional) Update your API requests to optionally set the `service_tier` parameter to `auto`
 3. Monitor your usage through response headers and the Claude Console
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

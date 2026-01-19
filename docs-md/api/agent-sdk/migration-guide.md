@@ -257,3 +257,7 @@ If you encounter any issues during migration:
 - Check out the [TypeScript SDK Reference](agent-sdk/typescript.md) for detailed API documentation
 - Review the [Python SDK Reference](agent-sdk/python.md) for Python-specific documentation
 - Learn about [Custom Tools](agent-sdk/custom-tools.md) and [MCP Integration](agent-sdk/mcp.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

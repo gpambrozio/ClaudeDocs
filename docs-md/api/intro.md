@@ -62,3 +62,7 @@ Process and analyze visual input and generate text and code from images.](build-
 Find answers to frequently asked account and billing questions.](https://support.claude.com/en/)[Service Status
 
 Check the status of Anthropic services.](https://status.claude.com)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

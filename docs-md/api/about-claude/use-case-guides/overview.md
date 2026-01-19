@@ -13,3 +13,7 @@ Build intelligent, context-aware chatbots with Claude to enhance customer suppor
 Techniques and best practices for using Claude to perform content filtering and general content moderation.](about-claude/use-case-guides/content-moderation.md)[Legal summarization
 
 Summarize legal documents using Claude to extract key information and expedite research.](about-claude/use-case-guides/legal-summarization.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

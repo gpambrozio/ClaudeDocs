@@ -365,3 +365,7 @@ Batch API and prompt caching discounts can be combined. For example, using both 
 We accept major credit cards for standard accounts. Enterprise customers can arrange invoicing and other payment methods.
 
 For additional questions about pricing, contact [support@anthropic.com](mailto:support@anthropic.com).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

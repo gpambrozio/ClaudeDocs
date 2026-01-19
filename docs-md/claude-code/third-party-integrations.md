@@ -182,3 +182,7 @@ Once you’ve chosen a deployment option and configured access for your team:
 1. **Roll out to your team**: Share installation instructions and have team members [install Claude Code](setup.md) and authenticate with their credentials.
 2. **Set up shared configuration**: Create a [CLAUDE.md file](memory.md) in your repositories to help Claude Code understand your codebase and coding standards.
 3. **Configure permissions**: Review [security settings](security.md) to define what Claude Code can and cannot do in your environment.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

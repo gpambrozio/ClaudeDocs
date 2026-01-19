@@ -149,3 +149,7 @@ const originalContinued = query({
   }
 })
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

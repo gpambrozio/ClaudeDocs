@@ -550,3 +550,7 @@ As you build applications with the text editor tool, we're excited to see how yo
 Learn how to implement tool workflows for use with Claude.](agents-and-tools/tool-use/overview.md)[Bash tool
 
 Execute shell commands with Claude.](agents-and-tools/tool-use/bash-tool.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

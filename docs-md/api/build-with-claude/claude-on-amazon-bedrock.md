@@ -194,3 +194,7 @@ message = client.messages.create(
 - **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)
 - **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)
 - **Anthropic pricing details:** [Pricing documentation](about-claude/pricing.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -3137,3 +3137,7 @@ Response 200
   }
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

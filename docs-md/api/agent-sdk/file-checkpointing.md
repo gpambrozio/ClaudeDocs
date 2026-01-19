@@ -482,3 +482,7 @@ async with ClaudeSDKClient(ClaudeAgentOptions(
 - **[Permissions](agent-sdk/permissions.md)**: configure which tools Claude can use and how file modifications are approved. Useful if you want more control over when edits happen.
 - **[TypeScript SDK reference](agent-sdk/typescript.md)**: complete API reference including all options for `query()` and the `rewindFiles()` method.
 - **[Python SDK reference](agent-sdk/python.md)**: complete API reference including all options for `ClaudeAgentOptions` and the `rewind_files()` method.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

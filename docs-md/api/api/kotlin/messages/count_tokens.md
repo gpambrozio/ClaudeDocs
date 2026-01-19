@@ -2319,3 +2319,7 @@ Response 200
   "input_tokens": 2095
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

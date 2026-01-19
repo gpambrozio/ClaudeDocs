@@ -160,3 +160,7 @@ Response 200
   "downloadable": true
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

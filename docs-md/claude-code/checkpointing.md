@@ -65,3 +65,7 @@ Checkpoints are designed for quick, session-level recovery. For permanent versio
 - [Interactive mode](interactive-mode.md) - Keyboard shortcuts and session controls
 - [Slash commands](slash-commands.md) - Accessing checkpoints using `/rewind`
 - [CLI reference](cli-reference.md) - Command-line options
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

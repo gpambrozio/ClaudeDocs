@@ -185,3 +185,7 @@ Response 200
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

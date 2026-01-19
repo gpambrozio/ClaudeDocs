@@ -273,3 +273,7 @@ next\_page: string
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
 formatdate-time
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -479,3 +479,7 @@ Now that you understand Claude Code’s plugin system, here are suggested paths 
   - [Agent Skills](skills.md): extend Claude’s capabilities
   - [Hooks](hooks.md): event handling and automation
   - [MCP](mcp.md): external tool integration
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

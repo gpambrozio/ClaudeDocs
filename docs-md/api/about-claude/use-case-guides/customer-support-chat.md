@@ -554,3 +554,7 @@ Here's how you can approach this:
 Visit our RAG cookbook recipe for more example code and detailed guidance.](https://platform.claude.com/cookbook/capabilities-retrieval-augmented-generation-guide)[Citations cookbook
 
 Explore our Citations cookbook recipe for how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

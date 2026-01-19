@@ -169,3 +169,7 @@ Response 200
   "version": "1759178010641129"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

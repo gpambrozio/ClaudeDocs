@@ -426,3 +426,7 @@ For detailed troubleshooting with solutions, see [Troubleshooting](plugin-market
 - **Build your own plugins**: See [Plugins](plugins.md) to create custom commands, agents, and hooks
 - **Create a marketplace**: See [Create a plugin marketplace](plugin-marketplaces.md) to distribute plugins to your team or community
 - **Technical reference**: See [Plugins reference](plugins-reference.md) for complete specifications
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

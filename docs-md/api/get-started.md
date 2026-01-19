@@ -92,3 +92,7 @@ Explore Claude's advanced features and capabilities.](api/overview.md)[Client SD
 Discover Anthropic client libraries.](api/client-sdks.md)[Claude Cookbook
 
 Learn with interactive Jupyter notebooks.](https://platform.claude.com/cookbooks)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

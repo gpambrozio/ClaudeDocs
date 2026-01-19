@@ -640,3 +640,7 @@ For additional debugging tools and common issues, see [Debugging and development
 - [Plugins reference](plugins-reference.md) - Complete technical specifications and schemas
 - [Plugin settings](settings.md) - Plugin configuration options
 - [strictKnownMarketplaces reference](settings.md) - Managed marketplace restrictions
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -270,3 +270,7 @@ The bash tool is most powerful when combined with the [text editor](agents-and-t
 Learn about tool use with Claude](agents-and-tools/tool-use/overview.md)[Text editor tool
 
 View and edit text files with Claude](agents-and-tools/tool-use/text-editor-tool.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

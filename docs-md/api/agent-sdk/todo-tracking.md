@@ -109,3 +109,7 @@ await tracker.trackQuery("Build a complete authentication system with todos");
 - [Python SDK Reference](agent-sdk/python.md)
 - [Streaming vs Single Mode](agent-sdk/streaming-vs-single-mode.md)
 - [Custom Tools](agent-sdk/custom-tools.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

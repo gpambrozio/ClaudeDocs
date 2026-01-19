@@ -101,3 +101,7 @@ Organizations can disable local Claude Code use in the desktop application with 
 - [Enterprise Configuration](https://support.claude.com/en/articles/12622667-enterprise-configuration)
 - [Common workflows](common-workflows.md)
 - [Settings reference](settings.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

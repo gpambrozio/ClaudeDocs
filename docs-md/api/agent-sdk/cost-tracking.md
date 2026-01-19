@@ -294,3 +294,7 @@ class BillingAggregator {
 - [TypeScript SDK Reference](agent-sdk/typescript.md) - Complete API documentation
 - [SDK Overview](agent-sdk/overview.md) - Getting started with the SDK
 - [SDK Permissions](agent-sdk/permissions.md) - Managing tool permissions
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

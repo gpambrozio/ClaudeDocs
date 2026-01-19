@@ -674,3 +674,7 @@ Learn about the underlying code execution capability that powers programmatic to
 Understand the fundamentals of tool use with Claude.](agents-and-tools/tool-use/overview.md)[Implement Tool Use
 
 Step-by-step guide for implementing tools.](agents-and-tools/tool-use/implement-tool-use.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

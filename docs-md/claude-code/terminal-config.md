@@ -68,3 +68,7 @@ The supported subset includes:
 - Line operations: `J` (join lines)
 
 See [Interactive mode](interactive-mode.md) for the complete reference.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

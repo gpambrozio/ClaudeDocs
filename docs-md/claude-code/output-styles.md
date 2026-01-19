@@ -106,3 +106,7 @@ about when to use the agent.
 
 You can think of output styles as “stored system prompts” and custom slash
 commands as “stored prompts”.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -460,3 +460,7 @@ Below, we've included several code snippets that showcase various prompt caching
 ### Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt\_caching'` in Python?
 
 ### Why am I seeing 'TypeError: Cannot read properties of undefined (reading 'messages')'?
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

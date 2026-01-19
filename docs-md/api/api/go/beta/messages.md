@@ -26857,3 +26857,7 @@ Type Succeeded
 Accepts one of the following:
 
 const SucceededSucceeded Succeeded = "succeeded"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

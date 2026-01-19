@@ -367,3 +367,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 Explore practical examples of PDF processing in our cookbook recipe.](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)[View API reference
 
 See complete API documentation for PDF support.](api/messages.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -27249,3 +27249,7 @@ get/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 delete/v1/skills/{skill\_id}/versions/{version}
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -664,3 +664,7 @@ You can configure Claude’s behavior in two ways:
 2. **Custom prompts**: Use the `prompt` parameter in the workflow file to provide workflow-specific instructions. This allows you to customize Claude’s behavior for different workflows or tasks.
 
 Claude will follow these guidelines when creating PRs and responding to requests.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

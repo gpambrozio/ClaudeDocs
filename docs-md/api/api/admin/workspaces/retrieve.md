@@ -86,3 +86,7 @@ Response 200
   "type": "workspace"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

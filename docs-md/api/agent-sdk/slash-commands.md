@@ -343,3 +343,7 @@ for await (const message of query({
 - [TypeScript SDK reference](agent-sdk/typescript.md) - Complete API documentation
 - [SDK overview](agent-sdk/overview.md) - General SDK concepts
 - [CLI reference](cli-reference.md) - Command-line interface
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

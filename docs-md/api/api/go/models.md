@@ -45,3 +45,7 @@ For Models, this is always `"model"`.
 Accepts one of the following:
 
 const ModelModel Model = "model"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

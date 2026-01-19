@@ -98,3 +98,7 @@ Get inspired by example prompts for various tasks.](resources/prompt-library/lib
 Learn prompting best practices with our interactive tutorial.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Test your prompts
 
 Use our evaluation tool to test your improved prompts.](test-and-evaluate/eval-tool.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

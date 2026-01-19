@@ -274,3 +274,7 @@ Ready to start building with images using Claude? Here are a few helpful resourc
 - [API reference](api/messages.md): Visit our documentation for the Messages API, including example [API calls involving images](build-with-claude/working-with-messages.md).
 
 If you have any other questions, feel free to reach out to our [support team](https://support.claude.com/). You can also join our [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -383,3 +383,7 @@ For either of these approaches, you will need to wrap your script in a service. 
 Visit our classification cookbook for more example code and detailed eval guidance.](https://platform.claude.com/cookbook/capabilities-classification-guide)[Claude Console
 
 Begin building and evaluating your workflow on the Claude Console.](/dashboard)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

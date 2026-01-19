@@ -133,3 +133,7 @@ Create compelling product announcement tweets in the world’s 10 most spoken la
 Detect the tone and sentiment behind tweets](resources/prompt-library/tweet-tone-detector.md)[### Airport code analyst
 
 Find and extract airport codes from text](resources/prompt-library/airport-code-analyst.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

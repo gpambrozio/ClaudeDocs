@@ -59,3 +59,7 @@ Accepts one of the following:
 "workspace\_admin"
 
 "workspace\_billing"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -60,3 +60,7 @@ Response 200
   "type": "organization"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

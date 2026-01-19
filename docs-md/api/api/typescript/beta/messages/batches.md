@@ -4213,3 +4213,7 @@ type: "succeeded"
 Accepts one of the following:
 
 "succeeded"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

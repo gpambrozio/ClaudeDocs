@@ -121,3 +121,7 @@ For the other steps in the permission evaluation flow:
 - [Handle approvals and user input](agent-sdk/user-input.md): interactive approval prompts and clarifying questions
 - [Hooks guide](agent-sdk/hooks.md): run custom code at key points in the agent lifecycle
 - [Permission rules](settings.md): declarative allow/deny rules in `settings.json`
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

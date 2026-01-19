@@ -673,3 +673,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -250,3 +250,7 @@ To effectively use the Admin API:
 ### Can organization admin or billing members' workspace roles be changed?
 
 ### What happens to workspace access when organization roles change?
+
+---
+
+*Copyright © Anthropic. All rights reserved.*
