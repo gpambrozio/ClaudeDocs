@@ -295,3 +295,7 @@ fi
 
 - If your status line doesn’t appear, check that your script is executable (`chmod +x`)
 - Ensure your script outputs to stdout (not stderr)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

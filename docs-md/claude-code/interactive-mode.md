@@ -217,3 +217,7 @@ This is useful for quick shell operations while maintaining conversation context
 - [CLI reference](cli-reference.md) - Command-line flags and options
 - [Settings](settings.md) - Configuration options
 - [Memory management](memory.md) - Managing CLAUDE.md files
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

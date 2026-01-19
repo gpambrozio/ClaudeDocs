@@ -350,3 +350,7 @@ When citations are enabled, responses include multiple text blocks with citation
 For streaming responses, we've added a `citations_delta` type that contains a single citation to be added to the `citations` list on the current `text` content block.
 
 ### Example streaming events
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

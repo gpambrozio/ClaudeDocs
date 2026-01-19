@@ -37,3 +37,7 @@ For tasks requiring consistent context (e.g., chatbots, knowledge bases), use re
 ## Chain prompts for complex tasks
 
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

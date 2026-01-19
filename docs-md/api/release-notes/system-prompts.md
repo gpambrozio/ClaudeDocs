@@ -65,3 +65,7 @@ Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use 
 ## Claude Haiku 3
 
 ### July 12th, 2024
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

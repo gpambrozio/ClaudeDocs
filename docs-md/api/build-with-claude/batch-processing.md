@@ -435,3 +435,7 @@ Note that the failure of one request in a batch does not affect the processing o
 ### How does the Message Batches API handle privacy and data separation?
 
 ### Can I use prompt caching in the Message Batches API?
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

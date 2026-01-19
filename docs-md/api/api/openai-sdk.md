@@ -175,3 +175,7 @@ While the OpenAI SDK automatically manages headers, here is the complete list of
 | `openai-version` | Always `2020-10-01` |
 | `authorization` | Fully supported |
 | `openai-processing-ms` | Always empty |
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

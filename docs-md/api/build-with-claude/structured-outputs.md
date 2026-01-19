@@ -443,3 +443,7 @@ For persistent issues with valid schemas, [contact support](https://support.clau
 - **[Message Prefilling](build-with-claude/prompt-engineering/prefill-claudes-response.md)**: Incompatible with JSON outputs
 
 **Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

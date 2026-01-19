@@ -562,3 +562,7 @@ Claude Code on the web shares rate limits with all other Claude and Claude Code 
 - [Settings reference](settings.md)
 - [Security](security.md)
 - [Data usage](data-usage.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

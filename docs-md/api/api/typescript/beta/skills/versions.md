@@ -29,3 +29,7 @@ get/v1/skills/{skill\_id}/versions/{version}
 client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta.md) { id, type }
 
 delete/v1/skills/{skill\_id}/versions/{version}
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

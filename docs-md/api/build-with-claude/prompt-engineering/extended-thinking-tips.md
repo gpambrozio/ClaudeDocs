@@ -156,3 +156,7 @@ And fix any issues you find.
 Explore practical examples of extended thinking in our cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking guide
 
 See complete technical documentation for implementing extended thinking.](build-with-claude/extended-thinking.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

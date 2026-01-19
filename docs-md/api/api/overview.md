@@ -197,3 +197,7 @@ Installation guides for Python, TypeScript, Java, Go, C#, Ruby, and PHP](api/cli
 Explore capabilities: caching, vision, tool use, streaming, and more](build-with-claude/overview.md)[Rate limits
 
 Usage tiers, spend limits, and rate limiting with token bucket algorithm](api/rate-limits.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

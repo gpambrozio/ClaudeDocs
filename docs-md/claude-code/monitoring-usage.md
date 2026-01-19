@@ -489,3 +489,7 @@ For a comprehensive guide on measuring return on investment for Claude Code, inc
 ## [​](#monitoring-claude-code-on-amazon-bedrock) Monitoring Claude Code on Amazon Bedrock
 
 For detailed Claude Code usage monitoring guidance for Amazon Bedrock, see [Claude Code Monitoring Implementation (Bedrock)](https://github.com/aws-solutions-library-samples/guidance-for-claude-code-with-amazon-bedrock/blob/main/assets/docs/MONITORING.md).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

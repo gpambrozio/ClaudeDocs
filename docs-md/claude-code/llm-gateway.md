@@ -189,3 +189,7 @@ For more detailed information, refer to the [LiteLLM documentation](https://docs
 - [Claude Code settings](settings.md)
 - [Enterprise network configuration](network-config.md)
 - [Third-party integrations overview](third-party-integrations.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

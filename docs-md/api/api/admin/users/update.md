@@ -116,3 +116,7 @@ Response 200
   "type": "user"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

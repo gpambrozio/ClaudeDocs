@@ -251,3 +251,7 @@ To set up organization-level memory management:
 - **Be specific**: “Use 2-space indentation” is better than “Format code properly”.
 - **Use structure to organize**: Format each individual memory as a bullet point and group related memories under descriptive markdown headings.
 - **Review periodically**: Update memories as your project evolves to ensure Claude is always using the most up to date information and context.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

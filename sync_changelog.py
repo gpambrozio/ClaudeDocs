@@ -20,6 +20,8 @@ import httpx
 CHANGELOG_URL = "https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/CHANGELOG.md"
 OUTPUT_DIR = Path("versions")
 
+COPYRIGHT_NOTICE = "\n\n---\n\n*Copyright © Anthropic. All rights reserved.*\n"
+
 
 def download_changelog() -> str:
     """Download the CHANGELOG.md file from GitHub."""
@@ -70,7 +72,7 @@ def save_versions(versions: list[tuple[str, str]]) -> int:
     saved = 0
     for version, content in versions:
         filepath = OUTPUT_DIR / f"{version}.md"
-        filepath.write_text(content, encoding="utf-8")
+        filepath.write_text(content + COPYRIGHT_NOTICE, encoding="utf-8")
         print(f"  Saved {filepath}")
         saved += 1
 

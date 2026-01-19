@@ -348,3 +348,7 @@ for await (const message of query({
 - [Output styles](output-styles.md) - Complete output styles documentation
 - [TypeScript SDK guide](agent-sdk/typescript.md) - Complete SDK usage guide
 - [Configuration guide](settings.md) - General configuration options
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

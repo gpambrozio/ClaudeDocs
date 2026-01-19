@@ -434,3 +434,7 @@ Response 200
   "type": "completion"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

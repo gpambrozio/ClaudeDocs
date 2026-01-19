@@ -448,3 +448,7 @@ Keep in mind that finding the optimal batch size for your specific needs may req
 View a fully implemented code-based example of how to use Claude for content moderation.](https://platform.claude.com/cookbook/misc-building-moderation-filter)[Guardrails guide
 
 Explore our guardrails guide for techniques to moderate interactions with Claude.](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -373,3 +373,7 @@ Share your feedback on the V2 interface before it becomes stable. Report issues 
 - [TypeScript SDK reference (V1)](agent-sdk/typescript.md) - Full V1 SDK documentation
 - [SDK overview](agent-sdk/overview.md) - General SDK concepts
 - [V2 examples on GitHub](https://github.com/anthropics/claude-agent-sdk-demos/tree/main/hello-world-v2) - Working code examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

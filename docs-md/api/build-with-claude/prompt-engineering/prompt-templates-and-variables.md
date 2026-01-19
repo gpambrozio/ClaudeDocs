@@ -56,3 +56,7 @@ Learn about the prompt generator in the Claude Console and try your hand at gett
 If you want to level up your prompt variable game, wrap them in XML tags.](build-with-claude/prompt-engineering/use-xml-tags.md)[Claude Console
 
 Check out the myriad prompt development tools available in the Claude Console.](/)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

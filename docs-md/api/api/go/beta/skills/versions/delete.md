@@ -144,3 +144,7 @@ Response 200
   "type": "type"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

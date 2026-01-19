@@ -781,3 +781,7 @@ Now that you understand subagents, explore these related features:
 - [Distribute subagents with plugins](plugins.md) to share subagents across teams or projects
 - [Run Claude Code programmatically](headless.md) with the Agent SDK for CI/CD and automation
 - [Use MCP servers](mcp.md) to give subagents access to external tools and data
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

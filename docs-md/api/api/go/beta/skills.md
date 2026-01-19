@@ -55,3 +55,7 @@ get/v1/skills/{skill\_id}/versions/{version}
 client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta.md), error)
 
 delete/v1/skills/{skill\_id}/versions/{version}
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

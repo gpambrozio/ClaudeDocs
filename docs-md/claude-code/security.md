@@ -123,3 +123,7 @@ If you discover a security vulnerability in Claude Code:
 - [Monitoring usage](monitoring-usage.md) - Track and audit Claude Code activity
 - [Development containers](devcontainer.md) - Secure, isolated environments
 - [Anthropic Trust Center](https://trust.anthropic.com) - Security certifications and compliance
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

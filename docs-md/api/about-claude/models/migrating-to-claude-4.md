@@ -354,3 +354,7 @@ Simply update your model ID.
 - Review [model capabilities](about-claude/models/overview.md) for performance comparisons
 - Review [API release notes](release-notes/api.md) for API updates
 - Contact support if you encounter any issues during migration
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

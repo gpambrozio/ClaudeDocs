@@ -703,3 +703,7 @@ print(message_batch_individual_response.custom_id)
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

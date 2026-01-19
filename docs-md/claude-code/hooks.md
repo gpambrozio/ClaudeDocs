@@ -1361,3 +1361,7 @@ Progress messages appear in verbose mode (ctrl+o) showing:
 - Command being executed
 - Success/failure status
 - Output or error messages
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

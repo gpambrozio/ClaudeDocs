@@ -86,3 +86,7 @@ public final class Main {
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

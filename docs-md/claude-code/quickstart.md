@@ -428,3 +428,7 @@ Learn more on claude.com](https://claude.com/product/claude-code)
 - **In Claude Code**: Type `/help` or ask “how do I…”
 - **Documentation**: You’re here! Browse other guides
 - **Community**: Join our [Discord](https://www.anthropic.com/discord) for tips and support
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

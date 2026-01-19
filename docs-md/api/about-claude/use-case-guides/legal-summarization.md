@@ -306,3 +306,7 @@ Fine-tuning is currently only available via Amazon Bedrock. Additional details a
 View a fully implemented code-based example of how to use Claude to summarize contracts.](https://platform.claude.com/cookbook/capabilities-summarization-guide)[Citations cookbook
 
 Explore our Citations cookbook recipe for guidance on how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

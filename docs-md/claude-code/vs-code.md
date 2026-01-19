@@ -234,3 +234,7 @@ Now that you have Claude Code set up in VS Code:
 - [Explore common workflows](common-workflows.md) to get the most out of Claude Code
 - [Set up MCP servers](mcp.md) to extend Claude’s capabilities with external tools. Configure servers using the CLI, then use them in the extension.
 - [Configure Claude Code settings](settings.md) to customize allowed commands, hooks, and more. These settings are shared between the extension and CLI.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -238,3 +238,7 @@ Response 200
   "type": "message_batch"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

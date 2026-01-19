@@ -27,3 +27,7 @@ We always recommend using the latest API version whenever possible. Previous ver
     - Removed unnecessary `data: [DONE]` event.
   - Removed legacy `exception` and `truncated` values in responses.
 - `2023-01-01`: Initial release.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

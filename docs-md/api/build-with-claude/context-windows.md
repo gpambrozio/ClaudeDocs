@@ -162,3 +162,7 @@ See our [model comparison](about-claude/models/overview.md) table for a list of 
 See our model comparison table for a list of context window sizes and input / output token pricing by model.](about-claude/models/overview.md)[Extended thinking overview
 
 Learn more about how extended thinking works and how to implement it alongside other features such as tool use and prompt caching.](build-with-claude/extended-thinking.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

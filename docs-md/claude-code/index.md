@@ -123,3 +123,7 @@ Clone our development container reference implementation](https://github.com/ant
 Discover Claude Code’s safeguards and best practices for safe usage](security.md)[## Privacy and data usage
 
 Understand how Claude Code handles your data](data-usage.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -76,3 +76,7 @@ Tool acceptance rates and code metrics help you:
 
 - [Monitoring usage with OpenTelemetry](monitoring-usage.md) for custom metrics and alerting
 - [Identity and access management](iam.md) for role configuration
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -41,3 +41,7 @@ For Models, this is always `"model"`.
 Accepts one of the following:
 
 "model"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

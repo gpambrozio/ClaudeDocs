@@ -236,3 +236,7 @@ Learn about Skills in Claude Code](skills.md)[Use Skills in the Agent SDK
 Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Agent Skills Cookbook
 
 Explore example Skills and implementation patterns](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

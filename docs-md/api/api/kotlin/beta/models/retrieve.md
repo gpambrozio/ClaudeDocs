@@ -134,3 +134,7 @@ Response 200
   "type": "model"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

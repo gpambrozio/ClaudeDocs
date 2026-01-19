@@ -536,3 +536,7 @@ JSON
   }
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

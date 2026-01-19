@@ -1441,3 +1441,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

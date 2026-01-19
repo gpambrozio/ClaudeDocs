@@ -124,3 +124,7 @@ If you notice changes in how costs are displayed (such as the `/cost` command sh
 
 For team deployments, we recommend starting with a small pilot group to
 establish usage patterns before wider rollout.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

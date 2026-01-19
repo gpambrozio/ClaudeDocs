@@ -26,3 +26,7 @@ Combine strategies for robust protection. Here's an enterprise-grade example wit
 ### Example: Multi-layered protection for a financial advisor chatbot
 
 By layering these strategies, you create a robust defense against jailbreaking and prompt injections, ensuring your Claude-powered applications maintain the highest standards of safety and compliance.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

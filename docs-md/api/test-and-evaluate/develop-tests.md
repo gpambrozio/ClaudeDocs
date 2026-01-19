@@ -66,3 +66,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 Learn how to craft prompts that maximize your eval scores.](build-with-claude/prompt-engineering/overview.md)[Evals cookbook
 
 More code examples of human-, code-, and LLM-graded evals.](https://platform.claude.com/cookbook/misc-building-evals)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

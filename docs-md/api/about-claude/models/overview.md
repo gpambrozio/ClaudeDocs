@@ -72,3 +72,7 @@ Learn how to make your first API call in minutes.](get-started.md)[Claude Consol
 Craft and test powerful prompts directly in your browser.](/)
 
 If you have any questions or need assistance, don't hesitate to reach out to our [support team](https://support.claude.com/) or consult the [Discord community](https://www.anthropic.com/discord).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

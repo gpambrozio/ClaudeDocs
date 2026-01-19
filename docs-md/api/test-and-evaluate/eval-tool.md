@@ -83,3 +83,7 @@ The Evaluation tool offers several features to help you refine your prompts:
 By reviewing results across test cases and comparing different prompt versions, you can spot patterns and make informed adjustments to your prompt more efficiently.
 
 Start evaluating your prompts today to build more robust AI applications with Claude!
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

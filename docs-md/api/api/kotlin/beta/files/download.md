@@ -82,3 +82,7 @@ fun main() {
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

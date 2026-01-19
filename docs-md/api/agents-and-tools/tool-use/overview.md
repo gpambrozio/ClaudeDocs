@@ -246,3 +246,7 @@ Build a responsive customer service bot that leverages client tools to
 enhance support.](https://platform.claude.com/cookbook/tool-use-customer-service-agent)[JSON Extractor
 
 See how Claude and tool use can extract structured data from unstructured text.](https://platform.claude.com/cookbook/tool-use-extracting-structured-json)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

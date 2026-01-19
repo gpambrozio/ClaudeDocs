@@ -47,3 +47,7 @@ Concise overview of Claude API documentation, optimized for LLM ingestion.](/doc
 LLM-optimized documentation index.](/llms.txt)[llms-full.txt
 
 Complete LLM-optimized documentation.](/llms-full.txt)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

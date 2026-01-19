@@ -83,3 +83,7 @@ See detailed specifications and pricing for the latest Claude models](about-clau
 Explore the latest improvements in Claude 4.5 models](about-claude/models/whats-new-claude-4-5.md)[Start building
 
 Get started with your first API call](get-started.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

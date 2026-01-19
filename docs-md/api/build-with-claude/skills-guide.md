@@ -739,3 +739,7 @@ Complete API reference with all endpoints](api/skills/create-skill.md)[Authoring
 Best practices for writing effective Skills](agents-and-tools/agent-skills/best-practices.md)[Code Execution Tool
 
 Learn about the code execution environment](agents-and-tools/tool-use/code-execution-tool.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -80,3 +80,7 @@ curl https://api.anthropic.com/v1/files/$FILE_ID/content \
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

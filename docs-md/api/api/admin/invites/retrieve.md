@@ -114,3 +114,7 @@ Response 200
   "type": "invite"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

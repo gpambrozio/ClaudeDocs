@@ -11,3 +11,7 @@ This guide provides actionable tips to keep Claude in character, even during lon
 - **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
 
 ### Example: Enterprise chatbot for role prompting
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -84,3 +84,7 @@ Response 200
   "type": "message_batch_deleted"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

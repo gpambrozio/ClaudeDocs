@@ -1317,3 +1317,7 @@ Tips:
 [## Claude Code reference implementation
 
 Clone our development container reference implementation.](https://github.com/anthropics/claude-code/tree/main/.devcontainer)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

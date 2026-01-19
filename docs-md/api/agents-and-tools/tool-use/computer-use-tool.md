@@ -611,3 +611,7 @@ If you're also using bash or text editor tools alongside computer use, those too
 Get started quickly with our complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[Tool documentation
 
 Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

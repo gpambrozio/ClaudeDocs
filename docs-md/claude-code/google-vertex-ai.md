@@ -146,3 +146,7 @@ If you encounter 429 errors:
 - [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs)
 - [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing)
 - [Vertex AI quotas and limits](https://cloud.google.com/vertex-ai/docs/quotas)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

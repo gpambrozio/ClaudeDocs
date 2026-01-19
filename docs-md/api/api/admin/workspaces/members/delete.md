@@ -67,3 +67,7 @@ Response 200
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

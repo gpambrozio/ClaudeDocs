@@ -102,3 +102,7 @@ When using fine-grained tool streaming, you may receive invalid or incomplete JS
 This approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.
 
 When wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

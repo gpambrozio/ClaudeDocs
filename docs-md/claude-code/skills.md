@@ -655,3 +655,7 @@ Learn how Skills work across Claude products](https://docs.claude.com/en/docs/ag
 Use Skills programmatically with TypeScript and Python](https://docs.claude.com/en/docs/agent-sdk/skills)[## Get started with Agent Skills
 
 Create your first Skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/quickstart)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

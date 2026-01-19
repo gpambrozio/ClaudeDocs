@@ -414,3 +414,7 @@ REM Remove project-specific settings (run from your project directory)
 rmdir /s /q ".claude"
 del ".mcp.json"
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

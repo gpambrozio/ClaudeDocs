@@ -260,3 +260,7 @@ Email assistant, research agent, and more](https://github.com/anthropics/claude-
 Full TypeScript API reference and examples](agent-sdk/typescript.md)[Python SDK
 
 Full Python API reference and examples](agent-sdk/python.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -136,3 +136,7 @@ An agent session will not timeout, but we recommend setting a 'maxTurns' propert
 - [Permissions](agent-sdk/permissions.md) - Configure tool permissions
 - [Cost Tracking](agent-sdk/cost-tracking.md) - Monitor API usage
 - [MCP Integration](agent-sdk/mcp.md) - Extend with custom tools
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

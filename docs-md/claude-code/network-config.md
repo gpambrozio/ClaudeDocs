@@ -94,3 +94,7 @@ Ensure these URLs are allowlisted in your proxy configuration and firewall rules
 - [Claude Code settings](settings.md)
 - [Environment variables reference](settings.md)
 - [Troubleshooting guide](troubleshooting.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

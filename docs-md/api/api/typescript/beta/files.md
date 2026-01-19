@@ -103,3 +103,7 @@ Accepts one of the following:
 downloadable?: boolean
 
 Whether the file can be downloaded.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

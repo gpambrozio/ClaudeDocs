@@ -56,3 +56,7 @@ Get inspired by a curated selection of prompts for various tasks and use cases.]
 An example-filled tutorial that covers the prompt engineering concepts found in our docs.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Google Sheets prompting tutorial
 
 A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

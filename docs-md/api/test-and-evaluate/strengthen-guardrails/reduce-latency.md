@@ -68,3 +68,7 @@ Streaming is a feature that allows the model to start sending back its response 
 With streaming enabled, you can process the model's output as it arrives, updating your user interface or performing other tasks in parallel. This can greatly enhance the user experience and make your application feel more interactive and responsive.
 
 Visit [streaming Messages](build-with-claude/streaming.md) to learn about how you can implement streaming for your use case.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -174,3 +174,7 @@ print(message)
 - **Claude models documentation:** [Claude on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude)
 - **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
 - **Anthropic pricing details:** [Pricing documentation](about-claude/pricing.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

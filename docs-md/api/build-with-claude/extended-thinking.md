@@ -584,3 +584,7 @@ The billed output token count will **not** match the visible token count in the 
 Explore practical examples of thinking in our cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking prompting tips
 
 Learn prompt engineering best practices for extended thinking.](build-with-claude/prompt-engineering/extended-thinking-tips.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

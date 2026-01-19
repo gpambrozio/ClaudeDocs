@@ -516,3 +516,7 @@ Learn prompt engineering techniques for Claude 4.5 models](build-with-claude/pro
 Compare Claude 4.5 models with other Claude models](about-claude/models/overview.md)[Migration guide
 
 Upgrade from previous models](about-claude/models/migrating-to-claude-4.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

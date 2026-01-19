@@ -931,3 +931,7 @@ files by blocking Write operations to certain paths.
 - [Identity and Access Management](iam.md) - Learn about Claude Code’s permission system
 - [IAM and access control](iam.md) - Managed policy configuration
 - [Troubleshooting](troubleshooting.md) - Solutions for common configuration issues
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -228,3 +228,7 @@ If relative paths don't work:
 - [Slash Commands](agent-sdk/slash-commands.md) - Using slash commands in the SDK
 - [Subagents](agent-sdk/subagents.md) - Working with specialized agents
 - [Skills](agent-sdk/skills.md) - Using Agent Skills
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

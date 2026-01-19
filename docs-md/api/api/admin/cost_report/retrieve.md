@@ -215,3 +215,7 @@ Response 200
   "next_page": "2019-12-27T18:11:19.117Z"
 }
 ```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

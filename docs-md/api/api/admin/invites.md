@@ -83,3 +83,7 @@ For Invites, this is always `"invite"`.
 Accepts one of the following:
 
 "invite"
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

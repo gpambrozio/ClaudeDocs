@@ -92,3 +92,7 @@ console.log(content);
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

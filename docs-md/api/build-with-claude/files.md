@@ -282,3 +282,7 @@ During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
 - [Contact us](mailto:sales@anthropic.com) if you need higher limits for your use case
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

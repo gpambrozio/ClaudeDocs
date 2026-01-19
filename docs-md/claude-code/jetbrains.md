@@ -138,3 +138,7 @@ When running in JetBrains IDEs, consider:
 - Being aware of which files Claude Code has access to modify
 
 For additional help, see our [troubleshooting guide](troubleshooting.md).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

@@ -103,3 +103,7 @@ FILE("file")
 Optional<Boolean> downloadable
 
 Whether the file can be downloaded.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

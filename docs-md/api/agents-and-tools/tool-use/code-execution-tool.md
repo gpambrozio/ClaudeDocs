@@ -641,3 +641,7 @@ Learn more in the [Programmatic tool calling documentation](agents-and-tools/too
 The code execution tool enables Claude to use [Agent Skills](agents-and-tools/agent-skills/overview.md). Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.
 
 Learn more in the [Agent Skills documentation](agents-and-tools/agent-skills/overview.md) and [Agent Skills API guide](build-with-claude/skills-guide.md).
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

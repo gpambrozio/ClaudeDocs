@@ -2169,3 +2169,7 @@ If `permissionMode` is set to `bypassPermissions` and `allowUnsandboxedCommands`
 - [Python SDK reference](agent-sdk/python.md) - Python SDK documentation
 - [CLI reference](cli-reference.md) - Command-line interface
 - [Common workflows](common-workflows.md) - Step-by-step guides
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

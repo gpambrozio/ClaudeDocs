@@ -358,3 +358,7 @@ Ask AI
 - For comprehensive security best practices and safety guidelines, see [Security Considerations](hooks.md) in the hooks reference documentation.
 - For troubleshooting steps and debugging techniques, see [Debugging](hooks.md) in the hooks reference
   documentation.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

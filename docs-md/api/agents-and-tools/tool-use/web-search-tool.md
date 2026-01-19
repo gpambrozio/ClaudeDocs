@@ -362,3 +362,7 @@ Web search usage is charged in addition to token usage:
 Web search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

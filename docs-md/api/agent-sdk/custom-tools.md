@@ -384,3 +384,7 @@ const calculatorServer = createSdkMcpServer({
 - [Python SDK Reference](agent-sdk/python.md)
 - [MCP Documentation](https://modelcontextprotocol.io)
 - [SDK Overview](agent-sdk/overview.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

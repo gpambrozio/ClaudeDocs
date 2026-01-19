@@ -21,3 +21,7 @@ get/v1/skills/{skill\_id}/versions/{version}
 ##### [Delete Skill Version](api/beta/skills/versions/delete.md)
 
 delete/v1/skills/{skill\_id}/versions/{version}
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

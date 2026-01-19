@@ -318,3 +318,7 @@ Create and manage custom Skills in Claude Code](skills.md)[Use Skills in the Age
 Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Authoring best practices
 
 Write Skills that Claude can use effectively](agents-and-tools/agent-skills/best-practices.md)
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

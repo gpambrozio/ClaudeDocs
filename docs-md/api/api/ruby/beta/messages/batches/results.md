@@ -1445,3 +1445,7 @@ puts(beta_message_batch_individual_response)
 ```
 
 ##### Returns Examples
+
+---
+
+*Copyright © Anthropic. All rights reserved.*
