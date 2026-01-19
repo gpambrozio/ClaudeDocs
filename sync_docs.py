@@ -33,6 +33,8 @@ from playwright.async_api import async_playwright
 
 OUTPUT_DIR = Path("docs-md")
 
+COPYRIGHT_NOTICE = "\n\n---\n\n*Copyright © Anthropic. All rights reserved.*\n"
+
 # URLs to skip (e.g., pages that always timeout or fail)
 SKIP_URLS = {
     "https://code.claude.com/docs/en/changelog",
@@ -389,7 +391,7 @@ async def main():
             for url, title, markdown in results:
                 filepath = url_to_filepath(url, site["name"])
                 filepath.parent.mkdir(parents=True, exist_ok=True)
-                filepath.write_text(markdown, encoding="utf-8")
+                filepath.write_text(markdown + COPYRIGHT_NOTICE, encoding="utf-8")
 
             print(f"  Saved {len(results)} files to {site['name']}/")
             total += len(results)
