@@ -11,7 +11,7 @@
 | `/config` | Open the Settings interface (Config tab). Type to search and filter settings |
 | `/context` | Visualize current context usage as a colored grid |
 | `/cost` | Show token usage statistics. See [cost tracking guide](costs.md) for subscription-specific details. |
-| `/doctor` | Checks installation health. Shows Updates section with auto-update channel and available npm versions |
+| `/doctor` | Run diagnostics to check installation health, detect configuration issues (invalid settings, MCP errors, keybinding problems), and identify context usage warnings (large CLAUDE.md files, high MCP token usage) |
 | `/exit` | Exit the REPL |
 | `/export [filename]` | Export the current conversation to a file or clipboard |
 | `/help` | Get usage help |

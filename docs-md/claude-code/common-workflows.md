@@ -433,6 +433,9 @@ Ask AI
 ```
 
 Claude uses the [`AskUserQuestion`](settings.md) tool to ask you multiple-choice questions for gathering requirements, clarifying ambiguity, and understanding your preferences before writing any code. This collaborative approach produces better specs than trying to anticipate every requirement upfront.
+
+When you select “Type something” to provide a custom answer, press **Ctrl+G** to open your default text editor for longer responses.
+
 This behavior is most active in Plan Mode. To encourage it in other modes, add guidance to your `CLAUDE.md` file:
 
 Copy

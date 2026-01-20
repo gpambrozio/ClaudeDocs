@@ -14,6 +14,7 @@ See [Terminal configuration](terminal-config.md) for details.
 | --- | --- | --- |
 | `Ctrl+C` | Cancel current input or generation | Standard interrupt |
 | `Ctrl+D` | Exit Claude Code session | EOF signal |
+| `Ctrl+G` | Open in default text editor | Edit your prompt or custom response in your default text editor |
 | `Ctrl+L` | Clear terminal screen | Keeps conversation history |
 | `Ctrl+O` | Toggle verbose output | Shows detailed tool usage and execution |
 | `Ctrl+R` | Reverse search command history | Search through previous commands interactively |
@@ -174,7 +175,7 @@ To run commands in the background, you can either:
 
 **Key features:**
 
-- Output is buffered and Claude can retrieve it using the BashOutput tool
+- Output is buffered and Claude can retrieve it using the TaskOutput tool
 - Background tasks have unique IDs for tracking and output retrieval
 - Background tasks are automatically cleaned up when Claude Code exits
 
