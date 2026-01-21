@@ -1,6 +1,6 @@
 # Discover and install prebuilt plugins through marketplaces
 
-Plugins extend Claude Code with custom commands, agents, hooks, and MCP servers. Plugin marketplaces are catalogs that help you discover and install these extensions without building them yourself.
+Plugins extend Claude Code with skills, agents, hooks, and MCP servers. Plugin marketplaces are catalogs that help you discover and install these extensions without building them yourself.
 Looking to create and distribute your own marketplace? See [Create and distribute a plugin marketplace](plugin-marketplaces.md).
 
 ## [​](#how-marketplaces-work) How marketplaces work
@@ -417,13 +417,13 @@ If you see “unknown command” or the `/plugin` command doesn’t appear:
 - **Marketplace not loading**: Verify the URL is accessible and that `.claude-plugin/marketplace.json` exists at the path
 - **Plugin installation failures**: Check that plugin source URLs are accessible and repositories are public (or you have access)
 - **Files not found after installation**: Plugins are copied to a cache, so paths referencing files outside the plugin directory won’t work
-- **Plugin Skills not appearing**: Clear the cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall the plugin. See [Plugin Skills not appearing](skills.md) for details.
+- **Plugin skills not appearing**: Clear the cache with `rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall the plugin.
 
 For detailed troubleshooting with solutions, see [Troubleshooting](plugin-marketplaces.md) in the marketplace guide. For debugging tools, see [Debugging and development tools](plugins-reference.md).
 
 ## [​](#next-steps) Next steps
 
-- **Build your own plugins**: See [Plugins](plugins.md) to create custom commands, agents, and hooks
+- **Build your own plugins**: See [Plugins](plugins.md) to create skills, agents, and hooks
 - **Create a marketplace**: See [Create a plugin marketplace](plugin-marketplaces.md) to distribute plugins to your team or community
 - **Technical reference**: See [Plugins reference](plugins-reference.md) for complete specifications
 

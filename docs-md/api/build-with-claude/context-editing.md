@@ -31,11 +31,11 @@ To maximize cache hits, preserve all thinking blocks by setting `keep: "all"`.
 
 An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](build-with-claude/extended-thinking.md)).
 
-**Context editing happens server-side**
+### Context editing happens server-side
 
-Context editing is applied **server-side** before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
+Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
-**Context editing and prompt caching**
+### Context editing and prompt caching
 
 Context editing's interaction with [prompt caching](build-with-claude/prompt-caching.md) varies by strategy:
 

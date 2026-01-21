@@ -57,7 +57,7 @@ Beyond these built-in subagents, you can create your own with custom prompts, to
 
 ## [​](#quickstart:-create-your-first-subagent) Quickstart: create your first subagent
 
-Subagents are defined in Markdown files with YAML frontmatter. You can [create them manually](#write-subagent-files) or use the `/agents` slash command.
+Subagents are defined in Markdown files with YAML frontmatter. You can [create them manually](#write-subagent-files) or use the `/agents` command.
 This walkthrough guides you through creating a user-level subagent with the `/agent` command. The subagent reviews code and suggests improvements for the codebase.
 
 1
@@ -216,7 +216,7 @@ The following fields can be used in the YAML frontmatter. Only `name` and `descr
 | `description` | Yes | When Claude should delegate to this subagent |
 | `tools` | No | [Tools](#available-tools) the subagent can use. Inherits all tools if omitted |
 | `disallowedTools` | No | Tools to deny, removed from inherited or specified list |
-| `model` | No | [Model](#choose-a-model) to use: `sonnet`, `opus`, `haiku`, or `inherit`. Defaults to `sonnet` |
+| `model` | No | [Model](#choose-a-model) to use: `sonnet`, `opus`, `haiku`, or `inherit`. Defaults to `inherit` |
 | `permissionMode` | No | [Permission mode](#permission-modes): `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, or `plan` |
 | `skills` | No | [Skills](skills.md) to load into the subagent’s context at startup. The full skill content is injected, not just made available for invocation. Subagents don’t inherit skills from the parent conversation |
 | `hooks` | No | [Lifecycle hooks](#define-hooks-for-subagents) scoped to this subagent |
@@ -226,8 +226,8 @@ The following fields can be used in the YAML frontmatter. Only `name` and `descr
 The `model` field controls which [AI model](model-config.md) the subagent uses:
 
 - **Model alias**: Use one of the available aliases: `sonnet`, `opus`, or `haiku`
-- **inherit**: Use the same model as the main conversation (useful for consistency)
-- **Omitted**: If not specified, uses the default model configured for subagents (`sonnet`)
+- **inherit**: Use the same model as the main conversation
+- **Omitted**: If not specified, defaults to `inherit` (uses the same model as the main conversation)
 
 ### [​](#control-subagent-capabilities) Control subagent capabilities
 
@@ -266,6 +266,30 @@ The `permissionMode` field controls how the subagent handles permission prompts.
 Use `bypassPermissions` with caution. It skips all permission checks, allowing the subagent to execute any operation without approval.
 
 If the parent uses `bypassPermissions`, this takes precedence and cannot be overridden.
+
+#### [​](#preload-skills-into-subagents) Preload skills into subagents
+
+Use the `skills` field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.
+
+Copy
+
+Ask AI
+
+```shiki
+---
+name: api-developer
+description: Implement API endpoints following team conventions
+skills:
+  - api-conventions
+  - error-handling-patterns
+---
+
+Implement API endpoints. Follow the conventions and patterns from the preloaded skills.
+```
+
+The full content of each skill is injected into the subagent’s context, not just made available for invocation. Subagents don’t inherit skills from the parent conversation; you must list them explicitly.
+
+This is the inverse of [running a skill in a subagent](skills.md). With `skills` in a subagent, the subagent controls the system prompt and loads skill content. With `context: fork` in a skill, the skill content is injected into the agent you specify. Both use the same underlying system.
 
 #### [​](#conditional-rules-with-hooks) Conditional rules with hooks
 
@@ -538,7 +562,6 @@ Continue that code review and now analyze the authorization logic
 ```
 
 You can also ask Claude for the agent ID if you want to reference it explicitly, or find IDs in the transcript files at `~/.claude/projects/{project}/{sessionId}/subagents/`. Each transcript is stored as `agent-{agentId}.jsonl`.
-For programmatic usage, see [Subagents in the Agent SDK](agent-sdk/subagents.md).
 Subagent transcripts persist independently of the main conversation:
 
 - **Main conversation compaction**: When the main conversation compacts, subagent transcripts are unaffected. They’re stored in separate files.

@@ -51,7 +51,7 @@ Ask AI
   - `prompt`: (For `type: "prompt"`) The prompt to send to the LLM for evaluation
   - `timeout`: (Optional) How long a hook should run, in seconds, before canceling that specific hook
 
-For events like `UserPromptSubmit`, `Stop`, and `SubagentStop`
+For events like `UserPromptSubmit`, `Stop`, `SubagentStop`, and `Setup`
 that don’t use matchers, you can omit the matcher field:
 
 Copy
@@ -151,9 +151,9 @@ Plugin hooks run alongside your custom hooks. If multiple hooks match an event, 
 
 See the [plugin components reference](plugins-reference.md) for details on creating plugin hooks.
 
-### [​](#hooks-in-skills,-agents,-and-slash-commands) Hooks in Skills, Agents, and Slash Commands
+### [​](#hooks-in-skills-and-agents) Hooks in skills and agents
 
-In addition to settings files and plugins, hooks can be defined directly in [Skills](skills.md), [subagents](sub-agents.md), and [slash commands](slash-commands.md) using frontmatter. These hooks are scoped to the component’s lifecycle and only run when that component is active.
+In addition to settings files and plugins, hooks can be defined directly in [skills](skills.md) and [subagents](sub-agents.md) using frontmatter. These hooks are scoped to the component’s lifecycle and only run when that component is active.
 **Supported events**: `PreToolUse`, `PostToolUse`, and `Stop`
 **Example in a Skill**:
 
@@ -194,9 +194,9 @@ hooks:
 ```
 
 Component-scoped hooks follow the same configuration format as settings-based hooks but are automatically cleaned up when the component finishes executing.
-**Additional option for skills and slash commands:**
+**Additional option for skills:**
 
-- `once`: Set to `true` to run the hook only once per session. After the first successful execution, the hook is removed. Note: This option is currently only supported for skills and slash commands, not for agents.
+- `once`: Set to `true` to run the hook only once per session. After the first successful execution, the hook is removed. Note: This option is currently only supported for skills, not for agents.
 
 ## [​](#prompt-based-hooks) Prompt-Based Hooks
 
@@ -435,11 +435,26 @@ Runs before Claude Code is about to run a compact operation.
 - `manual` - Invoked from `/compact`
 - `auto` - Invoked from auto-compact (due to full context window)
 
+### [​](#setup) Setup
+
+Runs when Claude Code is invoked with repository setup and maintenance flags (`--init`, `--init-only`, or `--maintenance`). Use this hook for operations you don’t want on every session—such as installing dependencies, running migrations, or periodic maintenance tasks.
+
+Use **Setup** hooks for one-time or occasional operations (dependency installation, migrations, cleanup). Use **SessionStart** hooks for things you want on every session (loading context, setting environment variables). Setup hooks require explicit flags because running them automatically would slow down every session start.
+
+**Matchers:**
+
+- `init` - Invoked from `--init` or `--init-only` flags
+- `maintenance` - Invoked from `--maintenance` flag
+
+Setup hooks have access to the `CLAUDE_ENV_FILE` environment variable for persisting environment variables, similar to SessionStart hooks.
+
 ### [​](#sessionstart) SessionStart
 
 Runs when Claude Code starts a new session or resumes an existing session (which
-currently does start a new session under the hood). Useful for loading in
-development context like existing issues or recent changes to your codebase, installing dependencies, or setting up environment variables.
+currently does start a new session under the hood). Useful for loading development context like existing issues or recent changes to your codebase, or setting up environment variables.
+
+For one-time operations like installing dependencies or running migrations, use [Setup hooks](#setup) instead. SessionStart runs on every session, so keep these hooks fast.
+
 **Matchers:**
 
 - `startup` - Invoked from startup
@@ -753,6 +768,25 @@ Ask AI
 }
 ```
 
+### [​](#setup-input) Setup Input
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "session_id": "abc123",
+  "transcript_path": "~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl",
+  "cwd": "/Users/...",
+  "permission_mode": "default",
+  "hook_event_name": "Setup",
+  "trigger": "init"
+}
+```
+
+The `trigger` field will be either `"init"` (from `--init` or `--init-only`) or `"maintenance"` (from `--maintenance`).
+
 ### [​](#sessionstart-input) SessionStart Input
 
 Copy
@@ -822,6 +856,7 @@ the `UserPromptSubmit` hook where stdout is injected as context.
 | `Stop` | Blocks stoppage, shows stderr to Claude |
 | `SubagentStop` | Blocks stoppage, shows stderr to Claude subagent |
 | `PreCompact` | N/A, shows stderr to user only |
+| `Setup` | N/A, shows stderr to user only |
 | `SessionStart` | N/A, shows stderr to user only |
 | `SessionEnd` | N/A, shows stderr to user only |
 
@@ -1012,6 +1047,27 @@ Ask AI
 {
   "decision": "block" | undefined,
   "reason": "Must be provided when Claude is blocked from stopping"
+}
+```
+
+#### [​](#setup-decision-control) `Setup` Decision Control
+
+`Setup` hooks allow you to load context and configure the environment during repository initialization or maintenance.
+
+- `"hookSpecificOutput.additionalContext"` adds the string to the context.
+- Multiple hooks’ `additionalContext` values are concatenated.
+- Setup hooks have access to `CLAUDE_ENV_FILE` for persisting environment variables.
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hookSpecificOutput": {
+    "hookEventName": "Setup",
+    "additionalContext": "Repository initialized with custom configuration"
+  }
 }
 ```
 
@@ -1304,7 +1360,7 @@ This prevents malicious hook modifications from affecting your current session.
 - **Output**:
   - PreToolUse/PermissionRequest/PostToolUse/Stop/SubagentStop: Progress shown in verbose mode (ctrl+o)
   - Notification/SessionEnd: Logged to debug only (`--debug`)
-  - UserPromptSubmit/SessionStart: stdout added as context for Claude
+  - UserPromptSubmit/SessionStart/Setup: stdout added as context for Claude
 
 ## [​](#debugging) Debugging
 

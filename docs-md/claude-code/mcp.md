@@ -1209,9 +1209,9 @@ Ask AI
 }
 ```
 
-## [​](#use-mcp-prompts-as-slash-commands) Use MCP prompts as slash commands
+## [​](#use-mcp-prompts-as-commands) Use MCP prompts as commands
 
-MCP servers can expose prompts that become available as slash commands in Claude Code.
+MCP servers can expose prompts that become available as commands in Claude Code.
 
 ### [​](#execute-mcp-prompts) Execute MCP prompts
 

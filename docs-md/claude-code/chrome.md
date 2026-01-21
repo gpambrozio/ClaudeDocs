@@ -70,7 +70,7 @@ Verify the connection
 
 Run `/chrome` to check the connection status and manage settings. If the extension isn’t detected, you’ll see a warning with a link to install it.
 
-You can also enable Chrome integration from within an existing session using the `/chrome` slash command.
+You can also enable Chrome integration from within an existing session using the `/chrome` command.
 
 ## [​](#try-it-out) Try it out
 

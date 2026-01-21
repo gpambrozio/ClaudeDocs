@@ -173,7 +173,7 @@ Copy
 Ask AI
 
 ```shiki
-> how do I use slash commands in Claude Code?
+> how do I create custom skills in Claude Code?
 ```
 
 Copy
@@ -405,7 +405,7 @@ Save time with shortcuts
 - Press `?` to see all available keyboard shortcuts
 - Use Tab for command completion
 - Press ↑ for command history
-- Type `/` to see all slash commands
+- Type `/` to see all commands and skills
 
 ## [​](#what’s-next) What’s next?
 

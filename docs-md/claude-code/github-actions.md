@@ -148,7 +148,7 @@ jobs:
           # Responds to @claude mentions in comments
 ```
 
-### [​](#using-slash-commands) Using slash commands
+### [​](#using-skills) Using skills
 
 Copy
 
@@ -272,7 +272,7 @@ Ask AI
 Key features:
 
 - **Unified prompt interface** - Use `prompt` for all instructions
-- **Slash commands** - Pre-built prompts like `/review` or `/fix`
+- **Commands** - Prebuilt prompts like `/review` or `/fix`
 - **CLI passthrough** - Any Claude Code CLI argument via `claude_args`
 - **Flexible triggers** - Works with any GitHub event
 
@@ -615,7 +615,7 @@ The Claude Code Action v1 uses a simplified configuration:
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| `prompt` | Instructions for Claude (text or slash command) | No\* |
+| `prompt` | Instructions for Claude (text or skill like `/review`) | No\* |
 | `claude_args` | CLI arguments passed to Claude Code | No |
 | `anthropic_api_key` | Claude API key | Yes\*\* |
 | `github_token` | GitHub token for API access | No |

@@ -321,6 +321,103 @@ Tips:
 
 ---
 
+## [​](#create-custom-skills-and-commands) Create custom skills and commands
+
+Skills extend Claude’s capabilities with reusable prompts and workflows. Create a skill once, then invoke it with `/skill-name` or let Claude use it automatically when relevant.
+For the full reference, see the [Skills documentation](skills.md).
+
+### [​](#create-a-skill-claude-can-use-automatically) Create a skill Claude can use automatically
+
+This skill teaches Claude how to analyze code performance. Because it has a description and no restrictions, Claude can load it automatically when you ask about optimization.
+
+1
+
+Create a skills directory in your project
+
+Copy
+
+Ask AI
+
+```shiki
+mkdir -p .claude/skills/optimize
+```
+
+2
+
+Create a SKILL.md file with frontmatter and instructions
+
+Create `.claude/skills/optimize/SKILL.md` with the following content:
+
+.claude/skills/optimize/SKILL.md
+
+Copy
+
+Ask AI
+
+```shiki
+---
+name: optimize
+description: Analyze code performance and suggest optimizations
+---
+
+Analyze the performance of this code and suggest three specific optimizations.
+```
+
+3
+
+Use your custom skill
+
+Claude uses it automatically when relevant, or you can invoke it directly:
+
+Copy
+
+Ask AI
+
+```shiki
+/optimize src/utils/parser.js
+```
+
+### [​](#create-a-skill-for-manual-invocation) Create a skill for manual invocation
+
+This skill runs tests and shows coverage. The `disable-model-invocation: true` field means Claude can’t invoke it automatically—only you can trigger it with `/test-coverage`.
+
+1
+
+Create a skill file
+
+Create `.claude/commands/test-coverage.md` with the following content:
+
+.claude/commands/test-coverage.md
+
+Copy
+
+Ask AI
+
+```shiki
+---
+description: Run tests with coverage report
+disable-model-invocation: true
+---
+
+Run the test suite with coverage enabled and summarize the results.
+```
+
+2
+
+Use your skill
+
+Copy
+
+Ask AI
+
+```shiki
+/test-coverage
+```
+
+Skills can be scoped to a project, personal directory, or organization. They can also accept arguments with `$ARGUMENTS`. See the [Skills documentation](skills.md) for details.
+
+---
+
 ## [​](#use-plan-mode-for-safe-code-analysis) Use Plan Mode for safe code analysis
 
 Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](settings.md) to gather requirements and clarify your goals before proposing a plan.
@@ -1107,150 +1204,6 @@ Tips:
 
 ---
 
-## [​](#create-custom-slash-commands) Create custom slash commands
-
-Claude Code supports custom slash commands that you can create to quickly execute specific prompts or tasks.
-For more details, see the [Slash commands](slash-commands.md) reference page.
-
-### [​](#create-project-specific-commands) Create project-specific commands
-
-Suppose you want to create reusable slash commands for your project that all team members can use.
-
-1
-
-Create a commands directory in your project
-
-Copy
-
-Ask AI
-
-```shiki
-mkdir -p .claude/commands
-```
-
-2
-
-Create a Markdown file for each command
-
-Copy
-
-Ask AI
-
-```shiki
-echo "Analyze the performance of this code and suggest three specific optimizations:" > .claude/commands/optimize.md
-```
-
-3
-
-Use your custom command in Claude Code
-
-Copy
-
-Ask AI
-
-```shiki
-> /optimize
-```
-
-Tips:
-
-- Command names are derived from the filename (for example, `optimize.md` becomes `/optimize`)
-- You can organize commands in subdirectories (for example, `.claude/commands/frontend/component.md` creates `/component` with “(project:frontend)” shown in the description)
-- Project commands are available to everyone who clones the repository
-- The Markdown file content becomes the prompt sent to Claude when the command is invoked
-
-### [​](#add-command-arguments-with-$arguments) Add command arguments with $ARGUMENTS
-
-Suppose you want to create flexible slash commands that can accept additional input from users.
-
-1
-
-Create a command file with the $ARGUMENTS placeholder
-
-Copy
-
-Ask AI
-
-```shiki
-echo 'Find and fix issue #$ARGUMENTS. Follow these steps: 1.
-Understand the issue described in the ticket 2. Locate the relevant code in
-our codebase 3. Implement a solution that addresses the root cause 4. Add
-appropriate tests 5. Prepare a concise PR description' >
-.claude/commands/fix-issue.md
-```
-
-2
-
-Use the command with an issue number
-
-In your Claude session, use the command with arguments.
-
-Copy
-
-Ask AI
-
-```shiki
-> /fix-issue 123
-```
-
-This replaces $ARGUMENTS with “123” in the prompt.
-
-Tips:
-
-- The $ARGUMENTS placeholder is replaced with any text that follows the command
-- You can position $ARGUMENTS anywhere in your command template
-- Other useful applications: generating test cases for specific functions, creating documentation for components, reviewing code in particular files, or translating content to specified languages
-
-### [​](#create-personal-slash-commands) Create personal slash commands
-
-Suppose you want to create personal slash commands that work across all your projects.
-
-1
-
-Create a commands directory in your home folder
-
-Copy
-
-Ask AI
-
-```shiki
-mkdir -p ~/.claude/commands
-```
-
-2
-
-Create a Markdown file for each command
-
-Copy
-
-Ask AI
-
-```shiki
-echo "Review this code for security vulnerabilities, focusing on:" >
-~/.claude/commands/security-review.md
-```
-
-3
-
-Use your personal custom command
-
-Copy
-
-Ask AI
-
-```shiki
-> /security-review
-```
-
-Tips:
-
-- Personal commands show “(user)” in their description when listed with `/help`
-- Personal commands are only available to you and not shared with your team
-- Personal commands work across all your projects
-- You can use these for consistent workflows across different codebases
-
----
-
 ## [​](#ask-claude-about-its-capabilities) Ask Claude about its capabilities
 
 Claude has built-in access to its documentation and can answer questions about its own features and limitations.
@@ -1278,7 +1231,7 @@ Copy
 Ask AI
 
 ```shiki
-> what slash commands are available?
+> what skills are available?
 ```
 
 Copy

@@ -35,9 +35,12 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--fallback-model` | Enable automatic fallback to specified model when default model is overloaded (print mode only) | `claude -p --fallback-model sonnet "query"` |
 | `--fork-session` | When resuming, create a new session ID instead of reusing the original (use with `--resume` or `--continue`) | `claude --resume abc123 --fork-session` |
 | `--ide` | Automatically connect to IDE on startup if exactly one valid IDE is available | `claude --ide` |
+| `--init` | Run [Setup hooks](hooks.md) and start interactive mode | `claude --init` |
+| `--init-only` | Run [Setup hooks](hooks.md) and exit (no interactive session) | `claude --init-only` |
 | `--include-partial-messages` | Include partial streaming events in output (requires `--print` and `--output-format=stream-json`) | `claude -p --output-format stream-json --include-partial-messages "query"` |
 | `--input-format` | Specify input format for print mode (options: `text`, `stream-json`) | `claude -p --output-format json --input-format stream-json` |
 | `--json-schema` | Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see [Agent SDK Structured Outputs](https://docs.claude.com/en/docs/agent-sdk/structured-outputs)) | `claude -p --json-schema '{"type":"object","properties":{...}}' "query"` |
+| `--maintenance` | Run [Setup hooks](hooks.md) with maintenance trigger and exit | `claude --maintenance` |
 | `--max-budget-usd` | Maximum dollar amount to spend on API calls before stopping (print mode only) | `claude -p --max-budget-usd 5.00 "query"` |
 | `--max-turns` | Limit the number of agentic turns (print mode only). Exits with an error when the limit is reached. No limit by default | `claude -p --max-turns 3 "query"` |
 | `--mcp-config` | Load MCP servers from JSON files or strings (space-separated) | `claude --mcp-config ./mcp.json` |
@@ -156,7 +159,6 @@ For most use cases, `--append-system-prompt` or `--append-system-prompt-file` is
 
 - [Chrome extension](chrome.md) - Browser automation and web testing
 - [Interactive mode](interactive-mode.md) - Shortcuts, input modes, and interactive features
-- [Slash commands](slash-commands.md) - Interactive session commands
 - [Quickstart guide](quickstart.md) - Getting started with Claude Code
 - [Common workflows](common-workflows.md) - Advanced workflows and patterns
 - [Settings](settings.md) - Configuration options

@@ -16,7 +16,7 @@ Once your marketplace is live, you can update it by pushing changes to your repo
 
 ## [​](#walkthrough:-create-a-local-marketplace) Walkthrough: create a local marketplace
 
-This example creates a marketplace with one plugin: a `/review` command for code reviews. You’ll create the directory structure, add a slash command, create the plugin manifest and marketplace catalog, then install and test it.
+This example creates a marketplace with one plugin: a `/review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
 
 1
 
@@ -29,22 +29,27 @@ Ask AI
 ```shiki
 mkdir -p my-marketplace/.claude-plugin
 mkdir -p my-marketplace/plugins/review-plugin/.claude-plugin
-mkdir -p my-marketplace/plugins/review-plugin/commands
+mkdir -p my-marketplace/plugins/review-plugin/skills/review
 ```
 
 2
 
-Create the plugin command
+Create the skill
 
-Create a Markdown file that defines what the `/review` command does.
+Create a `SKILL.md` file that defines what the `/review` skill does.
 
-my-marketplace/plugins/review-plugin/commands/review.md
+my-marketplace/plugins/review-plugin/skills/review/SKILL.md
 
 Copy
 
 Ask AI
 
 ```shiki
+---
+description: Review code for bugs, security, and performance
+disable-model-invocation: true
+---
+
 Review the code I've selected or the recent changes for:
 - Potential bugs or edge cases
 - Security concerns
@@ -69,7 +74,7 @@ Ask AI
 ```shiki
 {
   "name": "review-plugin",
-  "description": "Adds a /review command for quick code reviews",
+  "description": "Adds a /review skill for quick code reviews",
   "version": "1.0.0"
 }
 ```
@@ -96,7 +101,7 @@ Ask AI
     {
       "name": "review-plugin",
       "source": "./plugins/review-plugin",
-      "description": "Adds a /review command for quick code reviews"
+      "description": "Adds a /review skill for quick code reviews"
     }
   ]
 }

@@ -216,8 +216,8 @@ Two wildcard syntaxes are available for Bash rules:
 
 | Wildcard | Position | Behavior | Example |
 | --- | --- | --- | --- |
-| `:*` | End of pattern only | **Prefix matching** - matches commands starting with the prefix | `Bash(npm run:*)` matches `npm run test`, `npm run build` |
-| `*` | Anywhere in pattern | **Glob matching** - matches any sequence of characters at that position | `Bash(* install)` matches `npm install`, `yarn install` |
+| `:*` | End of pattern only | **Prefix matching** with word boundary. The prefix must be followed by a space or end-of-string. | `Bash(ls:*)` matches `ls -la` but not `lsof` |
+| `*` | Anywhere in pattern | **Glob matching** with no word boundary. Matches any sequence of characters at that position. | `Bash(ls*)` matches both `ls -la` and `lsof` |
 
 **Prefix matching with `:*`**
 The `:*` suffix matches any command that starts with the specified prefix. This works with multi-word commands. The following configuration allows npm and git commit commands while blocking git push and rm -rf:
@@ -260,7 +260,7 @@ Ask AI
 }
 ```
 
-Bash permission rules use pattern matching and can be bypassed using shell features like command flags, variables, or redirects. For example, `Bash(curl:*)` can be bypassed with `curl -X GET` reordered to `curl http://example.com -X GET`. Do not rely on Bash deny rules as a security boundary.
+Bash permission patterns that try to constrain command arguments are fragile. For example, `Bash(curl http://github.com/:*)` intends to restrict curl to GitHub URLs, but won’t match `curl -X GET http://github.com/...` (flags before URL), `curl https://github.com/...` (different protocol), or commands using shell variables. Do not rely on argument-constraining patterns as a security boundary. See [Bash permission limitations](iam.md) for alternatives.
 
 For detailed information about tool-specific permission patterns—including Read, Edit, WebFetch, MCP, Task rules, and Bash permission limitations—see [Tool-specific permission rules](iam.md).
 
@@ -461,7 +461,7 @@ For example, if your user settings allow `Bash(npm run:*)` but a project’s sha
 
 - **Memory files (`CLAUDE.md`)**: Contain instructions and context that Claude loads at startup
 - **Settings files (JSON)**: Configure permissions, environment variables, and tool behavior
-- **Slash commands**: Custom commands that can be invoked during a session with `/command-name`
+- **Skills**: Custom prompts that can be invoked with `/skill-name` or loaded by Claude automatically
 - **MCP servers**: Extend Claude Code with additional tools and integrations
 - **Precedence**: Higher-level configurations (Managed) override lower-level ones (User/Project)
 - **Inheritance**: Settings are merged, with more specific settings adding to or overriding broader ones
@@ -505,7 +505,7 @@ Subagent files define specialized AI assistants with custom prompts and tool per
 
 ## [​](#plugin-configuration) Plugin configuration
 
-Claude Code supports a plugin system that lets you extend functionality with custom commands, agents, hooks, and MCP servers. Plugins are distributed through marketplaces and can be configured at both user and repository levels.
+Claude Code supports a plugin system that lets you extend functionality with skills, agents, hooks, and MCP servers. Plugins are distributed through marketplaces and can be configured at both user and repository levels.
 
 ### [​](#plugin-settings) Plugin settings
 
@@ -903,7 +903,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `MCP_TIMEOUT` | Timeout in milliseconds for MCP server startup |
 | `MCP_TOOL_TIMEOUT` | Timeout in milliseconds for MCP tool execution |
 | `NO_PROXY` | List of domains and IPs to which requests will be directly issued, bypassing proxy |
-| `SLASH_COMMAND_TOOL_CHAR_BUDGET` | Maximum number of characters for slash command metadata shown to the [Skill tool](slash-commands.md) (default: 15000) |
+| `SLASH_COMMAND_TOOL_CHAR_BUDGET` | Maximum number of characters for skill metadata shown to the [Skill tool](skills.md) (default: 15000). Legacy name kept for backwards compatibility. |
 | `USE_BUILTIN_RIPGREP` | Set to `0` to use system-installed `rg` instead of `rg` included with Claude Code |
 | `VERTEX_REGION_CLAUDE_3_5_HAIKU` | Override region for Claude 3.5 Haiku when using Vertex AI |
 | `VERTEX_REGION_CLAUDE_3_7_SONNET` | Override region for Claude 3.7 Sonnet when using Vertex AI |
@@ -928,7 +928,7 @@ Claude Code has access to a set of powerful tools that help it understand and mo
 | **MCPSearch** | Searches for and loads MCP tools when [tool search](mcp.md) is enabled | No |
 | **NotebookEdit** | Modifies Jupyter notebook cells | Yes |
 | **Read** | Reads the contents of files | No |
-| **Skill** | Executes a [skill or slash command](slash-commands.md) within the main conversation | Yes |
+| **Skill** | Executes a [skill](skills.md) within the main conversation | Yes |
 | **Task** | Runs a sub-agent to handle complex, multi-step tasks | No |
 | **TodoWrite** | Creates and manages structured task lists | No |
 | **WebFetch** | Fetches content from a specified URL | Yes |

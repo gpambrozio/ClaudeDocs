@@ -39,6 +39,7 @@ workflow:
 - **Stop**: Runs when Claude Code finishes responding
 - **SubagentStop**: Runs when subagent tasks complete
 - **PreCompact**: Runs before Claude Code is about to run a compact operation
+- **Setup**: Runs when Claude Code is invoked with `--init`, `--init-only`, or `--maintenance` flags
 - **SessionStart**: Runs when Claude Code starts a new session or resumes an existing session
 - **SessionEnd**: Runs when Claude Code session ends
 
@@ -56,7 +57,7 @@ Install `jq` for JSON processing in the command line.
 
 ### [​](#step-1:-open-hooks-configuration) Step 1: Open hooks configuration
 
-Run the `/hooks` [slash command](slash-commands.md) and select
+Run the `/hooks` command and select
 the `PreToolUse` hook event.
 `PreToolUse` hooks run before tool calls and can block them while providing
 Claude feedback on what to do differently.

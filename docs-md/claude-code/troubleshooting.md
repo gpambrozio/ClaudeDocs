@@ -172,6 +172,7 @@ If you’re experiencing authentication problems:
 2. Close Claude Code
 3. Restart with `claude` and complete the authentication process again
 
+If the browser doesn’t open automatically during login, press `c` to copy the OAuth URL to your clipboard, then paste it into your browser manually.
 If problems persist, try:
 
 Copy
@@ -247,7 +248,7 @@ If Claude Code seems unresponsive:
 
 ### [​](#search-and-discovery-issues) Search and discovery issues
 
-If Search tool, `@file` mentions, custom agents, and custom slash commands aren’t working, install system `ripgrep`:
+If Search tool, `@file` mentions, custom agents, and custom skills aren’t working, install system `ripgrep`:
 
 Copy
 
