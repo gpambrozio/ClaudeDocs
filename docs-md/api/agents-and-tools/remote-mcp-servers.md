@@ -692,14 +692,6 @@ URL
 
 Answer questions with the Hex agent
 
-URL
-
-`https://app.hex.tech/mcp`
-
-[Hex](https://learn.hex.tech/docs/administration/mcp-server)
-
-Answer questions with the Hex agent
-
 Requires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude)
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).

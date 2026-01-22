@@ -488,12 +488,6 @@ Interact with your Chronograph data directly in ClaudeCommand
 
 [**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
 
-Answer questions with the Hex agentCommand
-
-`claude mcp add --transport http hex https://app.hex.tech/mcp`
-
-[**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
-
 Answer questions with the Hex agentRequires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude).
 
 **Need a specific integration?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers), or build your own using the [MCP SDK](https://modelcontextprotocol.io/quickstart/server).

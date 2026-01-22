@@ -278,7 +278,7 @@ Make sure you trust a plugin before installing it. Anthropic does not control wh
 
 ## [​](#manage-installed-plugins) Manage installed plugins
 
-Run `/plugin` and go to the **Installed** tab to view, enable, disable, or uninstall your plugins.
+Run `/plugin` and go to the **Installed** tab to view, enable, disable, or uninstall your plugins. Type to filter the list by plugin name or description.
 You can also manage plugins with direct commands.
 Disable a plugin without uninstalling:
 

@@ -887,6 +887,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `DISABLE_BUG_COMMAND` | Set to `1` to disable the `/bug` command |
 | `DISABLE_COST_WARNINGS` | Set to `1` to disable cost warning messages |
 | `DISABLE_ERROR_REPORTING` | Set to `1` to opt out of Sentry error reporting |
+| `DISABLE_INSTALLATION_CHECKS` | Set to `1` to disable installation warnings. Use only when manually managing the installation location, as this can mask issues with standard installations |
 | `DISABLE_NON_ESSENTIAL_MODEL_CALLS` | Set to `1` to disable model calls for non-critical paths like flavor text |
 | `DISABLE_PROMPT_CACHING` | Set to `1` to disable prompt caching for all models (takes precedence over per-model settings) |
 | `DISABLE_PROMPT_CACHING_HAIKU` | Set to `1` to disable prompt caching for Haiku models |
