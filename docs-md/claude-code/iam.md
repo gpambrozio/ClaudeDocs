@@ -154,6 +154,8 @@ A pattern like `/Users/alice/file` is NOT an absolute path - it’s relative to 
 - `Edit(//tmp/scratch.txt)` - Edits the absolute path `/tmp/scratch.txt`
 - `Read(src/**)` - Reads from `<current-directory>/src/`
 
+In gitignore patterns, `*` matches files in a single directory while `**` matches recursively across directories. To allow all file access, use just the tool name without parentheses: `Read`, `Edit`, or `Write`.
+
 **WebFetch**
 
 - `WebFetch(domain:example.com)` Matches fetch requests to example.com

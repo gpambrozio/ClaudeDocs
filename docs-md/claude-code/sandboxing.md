@@ -44,12 +44,38 @@ Network access is controlled through a proxy server running outside the sandbox:
 
 The sandboxed bash tool leverages operating system security primitives:
 
-- **Linux**: Uses [bubblewrap](https://github.com/containers/bubblewrap) for isolation
 - **macOS**: Uses Seatbelt for sandbox enforcement
+- **Linux**: Uses [bubblewrap](https://github.com/containers/bubblewrap) for isolation
+- **WSL2**: Uses bubblewrap, same as Linux
 
+WSL1 is not supported because bubblewrap requires kernel features only available in WSL2.
 These OS-level restrictions ensure that all child processes spawned by Claude Code’s commands inherit the same security boundaries.
 
 ## [​](#getting-started) Getting started
+
+### [​](#prerequisites) Prerequisites
+
+On **macOS**, sandboxing works out of the box using the built-in Seatbelt framework.
+On **Linux and WSL2**, install the required packages first:
+
+- Ubuntu/Debian
+- Fedora
+
+Copy
+
+Ask AI
+
+```shiki
+sudo apt-get install bubblewrap socat
+```
+
+Copy
+
+Ask AI
+
+```shiki
+sudo dnf install bubblewrap socat
+```
 
 ### [​](#enable-sandboxing) Enable sandboxing
 
@@ -200,7 +226,7 @@ For implementation details and source code, visit the [GitHub repository](https:
 
 - **Performance overhead**: Minimal, but some filesystem operations may be slightly slower
 - **Compatibility**: Some tools that require specific system access patterns may need configuration adjustments, or may even need to be run outside of the sandbox
-- **Platform support**: Currently supports Linux and macOS; Windows support planned
+- **Platform support**: Supports macOS, Linux, and WSL2. WSL1 is not supported. Native Windows support is planned.
 
 ## [​](#see-also) See also
 

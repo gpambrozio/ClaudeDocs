@@ -394,6 +394,12 @@ Analyze, debug, and manage projects and deploymentsCommand
 
 Find people, productivity and business impact insightsRequires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm).
 
+[**Webflow**](https://developers.webflow.com/mcp/v1.0.0/reference/overview)
+
+Manage Webflow CMS, pages, assets and sitesCommand
+
+`claude mcp add --transport http webflow https://mcp.webflow.com/mcp`
+
 [**Wix**](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
 
 Manage and build sites and apps on WixCommand
@@ -691,6 +697,8 @@ MCP servers can be configured at three different scope levels, each serving dist
 ### [​](#local-scope) Local scope
 
 Local-scoped servers represent the default configuration level and are stored in `~/.claude.json` under your project’s path. These servers remain private to you and are only accessible when working within the current project directory. This scope is ideal for personal development servers, experimental configurations, or servers containing sensitive credentials that shouldn’t be shared.
+
+The term “local scope” for MCP servers differs from general local settings. MCP local-scoped servers are stored in `~/.claude.json` (your home directory), while general local settings use `.claude/settings.local.json` (in the project directory). See [Settings](settings.md) for details on settings file locations.
 
 Copy
 

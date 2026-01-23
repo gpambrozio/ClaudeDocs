@@ -12,6 +12,8 @@ Additional configuration is needed to use Anthropic's Client SDKs through a part
 
 **Requirements:** Python 3.8+
 
+**Minimum SDK version:** 0.22.0
+
 **Installation:**
 
 ```shiki
@@ -25,6 +27,8 @@ pip install anthropic
 [TypeScript library GitHub repo](https://github.com/anthropics/anthropic-sdk-typescript)
 
 While this library is in TypeScript, it can also be used in JavaScript libraries.
+
+**Minimum SDK version:** 0.37.0
 
 **Installation:**
 

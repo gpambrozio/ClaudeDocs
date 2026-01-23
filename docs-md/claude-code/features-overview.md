@@ -52,7 +52,7 @@ Skills and subagents solve different problems:
 | **Key benefit** | Share content across contexts | Context isolation. Work happens separately, only summary returns |
 | **Best for** | Reference material, invocable workflows | Tasks that read many files, parallel work, specialized workers |
 
-**Skills can be reference or action.** Reference skills provide knowledge Claude uses throughout your session (like your API style guide). Action skills tell Claude to do something specific (like `/deploy` that runs your deployment workflow).**Use a subagent** when you need context isolation. The subagent might read dozens of files or run extensive searches, but your main conversation only receives a summary. Custom subagents can have their own instructions and can preload skills.**They can combine.** A subagent can preload specific skills (`skills:` field). A skill can run in isolated context using `context: fork`. See [Skills](skills.md) for details.
+**Skills can be reference or action.** Reference skills provide knowledge Claude uses throughout your session (like your API style guide). Action skills tell Claude to do something specific (like `/deploy` that runs your deployment workflow).**Use a subagent** when you need context isolation or when your context window is getting full. The subagent might read dozens of files or run extensive searches, but your main conversation only receives a summary. Since subagent work doesn’t consume your main context, this is also useful when you don’t need the intermediate work to remain visible. Custom subagents can have their own instructions and can preload skills.**They can combine.** A subagent can preload specific skills (`skills:` field). A skill can run in isolated context using `context: fork`. See [Skills](skills.md) for details.
 
 Both store instructions, but they load differently and serve different purposes.
 
@@ -74,6 +74,15 @@ MCP connects Claude to external services. Skills extend what Claude knows, inclu
 | **Examples** | Slack integration, database queries, browser control | Code review checklist, deploy workflow, API style guide |
 
 These solve different problems and work well together:**MCP** gives Claude the ability to interact with external systems. Without MCP, Claude can’t query your database or post to Slack.**Skills** give Claude knowledge about how to use those tools effectively, plus workflows you can trigger with `/<name>`. A skill might include your team’s database schema and query patterns, or a `/post-to-slack` workflow with your team’s message formatting rules.Example: An MCP server connects Claude to your database. A skill teaches Claude your data model, common query patterns, and which tables to use for different tasks.
+
+### [​](#understand-how-features-layer) Understand how features layer
+
+Features can be defined at multiple levels: user-wide, per-project, via plugins, or through managed policies. You can also nest CLAUDE.md files in subdirectories or place skills in specific packages of a monorepo. When the same feature exists at multiple levels, here’s how they layer:
+
+- **CLAUDE.md files** are additive: all levels contribute content to Claude’s context simultaneously. Files from your working directory and above load at launch; subdirectories load as you work in them. When instructions conflict, Claude uses judgment to reconcile them, with more specific instructions typically taking precedence. See [how Claude looks up memories](memory.md).
+- **Skills and subagents** override by name: when the same name exists at multiple levels, one definition wins based on priority (managed > user > project for skills; managed > CLI flag > project > user > plugin for subagents). Plugin skills are [namespaced](plugins.md) to avoid conflicts. See [skill discovery](skills.md) and [subagent scope](sub-agents.md).
+- **MCP servers** override by name: local > project > user. See [MCP scope](mcp.md).
+- **Hooks** merge: all registered hooks fire for their matching events regardless of source. See [hooks](hooks.md).
 
 ### [​](#combine-features) Combine features
 

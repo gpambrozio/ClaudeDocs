@@ -1,6 +1,6 @@
 # Common workflows
 
-This page covers practical workflows for everyday development: exploring unfamiliar code, debugging, refactoring, writing tests, creating PRs, and managing sessions. Each section includes example prompts you can adapt to your own projects.
+This page covers practical workflows for everyday development: exploring unfamiliar code, debugging, refactoring, writing tests, creating PRs, and managing sessions. Each section includes example prompts you can adapt to your own projects. For higher-level patterns and tips, see [Best practices](best-practices.md).
 
 ## [​](#understand-new-codebases) Understand new codebases
 
@@ -321,103 +321,6 @@ Tips:
 
 ---
 
-## [​](#create-custom-skills-and-commands) Create custom skills and commands
-
-Skills extend Claude’s capabilities with reusable prompts and workflows. Create a skill once, then invoke it with `/skill-name` or let Claude use it automatically when relevant.
-For the full reference, see the [Skills documentation](skills.md).
-
-### [​](#create-a-skill-claude-can-use-automatically) Create a skill Claude can use automatically
-
-This skill teaches Claude how to analyze code performance. Because it has a description and no restrictions, Claude can load it automatically when you ask about optimization.
-
-1
-
-Create a skills directory in your project
-
-Copy
-
-Ask AI
-
-```shiki
-mkdir -p .claude/skills/optimize
-```
-
-2
-
-Create a SKILL.md file with frontmatter and instructions
-
-Create `.claude/skills/optimize/SKILL.md` with the following content:
-
-.claude/skills/optimize/SKILL.md
-
-Copy
-
-Ask AI
-
-```shiki
----
-name: optimize
-description: Analyze code performance and suggest optimizations
----
-
-Analyze the performance of this code and suggest three specific optimizations.
-```
-
-3
-
-Use your custom skill
-
-Claude uses it automatically when relevant, or you can invoke it directly:
-
-Copy
-
-Ask AI
-
-```shiki
-/optimize src/utils/parser.js
-```
-
-### [​](#create-a-skill-for-manual-invocation) Create a skill for manual invocation
-
-This skill runs tests and shows coverage. The `disable-model-invocation: true` field means Claude can’t invoke it automatically—only you can trigger it with `/test-coverage`.
-
-1
-
-Create a skill file
-
-Create `.claude/commands/test-coverage.md` with the following content:
-
-.claude/commands/test-coverage.md
-
-Copy
-
-Ask AI
-
-```shiki
----
-description: Run tests with coverage report
-disable-model-invocation: true
----
-
-Run the test suite with coverage enabled and summarize the results.
-```
-
-2
-
-Use your skill
-
-Copy
-
-Ask AI
-
-```shiki
-/test-coverage
-```
-
-Skills can be scoped to a project, personal directory, or organization. They can also accept arguments with `$ARGUMENTS`. See the [Skills documentation](skills.md) for details.
-
----
-
 ## [​](#use-plan-mode-for-safe-code-analysis) Use Plan Mode for safe code analysis
 
 Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](settings.md) to gather requirements and clarify your goals before proposing a plan.
@@ -500,50 +403,6 @@ Ask AI
 ```
 
 See [settings documentation](settings.md) for more configuration options.
-
-## [​](#let-claude-interview-you) Let Claude interview you
-
-For large features, start with a minimal spec and let Claude interview you to fill in the details:
-
-Copy
-
-Ask AI
-
-```shiki
-> Interview me about this feature before you start: user notification system
-```
-
-Copy
-
-Ask AI
-
-```shiki
-> Help me think through the requirements for authentication by asking questions
-```
-
-Copy
-
-Ask AI
-
-```shiki
-> Ask me clarifying questions to build out this spec: payment processing
-```
-
-Claude uses the [`AskUserQuestion`](settings.md) tool to ask you multiple-choice questions for gathering requirements, clarifying ambiguity, and understanding your preferences before writing any code. This collaborative approach produces better specs than trying to anticipate every requirement upfront.
-
-When you select “Type something” to provide a custom answer, press **Ctrl+G** to open your default text editor for longer responses.
-
-This behavior is most active in Plan Mode. To encourage it in other modes, add guidance to your `CLAUDE.md` file:
-
-Copy
-
-Ask AI
-
-```shiki
-Always ask clarifying questions when there are multiple valid approaches to a task.
-```
-
-If you’re building applications with the Agent SDK and want to surface clarifying questions to your users programmatically, see [Handle approvals and user input](agent-sdk/user-input.md).
 
 ---
 
@@ -1270,9 +1129,15 @@ Tips:
 
 ## [​](#next-steps) Next steps
 
-[## Claude Code reference implementation
+[## Best practices
 
-Clone our development container reference implementation.](https://github.com/anthropics/claude-code/tree/main/.devcontainer)
+Patterns for getting the most out of Claude Code](best-practices.md)[## How Claude Code works
+
+Understand the agentic loop and context management](how-claude-code-works.md)[## Extend Claude Code
+
+Add skills, hooks, MCP, subagents, and plugins](features-overview.md)[## Reference implementation
+
+Clone our development container reference implementation](https://github.com/anthropics/claude-code/tree/main/.devcontainer)
 
 ---
 

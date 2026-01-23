@@ -53,6 +53,31 @@ export PATH="$HOME/.nvm/versions/node/$(node -v)/bin:$PATH"
 
 Avoid disabling Windows PATH importing (`appendWindowsPath = false`) as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
 
+### [​](#wsl2-sandbox-setup) WSL2 sandbox setup
+
+[Sandboxing](sandboxing.md) is supported on WSL2 but requires installing additional packages. If you see an error like “Sandbox requires socat and bubblewrap” when running `/sandbox`, install the dependencies:
+
+- Ubuntu/Debian
+- Fedora
+
+Copy
+
+Ask AI
+
+```shiki
+sudo apt-get install bubblewrap socat
+```
+
+Copy
+
+Ask AI
+
+```shiki
+sudo dnf install bubblewrap socat
+```
+
+WSL1 does not support sandboxing. If you see “Sandboxing requires WSL2”, you need to upgrade to WSL2 or run Claude Code without sandboxing.
+
 ### [​](#linux-and-mac-installation-issues:-permission-or-command-not-found-errors) Linux and Mac installation issues: permission or command not found errors
 
 When installing Claude Code with npm, `PATH` problems may prevent access to `claude`.
@@ -195,7 +220,7 @@ Claude Code stores configuration in several locations:
 | `~/.claude/settings.json` | User settings (permissions, hooks, model overrides) |
 | `.claude/settings.json` | Project settings (checked into source control) |
 | `.claude/settings.local.json` | Local project settings (not committed) |
-| `~/.claude.json` | Global state (theme, OAuth, MCP servers, allowed tools) |
+| `~/.claude.json` | Global state (theme, OAuth, MCP servers) |
 | `.mcp.json` | Project MCP servers (checked into source control) |
 | `managed-settings.json` | [Managed settings](settings.md) |
 | `managed-mcp.json` | [Managed MCP servers](mcp.md) |
@@ -227,7 +252,7 @@ rm -rf .claude/
 rm .mcp.json
 ```
 
-This will remove all your settings, allowed tools, MCP server configurations, and session history.
+This will remove all your settings, MCP server configurations, and session history.
 
 ## [​](#performance-and-stability) Performance and stability
 

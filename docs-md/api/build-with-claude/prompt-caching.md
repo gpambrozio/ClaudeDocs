@@ -335,6 +335,8 @@ For more detailed information, see the [extended thinking documentation](build-w
 
 ## Cache storage and sharing
 
+Starting February 5, 2026, prompt caching will use workspace-level isolation instead of organization-level isolation. Caches will be isolated per workspace, ensuring data separation between workspaces within the same organization. This change applies to the Claude API and Azure; Amazon Bedrock and Google Vertex AI will maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this change.
+
 - **Organization Isolation**: Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts.
 - **Exact Matching**: Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 - **Output Token Generation**: Prompt caching has no effect on output token generation. The response you receive will be identical to what you would get if prompt caching was not used.

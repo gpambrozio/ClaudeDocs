@@ -222,6 +222,7 @@ If you encounter permission errors, see [troubleshooting permission errors](trou
 **Option 1: Claude Code within WSL**
 
 - Both WSL 1 and WSL 2 are supported
+- WSL 2 supports [sandboxing](sandboxing.md) for enhanced security. WSL 1 does not support sandboxing.
 
 **Option 2: Claude Code on native Windows with Git Bash**
 
