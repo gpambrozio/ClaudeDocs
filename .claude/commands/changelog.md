@@ -63,16 +63,16 @@ Then create a markdown in this format. Files in `docs-md/claude-code` go in the 
 
 ### New Documents
 
-#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
+#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md)
 
 New file that describes the new X feature. It shows how to use it and how to configure it...
 
 ### Changed documents
 
-#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
+#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md)
 
-* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)] [[Source](link_to_source#anchor)]
-* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)] [[Source](link_to_source#anchor)]
+* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)]
+* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)]
 
 -----
 
@@ -80,35 +80,21 @@ New file that describes the new X feature. It shows how to use it and how to con
 
 ### New Documents
 
-#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
+#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md)
 
 New file that describes the new X feature. It shows how to use it and how to configure it...
 
 ### Changed documents
 
-#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md) [[Source](link_to_source)]
+#### [File name](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md)
 
-* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)] [[Source](link_to_source#anchor)]
-* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)] [[Source](link_to_source#anchor)]
+* A new configuration option was added to Stop hooks that determines their timeout. [[line 75](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L75)]
+* Clarification about how to use return values. [[lines 100-110](https://github.com/gpambrozio/ClaudeDocs/blob/{commit-hash}/path/to/file.md?plain=1#L100-L110)]
 
 ```
-
-To determine link_to_source you need to map the file name here using this mapping logic:
-
-- docs-md/claude-code/<path>.md → https://code.claude.com/docs/en/<path>
-- docs-md/api/<path>.md → https://platform.claude.com/docs/en/<path>
-
-Examples:
-docs-md/claude-code/common-workflows.md
-  → https://code.claude.com/docs/en/common-workflows
-
-docs-md/api/build-with-claude/vision.md
-  → https://platform.claude.com/docs/en/build-with-claude/vision
-
-The anchor to use on the source link is the closest anchor right above the given change in the source md file. If necessary read the full file to determine that. An anchor in markdown looks like this: `[​](#anchor-to-content)`
 
 File names on link descriptions should not include the .md extension. Order files by name in the doc.
 
 Save this summary to a markdown named `changelog-YYYY-mm-dd.md` with today's date in the `changelogs/YYYY/mm` folder.
 
-Commit this file and push.
+Commit this file (do not push).
