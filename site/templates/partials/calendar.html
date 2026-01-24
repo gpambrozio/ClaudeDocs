@@ -4,6 +4,10 @@
         <h3 id="calendar-title"></h3>
         <button class="calendar-nav-btn" id="cal-next" aria-label="Next month">&rarr;</button>
     </div>
+    <div class="calendar-legend">
+        <span class="legend-item"><span class="legend-dot version"></span> New version</span>
+        <span class="legend-item"><span class="legend-dot docs"></span> Docs only</span>
+    </div>
 
     {% for month in calendar.months %}
     <table class="calendar" data-month-index="{{ loop.index0 }}" {% if loop.index0 != calendar.current_index %}style="display: none;"{% endif %}>
@@ -22,7 +26,7 @@
             {% for week in month.weeks %}
             <tr>
                 {% for day in week %}
-                <td class="{% if day.has_changelog %}has-entry{% endif %}{% if day.is_current %} current{% endif %}">
+                <td class="{% if day.has_changelog %}has-entry{% endif %}{% if day.has_version %} has-version{% endif %}{% if day.is_current %} current{% endif %}">
                     {% if day.has_changelog %}
                         <a href="{{ base_url }}{{ day.url }}">{{ day.number }}</a>
                     {% elif day.number %}

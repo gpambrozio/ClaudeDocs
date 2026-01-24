@@ -66,6 +66,7 @@ class ChangelogEntry:
     title: str
     content: str
     html_content: str
+    has_new_version: bool
 
     @property
     def url(self) -> str:
@@ -100,6 +101,11 @@ def discover_changelogs() -> list[ChangelogEntry]:
         else:
             title = f"Changelog for {entry_date.strftime('%B %d, %Y')}"
 
+        # Check if changelog contains a new version release
+        has_new_version = bool(
+            re.search(r"^##\s+New Claude Code versions", content, re.MULTILINE)
+        )
+
         entries.append(
             ChangelogEntry(
                 date=entry_date,
@@ -107,6 +113,7 @@ def discover_changelogs() -> list[ChangelogEntry]:
                 title=title,
                 content=content,
                 html_content=html_content,
+                has_new_version=has_new_version,
             )
         )
 
@@ -123,11 +130,14 @@ def build_month_grid(year: int, month: int, changelog_dates: dict, viewing_date:
             if day.month != month:
                 week_data.append({"number": None, "has_changelog": False})
             else:
-                has_changelog = day in changelog_dates
+                changelog = changelog_dates.get(day)
+                has_changelog = changelog is not None
+                has_version = has_changelog and changelog.has_new_version
                 week_data.append(
                     {
                         "number": day.day,
                         "has_changelog": has_changelog,
+                        "has_version": has_version,
                         "is_current": day == viewing_date,
                         "url": f"/{day.year}/{day.month:02d}/{day.day:02d}.html"
                         if has_changelog
