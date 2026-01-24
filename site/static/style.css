@@ -279,6 +279,36 @@ a:hover {
     font-weight: 600;
 }
 
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend-dot.version {
+    background: var(--color-accent);
+}
+
+.legend-dot.docs {
+    background: var(--color-highlight);
+}
+
 .calendar-nav-btn {
     background: none;
     border: none;
@@ -352,9 +382,29 @@ a:hover {
     background: var(--color-link-hover);
 }
 
+/* Version release days get accent color */
+.calendar td.has-version a {
+    background: var(--color-accent);
+    color: var(--color-header-bg);
+}
+
+.calendar td.has-version a:hover {
+    background: #e68a00;
+}
+
+[data-theme="dark"] .calendar td.has-version a:hover,
+:root:not([data-theme="light"]) .calendar td.has-version a:hover {
+    background: #e6a817;
+}
+
 .calendar td.current a {
     background: var(--color-highlight-dark);
     box-shadow: 0 0 0 2px var(--color-highlight);
+}
+
+.calendar td.current.has-version a {
+    background: #cc7a00;
+    box-shadow: 0 0 0 2px var(--color-accent);
 }
 
 /* Archive */
