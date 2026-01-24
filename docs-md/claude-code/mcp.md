@@ -76,11 +76,11 @@ Search and update your company's knowledge graphCommand
 
 `claude mcp add devrev --transport http https://api.devrev.ai/mcp/v1`
 
-[**Explorium Business Data Hub**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
+[**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
-Get accurate company & contact dataCommand
+Discover, research, and enrich companies and peopleCommand
 
-`claude mcp add explorium-business-data-hub --transport http https://mcp-claude-web.explorium.ai/mcp`
+`claude mcp add harmonic --transport http https://mcp.api.harmonic.ai`
 
 [**LunarCrush**](https://lunarcrush.com/developers/api/ai)
 
@@ -99,6 +99,12 @@ Enhance responses with scholarly research and citationsCommand
 Event platform for managing tickets, orders & moreCommand
 
 `claude mcp add --transport http tickettailor https://mcp.tickettailor.ai/mcp`
+
+[**VibeProspecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
+
+Find company & contact dataCommand
+
+`claude mcp add vibeprospecting --transport http https://vibeprospecting.explorium.ai/mcp`
 
 [**Windsor.ai**](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
 
@@ -139,6 +145,24 @@ Access the Hugging Face Hub and thousands of Gradio AppsCommand
 [**ActiveCampaign**](https://developers.activecampaign.com/page/mcp)
 
 Autonomous marketing to transform how you workRequires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp).
+
+[**Ahrefs**](https://docs.ahrefs.com/docs/mcp/reference/introduction)
+
+SEO & AI search analyticsCommand
+
+`claude mcp add ahrefs --transport http https://api.ahrefs.com/mcp/mcp`
+
+[**AirOps**](https://docs.airops.com/mcp)
+
+Craft content that wins AI searchCommand
+
+`claude mcp add airops --transport http https://app.airops.com/mcp`
+
+[**Amplitude**](https://amplitude.com/docs/analytics/amplitude-mcp)
+
+Search, access, and get insights on your Amplitude dataCommand
+
+`claude mcp add --transport http amplitude https://mcp.amplitude.com/mcp`
 
 [**Asana**](https://developers.asana.com/docs/mcp-server)
 
@@ -350,11 +374,21 @@ Access PayPal payments platformCommand
 
 `claude mcp add --transport http paypal https://mcp.paypal.com/mcp`
 
+[**Pigment**](https://kb.pigment.com/docs/mcp-server)
+
+Analyze business dataRequires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server).
+
 [**Ramp**](https://docs.ramp.com/developer-api/v1/guides/ramp-mcp-remote)
 
 Search, access, and analyze your Ramp financial dataCommand
 
 `claude mcp add --transport http ramp https://ramp-mcp-remote.ramp.com/mcp`
+
+[**Similarweb Website Traffic**](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+
+Real-time web analytics & competitive intelligenceCommand
+
+`claude mcp add --transport http similarweb https://mcp.similarweb.com`
 
 [**Snowflake**](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
@@ -405,6 +439,12 @@ Manage Webflow CMS, pages, assets and sitesCommand
 Manage and build sites and apps on WixCommand
 
 `claude mcp add wix --transport http https://mcp.wix.com/mcp`
+
+[**WordPress.com**](https://developer.wordpress.com/docs/mcp/)
+
+Secure AI access to manage your WordPress.com sitesCommand
+
+`claude mcp add wordpress-com --transport http https://public-api.wordpress.com/wpcom/v2/mcp/v1`
 
 [**Workato**](https://docs.workato.com/en/mcp/mcp-cloud.html)
 

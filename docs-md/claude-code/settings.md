@@ -848,6 +848,8 @@ All environment variables can also be configured in [`settings.json`](#available
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_FOUNDRY_API_KEY` | API key for Microsoft Foundry authentication (see [Microsoft Foundry](microsoft-foundry.md)) |
+| `ANTHROPIC_FOUNDRY_BASE_URL` | Full base URL for the Foundry resource (for example, `https://my-resource.services.ai.azure.com/anthropic`). Alternative to `ANTHROPIC_FOUNDRY_RESOURCE` (see [Microsoft Foundry](microsoft-foundry.md)) |
+| `ANTHROPIC_FOUNDRY_RESOURCE` | Foundry resource name (for example, `my-resource`). Required if `ANTHROPIC_FOUNDRY_BASE_URL` is not set (see [Microsoft Foundry](microsoft-foundry.md)) |
 | `ANTHROPIC_MODEL` | Name of the model setting to use (see [Model Configuration](model-config.md)) |
 | `ANTHROPIC_SMALL_FAST_MODEL` | [DEPRECATED] Name of [Haiku-class model for background tasks](costs.md) |
 | `ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION` | Override AWS region for the Haiku-class model when using Bedrock |
@@ -869,6 +871,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |
+| `CLAUDE_CODE_ENABLE_TELEMETRY` | Set to `1` to enable OpenTelemetry data collection for metrics and logging. Required before configuring OTel exporters. See [Monitoring](monitoring-usage.md) |
 | `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS` | Override the default token limit for file reads. Useful when you need to read larger files in full |
 | `CLAUDE_CODE_HIDE_ACCOUNT_INFO` | Set to `1` to hide your email address and organization name from the Claude Code UI. Useful when streaming or recording |
 | `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL` | Skip auto-installation of IDE extensions |
@@ -939,6 +942,7 @@ Claude Code has access to a set of powerful tools that help it understand and mo
 | **WebFetch** | Fetches content from a specified URL | Yes |
 | **WebSearch** | Performs web searches with domain filtering | Yes |
 | **Write** | Creates or overwrites files | Yes |
+| **LSP** | Code intelligence via language servers. Reports type errors and warnings automatically after file edits. Also supports navigation operations: jump to definitions, find references, get type info, list symbols, find implementations, trace call hierarchies. Requires a [code intelligence plugin](discover-plugins.md) and its language server binary | No |
 
 Permission rules can be configured using `/allowed-tools` or in [permission settings](settings.md). Also see [Tool-specific permission rules](iam.md).
 

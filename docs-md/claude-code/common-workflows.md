@@ -122,6 +122,7 @@ Tips:
 
 - Be specific about what you’re looking for
 - Use domain language from the project
+- Install a [code intelligence plugin](discover-plugins.md) for your language to give Claude precise “go to definition” and “find references” navigation
 
 ---
 

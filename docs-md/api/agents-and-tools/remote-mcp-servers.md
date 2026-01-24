@@ -52,14 +52,6 @@ URL
 
 `https://api.devrev.ai/mcp/v1`
 
-[Explorium Business Data Hub](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
-
-Get accurate company & contact data
-
-URL
-
-`https://mcp-claude-web.explorium.ai/mcp`
-
 [Fireflies](https://guide.fireflies.ai/articles/8272956938-learn-about-the-fireflies-mcp-server-model-context-protocol)
 
 Analyze and generate insights from meeting transcripts
@@ -67,6 +59,14 @@ Analyze and generate insights from meeting transcripts
 URL
 
 `https://api.fireflies.ai/mcp`
+
+[Harmonic](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
+
+Discover, research, and enrich companies and people
+
+URL
+
+`https://mcp.api.harmonic.ai`
 
 [LunarCrush](https://lunarcrush.com/developers/api/ai)
 
@@ -91,6 +91,14 @@ Event platform for managing tickets, orders & more
 URL
 
 `https://mcp.tickettailor.ai/mcp`
+
+[VibeProspecting](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
+
+Find company & contact data
+
+URL
+
+`https://vibeprospecting.explorium.ai/mcp`
 
 [Windsor.ai](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
 
@@ -153,6 +161,22 @@ URL
 Autonomous marketing to transform how you work
 
 Requires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp)
+
+[Ahrefs](https://docs.ahrefs.com/docs/mcp/reference/introduction)
+
+SEO & AI search analytics
+
+URL
+
+`https://api.ahrefs.com/mcp/mcp`
+
+[AirOps](https://docs.airops.com/mcp)
+
+Craft content that wins AI search
+
+URL
+
+`https://app.airops.com/mcp`
 
 [Benchling](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
 
@@ -492,6 +516,12 @@ URL
 
 `https://mcp.paypal.com/mcp`
 
+[Pigment](https://kb.pigment.com/docs/mcp-server)
+
+Analyze business data
+
+Requires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server)
+
 [PitchBook Premium](https://help.pitchbook.com/s/article/PitchBook-Premium-for-Claude-by-Anthropic)
 
 PitchBook data, embedded in the way you work.
@@ -507,6 +537,14 @@ Search, access, and analyze your Ramp financial data
 URL
 
 `https://ramp-mcp-remote.ramp.com/mcp`
+
+[Similarweb Website Traffic](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+
+Real-time web analytics & competitive intelligence
+
+URL
+
+`https://mcp.similarweb.com`
 
 [Snowflake](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
@@ -567,6 +605,14 @@ Manage and build sites and apps on Wix
 URL
 
 `https://mcp.wix.com/mcp`
+
+[WordPress.com](https://developer.wordpress.com/docs/mcp/)
+
+Secure AI access to manage your WordPress.com sites
+
+URL
+
+`https://public-api.wordpress.com/wpcom/v2/mcp/v1`
 
 [Workato](https://docs.workato.com/en/mcp/mcp-cloud.html)
 

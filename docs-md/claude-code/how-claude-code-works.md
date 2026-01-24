@@ -28,6 +28,7 @@ The built-in tools generally fall into four categories, each representing a diff
 | **Search** | Find files by pattern, search content with regex, explore codebases |
 | **Execution** | Run shell commands, start servers, run tests, use git |
 | **Web** | Search the web, fetch documentation, look up error messages |
+| **Code intelligence** | See type errors and warnings after edits, jump to definitions, find references (requires [code intelligence plugins](discover-plugins.md)) |
 
 These are the primary capabilities. Claude also has tools for spawning subagents, asking you questions, and other orchestration tasks. See [Tools available to Claude](settings.md) for the complete list.
 Claude chooses which tools to use based on your prompt and what it learns along the way. When you say “fix the failing tests,” Claude might:
