@@ -40,8 +40,8 @@ New document explaining how Claude Code runs in VS Code, JetBrains IDEs, and oth
 
 #### [claude-code-on-the-web](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/claude-code-on-the-web.md) [[Source](https://code.claude.com/docs/en/claude-code-on-the-web)]
 
-* Added new diff view feature for reviewing Claude's changes before creating PRs. [[lines 85-107](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/claude-code-on-the-web.md?plain=1#L85-L107)] [[Source](https://code.claude.com/docs/en/claude-code-on-the-web#review-changes-with-diff-view)]
-* Updated workflow step to mention reviewing changes in diff view and iterating with comments. [[line 9](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/claude-code-on-the-web.md?plain=1#L9)] [[Source](https://code.claude.com/docs/en/claude-code-on-the-web)]
+* Added new diff view feature for reviewing Claude's changes before creating PRs. [[lines 85-107](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/claude-code-on-the-web.md?plain=1#L85-L107)] [[Source](https://code.claude.com/docs/en/claude-code-on-the-web#from-terminal-to-web)]
+* Updated workflow step to mention reviewing changes in diff view and iterating with comments. [[line 9](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/claude-code-on-the-web.md?plain=1#L9)] [[Source](https://code.claude.com/docs/en/claude-code-on-the-web#what-is-claude-code-on-the-web)]
 
 #### [common-workflows](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/common-workflows.md) [[Source](https://code.claude.com/docs/en/common-workflows)]
 
@@ -49,15 +49,15 @@ New document explaining how Claude Code runs in VS Code, JetBrains IDEs, and oth
 
 #### [costs](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/costs.md) [[Source](https://code.claude.com/docs/en/costs)]
 
-* Fixed broken link to plan mode documentation. [[line 65](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/costs.md?plain=1#L65)] [[Source](https://code.claude.com/docs/en/costs#use-plan-mode-for-complex-tasks)]
+* Fixed broken link to plan mode documentation. [[line 65](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/costs.md?plain=1#L65)] [[Source](https://code.claude.com/docs/en/costs#manage-context-proactively)]
 
 #### [desktop](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/desktop.md) [[Source](https://code.claude.com/docs/en/desktop)]
 
-* Added new diff view feature for reviewing Claude's changes file by file before creating PRs, with ability to comment on specific lines to iterate further. [[lines 18-35](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/desktop.md?plain=1#L18-L35)] [[Source](https://code.claude.com/docs/en/desktop#review-changes-with-diff-view)]
+* Added new diff view feature for reviewing Claude's changes file by file before creating PRs, with ability to comment on specific lines to iterate further. [[lines 18-35](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/desktop.md?plain=1#L18-L35)] [[Source](https://code.claude.com/docs/en/desktop#installation)]
 
 #### [discover-plugins](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/discover-plugins.md) [[Source](https://code.claude.com/docs/en/discover-plugins)]
 
-* Added ability to filter plugin list by name or description in the Installed tab. [[line 44](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/discover-plugins.md?plain=1#L44)] [[Source](https://code.claude.com/docs/en/discover-plugins#manage-plugins)]
+* Added ability to filter plugin list by name or description in the Installed tab. [[line 44](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/discover-plugins.md?plain=1#L44)] [[Source](https://code.claude.com/docs/en/discover-plugins#code-intelligence)]
 
 #### [hooks](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/hooks.md) [[Source](https://code.claude.com/docs/en/hooks)]
 
@@ -65,19 +65,19 @@ New document explaining how Claude Code runs in VS Code, JetBrains IDEs, and oth
 
 #### [interactive-mode](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/interactive-mode.md) [[Source](https://code.claude.com/docs/en/interactive-mode)]
 
-* Added history-based autocomplete for `!` bash commands - type a partial command and press Tab to complete from previous commands in current project. [[line 109](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/interactive-mode.md?plain=1#L109)] [[Source](https://code.claude.com/docs/en/interactive-mode#run-bash-commands)]
+* Added history-based autocomplete for `!` bash commands - type a partial command and press Tab to complete from previous commands in current project. [[line 109](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/interactive-mode.md?plain=1#L109)] [[Source](https://code.claude.com/docs/en/interactive-mode#vim-editor-mode)]
 
 #### [mcp](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/mcp.md) [[Source](https://code.claude.com/docs/en/mcp)]
 
-* Removed duplicate Hex MCP server entry from examples. [[line 491](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/mcp.md?plain=1#L491)] [[Source](https://code.claude.com/docs/en/mcp#examples)]
+* Removed duplicate Hex MCP server entry from examples. [[line 491](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/mcp.md?plain=1#L491)] [[Source](https://code.claude.com/docs/en/mcp#popular-mcp-servers)]
 
 #### [memory](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/memory.md) [[Source](https://code.claude.com/docs/en/memory)]
 
-* Renamed "Enterprise policy" to "Managed policy" for clarity. [[line 11](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/memory.md?plain=1#L11)] [[Source](https://code.claude.com/docs/en/memory#memory-locations)]
+* Renamed "Enterprise policy" to "Managed policy" for clarity. [[line 11](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/memory.md?plain=1#L11)] [[Source](https://code.claude.com/docs/en/memory#determine-memory-type)]
 
 #### [plugin-marketplaces](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/plugin-marketplaces.md) [[Source](https://code.claude.com/docs/en/plugin-marketplaces)]
 
-* Added ability to pin GitHub plugins to specific branch, tag, or commit using `ref` and `sha` fields. [[lines 172-186](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/plugin-marketplaces.md?plain=1#L172-L186)] [[Source](https://code.claude.com/docs/en/plugin-marketplaces#github-marketplaces)]
+* Added ability to pin GitHub plugins to specific branch, tag, or commit using `ref` and `sha` fields. [[lines 172-186](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/plugin-marketplaces.md?plain=1#L172-L186)] [[Source](https://code.claude.com/docs/en/plugin-marketplaces#create-the-marketplace-file)]
 
 #### [settings](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/claude-code/settings.md) [[Source](https://code.claude.com/docs/en/settings)]
 
@@ -99,8 +99,8 @@ New document explaining how Claude Code runs in VS Code, JetBrains IDEs, and oth
 
 #### [build-with-claude/files](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/build-with-claude/files.md) [[Source](https://platform.claude.com/docs/en/build-with-claude/files)]
 
-* Updated contact email address for requesting higher rate limits during beta. [[line 284](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/build-with-claude/files.md?plain=1#L284)] [[Source](https://platform.claude.com/docs/en/build-with-claude/files#pricing-and-rate-limits)]
+* Updated contact email address for requesting higher rate limits during beta. [[line 284](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/build-with-claude/files.md?plain=1#L284)] [[Source](https://platform.claude.com/docs/en/build-with-claude/files)]
 
 #### [agents-and-tools/remote-mcp-servers](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/agents-and-tools/remote-mcp-servers.md) [[Source](https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers)]
 
-* Removed duplicate Hex MCP server entry from the remote servers table. [[line 134](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/agents-and-tools/remote-mcp-servers.md?plain=1#L134)] [[Source](https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers#available-remote-mcp-servers)]
+* Removed duplicate Hex MCP server entry from the remote servers table. [[line 134](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/docs-md/api/agents-and-tools/remote-mcp-servers.md?plain=1#L134)] [[Source](https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers)]
