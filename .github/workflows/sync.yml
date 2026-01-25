@@ -62,6 +62,17 @@ jobs:
           if [ -n "$CHANGELOG" ]; then
             echo "Processing changelog: $CHANGELOG"
             uv run add_source_anchors.py "$CHANGELOG"
+
+            # Commit post-processing changes if any
+            if [[ -n $(git status --porcelain) ]]; then
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+              git add "$CHANGELOG"
+              git commit --amend --no-edit
+            fi
           else
             echo "No changelog file found in last commit"
           fi
+
+          # Push all changes
+          git push

@@ -14,7 +14,6 @@ Usage:
 # ///
 
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -137,35 +136,6 @@ def process_changelog(changelog_path: Path) -> str:
     return "\n".join(result_lines)
 
 
-def git_amend_and_push(changelog_path: Path) -> bool:
-    """Add changes, amend the last commit, and push.
-
-    This is designed for CI workflow use where Claude has created a commit
-    that hasn't been pushed yet. The script amends that commit with Source links.
-    """
-    print("\nGit operations:")
-
-    try:
-        # Add the modified changelog
-        print(f"  Adding {changelog_path}")
-        subprocess.run(["git", "add", str(changelog_path)], check=True, capture_output=True)
-
-        # Amend the last commit
-        print("  Amending last commit")
-        subprocess.run(["git", "commit", "--amend", "--no-edit"], check=True, capture_output=True)
-
-        # Push with force (since we amended)
-        print("  Pushing changes")
-        subprocess.run(["git", "push", "--force-with-lease"], check=True, capture_output=True)
-
-        return True
-    except subprocess.CalledProcessError as e:
-        print(f"  Error: Git operation failed: {e}")
-        if e.stderr:
-            print(f"  stderr: {e.stderr.decode()}")
-        return False
-
-
 def main() -> int:
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <changelog-file>")
@@ -184,11 +154,6 @@ def main() -> int:
     # Write back
     changelog_path.write_text(updated_content, encoding="utf-8")
     print(f"\nUpdated: {changelog_path}")
-
-    # Git operations
-    if not git_amend_and_push(changelog_path):
-        print("\nFailed to complete git operations")
-        return 1
 
     print("\nDone!")
     return 0
