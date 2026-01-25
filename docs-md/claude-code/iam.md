@@ -75,7 +75,7 @@ Rules are evaluated in order: **deny → ask → allow**. The first matching rul
 - **Default mode** controls Claude’s permission behavior when encountering new requests.
 
 Permission rules use the format: `Tool` or `Tool(optional-specifier)`
-A rule that is just the tool name matches any use of that tool. For example, adding `Bash` to the allow list allows Claude Code to use the Bash tool without requiring user approval. Note that `Bash(*)` does **not** match all Bash commands. Use `Bash` without parentheses to match all uses.
+A rule that is just the tool name matches any use of that tool. For example, adding `Bash` to the allow list allows Claude Code to use the Bash tool without requiring user approval. `Bash(*)` is equivalent to `Bash` and can be used interchangeably.
 
 For a quick reference on permission rule syntax including wildcards, see [Permission rule syntax](settings.md) in the settings documentation.
 

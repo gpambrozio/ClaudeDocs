@@ -198,7 +198,7 @@ To match all uses of a tool, use just the tool name without parentheses:
 | `WebFetch` | Matches **all** web fetch requests |
 | `Read` | Matches **all** file reads |
 
-`Bash(*)` does **not** match all Bash commands. The `*` wildcard only matches within the specifier context. To allow or deny all uses of a tool, use just the tool name: `Bash`, not `Bash(*)`.
+`Bash(*)` is equivalent to `Bash` and matches all Bash commands. Both syntaxes can be used interchangeably.
 
 #### [​](#using-specifiers-for-fine-grained-control) Using specifiers for fine-grained control
 
