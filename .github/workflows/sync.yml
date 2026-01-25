@@ -79,3 +79,6 @@ jobs:
           # Push all changes (re-authenticate since claude-code-action revokes its token)
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           git push
+
+          # Trigger pages workflow (GITHUB_TOKEN pushes don't trigger other workflows)
+          gh workflow run pages.yml
