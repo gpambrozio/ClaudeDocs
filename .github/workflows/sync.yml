@@ -56,6 +56,8 @@ jobs:
 
       - name: Add source links and push
         if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Find the changelog file from the last commit
           CHANGELOG=$(git diff --name-only HEAD~1 HEAD | grep '^changelogs/' || true)
@@ -74,5 +76,6 @@ jobs:
             echo "No changelog file found in last commit"
           fi
 
-          # Push all changes
+          # Push all changes (re-authenticate since claude-code-action revokes its token)
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
           git push
