@@ -216,7 +216,7 @@ URL
 
 `https://vast-mcp.blueskyapi.com/mcp`
 
-[Box](https://box.dev/guides/box-mcp/remote/)
+[Box](https://developer.box.com/guides/box-mcp)
 
 Search, access and get insights on your Box content
 
@@ -545,6 +545,14 @@ Real-time web analytics & competitive intelligence
 URL
 
 `https://mcp.similarweb.com`
+
+[Slack](https://docs.slack.dev/ai/mcp-server)
+
+Send messages, create canvases, and fetch Slack data
+
+URL
+
+`https://mcp.slack.com/mcp`
 
 [Snowflake](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 

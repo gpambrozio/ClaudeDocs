@@ -168,7 +168,7 @@ Search, access, and get insights on your Amplitude dataCommand
 
 Connect to Asana to coordinate tasks, projects, and goalsCommand
 
-`claude mcp add --transport sse asana https://mcp.asana.com/sse`
+`claude mcp add --transport streamable-http asana https://mcp.asana.com/v2/mcp`
 
 [**Atlassian**](https://community.atlassian.com/forums/Atlassian-Platform-articles/Using-the-Atlassian-Remote-MCP-Server-beta/ba-p/3005104)
 
@@ -389,6 +389,12 @@ Search, access, and analyze your Ramp financial dataCommand
 Real-time web analytics & competitive intelligenceCommand
 
 `claude mcp add --transport http similarweb https://mcp.similarweb.com`
+
+[**Slack**](https://docs.slack.dev/ai/mcp-server)
+
+Send messages, create canvases, and fetch Slack dataCommand
+
+`claude mcp add slack --transport http https://mcp.slack.com/mcp`
 
 [**Snowflake**](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
