@@ -8,7 +8,9 @@ Make sure you have:
 
 - A terminal or command prompt open
 - A code project to work with
-- A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise) or [Claude Console](https://console.anthropic.com/) account
+- A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
+
+This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md).
 
 ## [​](#step-1:-install-claude-code) Step 1: Install Claude Code
 
@@ -95,13 +97,10 @@ Ask AI
 You can log in using any of these account types:
 
 - [Claude Pro, Max, Teams, or Enterprise](https://claude.com/pricing) (recommended)
-- [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits)
+- [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits). On first login, a “Claude Code” workspace is automatically created in the Console for centralized cost tracking.
+- [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](third-party-integrations.md) (enterprise cloud providers)
 
-Once logged in, your credentials are stored and you won’t need to log in again.
-
-When you first authenticate Claude Code with your Claude Console account, a workspace called “Claude Code” is automatically created for you. This workspace provides centralized cost tracking and management for all Claude Code usage in your organization.
-
-You can have both account types under the same email address. If you need to log in again or switch accounts, use the `/login` command within Claude Code.
+Once logged in, your credentials are stored and you won’t need to log in again. To switch accounts later, use the `/login` command.
 
 ## [​](#step-3:-start-your-first-session) Step 3: Start your first session
 
@@ -129,7 +128,7 @@ Copy
 Ask AI
 
 ```shiki
-> what does this project do?
+what does this project do?
 ```
 
 Claude will analyze your files and provide a summary. You can also ask more specific questions:
@@ -139,7 +138,7 @@ Copy
 Ask AI
 
 ```shiki
-> what technologies does this project use?
+what technologies does this project use?
 ```
 
 Copy
@@ -147,7 +146,7 @@ Copy
 Ask AI
 
 ```shiki
-> where is the main entry point?
+where is the main entry point?
 ```
 
 Copy
@@ -155,7 +154,7 @@ Copy
 Ask AI
 
 ```shiki
-> explain the folder structure
+explain the folder structure
 ```
 
 You can also ask Claude about its own capabilities:
@@ -165,7 +164,7 @@ Copy
 Ask AI
 
 ```shiki
-> what can Claude Code do?
+what can Claude Code do?
 ```
 
 Copy
@@ -173,7 +172,7 @@ Copy
 Ask AI
 
 ```shiki
-> how do I create custom skills in Claude Code?
+how do I create custom skills in Claude Code?
 ```
 
 Copy
@@ -181,7 +180,7 @@ Copy
 Ask AI
 
 ```shiki
-> can Claude Code work with Docker?
+can Claude Code work with Docker?
 ```
 
 Claude Code reads your files as needed - you don’t have to manually add context. Claude also has access to its own documentation and can answer questions about its features and capabilities.
@@ -195,7 +194,7 @@ Copy
 Ask AI
 
 ```shiki
-> add a hello world function to the main file
+add a hello world function to the main file
 ```
 
 Claude Code will:
@@ -216,7 +215,7 @@ Copy
 Ask AI
 
 ```shiki
-> what files have I changed?
+what files have I changed?
 ```
 
 Copy
@@ -224,7 +223,7 @@ Copy
 Ask AI
 
 ```shiki
-> commit my changes with a descriptive message
+commit my changes with a descriptive message
 ```
 
 You can also prompt for more complex Git operations:
@@ -234,7 +233,7 @@ Copy
 Ask AI
 
 ```shiki
-> create a new branch called feature/quickstart
+create a new branch called feature/quickstart
 ```
 
 Copy
@@ -242,7 +241,7 @@ Copy
 Ask AI
 
 ```shiki
-> show me the last 5 commits
+show me the last 5 commits
 ```
 
 Copy
@@ -250,7 +249,7 @@ Copy
 Ask AI
 
 ```shiki
-> help me resolve merge conflicts
+help me resolve merge conflicts
 ```
 
 ## [​](#step-7:-fix-a-bug-or-add-a-feature) Step 7: Fix a bug or add a feature
@@ -263,7 +262,7 @@ Copy
 Ask AI
 
 ```shiki
-> add input validation to the user registration form
+add input validation to the user registration form
 ```
 
 Or fix existing issues:
@@ -273,7 +272,7 @@ Copy
 Ask AI
 
 ```shiki
-> there's a bug where users can submit empty forms - fix it
+there's a bug where users can submit empty forms - fix it
 ```
 
 Claude Code will:
@@ -293,7 +292,7 @@ Copy
 Ask AI
 
 ```shiki
-> refactor the authentication module to use async/await instead of callbacks
+refactor the authentication module to use async/await instead of callbacks
 ```
 
 **Write tests**
@@ -303,7 +302,7 @@ Copy
 Ask AI
 
 ```shiki
-> write unit tests for the calculator functions
+write unit tests for the calculator functions
 ```
 
 **Update documentation**
@@ -313,7 +312,7 @@ Copy
 Ask AI
 
 ```shiki
-> update the README with installation instructions
+update the README with installation instructions
 ```
 
 **Code review**
@@ -323,7 +322,7 @@ Copy
 Ask AI
 
 ```shiki
-> review my changes and suggest improvements
+review my changes and suggest improvements
 ```
 
 **Remember**: Claude Code is your AI pair programmer. Talk to it like you would a helpful colleague - describe what you want to achieve, and it will help you get there.
@@ -340,13 +339,15 @@ Here are the most important commands for daily use:
 | `claude -c` | Continue most recent conversation in current directory | `claude -c` |
 | `claude -r` | Resume a previous conversation | `claude -r` |
 | `claude commit` | Create a Git commit | `claude commit` |
-| `/clear` | Clear conversation history | `> /clear` |
-| `/help` | Show available commands | `> /help` |
-| `exit` or Ctrl+C | Exit Claude Code | `> exit` |
+| `/clear` | Clear conversation history | `/clear` |
+| `/help` | Show available commands | `/help` |
+| `exit` or Ctrl+C | Exit Claude Code | `exit` |
 
 See the [CLI reference](cli-reference.md) for a complete list of commands.
 
 ## [​](#pro-tips-for-beginners) Pro tips for beginners
+
+For more, see [best practices](best-practices.md) and [common workflows](common-workflows.md).
 
 Be specific with your requests
 
@@ -361,23 +362,9 @@ Copy
 Ask AI
 
 ```shiki
-> 1. create a new database table for user profiles
-```
-
-Copy
-
-Ask AI
-
-```shiki
-> 2. create an API endpoint to get and update user profiles
-```
-
-Copy
-
-Ask AI
-
-```shiki
-> 3. build a webpage that allows users to see and edit their information
+1. create a new database table for user profiles
+2. create an API endpoint to get and update user profiles
+3. build a webpage that allows users to see and edit their information
 ```
 
 Let Claude explore first
@@ -389,7 +376,7 @@ Copy
 Ask AI
 
 ```shiki
-> analyze the database schema
+analyze the database schema
 ```
 
 Copy
@@ -397,7 +384,7 @@ Copy
 Ask AI
 
 ```shiki
-> build a dashboard showing products that are most frequently returned by our UK customers
+build a dashboard showing products that are most frequently returned by our UK customers
 ```
 
 Save time with shortcuts
@@ -411,17 +398,15 @@ Save time with shortcuts
 
 Now that you’ve learned the basics, explore more advanced features:
 
-[## Common workflows
+[## How Claude Code works
 
-Step-by-step guides for common tasks](common-workflows.md)[## CLI reference
+Understand the agentic loop, built-in tools, and how Claude Code interacts with your project](how-claude-code-works.md)[## Best practices
 
-Master all commands and options](cli-reference.md)[## Configuration
+Get better results with effective prompting and project setup](best-practices.md)[## Common workflows
 
-Customize Claude Code for your workflow](settings.md)[## Claude Code on the web
+Step-by-step guides for common tasks](common-workflows.md)[## Extend Claude Code
 
-Run tasks asynchronously in the cloud](claude-code-on-the-web.md)[## About Claude Code
-
-Learn more on claude.com](https://claude.com/product/claude-code)
+Customize with CLAUDE.md, skills, hooks, MCP, and more](features-overview.md)
 
 ## [​](#getting-help) Getting help
 

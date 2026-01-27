@@ -248,6 +248,14 @@ URL
 
 `https://pubmed.mcp.claude.com/mcp`
 
+[Clay](https://www.notion.so/clayrun/Clay-Claude-MCP-Server-Documentation-2ef7e66eb01480c9820de48041591aeb?showMoveTo=true&saveParent=true)
+
+Find prospects. Research accounts. Personalize outreach
+
+URL
+
+`https://api.clay.com/v3/mcp`
+
 [ClickUp](https://help.clickup.com/hc/en-us/articles/33335772678423-What-is-ClickUp-MCP)
 
 Project management & collaboration for teams & agents
@@ -320,7 +328,7 @@ URL
 
 [Figma](https://help.figma.com/hc/en-us/articles/32132100833559)
 
-Create better code with Figma context
+Generate diagrams and better code from Figma context
 
 URL
 
@@ -538,9 +546,9 @@ URL
 
 `https://ramp-mcp-remote.ramp.com/mcp`
 
-[Similarweb Website Traffic](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+[Similarweb](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
 
-Real-time web analytics & competitive intelligence
+Real time web, mobile app, and market data.
 
 URL
 

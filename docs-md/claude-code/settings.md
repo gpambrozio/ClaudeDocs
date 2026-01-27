@@ -596,6 +596,7 @@ Ask AI
 - `github`: GitHub repository (uses `repo`)
 - `git`: Any git URL (uses `url`)
 - `directory`: Local filesystem path (uses `path`, for development only)
+- `hostPattern`: regex pattern to match marketplace hosts (uses `hostPattern`)
 
 #### [​](#strictknownmarketplaces) `strictKnownMarketplaces`
 
@@ -611,7 +612,7 @@ Ask AI
 - Only available in managed settings (`managed-settings.json`)
 - Cannot be overridden by user or project settings (highest precedence)
 - Enforced BEFORE network/filesystem operations (blocked sources never execute)
-- Uses exact matching for source specifications (including `ref`, `path` for git sources)
+- Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern`, which uses regex matching
 
 **Allowlist behavior**:
 
@@ -620,7 +621,7 @@ Ask AI
 - List of sources: Users can only add marketplaces that match exactly
 
 **All supported source types**:
-The allowlist supports six marketplace source types. Each source must match exactly for a user’s marketplace addition to be allowed.
+The allowlist supports seven marketplace source types. Most sources use exact matching, while `hostPattern` uses regex matching against the marketplace host.
 
 1. **GitHub repositories**:
 
@@ -703,8 +704,29 @@ Ask AI
 ```
 
 Fields: `path` (required: absolute path to directory containing `.claude-plugin/marketplace.json`)
+
+7. **Host pattern matching**:
+
+Copy
+
+Ask AI
+
+```shiki
+{ "source": "hostPattern", "hostPattern": "^github\\.example\\.com$" }
+{ "source": "hostPattern", "hostPattern": "^gitlab\\.internal\\.example\\.com$" }
+```
+
+Fields: `hostPattern` (required: regex pattern to match against the marketplace host)
+Use host pattern matching when you want to allow all marketplaces from a specific host without enumerating each repository individually. This is useful for organizations with internal GitHub Enterprise or GitLab servers where developers create their own marketplaces.
+Host extraction by source type:
+
+- `github`: always matches against `github.com`
+- `git`: extracts hostname from the URL (supports both HTTPS and SSH formats)
+- `url`: extracts hostname from the URL
+- `npm`, `file`, `directory`: not supported for host pattern matching
+
 **Configuration examples**:
-Example - Allow specific marketplaces only:
+Example: allow specific marketplaces only:
 
 Copy
 
@@ -743,6 +765,23 @@ Ask AI
 ```shiki
 {
   "strictKnownMarketplaces": []
+}
+```
+
+Example: allow all marketplaces from an internal git server:
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "strictKnownMarketplaces": [
+    {
+      "source": "hostPattern",
+      "hostPattern": "^github\\.example\\.com$"
+    }
+  ]
 }
 ```
 
@@ -871,6 +910,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |
+| `CLAUDE_CODE_ENABLE_TASKS` | Set to `false` to temporarily revert to the previous TODO list instead of the task tracking system. Default: `true`. See [Task list](interactive-mode.md) |
 | `CLAUDE_CODE_ENABLE_TELEMETRY` | Set to `1` to enable OpenTelemetry data collection for metrics and logging. Required before configuring OTel exporters. See [Monitoring](monitoring-usage.md) |
 | `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS` | Override the default token limit for file reads. Useful when you need to read larger files in full |
 | `CLAUDE_CODE_HIDE_ACCOUNT_INFO` | Set to `1` to hide your email address and organization name from the Claude Code UI. Useful when streaming or recording |

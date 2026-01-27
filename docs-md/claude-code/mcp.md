@@ -210,6 +210,12 @@ Trusted real-time global financial news providerCommand
 
 `claude mcp add --transport http mtnewswire`
 
+[**Box**](https://developer.box.com/guides/box-mcp)
+
+Search, access and get insights on your Box contentCommand
+
+`claude mcp add box --transport http https://mcp.box.com`
+
 [**Canva**](https://www.canva.dev/docs/connect/canva-mcp-server-setup/)
 
 Search, create, autofill, and export Canva designsCommand
@@ -227,6 +233,12 @@ Managed MCP platform for 350 sourcesCommand
 Search biomedical literature from PubMedCommand
 
 `claude mcp add pubmed --transport http https://pubmed.mcp.claude.com/mcp`
+
+[**Clay**](https://www.notion.so/clayrun/Clay-Claude-MCP-Server-Documentation-2ef7e66eb01480c9820de48041591aeb?showMoveTo=true&saveParent=true)
+
+Find prospects. Research accounts. Personalize outreachCommand
+
+`claude mcp add --transport http clay https://api.clay.com/v3/mcp`
 
 [**ClickUp**](https://help.clickup.com/hc/en-us/articles/33335772678423-What-is-ClickUp-MCP)
 
@@ -270,7 +282,7 @@ Securely access and analyze Egnyte contentCommand
 
 [**Figma**](https://help.figma.com/hc/en-us/articles/32132100833559)
 
-Create better code with Figma contextCommand
+Generate diagrams and better code from Figma contextCommand
 
 `claude mcp add --transport http figma-remote-mcp https://mcp.figma.com/mcp`
 
@@ -384,9 +396,9 @@ Search, access, and analyze your Ramp financial dataCommand
 
 `claude mcp add --transport http ramp https://ramp-mcp-remote.ramp.com/mcp`
 
-[**Similarweb Website Traffic**](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+[**Similarweb**](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
 
-Real-time web analytics & competitive intelligenceCommand
+Real time web, mobile app, and market data.Command
 
 `claude mcp add --transport http similarweb https://mcp.similarweb.com`
 

@@ -388,6 +388,8 @@ Ask AI
 > How should we handle database migration?
 ```
 
+Press `Ctrl+G` to open the plan in your default text editor, where you can edit it directly before Claude proceeds.
+
 ### [​](#configure-plan-mode-as-default) Configure Plan Mode as default
 
 Copy
