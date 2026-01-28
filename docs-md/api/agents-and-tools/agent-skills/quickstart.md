@@ -237,6 +237,8 @@ Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Agent
 
 Explore example Skills and implementation patterns](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

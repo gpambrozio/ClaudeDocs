@@ -230,6 +230,8 @@ The Usage and Cost APIs can be used to help you deliver a better experience for 
 - [Batch processing](build-with-claude/batch-processing.md) - 50% discount on batch requests
 - [Rate limits](api/rate-limits.md) - Understand usage tiers
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -163,6 +163,8 @@ See our model comparison table for a list of context window sizes and input / ou
 
 Learn more about how extended thinking works and how to implement it alongside other features such as tool use and prompt caching.](build-with-claude/extended-thinking.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

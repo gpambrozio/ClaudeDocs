@@ -29,6 +29,8 @@ Try monitoring techniques first, like output screening and post-processing, to t
 
 Remember, the goal is not just to prevent leaks but to maintain Claude's performance. Overly complex leak-prevention can degrade results. Balance is key.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

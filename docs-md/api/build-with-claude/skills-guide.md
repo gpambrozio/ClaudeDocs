@@ -740,6 +740,8 @@ Best practices for writing effective Skills](agents-and-tools/agent-skills/best-
 
 Learn about the code execution environment](agents-and-tools/tool-use/code-execution-tool.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

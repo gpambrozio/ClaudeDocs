@@ -449,6 +449,8 @@ View a fully implemented code-based example of how to use Claude for content mod
 
 Explore our guardrails guide for techniques to moderate interactions with Claude.](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

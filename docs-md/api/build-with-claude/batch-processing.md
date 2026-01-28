@@ -436,6 +436,8 @@ Note that the failure of one request in a batch does not affect the processing o
 
 ### Can I use prompt caching in the Message Batches API?
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

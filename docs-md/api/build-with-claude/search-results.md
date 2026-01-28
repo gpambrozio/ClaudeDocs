@@ -506,6 +506,8 @@ Citations are all-or-nothing: either all search results in a request must have c
 - Only text content is supported within search results (no images or other media)
 - The `content` array must contain at least one text block
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

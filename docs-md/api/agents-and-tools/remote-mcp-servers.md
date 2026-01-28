@@ -92,7 +92,7 @@ URL
 
 `https://mcp.tickettailor.ai/mcp`
 
-[VibeProspecting](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
+[Vibe Prospecting](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
 
 Find company & contact data
 
@@ -450,7 +450,7 @@ Access best in class data & analytics across a broad spectrum of asset classes.
 
 URL
 
-`https://api.analytics.lseg.com/lfa/mcp`
+`https://api.analytics.lseg.com/lfa/mcp/server-cl`
 
 [Melon](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
 
@@ -765,6 +765,8 @@ Answer questions with the Hex agent
 Requires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude)
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
+
+Was this page helpful?
 
 ---
 

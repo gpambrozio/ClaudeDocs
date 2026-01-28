@@ -367,6 +367,8 @@ We also released new official SDKs:
 
 - Our prompt generator tool is now available in the [Developer Console](https://console.anthropic.com). Prompt Generator makes it easy to guide Claude to generate a high-quality prompts tailored to your specific tasks. Read more in our [blog post](https://www.anthropic.com/news/prompt-generator).
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

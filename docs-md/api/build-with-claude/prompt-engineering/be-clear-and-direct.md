@@ -38,6 +38,8 @@ An example-filled tutorial that covers the prompt engineering concepts found in 
 
 A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

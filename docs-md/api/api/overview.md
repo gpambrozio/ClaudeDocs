@@ -198,6 +198,8 @@ Explore capabilities: caching, vision, tool use, streaming, and more](build-with
 
 Usage tiers, spend limits, and rate limiting with token bucket algorithm](api/rate-limits.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -261,6 +261,8 @@ Full TypeScript API reference and examples](agent-sdk/typescript.md)[Python SDK
 
 Full Python API reference and examples](agent-sdk/python.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

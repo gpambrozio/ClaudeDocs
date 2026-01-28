@@ -55,6 +55,8 @@ message = client.messages.create(
 print(message.content)
 ```
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

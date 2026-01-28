@@ -503,6 +503,8 @@ The MCP SDK has a default timeout of 60 seconds for server connections. If your 
 - **[Python SDK reference](agent-sdk/python.md)**: Full API reference including MCP configuration options
 - **[MCP server directory](https://github.com/modelcontextprotocol/servers)**: Browse available MCP servers for databases, APIs, and more
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -357,6 +357,8 @@ On Windows, subagents with very long prompts may fail due to command line length
 - [Claude Code subagents](sub-agents.md): comprehensive subagent documentation including filesystem-based definitions
 - [SDK overview](agent-sdk/overview.md): getting started with the Claude Agent SDK
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

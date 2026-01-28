@@ -136,6 +136,8 @@ composer require "anthropic-ai/sdk 0.3.0"
 
 Every SDK has a `beta` namespace that is available for accessing new features that Anthropic releases in beta versions. Use this in conjunction with [beta headers](api/beta-headers.md) to access these features. Refer to each SDK's GitHub repository for specific usage examples.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

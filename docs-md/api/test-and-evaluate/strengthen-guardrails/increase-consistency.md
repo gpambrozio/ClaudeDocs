@@ -38,6 +38,8 @@ For tasks requiring consistent context (e.g., chatbots, knowledge bases), use re
 
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

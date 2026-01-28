@@ -95,7 +95,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#c2b1a3aea7b182a3acb6aab0adb2aba1eca1adaf).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#3c4f5d50594f7c5d5248544e534c555f125f5351).
 
 ### Streaming thinking
 
@@ -569,6 +569,8 @@ The billed output token count will **not** match the visible token count in the 
 Explore practical examples of thinking in our cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking prompting tips
 
 Learn prompt engineering best practices for extended thinking.](build-with-claude/prompt-engineering/extended-thinking-tips.md)
+
+Was this page helpful?
 
 ---
 

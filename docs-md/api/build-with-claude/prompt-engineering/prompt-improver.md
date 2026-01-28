@@ -99,6 +99,8 @@ Learn prompting best practices with our interactive tutorial.](https://github.co
 
 Use our evaluation tool to test your improved prompts.](test-and-evaluate/eval-tool.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -441,6 +441,8 @@ Example token usage for typical content:
 - Large documentation page (100KB): ~25,000 tokens
 - Research paper PDF (500KB): ~125,000 tokens
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

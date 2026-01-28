@@ -12,6 +12,8 @@ This guide provides actionable tips to keep Claude in character, even during lon
 
 ### Example: Enterprise chatbot for role prompting
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

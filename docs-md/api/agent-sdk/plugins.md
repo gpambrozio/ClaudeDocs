@@ -229,6 +229,8 @@ If relative paths don't work:
 - [Subagents](agent-sdk/subagents.md) - Working with specialized agents
 - [Skills](agent-sdk/skills.md) - Using Agent Skills
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

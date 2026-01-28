@@ -103,6 +103,8 @@ This approach helps the model understand that the content is invalid JSON while 
 
 When wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

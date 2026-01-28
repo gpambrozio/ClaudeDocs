@@ -100,11 +100,11 @@ Event platform for managing tickets, orders & moreCommand
 
 `claude mcp add --transport http tickettailor https://mcp.tickettailor.ai/mcp`
 
-[**VibeProspecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
+[**Vibe Prospecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
 
 Find company & contact dataCommand
 
-`claude mcp add vibeprospecting --transport http https://vibeprospecting.explorium.ai/mcp`
+`claude mcp add vibe-prospecting --transport http https://vibeprospecting.explorium.ai/mcp`
 
 [**Windsor.ai**](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
 

@@ -93,6 +93,8 @@ Discover Anthropic client libraries.](api/client-sdks.md)[Claude Cookbook
 
 Learn with interactive Jupyter notebooks.](https://platform.claude.com/cookbooks)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

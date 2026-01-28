@@ -476,6 +476,8 @@ Custom tools give you full control over the interaction, but require more implem
 - [Control execution with hooks](agent-sdk/hooks.md): run custom code at key points in the agent lifecycle
 - [TypeScript SDK reference](agent-sdk/typescript.md): full canUseTool API documentation
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -4,7 +4,7 @@ Copy page
 
 After defining your success criteria, the next step is designing evaluations to measure LLM performance against those criteria. This is a vital part of the prompt engineering cycle.
 
-![](/docs/images/how-to-prompt-eng.png)
+![Flowchart of prompt engineering: test cases, preliminary prompt, iterative testing and refinement, final validation, ship](/docs/images/how-to-prompt-eng.png)
 
 This guide focuses on how to develop your test cases.
 
@@ -66,6 +66,8 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 Learn how to craft prompts that maximize your eval scores.](build-with-claude/prompt-engineering/overview.md)[Evals cookbook
 
 More code examples of human-, code-, and LLM-graded evals.](https://platform.claude.com/cookbook/misc-building-evals)
+
+Was this page helpful?
 
 ---
 

@@ -620,6 +620,8 @@ logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
 - Workflows using server-side tools extensively
 - Tasks that need to maintain exact state across many variables
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

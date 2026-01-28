@@ -355,6 +355,8 @@ Simply update your model ID.
 - Review [API release notes](release-notes/api.md) for API updates
 - Contact support if you encounter any issues during migration
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

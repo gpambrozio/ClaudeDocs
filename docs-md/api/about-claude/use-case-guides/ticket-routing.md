@@ -384,6 +384,8 @@ Visit our classification cookbook for more example code and detailed eval guidan
 
 Begin building and evaluating your workflow on the Claude Console.](/dashboard)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

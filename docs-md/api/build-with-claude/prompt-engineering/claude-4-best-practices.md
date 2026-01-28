@@ -380,6 +380,8 @@ When migrating to Claude 4.5 models:
 2. **Frame your instructions with modifiers**: Adding modifiers that encourage Claude to increase the quality and detail of its output can help better shape Claude's performance. For example, instead of "Create an analytics dashboard", use "Create an analytics dashboard. Include as many relevant features and interactions as possible. Go beyond the basics to create a fully-featured implementation."
 3. **Request specific features explicitly**: Animations and interactive elements should be requested explicitly when desired.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

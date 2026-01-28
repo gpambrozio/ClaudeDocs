@@ -87,6 +87,8 @@ Future API versions will expand the **`stop_reason`: `refusal`** pattern to unif
 - Future models will expand this pattern to other refusal types
 - Plan your error handling to accommodate future unification of refusal responses
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

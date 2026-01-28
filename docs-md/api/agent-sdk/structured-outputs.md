@@ -231,6 +231,8 @@ for await (const msg of query({
 - [API Structured Outputs](build-with-claude/structured-outputs.md): use structured outputs with the Claude API directly for single-turn requests without tool use
 - [Custom tools](agent-sdk/custom-tools.md): give your agent custom tools to call during execution before returning structured output
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

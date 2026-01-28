@@ -141,6 +141,8 @@ On September 4, 2024, we notified developers using Claude 1 and Instant models o
 | November 6, 2024 | `claude-instant-1.1` | `claude-haiku-4-5-20251001` |
 | November 6, 2024 | `claude-instant-1.2` | `claude-haiku-4-5-20251001` |
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -351,6 +351,8 @@ For streaming responses, we've added a `citations_delta` type that contains a si
 
 ### Example streaming events
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

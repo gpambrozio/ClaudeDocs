@@ -463,6 +463,8 @@ Below, we've included several code snippets that showcase various prompt caching
 
 ### Why am I seeing 'TypeError: Cannot read properties of undefined (reading 'messages')'?
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -220,6 +220,8 @@ For general Skills troubleshooting (YAML syntax, debugging, etc.), see the [Clau
 - [TypeScript SDK Reference](agent-sdk/typescript.md): Complete API documentation
 - [Python SDK Reference](agent-sdk/python.md): Complete API documentation
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

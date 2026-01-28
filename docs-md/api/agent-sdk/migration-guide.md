@@ -258,6 +258,8 @@ If you encounter any issues during migration:
 - Review the [Python SDK Reference](agent-sdk/python.md) for Python-specific documentation
 - Learn about [Custom Tools](agent-sdk/custom-tools.md) and [MCP Integration](agent-sdk/mcp.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

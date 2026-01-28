@@ -555,6 +555,8 @@ Visit our RAG cookbook recipe for more example code and detailed guidance.](http
 
 Explore our Citations cookbook recipe for how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -675,6 +675,8 @@ Understand the fundamentals of tool use with Claude.](agents-and-tools/tool-use/
 
 Step-by-step guide for implementing tools.](agents-and-tools/tool-use/implement-tool-use.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

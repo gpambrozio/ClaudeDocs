@@ -122,6 +122,8 @@ For the other steps in the permission evaluation flow:
 - [Hooks guide](agent-sdk/hooks.md): run custom code at key points in the agent lifecycle
 - [Permission rules](settings.md): declarative allow/deny rules in `settings.json`
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

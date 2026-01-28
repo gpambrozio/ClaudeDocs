@@ -368,6 +368,8 @@ Explore practical examples of PDF processing in our cookbook recipe.](https://pl
 
 See complete API documentation for PDF support.](api/messages.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -63,6 +63,8 @@ Find answers to frequently asked account and billing questions.](https://support
 
 Check the status of Anthropic services.](https://status.claude.com)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -66,6 +66,8 @@ Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use 
 
 ### July 12th, 2024
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

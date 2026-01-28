@@ -349,6 +349,8 @@ for await (const message of query({
 - [TypeScript SDK guide](agent-sdk/typescript.md) - Complete SDK usage guide
 - [Configuration guide](settings.md) - General configuration options
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

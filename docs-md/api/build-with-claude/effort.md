@@ -101,6 +101,8 @@ For best performance on complex reasoning tasks, use high effort (the default) w
 3. **Test your use case**: The impact of effort levels varies by task type. Evaluate performance on your specific use cases before deploying.
 4. **Consider dynamic effort**: Adjust effort based on task complexity. Simple queries may warrant low effort while agentic coding and complex reasoning benefit from high effort.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

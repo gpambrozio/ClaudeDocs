@@ -483,6 +483,8 @@ async with ClaudeSDKClient(ClaudeAgentOptions(
 - **[TypeScript SDK reference](agent-sdk/typescript.md)**: complete API reference including all options for `query()` and the `rewindFiles()` method.
 - **[Python SDK reference](agent-sdk/python.md)**: complete API reference including all options for `ClaudeAgentOptions` and the `rewind_files()` method.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

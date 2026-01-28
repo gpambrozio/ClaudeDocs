@@ -14,6 +14,8 @@ Techniques and best practices for using Claude to perform content filtering and 
 
 Summarize legal documents using Claude to extract key information and expedite research.](about-claude/use-case-guides/legal-summarization.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

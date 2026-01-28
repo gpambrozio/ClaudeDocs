@@ -517,6 +517,8 @@ Compare Claude 4.5 models with other Claude models](about-claude/models/overview
 
 Upgrade from previous models](about-claude/models/migrating-to-claude-4.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

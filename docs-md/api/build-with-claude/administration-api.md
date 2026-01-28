@@ -16,7 +16,6 @@ When you use the Admin API:
 
 1. You make requests using your Admin API key in the `x-api-key` header
 2. The API allows you to manage:
-
    - Organization members and their roles
    - Organization member invites
    - Workspaces and their members
@@ -250,6 +249,8 @@ To effectively use the Admin API:
 ### Can organization admin or billing members' workspace roles be changed?
 
 ### What happens to workspace access when organization roles change?
+
+Was this page helpful?
 
 ---
 

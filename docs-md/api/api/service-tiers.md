@@ -132,6 +132,8 @@ To begin using Priority Tier:
 2. (Optional) Update your API requests to optionally set the `service_tier` parameter to `auto`
 3. Monitor your usage through response headers and the Claude Console
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

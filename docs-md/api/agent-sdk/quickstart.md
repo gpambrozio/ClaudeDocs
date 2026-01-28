@@ -261,6 +261,8 @@ Now that you've created your first agent, learn how to extend its capabilities a
 - **[Hosting](agent-sdk/hosting.md)**: deploy agents to Docker, cloud, and CI/CD
 - **[Example agents](https://github.com/anthropics/claude-agent-sdk-demos)**: see complete examples: email assistant, research agent, and more
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

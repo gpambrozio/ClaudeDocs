@@ -30,6 +30,8 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 
 Remember, while these techniques significantly reduce hallucinations, they don't eliminate them entirely. Always validate critical information, especially for high-stakes decisions.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

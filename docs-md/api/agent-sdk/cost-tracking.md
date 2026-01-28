@@ -295,6 +295,8 @@ class BillingAggregator {
 - [SDK Overview](agent-sdk/overview.md) - Getting started with the SDK
 - [SDK Permissions](agent-sdk/permissions.md) - Managing tool permissions
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

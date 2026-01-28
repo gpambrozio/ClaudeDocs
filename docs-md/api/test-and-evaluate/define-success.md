@@ -66,6 +66,8 @@ Brainstorm success criteria for your use case with Claude on claude.ai.
 
 Learn to build strong test sets to gauge Claude's performance against your criteria.](build-with-claude/prompt-engineering/be-clear-and-direct.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

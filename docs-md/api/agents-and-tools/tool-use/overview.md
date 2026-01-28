@@ -247,6 +247,8 @@ enhance support.](https://platform.claude.com/cookbook/tool-use-customer-service
 
 See how Claude and tool use can extract structured data from unstructured text.](https://platform.claude.com/cookbook/tool-use-extracting-structured-json)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

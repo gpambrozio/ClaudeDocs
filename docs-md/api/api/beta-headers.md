@@ -81,6 +81,8 @@ For questions about beta features:
 
 Remember that beta features are provided "as-is" and may not have the same SLA guarantees as stable API features.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

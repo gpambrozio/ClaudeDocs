@@ -84,6 +84,8 @@ By reviewing results across test cases and comparing different prompt versions, 
 
 Start evaluating your prompts today to build more robust AI applications with Claude!
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

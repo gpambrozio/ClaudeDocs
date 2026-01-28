@@ -344,6 +344,8 @@ for await (const message of query({
 - [SDK overview](agent-sdk/overview.md) - General SDK concepts
 - [CLI reference](cli-reference.md) - Command-line interface
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

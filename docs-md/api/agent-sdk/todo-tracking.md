@@ -110,6 +110,8 @@ await tracker.trackQuery("Build a complete authentication system with todos");
 - [Streaming vs Single Mode](agent-sdk/streaming-vs-single-mode.md)
 - [Custom Tools](agent-sdk/custom-tools.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

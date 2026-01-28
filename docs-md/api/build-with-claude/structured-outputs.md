@@ -444,6 +444,8 @@ For persistent issues with valid schemas, [contact support](https://support.clau
 
 **Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -307,6 +307,8 @@ View a fully implemented code-based example of how to use Claude to summarize co
 
 Explore our Citations cookbook recipe for guidance on how to ensure accuracy and explainability of information.](https://platform.claude.com/cookbook/misc-using-citations)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

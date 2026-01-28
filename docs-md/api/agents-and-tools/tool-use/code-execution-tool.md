@@ -642,6 +642,8 @@ The code execution tool enables Claude to use [Agent Skills](agents-and-tools/ag
 
 Learn more in the [Agent Skills documentation](agents-and-tools/agent-skills/overview.md) and [Agent Skills API guide](build-with-claude/skills-guide.md).
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

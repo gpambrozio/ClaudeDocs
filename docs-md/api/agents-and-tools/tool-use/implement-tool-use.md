@@ -719,6 +719,8 @@ There are a few different types of errors that can occur when using tools with C
 
 ### Parallel tool calls not working
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

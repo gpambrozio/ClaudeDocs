@@ -215,6 +215,8 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
 Visit Voyage's [pricing page](https://docs.voyageai.com/docs/pricing?ref=anthropic) for the most up to date pricing details.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

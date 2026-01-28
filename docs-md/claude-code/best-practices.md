@@ -525,7 +525,7 @@ Ask AI
 ```shiki
 for file in $(cat files.txt); do
   claude -p "Migrate $file from React to Vue. Return OK or FAIL." \
-    --allowedTools "Edit,Bash(git commit:*)"
+    --allowedTools "Edit,Bash(git commit *)"
 done
 ```
 

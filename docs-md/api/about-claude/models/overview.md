@@ -73,6 +73,8 @@ Craft and test powerful prompts directly in your browser.](/)
 
 If you have any questions or need assistance, don't hesitate to reach out to our [support team](https://support.claude.com/) or consult the [Discord community](https://www.anthropic.com/discord).
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

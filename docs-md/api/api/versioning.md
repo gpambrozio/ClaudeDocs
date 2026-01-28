@@ -28,6 +28,8 @@ We always recommend using the latest API version whenever possible. Previous ver
   - Removed legacy `exception` and `truncated` values in responses.
 - `2023-01-01`: Initial release.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

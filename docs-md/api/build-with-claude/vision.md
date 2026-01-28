@@ -275,6 +275,8 @@ Ready to start building with images using Claude? Here are a few helpful resourc
 
 If you have any other questions, feel free to reach out to our [support team](https://support.claude.com/). You can also join our [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

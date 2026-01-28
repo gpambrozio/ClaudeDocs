@@ -612,6 +612,8 @@ Get started quickly with our complete Docker-based implementation](https://githu
 
 Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -69,6 +69,8 @@ With streaming enabled, you can process the model's output as it arrives, updati
 
 Visit [streaming Messages](build-with-claude/streaming.md) to learn about how you can implement streaming for your use case.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

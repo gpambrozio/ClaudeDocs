@@ -319,6 +319,8 @@ Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Autho
 
 Write Skills that Claude can use effectively](agents-and-tools/agent-skills/best-practices.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

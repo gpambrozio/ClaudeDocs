@@ -57,6 +57,8 @@ If you want to level up your prompt variable game, wrap them in XML tags.](build
 
 Check out the myriad prompt development tools available in the Claude Console.](/)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -176,6 +176,8 @@ While the OpenAI SDK automatically manages headers, here is the complete list of
 | `authorization` | Fully supported |
 | `openai-processing-ms` | Always empty |
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

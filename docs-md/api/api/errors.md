@@ -93,6 +93,8 @@ If you are building a direct API integration, you should be aware that setting a
 Our [SDKs](api/client-sdks.md) will validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
 also will set a socket option for TCP keep-alive.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

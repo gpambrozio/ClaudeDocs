@@ -363,6 +363,8 @@ Web search is available on the Claude API for **$10 per 1,000 searches**, plus s
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

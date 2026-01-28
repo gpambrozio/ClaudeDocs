@@ -150,6 +150,8 @@ const originalContinued = query({
 })
 ```
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -42,6 +42,8 @@ These features enable Claude to interact with external systems, execute code, an
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | Claude API (Beta)  Microsoft Foundry (Beta) |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | Claude API  Google Cloud's Vertex AI  Microsoft Foundry |
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

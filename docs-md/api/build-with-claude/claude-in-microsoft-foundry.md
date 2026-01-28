@@ -241,6 +241,8 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 - **Authentication guide**: See the [authentication section](#authentication) above
 - **Azure portal**: [portal.azure.com](https://portal.azure.com/)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

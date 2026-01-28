@@ -271,6 +271,8 @@ Learn about tool use with Claude](agents-and-tools/tool-use/overview.md)[Text ed
 
 View and edit text files with Claude](agents-and-tools/tool-use/text-editor-tool.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

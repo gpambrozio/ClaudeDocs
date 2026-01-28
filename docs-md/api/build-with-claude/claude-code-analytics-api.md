@@ -262,6 +262,8 @@ The Claude Code Analytics API helps you understand and optimize your team's deve
 - [Identity and access management](iam.md)
 - [Monitoring usage with OpenTelemetry](monitoring-usage.md) for custom metrics and alerting
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

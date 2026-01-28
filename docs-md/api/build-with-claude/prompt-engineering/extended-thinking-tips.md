@@ -157,6 +157,8 @@ Explore practical examples of extended thinking in our cookbook.](https://platfo
 
 See complete technical documentation for implementing extended thinking.](build-with-claude/extended-thinking.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

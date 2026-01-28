@@ -366,6 +366,8 @@ We accept major credit cards for standard accounts. Enterprise customers can arr
 
 For additional questions about pricing, contact [support@anthropic.com](mailto:support@anthropic.com).
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

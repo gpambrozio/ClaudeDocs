@@ -1143,6 +1143,8 @@ Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Use S
 
 Upload and use Skills programmatically](build-with-claude/skills-guide.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

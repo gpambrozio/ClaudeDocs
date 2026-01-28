@@ -32,6 +32,8 @@ These are the stable IP addresses that Anthropic uses for outbound requests (for
 34.162.183.95/32
 ```
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -161,6 +161,8 @@ for await (const message of query({
 }
 ```
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -2377,6 +2377,8 @@ If `permission_mode` is set to `bypassPermissions` and `allow_unsandboxed_comman
 - [CLI reference](cli-reference.md) - Command-line interface
 - [Common workflows](common-workflows.md) - Step-by-step guides
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -84,6 +84,8 @@ Explore the latest improvements in Claude 4.5 models](about-claude/models/whats-
 
 Get started with your first API call](get-started.md)
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

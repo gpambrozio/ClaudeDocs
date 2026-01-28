@@ -240,6 +240,8 @@ Token counting and message creation have separate and independent rate limits --
 
 ### Does token counting use prompt caching?
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

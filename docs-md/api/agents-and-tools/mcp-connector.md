@@ -475,6 +475,8 @@ The previous version of the MCP connector included tool configuration directly i
 | `tool_configuration.enabled` | boolean | **Deprecated**: Use `default_config.enabled` in MCPToolset |
 | `tool_configuration.allowed_tools` | array | **Deprecated**: Use allowlist pattern with `configs` in MCPToolset |
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -374,6 +374,8 @@ Share your feedback on the V2 interface before it becomes stable. Report issues 
 - [SDK overview](agent-sdk/overview.md) - General SDK concepts
 - [V2 examples on GitHub](https://github.com/anthropics/claude-agent-sdk-demos/tree/main/hello-world-v2) - Working code examples
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

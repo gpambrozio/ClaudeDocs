@@ -520,6 +520,8 @@ The basic recovery strategy involves:
 1. **Use SDK features**: Leverage the SDK's built-in message accumulation and error handling capabilities
 2. **Handle content types**: Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
+Was this page helpful?
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*
