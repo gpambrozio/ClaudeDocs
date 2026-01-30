@@ -947,6 +947,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825: …
 
 name: Literal["code\_execution"]
@@ -1005,6 +1007,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -1619,7 +1623,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -1647,32 +1677,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -1694,6 +1698,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -4003,6 +4009,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
@@ -6283,6 +6291,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaMemoryTool20250818Command = [BetaMemoryTool20250818Command](api/beta.md)
 
 Accepts one of the following:
@@ -6780,7 +6790,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -6808,32 +6844,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -6855,6 +6865,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -7500,8 +7512,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -9522,6 +9534,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
@@ -10671,7 +10685,9 @@ class BetaOutputConfig: …
 
 effort: Optional[Literal["low", "medium", "high"]]
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -10680,6 +10696,20 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+format: Optional[BetaJSONOutputFormat]
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Dict[str, object]
+
+The JSON schema of the format
+
+type: Literal["json\_schema"]
+
+Accepts one of the following:
+
+"json\_schema"
 
 class BetaPlainTextSource: …
 
@@ -11201,7 +11231,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -11229,32 +11285,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -11276,6 +11306,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -12310,7 +12342,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -12338,32 +12396,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -12385,6 +12417,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -13030,8 +13064,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -13553,7 +13587,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -13581,32 +13641,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -13628,6 +13662,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -14273,8 +14309,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -14893,7 +14929,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -14921,32 +14983,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -14968,6 +15004,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -16474,7 +16512,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -16501,32 +16565,6 @@ type: Literal["code\_execution\_20250825"]
 Accepts one of the following:
 
 "code\_execution\_20250825"
-
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 class BetaServerToolUseBlockParam: …
 
@@ -17700,6 +17738,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 type: Optional[Literal["custom"]]
 
 Accepts one of the following:
@@ -17767,6 +17807,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124: …
 
 name: Literal["bash"]
@@ -17827,6 +17869,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolChoice = [BetaToolChoice](api/beta.md)
 
@@ -18037,6 +18081,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolComputerUse20250124: …
 
 display\_height\_px: int
@@ -18115,6 +18161,8 @@ minimum0
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124: …
 
@@ -18198,6 +18246,8 @@ Whether to enable an action to take a zoomed-in screenshot of the screen.
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolReferenceBlock: …
 
@@ -19112,6 +19162,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119: …
 
 name: Literal["tool\_search\_tool\_regex"]
@@ -19172,6 +19224,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolSearchToolResultBlock: …
 
@@ -19499,6 +19553,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124: …
 
 name: Literal["str\_replace\_editor"]
@@ -19560,6 +19616,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429: …
 
 name: Literal["str\_replace\_based\_edit\_tool"]
@@ -19620,6 +19678,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728: …
 
@@ -19687,6 +19747,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolUnion = [BetaToolUnion](api/beta.md)
 
@@ -19774,6 +19836,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 type: Optional[Literal["custom"]]
 
 Accepts one of the following:
@@ -19841,6 +19905,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124: …
 
 name: Literal["bash"]
@@ -19902,6 +19968,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522: …
 
 name: Literal["code\_execution"]
@@ -19961,6 +20029,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825: …
 
 name: Literal["code\_execution"]
@@ -20019,6 +20089,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022: …
 
@@ -20099,6 +20171,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818: …
 
 name: Literal["memory"]
@@ -20159,6 +20233,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124: …
 
@@ -20239,6 +20315,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022: …
 
 name: Literal["str\_replace\_editor"]
@@ -20299,6 +20377,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124: …
 
@@ -20383,6 +20463,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124: …
 
 name: Literal["str\_replace\_editor"]
@@ -20444,6 +20526,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429: …
 
 name: Literal["str\_replace\_based\_edit\_tool"]
@@ -20504,6 +20588,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728: …
 
@@ -20571,6 +20657,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305: …
 
@@ -20644,6 +20732,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: Optional[UserLocation]
 
@@ -20772,6 +20862,8 @@ exclusiveMinimum0
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119: …
 
 name: Literal["tool\_search\_tool\_bm25"]
@@ -20833,6 +20925,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119: …
 
 name: Literal["tool\_search\_tool\_regex"]
@@ -20893,6 +20987,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMCPToolset: …
 
@@ -21679,6 +21775,8 @@ exclusiveMinimum0
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaWebFetchToolResultBlock: …
 
 content: Content
@@ -22386,6 +22484,8 @@ exclusiveMinimum0
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 user\_location: Optional[UserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -22444,6 +22544,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
@@ -22471,6 +22573,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -22521,6 +22625,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -22581,6 +22687,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -22659,6 +22767,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
@@ -22681,13 +22791,15 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
 
 "web\_search\_tool\_result\_error"
 
-BetaWebSearchToolResultErrorCode = Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 2 more]
+BetaWebSearchToolResultErrorCode = Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
 
 Accepts one of the following:
 
@@ -22700,6 +22812,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 #### MessagesBatches
 
@@ -23272,7 +23386,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -23300,32 +23440,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -23347,6 +23461,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -23992,8 +24108,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -24669,7 +24785,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -24697,32 +24839,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -24744,6 +24860,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -25389,8 +25507,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -26028,7 +26146,33 @@ class BetaServerToolUseBlock: …
 
 id: str
 
-caller: Caller
+input: Dict[str, object]
+
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
+
+type: Literal["server\_tool\_use"]
+
+Accepts one of the following:
+
+"server\_tool\_use"
+
+caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
@@ -26056,32 +26200,6 @@ Accepts one of the following:
 
 "code\_execution\_20250825"
 
-input: Dict[str, object]
-
-name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
-
-Accepts one of the following:
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
-
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -26103,6 +26221,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -26748,8 +26868,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking

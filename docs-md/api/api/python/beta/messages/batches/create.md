@@ -1841,6 +1841,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: Literal["web\_search\_tool\_result\_error"]
 
 Accepts one of the following:
@@ -2980,8 +2982,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -3285,11 +3287,13 @@ maxLength256
 
 output\_config: Optional[[BetaOutputConfigParam](api/beta.md)]
 
-Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Configuration options for the model's output, such as the output format.
 
 effort: Optional[Literal["low", "medium", "high"]]
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -3299,9 +3303,25 @@ Accepts one of the following:
 
 "high"
 
-output\_format: Optional[BetaJSONOutputFormatParam]
+format: Optional[BetaJSONOutputFormat]
 
-A schema to specify Claude's output format in responses.
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Dict[str, object]
+
+The JSON schema of the format
+
+type: Literal["json\_schema"]
+
+Accepts one of the following:
+
+"json\_schema"
+
+Deprecatedoutput\_format: Optional[BetaJSONOutputFormatParam]
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 schema: Dict[str, object]
 
@@ -3739,6 +3759,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 type: Optional[Literal["custom"]]
 
 Accepts one of the following:
@@ -3806,6 +3828,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124: …
 
 name: Literal["bash"]
@@ -3867,6 +3891,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522: …
 
 name: Literal["code\_execution"]
@@ -3926,6 +3952,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825: …
 
 name: Literal["code\_execution"]
@@ -3984,6 +4012,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022: …
 
@@ -4064,6 +4094,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818: …
 
 name: Literal["memory"]
@@ -4124,6 +4156,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124: …
 
@@ -4204,6 +4238,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022: …
 
 name: Literal["str\_replace\_editor"]
@@ -4264,6 +4300,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124: …
 
@@ -4348,6 +4386,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124: …
 
 name: Literal["str\_replace\_editor"]
@@ -4409,6 +4449,8 @@ input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429: …
 
 name: Literal["str\_replace\_based\_edit\_tool"]
@@ -4469,6 +4511,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728: …
 
@@ -4536,6 +4580,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305: …
 
@@ -4609,6 +4655,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: Optional[UserLocation]
 
@@ -4737,6 +4785,8 @@ exclusiveMinimum0
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119: …
 
 name: Literal["tool\_search\_tool\_bm25"]
@@ -4798,6 +4848,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: Optional[bool]
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119: …
 
 name: Literal["tool\_search\_tool\_regex"]
@@ -4858,6 +4910,8 @@ defer\_loading: Optional[bool]
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMCPToolset: …
 

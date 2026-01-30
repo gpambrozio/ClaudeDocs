@@ -4,16 +4,14 @@ Copy page
 
 Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Two complementary features are available:
 
-- **JSON outputs** (`output_format`): Get Claude's response in a specific JSON format
+- **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
 These features can be used independently or together in the same request.
 
-Structured outputs are currently available as a public beta feature in the Claude API for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4.5, and Claude Haiku 4.5.
+Structured outputs are generally available on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
 
-To use the feature, set the [beta header](api/beta-headers.md) `structured-outputs-2025-11-13`.
-
-Share feedback using this [form](https://forms.gle/BFnYc6iCkWoRzFgk7).
+**Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See code examples below for the updated API shape.
 
 ## Why use structured outputs
 
@@ -48,7 +46,6 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: structured-outputs-2025-11-13" \
   -d '{
     "model": "claude-sonnet-4-5",
     "max_tokens": 1024,
@@ -58,18 +55,20 @@ curl https://api.anthropic.com/v1/messages \
         "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
       }
     ],
-    "output_format": {
-      "type": "json_schema",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "name": {"type": "string"},
-          "email": {"type": "string"},
-          "plan_interest": {"type": "string"},
-          "demo_requested": {"type": "boolean"}
-        },
-        "required": ["name", "email", "plan_interest", "demo_requested"],
-        "additionalProperties": false
+    "output_config": {
+      "format": {
+        "type": "json_schema",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "email": {"type": "string"},
+            "plan_interest": {"type": "string"},
+            "demo_requested": {"type": "boolean"}
+          },
+          "required": ["name", "email", "plan_interest", "demo_requested"],
+          "additionalProperties": false
+        }
       }
     }
   }'
@@ -95,15 +94,10 @@ curl https://api.anthropic.com/v1/messages \
    Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](#json-schema-limitations)).
 2. 2
 
-   Add the output\_format parameter
+   Add the output\_config.format parameter
 
-   Include the `output_format` parameter in your API request with `type: "json_schema"` and your schema definition.
+   Include the `output_config.format` parameter in your API request with `type: "json_schema"` and your schema definition.
 3. 3
-
-   Include the beta header
-
-   Add the `anthropic-beta: structured-outputs-2025-11-13` header to your request.
-4. 4
 
    Parse the response
 
@@ -132,29 +126,29 @@ class ContactInfo(BaseModel):
 client = Anthropic()
 
 # With .create() - requires transform_schema()
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-sonnet-4-5",
     max_tokens=1024,
-    betas=["structured-outputs-2025-11-13"],
     messages=[
         {
             "role": "user",
             "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
         }
     ],
-    output_format={
-        "type": "json_schema",
-        "schema": transform_schema(ContactInfo),
+    output_config={
+        "format": {
+            "type": "json_schema",
+            "schema": transform_schema(ContactInfo),
+        }
     }
 )
 
 print(response.content[0].text)
 
 # With .parse() - can pass Pydantic model directly
-response = client.beta.messages.parse(
+response = client.messages.parse(
     model="claude-sonnet-4-5",
     max_tokens=1024,
-    betas=["structured-outputs-2025-11-13"],
     messages=[
         {
             "role": "user",
@@ -169,17 +163,15 @@ print(response.parsed_output)
 
 #### SDK-specific methods
 
-**Python: `client.beta.messages.parse()` (Recommended)**
+**Python: `client.messages.parse()` (Recommended)**
 
 The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
-
-The `parse()` method is available on `client.beta.messages`, not `client.messages`.
 
 ### Example usage
 
 **Python: `transform_schema()` helper**
 
-For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.beta.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
+For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
 
 ### Example usage
 
@@ -235,7 +227,6 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: structured-outputs-2025-11-13" \
   -d '{
     "model": "claude-sonnet-4-5",
     "max_tokens": 1024,
@@ -296,11 +287,6 @@ curl https://api.anthropic.com/v1/messages \
    Set `"strict": true` as a top-level property in your tool definition, alongside `name`, `description`, and `input_schema`.
 3. 3
 
-   Include the beta header
-
-   Add the `anthropic-beta: structured-outputs-2025-11-13` header to your request.
-4. 4
-
    Handle tool calls
 
    When Claude uses the tool, the `input` field in the tool\_use block will strictly follow your `input_schema`, and the `name` will always be valid.
@@ -323,22 +309,23 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 Python
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-sonnet-4-5",
-    betas=["structured-outputs-2025-11-13"],
     max_tokens=1024,
     messages=[{"role": "user", "content": "Help me plan a trip to Paris for next month"}],
     # JSON outputs: structured response format
-    output_format={
-        "type": "json_schema",
-        "schema": {
-            "type": "object",
-            "properties": {
-                "summary": {"type": "string"},
-                "next_steps": {"type": "array", "items": {"type": "string"}}
-            },
-            "required": ["summary", "next_steps"],
-            "additionalProperties": False
+    output_config={
+        "format": {
+            "type": "json_schema",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "summary": {"type": "string"},
+                    "next_steps": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["summary", "next_steps"],
+                "additionalProperties": False
+            }
         }
     },
     # Strict tool use: guaranteed tool parameters
@@ -377,7 +364,7 @@ When using structured outputs, Claude automatically receives an additional syste
 
 - Your input token count will be slightly higher
 - The injected prompt costs you tokens like any other system prompt
-- Changing the `output_format` parameter will invalidate any [prompt cache](build-with-claude/prompt-caching.md) for that conversation thread
+- Changing the `output_config.format` parameter will invalidate any [prompt cache](build-with-claude/prompt-caching.md) for that conversation thread
 
 ### JSON Schema limitations
 
@@ -435,11 +422,11 @@ For persistent issues with valid schemas, [contact support](https://support.clau
 - **[Batch processing](build-with-claude/batch-processing.md)**: Process structured outputs at scale with 50% discount
 - **[Token counting](build-with-claude/token-counting.md)**: Count tokens without compilation
 - **[Streaming](build-with-claude/streaming.md)**: Stream structured outputs like normal responses
-- **Combined usage**: Use JSON outputs (`output_format`) and strict tool use (`strict: true`) together in the same request
+- **Combined usage**: Use JSON outputs (`output_config.format`) and strict tool use (`strict: true`) together in the same request
 
 **Incompatible with:**
 
-- **[Citations](build-with-claude/citations.md)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_format`.
+- **[Citations](build-with-claude/citations.md)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
 - **[Message Prefilling](build-with-claude/prompt-engineering/prefill-claudes-response.md)**: Incompatible with JSON outputs
 
 **Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.

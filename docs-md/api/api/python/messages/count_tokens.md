@@ -1630,7 +1630,7 @@ page\_age: Optional[str]
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 2 more]
+error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
 
 Accepts one of the following:
 
@@ -1643,6 +1643,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -1711,8 +1713,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking
@@ -1811,6 +1813,24 @@ Excels at writing and complex tasks
 Our previous most fast and cost-effective
 
 UnionMember1 = str
+
+output\_config: Optional[[OutputConfig](api/messages/count_tokens.md)]
+
+Configuration options for the model's output, such as the output format.
+
+format: Optional[OutputConfigFormat]
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Dict[str, object]
+
+The JSON schema of the format
+
+type: Literal["json\_schema"]
+
+Accepts one of the following:
+
+"json\_schema"
 
 system: Optional[Union[str, Iterable[[TextBlockParam](api/messages.md)]]]
 
@@ -2184,6 +2204,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 type: Optional[Literal["custom"]]
 
 Accepts one of the following:
@@ -2235,6 +2259,10 @@ Accepts one of the following:
 
 "1h"
 
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250124: …
 
 name: Literal["str\_replace\_editor"]
@@ -2280,6 +2308,10 @@ Accepts one of the following:
 
 "1h"
 
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250429: …
 
 name: Literal["str\_replace\_based\_edit\_tool"]
@@ -2324,6 +2356,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolTextEditor20250728: …
 
@@ -2375,6 +2411,10 @@ max\_characters: Optional[int]
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 class WebSearchTool20250305: …
 
@@ -2434,6 +2474,10 @@ max\_uses: Optional[int]
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: Optional[UserLocation]
 

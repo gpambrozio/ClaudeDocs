@@ -1630,7 +1630,7 @@ page\_age: String
 
 class WebSearchToolRequestError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 2 more
+error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
 
 Accepts one of the following:
 
@@ -1643,6 +1643,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -1790,6 +1792,24 @@ Excels at writing and complex tasks
 Our previous most fast and cost-effective
 
 String
+
+output\_config: { format\_}
+
+Configuration options for the model's output, such as the output format.
+
+format\_: { schema, type}
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Hash[Symbol, untyped]
+
+The JSON schema of the format
+
+type: :json\_schema
+
+Accepts one of the following:
+
+:json\_schema
 
 system\_: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
 
@@ -2102,7 +2122,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 2 more }
+class Tool { input\_schema, name, cache\_control, 3 more }
 
 input\_schema: { type, properties, required}
 
@@ -2163,13 +2183,17 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
 type: :custom
 
 Accepts one of the following:
 
 :custom
 
-class ToolBash20250124 { name, type, cache\_control }
+class ToolBash20250124 { name, type, cache\_control, strict }
 
 name: :bash
 
@@ -2214,7 +2238,11 @@ Accepts one of the following:
 
 :"1h"
 
-class ToolTextEditor20250124 { name, type, cache\_control }
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolTextEditor20250124 { name, type, cache\_control, strict }
 
 name: :str\_replace\_editor
 
@@ -2259,7 +2287,11 @@ Accepts one of the following:
 
 :"1h"
 
-class ToolTextEditor20250429 { name, type, cache\_control }
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolTextEditor20250429 { name, type, cache\_control, strict }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -2304,7 +2336,11 @@ Accepts one of the following:
 
 :"1h"
 
-class ToolTextEditor20250728 { name, type, cache\_control, max\_characters }
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolTextEditor20250728 { name, type, cache\_control, 2 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -2355,7 +2391,11 @@ Maximum number of characters to display when viewing a file. If not specified, d
 
 minimum1
 
-class WebSearchTool20250305 { name, type, allowed\_domains, 4 more }
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
 
 name: :web\_search
 
@@ -2413,6 +2453,10 @@ max\_uses: Integer
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: { type, city, country, 2 more}
 

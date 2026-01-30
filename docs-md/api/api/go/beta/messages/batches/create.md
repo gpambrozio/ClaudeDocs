@@ -1839,6 +1839,8 @@ const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultEr
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
 
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -3262,11 +3264,13 @@ maxLength256
 
 OutputConfig [BetaOutputConfig](api/beta.md)optional
 
-Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Configuration options for the model's output, such as the output format.
 
 Effort BetaOutputConfigEffortoptional
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -3276,9 +3280,25 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
-OutputFormat [BetaJSONOutputFormat](api/beta.md)optional
+Format [BetaJSONOutputFormat](api/beta.md)optional
 
-A schema to specify Claude's output format in responses.
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+Accepts one of the following:
+
+const JSONSchemaJSONSchema JSONSchema = "json\_schema"
+
+DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta.md)optional
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 Schema map[string, any]
 
@@ -3714,6 +3734,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 Type BetaToolTypeoptional
 
 Accepts one of the following:
@@ -3781,6 +3803,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolBash20250124 struct{…}
 
 Name Bash
@@ -3842,6 +3866,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaCodeExecutionTool20250522 struct{…}
 
 Name CodeExecution
@@ -3901,6 +3927,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaCodeExecutionTool20250825 struct{…}
 
 Name CodeExecution
@@ -3959,6 +3987,8 @@ DeferLoading booloptional
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20241022 struct{…}
 
@@ -4039,6 +4069,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaMemoryTool20250818 struct{…}
 
 Name Memory
@@ -4099,6 +4131,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20250124 struct{…}
 
@@ -4179,6 +4213,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20241022 struct{…}
 
 Name StrReplaceEditor
@@ -4239,6 +4275,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20251124 struct{…}
 
@@ -4323,6 +4361,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -4384,6 +4424,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -4444,6 +4486,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolTextEditor20250728 struct{…}
 
@@ -4511,6 +4555,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaWebSearchTool20250305 struct{…}
 
@@ -4584,6 +4630,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation BetaWebSearchTool20250305UserLocationoptional
 
@@ -4712,6 +4760,8 @@ exclusiveMinimum0
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolSearchToolBm25\_20251119 struct{…}
 
 Name ToolSearchToolBm25
@@ -4773,6 +4823,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolSearchToolRegex20251119 struct{…}
 
 Name ToolSearchToolRegex
@@ -4833,6 +4885,8 @@ DeferLoading booloptional
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaMCPToolset struct{…}
 
@@ -5098,13 +5152,13 @@ func main() {
         MaxTokens: 1024,
         Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
           Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
-            OfText: &anthropic.BetaTextBlockParam{Text: "What is a quaternion?", CacheControl: anthropic.BetaCacheControlEphemeralParam{TTL: anthropic.BetaCacheControlEphemeralTTLTTL5m}, Citations: []anthropic.BetaTextCitationParamUnion{anthropic.BetaTextCitationParamUnion{
-              OfCharLocation: &anthropic.BetaCitationCharLocationParam{CitedText: "cited_text", DocumentIndex: 0, DocumentTitle: anthropic.String("x"), EndCharIndex: 0, StartCharIndex: 0},
-            }}},
+            OfText: &anthropic.BetaTextBlockParam{
+              Text: "x",
+            },
           }},
           Role: anthropic.BetaMessageParamRoleUser,
         }},
-        Model: anthropic.ModelClaudeOpus4_5_20251101,
+        Model: anthropic.ModelClaudeSonnet4_5_20250929,
       },
     }},
   })

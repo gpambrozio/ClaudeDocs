@@ -1861,6 +1861,8 @@ Accepts one of the following:
 
 "query\_too\_long"
 
+"request\_too\_large"
+
 type: "web\_search\_tool\_result\_error"
 
 Accepts one of the following:
@@ -3224,13 +3226,15 @@ allowed\_tools: optional array of string
 
 enabled: optional boolean
 
-output\_config: optional [BetaOutputConfig](api/beta.md) { effort }
+output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format }
 
-Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Configuration options for the model's output, such as the output format.
 
 effort: optional "low" or "medium" or "high"
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -3240,9 +3244,25 @@ Accepts one of the following:
 
 "high"
 
-output\_format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
+format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
-A schema to specify Claude's output format in responses.
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: map[unknown]
+
+The JSON schema of the format
+
+type: "json\_schema"
+
+Accepts one of the following:
+
+"json\_schema"
+
+Deprecatedoutput\_format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 schema: map[unknown]
 
@@ -3642,6 +3662,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 type: optional "custom"
 
 Accepts one of the following:
@@ -3709,6 +3731,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolBash20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
@@ -3770,6 +3794,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaCodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
@@ -3829,6 +3855,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaCodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
@@ -3887,6 +3915,8 @@ defer\_loading: optional boolean
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolComputerUse20241022 = object { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -3967,6 +3997,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaMemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
@@ -4027,6 +4059,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: optional array of map[unknown]
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolComputerUse20250124 = object { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -4107,6 +4141,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolTextEditor20241022 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
@@ -4167,6 +4203,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: optional array of map[unknown]
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolComputerUse20251124 = object { display\_height\_px, display\_width\_px, name, 8 more }
 
@@ -4251,6 +4289,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
@@ -4312,6 +4352,8 @@ input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
@@ -4372,6 +4414,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: optional array of map[unknown]
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
 
@@ -4439,6 +4483,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaWebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
 
@@ -4512,6 +4558,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: optional object { type, city, country, 2 more }
 
@@ -4640,6 +4688,8 @@ exclusiveMinimum0
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
@@ -4701,6 +4751,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: optional boolean
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
@@ -4761,6 +4813,8 @@ defer\_loading: optional boolean
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaMCPToolset = object { mcp\_server\_name, type, cache\_control, 2 more }
 

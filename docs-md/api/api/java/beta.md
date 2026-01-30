@@ -1279,6 +1279,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825:
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
@@ -1337,6 +1339,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -1943,7 +1947,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -1971,32 +2001,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -2018,6 +2022,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -4325,6 +4331,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -6603,6 +6611,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818Command: A class that can be one of several variants.union
 
 class BetaMemoryTool20250818ViewCommand:
@@ -7098,7 +7108,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -7126,32 +7162,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -7173,6 +7183,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -9809,6 +9821,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -10958,7 +10972,9 @@ class BetaOutputConfig:
 
 Optional<Effort> effort
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -10967,6 +10983,20 @@ LOW("low")
 MEDIUM("medium")
 
 HIGH("high")
+
+Optional<[BetaJsonOutputFormat](api/beta.md)> format
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema schema
+
+The JSON schema of the format
+
+JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Accepts one of the following:
+
+JSON\_SCHEMA("json\_schema")
 
 class BetaPlainTextSource:
 
@@ -11486,7 +11516,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -11514,32 +11570,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -11561,6 +11591,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -12595,7 +12627,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -12623,32 +12681,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -12670,6 +12702,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -13805,7 +13839,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -13833,32 +13893,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -13880,6 +13914,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -15114,7 +15150,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -15142,32 +15204,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -15189,6 +15225,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -16695,7 +16733,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -16722,32 +16786,6 @@ JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"co
 Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
-
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 class BetaServerToolUseBlockParam:
 
@@ -17913,6 +17951,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -17980,6 +18020,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124:
 
 JsonValue; name "bash"constant"bash"constant
@@ -18040,6 +18082,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolChoice: A class that can be one of several variants.union
 
@@ -18248,6 +18292,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolComputerUse20250124:
 
 long displayHeightPx
@@ -18326,6 +18372,8 @@ minimum0
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124:
 
@@ -18409,6 +18457,8 @@ Whether to enable an action to take a zoomed-in screenshot of the screen.
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolReferenceBlock:
 
@@ -19323,6 +19373,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119:
 
 JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
@@ -19383,6 +19435,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolSearchToolResultBlock:
 
@@ -19710,6 +19764,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -19771,6 +19827,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -19831,6 +19889,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728:
 
@@ -19898,6 +19958,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolUnion: A class that can be one of several variants.union
 
@@ -19983,6 +20045,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -20050,6 +20114,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124:
 
 JsonValue; name "bash"constant"bash"constant
@@ -20111,6 +20177,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522:
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
@@ -20170,6 +20238,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825:
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
@@ -20228,6 +20298,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022:
 
@@ -20308,6 +20380,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818:
 
 JsonValue; name "memory"constant"memory"constant
@@ -20368,6 +20442,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124:
 
@@ -20448,6 +20524,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -20508,6 +20586,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124:
 
@@ -20592,6 +20672,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -20653,6 +20735,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -20713,6 +20797,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728:
 
@@ -20780,6 +20866,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305:
 
@@ -20853,6 +20941,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 Optional<UserLocation> userLocation
 
@@ -20981,6 +21071,8 @@ exclusiveMinimum0
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119:
 
 JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
@@ -21042,6 +21134,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119:
 
 JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
@@ -21102,6 +21196,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMcpToolset:
 
@@ -21888,6 +21984,8 @@ exclusiveMinimum0
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaWebFetchToolResultBlock:
 
 Content content
@@ -22593,6 +22691,8 @@ exclusiveMinimum0
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 Optional<UserLocation> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -22651,6 +22751,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -22678,6 +22780,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -22726,6 +22830,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -22786,6 +22892,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -22862,6 +22970,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -22884,6 +22994,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -22901,6 +23013,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 #### BetaMessagesBatches
 
@@ -23473,7 +23587,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -23501,32 +23641,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -23548,6 +23662,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -24837,7 +24953,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -24865,32 +25007,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -24912,6 +25028,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -26165,7 +26283,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -26193,32 +26337,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -26240,6 +26358,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 

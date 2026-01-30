@@ -353,7 +353,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -381,32 +407,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -428,6 +428,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 

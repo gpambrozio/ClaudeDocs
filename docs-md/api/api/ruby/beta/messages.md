@@ -947,6 +947,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
 
 name: :code\_execution
@@ -1005,6 +1007,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
@@ -1615,9 +1619,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -1647,32 +1677,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -1694,6 +1698,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -4003,6 +4009,8 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
@@ -6283,6 +6291,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 BetaMemoryTool20250818Command = [BetaMemoryTool20250818ViewCommand](api/beta.md) { command, path, view\_range }  | [BetaMemoryTool20250818CreateCommand](api/beta.md) { command, file\_text, path }  | [BetaMemoryTool20250818StrReplaceCommand](api/beta.md) { command, new\_str, old\_str, path }  | 3 more
 
 Accepts one of the following:
@@ -6776,9 +6786,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -6808,32 +6844,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -6855,6 +6865,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -9501,6 +9513,8 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
@@ -10646,11 +10660,13 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-class BetaOutputConfig { effort }
+class BetaOutputConfig { effort, format\_ }
 
 effort: :low | :medium | :high
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -10659,6 +10675,20 @@ Accepts one of the following:
 :medium
 
 :high
+
+format\_: [BetaJSONOutputFormat](api/beta.md) { schema, type }
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Hash[Symbol, untyped]
+
+The JSON schema of the format
+
+type: :json\_schema
+
+Accepts one of the following:
+
+:json\_schema
 
 class BetaPlainTextSource { data, media\_type, type }
 
@@ -11176,9 +11206,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -11208,32 +11264,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -11255,6 +11285,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -12285,9 +12317,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -12317,32 +12375,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -12364,6 +12396,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -13507,9 +13541,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -13539,32 +13599,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -13586,6 +13620,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -14826,9 +14862,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -14858,32 +14920,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -14905,6 +14941,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -16407,9 +16445,35 @@ The number of web search tool requests.
 
 minimum0
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -16438,32 +16502,6 @@ type: :code\_execution\_20250825
 Accepts one of the following:
 
 :code\_execution\_20250825
-
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class BetaServerToolUseBlockParam { id, input, name, 3 more }
 
@@ -17637,6 +17675,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 type: :custom
 
 Accepts one of the following:
@@ -17704,6 +17744,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
@@ -17764,6 +17806,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolChoice = [BetaToolChoiceAuto](api/beta.md) { type, disable\_parallel\_tool\_use }  | [BetaToolChoiceAny](api/beta.md) { type, disable\_parallel\_tool\_use }  | [BetaToolChoiceTool](api/beta.md) { name, type, disable\_parallel\_tool\_use }  | [BetaToolChoiceNone](api/beta.md) { type }
 
@@ -17974,6 +18018,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: Integer
@@ -18052,6 +18098,8 @@ minimum0
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more }
 
@@ -18135,6 +18183,8 @@ Whether to enable an action to take a zoomed-in screenshot of the screen.
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolReferenceBlock { tool\_name, type }
 
@@ -19049,6 +19099,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_regex
@@ -19109,6 +19161,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -19436,6 +19490,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
@@ -19497,6 +19553,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
@@ -19557,6 +19615,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
@@ -19624,6 +19684,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 6 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 15 more
 
@@ -19711,6 +19773,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 type: :custom
 
 Accepts one of the following:
@@ -19778,6 +19842,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
@@ -19839,6 +19905,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
 
 name: :code\_execution
@@ -19898,6 +19966,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
 
 name: :code\_execution
@@ -19956,6 +20026,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022 { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -20036,6 +20108,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818 { name, type, allowed\_callers, 4 more }
 
 name: :memory
@@ -20096,6 +20170,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -20176,6 +20252,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
@@ -20236,6 +20314,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more }
 
@@ -20320,6 +20400,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
@@ -20381,6 +20463,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
@@ -20441,6 +20525,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
@@ -20508,6 +20594,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305 { name, type, allowed\_callers, 7 more }
 
@@ -20581,6 +20669,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: { type, city, country, 2 more}
 
@@ -20709,6 +20799,8 @@ exclusiveMinimum0
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_bm25
@@ -20770,6 +20862,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_regex
@@ -20830,6 +20924,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMCPToolset { mcp\_server\_name, type, cache\_control, 2 more }
 
@@ -21616,6 +21712,8 @@ exclusiveMinimum0
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
@@ -22323,6 +22421,8 @@ exclusiveMinimum0
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 user\_location: { type, city, country, 2 more}
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -22381,6 +22481,8 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
@@ -22408,6 +22510,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -22458,6 +22562,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -22518,6 +22624,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -22596,6 +22704,8 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
@@ -22618,13 +22728,15 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
 
 :web\_search\_tool\_result\_error
 
-BetaWebSearchToolResultErrorCode = :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 2 more
+BetaWebSearchToolResultErrorCode = :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
 
 Accepts one of the following:
 
@@ -22637,6 +22749,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 #### MessagesBatches
 
@@ -23205,9 +23319,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -23237,32 +23377,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -23284,6 +23398,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -24581,9 +24697,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -24613,32 +24755,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -24660,6 +24776,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -25919,9 +26037,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -25951,32 +26095,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -25998,6 +26116,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 

@@ -30,7 +30,7 @@ maxLength64
 
 minLength1
 
-params: object { max\_tokens, messages, model, 11 more }
+params: object { max\_tokens, messages, model, 12 more }
 
 Messages API creation parameters for the individual request.
 
@@ -1658,7 +1658,7 @@ page\_age: optional string
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 2 more
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
 Accepts one of the following:
 
@@ -1671,6 +1671,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -1830,6 +1832,24 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength256
+
+output\_config: optional object { format }
+
+Configuration options for the model's output, such as the output format.
+
+format: optional object { schema, type }
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: map[unknown]
+
+The JSON schema of the format
+
+type: "json\_schema"
+
+Accepts one of the following:
+
+"json\_schema"
 
 service\_tier: optional "auto" or "standard\_only"
 
@@ -2180,7 +2200,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-Tool = object { input\_schema, name, cache\_control, 2 more }
+Tool = object { input\_schema, name, cache\_control, 3 more }
 
 input\_schema: object { type, properties, required }
 
@@ -2241,13 +2261,17 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 type: optional "custom"
 
 Accepts one of the following:
 
 "custom"
 
-ToolBash20250124 = object { name, type, cache\_control }
+ToolBash20250124 = object { name, type, cache\_control, strict }
 
 name: "bash"
 
@@ -2292,7 +2316,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250124 = object { name, type, cache\_control }
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250124 = object { name, type, cache\_control, strict }
 
 name: "str\_replace\_editor"
 
@@ -2337,7 +2365,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250429 = object { name, type, cache\_control }
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250429 = object { name, type, cache\_control, strict }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -2382,7 +2414,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250728 = object { name, type, cache\_control, max\_characters }
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250728 = object { name, type, cache\_control, 2 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -2433,7 +2469,11 @@ Maximum number of characters to display when viewing a file. If not specified, d
 
 minimum1
 
-WebSearchTool20250305 = object { name, type, allowed\_domains, 4 more }
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20250305 = object { name, type, allowed\_domains, 5 more }
 
 name: "web\_search"
 
@@ -2491,6 +2531,10 @@ max\_uses: optional number
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: optional object { type, city, country, 2 more }
 

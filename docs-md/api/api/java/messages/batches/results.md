@@ -275,6 +275,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:

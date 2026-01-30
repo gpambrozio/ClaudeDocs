@@ -273,6 +273,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:

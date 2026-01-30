@@ -76,6 +76,12 @@ Search and update your company's knowledge graphCommand
 
 `claude mcp add devrev --transport http https://api.devrev.ai/mcp/v1`
 
+[**Granola**](https://help.granola.ai/article/granola-mcp#set-up-guide)
+
+The AI notepad for meetingsCommand
+
+`claude mcp add --transport http granola https://mcp.granola.ai/mcp`
+
 [**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
 Discover, research, and enrich companies and peopleCommand
@@ -174,7 +180,7 @@ Connect to Asana to coordinate tasks, projects, and goalsCommand
 
 Access Jira & Confluence from ClaudeCommand
 
-`claude mcp add --transport sse atlassian https://mcp.atlassian.com/v1/mcp`
+`claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp`
 
 [**Aura**](https://docs.getaura.ai/)
 
@@ -408,6 +414,12 @@ Send messages, create canvases, and fetch Slack dataCommand
 
 `claude mcp add slack --transport http https://mcp.slack.com/mcp`
 
+[**Smartsheet**](https://www.smartsheet.com/claude-integration)
+
+Analyze and manage Smartsheet data with ClaudeCommand
+
+`claude mcp add --transport http smartsheet https://mcp.smartsheet.com`
+
 [**Snowflake**](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
 Retrieve both structured and unstructured dataRequires user-specific URL. [Get your URL here](https://docs.snowflake.com/en/user-guide/admin-account-identifier#label-account-name-find).
@@ -423,6 +435,12 @@ Search and manage transaction, merchant, and payment dataCommand
 Payment processing and financial infrastructure toolsCommand
 
 `claude mcp add --transport http stripe https://mcp.stripe.com`
+
+[**Supabase**](https://supabase.com/docs/guides/getting-started/mcp)
+
+Manage databases, authentication, and storageCommand
+
+`claude mcp add --transport http supabase https://mcp.supabase.com/mcp`
 
 [**Trivago**](https://mcp.trivago.com/docs)
 

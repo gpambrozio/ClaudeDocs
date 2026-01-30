@@ -587,6 +587,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -2186,6 +2188,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -3270,6 +3274,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -3580,6 +3586,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -3631,6 +3641,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -3676,6 +3690,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -3720,6 +3738,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolTextEditor20250728:
 
@@ -3771,6 +3793,10 @@ Optional<Long> maxCharacters
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class WebSearchTool20250305:
 
@@ -3830,6 +3856,10 @@ Optional<Long> maxUses
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 Optional<UserLocation> userLocation
 
@@ -5484,6 +5514,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -6073,6 +6105,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -6423,6 +6457,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -6917,6 +6953,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -7446,6 +7484,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -8546,6 +8586,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -8596,6 +8640,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolChoice: A class that can be one of several variants.union
 
@@ -9504,6 +9552,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -9548,6 +9600,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolTextEditor20250728:
 
@@ -9599,6 +9655,10 @@ Optional<Long> maxCharacters
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolUnion: A class that can be one of several variants.union
 
@@ -9663,6 +9723,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -9714,6 +9778,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -9759,6 +9827,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -9803,6 +9875,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolTextEditor20250728:
 
@@ -9854,6 +9930,10 @@ Optional<Long> maxCharacters
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class WebSearchTool20250305:
 
@@ -9913,6 +9993,10 @@ Optional<Long> maxUses
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 Optional<UserLocation> userLocation
 
@@ -10186,6 +10270,10 @@ Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 Optional<UserLocation> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -10244,6 +10332,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -10271,6 +10361,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -10319,6 +10411,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -10379,6 +10473,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -10455,6 +10551,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -10476,6 +10574,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -11017,6 +11117,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -11666,6 +11768,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -12277,6 +12381,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 

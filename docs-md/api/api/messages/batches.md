@@ -513,7 +513,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 2 more
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
 Accepts one of the following:
 
@@ -526,6 +526,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -1173,7 +1175,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 2 more
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
 Accepts one of the following:
 
@@ -1186,6 +1188,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -1795,7 +1799,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 2 more
+error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
 Accepts one of the following:
 
@@ -1808,6 +1812,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 

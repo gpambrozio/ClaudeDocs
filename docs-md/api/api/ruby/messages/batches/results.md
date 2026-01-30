@@ -259,7 +259,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 2 more
+error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
 
 Accepts one of the following:
 
@@ -272,6 +272,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 

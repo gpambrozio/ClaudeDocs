@@ -571,9 +571,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -603,32 +629,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -650,6 +650,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -1947,9 +1949,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -1979,32 +2007,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -2026,6 +2028,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -3285,9 +3289,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -3317,32 +3347,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -3364,6 +3368,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 

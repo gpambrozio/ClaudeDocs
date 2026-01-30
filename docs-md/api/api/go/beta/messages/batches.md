@@ -575,7 +575,33 @@ type BetaServerToolUseBlock struct{…}
 
 ID string
 
-Caller BetaServerToolUseBlockCallerUnion
+Input map[string, any]
+
+Name BetaServerToolUseBlockName
+
+Accepts one of the following:
+
+const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
+
+const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
+
+const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
+
+const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
+
+const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
+
+const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
+
+const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
+
+Type ServerToolUse
+
+Accepts one of the following:
+
+const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
+
+Caller BetaServerToolUseBlockCallerUnionoptional
 
 Tool invocation directly from the model.
 
@@ -603,32 +629,6 @@ Accepts one of the following:
 
 const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code\_execution\_20250825"
 
-Input map[string, any]
-
-Name BetaServerToolUseBlockName
-
-Accepts one of the following:
-
-const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
-
-const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
-
-const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
-
-const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
-
-const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
-
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -650,6 +650,8 @@ const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultEr
 const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
+
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -1951,7 +1953,33 @@ type BetaServerToolUseBlock struct{…}
 
 ID string
 
-Caller BetaServerToolUseBlockCallerUnion
+Input map[string, any]
+
+Name BetaServerToolUseBlockName
+
+Accepts one of the following:
+
+const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
+
+const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
+
+const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
+
+const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
+
+const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
+
+const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
+
+const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
+
+Type ServerToolUse
+
+Accepts one of the following:
+
+const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
+
+Caller BetaServerToolUseBlockCallerUnionoptional
 
 Tool invocation directly from the model.
 
@@ -1979,32 +2007,6 @@ Accepts one of the following:
 
 const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code\_execution\_20250825"
 
-Input map[string, any]
-
-Name BetaServerToolUseBlockName
-
-Accepts one of the following:
-
-const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
-
-const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
-
-const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
-
-const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
-
-const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
-
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -2026,6 +2028,8 @@ const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultEr
 const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
+
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -3289,7 +3293,33 @@ type BetaServerToolUseBlock struct{…}
 
 ID string
 
-Caller BetaServerToolUseBlockCallerUnion
+Input map[string, any]
+
+Name BetaServerToolUseBlockName
+
+Accepts one of the following:
+
+const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
+
+const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
+
+const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
+
+const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
+
+const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
+
+const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
+
+const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
+
+Type ServerToolUse
+
+Accepts one of the following:
+
+const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
+
+Caller BetaServerToolUseBlockCallerUnionoptional
 
 Tool invocation directly from the model.
 
@@ -3317,32 +3347,6 @@ Accepts one of the following:
 
 const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code\_execution\_20250825"
 
-Input map[string, any]
-
-Name BetaServerToolUseBlockName
-
-Accepts one of the following:
-
-const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
-
-const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
-
-const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
-
-const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
-
-const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
-
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -3364,6 +3368,8 @@ const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultEr
 const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
+
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 

@@ -1819,6 +1819,8 @@ const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultEr
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
 
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -3024,12 +3026,13 @@ Body param: An object describing metadata about the request.
 
 OutputConfig param.Field[[BetaOutputConfig](api/beta.md)]optional
 
-Body param: Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Body param: Configuration options for the model's output, such as the output format.
 
-OutputFormat param.Field[[BetaJSONOutputFormat](api/beta.md)]optional
+DeprecatedOutputFormat param.Field[[BetaJSONOutputFormat](api/beta.md)]optional
 
-Body param:
-A schema to specify Claude's output format in responses.
+Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 ServiceTier param.Field[[BetaMessageNewParamsServiceTier](api/beta/messages/create.md)]optional
 
@@ -3351,6 +3354,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 Type BetaToolTypeoptional
 
 Accepts one of the following:
@@ -3418,6 +3423,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolBash20250124 struct{…}
 
 Name Bash
@@ -3479,6 +3486,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaCodeExecutionTool20250522 struct{…}
 
 Name CodeExecution
@@ -3538,6 +3547,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaCodeExecutionTool20250825 struct{…}
 
 Name CodeExecution
@@ -3596,6 +3607,8 @@ DeferLoading booloptional
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20241022 struct{…}
 
@@ -3676,6 +3689,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaMemoryTool20250818 struct{…}
 
 Name Memory
@@ -3736,6 +3751,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20250124 struct{…}
 
@@ -3816,6 +3833,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20241022 struct{…}
 
 Name StrReplaceEditor
@@ -3876,6 +3895,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolComputerUse20251124 struct{…}
 
@@ -3960,6 +3981,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -4021,6 +4044,8 @@ InputExamples []map[string, any]optional
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -4081,6 +4106,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 InputExamples []map[string, any]optional
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaToolTextEditor20250728 struct{…}
 
@@ -4148,6 +4175,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaWebSearchTool20250305 struct{…}
 
@@ -4221,6 +4250,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation BetaWebSearchTool20250305UserLocationoptional
 
@@ -4349,6 +4380,8 @@ exclusiveMinimum0
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolSearchToolBm25\_20251119 struct{…}
 
 Name ToolSearchToolBm25
@@ -4410,6 +4443,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Strict booloptional
 
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolSearchToolRegex20251119 struct{…}
 
 Name ToolSearchToolRegex
@@ -4470,6 +4505,8 @@ DeferLoading booloptional
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type BetaMCPToolset struct{…}
 
@@ -4872,7 +4909,33 @@ type BetaServerToolUseBlock struct{…}
 
 ID string
 
-Caller BetaServerToolUseBlockCallerUnion
+Input map[string, any]
+
+Name BetaServerToolUseBlockName
+
+Accepts one of the following:
+
+const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
+
+const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
+
+const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
+
+const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
+
+const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
+
+const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
+
+const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
+
+Type ServerToolUse
+
+Accepts one of the following:
+
+const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
+
+Caller BetaServerToolUseBlockCallerUnionoptional
 
 Tool invocation directly from the model.
 
@@ -4900,32 +4963,6 @@ Accepts one of the following:
 
 const CodeExecution20250825CodeExecution20250825 CodeExecution20250825 = "code\_execution\_20250825"
 
-Input map[string, any]
-
-Name BetaServerToolUseBlockName
-
-Accepts one of the following:
-
-const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
-
-const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
-
-const BetaServerToolUseBlockNameCodeExecution BetaServerToolUseBlockName = "code\_execution"
-
-const BetaServerToolUseBlockNameBashCodeExecution BetaServerToolUseBlockName = "bash\_code\_execution"
-
-const BetaServerToolUseBlockNameTextEditorCodeExecution BetaServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const BetaServerToolUseBlockNameToolSearchToolRegex BetaServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
-
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -4947,6 +4984,8 @@ const BetaWebSearchToolResultErrorCodeMaxUsesExceeded [BetaWebSearchToolResultEr
 const BetaWebSearchToolResultErrorCodeTooManyRequests [BetaWebSearchToolResultErrorCode](api/beta.md) = "too\_many\_requests"
 
 const BetaWebSearchToolResultErrorCodeQueryTooLong [BetaWebSearchToolResultErrorCode](api/beta.md) = "query\_too\_long"
+
+const BetaWebSearchToolResultErrorCodeRequestTooLarge [BetaWebSearchToolResultErrorCode](api/beta.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -5832,13 +5871,13 @@ func main() {
     MaxTokens: 1024,
     Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
       Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
-        OfText: &anthropic.BetaTextBlockParam{Text: "What is a quaternion?", CacheControl: anthropic.BetaCacheControlEphemeralParam{TTL: anthropic.BetaCacheControlEphemeralTTLTTL5m}, Citations: []anthropic.BetaTextCitationParamUnion{anthropic.BetaTextCitationParamUnion{
-          OfCharLocation: &anthropic.BetaCitationCharLocationParam{CitedText: "cited_text", DocumentIndex: 0, DocumentTitle: anthropic.String("x"), EndCharIndex: 0, StartCharIndex: 0},
-        }}},
+        OfText: &anthropic.BetaTextBlockParam{
+          Text: "x",
+        },
       }},
       Role: anthropic.BetaMessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_5_20251101,
+    Model: anthropic.ModelClaudeSonnet4_5_20250929,
   })
   if err != nil {
     panic(err.Error())

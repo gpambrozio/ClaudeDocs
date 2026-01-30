@@ -539,6 +539,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -1199,6 +1201,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -1820,6 +1824,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 

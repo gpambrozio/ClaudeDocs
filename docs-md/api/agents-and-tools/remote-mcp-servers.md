@@ -60,6 +60,14 @@ URL
 
 `https://api.fireflies.ai/mcp`
 
+[Granola](https://help.granola.ai/article/granola-mcp#set-up-guide)
+
+The AI notepad for meetings
+
+URL
+
+`https://mcp.granola.ai/mcp`
+
 [Harmonic](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
 Discover, research, and enrich companies and people
@@ -562,6 +570,14 @@ URL
 
 `https://mcp.slack.com/mcp`
 
+[Smartsheet](https://www.smartsheet.com/claude-integration)
+
+Analyze and manage Smartsheet data with Claude
+
+URL
+
+`https://mcp.smartsheet.com`
+
 [Snowflake](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
 Retrieve both structured and unstructured data
@@ -583,6 +599,14 @@ Payment processing and financial infrastructure tools
 URL
 
 `https://mcp.stripe.com`
+
+[Supabase](https://supabase.com/docs/guides/getting-started/mcp)
+
+Manage databases, authentication, and storage
+
+URL
+
+`https://mcp.supabase.com/mcp`
 
 [Udemy Business](https://business-support.udemy.com/hc/en-us/articles/34213384429335-How-to-Integrate-the-Udemy-Business-MCP-Server-With-Your-AI-Tool#h_01K9CA42YGCV1AVXPY1RKABKP1)
 

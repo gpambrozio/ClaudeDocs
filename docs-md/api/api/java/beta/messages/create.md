@@ -1865,6 +1865,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -3070,11 +3072,13 @@ An object describing metadata about the request.
 
 Optional<[BetaOutputConfig](api/beta.md)> outputConfig
 
-Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Configuration options for the model's output, such as the output format.
 
-Optional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
+DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
 
-A schema to specify Claude's output format in responses.
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 Optional<ServiceTier> serviceTier
 
@@ -3398,6 +3402,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -3465,6 +3471,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124:
 
 JsonValue; name "bash"constant"bash"constant
@@ -3526,6 +3534,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522:
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
@@ -3585,6 +3595,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825:
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
@@ -3643,6 +3655,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022:
 
@@ -3723,6 +3737,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818:
 
 JsonValue; name "memory"constant"memory"constant
@@ -3783,6 +3799,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124:
 
@@ -3863,6 +3881,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -3923,6 +3943,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124:
 
@@ -4007,6 +4029,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -4068,6 +4092,8 @@ Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -4128,6 +4154,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728:
 
@@ -4195,6 +4223,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305:
 
@@ -4268,6 +4298,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 Optional<UserLocation> userLocation
 
@@ -4396,6 +4428,8 @@ exclusiveMinimum0
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119:
 
 JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
@@ -4457,6 +4491,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 Optional<Boolean> strict
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119:
 
 JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
@@ -4517,6 +4553,8 @@ Optional<Boolean> deferLoading
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMcpToolset:
 
@@ -4871,7 +4909,33 @@ class BetaServerToolUseBlock:
 
 String id
 
-Caller caller
+Input input
+
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+Accepts one of the following:
+
+SERVER\_TOOL\_USE("server\_tool\_use")
+
+Optional<Caller> caller
 
 Tool invocation directly from the model.
 
@@ -4899,32 +4963,6 @@ Accepts one of the following:
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
-Input input
-
-Name name
-
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -4946,6 +4984,8 @@ MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
@@ -5820,7 +5860,7 @@ public final class Main {
         MessageCreateParams params = MessageCreateParams.builder()
             .maxTokens(1024L)
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_OPUS_4_5_20251101)
+            .model(Model.CLAUDE_SONNET_4_5_20250929)
             .build();
         BetaMessage betaMessage = client.beta().messages().create(params);
     }

@@ -1821,6 +1821,8 @@ Accepts one of the following:
 
 :query\_too\_long
 
+:request\_too\_large
+
 type: :web\_search\_tool\_result\_error
 
 Accepts one of the following:
@@ -3242,13 +3244,15 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-output\_config: [BetaOutputConfig](api/beta.md) { effort }
+output\_config: [BetaOutputConfig](api/beta.md) { effort, format\_ }
 
-Configuration options for the model's output. Controls aspects like how much effort the model puts into its response.
+Configuration options for the model's output, such as the output format.
 
 effort: :low | :medium | :high
 
-All possible effort levels.
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+Valid values are `low`, `medium`, or `high`.
 
 Accepts one of the following:
 
@@ -3258,9 +3262,25 @@ Accepts one of the following:
 
 :high
 
-output\_format: [BetaJSONOutputFormat](api/beta.md) { schema, type }
+format\_: [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
-A schema to specify Claude's output format in responses.
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Hash[Symbol, untyped]
+
+The JSON schema of the format
+
+type: :json\_schema
+
+Accepts one of the following:
+
+:json\_schema
+
+Deprecatedoutput\_format: [BetaJSONOutputFormat](api/beta.md) { schema, type }
+
+Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
 schema: Hash[Symbol, untyped]
 
@@ -3702,6 +3722,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 type: :custom
 
 Accepts one of the following:
@@ -3769,6 +3791,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
@@ -3830,6 +3854,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
 
 name: :code\_execution
@@ -3889,6 +3915,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
 
 name: :code\_execution
@@ -3947,6 +3975,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20241022 { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -4027,6 +4057,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaMemoryTool20250818 { name, type, allowed\_callers, 4 more }
 
 name: :memory
@@ -4087,6 +4119,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more }
 
@@ -4167,6 +4201,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20241022 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
@@ -4227,6 +4263,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more }
 
@@ -4311,6 +4349,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
@@ -4372,6 +4412,8 @@ input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
@@ -4432,6 +4474,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
@@ -4499,6 +4543,8 @@ Maximum number of characters to display when viewing a file. If not specified, d
 minimum1
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaWebSearchTool20250305 { name, type, allowed\_callers, 7 more }
 
@@ -4572,6 +4618,8 @@ Maximum number of times the tool can be used in the API request.
 exclusiveMinimum0
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location: { type, city, country, 2 more}
 
@@ -4700,6 +4748,8 @@ exclusiveMinimum0
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_bm25
@@ -4761,6 +4811,8 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 
 strict: bool
 
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_regex
@@ -4821,6 +4873,8 @@ defer\_loading: bool
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 strict: bool
+
+When true, guarantees schema validation on tool names and inputs
 
 class BetaMCPToolset { mcp\_server\_name, type, cache\_control, 2 more }
 
@@ -5221,9 +5275,35 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-class BetaServerToolUseBlock { id, caller\_, input, 2 more }
+class BetaServerToolUseBlock { id, input, name, 2 more }
 
 id: String
+
+input: Hash[Symbol, untyped]
+
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
+
+type: :server\_tool\_use
+
+Accepts one of the following:
+
+:server\_tool\_use
 
 caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
 
@@ -5253,32 +5333,6 @@ Accepts one of the following:
 
 :code\_execution\_20250825
 
-input: Hash[Symbol, untyped]
-
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
-
-Accepts one of the following:
-
-:web\_search
-
-:web\_fetch
-
-:code\_execution
-
-:bash\_code\_execution
-
-:text\_editor\_code\_execution
-
-:tool\_search\_tool\_regex
-
-:tool\_search\_tool\_bm25
-
-type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
-
 class BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -5300,6 +5354,8 @@ Accepts one of the following:
 :too\_many\_requests
 
 :query\_too\_long
+
+:request\_too\_large
 
 type: :web\_search\_tool\_result\_error
 
@@ -6174,7 +6230,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 beta_message = anthropic.beta.messages.create(
   max_tokens: 1024,
   messages: [{content: "Hello, world", role: :user}],
-  model: :"claude-opus-4-5-20251101"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 puts(beta_message)

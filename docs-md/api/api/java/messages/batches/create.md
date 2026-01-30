@@ -1676,6 +1676,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 
 QUERY\_TOO\_LONG("query\_too\_long")
 
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 Accepts one of the following:
@@ -1824,6 +1826,24 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength256
+
+Optional<OutputConfig> outputConfig
+
+Configuration options for the model's output, such as the output format.
+
+Optional<Format> format
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema schema
+
+The JSON schema of the format
+
+JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Accepts one of the following:
+
+JSON\_SCHEMA("json\_schema")
 
 Optional<ServiceTier> serviceTier
 
@@ -2235,6 +2255,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 Optional<Type> type
 
 Accepts one of the following:
@@ -2286,6 +2310,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250124:
 
 JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
@@ -2331,6 +2359,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolTextEditor20250429:
 
 JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
@@ -2375,6 +2407,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class ToolTextEditor20250728:
 
@@ -2426,6 +2462,10 @@ Optional<Long> maxCharacters
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class WebSearchTool20250305:
 
@@ -2485,6 +2525,10 @@ Optional<Long> maxUses
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
 
 Optional<UserLocation> userLocation
 
@@ -2679,7 +2723,7 @@ public final class Main {
                 .params(BatchCreateParams.Request.Params.builder()
                     .maxTokens(1024L)
                     .addUserMessage("Hello, world")
-                    .model(Model.CLAUDE_OPUS_4_5_20251101)
+                    .model(Model.CLAUDE_SONNET_4_5_20250929)
                     .build())
                 .build())
             .build();

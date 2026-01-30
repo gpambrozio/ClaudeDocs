@@ -1652,6 +1652,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -1710,6 +1712,24 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 Metadata param.Field[[Metadata](api/messages.md)]optional
 
 An object describing metadata about the request.
+
+OutputConfig param.Field[[MessageNewParamsOutputConfig](api/messages/create.md)]optional
+
+Configuration options for the model's output, such as the output format.
+
+Format MessageNewParamsOutputConfigFormatoptional
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+Accepts one of the following:
+
+const JSONSchemaJSONSchema JSONSchema = "json\_schema"
 
 ServiceTier param.Field[[MessageNewParamsServiceTier](api/messages/create.md)]optional
 
@@ -2015,6 +2035,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 Type ToolTypeoptional
 
 Accepts one of the following:
@@ -2066,6 +2090,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -2111,6 +2139,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -2155,6 +2187,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolTextEditor20250728 struct{…}
 
@@ -2206,6 +2242,10 @@ MaxCharacters int64optional
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type WebSearchTool20250305 struct{…}
 
@@ -2265,6 +2305,10 @@ MaxUses int64optional
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation WebSearchTool20250305UserLocationoptional
 
@@ -2561,6 +2605,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -2841,13 +2887,13 @@ func main() {
     MaxTokens: 1024,
     Messages: []anthropic.MessageParam{anthropic.MessageParam{
       Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-        OfText: &anthropic.TextBlockParam{Text: "What is a quaternion?", CacheControl: anthropic.CacheControlEphemeralParam{TTL: anthropic.CacheControlEphemeralTTLTTL5m}, Citations: []anthropic.TextCitationParamUnion{anthropic.TextCitationParamUnion{
-          OfCharLocation: &anthropic.CitationCharLocationParam{CitedText: "cited_text", DocumentIndex: 0, DocumentTitle: anthropic.String("x"), EndCharIndex: 0, StartCharIndex: 0},
-        }}},
+        OfText: &anthropic.TextBlockParam{
+          Text: "x",
+        },
       }},
       Role: anthropic.MessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_5_20251101,
+    Model: anthropic.ModelClaudeSonnet4_5_20250929,
   })
   if err != nil {
     panic(err.Error())

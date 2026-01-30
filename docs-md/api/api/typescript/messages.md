@@ -14,7 +14,7 @@ post/v1/messages
 
 ##### [Count tokens in a Message](api/messages/count_tokens.md)
 
-client.messages.countTokens(MessageCountTokensParams { messages, model, system, 3 more } body, RequestOptionsoptions?): [MessageTokensCount](api/messages.md) { input\_tokens }
+client.messages.countTokens(MessageCountTokensParams { messages, model, output\_config, 4 more } body, RequestOptionsoptions?): [MessageTokensCount](api/messages.md) { input\_tokens }
 
 post/v1/messages/count\_tokens
 
@@ -575,7 +575,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -588,6 +588,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -2170,7 +2172,7 @@ page\_age?: string | null
 
 WebSearchToolRequestError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -2183,6 +2185,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -3252,7 +3256,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -3265,6 +3269,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -3517,11 +3523,11 @@ Accepts one of the following:
 
 "batch"
 
-MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 2 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control }  | 3 more
+MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 3 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
 
 Accepts one of the following:
 
-Tool { input\_schema, name, cache\_control, 2 more }
+Tool { input\_schema, name, cache\_control, 3 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -3582,13 +3588,17 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 type?: "custom" | null
 
 Accepts one of the following:
 
 "custom"
 
-ToolBash20250124 { name, type, cache\_control }
+ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
 
@@ -3633,7 +3643,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250124 { name, type, cache\_control }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250124 { name, type, cache\_control, strict }
 
 name: "str\_replace\_editor"
 
@@ -3678,7 +3692,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250429 { name, type, cache\_control }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250429 { name, type, cache\_control, strict }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -3723,7 +3741,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250728 { name, type, cache\_control, max\_characters }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250728 { name, type, cache\_control, 2 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -3774,7 +3796,11 @@ Maximum number of characters to display when viewing a file. If not specified, d
 
 minimum1
 
-WebSearchTool20250305 { name, type, allowed\_domains, 4 more }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
 
 name: "web\_search"
 
@@ -3832,6 +3858,10 @@ max\_uses?: number | null
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location?: UserLocation | null
 
@@ -5464,7 +5494,7 @@ page\_age?: string | null
 
 WebSearchToolRequestError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -5477,6 +5507,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -6147,7 +6179,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -6160,6 +6192,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -6498,7 +6532,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -6511,6 +6545,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -6998,7 +7034,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -7011,6 +7047,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -7531,7 +7569,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -7544,6 +7582,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -8591,7 +8631,7 @@ Accepts one of the following:
 
 "thinking\_delta"
 
-Tool { input\_schema, name, cache\_control, 2 more }
+Tool { input\_schema, name, cache\_control, 3 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -8652,13 +8692,17 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 type?: "custom" | null
 
 Accepts one of the following:
 
 "custom"
 
-ToolBash20250124 { name, type, cache\_control }
+ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
 
@@ -8702,6 +8746,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 ToolChoice = [ToolChoiceAuto](api/messages.md) { type, disable\_parallel\_tool\_use }  | [ToolChoiceAny](api/messages.md) { type, disable\_parallel\_tool\_use }  | [ToolChoiceTool](api/messages.md) { name, type, disable\_parallel\_tool\_use }  | [ToolChoiceNone](api/messages.md) { type }
 
@@ -9563,7 +9611,7 @@ title?: string | null
 
 is\_error?: boolean
 
-ToolTextEditor20250124 { name, type, cache\_control }
+ToolTextEditor20250124 { name, type, cache\_control, strict }
 
 name: "str\_replace\_editor"
 
@@ -9608,7 +9656,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250429 { name, type, cache\_control }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250429 { name, type, cache\_control, strict }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -9653,7 +9705,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250728 { name, type, cache\_control, max\_characters }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250728 { name, type, cache\_control, 2 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -9704,11 +9760,15 @@ Maximum number of characters to display when viewing a file. If not specified, d
 
 minimum1
 
-ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 2 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control }  | 3 more
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 3 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
 
 Accepts one of the following:
 
-Tool { input\_schema, name, cache\_control, 2 more }
+Tool { input\_schema, name, cache\_control, 3 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -9769,13 +9829,17 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 type?: "custom" | null
 
 Accepts one of the following:
 
 "custom"
 
-ToolBash20250124 { name, type, cache\_control }
+ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
 
@@ -9820,7 +9884,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250124 { name, type, cache\_control }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250124 { name, type, cache\_control, strict }
 
 name: "str\_replace\_editor"
 
@@ -9865,7 +9933,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250429 { name, type, cache\_control }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250429 { name, type, cache\_control, strict }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -9910,7 +9982,11 @@ Accepts one of the following:
 
 "1h"
 
-ToolTextEditor20250728 { name, type, cache\_control, max\_characters }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250728 { name, type, cache\_control, 2 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -9961,7 +10037,11 @@ Maximum number of characters to display when viewing a file. If not specified, d
 
 minimum1
 
-WebSearchTool20250305 { name, type, allowed\_domains, 4 more }
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
 
 name: "web\_search"
 
@@ -10019,6 +10099,10 @@ max\_uses?: number | null
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 user\_location?: UserLocation | null
 
@@ -10233,7 +10317,7 @@ url: string
 
 page\_age?: string | null
 
-WebSearchTool20250305 { name, type, allowed\_domains, 4 more }
+WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
 
 name: "web\_search"
 
@@ -10292,6 +10376,10 @@ Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
 
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 user\_location?: UserLocation | null
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -10336,7 +10424,7 @@ minLength1
 
 WebSearchToolRequestError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10349,6 +10437,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -10364,7 +10454,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10377,6 +10467,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -10414,7 +10506,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10427,6 +10519,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -10474,7 +10568,7 @@ page\_age?: string | null
 
 WebSearchToolRequestError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10487,6 +10581,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -10551,7 +10647,7 @@ page\_age?: string | null
 
 WebSearchToolRequestError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10564,6 +10660,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -10573,7 +10671,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -10586,6 +10684,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -11114,7 +11214,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -11127,6 +11227,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -11768,7 +11870,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -11781,6 +11883,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 
@@ -12384,7 +12488,7 @@ Accepts one of the following:
 
 WebSearchToolResultError { error\_code, type }
 
-error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 2 more
+error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
 
 Accepts one of the following:
 
@@ -12397,6 +12501,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
 

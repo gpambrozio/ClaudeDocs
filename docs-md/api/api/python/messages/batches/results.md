@@ -259,7 +259,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 2 more]
+error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
 
 Accepts one of the following:
 
@@ -272,6 +272,8 @@ Accepts one of the following:
 "too\_many\_requests"
 
 "query\_too\_long"
+
+"request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
 
@@ -321,8 +323,8 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-7-sonnet-20250219` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-3-5-haiku-latest` - Fastest and most compact model for near-instant responsiveness
-- `claude-3-5-haiku-20241022` - Our fastest model
+- `claude-3-5-haiku-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-3-5-haiku-20241022` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-haiku-4-5` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-haiku-4-5-20251001` - Hybrid model, capable of near-instant responses and extended thinking
 - `claude-sonnet-4-20250514` - High-performance model with extended thinking

@@ -589,6 +589,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -2188,6 +2190,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -3274,6 +3278,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -3596,6 +3602,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 Type ToolTypeoptional
 
 Accepts one of the following:
@@ -3647,6 +3657,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -3692,6 +3706,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -3736,6 +3754,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolTextEditor20250728 struct{…}
 
@@ -3787,6 +3809,10 @@ MaxCharacters int64optional
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type WebSearchTool20250305 struct{…}
 
@@ -3846,6 +3872,10 @@ MaxUses int64optional
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation WebSearchTool20250305UserLocationoptional
 
@@ -5496,6 +5526,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -6185,6 +6217,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -6535,6 +6569,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -7041,6 +7077,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -7580,6 +7618,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -8688,6 +8728,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 Type ToolTypeoptional
 
 Accepts one of the following:
@@ -8738,6 +8782,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolChoiceUnion interface{…}
 
@@ -9646,6 +9694,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -9690,6 +9742,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolTextEditor20250728 struct{…}
 
@@ -9741,6 +9797,10 @@ MaxCharacters int64optional
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolUnion interface{…}
 
@@ -9807,6 +9867,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 Type ToolTypeoptional
 
 Accepts one of the following:
@@ -9858,6 +9922,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -9903,6 +9971,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -9947,6 +10019,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolTextEditor20250728 struct{…}
 
@@ -9998,6 +10074,10 @@ MaxCharacters int64optional
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type WebSearchTool20250305 struct{…}
 
@@ -10057,6 +10137,10 @@ MaxUses int64optional
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation WebSearchTool20250305UserLocationoptional
 
@@ -10330,6 +10414,10 @@ Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 UserLocation WebSearchTool20250305UserLocationoptional
 
 Parameters for the user's location. Used to provide more relevant search results.
@@ -10388,6 +10476,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -10415,6 +10505,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -10465,6 +10557,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -10525,6 +10619,8 @@ const WebSearchToolRequestErrorErrorCodeMaxUsesExceeded WebSearchToolRequestErro
 const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -10603,6 +10699,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -10624,6 +10722,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -11165,6 +11265,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -11826,6 +11928,8 @@ const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorE
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -12447,6 +12551,8 @@ const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorE
 const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
 
 const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
 
 Type WebSearchToolResultError
 

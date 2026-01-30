@@ -1672,6 +1672,8 @@ const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErro
 
 const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
 
+const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+
 Type WebSearchToolResultError
 
 Accepts one of the following:
@@ -1830,6 +1832,24 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength256
+
+OutputConfig MessageBatchNewParamsRequestParamsOutputConfigoptional
+
+Configuration options for the model's output, such as the output format.
+
+Format MessageBatchNewParamsRequestParamsOutputConfigFormatoptional
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+Accepts one of the following:
+
+const JSONSchemaJSONSchema JSONSchema = "json\_schema"
 
 ServiceTier stringoptional
 
@@ -2239,6 +2259,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 Type ToolTypeoptional
 
 Accepts one of the following:
@@ -2290,6 +2314,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250124 struct{…}
 
 Name StrReplaceEditor
@@ -2335,6 +2363,10 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type ToolTextEditor20250429 struct{…}
 
 Name StrReplaceBasedEditTool
@@ -2379,6 +2411,10 @@ Accepts one of the following:
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type ToolTextEditor20250728 struct{…}
 
@@ -2430,6 +2466,10 @@ MaxCharacters int64optional
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
 minimum1
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 type WebSearchTool20250305 struct{…}
 
@@ -2489,6 +2529,10 @@ MaxUses int64optional
 Maximum number of times the tool can be used in the API request.
 
 exclusiveMinimum0
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
 
 UserLocation WebSearchTool20250305UserLocationoptional
 
@@ -2684,13 +2728,13 @@ func main() {
         MaxTokens: 1024,
         Messages: []anthropic.MessageParam{anthropic.MessageParam{
           Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-            OfText: &anthropic.TextBlockParam{Text: "What is a quaternion?", CacheControl: anthropic.CacheControlEphemeralParam{TTL: anthropic.CacheControlEphemeralTTLTTL5m}, Citations: []anthropic.TextCitationParamUnion{anthropic.TextCitationParamUnion{
-              OfCharLocation: &anthropic.CitationCharLocationParam{CitedText: "cited_text", DocumentIndex: 0, DocumentTitle: anthropic.String("x"), EndCharIndex: 0, StartCharIndex: 0},
-            }}},
+            OfText: &anthropic.TextBlockParam{
+              Text: "x",
+            },
           }},
           Role: anthropic.MessageParamRoleUser,
         }},
-        Model: anthropic.ModelClaudeOpus4_5_20251101,
+        Model: anthropic.ModelClaudeSonnet4_5_20250929,
       },
     }},
   })
