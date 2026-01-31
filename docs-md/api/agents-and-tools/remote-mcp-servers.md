@@ -60,14 +60,6 @@ URL
 
 `https://api.fireflies.ai/mcp`
 
-[Granola](https://help.granola.ai/article/granola-mcp#set-up-guide)
-
-The AI notepad for meetings
-
-URL
-
-`https://mcp.granola.ai/mcp`
-
 [Harmonic](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
 Discover, research, and enrich companies and people
@@ -372,6 +364,14 @@ URL
 
 `https://api.godaddy.com/v1/domains/mcp`
 
+[Google Cloud BigQuery](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
+
+BigQuery: Advanced analytical insights for agents
+
+URL
+
+`https://bigquery.googleapis.com/mcp`
+
 [HubSpot](https://knowledge.hubspot.com/integrations/set-up-and-use-the-hubspot-connector-for-claude)
 
 Chat with your CRM data to get personalized insights
@@ -452,6 +452,14 @@ URL
 
 `https://mcp.lastminute.com/mcp`
 
+[LILT](https://support.lilt.com/kb/LILT-mcp)
+
+High-quality translation with human verification
+
+URL
+
+`https://mcp.lilt.com/mcp`
+
 [LSEG](https://www.lseg.com/en/solutions/ai-finance-solutions/anthropic)
 
 Access best in class data & analytics across a broad spectrum of asset classes.
@@ -459,6 +467,14 @@ Access best in class data & analytics across a broad spectrum of asset classes.
 URL
 
 `https://api.analytics.lseg.com/lfa/mcp/server-cl`
+
+[Make](https://developers.make.com/mcp-server/)
+
+Run Make scenarios and manage your Make account
+
+URL
+
+`https://mcp.make.com`
 
 [Melon](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
 
@@ -659,6 +675,14 @@ URL
 Automate workflows and connect your business apps
 
 Requires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp)
+
+[Wyndham Hotels and Resorts](https://www.wyndhamhotels.com/mcp-doc)
+
+Discover the right Wyndham Hotel for you, faster
+
+URL
+
+`https://mcp.wyndhamhotels.com/claude/mcp`
 
 [Zapier](https://docs.zapier.com/mcp/home)
 

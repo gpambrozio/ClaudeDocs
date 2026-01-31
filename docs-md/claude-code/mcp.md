@@ -76,12 +76,6 @@ Search and update your company's knowledge graphCommand
 
 `claude mcp add devrev --transport http https://api.devrev.ai/mcp/v1`
 
-[**Granola**](https://help.granola.ai/article/granola-mcp#set-up-guide)
-
-The AI notepad for meetingsCommand
-
-`claude mcp add --transport http granola https://mcp.granola.ai/mcp`
-
 [**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
 Discover, research, and enrich companies and peopleCommand
@@ -314,6 +308,12 @@ Search domains and check availabilityCommand
 
 `claude mcp add --transport http godaddy https://api.godaddy.com/v1/domains/mcp`
 
+[**Google Cloud BigQuery**](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
+
+BigQuery: Advanced analytical insights for agentsCommand
+
+`claude mcp add --transport http bigquery https://bigquery.googleapis.com/mcp`
+
 [**Medidata**](https://learn.medidata.com/en-US/bundle/mcp-server-documentation/page/medidata_mcp_server_documentation.html)
 
 Clinical trial software and site ranking toolsCommand
@@ -349,6 +349,18 @@ Report, strategize & create with real-time Klaviyo dataCommand
 Search, compare and book flights across global airlinesCommand
 
 `claude mcp add lastminute-com --transport http https://mcp.lastminute.com/mcp`
+
+[**LILT**](https://support.lilt.com/kb/LILT-mcp)
+
+High-quality translation with human verificationCommand
+
+`claude mcp add --transport http lilt https://mcp.lilt.com/mcp`
+
+[**Make**](https://developers.make.com/mcp-server/)
+
+Run Make scenarios and manage your Make accountCommand
+
+`claude mcp add --transport http make https://mcp.make.com`
 
 [**Melon**](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
 
@@ -485,6 +497,12 @@ Secure AI access to manage your WordPress.com sitesCommand
 [**Workato**](https://docs.workato.com/en/mcp/mcp-cloud.html)
 
 Automate workflows and connect your business appsRequires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp).
+
+[**Wyndham Hotels and Resorts**](https://www.wyndhamhotels.com/mcp-doc)
+
+Discover the right Wyndham Hotel for you, fasterCommand
+
+`claude mcp add --transport http wyndham-hotels https://mcp.wyndhamhotels.com/claude/mcp`
 
 [**Zapier**](https://docs.zapier.com/mcp/home)
 

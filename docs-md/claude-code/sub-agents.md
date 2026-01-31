@@ -376,12 +376,13 @@ Subagents can define [hooks](hooks.md) that run during the subagent’s lifecycl
 #### [​](#hooks-in-subagent-frontmatter) Hooks in subagent frontmatter
 
 Define hooks directly in the subagent’s markdown file. These hooks only run while that specific subagent is active and are cleaned up when it finishes.
+All [hook events](hooks.md) are supported. The most common events for subagents are:
 
 | Event | Matcher input | When it fires |
 | --- | --- | --- |
 | `PreToolUse` | Tool name | Before the subagent uses a tool |
 | `PostToolUse` | Tool name | After the subagent uses a tool |
-| `Stop` | (none) | When the subagent finishes |
+| `Stop` | (none) | When the subagent finishes (converted to `SubagentStop` at runtime) |
 
 This example validates Bash commands with the `PreToolUse` hook and runs a linter after file edits with `PostToolUse`:
 
@@ -411,14 +412,14 @@ hooks:
 
 #### [​](#project-level-hooks-for-subagent-events) Project-level hooks for subagent events
 
-Configure hooks in `settings.json` that respond to subagent lifecycle events in the main session. Use the `matcher` field to target specific agent types by name.
+Configure hooks in `settings.json` that respond to subagent lifecycle events in the main session.
 
 | Event | Matcher input | When it fires |
 | --- | --- | --- |
 | `SubagentStart` | Agent type name | When a subagent begins execution |
-| `SubagentStop` | Agent type name | When a subagent completes |
+| `SubagentStop` | (none) | When any subagent completes |
 
-This example runs setup and cleanup scripts only when the `db-agent` subagent starts and stops:
+`SubagentStart` supports matchers to target specific agent types by name. `SubagentStop` fires for all subagent completions regardless of matcher values. This example runs a setup script only when the `db-agent` subagent starts, and a cleanup script when any subagent stops:
 
 Copy
 
@@ -437,7 +438,6 @@ Ask AI
     ],
     "SubagentStop": [
       {
-        "matcher": "db-agent",
         "hooks": [
           { "type": "command", "command": "./scripts/cleanup-db-connection.sh" }
         ]

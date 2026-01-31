@@ -148,7 +148,7 @@ Run `/mcp` to see token costs per server. Disconnect servers you’re not active
 
 Use subagents for work that doesn’t need your full conversation context. Their isolation prevents bloating your main session.
 
-**When:** On trigger. Hooks can run before or after tool executions, at session start, before compaction, and at other lifecycle events. See [Hooks](hooks.md) for the full list.**What loads:** Nothing by default. Hooks run as external scripts.**Context cost:** Zero, unless the hook returns output that gets added as messages to your conversation.
+**When:** On trigger. Hooks fire at specific lifecycle events like tool execution, session boundaries, prompt submission, permission requests, and compaction. See [Hooks](hooks.md) for the full list.**What loads:** Nothing by default. Hooks run as external scripts.**Context cost:** Zero, unless the hook returns output that gets added as messages to your conversation.
 
 Hooks are ideal for side effects (linting, logging) that don’t need to affect Claude’s context.
 
@@ -166,7 +166,7 @@ Offload work to isolated context](sub-agents.md)[## MCP
 
 Connect Claude to external services](mcp.md)[## Hooks
 
-Run scripts on Claude Code events](hooks.md)[## Plugins
+Automate workflows with hooks](hooks-guide.md)[## Plugins
 
 Bundle and share feature sets](plugins.md)[## Marketplaces
 

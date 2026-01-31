@@ -138,7 +138,7 @@ Ask AI
 | `attribution` | Customize attribution for git commits and pull requests. See [Attribution settings](#attribution-settings) | `{"commit": "🤖 Generated with Claude Code", "pr": ""}` |
 | `includeCoAuthoredBy` | **Deprecated**: Use `attribution` instead. Whether to include the `co-authored-by Claude` byline in git commits and pull requests (default: `true`) | `false` |
 | `permissions` | See table below for structure of permissions. |  |
-| `hooks` | Configure custom commands to run before or after tool executions. See [hooks documentation](hooks.md) | `{"PreToolUse": {"Bash": "echo 'Running command...'"}}` |
+| `hooks` | Configure custom commands to run at lifecycle events. See [hooks documentation](hooks.md) for format | See [hooks](hooks.md) |
 | `disableAllHooks` | Disable all [hooks](hooks.md) | `true` |
 | `allowManagedHooksOnly` | (Managed settings only) Prevent loading of user, project, and plugin hooks. Only allows managed hooks and SDK hooks. See [Hook configuration](#hook-configuration) | `true` |
 | `model` | Override the default model to use for Claude Code | `"claude-sonnet-4-5-20250929"` |
@@ -256,7 +256,9 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 | `excludedCommands` | Commands that should run outside of the sandbox | `["git", "docker"]` |
 | `allowUnsandboxedCommands` | Allow commands to run outside the sandbox via the `dangerouslyDisableSandbox` parameter. When set to `false`, the `dangerouslyDisableSandbox` escape hatch is completely disabled and all commands must run sandboxed (or be in `excludedCommands`). Useful for enterprise policies that require strict sandboxing. Default: true | `false` |
 | `network.allowUnixSockets` | Unix socket paths accessible in sandbox (for SSH agents, etc.) | `["~/.ssh/agent-socket"]` |
+| `network.allowAllUnixSockets` | Allow all Unix socket connections in sandbox. Default: false | `true` |
 | `network.allowLocalBinding` | Allow binding to localhost ports (macOS only). Default: false | `true` |
+| `network.allowedDomains` | Array of domains to allow for outbound network traffic. Supports wildcards (e.g., `*.example.com`). | `["github.com", "*.npmjs.org"]` |
 | `network.httpProxyPort` | HTTP proxy port used if you wish to bring your own proxy. If not specified, Claude will run its own proxy. | `8080` |
 | `network.socksProxyPort` | SOCKS5 proxy port used if you wish to bring your own proxy. If not specified, Claude will run its own proxy. | `8081` |
 | `enableWeakerNestedSandbox` | Enable weaker sandbox for unprivileged Docker environments (Linux and WSL2 only). **Reduces security.** Default: false | `true` |
@@ -274,6 +276,7 @@ Ask AI
     "autoAllowBashIfSandboxed": true,
     "excludedCommands": ["docker"],
     "network": {
+      "allowedDomains": ["github.com", "*.npmjs.org", "registry.yarnpkg.com"],
       "allowUnixSockets": [
         "/var/run/docker.sock"
       ],
@@ -862,7 +865,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | --- | --- | --- |
 | `ANTHROPIC_API_KEY` | API key sent as `X-Api-Key` header, typically for the Claude SDK (for interactive usage, run `/login`) |  |
 | `ANTHROPIC_AUTH_TOKEN` | Custom value for the `Authorization` header (the value you set here will be prefixed with `Bearer` ) |  |
-| `ANTHROPIC_CUSTOM_HEADERS` | Custom headers you want to add to the request (in `Name: Value` format) |  |
+| `ANTHROPIC_CUSTOM_HEADERS` | Custom headers to add to requests (`Name: Value` format, newline-separated for multiple headers) |  |
 | `ANTHROPIC_DEFAULT_HAIKU_MODEL` | See [Model configuration](model-config.md) |  |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | See [Model configuration](model-config.md) |  |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | See [Model configuration](model-config.md) |  |
