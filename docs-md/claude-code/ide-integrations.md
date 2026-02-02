@@ -35,7 +35,7 @@ Throughout VS Code, the Spark icon indicates Claude Code: ![Spark icon](https://
 - **Command Palette**: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux), type “Claude Code”, and select an option like “Open in New Tab”
 - **Status Bar**: Click **✱ Claude Code** in the bottom-right corner of the window. This works even when no file is open.
 
-You can drag the Claude panel to reposition it anywhere in VS Code. See [Customize your workflow](#customize-your-workflow) for details.
+When you first open the panel, a **Learn Claude Code** checklist appears. Work through each item by clicking **Show me**, or dismiss it with the X. To reopen it later, uncheck **Hide Onboarding** in VS Code settings under Extensions → Claude Code.You can drag the Claude panel to reposition it anywhere in VS Code. See [Customize your workflow](#customize-your-workflow) for details.
 
 2
 
@@ -55,10 +55,7 @@ When Claude wants to edit a file, it shows a side-by-side comparison of the orig
 
 For more ideas on what you can do with Claude Code, see [Common workflows](common-workflows.md).
 
-The extension includes two built-in tutorials:
-
-- **VS Code walkthrough**: Run “Claude Code: Open Walkthrough” from the Command Palette for a guided tour of the basics.
-- **Interactive checklist**: Click the graduation cap icon in the Claude panel header to work through features like writing code, using Plan mode, and setting up rules.
+Run “Claude Code: Open Walkthrough” from the Command Palette for a guided tour of the basics.
 
 ## [​](#use-the-prompt-box) Use the prompt box
 
@@ -197,6 +194,8 @@ The extension has two types of settings:
 
 - **Extension settings** in VS Code: Control the extension’s behavior within VS Code. Open with `Cmd+,` (Mac) or `Ctrl+,` (Windows/Linux), then go to Extensions → Claude Code. You can also type `/` and select **General Config** to open settings.
 - **Claude Code settings** in `~/.claude/settings.json`: Shared between the extension and CLI. Use for allowed commands, environment variables, hooks, and MCP servers. See [Settings](settings.md) for details.
+
+Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to your `settings.json` to get autocomplete and inline validation for all available settings directly in VS Code.
 
 ### [​](#extension-settings) Extension settings
 

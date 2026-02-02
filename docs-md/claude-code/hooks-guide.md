@@ -389,13 +389,14 @@ Ask AI
 }
 ```
 
-Claude Code reads `permissionDecision` and cancels the tool call, then feeds `permissionDecisionReason` back to Claude as feedback. The three options are:
+Claude Code reads `permissionDecision` and cancels the tool call, then feeds `permissionDecisionReason` back to Claude as feedback. These three options are specific to `PreToolUse`:
 
 - `"allow"`: proceed without showing a permission prompt
 - `"deny"`: cancel the tool call and send the reason to Claude
 - `"ask"`: show the permission prompt to the user as normal
 
-For `UserPromptSubmit` hooks, use `additionalContext` instead to inject text into Claude’s context. See [Control behavior with JSON output](hooks.md) in the reference for the full JSON schema. Prompt-based hooks (`type: "prompt"`) handle output differently: see [Prompt-based hooks](#prompt-based-hooks).
+Other events use different decision patterns. For example, `PostToolUse` and `Stop` hooks use a top-level `decision: "block"` field, while `PermissionRequest` uses `hookSpecificOutput.decision.behavior`. See the [summary table](hooks.md) in the reference for a full breakdown by event.
+For `UserPromptSubmit` hooks, use `additionalContext` instead to inject text into Claude’s context. Prompt-based hooks (`type: "prompt"`) handle output differently: see [Prompt-based hooks](#prompt-based-hooks).
 
 ### [​](#filter-hooks-with-matchers) Filter hooks with matchers
 
@@ -668,7 +669,7 @@ Ask AI
 
 ```shiki
 Shell ready on arm64
-{"decision": "allow"}
+{"decision": "block", "reason": "Not allowed"}
 ```
 
 Claude Code tries to parse this as JSON and fails. To fix this, wrap echo statements in your shell profile so they only run in interactive shells:

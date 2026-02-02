@@ -53,7 +53,7 @@ Ask AI
 }
 ```
 
-The script reads the JSON input from stdin, extracts the command, and blocks it if it contains `rm -rf`:
+The script reads the JSON input from stdin, extracts the command, and returns a `permissionDecision` of `"deny"` if it contains `rm -rf`:
 
 Copy
 
@@ -65,7 +65,13 @@ Ask AI
 COMMAND=$(jq -r '.tool_input.command')
 
 if echo "$COMMAND" | grep -q 'rm -rf'; then
-  echo '{"decision":"block","reason":"Destructive command blocked by hook"}'
+  jq -n '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: "Destructive command blocked by hook"
+    }
+  }'
 else
   exit 0  # allow the command
 fi
@@ -106,7 +112,13 @@ Copy
 Ask AI
 
 ```shiki
-{ "decision": "block", "reason": "Destructive command blocked by hook" }
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "Destructive command blocked by hook"
+  }
+}
 ```
 
 If the command had been safe (like `npm test`), the script would hit `exit 0` instead, which tells Claude Code to allow the tool call with no further action.
@@ -419,7 +431,7 @@ The `tool_name` and `tool_input` fields are event-specific. Each [hook event](#h
 ### [​](#exit-code-output) Exit code output
 
 The exit code from your hook command tells Claude Code whether the action should proceed, be blocked, or be ignored.
-**Exit 0** means success. Claude Code parses stdout for [JSON output fields](#json-output) like `decision` or `reason`. JSON output is only processed on exit 0. For most events, stdout is only shown in verbose mode (`Ctrl+O`). The exceptions are `UserPromptSubmit` and `SessionStart`, where stdout is added as context that Claude can see and act on.
+**Exit 0** means success. Claude Code parses stdout for [JSON output fields](#json-output). JSON output is only processed on exit 0. For most events, stdout is only shown in verbose mode (`Ctrl+O`). The exceptions are `UserPromptSubmit` and `SessionStart`, where stdout is added as context that Claude can see and act on.
 **Exit 2** means a blocking error. Claude Code ignores stdout and any JSON in it. Instead, stderr text is fed back to Claude as an error message. The effect depends on the event: `PreToolUse` blocks the tool call, `UserPromptSubmit` rejects the prompt, and so on. See [exit code 2 behavior](#exit-code-2-behavior-per-event) for the full list.
 **Any other exit code** is a non-blocking error. stderr is shown in verbose mode (`Ctrl+O`) and execution continues.
 For example, a hook command script that blocks dangerous Bash commands:
@@ -462,22 +474,25 @@ Exit code 2 is the way a hook signals “stop, don’t do this.” The effect de
 
 ### [​](#json-output) JSON output
 
-You must choose one approach per hook, not both: either use exit codes alone for signaling, or exit 0 and print JSON for structured control. Claude Code only processes JSON on exit 0. If you exit 2, any JSON is ignored.
-Instead of relying on exit codes alone, hooks can print JSON to stdout on exit 0. Claude Code reads specific fields from this JSON to decide what to do next.
-Your hook’s stdout must contain only the JSON object. If your shell profile prints text on startup, it can interfere with JSON parsing. See [JSON validation failed](hooks-guide.md) in the troubleshooting guide.
-The JSON object has two parts:
+Exit codes let you allow or block, but JSON output gives you finer-grained control. Instead of exiting with code 2 to block, exit 0 and print a JSON object to stdout. Claude Code reads specific fields from that JSON to control behavior, including [decision control](#decision-control) for blocking, allowing, or escalating to the user.
 
-- **Top-level fields** like `continue` and `decision` work across all events. These are listed in the table below.
-- **`hookSpecificOutput`** is a nested object for event-specific fields like `permissionDecision` or `additionalContext`. It requires a `hookEventName` field set to the event name, like `"PreToolUse"` or `"Stop"`. Each event’s decision control section under [Hook events](#hook-events) documents what fields go here.
+You must choose one approach per hook, not both: either use exit codes alone for signaling, or exit 0 and print JSON for structured control. Claude Code only processes JSON on exit 0. If you exit 2, any JSON is ignored.
+
+Your hook’s stdout must contain only the JSON object. If your shell profile prints text on startup, it can interfere with JSON parsing. See [JSON validation failed](hooks-guide.md) in the troubleshooting guide.
+The JSON object supports three kinds of fields:
+
+- **Universal fields** like `continue` work across all events. These are listed in the table below.
+- **Top-level `decision` and `reason`** are used by some events to block or provide feedback.
+- **`hookSpecificOutput`** is a nested object for events that need richer control. It requires a `hookEventName` field set to the event name.
 
 | Field | Default | Description |
 | --- | --- | --- |
-| `continue` | `true` | If `false`, Claude stops processing entirely after the hook runs. Takes precedence over event-specific fields like `decision` or `permissionDecision` |
+| `continue` | `true` | If `false`, Claude stops processing entirely after the hook runs. Takes precedence over any event-specific decision fields |
 | `stopReason` | none | Message shown to the user when `continue` is `false`. Not shown to Claude |
 | `suppressOutput` | `false` | If `true`, hides stdout from verbose mode output |
 | `systemMessage` | none | Warning message shown to the user |
 
-This example uses a top-level field to stop Claude:
+To stop Claude entirely regardless of event type:
 
 Copy
 
@@ -487,7 +502,36 @@ Ask AI
 { "continue": false, "stopReason": "Build failed, fix errors before continuing" }
 ```
 
-This example uses `hookSpecificOutput` to deny a PreToolUse tool call:
+#### [​](#decision-control) Decision control
+
+Not every event supports blocking or controlling behavior through JSON. The events that do each use a different set of fields to express that decision. Use this table as a quick reference before writing a hook:
+
+| Events | Decision pattern | Key fields |
+| --- | --- | --- |
+| UserPromptSubmit, PostToolUse, PostToolUseFailure, Stop, SubagentStop | Top-level `decision` | `decision: "block"`, `reason` |
+| PreToolUse | `hookSpecificOutput` | `permissionDecision` (allow/deny/ask), `permissionDecisionReason` |
+| PermissionRequest | `hookSpecificOutput` | `decision.behavior` (allow/deny) |
+
+Here are examples of each pattern in action:
+
+- Top-level decision
+- PreToolUse
+- PermissionRequest
+
+Used by `UserPromptSubmit`, `PostToolUse`, `PostToolUseFailure`, `Stop`, and `SubagentStop`. The only value is `"block"` — to allow the action to proceed, omit `decision` from your JSON, or exit 0 without any JSON at all:
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "decision": "block",
+  "reason": "Test suite must pass before proceeding"
+}
+```
+
+Uses `hookSpecificOutput` for richer control: allow, deny, or escalate to the user. You can also modify tool input before it runs or inject additional context for Claude. See [PreToolUse decision control](#pretooluse-decision-control) for the full set of options.
 
 Copy
 
@@ -499,6 +543,26 @@ Ask AI
     "hookEventName": "PreToolUse",
     "permissionDecision": "deny",
     "permissionDecisionReason": "Database writes are not allowed"
+  }
+}
+```
+
+Uses `hookSpecificOutput` to allow or deny a permission request on behalf of the user. When allowing, you can also modify the tool’s input or apply permission rules so the user isn’t prompted again. See [PermissionRequest decision control](#permissionrequest-decision-control) for the full set of options.
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PermissionRequest",
+    "decision": {
+      "behavior": "allow",
+      "updatedInput": {
+        "command": "npm run lint"
+      }
+    }
   }
 }
 ```
@@ -775,7 +839,7 @@ Spawns a [subagent](sub-agents.md).
 
 #### [​](#pretooluse-decision-control) PreToolUse decision control
 
-`PreToolUse` hooks can control whether a tool call proceeds. In addition to the [JSON output fields](#json-output) available to all hooks, your hook script can return a `hookSpecificOutput` object with these event-specific fields:
+`PreToolUse` hooks can control whether a tool call proceeds. Unlike other hooks that use a top-level `decision` field, PreToolUse returns its decision inside a `hookSpecificOutput` object. This gives it richer control: three outcomes (allow, deny, or ask) plus the ability to modify tool input before execution.
 
 | Field | Description |
 | --- | --- |
@@ -802,10 +866,7 @@ Ask AI
 }
 ```
 
-The `decision` and `reason` fields are deprecated for PreToolUse hooks.
-Use `hookSpecificOutput.permissionDecision` and
-`hookSpecificOutput.permissionDecisionReason` instead. The deprecated fields
-`"approve"` and `"block"` map to `"allow"` and `"deny"` respectively.
+PreToolUse previously used top-level `decision` and `reason` fields, but these are deprecated for this event. Use `hookSpecificOutput.permissionDecision` and `hookSpecificOutput.permissionDecisionReason` instead. The deprecated values `"approve"` and `"block"` map to `"allow"` and `"deny"` respectively. Other events like PostToolUse and Stop continue to use top-level `decision` and `reason` as their current format.
 
 ### [​](#permissionrequest) PermissionRequest
 
