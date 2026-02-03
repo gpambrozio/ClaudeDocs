@@ -84,7 +84,7 @@ Code through hierarchical settings:
 
   These are system-wide paths (not user home directories like `~/Library/...`) that require administrator privileges. They are designed to be deployed by IT administrators.
 
-  See [Managed settings](iam.md) and [Managed MCP configuration](mcp.md) for details.
+  See [Managed settings](permissions.md) and [Managed MCP configuration](mcp.md) for details.
 
   Managed deployments can also restrict **plugin marketplace additions** using
   `strictKnownMarketplaces`. For more information, see [Managed marketplace restrictions](plugin-marketplaces.md).
@@ -144,6 +144,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `hooks` | Configure custom commands to run at lifecycle events. See [hooks documentation](hooks.md) for format | See [hooks](hooks.md) |
 | `disableAllHooks` | Disable all [hooks](hooks.md) | `true` |
 | `allowManagedHooksOnly` | (Managed settings only) Prevent loading of user, project, and plugin hooks. Only allows managed hooks and SDK hooks. See [Hook configuration](#hook-configuration) | `true` |
+| `allowManagedPermissionRulesOnly` | (Managed settings only) Prevent user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply. See [Managed-only settings](permissions.md) | `true` |
 | `model` | Override the default model to use for Claude Code | `"claude-sonnet-4-5-20250929"` |
 | `otelHeadersHelper` | Script to generate dynamic OpenTelemetry headers. Runs at startup and periodically (see [Dynamic headers](monitoring-usage.md)) | `/bin/generate_otel_headers.sh` |
 | `statusLine` | Configure a custom status line to display context. See [`statusLine` documentation](statusline.md) | `{"type": "command", "command": "~/.claude/statusline.sh"}` |
@@ -175,77 +176,24 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | --- | --- | --- |
 | `allow` | Array of permission rules to allow tool use. See [Permission rule syntax](#permission-rule-syntax) below for pattern matching details | `[ "Bash(git diff *)" ]` |
 | `ask` | Array of permission rules to ask for confirmation upon tool use. See [Permission rule syntax](#permission-rule-syntax) below | `[ "Bash(git push *)" ]` |
-| `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](iam.md) | `[ "WebFetch", "Bash(curl *)", "Read(./.env)", "Read(./secrets/**)" ]` |
-| `additionalDirectories` | Additional [working directories](iam.md) that Claude has access to | `[ "../docs/" ]` |
-| `defaultMode` | Default [permission mode](iam.md) when opening Claude Code | `"acceptEdits"` |
-| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. See [managed settings](iam.md) | `"disable"` |
+| `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](permissions.md) | `[ "WebFetch", "Bash(curl *)", "Read(./.env)", "Read(./secrets/**)" ]` |
+| `additionalDirectories` | Additional [working directories](permissions.md) that Claude has access to | `[ "../docs/" ]` |
+| `defaultMode` | Default [permission mode](permissions.md) when opening Claude Code | `"acceptEdits"` |
+| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. See [managed settings](permissions.md) | `"disable"` |
 
 ### [​](#permission-rule-syntax) Permission rule syntax
 
-Permission rules follow the format `Tool` or `Tool(specifier)`. Understanding the syntax helps you write rules that match exactly what you intend.
-
-#### [​](#rule-evaluation-order) Rule evaluation order
-
-When multiple rules could match the same tool use, rules are evaluated in this order:
-
-1. **Deny** rules are checked first
-2. **Ask** rules are checked second
-3. **Allow** rules are checked last
-
-The first matching rule determines the behavior. This means deny rules always take precedence over allow rules, even if both match the same command.
-
-#### [​](#matching-all-uses-of-a-tool) Matching all uses of a tool
-
-To match all uses of a tool, use just the tool name without parentheses:
+Permission rules follow the format `Tool` or `Tool(specifier)`. Rules are evaluated in order: deny rules first, then ask, then allow. The first matching rule wins.
+Quick examples:
 
 | Rule | Effect |
 | --- | --- |
-| `Bash` | Matches **all** Bash commands |
-| `WebFetch` | Matches **all** web fetch requests |
-| `Read` | Matches **all** file reads |
-
-`Bash(*)` is equivalent to `Bash` and matches all Bash commands. Both syntaxes can be used interchangeably.
-
-#### [​](#using-specifiers-for-fine-grained-control) Using specifiers for fine-grained control
-
-Add a specifier in parentheses to match specific tool uses:
-
-| Rule | Effect |
-| --- | --- |
-| `Bash(npm run build)` | Matches the exact command `npm run build` |
-| `Read(./.env)` | Matches reading the `.env` file in the current directory |
+| `Bash` | Matches all Bash commands |
+| `Bash(npm run *)` | Matches commands starting with `npm run` |
+| `Read(./.env)` | Matches reading the `.env` file |
 | `WebFetch(domain:example.com)` | Matches fetch requests to example.com |
 
-#### [​](#wildcard-patterns) Wildcard patterns
-
-Bash rules support glob patterns with `*`. Wildcards can appear at any position in the command, including at the beginning, middle, or end. The following configuration allows npm and git commit commands while blocking git push:
-
-Copy
-
-Ask AI
-
-```shiki
-{
-  "permissions": {
-    "allow": [
-      "Bash(npm run *)",
-      "Bash(git commit *)",
-      "Bash(git * main)",
-      "Bash(* --version)",
-      "Bash(* --help *)"
-    ],
-    "deny": [
-      "Bash(git push *)"
-    ]
-  }
-}
-```
-
-The space before `*` matters: `Bash(ls *)` matches `ls -la` but not `lsof`, while `Bash(ls*)` matches both. The legacy `:*` suffix syntax (e.g., `Bash(npm run:*)`) is equivalent to  `*` but is deprecated.
-
-Bash permission patterns that try to constrain command arguments are fragile. For example, `Bash(curl http://github.com/ *)` intends to restrict curl to GitHub URLs, but won’t match `curl -X GET http://github.com/...` (flags before URL), `curl https://github.com/...` (different protocol), or commands using shell variables. Do not rely on argument-constraining patterns as a security boundary. See [Bash permission limitations](iam.md) for alternatives.
-
-For detailed information about tool-specific permission patterns—including Read, Edit, WebFetch, MCP, Task rules, and Bash permission limitations—see [Tool-specific permission rules](iam.md).
+For the complete rule syntax reference, including wildcard behavior, tool-specific patterns for Read, Edit, WebFetch, MCP, and Task rules, and security limitations of Bash patterns, see [Permission rule syntax](permissions.md).
 
 ### [​](#sandbox-settings) Sandbox settings
 
@@ -586,7 +534,7 @@ Ask AI
 
 #### [​](#strictknownmarketplaces) `strictKnownMarketplaces`
 
-**Managed settings only**: Controls which plugin marketplaces users are allowed to add. This setting can only be configured in [`managed-settings.json`](iam.md) and provides administrators with strict control over marketplace sources.
+**Managed settings only**: Controls which plugin marketplaces users are allowed to add. This setting can only be configured in [`managed-settings.json`](permissions.md) and provides administrators with strict control over marketplace sources.
 **Managed settings file locations**:
 
 - **macOS**: `/Library/Application Support/ClaudeCode/managed-settings.json`
@@ -973,7 +921,7 @@ Claude Code has access to a set of powerful tools that help it understand and mo
 | **Write** | Creates or overwrites files | Yes |
 | **LSP** | Code intelligence via language servers. Reports type errors and warnings automatically after file edits. Also supports navigation operations: jump to definitions, find references, get type info, list symbols, find implementations, trace call hierarchies. Requires a [code intelligence plugin](discover-plugins.md) and its language server binary | No |
 
-Permission rules can be configured using `/allowed-tools` or in [permission settings](settings.md). Also see [Tool-specific permission rules](iam.md).
+Permission rules can be configured using `/allowed-tools` or in [permission settings](settings.md). Also see [Tool-specific permission rules](permissions.md).
 
 ### [​](#bash-tool-behavior) Bash tool behavior
 
@@ -1056,10 +1004,9 @@ files by blocking Write operations to certain paths.
 
 ## [​](#see-also) See also
 
-- [Identity and Access Management](iam.md) - Permission system overview and how allow/ask/deny rules interact
-- [Tool-specific permission rules](iam.md) - Detailed patterns for Bash, Read, Edit, WebFetch, MCP, and Task tools, including security limitations
-- [Managed settings](iam.md) - Managed policy configuration for organizations
-- [Troubleshooting](troubleshooting.md) - Solutions for common configuration issues
+- [Permissions](permissions.md): permission system, rule syntax, tool-specific patterns, and managed policies
+- [Authentication](authentication.md): set up user access to Claude Code
+- [Troubleshooting](troubleshooting.md): solutions for common configuration issues
 
 ---
 

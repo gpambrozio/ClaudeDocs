@@ -364,7 +364,7 @@ Ask AI
 claude --disallowedTools "Task(Explore)"
 ```
 
-See [IAM documentation](iam.md) for more details on permission rules.
+See [Permissions documentation](permissions.md) for more details on permission rules.
 
 ### [​](#define-hooks-for-subagents) Define hooks for subagents
 

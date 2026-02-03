@@ -206,7 +206,7 @@ Spend figures in the Console dashboard are estimates for analytics purposes. For
 
 - [Monitoring with OpenTelemetry](monitoring-usage.md): export real-time metrics and events to your observability stack
 - [Manage costs effectively](costs.md): set spend limits and optimize token usage
-- [Identity and access management](iam.md): configure roles and permissions
+- [Permissions](permissions.md): configure roles and permissions
 
 ---
 

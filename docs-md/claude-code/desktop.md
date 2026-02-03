@@ -102,7 +102,7 @@ Control how Claude works using the mode selector next to the send button:
 - **Plan**: Claude creates a detailed plan for your approval before making any changes. Good for complex tasks where you want to review the approach first.
 
 To stop Claude mid-task, click the stop button.
-Remote sessions only support **Code** and **Plan** modes because they continue running in the background without requiring your active participation. See [permission modes](iam.md) for details on how these work internally.
+Remote sessions only support **Code** and **Plan** modes because they continue running in the background without requiring your active participation. See [permission modes](permissions.md) for details on how these work internally.
 
 ### [​](#work-in-parallel-with-sessions) Work in parallel with sessions
 

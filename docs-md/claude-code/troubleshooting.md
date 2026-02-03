@@ -187,7 +187,7 @@ claude doctor # Check installation health
 ### [​](#repeated-permission-prompts) Repeated permission prompts
 
 If you find yourself repeatedly approving the same commands, you can allow specific tools
-to run without approval using the `/permissions` command. See [Permissions docs](iam.md).
+to run without approval using the `/permissions` command. See [Permissions docs](permissions.md).
 
 ### [​](#authentication-issues) Authentication issues
 

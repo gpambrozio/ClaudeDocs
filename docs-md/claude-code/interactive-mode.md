@@ -86,7 +86,7 @@ To create your own commands you can invoke with `/`, see [skills](skills.md).
 | `/mcp` | Manage MCP server connections and OAuth authentication |
 | `/memory` | Edit `CLAUDE.md` memory files |
 | `/model` | Select or change the AI model |
-| `/permissions` | View or update [permissions](iam.md) |
+| `/permissions` | View or update [permissions](permissions.md) |
 | `/plan` | Enter plan mode directly from the prompt |
 | `/rename <name>` | Rename the current session for easier identification |
 | `/resume [session]` | Resume a conversation by ID or name, or open the session picker |

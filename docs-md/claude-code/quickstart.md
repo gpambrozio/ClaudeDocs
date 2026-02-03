@@ -117,7 +117,7 @@ claude
 
 You’ll see the Claude Code welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands or `/resume` to continue a previous conversation.
 
-After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](iam.md).
+After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](authentication.md).
 
 ## [​](#step-4:-ask-your-first-question) Step 4: Ask your first question
 

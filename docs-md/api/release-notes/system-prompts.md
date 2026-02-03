@@ -6,15 +6,21 @@ Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use 
 
 ## Claude Opus 4.5
 
+### January 18, 2026
+
 ### November 24, 2025
 
 ## Claude Haiku 4.5
+
+### January 18, 2026
 
 ### November 19, 2025
 
 ### October 15, 2025
 
 ## Claude Sonnet 4.5
+
+### January 18, 2026
 
 ### November 19, 2025
 

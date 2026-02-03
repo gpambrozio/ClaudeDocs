@@ -403,7 +403,7 @@ All hook events receive these fields via stdin as JSON, in addition to event-spe
 | `session_id` | Current session identifier |
 | `transcript_path` | Path to conversation JSON |
 | `cwd` | Current working directory when the hook is invoked |
-| `permission_mode` | Current [permission mode](iam.md): `"default"`, `"plan"`, `"acceptEdits"`, `"dontAsk"`, or `"bypassPermissions"` |
+| `permission_mode` | Current [permission mode](permissions.md): `"default"`, `"plan"`, `"acceptEdits"`, `"dontAsk"`, or `"bypassPermissions"` |
 | `hook_event_name` | Name of the event that fired |
 
 For example, a `PreToolUse` hook for a Bash command receives this on stdin:

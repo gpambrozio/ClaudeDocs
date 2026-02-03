@@ -84,7 +84,7 @@ Where you store a skill determines who can use it:
 
 | Location | Path | Applies to |
 | --- | --- | --- |
-| Enterprise | See [managed settings](iam.md) | All users in your organization |
+| Enterprise | See [managed settings](permissions.md) | All users in your organization |
 | Personal | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects |
 | Project | `.claude/skills/<skill-name>/SKILL.md` | This project only |
 | Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | Where plugin is enabled |
@@ -456,7 +456,7 @@ The `agent` field specifies which subagent configuration to use. Options include
 
 ### [​](#restrict-claude’s-skill-access) Restrict Claude’s skill access
 
-By default, Claude can invoke any skill that doesn’t have `disable-model-invocation: true` set. Skills that define `allowed-tools` grant Claude access to those tools without per-use approval when the skill is active. Your [permission settings](iam.md) still govern baseline approval behavior for all other tools. Built-in commands like `/compact` and `/init` are not available through the Skill tool.
+By default, Claude can invoke any skill that doesn’t have `disable-model-invocation: true` set. Skills that define `allowed-tools` grant Claude access to those tools without per-use approval when the skill is active. Your [permission settings](permissions.md) still govern baseline approval behavior for all other tools. Built-in commands like `/compact` and `/init` are not available through the Skill tool.
 Three ways to control which skills Claude can invoke:
 **Disable all skills** by denying the Skill tool in `/permissions`:
 
@@ -469,7 +469,7 @@ Ask AI
 Skill
 ```
 
-**Allow or deny specific skills** using [permission rules](iam.md):
+**Allow or deny specific skills** using [permission rules](permissions.md):
 
 Copy
 
@@ -495,7 +495,7 @@ Skills can be distributed at different scopes depending on your audience:
 
 - **Project skills**: Commit `.claude/skills/` to version control
 - **Plugins**: Create a `skills/` directory in your [plugin](plugins.md)
-- **Managed**: Deploy organization-wide through [managed settings](iam.md)
+- **Managed**: Deploy organization-wide through [managed settings](permissions.md)
 
 ### [​](#generate-visual-output) Generate visual output
 
@@ -727,7 +727,7 @@ To increase the limit, set the `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment vari
 - **[Hooks](hooks.md)**: automate workflows around tool events
 - **[Memory](memory.md)**: manage CLAUDE.md files for persistent context
 - **[Interactive mode](interactive-mode.md)**: built-in commands and shortcuts
-- **[Permissions](iam.md)**: control tool and skill access
+- **[Permissions](permissions.md)**: control tool and skill access
 
 ---
 

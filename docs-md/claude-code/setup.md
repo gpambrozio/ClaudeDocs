@@ -269,7 +269,7 @@ Ask AI
 }
 ```
 
-For enterprise deployments, you can enforce a consistent release channel across your organization using [managed settings](iam.md).
+For enterprise deployments, you can enforce a consistent release channel across your organization using [managed settings](permissions.md).
 
 ### [​](#disable-auto-updates) Disable auto-updates
 

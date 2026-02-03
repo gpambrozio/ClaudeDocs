@@ -23,8 +23,8 @@ If your organization has specific infrastructure requirements, compare the optio
 
 Select a deployment option to view setup instructions:
 
-- [Claude for Teams or Enterprise](iam.md)
-- [Anthropic Console](iam.md)
+- [Claude for Teams or Enterprise](authentication.md)
+- [Anthropic Console](authentication.md)
 - [Amazon Bedrock](amazon-bedrock.md)
 - [Google Vertex AI](google-vertex-ai.md)
 - [Microsoft Foundry](microsoft-foundry.md)
