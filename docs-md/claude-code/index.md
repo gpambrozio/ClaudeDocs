@@ -2,6 +2,7 @@
 
 Prerequisites:
 
+- Meet the [system requirements](setup.md)
 - A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise) or [Claude Console](https://console.anthropic.com/) account
 
 **Install Claude Code:**
@@ -124,7 +125,7 @@ Run Claude Code as a standalone application](desktop.md)
 
 Learn more about Claude Code on claude.com](https://claude.com/product/claude-code)[## Build with the Agent SDK
 
-Create custom AI agents with the Claude Agent SDK](https://docs.claude.com/en/docs/agent-sdk/overview)[## Host on AWS or GCP
+Create custom AI agents with the Claude Agent SDK](agent-sdk/overview.md)[## Host on AWS or GCP
 
 Configure Claude Code with Amazon Bedrock or Google Vertex AI](third-party-integrations.md)[## Settings
 

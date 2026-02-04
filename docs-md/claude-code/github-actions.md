@@ -2,8 +2,8 @@
 
 Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project’s standards.
 
-Claude Code GitHub Actions is built on top of the [Claude Code
-SDK](https://docs.claude.com/en/docs/agent-sdk), which enables programmatic integration of
+Claude Code GitHub Actions is built on top of the [Claude
+Agent SDK](agent-sdk/overview.md), which enables programmatic integration of
 Claude Code into your applications. You can use the SDK to build custom
 automation workflows beyond GitHub Actions.
 
@@ -288,14 +288,14 @@ For enterprise environments, you can use Claude Code GitHub Actions with your ow
 
 Before setting up Claude Code GitHub Actions with cloud providers, you need:
 
-#### [​](#for-google-cloud-vertex-ai:) For Google Cloud Vertex AI:
+#### [​](#for-google-cloud-vertex-ai) For Google Cloud Vertex AI:
 
 1. A Google Cloud Project with Vertex AI enabled
 2. Workload Identity Federation configured for GitHub Actions
 3. A service account with the required permissions
 4. A GitHub App (recommended) or use the default GITHUB\_TOKEN
 
-#### [​](#for-aws-bedrock:) For AWS Bedrock:
+#### [​](#for-aws-bedrock) For AWS Bedrock:
 
 1. An AWS account with Amazon Bedrock enabled
 2. GitHub OIDC Identity Provider configured in AWS
@@ -413,7 +413,7 @@ Add Required Secrets
 
 Add the following secrets to your repository (Settings → Secrets and variables → Actions):
 
-#### [​](#for-claude-api-direct-:) For Claude API (Direct):
+#### [​](#for-claude-api-direct-) For Claude API (Direct):
 
 1. **For API Authentication**:
    - `ANTHROPIC_API_KEY`: Your Claude API key from [console.anthropic.com](https://console.anthropic.com)

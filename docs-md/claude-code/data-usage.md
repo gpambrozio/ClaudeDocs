@@ -41,14 +41,14 @@ For full details, please review our [Commercial Terms of Service](https://www.an
 
 For all first party users, you can learn more about what data is logged for [local Claude Code](#local-claude-code-data-flow-and-dependencies) and [remote Claude Code](#cloud-execution-data-flow-and-dependencies). Note for remote Claude Code, Claude accesses the repository where you initiate your Claude Code session. Claude does not access repositories that you have connected but have not started a session in.
 
-## [​](#local-claude-code:-data-flow-and-dependencies) Local Claude Code: Data flow and dependencies
+## [​](#local-claude-code-data-flow-and-dependencies) Local Claude Code: Data flow and dependencies
 
 The diagram below shows how Claude Code connects to external services during installation and normal operation. Solid lines indicate required connections, while dashed lines represent optional or user-initiated data flows.
 ![Diagram showing Claude Code's external connections: install/update connects to NPM, and user requests connect to Anthropic services including Console auth, public-api, and optionally Statsig, Sentry, and bug reporting](https://mintcdn.com/claude-code/I9Dpo7RZuIbc86cX/images/claude-code-data-flow.svg?fit=max&auto=format&n=I9Dpo7RZuIbc86cX&q=85&s=9e77f476347e7c9983f6e211d27cf6a9)
 Claude Code is installed from [NPM](https://www.npmjs.com/package/@anthropic-ai/claude-code). Claude Code runs locally. In order to interact with the LLM, Claude Code sends data over the network. This data includes all user prompts and model outputs. The data is encrypted in transit via TLS and is not encrypted at rest. Claude Code is compatible with most popular VPNs and LLM proxies.
 Claude Code is built on Anthropic’s APIs. For details regarding our API’s security controls, including our API logging procedures, please refer to compliance artifacts offered in the [Anthropic Trust Center](https://trust.anthropic.com).
 
-### [​](#cloud-execution:-data-flow-and-dependencies) Cloud execution: Data flow and dependencies
+### [​](#cloud-execution-data-flow-and-dependencies) Cloud execution: Data flow and dependencies
 
 When using [Claude Code on the web](claude-code-on-the-web.md), sessions run in Anthropic-managed virtual machines instead of locally. In cloud environments:
 

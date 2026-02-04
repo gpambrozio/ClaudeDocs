@@ -1,6 +1,6 @@
 ## [​](#common-installation-issues) Common installation issues
 
-### [​](#windows-installation-issues:-errors-in-wsl) Windows installation issues: errors in WSL
+### [​](#windows-installation-issues-errors-in-wsl) Windows installation issues: errors in WSL
 
 You might encounter the following issues in WSL:
 **OS/platform detection issues**: If you receive an error during installation, WSL may be using Windows `npm`. Try:
@@ -78,12 +78,12 @@ sudo dnf install bubblewrap socat
 
 WSL1 does not support sandboxing. If you see “Sandboxing requires WSL2”, you need to upgrade to WSL2 or run Claude Code without sandboxing.
 
-### [​](#linux-and-mac-installation-issues:-permission-or-command-not-found-errors) Linux and Mac installation issues: permission or command not found errors
+### [​](#linux-and-mac-installation-issues-permission-or-command-not-found-errors) Linux and Mac installation issues: permission or command not found errors
 
 When installing Claude Code with npm, `PATH` problems may prevent access to `claude`.
 You may also encounter permission errors if your npm global prefix is not user writable (for example, `/usr`, or `/usr/local`).
 
-#### [​](#recommended-solution:-native-claude-code-installation) Recommended solution: Native Claude Code installation
+#### [​](#recommended-solution-native-claude-code-installation) Recommended solution: Native Claude Code installation
 
 Claude Code has a native installation that doesn’t depend on npm or Node.js.
 Use the following command to run the native installer.
@@ -125,7 +125,7 @@ This command installs the appropriate build of Claude Code for your operating sy
 
 Make sure that you have the installation directory in your system PATH.
 
-### [​](#windows:-“claude-code-on-windows-requires-git-bash”) Windows: “Claude Code on Windows requires git-bash”
+### [​](#windows-“claude-code-on-windows-requires-git-bash”) Windows: “Claude Code on Windows requires git-bash”
 
 Claude Code on native Windows requires [Git for Windows](https://git-scm.com/downloads/win) which includes Git Bash. If Git is installed but not detected:
 
@@ -142,7 +142,7 @@ Claude Code on native Windows requires [Git for Windows](https://git-scm.com/dow
 
 If Git is installed in a non-standard location, adjust the path accordingly.
 
-### [​](#windows:-“installmethod-is-native,-but-claude-command-not-found”) Windows: “installMethod is native, but claude command not found”
+### [​](#windows-“installmethod-is-native-but-claude-command-not-found”) Windows: “installMethod is native, but claude command not found”
 
 If you see this error after installation, the `claude` command isn’t in your PATH. Add it manually:
 
@@ -372,7 +372,7 @@ If you’re experiencing IDE integration problems on Windows, [create an issue](
 - Claude Code extension/plugin version
 - Shell type: Bash, Zsh, PowerShell, etc.
 
-### [​](#escape-key-not-working-in-jetbrains-intellij,-pycharm,-etc-terminals) Escape key not working in JetBrains (IntelliJ, PyCharm, etc.) terminals
+### [​](#escape-key-not-working-in-jetbrains-intellij-pycharm-etc-terminals) Escape key not working in JetBrains (IntelliJ, PyCharm, etc.) terminals
 
 If you’re using Claude Code in JetBrains terminals and the `Esc` key doesn’t interrupt the agent as expected, this is likely due to a keybinding clash with JetBrains’ default shortcuts.
 To fix this issue:

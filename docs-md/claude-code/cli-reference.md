@@ -40,7 +40,7 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--init-only` | Run initialization hooks and exit (no interactive session) | `claude --init-only` |
 | `--include-partial-messages` | Include partial streaming events in output (requires `--print` and `--output-format=stream-json`) | `claude -p --output-format stream-json --include-partial-messages "query"` |
 | `--input-format` | Specify input format for print mode (options: `text`, `stream-json`) | `claude -p --output-format json --input-format stream-json` |
-| `--json-schema` | Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see [Agent SDK Structured Outputs](https://docs.claude.com/en/docs/agent-sdk/structured-outputs)) | `claude -p --json-schema '{"type":"object","properties":{...}}' "query"` |
+| `--json-schema` | Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only, see [structured outputs](agent-sdk/structured-outputs.md)) | `claude -p --json-schema '{"type":"object","properties":{...}}' "query"` |
 | `--maintenance` | Run maintenance hooks and exit | `claude --maintenance` |
 | `--max-budget-usd` | Maximum dollar amount to spend on API calls before stopping (print mode only) | `claude -p --max-budget-usd 5.00 "query"` |
 | `--max-turns` | Limit the number of agentic turns (print mode only). Exits with an error when the limit is reached. No limit by default | `claude -p --max-turns 3 "query"` |
@@ -52,7 +52,7 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--permission-mode` | Begin in a specified [permission mode](permissions.md) | `claude --permission-mode plan` |
 | `--permission-prompt-tool` | Specify an MCP tool to handle permission prompts in non-interactive mode | `claude -p --permission-prompt-tool mcp_auth_tool "query"` |
 | `--plugin-dir` | Load plugins from directories for this session only (repeatable) | `claude --plugin-dir ./my-plugins` |
-| `--print`, `-p` | Print response without interactive mode (see [SDK documentation](https://docs.claude.com/en/docs/agent-sdk) for programmatic usage details) | `claude -p "query"` |
+| `--print`, `-p` | Print response without interactive mode (see [Agent SDK documentation](agent-sdk/overview.md) for programmatic usage details) | `claude -p "query"` |
 | `--remote` | Create a new [web session](claude-code-on-the-web.md) on claude.ai with the provided task description | `claude --remote "Fix the login bug"` |
 | `--resume`, `-r` | Resume a specific session by ID or name, or show an interactive picker to choose a session | `claude --resume auth-refactor` |
 | `--session-id` | Use a specific session ID for the conversation (must be a valid UUID) | `claude --session-id "550e8400-e29b-41d4-a716-446655440000"` |
@@ -163,7 +163,7 @@ For most use cases, `--append-system-prompt` or `--append-system-prompt-file` is
 - [Quickstart guide](quickstart.md) - Getting started with Claude Code
 - [Common workflows](common-workflows.md) - Advanced workflows and patterns
 - [Settings](settings.md) - Configuration options
-- [SDK documentation](https://docs.claude.com/en/docs/agent-sdk) - Programmatic usage and integrations
+- [Agent SDK documentation](agent-sdk/overview.md) - Programmatic usage and integrations
 
 ---
 

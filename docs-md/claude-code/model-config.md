@@ -82,7 +82,7 @@ The `opusplan` model alias provides an automated hybrid approach:
 This gives you the best of both worlds: Opus’s superior reasoning for planning,
 and Sonnet’s efficiency for execution.
 
-### [​](#extended-context-with-[1m]) Extended context with [1m]
+### [​](#extended-context-with-1m) Extended context with [1m]
 
 For Console/API users, the `[1m]` suffix can be added to full model names to
 enable a

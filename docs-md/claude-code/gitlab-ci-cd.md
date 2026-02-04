@@ -2,7 +2,7 @@
 
 Claude Code for GitLab CI/CD is currently in beta. Features and functionality may evolve as we refine the experience.This integration is maintained by GitLab. For support, see the following [GitLab issue](https://gitlab.com/gitlab-org/gitlab/-/issues/573776).
 
-This integration is built on top of the [Claude Code CLI and SDK](https://docs.claude.com/en/docs/agent-sdk), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
+This integration is built on top of the [Claude Code CLI and Agent SDK](agent-sdk/overview.md), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
 
 ## [​](#why-use-claude-code-with-gitlab) Why use Claude Code with GitLab?
 
@@ -412,7 +412,7 @@ When using Claude Code with GitLab CI/CD, be aware of associated costs:
 - **API costs**:
   - Each Claude interaction consumes tokens based on prompt and response size
   - Token usage varies by task complexity and codebase size
-  - See [Anthropic pricing](https://docs.claude.com/en/docs/about-claude/pricing) for details
+  - See [Anthropic pricing](about-claude/pricing.md) for details
 - **Cost optimization tips**:
   - Use specific `@claude` commands to reduce unnecessary turns
   - Set appropriate `max_turns` and job timeout values

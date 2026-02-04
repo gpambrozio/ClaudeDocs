@@ -97,7 +97,7 @@ Customize how Claude responds:
 - **explanatory-output-style**: Educational insights about implementation choices
 - **learning-output-style**: Interactive learning mode for skill building
 
-## [​](#try-it:-add-the-demo-marketplace) Try it: add the demo marketplace
+## [​](#try-it-add-the-demo-marketplace) Try it: add the demo marketplace
 
 Anthropic also maintains a [demo plugins marketplace](https://github.com/anthropics/claude-code/tree/main/plugins) (`claude-code-plugins`) with example plugins that show what’s possible with the plugin system. Unlike the official marketplace, you need to add this one manually.
 

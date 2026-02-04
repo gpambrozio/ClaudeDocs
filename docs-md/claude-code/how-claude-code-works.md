@@ -205,7 +205,7 @@ Ask AI
 
 Review the plan, refine it through conversation, then let Claude implement. This two-phase approach produces better results than jumping straight to code.
 
-### [​](#delegate,-don’t-dictate) Delegate, don’t dictate
+### [​](#delegate-don’t-dictate) Delegate, don’t dictate
 
 Think of delegating to a capable colleague. Give context and direction, then trust Claude to figure out the details:
 

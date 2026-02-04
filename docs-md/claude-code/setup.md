@@ -1,6 +1,11 @@
 ## [​](#system-requirements) System requirements
 
-- **Operating Systems**: macOS 13.0+, Ubuntu 20.04+/Debian 10+, or Windows 10 1809+ / Windows Server 2019+ (with WSL 1, WSL 2, or Git for Windows)
+- **Operating System**:
+  - macOS 13.0+
+  - Windows 10 1809+ or Windows Server 2019+ ([see setup notes](#platform-specific-setup))
+  - Ubuntu 20.04+
+  - Debian 10+
+  - Alpine Linux 3.19+ ([additional dependencies required](#platform-specific-setup))
 - **Hardware**: 4 GB+ RAM
 - **Network**: Internet connection required (see [network configuration](network-config.md))
 - **Shell**: Works best in Bash or Zsh
@@ -86,7 +91,20 @@ If you encounter any issues during installation, consult the [troubleshooting gu
 
 Run `claude doctor` after installation to check your installation type and version.
 
-**Alpine Linux and other musl/uClibc-based distributions**: The native installer requires `libgcc`, `libstdc++`, and `ripgrep`. For Alpine: `apk add libgcc libstdc++ ripgrep`. Set `USE_BUILTIN_RIPGREP=0`.
+### [​](#platform-specific-setup) Platform-specific setup
+
+**Windows**: Run Claude Code natively (requires [Git Bash](https://git-scm.com/downloads/win)) or inside WSL. Both WSL 1 and WSL 2 are supported, but WSL 1 has limited support and does not support features like Bash tool sandboxing.
+**Alpine Linux and other musl/uClibc-based distributions**:
+The native installer on Alpine and other musl/uClibc-based distributions requires `libgcc`, `libstdc++`, and `ripgrep`. Install these using your distribution’s package manager, then set `USE_BUILTIN_RIPGREP=0`.
+On Alpine:
+
+Copy
+
+Ask AI
+
+```shiki
+apk add libgcc libstdc++ ripgrep
+```
 
 ### [​](#authentication) Authentication
 

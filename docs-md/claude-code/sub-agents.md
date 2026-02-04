@@ -55,7 +55,7 @@ Claude Code includes additional helper agents for specific tasks. These are typi
 
 Beyond these built-in subagents, you can create your own with custom prompts, tool restrictions, permission modes, hooks, and skills. The following sections show how to get started and customize subagents.
 
-## [​](#quickstart:-create-your-first-subagent) Quickstart: create your first subagent
+## [​](#quickstart-create-your-first-subagent) Quickstart: create your first subagent
 
 Subagents are defined in Markdown files with YAML frontmatter. You can [create them manually](#write-subagent-files) or use the `/agents` command.
 This walkthrough guides you through creating a user-level subagent with the `/agent` command. The subagent reviews code and suggests improvements for the codebase.

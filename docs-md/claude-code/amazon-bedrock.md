@@ -169,7 +169,7 @@ export ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-in
 export DISABLE_PROMPT_CACHING=1
 ```
 
-[Prompt caching](https://docs.claude.com/en/docs/build-with-claude/prompt-caching) may not be available in all regions.
+[Prompt caching](build-with-claude/prompt-caching.md) may not be available in all regions.
 
 ### [​](#5-output-token-configuration) 5. Output token configuration
 

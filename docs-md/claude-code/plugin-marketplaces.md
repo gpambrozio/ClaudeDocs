@@ -14,7 +14,7 @@ Creating and distributing a marketplace involves:
 
 Once your marketplace is live, you can update it by pushing changes to your repository. Users refresh their local copy with `/plugin marketplace update`.
 
-## [​](#walkthrough:-create-a-local-marketplace) Walkthrough: create a local marketplace
+## [​](#walkthrough-create-a-local-marketplace) Walkthrough: create a local marketplace
 
 This example creates a marketplace with one plugin: a `/review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
 

@@ -359,7 +359,7 @@ Ask AI
 claude --permission-mode plan -p "Analyze the authentication system and suggest improvements"
 ```
 
-### [​](#example:-planning-a-complex-refactor) Example: Planning a complex refactor
+### [​](#example-planning-a-complex-refactor) Example: Planning a complex refactor
 
 Copy
 
@@ -730,7 +730,7 @@ Tips:
 
 ## [​](#use-extended-thinking-thinking-mode) Use extended thinking (thinking mode)
 
-[Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) is enabled by default, reserving a portion of the output token budget (up to 31,999 tokens) for Claude to reason through complex problems step-by-step. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`.
+[Extended thinking](build-with-claude/extended-thinking.md) is enabled by default, reserving a portion of the output token budget (up to 31,999 tokens) for Claude to reason through complex problems step-by-step. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`.
 Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches. It provides more space for exploring multiple solutions, analyzing edge cases, and self-correcting mistakes.
 
 Phrases like “think”, “think hard”, “ultrathink”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.
@@ -991,7 +991,7 @@ Tips:
 - Customize the prompt to check for specific issues relevant to your project
 - Consider creating multiple scripts for different types of verification
 
-### [​](#pipe-in,-pipe-out) Pipe in, pipe out
+### [​](#pipe-in-pipe-out) Pipe in, pipe out
 
 Suppose you want to pipe data into Claude, and get back data in a structured format.
 **Pipe data through Claude:**

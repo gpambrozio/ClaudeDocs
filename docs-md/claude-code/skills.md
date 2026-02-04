@@ -422,7 +422,7 @@ Skills and [subagents](sub-agents.md) work together in two directions:
 
 With `context: fork`, you write the task in your skill and pick an agent type to execute it. For the inverse (defining a custom subagent that uses skills as reference material), see [Subagents](sub-agents.md).
 
-#### [​](#example:-research-skill-using-explore-agent) Example: Research skill using Explore agent
+#### [​](#example-research-skill-using-explore-agent) Example: Research skill using Explore agent
 
 This skill runs research in a forked Explore agent. The skill content becomes the task, and the agent provides read-only tools optimized for codebase exploration:
 

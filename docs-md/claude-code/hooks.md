@@ -1354,7 +1354,7 @@ Ask AI
 | `ok` | `true` allows the action, `false` prevents it |
 | `reason` | Required when `ok` is `false`. Explanation shown to Claude |
 
-### [​](#example:-multi-criteria-stop-hook) Example: Multi-criteria Stop hook
+### [​](#example-multi-criteria-stop-hook) Example: Multi-criteria Stop hook
 
 This `Stop` hook uses a detailed prompt to check three conditions before allowing Claude to stop. If `"ok"` is `false`, Claude continues working with the provided reason as its next instruction. `SubagentStop` hooks use the same format to evaluate whether a [subagent](sub-agents.md) should stop:
 
@@ -1471,7 +1471,7 @@ The `timeout` field sets the maximum time in seconds for the background process.
 When an async hook fires, Claude Code starts the hook process and immediately continues without waiting for it to finish. The hook receives the same JSON input via stdin as a synchronous hook.
 After the background process exits, if the hook produced a JSON response with a `systemMessage` or `additionalContext` field, that content is delivered to Claude as context on the next conversation turn.
 
-### [​](#example:-run-tests-after-file-changes) Example: run tests after file changes
+### [​](#example-run-tests-after-file-changes) Example: run tests after file changes
 
 This hook starts a test suite in the background whenever Claude writes a file, then reports the results back to Claude when the tests finish. Save this script to `.claude/hooks/run-tests-async.sh` in your project and make it executable with `chmod +x`:
 

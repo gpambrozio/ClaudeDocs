@@ -31,7 +31,7 @@ Your verification can also be a test suite, a linter, or a Bash command that che
 
 ---
 
-## [​](#explore-first,-then-plan,-then-code) Explore first, then plan, then code
+## [​](#explore-first-then-plan-then-code) Explore first, then plan, then code
 
 Separate research and planning from implementation to avoid solving the wrong problem.
 

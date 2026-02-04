@@ -22,7 +22,7 @@ Ask AI
 
 ```shiki
 {
-  "$schema": "https://platform.claude.com/docs/schemas/claude-code/keybindings.json",
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
   "$docs": "https://code.claude.com/docs/en/keybindings",
   "bindings": [
     {
