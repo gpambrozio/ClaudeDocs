@@ -169,6 +169,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release | `"stable"` |
 | `spinnerTipsEnabled` | Show tips in the spinner while Claude is working. Set to `false` to disable tips (default: `true`) | `false` |
 | `terminalProgressBarEnabled` | Enable the terminal progress bar that shows progress in supported terminals like Windows Terminal and iTerm2 (default: `true`) | `false` |
+| `prefersReducedMotion` | Reduce or disable UI animations (spinners, shimmer, flash effects) for accessibility | `true` |
 
 ### [​](#permission-settings) Permission settings
 
@@ -882,6 +883,8 @@ All environment variables can also be configured in [`settings.json`](#available
 | `IS_DEMO` | Set to `true` to enable demo mode: hides email and organization from the UI, skips onboarding, and hides internal commands. Useful for streaming or recording sessions |  |
 | `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens (default: 25000) |  |
 | `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. Thinking is enabled at max budget (31,999 tokens) by default. Use this to limit the budget (for example, `MAX_THINKING_TOKENS=10000`) or disable thinking entirely (`MAX_THINKING_TOKENS=0`). Extended thinking improves performance on complex reasoning and coding tasks but impacts [prompt caching efficiency](build-with-claude/prompt-caching.md). |  |
+| `MCP_CLIENT_SECRET` | OAuth client secret for MCP servers that require [pre-configured credentials](mcp.md). Avoids the interactive prompt when adding a server with `--client-secret` |  |
+| `MCP_OAUTH_CALLBACK_PORT` | Fixed port for the OAuth redirect callback, as an alternative to `--callback-port` when adding an MCP server with [pre-configured credentials](mcp.md) |  |
 | `MCP_TIMEOUT` | Timeout in milliseconds for MCP server startup |  |
 | `MCP_TOOL_TIMEOUT` | Timeout in milliseconds for MCP tool execution |  |
 | `NO_PROXY` | List of domains and IPs to which requests will be directly issued, bypassing proxy |  |

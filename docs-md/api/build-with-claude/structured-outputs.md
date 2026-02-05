@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 These features can be used independently or together in the same request.
 
-Structured outputs are generally available on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
 
 **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See code examples below for the updated API shape.
 

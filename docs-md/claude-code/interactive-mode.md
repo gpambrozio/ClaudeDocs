@@ -78,6 +78,7 @@ To create your own commands you can invoke with `/`, see [skills](skills.md).
 | `/config` | Open the Settings interface (Config tab) |
 | `/context` | Visualize current context usage as a colored grid |
 | `/cost` | Show token usage statistics. See [cost tracking guide](costs.md) for subscription-specific details. |
+| `/debug [description]` | Troubleshoot the current session by reading the session debug log. Optionally describe the issue |
 | `/doctor` | Checks the health of your Claude Code installation |
 | `/exit` | Exit the REPL |
 | `/export [filename]` | Export the current conversation to a file or clipboard |
@@ -85,7 +86,7 @@ To create your own commands you can invoke with `/`, see [skills](skills.md).
 | `/init` | Initialize project with `CLAUDE.md` guide |
 | `/mcp` | Manage MCP server connections and OAuth authentication |
 | `/memory` | Edit `CLAUDE.md` memory files |
-| `/model` | Select or change the AI model |
+| `/model` | Select or change the AI model. The change takes effect immediately without waiting for the current response to finish |
 | `/permissions` | View or update [permissions](permissions.md) |
 | `/plan` | Enter plan mode directly from the prompt |
 | `/rename <name>` | Rename the current session for easier identification |

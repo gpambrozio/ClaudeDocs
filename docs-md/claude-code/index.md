@@ -79,6 +79,8 @@ You’ll be prompted to log in on first use. That’s it! [Continue with Quickst
 
 See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [troubleshooting](troubleshooting.md) if you hit issues.
 
+Claude Code also runs in [VS Code](vs-code.md), [JetBrains IDEs](jetbrains.md), as a [desktop app](desktop.md), [on the web](claude-code-on-the-web.md), and in [Slack](slack.md). See [all platforms](#use-claude-code-everywhere) below.
+
 ## [​](#what-claude-code-does-for-you) What Claude Code does for you
 
 - **Build features from descriptions**: Tell Claude what you want to build in plain English. It will make a plan, write the code, and ensure it works.
@@ -88,7 +90,7 @@ See [advanced setup](setup.md) for installation options, manual updates, or unin
 
 ## [​](#why-developers-love-claude-code) Why developers love Claude Code
 
-- **Works in your terminal**: Not another chat window. Not another IDE. Claude Code meets you where you already work, with the tools you already love.
+- **Meets you where you work**: Use Claude Code in your terminal, your IDE, or a standalone desktop app. It integrates with the tools you already use.
 - **Takes action**: Claude Code can directly edit files, run commands, and create commits. Need more? [MCP](mcp.md) lets Claude read your design docs in Google Drive, update your tickets in Jira, or use *your* custom developer tooling.
 - **Unix philosophy**: Claude Code is composable and scriptable. `tail -f app.log | claude -p "Slack me if you see any anomalies appear in this log stream"` *works*. Your CI can run `claude -p "If there are new text strings, translate them into French and raise a PR for @lang-fr-team to review"`.
 - **Enterprise-ready**: Use the Claude API, or host on AWS or GCP. Enterprise-grade [security](security.md), [privacy](data-usage.md), and [compliance](https://trust.anthropic.com/) is built-in.
