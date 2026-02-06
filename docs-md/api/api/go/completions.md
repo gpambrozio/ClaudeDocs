@@ -42,6 +42,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance

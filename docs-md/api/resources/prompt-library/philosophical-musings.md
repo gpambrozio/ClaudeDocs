@@ -39,7 +39,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=1,
     system="Your task is to discuss a philosophical concept or thought experiment on the given topic. Briefly explain the concept, present the main arguments and implications, and encourage critical thinking by posing open-ended questions. Maintain a balanced, objective tone that fosters intellectual curiosity.",

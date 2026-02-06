@@ -1713,27 +1713,17 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+Optional<String> inferenceGeo
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 Optional<[Metadata](api/messages.md)> metadata
 
 An object describing metadata about the request.
 
-Optional<OutputConfig> outputConfig
+Optional<[OutputConfig](api/messages.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
-
-Optional<Format> format
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-Schema schema
-
-The JSON schema of the format
-
-JsonValue; type "json\_schema"constant"json\_schema"constant
-
-Accepts one of the following:
-
-JSON\_SCHEMA("json\_schema")
 
 Optional<ServiceTier> serviceTier
 
@@ -2040,6 +2030,10 @@ Optional<String> description
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Optional<Boolean> strict
 
@@ -2651,6 +2645,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -2826,6 +2824,10 @@ The number of input tokens read from the cache.
 
 minimum0
 
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
 long inputTokens
 
 The number of input tokens which were used.
@@ -2882,7 +2884,7 @@ public final class Main {
         MessageCreateParams params = MessageCreateParams.builder()
             .maxTokens(1024L)
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_SONNET_4_5_20250929)
+            .model(Model.CLAUDE_OPUS_4_6)
             .build();
         Message message = client.messages().create(params);
     }
@@ -2911,7 +2913,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -2923,6 +2925,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {
@@ -2957,7 +2960,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -2969,6 +2972,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {

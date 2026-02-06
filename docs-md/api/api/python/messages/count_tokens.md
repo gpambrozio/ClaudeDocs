@@ -1703,12 +1703,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]
+UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-6` - Most intelligent model for building agents and coding
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -1731,6 +1732,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -1814,11 +1819,25 @@ Our previous most fast and cost-effective
 
 UnionMember1 = str
 
-output\_config: Optional[[OutputConfig](api/messages/count_tokens.md)]
+output\_config: Optional[[OutputConfigParam](api/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
-format: Optional[OutputConfigFormat]
+effort: Optional[Literal["low", "medium", "high", "max"]]
+
+All possible effort levels.
+
+Accepts one of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"max"
+
+format: Optional[JSONOutputFormat]
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -2008,6 +2027,14 @@ type: Literal["disabled"]
 Accepts one of the following:
 
 "disabled"
+
+class ThinkingConfigAdaptive: …
+
+type: Literal["adaptive"]
+
+Accepts one of the following:
+
+"adaptive"
 
 tool\_choice: Optional[[ToolChoiceParam](api/messages.md)]
 
@@ -2203,6 +2230,10 @@ description: Optional[str]
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: Optional[bool]
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: Optional[bool]
 
@@ -2545,7 +2576,7 @@ message_tokens_count = client.messages.count_tokens(
         "content": "string",
         "role": "user",
     }],
-    model="claude-opus-4-5-20251101",
+    model="claude-opus-4-6",
 )
 print(message_tokens_count.input_tokens)
 ```

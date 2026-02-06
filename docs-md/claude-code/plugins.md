@@ -207,7 +207,7 @@ You’ve created a plugin with a skill, but plugins can include much more: custo
 
 | Directory | Location | Purpose |
 | --- | --- | --- |
-| `.claude-plugin/` | Plugin root | Contains only `plugin.json` manifest (required) |
+| `.claude-plugin/` | Plugin root | Contains `plugin.json` manifest (optional if components use default locations) |
 | `commands/` | Plugin root | Skills as Markdown files |
 | `agents/` | Plugin root | Custom agent definitions |
 | `skills/` | Plugin root | Agent Skills with `SKILL.md` files |

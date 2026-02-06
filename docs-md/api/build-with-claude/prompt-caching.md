@@ -14,7 +14,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "system": [
       {
@@ -83,6 +83,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 | Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | --- | --- | --- | --- | --- | --- |
+| Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.1 | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
 | Claude Opus 4 | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
@@ -100,6 +101,8 @@ The table above reflects the following pricing multipliers for prompt caching:
 - 1-hour cache write tokens are 2 times the base input tokens price
 - Cache read tokens are 0.1 times the base input tokens price
 
+These multipliers stack with other pricing modifiers such as the Batch API discount, long context pricing, and data residency. See [pricing](about-claude/pricing.md) for full details.
+
 ---
 
 ## How to implement prompt caching
@@ -108,6 +111,7 @@ The table above reflects the following pricing multipliers for prompt caching:
 
 Prompt caching is currently supported on:
 
+- Claude Opus 4.6
 - Claude Opus 4.5
 - Claude Opus 4.1
 - Claude Opus 4
@@ -159,8 +163,8 @@ You can define up to 4 cache breakpoints if you want to:
 
 The minimum cacheable prompt length is:
 
-- 4096 tokens for Claude Opus 4.5
-- 1024 tokens for Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
+- 4096 tokens for Claude Opus 4.6, Claude Opus 4.5
+- 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
 - 4096 tokens for Claude Haiku 4.5
 - 2048 tokens for Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md)) and Claude Haiku 3
 

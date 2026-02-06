@@ -1,12 +1,12 @@
-# Update Api Key
+# Update API Key
 
 Copy page
 
-# Update Api Key
+# Update API Key
 
 post/v1/organizations/api\_keys/{api\_key\_id}
 
-Update Api Key
+Update API Key
 
 ##### Path ParametersExpand Collapse
 
@@ -94,13 +94,14 @@ Accepts one of the following:
 
 workspace\_id: string
 
-ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-Update Api Key
+Update API Key
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{}'
 ```

@@ -48,7 +48,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [
       {
@@ -196,7 +196,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [
       {
@@ -218,7 +218,7 @@ Claude will use the text editor tool first to view the file:
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -249,7 +249,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [
       {
@@ -303,7 +303,7 @@ Claude will identify the syntax error and use the `str_replace` command to fix i
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -332,7 +332,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[
         {
@@ -381,7 +381,7 @@ Finally, Claude will provide a complete explanation of the fix:
 ```shiki
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [

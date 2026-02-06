@@ -67,7 +67,7 @@ client = anthropic.Anthropic(
   api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=1000,
   temperature=0,
   system="Your task is to analyze the provided Python code snippet, identify any bugs or errors present, and provide a corrected version of the code that resolves these issues. Explain the problems you found in the original code and how your fixes address them. The corrected code should be functional, efficient, and adhere to best practices in Python programming.",

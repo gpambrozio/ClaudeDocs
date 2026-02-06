@@ -18,8 +18,9 @@ Programmatic tool calling is available on the following models:
 
 | Model | Tool Version |
 | --- | --- |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
+| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
 
 Programmatic tool calling is available via the Claude API and Microsoft Foundry.
 
@@ -36,7 +37,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: advanced-tool-use-2025-11-20" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [
             {
@@ -169,7 +170,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     messages=[{
@@ -238,7 +239,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container

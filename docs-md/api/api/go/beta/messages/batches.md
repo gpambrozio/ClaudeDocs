@@ -1223,6 +1223,24 @@ Accepts one of the following:
 
 const ContainerUploadContainerUpload ContainerUpload = "container\_upload"
 
+type BetaCompactionBlock struct{…}
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Content string
+
+Summary of compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
 ContextManagement [BetaContextManagementResponse](api/beta.md)
 
 Context management response.
@@ -1294,6 +1312,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -1414,6 +1436,8 @@ const BetaStopReasonToolUse [BetaStopReason](api/beta.md) = "tool\_use"
 
 const BetaStopReasonPauseTurn [BetaStopReason](api/beta.md) = "pause\_turn"
 
+const BetaStopReasonCompaction [BetaStopReason](api/beta.md) = "compaction"
+
 const BetaStopReasonRefusal [BetaStopReason](api/beta.md) = "refusal"
 
 const BetaStopReasonModelContextWindowExceeded [BetaStopReason](api/beta.md) = "model\_context\_window\_exceeded"
@@ -1474,11 +1498,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
 
 minimum0
+
+Iterations []BetaUsageIterationUnion
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+type BetaMessageIterationUsage struct{…}
+
+Token usage for a sampling iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+const MessageMessage Message = "message"
+
+type BetaCompactionIterationUsage struct{…}
+
+Token usage for a compaction iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
 
 OutputTokens int64
 
@@ -2601,6 +2745,24 @@ Accepts one of the following:
 
 const ContainerUploadContainerUpload ContainerUpload = "container\_upload"
 
+type BetaCompactionBlock struct{…}
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Content string
+
+Summary of compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
 ContextManagement [BetaContextManagementResponse](api/beta.md)
 
 Context management response.
@@ -2672,6 +2834,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -2792,6 +2958,8 @@ const BetaStopReasonToolUse [BetaStopReason](api/beta.md) = "tool\_use"
 
 const BetaStopReasonPauseTurn [BetaStopReason](api/beta.md) = "pause\_turn"
 
+const BetaStopReasonCompaction [BetaStopReason](api/beta.md) = "compaction"
+
 const BetaStopReasonRefusal [BetaStopReason](api/beta.md) = "refusal"
 
 const BetaStopReasonModelContextWindowExceeded [BetaStopReason](api/beta.md) = "model\_context\_window\_exceeded"
@@ -2852,11 +3020,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
 
 minimum0
+
+Iterations []BetaUsageIterationUnion
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+type BetaMessageIterationUsage struct{…}
+
+Token usage for a sampling iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+const MessageMessage Message = "message"
+
+type BetaCompactionIterationUsage struct{…}
+
+Token usage for a compaction iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
 
 OutputTokens int64
 
@@ -3941,6 +4229,24 @@ Accepts one of the following:
 
 const ContainerUploadContainerUpload ContainerUpload = "container\_upload"
 
+type BetaCompactionBlock struct{…}
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Content string
+
+Summary of compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
 ContextManagement [BetaContextManagementResponse](api/beta.md)
 
 Context management response.
@@ -4012,6 +4318,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -4132,6 +4442,8 @@ const BetaStopReasonToolUse [BetaStopReason](api/beta.md) = "tool\_use"
 
 const BetaStopReasonPauseTurn [BetaStopReason](api/beta.md) = "pause\_turn"
 
+const BetaStopReasonCompaction [BetaStopReason](api/beta.md) = "compaction"
+
 const BetaStopReasonRefusal [BetaStopReason](api/beta.md) = "refusal"
 
 const BetaStopReasonModelContextWindowExceeded [BetaStopReason](api/beta.md) = "model\_context\_window\_exceeded"
@@ -4192,11 +4504,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
 
 minimum0
+
+Iterations []BetaUsageIterationUnion
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+type BetaMessageIterationUsage struct{…}
+
+Token usage for a sampling iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+const MessageMessage Message = "message"
+
+type BetaCompactionIterationUsage struct{…}
+
+Token usage for a compaction iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
 
 OutputTokens int64
 

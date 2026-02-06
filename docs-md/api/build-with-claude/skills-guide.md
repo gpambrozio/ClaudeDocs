@@ -68,7 +68,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -113,7 +113,7 @@ client = anthropic.Anthropic()
 
 # Step 1: Use a Skill to create a file
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -191,7 +191,7 @@ Python
 ```shiki
 # First request creates container
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -211,7 +211,7 @@ messages = [
 ]
 
 response2 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -236,7 +236,7 @@ messages = [{"role": "user", "content": "Process this large dataset"}]
 max_retries = 10
 
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -255,7 +255,7 @@ for i in range(max_retries):
 
     messages.append({"role": "assistant", "content": response.content})
     response = client.beta.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-opus-4-6",
         max_tokens=4096,
         betas=["code-execution-2025-08-25", "skills-2025-10-02"],
         container={
@@ -279,7 +279,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -468,7 +468,7 @@ new_version = client.beta.skills.versions.create(
 
 # Use specific version
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -484,7 +484,7 @@ response = client.beta.messages.create(
 
 # Use latest version
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -576,7 +576,7 @@ dcf_skill = client.beta.skills.create(
 
 # Use with Excel to create financial model
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -670,7 +670,7 @@ Python
 ```shiki
 # First request creates cache
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31"],
     container={
@@ -684,7 +684,7 @@ response1 = client.beta.messages.create(
 
 # Adding/removing Skills breaks cache
 response2 = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02", "prompt-caching-2024-07-31"],
     container={
@@ -709,7 +709,7 @@ Python
 ```shiki
 try:
     response = client.beta.messages.create(
-        model="claude-sonnet-4-5-20250929",
+        model="claude-opus-4-6",
         max_tokens=4096,
         betas=["code-execution-2025-08-25", "skills-2025-10-02"],
         container={

@@ -1,6 +1,9 @@
 # Create custom subagents
 
 Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.
+
+If you need multiple agents working in parallel and communicating with each other, see [agent teams](agent-teams.md) instead. Subagents work within a single session; agent teams coordinate across separate sessions.
+
 Subagents help you:
 
 - **Preserve context** by keeping exploration and implementation out of your main conversation
@@ -294,7 +297,7 @@ This is the inverse of [running a skill in a subagent](skills.md). With `skills`
 
 #### [​](#enable-persistent-memory) Enable persistent memory
 
-The `memory` field designates a persistent directory for the subagent to write to across conversations. The subagent uses this directory to build up knowledge over time: codebase patterns, debugging insights, architectural decisions, and other learnings.
+The `memory` field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as codebase patterns, debugging insights, and architectural decisions.
 
 Copy
 
@@ -337,7 +340,7 @@ When memory is enabled:
   Ask AI
 
   ```shiki
-  **Update your agent memory** as you discover codepaths, patterns, library
+  Update your agent memory as you discover codepaths, patterns, library
   locations, and key architectural decisions. This builds up institutional
   knowledge across conversations. Write concise notes about what you found
   and where.
@@ -561,6 +564,8 @@ Research the authentication, database, and API modules in parallel using separat
 Each subagent explores its area independently, then Claude synthesizes the findings. This works best when the research paths don’t depend on each other.
 
 When subagents complete, their results return to your main conversation. Running many subagents that each return detailed results can consume significant context.
+
+For tasks that need sustained parallelism or exceed your context window, [agent teams](agent-teams.md) give each worker its own independent context.
 
 #### [​](#chain-subagents) Chain subagents
 

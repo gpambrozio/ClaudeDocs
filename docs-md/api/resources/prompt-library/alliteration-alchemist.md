@@ -46,7 +46,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1000,
     temperature=1,
     system="Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",

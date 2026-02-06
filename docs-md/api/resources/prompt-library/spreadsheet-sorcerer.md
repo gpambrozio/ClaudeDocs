@@ -44,7 +44,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1000,
     temperature=0,
     system="Your task is to generate a CSV spreadsheet containing the specified type of data. The spreadsheet should be well-organized, with clear column headers and appropriate data types for each column. Ensure that the data is realistic, diverse, and formatted consistently. Include a minimum of 10 rows of data, not counting the header row.",

@@ -7,9 +7,11 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
+The `output_format` parameter has been moved to `output_config.format`. The old `output_format` parameter still works temporarily but is deprecated and will be removed in a future API version. Update your code to use `output_config: {format: {...}}` instead.
+
 These features can be used independently or together in the same request.
 
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
 
 **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See code examples below for the updated API shape.
 
@@ -47,7 +49,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -107,6 +109,8 @@ curl https://api.anthropic.com/v1/messages \
 
 The Python and TypeScript SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
+SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
+
 #### Using Pydantic and Zod
 
 For Python and TypeScript developers, you can use familiar schema definition tools like Pydantic and Zod instead of writing raw JSON schemas.
@@ -127,7 +131,7 @@ client = Anthropic()
 
 # With .create() - requires transform_schema()
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -147,7 +151,7 @@ print(response.content[0].text)
 
 # With .parse() - can pass Pydantic model directly
 response = client.messages.parse(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -228,7 +232,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "What is the weather in San Francisco?"}
@@ -310,7 +314,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Help me plan a trip to Paris for next month"}],
     # JSON outputs: structured response format
@@ -427,7 +431,7 @@ For persistent issues with valid schemas, [contact support](https://support.clau
 **Incompatible with:**
 
 - **[Citations](build-with-claude/citations.md)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
-- **[Message Prefilling](build-with-claude/prompt-engineering/prefill-claudes-response.md)**: Incompatible with JSON outputs
+- **Message Prefilling**: Incompatible with JSON outputs
 
 **Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 

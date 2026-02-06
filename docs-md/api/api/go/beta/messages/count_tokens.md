@@ -2924,6 +2924,53 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+type BetaCompactionBlockParamResp struct{…}
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+Content string
+
+Summary of previously compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+Accepts one of the following:
+
+const EphemeralEphemeral Ephemeral = "ephemeral"
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -3263,6 +3310,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 InputExamples []map[string, any]optional
 
@@ -4578,7 +4629,7 @@ func main() {
       }},
       Role: anthropic.BetaMessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_5_20251101,
+    Model: anthropic.ModelClaudeOpus4_6,
   })
   if err != nil {
     panic(err.Error())

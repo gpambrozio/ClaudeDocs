@@ -31,6 +31,7 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 
 | Model | Vertex AI API model ID |
 | --- | --- |
+| Claude Opus 4.6 | claude-opus-4-6 |
 | Claude Sonnet 4.5 | claude-sonnet-4-5@20250929 |
 | Claude Sonnet 4 | claude-sonnet-4@20250514 |
 | Claude Sonnet 3.7 ⚠️ | claude-3-7-sonnet@20250219 |
@@ -58,7 +59,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-6",
     max_tokens=100,
     messages=[
         {
@@ -129,7 +130,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-6",
     max_tokens=100,
     messages=[
         {
@@ -156,7 +157,7 @@ region = "us-east1"  # Specify a specific region
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-sonnet-4-5@20250929",
+    model="claude-opus-4-6",
     max_tokens=100,
     messages=[
         {

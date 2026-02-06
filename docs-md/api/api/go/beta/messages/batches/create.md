@@ -2954,6 +2954,53 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+type BetaCompactionBlockParamResp struct{…}
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+Content string
+
+Summary of previously compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+Accepts one of the following:
+
+const EphemeralEphemeral Ephemeral = "ephemeral"
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -2977,6 +3024,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -3228,6 +3279,40 @@ Accepts one of the following:
 
 const AllAll All = "all"
 
+type BetaCompact20260112Edit struct{…}
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+Type Compact20260112
+
+Accepts one of the following:
+
+const Compact20260112Compact20260112 Compact20260112 = "compact\_20260112"
+
+Instructions stringoptional
+
+Additional instructions for summarization.
+
+PauseAfterCompaction booloptional
+
+Whether to pause after compaction and return the compaction block to the user.
+
+Trigger [BetaInputTokensTrigger](api/beta.md)optional
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+Type InputTokens
+
+Accepts one of the following:
+
+const InputTokensInputTokens InputTokens = "input\_tokens"
+
+Value int64
+
+InferenceGeo stringoptional
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 MCPServers [][BetaRequestMCPServerURLDefinition](api/beta.md)optional
 
 MCP servers to be utilized in this request
@@ -3268,9 +3353,7 @@ Configuration options for the model's output, such as the output format.
 
 Effort BetaOutputConfigEffortoptional
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3279,6 +3362,8 @@ const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"
 const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
+
+const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
 
@@ -3523,6 +3608,14 @@ Accepts one of the following:
 
 const DisabledDisabled Disabled = "disabled"
 
+type BetaThinkingConfigAdaptive struct{…}
+
+Type Adaptive
+
+Accepts one of the following:
+
+const AdaptiveAdaptive Adaptive = "adaptive"
+
 ToolChoice [BetaToolChoiceUnion](api/beta.md)optional
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3729,6 +3822,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 InputExamples []map[string, any]optional
 
@@ -5158,7 +5255,7 @@ func main() {
           }},
           Role: anthropic.BetaMessageParamRoleUser,
         }},
-        Model: anthropic.ModelClaudeSonnet4_5_20250929,
+        Model: anthropic.ModelClaudeOpus4_6,
       },
     }},
   })

@@ -94,7 +94,9 @@ If you're hitting OTPM limits earlier than expected, try reducing `max_tokens` t
 Rate limits are applied separately for each model; therefore you can use different models up to their respective limits simultaneously.
 You can check your current rate limits and behavior in the [Claude Console](/settings/limits).
 
-For long context requests (>200K tokens) when using the `context-1m-2025-08-07` beta header with Claude Sonnet 4.x, separate rate limits apply. See [Long context rate limits](#long-context-rate-limits) below.
+Rate limits are currently shared across all `inference_geo` values. Requests with `inference_geo: "us"` and `inference_geo: "global"` draw from the same rate limit pool.
+
+For long context requests (>200K tokens) when using the `context-1m-2025-08-07` beta header with Claude Opus 4.x or Sonnet 4.x, separate rate limits apply. See [Long context rate limits](#long-context-rate-limits) below.
 
 Tier 1
 
@@ -125,9 +127,9 @@ Custom
 | Claude Haiku 3 | 50 | 50,000† | 10,000 |
 | Claude Opus 4.x\* | 50 | 30,000 | 8,000 |
 
-*\* - Opus 4.x rate limit is a total limit that applies to combined traffic across Opus 4, Opus 4.1, and Opus 4.5.*
+*\* - Opus rate limit is a total limit that applies to combined traffic across Opus 4.6, Opus 4.5, Opus 4.1, and Opus 4.*
 
-*\*\* - Sonnet 4.x rate limit is a total limit that applies to combined traffic across both Sonnet 4 and Sonnet 4.5.*
+*\*\* - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.5 and Sonnet 4.*
 
 *† - Limit counts `cache_read_input_tokens` towards ITPM usage.*
 
@@ -161,9 +163,9 @@ Custom
 
 ### Long context rate limits
 
-When using Claude Sonnet 4 and Sonnet 4.5 with the [1M token context window enabled](build-with-claude/context-windows.md), the following dedicated rate limits apply to requests exceeding 200K tokens.
+When using Claude Opus 4.6, Sonnet 4.5, or Sonnet 4 with the [1M token context window enabled](build-with-claude/context-windows.md), the following dedicated rate limits apply to requests exceeding 200K tokens.
 
-The 1M token context window is currently in beta for organizations in usage tier 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Sonnet 4 and Sonnet 4.5.
+The 1M token context window is currently in beta for organizations in usage tier 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.5, and Sonnet 4.
 
 Tier 4
 

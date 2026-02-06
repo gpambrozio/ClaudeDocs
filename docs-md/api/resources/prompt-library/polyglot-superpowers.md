@@ -27,7 +27,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=0.2,
     system="You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version.",

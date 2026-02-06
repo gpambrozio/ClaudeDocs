@@ -59,7 +59,7 @@ client = anthropic.Anthropic(  # defaults to os.environ.get("ANTHROPIC_API_KEY")
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1000,
     temperature=1,
     system="You are an AI assistant with a witty sense of humor and a knack for crafting clever puns and wordplay. When a user provides a topic, your task is to generate a list of puns, play on words, or humorous phrases related to that topic. The wordplay should be original, creative, and aim to elicit a laugh or a groan from the reader.",

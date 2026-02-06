@@ -14,6 +14,7 @@ Extensions plug into different parts of the agentic loop:
 - **[Skills](skills.md)** add reusable knowledge and invocable workflows
 - **[MCP](mcp.md)** connects Claude to external services and tools
 - **[Subagents](sub-agents.md)** run their own loops in isolated context, returning summaries
+- **[Agent teams](agent-teams.md)** coordinate multiple independent sessions with shared tasks and peer-to-peer messaging
 - **[Hooks](hooks.md)** run outside the loop entirely as deterministic scripts
 - **[Plugins](plugins.md)** and **[marketplaces](plugin-marketplaces.md)** package and distribute these features
 
@@ -28,6 +29,7 @@ Features range from always-on context that Claude sees every session, to on-dema
 | **CLAUDE.md** | Persistent context loaded every conversation | Project conventions, “always do X” rules | ”Use pnpm, not npm. Run tests before committing.” |
 | **Skill** | Instructions, knowledge, and workflows Claude can use | Reusable content, reference docs, repeatable tasks | `/review` runs your code review checklist; API docs skill with endpoint patterns |
 | **Subagent** | Isolated execution context that returns summarized results | Context isolation, parallel tasks, specialized workers | Research task that reads many files but returns only key findings |
+| **[Agent teams](agent-teams.md)** | Coordinate multiple independent Claude Code sessions | Parallel research, new feature development, debugging with competing hypotheses | Spawn reviewers to check security, performance, and tests simultaneously |
 | **MCP** | Connect to external services | External data or actions | Query your database, post to Slack, control a browser |
 | **Hook** | Deterministic script that runs on events | Predictable automation, no LLM involved | Run ESLint after every file edit |
 
@@ -39,6 +41,7 @@ Some features can seem similar. Here’s how to tell them apart.
 
 - Skill vs Subagent
 - CLAUDE.md vs Skill
+- Subagent vs Agent team
 - MCP vs Skill
 
 Skills and subagents solve different problems:
@@ -64,6 +67,23 @@ Both store instructions, but they load differently and serve different purposes.
 | **Best for** | ”Always do X” rules | Reference material, invocable workflows |
 
 **Put it in CLAUDE.md** if Claude should always know it: coding conventions, build commands, project structure, “never do X” rules.**Put it in a skill** if it’s reference material Claude needs sometimes (API docs, style guides) or a workflow you trigger with `/<name>` (deploy, review, release).**Rule of thumb:** Keep CLAUDE.md under ~500 lines. If it’s growing, move reference content to skills.
+
+Both parallelize work, but they’re architecturally different:
+
+- **Subagents** run inside your session and report results back to your main context
+- **Agent teams** are independent Claude Code sessions that communicate with each other
+
+| Aspect | Subagent | Agent team |
+| --- | --- | --- |
+| **Context** | Own context window; results return to the caller | Own context window; fully independent |
+| **Communication** | Reports results back to the main agent only | Teammates message each other directly |
+| **Coordination** | Main agent manages all work | Shared task list with self-coordination |
+| **Best for** | Focused tasks where only the result matters | Complex work requiring discussion and collaboration |
+| **Token cost** | Lower: results summarized back to main context | Higher: each teammate is a separate Claude instance |
+
+**Use a subagent** when you need a quick, focused worker: research a question, verify a claim, review a file. The subagent does the work and returns a summary. Your main conversation stays clean.**Use an agent team** when teammates need to share findings, challenge each other, and coordinate independently. Agent teams are best for research with competing hypotheses, parallel code review, and new feature development where each teammate owns a separate piece.**Transition point:** If you’re running parallel subagents but hitting context limits, or if your subagents need to communicate with each other, agent teams are the natural next step.
+
+Agent teams are experimental and disabled by default. See [agent teams](agent-teams.md) for setup and current limitations.
 
 MCP connects Claude to external services. Skills extend what Claude knows, including how to use those services effectively.
 
@@ -162,7 +182,9 @@ Store project context, conventions, and instructions](memory.md)[## Skills
 
 Give Claude domain expertise and reusable workflows](skills.md)[## Subagents
 
-Offload work to isolated context](sub-agents.md)[## MCP
+Offload work to isolated context](sub-agents.md)[## Agent teams
+
+Coordinate multiple sessions working in parallel](agent-teams.md)[## MCP
 
 Connect Claude to external services](mcp.md)[## Hooks
 

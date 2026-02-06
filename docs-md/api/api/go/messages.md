@@ -3049,6 +3049,18 @@ Accepts one of the following:
 
 const InputJSONDeltaInputJSONDelta InputJSONDelta = "input\_json\_delta"
 
+type JSONOutputFormat struct{…}
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+Accepts one of the following:
+
+const JSONSchemaJSONSchema JSONSchema = "json\_schema"
+
 type Message struct{…}
 
 ID string
@@ -3326,6 +3338,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -3503,6 +3519,10 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
@@ -3601,6 +3621,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Strict booloptional
 
@@ -5609,6 +5633,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -5690,6 +5718,36 @@ const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
 Our previous most fast and cost-effective
 
 string
+
+type OutputConfig struct{…}
+
+Effort OutputConfigEffortoptional
+
+All possible effort levels.
+
+Accepts one of the following:
+
+const OutputConfigEffortLow OutputConfigEffort = "low"
+
+const OutputConfigEffortMedium OutputConfigEffort = "medium"
+
+const OutputConfigEffortHigh OutputConfigEffort = "high"
+
+const OutputConfigEffortMax OutputConfigEffort = "max"
+
+Format [JSONOutputFormat](api/messages.md)optional
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+Accepts one of the following:
+
+const JSONSchemaJSONSchema JSONSchema = "json\_schema"
 
 type PlainTextSource struct{…}
 
@@ -6618,6 +6676,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -6794,6 +6856,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 
@@ -7126,6 +7192,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -7302,6 +7372,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 
@@ -8595,6 +8669,14 @@ Accepts one of the following:
 
 const ThinkingThinking Thinking = "thinking"
 
+type ThinkingConfigAdaptive struct{…}
+
+Type Adaptive
+
+Accepts one of the following:
+
+const AdaptiveAdaptive Adaptive = "adaptive"
+
 type ThinkingConfigDisabled struct{…}
 
 Type Disabled
@@ -8656,6 +8738,14 @@ Type Disabled
 Accepts one of the following:
 
 const DisabledDisabled Disabled = "disabled"
+
+type ThinkingConfigAdaptive struct{…}
+
+Type Adaptive
+
+Accepts one of the following:
+
+const AdaptiveAdaptive Adaptive = "adaptive"
 
 type ThinkingDelta struct{…}
 
@@ -8727,6 +8817,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Strict booloptional
 
@@ -9867,6 +9961,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
@@ -10288,6 +10386,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 
@@ -11314,6 +11416,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -11490,6 +11596,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 
@@ -11976,6 +12086,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -12152,6 +12266,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 
@@ -12600,6 +12718,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -12776,6 +12898,10 @@ CacheReadInputTokens int64
 The number of input tokens read from the cache.
 
 minimum0
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
 
 InputTokens int64
 

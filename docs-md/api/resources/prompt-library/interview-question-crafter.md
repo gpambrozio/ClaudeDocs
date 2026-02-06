@@ -55,7 +55,7 @@ client = anthropic.Anthropic(
   api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=1000,
   temperature=0.5,
   system="Your task is to generate a series of thoughtful, open-ended questions for an interview based on the given context. The questions should be designed to elicit insightful and detailed responses from the interviewee, allowing them to showcase their knowledge, experience, and critical thinking skills. Avoid yes/no questions or those with obvious answers. Instead, focus on questions that encourage reflection, self-assessment, and the sharing of specific examples or anecdotes.",

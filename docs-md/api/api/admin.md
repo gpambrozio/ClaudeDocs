@@ -266,15 +266,15 @@ Accepts one of the following:
 
 #### AdminAPI Keys
 
-##### [Get Api Key](api/admin/api_keys/retrieve.md)
+##### [Get API Key](api/admin/api_keys/retrieve.md)
 
 get/v1/organizations/api\_keys/{api\_key\_id}
 
-##### [List Api Keys](api/admin/api_keys/list.md)
+##### [List API Keys](api/admin/api_keys/list.md)
 
 get/v1/organizations/api\_keys
 
-##### [Update Api Key](api/admin/api_keys/update.md)
+##### [Update API Key](api/admin/api_keys/update.md)
 
 post/v1/organizations/api\_keys/{api\_key\_id}
 
@@ -432,7 +432,7 @@ Number of tool action proposals that the user rejected.
 
 subscription\_type: optional "enterprise" or "team"
 
-Subscription tier for subscription customers. Null for API customers.
+Subscription tier for subscription customers. `null` for API customers.
 
 Accepts one of the following:
 
@@ -458,13 +458,13 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 7 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
 api\_key\_id: string
 
-ID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.
+ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
 cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -484,7 +484,7 @@ The number of input tokens read from the cache.
 
 context\_window: "0-200k" or "200k-1M"
 
-Context window used. Null if not grouping by context window.
+Context window used. `null` if not grouping by context window.
 
 Accepts one of the following:
 
@@ -492,9 +492,14 @@ Accepts one of the following:
 
 "200k-1M"
 
+inference\_geo: string
+
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+
 model: string
 
-Model used. Null if not grouping by model.
+Model used. `null` if not grouping by model.
 
 output\_tokens: number
 
@@ -510,7 +515,7 @@ The number of web search requests made.
 
 service\_tier: "standard" or "batch" or "priority" or 3 more
 
-Service tier used. Null if not grouping by service tier.
+Service tier used. `null` if not grouping by service tier.
 
 Accepts one of the following:
 
@@ -532,7 +537,7 @@ The number of uncached input tokens processed.
 
 workspace\_id: string
 
-ID of the Workspace used. Null if not grouping by workspace or for the default workspace.
+ID of the Workspace used. `null` if not grouping by workspace or for the default workspace.
 
 starting\_at: string
 
@@ -566,7 +571,7 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { amount, context\_window, cost\_type, 6 more }
+results: array of object { amount, context\_window, cost\_type, 7 more }
 
 List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -576,7 +581,7 @@ Cost amount in lowest currency units (e.g. cents) as a decimal string. For examp
 
 context\_window: "0-200k" or "200k-1M"
 
-Input context window used. Null if not grouping by description or for non-token costs.
+Input context window used. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -586,7 +591,7 @@ Accepts one of the following:
 
 cost\_type: "tokens" or "web\_search" or "code\_execution"
 
-Type of cost. Null if not grouping by description.
+Type of cost. `null` if not grouping by description.
 
 Accepts one of the following:
 
@@ -602,15 +607,20 @@ Currency code for the cost amount. Currently always `"USD"`.
 
 description: string
 
-Description of the cost item. Null if not grouping by description.
+Description of the cost item. `null` if not grouping by description.
+
+inference\_geo: string
+
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
 model: string
 
-Model name used. Null if not grouping by description or for non-token costs.
+Model name used. `null` if not grouping by description or for non-token costs.
 
 service\_tier: "standard" or "batch"
 
-Service tier used. Null if not grouping by description or for non-token costs.
+Service tier used. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -620,7 +630,7 @@ Accepts one of the following:
 
 token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
-Type of token. Null if not grouping by description or for non-token costs.
+Type of token. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -636,7 +646,7 @@ Accepts one of the following:
 
 workspace\_id: string
 
-ID of the Workspace this cost is associated with. Null if not grouping by workspace or for the default workspace.
+ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
 starting\_at: string
 

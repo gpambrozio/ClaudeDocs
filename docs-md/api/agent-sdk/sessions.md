@@ -22,7 +22,7 @@ let sessionId: string | undefined
 const response = query({
   prompt: "Help me build a web application",
   options: {
-    model: "claude-sonnet-4-5"
+    model: "claude-opus-4-6"
   }
 })
 
@@ -63,7 +63,7 @@ const response = query({
   prompt: "Continue implementing the authentication system from where we left off",
   options: {
     resume: "session-xyz", // Session ID from previous conversation
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-4-6",
     allowedTools: ["Read", "Edit", "Write", "Glob", "Grep", "Bash"]
   }
 })
@@ -112,7 +112,7 @@ let sessionId: string | undefined
 
 const response = query({
   prompt: "Help me design a REST API",
-  options: { model: "claude-sonnet-4-5" }
+  options: { model: "claude-opus-4-6" }
 })
 
 for await (const message of response) {
@@ -128,7 +128,7 @@ const forkedResponse = query({
   options: {
     resume: sessionId,
     forkSession: true,  // Creates a new session ID
-    model: "claude-sonnet-4-5"
+    model: "claude-opus-4-6"
   }
 })
 
@@ -145,7 +145,7 @@ const originalContinued = query({
   options: {
     resume: sessionId,
     forkSession: false,  // Continue original session (default)
-    model: "claude-sonnet-4-5"
+    model: "claude-opus-4-6"
   }
 })
 ```

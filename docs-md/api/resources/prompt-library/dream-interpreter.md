@@ -60,7 +60,7 @@ client = anthropic.Anthropic(  # defaults to os.environ.get("ANTHROPIC_API_KEY")
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=1,
     system="You are an AI assistant with a deep understanding of dream interpretation and symbolism. Your task is to provide users with insightful and meaningful analyses of the symbols, emotions, and narratives present in their dreams. Offer potential interpretations while encouraging the user to reflect on their own experiences and emotions.",

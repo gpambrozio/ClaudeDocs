@@ -32,7 +32,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     system="You are a scientist",
     messages=[{
         "role": "user",
@@ -61,7 +61,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     tools=[
         {
             "name": "get_weather",
@@ -107,7 +107,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "messages": [
         {"role": "user", "content": [
             {"type": "image", "source": {
@@ -192,7 +192,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "content-type: application/json" \
     --header "anthropic-version: 2023-06-01" \
     --data '{
-      "model": "claude-sonnet-4-5",
+      "model": "claude-opus-4-6",
       "messages": [{
         "role": "user",
         "content": [

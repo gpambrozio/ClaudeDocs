@@ -2934,6 +2934,53 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+type BetaCompactionBlockParamResp struct{…}
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+Content string
+
+Summary of previously compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+Accepts one of the following:
+
+const EphemeralEphemeral Ephemeral = "ephemeral"
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -2997,6 +3044,10 @@ ContextManagement param.Field[[BetaContextManagementConfig](api/beta.md)]optiona
 Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+
+InferenceGeo param.Field[string]optional
+
+Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
 MCPServers param.Field[[][BetaRequestMCPServerURLDefinition](api/beta.md)]optional
 
@@ -3349,6 +3400,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 InputExamples []map[string, any]optional
 
@@ -5557,6 +5612,24 @@ Accepts one of the following:
 
 const ContainerUploadContainerUpload ContainerUpload = "container\_upload"
 
+type BetaCompactionBlock struct{…}
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Content string
+
+Summary of compacted content, or null if compaction failed
+
+Type Compaction
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
 ContextManagement [BetaContextManagementResponse](api/beta.md)
 
 Context management response.
@@ -5628,6 +5701,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -5748,6 +5825,8 @@ const BetaStopReasonToolUse [BetaStopReason](api/beta.md) = "tool\_use"
 
 const BetaStopReasonPauseTurn [BetaStopReason](api/beta.md) = "pause\_turn"
 
+const BetaStopReasonCompaction [BetaStopReason](api/beta.md) = "compaction"
+
 const BetaStopReasonRefusal [BetaStopReason](api/beta.md) = "refusal"
 
 const BetaStopReasonModelContextWindowExceeded [BetaStopReason](api/beta.md) = "model\_context\_window\_exceeded"
@@ -5808,11 +5887,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
 
 minimum0
+
+Iterations []BetaUsageIterationUnion
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+type BetaMessageIterationUsage struct{…}
+
+Token usage for a sampling iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+const MessageMessage Message = "message"
+
+type BetaCompactionIterationUsage struct{…}
+
+Token usage for a compaction iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
 
 OutputTokens int64
 
@@ -5877,7 +6076,7 @@ func main() {
       }},
       Role: anthropic.BetaMessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeSonnet4_5_20250929,
+    Model: anthropic.ModelClaudeOpus4_6,
   })
   if err != nil {
     panic(err.Error())
@@ -5928,7 +6127,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -5940,7 +6139,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,
@@ -5995,7 +6208,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -6007,7 +6220,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,

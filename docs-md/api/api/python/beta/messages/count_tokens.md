@@ -2926,6 +2926,53 @@ Accepts one of the following:
 
 "1h"
 
+class BetaCompactionBlockParam: …
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: Optional[str]
+
+Summary of previously compacted content, or null if compaction failed
+
+type: Literal["compaction"]
+
+Accepts one of the following:
+
+"compaction"
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+Accepts one of the following:
+
+"ephemeral"
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: Literal["user", "assistant"]
 
 Accepts one of the following:
@@ -2942,12 +2989,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]
+UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-6` - Most intelligent model for building agents and coding
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -2970,6 +3018,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -3175,6 +3227,36 @@ Accepts one of the following:
 
 "all"
 
+class BetaCompact20260112Edit: …
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: Literal["compact\_20260112"]
+
+Accepts one of the following:
+
+"compact\_20260112"
+
+instructions: Optional[str]
+
+Additional instructions for summarization.
+
+pause\_after\_compaction: Optional[bool]
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger: Optional[BetaInputTokensTrigger]
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: Literal["input\_tokens"]
+
+Accepts one of the following:
+
+"input\_tokens"
+
+value: int
+
 mcp\_servers: Optional[[Iterable](api/beta/messages/count_tokens.md)[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
 
 MCP servers to be utilized in this request
@@ -3201,11 +3283,9 @@ output\_config: Optional[[BetaOutputConfigParam](api/beta.md)]
 
 Configuration options for the model's output, such as the output format.
 
-effort: Optional[Literal["low", "medium", "high"]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3214,6 +3294,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"max"
 
 format: Optional[BetaJSONOutputFormat]
 
@@ -3422,6 +3504,14 @@ Accepts one of the following:
 
 "disabled"
 
+class BetaThinkingConfigAdaptive: …
+
+type: Literal["adaptive"]
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice: Optional[[BetaToolChoiceParam](api/beta.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3628,6 +3718,10 @@ description: Optional[str]
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: Optional[bool]
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples: Optional[List[Dict[str, object]]]
 
@@ -4933,7 +5027,7 @@ beta_message_tokens_count = client.beta.messages.count_tokens(
         "content": "string",
         "role": "user",
     }],
-    model="claude-opus-4-5-20251101",
+    model="claude-opus-4-6",
 )
 print(beta_message_tokens_count.context_management)
 ```

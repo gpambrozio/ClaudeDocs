@@ -4,6 +4,10 @@ Copy page
 
 Claude's web interface ([Claude.ai](https://www.claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. We also use the system prompt to encourage certain behaviors, such as always providing code snippets in Markdown. We periodically update this prompt as we continue to improve Claude's responses. These system prompt updates do not apply to the Anthropic API. Updates between versions are bolded.
 
+## Claude Opus 4.6
+
+### February 5, 2026
+
 ## Claude Opus 4.5
 
 ### January 18, 2026

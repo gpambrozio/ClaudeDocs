@@ -49,7 +49,7 @@ Time buckets that end before this RFC 3339 timestamp will be returned.
 
 formatdate-time
 
-group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 2 more
+group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 3 more
 
 Group by any subset of the available options.
 
@@ -64,6 +64,20 @@ Accepts one of the following:
 "service\_tier"
 
 "context\_window"
+
+"inference\_geo"
+
+inference\_geos: optional array of "global" or "us" or "not\_available"
+
+Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
+
+Accepts one of the following:
+
+"global"
+
+"us"
+
+"not\_available"
 
 limit: optional number
 
@@ -106,6 +120,14 @@ workspace\_ids: optional array of string
 
 Restrict usage returned to the specified workspace ID(s).
 
+##### Header ParametersExpand Collapse
+
+"anthropic-beta": optional array of string
+
+Optional header to specify the beta version(s) you want to use.
+
+To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
 ##### ReturnsExpand Collapse
 
 MessagesUsageReport = object { data, has\_more, next\_page }
@@ -118,13 +140,13 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 7 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
 api\_key\_id: string
 
-ID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.
+ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
 cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -144,7 +166,7 @@ The number of input tokens read from the cache.
 
 context\_window: "0-200k" or "200k-1M"
 
-Context window used. Null if not grouping by context window.
+Context window used. `null` if not grouping by context window.
 
 Accepts one of the following:
 
@@ -152,9 +174,14 @@ Accepts one of the following:
 
 "200k-1M"
 
+inference\_geo: string
+
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+
 model: string
 
-Model used. Null if not grouping by model.
+Model used. `null` if not grouping by model.
 
 output\_tokens: number
 
@@ -170,7 +197,7 @@ The number of web search requests made.
 
 service\_tier: "standard" or "batch" or "priority" or 3 more
 
-Service tier used. Null if not grouping by service tier.
+Service tier used. `null` if not grouping by service tier.
 
 Accepts one of the following:
 
@@ -192,7 +219,7 @@ The number of uncached input tokens processed.
 
 workspace\_id: string
 
-ID of the Workspace used. Null if not grouping by workspace or for the default workspace.
+ID of the Workspace used. `null` if not grouping by workspace or for the default workspace.
 
 starting\_at: string
 
@@ -214,6 +241,7 @@ Get Messages Usage Report
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/messages \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
@@ -233,7 +261,8 @@ Response 200
           },
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
-          "model": "claude-sonnet-4-20250514",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
           "output_tokens": 500,
           "server_tool_use": {
             "web_search_requests": 10
@@ -269,7 +298,8 @@ Response 200
           },
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
-          "model": "claude-sonnet-4-20250514",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
           "output_tokens": 500,
           "server_tool_use": {
             "web_search_requests": 10

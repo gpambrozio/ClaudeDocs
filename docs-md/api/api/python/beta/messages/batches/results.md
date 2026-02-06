@@ -1007,6 +1007,24 @@ Accepts one of the following:
 
 "container\_upload"
 
+class BetaCompactionBlock: …
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: Optional[str]
+
+Summary of compacted content, or null if compaction failed
+
+type: Literal["compaction"]
+
+Accepts one of the following:
+
+"compaction"
+
 context\_management: Optional[BetaContextManagementResponse]
 
 Context management response.
@@ -1071,12 +1089,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-5-20251101", "claude-opus-4-5", "claude-3-7-sonnet-latest", 17 more]
+UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-6` - Most intelligent model for building agents and coding
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -1099,6 +1118,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Our previous most fast and cost-effective
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -1219,6 +1242,8 @@ Accepts one of the following:
 
 "pause\_turn"
 
+"compaction"
+
 "refusal"
 
 "model\_context\_window\_exceeded"
@@ -1279,11 +1304,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: Optional[str]
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: int
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Optional[List[Iteration]]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage: …
+
+Token usage for a sampling iteration.
+
+cache\_creation: Optional[BetaCacheCreation]
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: int
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: int
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: int
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: int
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: int
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: int
+
+The number of output tokens which were used.
+
+minimum0
+
+type: Literal["message"]
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+"message"
+
+class BetaCompactionIterationUsage: …
+
+Token usage for a compaction iteration.
+
+cache\_creation: Optional[BetaCacheCreation]
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: int
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: int
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: int
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: int
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: int
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: int
+
+The number of output tokens which were used.
+
+minimum0
+
+type: Literal["compaction"]
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+"compaction"
 
 output\_tokens: int
 

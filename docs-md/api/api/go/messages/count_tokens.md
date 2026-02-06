@@ -1699,23 +1699,9 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-OutputConfig param.Field[[MessageCountTokensParamsOutputConfig](api/messages/count_tokens.md)]optional
+OutputConfig param.Field[[OutputConfig](api/messages.md)]optional
 
 Configuration options for the model's output, such as the output format.
-
-Format MessageCountTokensParamsOutputConfigFormatoptional
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-Schema map[string, any]
-
-The JSON schema of the format
-
-Type JSONSchema
-
-Accepts one of the following:
-
-const JSONSchemaJSONSchema JSONSchema = "json\_schema"
 
 System param.Field[[MessageCountTokensParamsSystemUnion](api/messages/count_tokens.md)]optional
 
@@ -1992,6 +1978,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Strict booloptional
 
@@ -2346,7 +2336,7 @@ func main() {
       }},
       Role: anthropic.MessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeOpus4_5_20251101,
+    Model: anthropic.ModelClaudeOpus4_6,
   })
   if err != nil {
     panic(err.Error())

@@ -2986,6 +2986,53 @@ Accepts one of the following:
 
 "1h"
 
+BetaCompactionBlockParam = object { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: string
+
+Summary of previously compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+Accepts one of the following:
+
+"ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: "user" or "assistant"
 
 Accepts one of the following:
@@ -3002,13 +3049,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more
+UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -3144,7 +3195,7 @@ Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta.md) { type, keep }
+edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  or [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger }
 
 List of context management edits to apply
 
@@ -3260,6 +3311,40 @@ Accepts one of the following:
 
 "all"
 
+BetaCompact20260112Edit = object { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: "compact\_20260112"
+
+Accepts one of the following:
+
+"compact\_20260112"
+
+instructions: optional string
+
+Additional instructions for summarization.
+
+pause\_after\_compaction: optional boolean
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger: optional [BetaInputTokensTrigger](api/beta.md) { type, value }
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: "input\_tokens"
+
+Accepts one of the following:
+
+"input\_tokens"
+
+value: number
+
+inference\_geo: optional string
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 mcp\_servers: optional array of [BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more }
 
 MCP servers to be utilized in this request
@@ -3298,11 +3383,9 @@ output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort: optional "low" or "medium" or "high"
+effort: optional "low" or "medium" or "high" or "max"
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3311,6 +3394,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"max"
 
 format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -3557,6 +3642,14 @@ Accepts one of the following:
 
 "disabled"
 
+BetaThinkingConfigAdaptive = object { type }
+
+type: "adaptive"
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice: optional [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3691,7 +3784,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-BetaTool = object { input\_schema, name, allowed\_callers, 6 more }
+BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -3763,6 +3856,10 @@ description: optional string
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: optional boolean
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples: optional array of map[unknown]
 
@@ -5923,6 +6020,24 @@ Accepts one of the following:
 
 "container\_upload"
 
+BetaCompactionBlock = object { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: string
+
+Summary of compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -5987,13 +6102,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more
+UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -6114,6 +6233,8 @@ Accepts one of the following:
 
 "pause\_turn"
 
+"compaction"
+
 "refusal"
 
 "model\_context\_window\_exceeded"
@@ -6134,7 +6255,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -6174,11 +6295,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: string
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: number
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: array of [BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  or [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "message"
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+"message"
+
+BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "compaction"
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+"compaction"
 
 output\_tokens: number
 
@@ -6232,7 +6473,7 @@ curl https://api.anthropic.com/v1/messages \
               "role": "user"
             }
           ],
-          "model": "claude-sonnet-4-5-20250929"
+          "model": "claude-opus-4-6"
         }'
 ```
 
@@ -6278,7 +6519,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -6290,7 +6531,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,
@@ -6345,7 +6600,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -6357,7 +6612,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,

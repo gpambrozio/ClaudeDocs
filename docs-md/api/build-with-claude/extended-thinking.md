@@ -4,17 +4,20 @@ Copy page
 
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
 
+For Claude Opus 4.6, we recommend using [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md) instead of the manual thinking mode described on this page. The manual `thinking: {type: "enabled", budget_tokens: N}` configuration is deprecated on Opus 4.6 and will be removed in a future model release.
+
 ## Supported models
 
 Extended thinking is supported in the following models:
 
+- Claude Opus 4.6 (`claude-opus-4-6`) — [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated
+- Claude Opus 4.5 (`claude-opus-4-5-20251101`)
+- Claude Opus 4.1 (`claude-opus-4-1-20250805`)
+- Claude Opus 4 (`claude-opus-4-20250514`)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Sonnet 4 (`claude-sonnet-4-20250514`)
 - Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](about-claude/model-deprecations.md))
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-- Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-- Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-- Claude Opus 4 (`claude-opus-4-20250514`)
 
 API behavior differs across Claude Sonnet 3.7 and Claude 4 models, but the API shapes remain exactly the same.
 
@@ -74,9 +77,13 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-To turn on extended thinking, add a `thinking` object, with the `type` parameter set to `enabled` and the `budget_tokens` to a specified token budget for extended thinking.
+To turn on extended thinking, add a `thinking` object, with the `type` parameter set to `enabled` and the `budget_tokens` to a specified token budget for extended thinking. For Claude Opus 4.6, we recommend using `type: "adaptive"` instead — see [Adaptive thinking](build-with-claude/adaptive-thinking.md) for details. While `type: "enabled"` with `budget_tokens` is still supported on Opus 4.6, it is deprecated and will be removed in a future release.
 
-The `budget_tokens` parameter determines the maximum number of tokens Claude is allowed to use for its internal reasoning process. In Claude 4 models, this limit applies to full thinking tokens, and not to [the summarized output](#summarized-thinking). Larger budgets can improve response quality by enabling more thorough analysis for complex problems, although Claude may not use the entire budget allocated, especially at ranges above 32k.
+The `budget_tokens` parameter determines the maximum number of tokens Claude is allowed to use for its internal reasoning process. In Claude 4 and later models, this limit applies to full thinking tokens, and not to [the summarized output](#summarized-thinking). Larger budgets can improve response quality by enabling more thorough analysis for complex problems, although Claude may not use the entire budget allocated, especially at ranges above 32k.
+
+`budget_tokens` is deprecated on Claude Opus 4.6 and will be removed in a future model release. We recommend using [adaptive thinking](build-with-claude/adaptive-thinking.md) with the [effort parameter](build-with-claude/effort.md) to control thinking depth instead.
+
+Claude Opus 4.6 supports up to 128K output tokens. Earlier models support up to 64K output tokens.
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window (200k tokens).
 
@@ -90,12 +97,12 @@ Here are some important considerations for summarized thinking:
 - The billed output token count will **not match** the count of tokens you see in the response.
 - The first few lines of thinking output are more verbose, providing detailed reasoning that's particularly helpful for prompt engineering purposes.
 - As Anthropic seeks to improve the extended thinking feature, summarization behavior is subject to change.
-- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience and easy migration from Claude Sonnet 3.7 to Claude 4 models.
+- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience and easy migration from Claude Sonnet 3.7 to Claude 4 and later models.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#55263439302615343b213d273a253c367b363a38).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#3142505d544271505f4559435e4158521f525e5c).
 
 ### Streaming thinking
 
@@ -126,13 +133,13 @@ curl https://api.anthropic.com/v1/messages \
     "messages": [
         {
             "role": "user",
-            "content": "What is 27 * 453?"
+            "content": "What is the greatest common divisor of 1071 and 462?"
         }
     ]
 }'
 ```
 
-[Try in Console](/workbench/new?user=What+is+27+*+453%3F&thinking.budget_tokens=16000)
+[Try in Console](/workbench/new?user=What+is+the+greatest+common+divisor+of+1071+and+462%3F&thinking.budget_tokens=16000)
 
 Example streaming output:
 
@@ -144,10 +151,10 @@ event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "Let me solve this step by step:\n\n1. First break down 27 * 453"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n2. 453 = 400 + 50 + 3"}}
+data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "\n462 = 3 × 147 + 21\n147 = 7 × 21 + 0\n\nSo GCD(1071, 462) = 21"}}
 
 // Additional thinking deltas...
 
@@ -161,7 +168,7 @@ event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "text", "text": ""}}
 
 event: content_block_delta
-data: {"type": "content_block_delta", "index": 1, "delta": {"type": "text_delta", "text": "27 * 453 = 12,231"}}
+data: {"type": "content_block_delta", "index": 1, "delta": {"type": "text_delta", "text": "The greatest common divisor of 1071 and 462 is **21**."}}
 
 // Additional text deltas...
 
@@ -267,15 +274,17 @@ With interleaved thinking, Claude can:
 - Chain multiple tool calls with reasoning steps in between
 - Make more nuanced decisions based on intermediate results
 
-To enable interleaved thinking, add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request.
+For Claude Opus 4.6, interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) — no beta header is needed.
+
+For Claude 4 models, add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
-- Interleaved thinking is supported for Claude 4 models only, with the beta header `interleaved-thinking-2025-05-14`.
+- For Claude 4 models, interleaved thinking requires the beta header `interleaved-thinking-2025-05-14`.
 - Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect.
-- On 3rd-party platforms (e.g., [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
+- On 3rd-party platforms (e.g., [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
 
 ### Tool use without interleaved thinking
 
@@ -353,7 +362,7 @@ Assistant: [thinking_block_2] + [text block 2],
 User: [Text response, cache=True]
 ```
 
-For Claude Opus 4.5 and later, all previous thinking blocks are kept by default. For older models, because a non-tool-result user block was included, all previous thinking blocks are ignored. This request will be processed the same as:
+For Claude Opus 4.5 and later (including Claude Opus 4.6), all previous thinking blocks are kept by default. For older models, because a non-tool-result user block was included, all previous thinking blocks are ignored. This request will be processed the same as:
 
 ```inline-block
 User: ["What's the weather in Paris?"],
@@ -432,13 +441,13 @@ This change has been made to provide more predictable and transparent behavior, 
 
 Full thinking content is encrypted and returned in the `signature` field. This field is used to verify that thinking blocks were generated by Claude when passed back to the API.
 
-It is only strictly necessary to send back thinking blocks when using [tools with extended thinking](#extended-thinking-with-tool-use). Otherwise you can omit thinking blocks from previous turns, or let the API strip them for you if you pass them back.
+It is only strictly necessary to send back thinking blocks when using [tools with extended thinking](build-with-claude/extended-thinking.md). Otherwise you can omit thinking blocks from previous turns, or let the API strip them for you if you pass them back.
 
 If sending back thinking blocks, we recommend passing everything back as you received it for consistency and to avoid potential issues.
 
 Here are some important considerations on thinking encryption:
 
-- When [streaming responses](#streaming-thinking), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
+- When [streaming responses](build-with-claude/extended-thinking.md), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 - `signature` values are significantly longer in Claude 4 models than in previous models.
 - The `signature` field is an opaque field and should not be interpreted or parsed - it exists solely for verification purposes.
 - `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md), and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
@@ -481,7 +490,7 @@ Seeing redacted thinking blocks in your output is expected behavior. The model c
 
 If you need to test redacted thinking handling in your application, you can use this special test string as your prompt: `ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB`
 
-When passing `thinking` and `redacted_thinking` blocks back to the API in a multi-turn conversation, you must include the complete unmodified block back to the API for the last assistant turn. This is critical for maintaining the model's reasoning flow. We suggest always passing back all thinking blocks to the API. For more details, see the [Preserving thinking blocks](#preserving-thinking-blocks) section above.
+When passing `thinking` and `redacted_thinking` blocks back to the API in a multi-turn conversation, you must include the complete unmodified block back to the API for the last assistant turn. This is critical for maintaining the model's reasoning flow. We suggest always passing back all thinking blocks to the API. For more details, see the [Preserving thinking blocks](build-with-claude/extended-thinking.md) section.
 
 ### Example: Working with redacted thinking blocks
 
@@ -491,15 +500,15 @@ The Messages API handles thinking differently across Claude Sonnet 3.7 and Claud
 
 See the table below for a condensed comparison:
 
-| Feature | Claude Sonnet 3.7 | Claude 4 Models (pre-Opus 4.5) | Claude Opus 4.5 and later |
-| --- | --- | --- | --- |
-| **Thinking Output** | Returns full thinking output | Returns summarized thinking | Returns summarized thinking |
-| **Interleaved Thinking** | Not supported | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header |
-| **Thinking Block Preservation** | Not preserved across turns | Not preserved across turns | **Preserved by default** (enables cache optimization, token savings) |
+| Feature | Claude Sonnet 3.7 | Claude 4 Models (pre-Opus 4.5) | Claude Opus 4.5 | Claude Opus 4.6 ([adaptive thinking](build-with-claude/adaptive-thinking.md)) |
+| --- | --- | --- | --- | --- |
+| **Thinking Output** | Returns full thinking output | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking |
+| **Interleaved Thinking** | Not supported | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header | Automatic with adaptive thinking (no beta header needed) |
+| **Thinking Block Preservation** | Not preserved across turns | Not preserved across turns | **Preserved by default** | **Preserved by default** |
 
-### Thinking block preservation in Claude Opus 4.5
+### Thinking block preservation in Claude Opus 4.5 and later
 
-Claude Opus 4.5 introduces a new default behavior: **thinking blocks from previous assistant turns are preserved in model context by default**. This differs from earlier models, which remove thinking blocks from prior turns.
+Starting with Claude Opus 4.5 (and continuing in Claude Opus 4.6), **thinking blocks from previous assistant turns are preserved in model context by default**. This differs from earlier models, which remove thinking blocks from prior turns.
 
 **Benefits of thinking block preservation:**
 
@@ -509,7 +518,7 @@ Claude Opus 4.5 introduces a new default behavior: **thinking blocks from previo
 **Important considerations:**
 
 - **Context usage**: Long conversations will consume more context space since thinking blocks are retained in context
-- **Automatic behavior**: This is the default behavior for Claude Opus 4.5—no code changes or beta headers required
+- **Automatic behavior**: This is the default behavior for Claude Opus 4.5 and later models (including Opus 4.6)—no code changes or beta headers required
 - **Backward compatibility**: To leverage this feature, continue passing complete, unmodified thinking blocks back to the API as you would for tool use
 
 For earlier models (Claude Sonnet 4.5, Opus 4.1, etc.), thinking blocks from previous turns continue to be removed from context. The existing behavior described in the [Extended thinking with prompt caching](#extended-thinking-with-prompt-caching) section applies to those models.
@@ -547,7 +556,7 @@ The billed output token count will **not** match the visible token count in the 
 ### Performance considerations
 
 - **Response times:** Be prepared for potentially longer response times due to the additional processing required for the reasoning process. Factor in that generating thinking blocks may increase overall response time.
-- **Streaming requirements:** Streaming is required when `max_tokens` is greater than 21,333. When streaming, be prepared to handle both thinking and text content blocks as they arrive.
+- **Streaming requirements:** The SDKs require streaming when `max_tokens` is greater than 21,333 to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without handling individual events — see [Streaming Messages](build-with-claude/streaming.md) for details. When streaming, be prepared to handle both thinking and text content blocks as they arrive.
 
 ### Feature compatibility
 

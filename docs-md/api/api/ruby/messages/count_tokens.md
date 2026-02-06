@@ -1703,13 +1703,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -1793,11 +1797,25 @@ Our previous most fast and cost-effective
 
 String
 
-output\_config: { format\_}
+output\_config: [OutputConfig](api/messages.md) { effort, format\_ }
 
 Configuration options for the model's output, such as the output format.
 
-format\_: { schema, type}
+effort: :low | :medium | :high | :max
+
+All possible effort levels.
+
+Accepts one of the following:
+
+:low
+
+:medium
+
+:high
+
+:max
+
+format\_: [JSONOutputFormat](api/messages.md) { schema, type }
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -1988,6 +2006,14 @@ Accepts one of the following:
 
 :disabled
 
+class ThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 tool\_choice: [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -2122,7 +2148,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 3 more }
+class Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: { type, properties, required}
 
@@ -2182,6 +2208,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: bool
 
@@ -2517,10 +2547,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-message_tokens_count = anthropic.messages.count_tokens(
-  messages: [{content: "string", role: :user}],
-  model: :"claude-opus-4-5-20251101"
-)
+message_tokens_count = anthropic.messages.count_tokens(messages: [{content: "string", role: :user}], model: :"claude-opus-4-6")
 
 puts(message_tokens_count)
 ```

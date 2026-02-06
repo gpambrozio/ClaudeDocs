@@ -7,7 +7,7 @@ Agent SDK](agent-sdk/overview.md), which enables programmatic integration of
 Claude Code into your applications. You can use the SDK to build custom
 automation workflows beyond GitHub Actions.
 
-**Claude Opus 4.5 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.5, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-5-20251101`.
+**Claude Opus 4.6 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.6, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-6`.
 
 ## [​](#why-use-claude-code-github-actions) Why use Claude Code GitHub Actions?
 
@@ -189,7 +189,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: "Generate a summary of yesterday's commits and open issues"
-          claude_args: "--model claude-opus-4-5-20251101"
+          claude_args: "--model opus"
 ```
 
 ### [​](#common-use-cases) Common use cases

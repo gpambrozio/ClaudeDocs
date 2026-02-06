@@ -1735,6 +1735,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -1815,6 +1819,10 @@ CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Our previous most fast and cost-effective
 
+Optional<String> inferenceGeo
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 Optional<[Metadata](api/messages.md)> metadata
 
 An object describing metadata about the request.
@@ -1827,11 +1835,25 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-Optional<OutputConfig> outputConfig
+Optional<[OutputConfig](api/messages.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
 
-Optional<Format> format
+Optional<Effort> effort
+
+All possible effort levels.
+
+Accepts one of the following:
+
+LOW("low")
+
+MEDIUM("medium")
+
+HIGH("high")
+
+MAX("max")
+
+Optional<[JsonOutputFormat](api/messages.md)> format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -2060,6 +2082,14 @@ Accepts one of the following:
 
 DISABLED("disabled")
 
+class ThinkingConfigAdaptive:
+
+JsonValue; type "adaptive"constant"adaptive"constant
+
+Accepts one of the following:
+
+ADAPTIVE("adaptive")
+
 Optional<[ToolChoice](api/messages.md)> toolChoice
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -2254,6 +2284,10 @@ Optional<String> description
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Optional<Boolean> strict
 
@@ -2723,7 +2757,7 @@ public final class Main {
                 .params(BatchCreateParams.Request.Params.builder()
                     .maxTokens(1024L)
                     .addUserMessage("Hello, world")
-                    .model(Model.CLAUDE_SONNET_4_5_20250929)
+                    .model(Model.CLAUDE_OPUS_4_6)
                     .build())
                 .build())
             .build();

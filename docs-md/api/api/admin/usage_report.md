@@ -156,7 +156,7 @@ Number of tool action proposals that the user rejected.
 
 subscription\_type: optional "enterprise" or "team"
 
-Subscription tier for subscription customers. Null for API customers.
+Subscription tier for subscription customers. `null` for API customers.
 
 Accepts one of the following:
 
@@ -182,13 +182,13 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 7 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
 api\_key\_id: string
 
-ID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.
+ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
 cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -208,7 +208,7 @@ The number of input tokens read from the cache.
 
 context\_window: "0-200k" or "200k-1M"
 
-Context window used. Null if not grouping by context window.
+Context window used. `null` if not grouping by context window.
 
 Accepts one of the following:
 
@@ -216,9 +216,14 @@ Accepts one of the following:
 
 "200k-1M"
 
+inference\_geo: string
+
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+
 model: string
 
-Model used. Null if not grouping by model.
+Model used. `null` if not grouping by model.
 
 output\_tokens: number
 
@@ -234,7 +239,7 @@ The number of web search requests made.
 
 service\_tier: "standard" or "batch" or "priority" or 3 more
 
-Service tier used. Null if not grouping by service tier.
+Service tier used. `null` if not grouping by service tier.
 
 Accepts one of the following:
 
@@ -256,7 +261,7 @@ The number of uncached input tokens processed.
 
 workspace\_id: string
 
-ID of the Workspace used. Null if not grouping by workspace or for the default workspace.
+ID of the Workspace used. `null` if not grouping by workspace or for the default workspace.
 
 starting\_at: string
 

@@ -18,10 +18,11 @@ The code execution tool is available on the following models:
 
 | Model | Tool Version |
 | --- | --- |
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
 | Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
 | Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
 | Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
@@ -44,7 +45,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [
             {
@@ -86,7 +87,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -112,7 +113,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -163,7 +164,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -193,7 +194,7 @@ client = Anthropic()
 
 # Request code execution that creates files
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens=4096,
     messages=[{
@@ -251,7 +252,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-sonnet-4-5",
+        "model": "claude-opus-4-6",
         "max_tokens": 4096,
         "messages": [{
             "role": "user",
@@ -501,7 +502,7 @@ client = Anthropic(
 
 # First request: Create a file with a random number
 response1 = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -520,7 +521,7 @@ container_id = response1.container.id
 # Second request: Reuse the container to read the file
 response2 = client.beta.messages.create(
     container=container_id,  # Reuse the same container
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[{
@@ -612,7 +613,7 @@ Python
 ```shiki
 # Enable programmatic calling for your tools
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     messages=[{

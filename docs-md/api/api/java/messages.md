@@ -3045,6 +3045,18 @@ Accepts one of the following:
 
 INPUT\_JSON\_DELTA("input\_json\_delta")
 
+class JsonOutputFormat:
+
+Schema schema
+
+The JSON schema of the format
+
+JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Accepts one of the following:
+
+JSON\_SCHEMA("json\_schema")
+
 class Message:
 
 String id
@@ -3314,6 +3326,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -3489,6 +3505,10 @@ The number of input tokens read from the cache.
 
 minimum0
 
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
 long inputTokens
 
 The number of input tokens which were used.
@@ -3585,6 +3605,10 @@ Optional<String> description
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Optional<Boolean> strict
 
@@ -5581,6 +5605,36 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
+class OutputConfig:
+
+Optional<Effort> effort
+
+All possible effort levels.
+
+Accepts one of the following:
+
+LOW("low")
+
+MEDIUM("medium")
+
+HIGH("high")
+
+MAX("max")
+
+Optional<[JsonOutputFormat](api/messages.md)> format
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema schema
+
+The JSON schema of the format
+
+JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Accepts one of the following:
+
+JSON\_SCHEMA("json\_schema")
+
 class PlainTextSource:
 
 String data
@@ -6498,6 +6552,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -6672,6 +6730,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 
@@ -6994,6 +7056,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -7168,6 +7234,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 
@@ -8455,6 +8525,14 @@ Accepts one of the following:
 
 THINKING("thinking")
 
+class ThinkingConfigAdaptive:
+
+JsonValue; type "adaptive"constant"adaptive"constant
+
+Accepts one of the following:
+
+ADAPTIVE("adaptive")
+
 class ThinkingConfigDisabled:
 
 JsonValue; type "disabled"constant"disabled"constant
@@ -8514,6 +8592,14 @@ JsonValue; type "disabled"constant"disabled"constant
 Accepts one of the following:
 
 DISABLED("disabled")
+
+class ThinkingConfigAdaptive:
+
+JsonValue; type "adaptive"constant"adaptive"constant
+
+Accepts one of the following:
+
+ADAPTIVE("adaptive")
 
 class ThinkingDelta:
 
@@ -8585,6 +8671,10 @@ Optional<String> description
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Optional<Boolean> strict
 
@@ -9723,6 +9813,10 @@ Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -10144,6 +10238,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 
@@ -11158,6 +11256,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -11332,6 +11434,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 
@@ -11808,6 +11914,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -11982,6 +12092,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 
@@ -12422,6 +12536,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -12596,6 +12714,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 

@@ -16,7 +16,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
         {"role": "user", "content": "Hello, Claude"}
@@ -37,7 +37,7 @@ JSON
       "text": "Hello!"
     }
   ],
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -61,7 +61,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
         {"role": "user", "content": "Hello, Claude"},
@@ -108,7 +108,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1,
     "messages": [
         {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
@@ -130,7 +130,7 @@ JSON
       "text": "C"
     }
   ],
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "max_tokens",
   "stop_sequence": null,
   "usage": {
@@ -140,7 +140,7 @@ JSON
 }
 ```
 
-For more information on prefill techniques, see our [prefill guide](build-with-claude/prompt-engineering/prefill-claudes-response.md).
+Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
 
 ## Vision
 
@@ -162,7 +162,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
         {"role": "user", "content": [
@@ -183,7 +183,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
         {"role": "user", "content": [
@@ -210,7 +210,7 @@ JSON
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

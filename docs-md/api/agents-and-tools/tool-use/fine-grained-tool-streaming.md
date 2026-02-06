@@ -2,19 +2,13 @@
 
 Copy page
 
-Tool use now supports fine-grained [streaming](build-with-claude/streaming.md) for parameter values. This allows developers to stream tool use parameters without buffering / JSON validation, reducing the latency to begin receiving large parameters.
+Fine-grained tool streaming is generally available on all models and all platforms, with no beta header required. It enables [streaming](build-with-claude/streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
 
-Fine-grained tool streaming is available via the Claude API, AWS Bedrock, Google Cloud's Vertex AI, and Microsoft Foundry.
-
-Fine-grained tool streaming is a beta feature. Please make sure to evaluate your responses before using it in production.
-
-Please use [this form](https://forms.gle/D4Fjr7GvQRzfTZT96) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation—we cannot wait to hear from you!
-
-When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Please make sure to account for these edge cases in your code.
+When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 
 ## How to use fine-grained tool streaming
 
-To use this beta feature, simply add the beta header `fine-grained-tool-streaming-2025-05-14` to a tool use request and turn on streaming.
+Fine-grained tool streaming is available on all models and all platforms (Claude API, Amazon Bedrock, Google Vertex AI, and Microsoft Foundry). To use it, set `eager_input_streaming` to `true` on any tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
@@ -25,14 +19,14 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: fine-grained-tool-streaming-2025-05-14" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 65536,
     "tools": [
       {
         "name": "make_file",
         "description": "Write text to a file",
+        "eager_input_streaming": true,
         "input_schema": {
           "type": "object",
           "properties": {

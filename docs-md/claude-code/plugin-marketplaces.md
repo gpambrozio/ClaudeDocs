@@ -231,7 +231,7 @@ Each plugin entry in the `plugins` array describes a plugin and where to find it
 | `keywords` | array | Tags for plugin discovery and categorization |
 | `category` | string | Plugin category for organization |
 | `tags` | array | Tags for searchability |
-| `strict` | boolean | Controls whether plugins need their own `plugin.json` file. When `true` (default), the plugin source must contain a `plugin.json`, and any fields you add here in the marketplace entry get merged with it. When `false`, the plugin doesn’t need its own `plugin.json`; the marketplace entry itself defines everything about the plugin. Use `false` when you want to define simple plugins entirely in your marketplace file. |
+| `strict` | boolean | When true (default), marketplace component fields merge with plugin.json. When false, the marketplace entry defines the plugin entirely, and plugin.json must not also declare components. |
 
 **Component configuration fields:**
 

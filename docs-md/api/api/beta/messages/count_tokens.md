@@ -2976,6 +2976,53 @@ Accepts one of the following:
 
 "1h"
 
+BetaCompactionBlockParam = object { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: string
+
+Summary of previously compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+Accepts one of the following:
+
+"ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: "user" or "assistant"
 
 Accepts one of the following:
@@ -2992,13 +3039,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-5-20251101" or "claude-opus-4-5" or "claude-3-7-sonnet-latest" or 17 more
+UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -3088,7 +3139,7 @@ Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta.md) { type, keep }
+edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  or [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger }
 
 List of context management edits to apply
 
@@ -3204,6 +3255,36 @@ Accepts one of the following:
 
 "all"
 
+BetaCompact20260112Edit = object { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: "compact\_20260112"
+
+Accepts one of the following:
+
+"compact\_20260112"
+
+instructions: optional string
+
+Additional instructions for summarization.
+
+pause\_after\_compaction: optional boolean
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger: optional [BetaInputTokensTrigger](api/beta.md) { type, value }
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: "input\_tokens"
+
+Accepts one of the following:
+
+"input\_tokens"
+
+value: number
+
 mcp\_servers: optional array of [BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more }
 
 MCP servers to be utilized in this request
@@ -3230,11 +3311,9 @@ output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort: optional "low" or "medium" or "high"
+effort: optional "low" or "medium" or "high" or "max"
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3243,6 +3322,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"max"
 
 format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -3451,6 +3532,14 @@ Accepts one of the following:
 
 "disabled"
 
+BetaThinkingConfigAdaptive = object { type }
+
+type: "adaptive"
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice: optional [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3519,7 +3608,7 @@ Accepts one of the following:
 
 "none"
 
-tools: optional array of [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 6 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 15 more
+tools: optional array of [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  or [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  or [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  or 15 more
 
 Definitions of tools that the model may use.
 
@@ -3585,7 +3674,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-BetaTool = object { input\_schema, name, allowed\_callers, 6 more }
+BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -3657,6 +3746,10 @@ description: optional string
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: optional boolean
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples: optional array of map[unknown]
 
@@ -4912,7 +5005,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-4-5-20251101"
+          "model": "claude-opus-4-6"
         }'
 ```
 

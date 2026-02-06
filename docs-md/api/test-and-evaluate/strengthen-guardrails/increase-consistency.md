@@ -18,6 +18,8 @@ Precisely define your desired output format using JSON, XML, or custom templates
 
 ## Prefill Claude's response
 
+Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
+
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 
 ### Example: Daily sales report

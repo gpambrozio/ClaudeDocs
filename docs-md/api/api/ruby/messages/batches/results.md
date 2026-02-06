@@ -313,13 +313,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -458,7 +462,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -497,6 +501,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 

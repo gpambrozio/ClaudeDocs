@@ -36,7 +36,7 @@ To improve [time-to-first-token](about-claude/glossary.md), we recommend
 resizing images to no more than 1.15 megapixels (and within 1568 pixels in
 both dimensions).
 
-Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With Claude Sonnet 4.5, these images use approximately 1,600 tokens and around $4.80/1K images.
+Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With Claude Opus 4.6, these images use approximately 1,600 tokens and around $4.80/1K images.
 
 | Aspect ratio | Image size |
 | --- | --- |
@@ -52,7 +52,7 @@ Each image you include in a request to Claude counts towards your token usage. T
 
 If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
 
-Here are examples of approximate tokenization and costs for different image sizes within our API's size constraints based on Claude Sonnet 4.5 per-token price of $3 per million input tokens:
+Here are examples of approximate tokenization and costs for different image sizes within our API's size constraints based on Claude Opus 4.6 per-token price of $3 per million input tokens:
 
 | Image size | # of Tokens | Cost / image | Cost / 1K images |
 | --- | --- | --- | --- |
@@ -115,7 +115,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -149,7 +149,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -193,7 +193,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {

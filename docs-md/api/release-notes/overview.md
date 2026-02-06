@@ -6,6 +6,15 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### February 5, 2026
+
+- We've launched [Claude Opus 4.6](https://www.anthropic.com/news/claude-opus-4-6), our most intelligent model for complex agentic tasks and long-horizon work. Opus 4.6 recommends [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`); manual thinking (`type: "enabled"` with `budget_tokens`) is deprecated. Opus 4.6 does not support prefilling assistant messages. Learn more in [What's new in Claude 4.6](about-claude/models/whats-new-claude-4-6.md).
+- The [effort parameter](build-with-claude/effort.md) is now generally available (no beta header required) and supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
+- We've launched the [compaction API](build-with-claude/compaction.md) in beta, providing server-side context summarization for effectively infinite conversations. Available on Opus 4.6.
+- We've introduced [data residency controls](build-with-claude/data-residency.md), allowing you to specify where model inference runs with the `inference_geo` parameter. US-only inference is available at 1.1x pricing for models released after February 1, 2026.
+- The [1M token context window](build-with-claude/context-windows.md) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](about-claude/pricing.md) applies to requests exceeding 200K input tokens.
+- [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) is now generally available on all models and platforms (no beta header required). The `output_format` parameter for [structured outputs](build-with-claude/structured-outputs.md) has been moved to `output_config.format`.
+
 ### January 29, 2026
 
 - [Structured outputs](build-with-claude/structured-outputs.md) are now generally available on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. GA includes expanded schema support, improved grammar compilation latency, and a simplified integration path with no beta header required. The `output_format` parameter has moved to `output_config.format`. Existing beta users can continue using the beta header during the transition period. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
@@ -70,7 +79,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### September 29, 2025
 
-- We've launched [Claude Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5), our best model for complex agents and coding, with the highest intelligence across most tasks. Learn more in [What's new in Claude 4.5](about-claude/models/whats-new-claude-4-5.md).
+- We've launched [Claude Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5), our best model for complex agents and coding, with the highest intelligence across most tasks. Learn more in the [models overview](about-claude/models/overview.md).
 - We've introduced [global endpoint pricing](about-claude/pricing.md) for AWS Bedrock and Google Vertex AI. The Claude API (1P) pricing is unaffected.
 - We've introduced a new stop reason `model_context_window_exceeded` that allows you to request the maximum possible tokens without calculating input size. Learn more in our [handling stop reasons documentation](build-with-claude/handling-stop-reasons.md).
 - We've launched the memory tool in beta, enabling Claude to store and consult information across conversations. Learn more in our [memory tool documentation](agents-and-tools/tool-use/memory-tool.md).

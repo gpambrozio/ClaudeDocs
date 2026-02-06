@@ -1703,23 +1703,9 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Optional<OutputConfig> outputConfig
+Optional<[OutputConfig](api/messages.md)> outputConfig
 
 Configuration options for the model's output, such as the output format.
-
-Optional<Format> format
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-Schema schema
-
-The JSON schema of the format
-
-JsonValue; type "json\_schema"constant"json\_schema"constant
-
-Accepts one of the following:
-
-JSON\_SCHEMA("json\_schema")
 
 Optional<System> system
 
@@ -1996,6 +1982,10 @@ Optional<String> description
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+Optional<Boolean> eagerInputStreaming
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Optional<Boolean> strict
 
@@ -2343,7 +2333,7 @@ public final class Main {
 
         MessageCountTokensParams params = MessageCountTokensParams.builder()
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_SONNET_4_5_20250929)
+            .model(Model.CLAUDE_OPUS_4_6)
             .build();
         MessageTokensCount messageTokensCount = client.messages().countTokens(params);
     }

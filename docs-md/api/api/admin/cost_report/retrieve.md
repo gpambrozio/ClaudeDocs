@@ -55,6 +55,14 @@ Optionally set to the `next_page` token from the previous response.
 
 formatdate-time
 
+##### Header ParametersExpand Collapse
+
+"anthropic-beta": optional array of string
+
+Optional header to specify the beta version(s) you want to use.
+
+To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
 ##### ReturnsExpand Collapse
 
 CostReport = object { data, has\_more, next\_page }
@@ -65,7 +73,7 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { amount, context\_window, cost\_type, 6 more }
+results: array of object { amount, context\_window, cost\_type, 7 more }
 
 List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -75,7 +83,7 @@ Cost amount in lowest currency units (e.g. cents) as a decimal string. For examp
 
 context\_window: "0-200k" or "200k-1M"
 
-Input context window used. Null if not grouping by description or for non-token costs.
+Input context window used. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -85,7 +93,7 @@ Accepts one of the following:
 
 cost\_type: "tokens" or "web\_search" or "code\_execution"
 
-Type of cost. Null if not grouping by description.
+Type of cost. `null` if not grouping by description.
 
 Accepts one of the following:
 
@@ -101,15 +109,20 @@ Currency code for the cost amount. Currently always `"USD"`.
 
 description: string
 
-Description of the cost item. Null if not grouping by description.
+Description of the cost item. `null` if not grouping by description.
+
+inference\_geo: string
+
+Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
 model: string
 
-Model name used. Null if not grouping by description or for non-token costs.
+Model name used. `null` if not grouping by description or for non-token costs.
 
 service\_tier: "standard" or "batch"
 
-Service tier used. Null if not grouping by description or for non-token costs.
+Service tier used. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -119,7 +132,7 @@ Accepts one of the following:
 
 token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
-Type of token. Null if not grouping by description or for non-token costs.
+Type of token. `null` if not grouping by description or for non-token costs.
 
 Accepts one of the following:
 
@@ -135,7 +148,7 @@ Accepts one of the following:
 
 workspace\_id: string
 
-ID of the Workspace this cost is associated with. Null if not grouping by workspace or for the default workspace.
+ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
 starting\_at: string
 
@@ -155,6 +168,7 @@ Get Cost Report
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/cost_report \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
@@ -172,7 +186,8 @@ Response 200
           "cost_type": "tokens",
           "currency": "USD",
           "description": "Claude Sonnet 4 Usage - Input Tokens",
-          "model": "claude-sonnet-4-20250514",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
           "service_tier": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -202,7 +217,8 @@ Response 200
           "cost_type": "tokens",
           "currency": "USD",
           "description": "Claude Sonnet 4 Usage - Input Tokens",
-          "model": "claude-sonnet-4-20250514",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
           "service_tier": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"

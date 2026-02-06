@@ -112,9 +112,9 @@ Response 200
 
 ```shiki
 {
-  "id": "claude-sonnet-4-20250514",
-  "created_at": "2025-02-19T00:00:00Z",
-  "display_name": "Claude Sonnet 4",
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
   "type": "model"
 }
 ```
@@ -125,9 +125,9 @@ Response 200
 
 ```shiki
 {
-  "id": "claude-sonnet-4-20250514",
-  "created_at": "2025-02-19T00:00:00Z",
-  "display_name": "Claude Sonnet 4",
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
   "type": "model"
 }
 ```

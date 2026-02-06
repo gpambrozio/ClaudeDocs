@@ -315,6 +315,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
 Premium model combining maximum intelligence with practical performance
@@ -489,6 +493,10 @@ Optional<Long> cacheReadInputTokens
 The number of input tokens read from the cache.
 
 minimum0
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
 
 long inputTokens
 

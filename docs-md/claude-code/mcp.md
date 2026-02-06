@@ -336,7 +336,7 @@ Access to Intercom data for better customer insightsCommand
 
 Create forms & analyze submissions inside ClaudeCommand
 
-`claude mcp add --transport http jotform https://mcp.jotform.com/`
+`claude mcp add --transport http jotform https://mcp.jotform.com/mcp-app`
 
 [**PlayMCP**](https://www.notion.so/2189b97b4888803dbbdcef264e7eff58)
 

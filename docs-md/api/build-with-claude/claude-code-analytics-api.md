@@ -122,7 +122,7 @@ Breakdown of tool action acceptance and rejection rates by tool type:
 
 For each Claude model used:
 
-- **model**: Claude model identifier (e.g., `claude-sonnet-4-5-20250929`)
+- **model**: Claude model identifier (e.g., `claude-opus-4-6`)
 - **tokens.input/output**: Input and output token counts for this model
 - **tokens.cache\_read/cache\_creation**: Cache-related token usage for this model
 - **estimated\_cost.amount**: Estimated cost in cents USD for this model
@@ -173,7 +173,7 @@ The API returns data in the following format:
       },
       "model_breakdown": [
         {
-          "model": "claude-sonnet-4-5-20250929",
+          "model": "claude-opus-4-6",
           "tokens": {
             "input": 100000,
             "output": 35000,

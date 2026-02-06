@@ -171,7 +171,7 @@ Number of tool action proposals that the user rejected.
 
 subscription\_type: optional "enterprise" or "team"
 
-Subscription tier for subscription customers. Null for API customers.
+Subscription tier for subscription customers. `null` for API customers.
 
 Accepts one of the following:
 
@@ -191,6 +191,7 @@ Get Claude Code Usage Report
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

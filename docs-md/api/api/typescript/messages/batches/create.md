@@ -34,7 +34,7 @@ maxLength64
 
 minLength1
 
-params: Params { max\_tokens, messages, model, 12 more }
+params: Params { max\_tokens, messages, model, 13 more }
 
 Messages API creation parameters for the individual request.
 
@@ -1727,7 +1727,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more
+"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -1811,6 +1815,10 @@ Our previous most fast and cost-effective
 
 (string & {})
 
+inference\_geo?: string | null
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 metadata?: [Metadata](api/messages.md) { user\_id }
 
 An object describing metadata about the request.
@@ -1823,11 +1831,25 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-output\_config?: OutputConfig { format }
+output\_config?: [OutputConfig](api/messages.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-format?: Format | null
+effort?: "low" | "medium" | "high" | "max" | null
+
+All possible effort levels.
+
+Accepts one of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"max"
+
+format?: [JSONOutputFormat](api/messages.md) { schema, type }  | null
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -2056,6 +2078,14 @@ Accepts one of the following:
 
 "disabled"
 
+ThinkingConfigAdaptive { type }
+
+type: "adaptive"
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice?: [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -2190,7 +2220,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-Tool { input\_schema, name, cache\_control, 3 more }
+Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -2250,6 +2280,10 @@ description?: string
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming?: boolean | null
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict?: boolean
 
@@ -2712,7 +2746,7 @@ const messageBatch = await client.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: 'Hello, world', role: 'user' }],
-        model: 'claude-sonnet-4-5-20250929',
+        model: 'claude-opus-4-6',
       },
     },
   ],

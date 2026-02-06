@@ -4,7 +4,7 @@ Copy page
 
 ## Choosing a model
 
-We recommend using the latest Claude Sonnet (4.5) or Claude Opus (4.5) model for complex tools and ambiguous queries; they handle multiple tools better and seek clarification when needed.
+We recommend using the latest Claude Opus (4.6) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
@@ -63,7 +63,7 @@ Tool use examples is a beta feature. Include the appropriate [beta header](api/b
 | Provider | Beta header | Supported models |
 | --- | --- | --- |
 | Claude API, Microsoft Foundry | `advanced-tool-use-2025-11-20` | All models |
-| Vertex AI, Amazon Bedrock | `tool-examples-2025-10-29` | Claude Opus 4.5 only |
+| Vertex AI, Amazon Bedrock | `tool-examples-2025-10-29` | Claude Opus 4.6, Claude Opus 4.5 |
 
 ### Basic usage
 
@@ -77,7 +77,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=1024,
     betas=["advanced-tool-use-2025-11-20"],
     tools=[
@@ -197,7 +197,7 @@ def calculate_sum(a: int, b: int) -> str:
 
 # Use the tool runner
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -260,7 +260,7 @@ Use `runner.until_done()` to get the final message.
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -291,7 +291,7 @@ Use `generate_tool_call_response()` to optionally inspect the tool result (the r
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[get_weather],
     messages=[{"role": "user", "content": "What's the weather in San Francisco?"}]
@@ -352,7 +352,7 @@ Ruby
 import json
 
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[my_tool],
     messages=[{"role": "user", "content": "Run the tool"}]
@@ -395,7 +395,7 @@ Ruby
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[search_documents],
     messages=[{"role": "user", "content": "Search for information about the climate of San Francisco"}]
@@ -439,7 +439,7 @@ Set `stream=True` and use `get_final_message()` to get the accumulated message.
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=[calculate_sum],
     messages=[{"role": "user", "content": "What is 15 + 27?"}],
@@ -545,7 +545,7 @@ While Claude 4 models have excellent parallel tool use capabilities by default, 
 
 **Parallel tool use with Claude Sonnet 3.7**
 
-Claude Sonnet 3.7 may be less likely to make make parallel tool calls in a response, even when you have not set `disable_parallel_tool_use`. We recommend [upgrading to Claude 4 models](about-claude/models/migrating-to-claude-4.md), which have built-in token-efficient tool use and improved parallel tool calling.
+Claude Sonnet 3.7 may be less likely to make make parallel tool calls in a response, even when you have not set `disable_parallel_tool_use`. We recommend [upgrading to Claude 4 models](about-claude/models/migration-guide.md), which have built-in token-efficient tool use and improved parallel tool calling.
 
 If you're still using Claude Sonnet 3.7, you can enable the `token-efficient-tools-2025-02-19` [beta header](api/beta-headers.md), which helps encourage Claude to use parallel tools. You can also introduce a "batch tool" that can act as a meta-tool to wrap invocations to other tools simultaneously.
 
@@ -635,7 +635,7 @@ if response.stop_reason == "max_tokens":
     if last_block.type == "tool_use":
         # Send the request with higher max_tokens
         response = client.messages.create(
-            model="claude-sonnet-4-5",
+            model="claude-opus-4-6",
             max_tokens=4096,  # Increased limit
             messages=messages,
             tools=tools

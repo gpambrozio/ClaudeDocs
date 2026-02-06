@@ -1709,27 +1709,17 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+InferenceGeo param.Field[string]optional
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 Metadata param.Field[[Metadata](api/messages.md)]optional
 
 An object describing metadata about the request.
 
-OutputConfig param.Field[[MessageNewParamsOutputConfig](api/messages/create.md)]optional
+OutputConfig param.Field[[OutputConfig](api/messages.md)]optional
 
 Configuration options for the model's output, such as the output format.
-
-Format MessageNewParamsOutputConfigFormatoptional
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-Schema map[string, any]
-
-The JSON schema of the format
-
-Type JSONSchema
-
-Accepts one of the following:
-
-const JSONSchemaJSONSchema JSONSchema = "json\_schema"
 
 ServiceTier param.Field[[MessageNewParamsServiceTier](api/messages/create.md)]optional
 
@@ -2034,6 +2024,10 @@ Description stringoptional
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+EagerInputStreaming booloptional
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 Strict booloptional
 
@@ -2653,6 +2647,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -2830,6 +2828,10 @@ The number of input tokens read from the cache.
 
 minimum0
 
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
 InputTokens int64
 
 The number of input tokens which were used.
@@ -2893,7 +2895,7 @@ func main() {
       }},
       Role: anthropic.MessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeSonnet4_5_20250929,
+    Model: anthropic.ModelClaudeOpus4_6,
   })
   if err != nil {
     panic(err.Error())
@@ -2924,7 +2926,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -2936,6 +2938,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {
@@ -2970,7 +2973,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -2982,6 +2985,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {

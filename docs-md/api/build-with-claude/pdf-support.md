@@ -90,7 +90,7 @@ Shell
    -H "x-api-key: $ANTHROPIC_API_KEY" \
    -H "anthropic-version: 2023-06-01" \
    -d '{
-     "model": "claude-sonnet-4-5",
+     "model": "claude-opus-4-6",
      "max_tokens": 1024,
      "messages": [{
          "role": "user",
@@ -124,7 +124,7 @@ curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model
 
 # Create a JSON request file using the pdf_base64.txt content
 jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [{
         "role": "user",
@@ -172,7 +172,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -d '{
-    "model": "claude-sonnet-4-5", 
+    "model": "claude-opus-4-6", 
     "max_tokens": 1024,
     "messages": [{
       "role": "user",
@@ -255,7 +255,7 @@ Shell
 ```shiki
 # Create a JSON request file using the pdf_base64.txt content
 jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [{
         "role": "user",
@@ -299,7 +299,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '
       {
           "custom_id": "my-first-request",
           "params": {
-              "model": "claude-sonnet-4-5",
+              "model": "claude-opus-4-6",
               "max_tokens": 1024,
               "messages": [
                 {
@@ -325,7 +325,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '
       {
           "custom_id": "my-second-request",
           "params": {
-              "model": "claude-sonnet-4-5",
+              "model": "claude-opus-4-6",
               "max_tokens": 1024,
               "messages": [
                 {

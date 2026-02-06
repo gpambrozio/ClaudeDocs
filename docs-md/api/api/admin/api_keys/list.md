@@ -1,12 +1,12 @@
-# List Api Keys
+# List API Keys
 
 Copy page
 
-# List Api Keys
+# List API Keys
 
 get/v1/organizations/api\_keys
 
-List Api Keys
+List API Keys
 
 ##### Query ParametersExpand Collapse
 
@@ -106,7 +106,7 @@ Accepts one of the following:
 
 workspace\_id: string
 
-ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
 first\_id: string
 
@@ -120,10 +120,11 @@ last\_id: string
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-List Api Keys
+List API Keys
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

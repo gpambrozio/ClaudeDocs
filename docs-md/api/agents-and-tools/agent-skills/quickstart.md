@@ -59,7 +59,7 @@ client = anthropic.Anthropic()
 
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -138,7 +138,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -167,7 +167,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -196,7 +196,7 @@ Python
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-sonnet-4-5-20250929",
+    model="claude-opus-4-6",
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={

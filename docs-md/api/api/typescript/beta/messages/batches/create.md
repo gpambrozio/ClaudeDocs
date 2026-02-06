@@ -34,7 +34,7 @@ maxLength64
 
 minLength1
 
-params: Params { max\_tokens, messages, model, 16 more }
+params: Params { max\_tokens, messages, model, 17 more }
 
 Messages API creation parameters for the individual request.
 
@@ -2948,6 +2948,53 @@ Accepts one of the following:
 
 "1h"
 
+BetaCompactionBlockParam { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: string | null
+
+Summary of previously compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+Accepts one of the following:
+
+"ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: "user" | "assistant"
 
 Accepts one of the following:
@@ -2964,7 +3011,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more
+"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -3100,7 +3151,7 @@ Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep } >
+edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } >
 
 List of context management edits to apply
 
@@ -3214,6 +3265,40 @@ Accepts one of the following:
 
 "all"
 
+BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: "compact\_20260112"
+
+Accepts one of the following:
+
+"compact\_20260112"
+
+instructions?: string | null
+
+Additional instructions for summarization.
+
+pause\_after\_compaction?: boolean
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | null
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: "input\_tokens"
+
+Accepts one of the following:
+
+"input\_tokens"
+
+value: number
+
+inference\_geo?: string | null
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 mcp\_servers?: Array<[BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } >
 
 MCP servers to be utilized in this request
@@ -3252,11 +3337,9 @@ output\_config?: [BetaOutputConfig](api/beta.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | null
+effort?: "low" | "medium" | "high" | "max" | null
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3265,6 +3348,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"max"
 
 format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
@@ -3511,6 +3596,14 @@ Accepts one of the following:
 
 "disabled"
 
+BetaThinkingConfigAdaptive { type }
+
+type: "adaptive"
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice?: [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3645,7 +3738,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-BetaTool { input\_schema, name, allowed\_callers, 6 more }
+BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -3717,6 +3810,10 @@ description?: string
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming?: boolean | null
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples?: Array<Record<string, unknown>>
 
@@ -5132,7 +5229,7 @@ const betaMessageBatch = await client.beta.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: 'Hello, world', role: 'user' }],
-        model: 'claude-sonnet-4-5-20250929',
+        model: 'claude-opus-4-6',
       },
     },
   ],

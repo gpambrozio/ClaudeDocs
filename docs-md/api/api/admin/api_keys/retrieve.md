@@ -1,12 +1,12 @@
-# Get Api Key
+# Get API Key
 
 Copy page
 
-# Get Api Key
+# Get API Key
 
 get/v1/organizations/api\_keys/{api\_key\_id}
 
-Get Api Key
+Get API Key
 
 ##### Path ParametersExpand Collapse
 
@@ -72,12 +72,13 @@ Accepts one of the following:
 
 workspace\_id: string
 
-ID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.
+ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-Get Api Key
+Get API Key
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
+    -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 

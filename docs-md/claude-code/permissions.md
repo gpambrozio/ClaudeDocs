@@ -31,6 +31,7 @@ Claude Code supports several permission modes that control how tools are approve
 | `default` | Standard behavior: prompts for permission on first use of each tool |
 | `acceptEdits` | Automatically accepts file edit permissions for the session |
 | `plan` | Plan Mode: Claude can analyze but not modify files or execute commands |
+| `delegate` | Coordination-only mode for agent team leads. Restricts the lead to team management tools, so all implementation work happens through teammates. Only available when an agent team is active. See [delegate mode](agent-teams.md) for details. |
 | `dontAsk` | Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules |
 | `bypassPermissions` | Skips all permission prompts (requires safe environment, see warning below) |
 

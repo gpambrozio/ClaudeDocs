@@ -20,10 +20,11 @@ See [Terminal configuration](terminal-config.md) for details.
 | `Ctrl+R` | Reverse search command history | Search through previous commands interactively |
 | `Ctrl+V` or `Cmd+V` (iTerm2) or `Alt+V` (Windows) | Paste image from clipboard | Pastes an image or path to an image file |
 | `Ctrl+B` | Background running tasks | Backgrounds bash commands and agents. Tmux users press twice |
+| `Ctrl+T` | Toggle task list | Show or hide the [task list](#task-list) in the terminal status area |
 | `Left/Right arrows` | Cycle through dialog tabs | Navigate between tabs in permission dialogs and menus |
 | `Up/Down arrows` | Navigate command history | Recall previous inputs |
 | `Esc` + `Esc` | Rewind the code/conversation | Restore the code and/or conversation to a previous point |
-| `Shift+Tab` or `Alt+M` (some configurations) | Toggle permission modes | Switch between Auto-Accept Mode, Plan Mode, and normal mode |
+| `Shift+Tab` or `Alt+M` (some configurations) | Toggle permission modes | Switch between Auto-Accept Mode, Plan Mode, and normal mode. When an [agent team](agent-teams.md) is active, the cycle also includes Delegate Mode. |
 | `Option+P` (macOS) or `Alt+P` (Windows/Linux) | Switch model | Switch models without clearing your prompt |
 | `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle extended thinking | Enable or disable extended thinking mode. Run `/terminal-setup` first to enable this shortcut |
 
@@ -86,7 +87,7 @@ To create your own commands you can invoke with `/`, see [skills](skills.md).
 | `/init` | Initialize project with `CLAUDE.md` guide |
 | `/mcp` | Manage MCP server connections and OAuth authentication |
 | `/memory` | Edit `CLAUDE.md` memory files |
-| `/model` | Select or change the AI model. The change takes effect immediately without waiting for the current response to finish |
+| `/model` | Select or change the AI model. With Opus 4.6, use left/right arrows to [adjust effort level](model-config.md). The change takes effect immediately without waiting for the current response to finish |
 | `/permissions` | View or update [permissions](permissions.md) |
 | `/plan` | Enter plan mode directly from the prompt |
 | `/rename <name>` | Rename the current session for easier identification |

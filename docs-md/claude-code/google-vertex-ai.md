@@ -100,7 +100,7 @@ Copy
 Ask AI
 
 ```shiki
-export ANTHROPIC_MODEL='claude-opus-4-1@20250805'
+export ANTHROPIC_MODEL='claude-opus-4-6'
 export ANTHROPIC_SMALL_FAST_MODEL='claude-haiku-4-5@20251001'
 ```
 

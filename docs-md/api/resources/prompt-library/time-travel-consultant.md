@@ -59,7 +59,7 @@ client = anthropic.Anthropic(
   api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=2000,
   temperature=1,
   system="You are an AI assistant with expertise in physics, philosophy, and science fiction. Your task is to help users explore and understand the implications of hypothetical time travel scenarios. Provide detailed insights on the potential consequences, paradoxes, and ethical considerations involved in each specific scenario, while maintaining a friendly and engaging conversation.",

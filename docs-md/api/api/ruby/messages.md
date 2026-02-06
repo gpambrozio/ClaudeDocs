@@ -3051,6 +3051,18 @@ Accepts one of the following:
 
 :input\_json\_delta
 
+class JSONOutputFormat { schema, type }
+
+schema: Hash[Symbol, untyped]
+
+The JSON schema of the format
+
+type: :json\_schema
+
+Accepts one of the following:
+
+:json\_schema
+
 class Message { id, content, model, 5 more }
 
 id: String
@@ -3320,13 +3332,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -3465,7 +3481,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -3505,6 +3521,10 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
@@ -3539,11 +3559,11 @@ Accepts one of the following:
 
 :batch
 
-MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 3 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
+MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 3 more }
+class Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: { type, properties, required}
 
@@ -3603,6 +3623,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: bool
 
@@ -5599,7 +5623,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-Model = :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more | String
+Model = :"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more | String
 
 The model that will complete your prompt.
 
@@ -5607,13 +5631,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -5696,6 +5724,36 @@ Excels at writing and complex tasks
 Our previous most fast and cost-effective
 
 String
+
+class OutputConfig { effort, format\_ }
+
+effort: :low | :medium | :high | :max
+
+All possible effort levels.
+
+Accepts one of the following:
+
+:low
+
+:medium
+
+:high
+
+:max
+
+format\_: [JSONOutputFormat](api/messages.md) { schema, type }
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Hash[Symbol, untyped]
+
+The JSON schema of the format
+
+type: :json\_schema
+
+Accepts one of the following:
+
+:json\_schema
 
 class PlainTextSource { data, media\_type, type }
 
@@ -6616,13 +6674,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -6761,7 +6823,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -6800,6 +6862,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -7124,13 +7190,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -7269,7 +7339,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -7308,6 +7378,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -8601,6 +8675,14 @@ Accepts one of the following:
 
 :thinking
 
+class ThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 class ThinkingConfigDisabled { type }
 
 type: :disabled
@@ -8627,7 +8709,7 @@ Accepts one of the following:
 
 :enabled
 
-ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type }  | [ThinkingConfigDisabled](api/messages.md) { type }
+ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type }  | [ThinkingConfigDisabled](api/messages.md) { type }  | [ThinkingConfigAdaptive](api/messages.md) { type }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -8663,6 +8745,14 @@ Accepts one of the following:
 
 :disabled
 
+class ThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 class ThinkingDelta { thinking, type }
 
 thinking: String
@@ -8673,7 +8763,7 @@ Accepts one of the following:
 
 :thinking\_delta
 
-class Tool { input\_schema, name, cache\_control, 3 more }
+class Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: { type, properties, required}
 
@@ -8733,6 +8823,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: bool
 
@@ -9810,11 +9904,11 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 3 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
+ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 3 more }
+class Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: { type, properties, required}
 
@@ -9874,6 +9968,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: bool
 
@@ -10267,7 +10365,7 @@ Accepts one of the following:
 
 url: String
 
-class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -10296,6 +10394,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -11314,13 +11416,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -11459,7 +11565,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -11498,6 +11604,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -11976,13 +12086,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -12121,7 +12235,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -12160,6 +12274,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -12600,13 +12718,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -12745,7 +12867,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -12784,6 +12906,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 

@@ -24,7 +24,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [
       {
@@ -163,7 +163,7 @@ client = anthropic.Anthropic()
 claude_tools = await get_claude_tools(mcp_session)
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     tools=claude_tools,
     messages=[{"role": "user", "content": "What tools do you have available?"}]
@@ -214,6 +214,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model | Tool choice | Tool use system prompt token count |
 | --- | --- | --- |
+| Claude Opus 4.6 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.5 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.1 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |

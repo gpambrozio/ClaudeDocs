@@ -2,15 +2,17 @@
 
 Model cards
 
-[Claude Opus 4.5 System Card
+[Claude Opus 4.6 System Card
 
-Detailed documentation of Claude Opus 4.5.](http://www.anthropic.com/claude-opus-4-5-system-card)[Claude Haiku 4.5 System Card
+Detailed documentation of Claude Opus 4.6.](https://www.anthropic.com/claude-opus-4-6-system-card)[Claude Opus 4.5 System Card
 
-Detailed documentation of Claude Haiku 4.5.](http://www.anthropic.com/claude-haiku-4-5-system-card)[Claude Sonnet 4.5 System Card
+Detailed documentation of Claude Opus 4.5.](https://www.anthropic.com/claude-opus-4-5-system-card)[Claude Haiku 4.5 System Card
 
-Detailed documentation of Claude Sonnet 4.5.](http://www.anthropic.com/claude-sonnet-4-5-system-card)[Claude Opus 4.1 System Card
+Detailed documentation of Claude Haiku 4.5.](https://www.anthropic.com/claude-haiku-4-5-system-card)[Claude Sonnet 4.5 System Card
 
-Detailed documentation of Claude Opus 4.1.](http://www.anthropic.com/claude-opus-4-1-system-card)[Claude 4 System Card
+Detailed documentation of Claude Sonnet 4.5.](https://www.anthropic.com/claude-sonnet-4-5-system-card)[Claude Opus 4.1 System Card
+
+Detailed documentation of Claude Opus 4.1.](https://www.anthropic.com/claude-opus-4-1-system-card)[Claude 4 System Card
 
 Detailed documentation of Claude 4 models.](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf)[Claude Sonnet 3.7 System Card
 

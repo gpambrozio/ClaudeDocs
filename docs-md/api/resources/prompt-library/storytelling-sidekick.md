@@ -59,7 +59,7 @@ client = anthropic.Anthropic(
   api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=2000,
   temperature=1,
   system="You are an AI assistant with a passion for creative writing and storytelling. Your task is to collaborate with users to create engaging stories, offering imaginative plot twists and dynamic character development. Encourage the user to contribute their ideas and build upon them to create a captivating narrative.",

@@ -37,7 +37,7 @@ client = anthropic.Anthropic(
     api_key="my_api_key",
 )
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=2000,
     temperature=1,
     system="Your task is to explore a science fiction scenario and discuss the potential challenges and considerations that may arise. Briefly describe the scenario, identify the key technological, social, or ethical issues involved, and encourage the user to share their thoughts on how these challenges might be addressed.",

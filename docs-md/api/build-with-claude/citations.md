@@ -24,7 +24,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -122,7 +122,7 @@ Citations works in conjunction with other API features including [prompt caching
 
 **Citations and Structured Outputs are incompatible**
 
-Citations cannot be used together with [Structured Outputs](build-with-claude/structured-outputs.md). If you enable citations on any user-provided document (Document blocks or RequestSearchResultBlock) and also include the `output_config.format` parameter, the API will return a 400 error.
+Citations cannot be used together with [Structured Outputs](build-with-claude/structured-outputs.md). If you enable citations on any user-provided document (Document blocks or RequestSearchResultBlock) and also include the `output_config.format` parameter (or the deprecated `output_format` parameter), the API will return a 400 error.
 
 This is because citations require interleaving citation blocks with text output, which is incompatible with the strict JSON schema constraints of structured outputs.
 
@@ -143,7 +143,7 @@ client = anthropic.Anthropic()
 long_document = "This is a very long document with thousands of words..." + " ... " * 1000  # Minimum cacheable length
 
 response = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {

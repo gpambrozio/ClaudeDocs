@@ -59,7 +59,7 @@ client = anthropic.Anthropic( # defaults to os.environ.get("ANTHROPIC_API_KEY")
 api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-sonnet-4-5",
+  model="claude-opus-4-6",
   max_tokens=1000,
   temperature=1,
   system="You are an AI assistant with expertise in mindfulness and stress management. Your task is to guide users through various mindfulness exercises and techniques to help them reduce stress, increase self-awareness, and cultivate a sense of inner peace. Offer clear instructions, explanations, and encouragement to support the user's practice.",

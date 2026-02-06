@@ -1683,6 +1683,163 @@ Accepts one of the following:
 
 :code\_execution\_tool\_result\_error
 
+class BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: :compact\_20260112
+
+Accepts one of the following:
+
+:compact\_20260112
+
+instructions: String
+
+Additional instructions for summarization.
+
+pause\_after\_compaction: bool
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger: [BetaInputTokensTrigger](api/beta.md) { type, value }
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: :input\_tokens
+
+Accepts one of the following:
+
+:input\_tokens
+
+value: Integer
+
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
+class BetaCompactionBlockParam { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: String
+
+Summary of previously compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+Accepts one of the following:
+
+:ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class BetaCompactionContentBlockDelta { content, type }
+
+content: String
+
+type: :compaction\_delta
+
+Accepts one of the following:
+
+:compaction\_delta
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
+
 class BetaContainer { id, expires\_at, skills }
 
 Information about the container used in the request (for the code execution tool)
@@ -1817,7 +1974,7 @@ Accepts one of the following:
 
 :"1h"
 
-BetaContentBlock = [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 11 more
+BetaContentBlock = [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 12 more
 
 Response model for a file uploaded to the container.
 
@@ -2653,7 +2810,25 @@ Accepts one of the following:
 
 :container\_upload
 
-BetaContentBlockParam = [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  | 15 more
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
+BetaContentBlockParam = [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  | 16 more
 
 Regular text content.
 
@@ -5506,6 +5681,53 @@ Accepts one of the following:
 
 :"1h"
 
+class BetaCompactionBlockParam { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: String
+
+Summary of previously compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+Accepts one of the following:
+
+:ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 class BetaContentBlockSource { content, type }
 
 content: String | Array[[BetaContentBlockSourceContent](api/beta.md)]
@@ -5954,7 +6176,7 @@ Accepts one of the following:
 
 class BetaContextManagementConfig { edits }
 
-edits: Array[[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep } ]
+edits: Array[[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } ]
 
 List of context management edits to apply
 
@@ -6069,6 +6291,36 @@ Keep = :all
 Accepts one of the following:
 
 :all
+
+class BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: :compact\_20260112
+
+Accepts one of the following:
+
+:compact\_20260112
+
+instructions: String
+
+Additional instructions for summarization.
+
+pause\_after\_compaction: bool
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger: [BetaInputTokensTrigger](api/beta.md) { type, value }
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: :input\_tokens
+
+Accepts one of the following:
+
+:input\_tokens
+
+value: Integer
 
 class BetaContextManagementResponse { applied\_edits }
 
@@ -7820,6 +8072,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -7884,13 +8154,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -8011,6 +8285,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -8031,7 +8307,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -8042,6 +8318,60 @@ Under the hood, the API transforms requests into a format suitable for the model
 For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
 Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
 
 cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -8083,6 +8413,72 @@ The number of output tokens which were used.
 
 minimum0
 
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
 server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
@@ -8111,7 +8507,7 @@ Accepts one of the following:
 
 :batch
 
-class BetaMessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+class BetaMessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 cache\_creation\_input\_tokens: Integer
 
@@ -8130,6 +8526,122 @@ input\_tokens: Integer
 The cumulative number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -8150,6 +8662,58 @@ web\_search\_requests: Integer
 The number of web search tool requests.
 
 minimum0
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
 
 class BetaMessageParam { content, role }
 
@@ -11010,6 +11574,53 @@ Accepts one of the following:
 
 :"1h"
 
+class BetaCompactionBlockParam { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: String
+
+Summary of previously compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+Accepts one of the following:
+
+:ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 role: :user | :assistant
 
 Accepts one of the following:
@@ -11044,11 +11655,9 @@ maxLength256
 
 class BetaOutputConfig { effort, format\_ }
 
-effort: :low | :medium | :high
+effort: :low | :medium | :high | :max
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -11057,6 +11666,8 @@ Accepts one of the following:
 :medium
 
 :high
+
+:max
 
 format\_: [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -11088,7 +11699,7 @@ Accepts one of the following:
 
 :text
 
-BetaRawContentBlockDelta = [BetaTextDelta](api/beta.md) { text, type }  | [BetaInputJSONDelta](api/beta.md) { partial\_json, type }  | [BetaCitationsDelta](api/beta.md) { citation, type }  | 2 more
+BetaRawContentBlockDelta = [BetaTextDelta](api/beta.md) { text, type }  | [BetaInputJSONDelta](api/beta.md) { partial\_json, type }  | [BetaCitationsDelta](api/beta.md) { citation, type }  | 3 more
 
 Accepts one of the following:
 
@@ -11239,6 +11850,16 @@ type: :signature\_delta
 Accepts one of the following:
 
 :signature\_delta
+
+class BetaCompactionContentBlockDelta { content, type }
+
+content: String
+
+type: :compaction\_delta
+
+Accepts one of the following:
+
+:compaction\_delta
 
 class BetaRawContentBlockDeltaEvent { delta, index, type }
 
@@ -11394,6 +12015,16 @@ Accepts one of the following:
 
 :signature\_delta
 
+class BetaCompactionContentBlockDelta { content, type }
+
+content: String
+
+type: :compaction\_delta
+
+Accepts one of the following:
+
+:compaction\_delta
+
 index: Integer
 
 type: :content\_block\_delta
@@ -11404,7 +12035,7 @@ Accepts one of the following:
 
 class BetaRawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 11 more
+content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 12 more
 
 Response model for a file uploaded to the container.
 
@@ -12240,6 +12871,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 index: Integer
 
 type: :content\_block\_start
@@ -12374,6 +13023,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -12386,7 +13037,7 @@ Accepts one of the following:
 
 :message\_delta
 
-usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 Billing and rate-limit usage.
 
@@ -12415,6 +13066,122 @@ input\_tokens: Integer
 The cumulative number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -13351,6 +14118,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -13415,13 +14200,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -13542,6 +14331,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -13562,7 +14353,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -13602,11 +14393,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -14575,6 +15486,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -14639,13 +15568,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -14766,6 +15699,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -14786,7 +15721,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -14826,11 +15761,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -14988,6 +16043,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -15000,7 +16057,7 @@ Accepts one of the following:
 
 :message\_delta
 
-usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+usage: [BetaMessageDeltaUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 Billing and rate-limit usage.
 
@@ -15029,6 +16086,122 @@ input\_tokens: Integer
 The cumulative number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -15060,7 +16233,7 @@ Accepts one of the following:
 
 class BetaRawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 11 more
+content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 12 more
 
 Response model for a file uploaded to the container.
 
@@ -15896,6 +17069,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 index: Integer
 
 type: :content\_block\_start
@@ -16057,6 +17248,16 @@ type: :signature\_delta
 Accepts one of the following:
 
 :signature\_delta
+
+class BetaCompactionContentBlockDelta { content, type }
+
+content: String
+
+type: :compaction\_delta
+
+Accepts one of the following:
+
+:compaction\_delta
 
 index: Integer
 
@@ -17040,7 +18241,7 @@ maxLength64
 
 minLength1
 
-BetaStopReason = :end\_turn | :max\_tokens | :stop\_sequence | 4 more
+BetaStopReason = :end\_turn | :max\_tokens | :stop\_sequence | 5 more
 
 Accepts one of the following:
 
@@ -17053,6 +18254,8 @@ Accepts one of the following:
 :tool\_use
 
 :pause\_turn
+
+:compaction
 
 :refusal
 
@@ -17898,6 +19101,14 @@ Accepts one of the following:
 
 :thinking
 
+class BetaThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 class BetaThinkingConfigDisabled { type }
 
 type: :disabled
@@ -17924,7 +19135,7 @@ Accepts one of the following:
 
 :enabled
 
-BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type }  | [BetaThinkingConfigDisabled](api/beta.md) { type }
+BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -17960,6 +19171,14 @@ Accepts one of the following:
 
 :disabled
 
+class BetaThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 class BetaThinkingDelta { thinking, type }
 
 thinking: String
@@ -17980,7 +19199,7 @@ Accepts one of the following:
 
 value: Integer
 
-class BetaTool { input\_schema, name, allowed\_callers, 6 more }
+class BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: { type, properties, required}
 
@@ -18052,6 +19271,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples: Array[Hash[Symbol, untyped]]
 
@@ -20069,7 +21292,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 6 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 15 more
+BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 15 more
 
 Configuration for a group of tools from an MCP server.
 
@@ -20078,7 +21301,7 @@ from an MCP server, with optional per-tool overrides.
 
 Accepts one of the following:
 
-class BetaTool { input\_schema, name, allowed\_callers, 6 more }
+class BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: { type, properties, required}
 
@@ -20150,6 +21373,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples: Array[Hash[Symbol, untyped]]
 
@@ -21524,7 +22751,61 @@ Accepts one of the following:
 
 url: String
 
-class BetaUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+class BetaUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
 
 cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -21559,6 +22840,72 @@ input\_tokens: Integer
 The number of input tokens which were used.
 
 minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -24353,6 +25700,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -24417,13 +25782,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -24544,6 +25913,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -24564,7 +25935,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -24604,11 +25975,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -25731,6 +27222,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -25795,13 +27304,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -25922,6 +27435,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -25942,7 +27457,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -25982,11 +27497,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 
@@ -27071,6 +28706,24 @@ Accepts one of the following:
 
 :container\_upload
 
+class BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: String
+
+Summary of compacted content, or null if compaction failed
+
+type: :compaction
+
+Accepts one of the following:
+
+:compaction
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
 Context management response.
@@ -27135,13 +28788,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -27262,6 +28919,8 @@ Accepts one of the following:
 
 :pause\_turn
 
+:compaction
+
 :refusal
 
 :model\_context\_window\_exceeded
@@ -27282,7 +28941,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -27322,11 +28981,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: Integer
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+:message
+
+class BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+minimum0
+
+type: :compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+:compaction
 
 output\_tokens: Integer
 

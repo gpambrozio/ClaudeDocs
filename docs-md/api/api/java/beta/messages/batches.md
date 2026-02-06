@@ -1223,6 +1223,24 @@ Accepts one of the following:
 
 CONTAINER\_UPLOAD("container\_upload")
 
+class BetaCompactionBlock:
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Optional<String> content
+
+Summary of compacted content, or null if compaction failed
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Accepts one of the following:
+
+COMPACTION("compaction")
+
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
@@ -1286,6 +1304,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -1404,6 +1426,8 @@ TOOL\_USE("tool\_use")
 
 PAUSE\_TURN("pause\_turn")
 
+COMPACTION("compaction")
+
 REFUSAL("refusal")
 
 MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
@@ -1464,11 +1488,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
 long inputTokens
 
 The number of input tokens which were used.
 
 minimum0
+
+Optional<List<Iteration>> iterations
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage:
+
+Token usage for a sampling iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "message"constant"message"constant
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+MESSAGE("message")
+
+class BetaCompactionIterationUsage:
+
+Token usage for a compaction iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+COMPACTION("compaction")
 
 long outputTokens
 
@@ -2589,6 +2733,24 @@ Accepts one of the following:
 
 CONTAINER\_UPLOAD("container\_upload")
 
+class BetaCompactionBlock:
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Optional<String> content
+
+Summary of compacted content, or null if compaction failed
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Accepts one of the following:
+
+COMPACTION("compaction")
+
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
@@ -2652,6 +2814,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -2770,6 +2936,8 @@ TOOL\_USE("tool\_use")
 
 PAUSE\_TURN("pause\_turn")
 
+COMPACTION("compaction")
+
 REFUSAL("refusal")
 
 MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
@@ -2830,11 +2998,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
 long inputTokens
 
 The number of input tokens which were used.
 
 minimum0
+
+Optional<List<Iteration>> iterations
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage:
+
+Token usage for a sampling iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "message"constant"message"constant
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+MESSAGE("message")
+
+class BetaCompactionIterationUsage:
+
+Token usage for a compaction iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+COMPACTION("compaction")
 
 long outputTokens
 
@@ -3919,6 +4207,24 @@ Accepts one of the following:
 
 CONTAINER\_UPLOAD("container\_upload")
 
+class BetaCompactionBlock:
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+Optional<String> content
+
+Summary of compacted content, or null if compaction failed
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Accepts one of the following:
+
+COMPACTION("compaction")
+
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
@@ -3982,6 +4288,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -4100,6 +4410,8 @@ TOOL\_USE("tool\_use")
 
 PAUSE\_TURN("pause\_turn")
 
+COMPACTION("compaction")
+
 REFUSAL("refusal")
 
 MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
@@ -4160,11 +4472,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
 long inputTokens
 
 The number of input tokens which were used.
 
 minimum0
+
+Optional<List<Iteration>> iterations
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage:
+
+Token usage for a sampling iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "message"constant"message"constant
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+MESSAGE("message")
+
+class BetaCompactionIterationUsage:
+
+Token usage for a compaction iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+minimum0
+
+long inputTokens
+
+The number of input tokens which were used.
+
+minimum0
+
+long outputTokens
+
+The number of output tokens which were used.
+
+minimum0
+
+JsonValue; type "compaction"constant"compaction"constant
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+COMPACTION("compaction")
 
 long outputTokens
 

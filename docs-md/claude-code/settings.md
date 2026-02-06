@@ -142,7 +142,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `includeCoAuthoredBy` | **Deprecated**: Use `attribution` instead. Whether to include the `co-authored-by Claude` byline in git commits and pull requests (default: `true`) | `false` |
 | `permissions` | See table below for structure of permissions. |  |
 | `hooks` | Configure custom commands to run at lifecycle events. See [hooks documentation](hooks.md) for format | See [hooks](hooks.md) |
-| `disableAllHooks` | Disable all [hooks](hooks.md) | `true` |
+| `disableAllHooks` | Disable all [hooks](hooks.md) and any custom [status line](statusline.md) | `true` |
 | `allowManagedHooksOnly` | (Managed settings only) Prevent loading of user, project, and plugin hooks. Only allows managed hooks and SDK hooks. See [Hook configuration](#hook-configuration) | `true` |
 | `allowManagedPermissionRulesOnly` | (Managed settings only) Prevent user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply. See [Managed-only settings](permissions.md) | `true` |
 | `model` | Override the default model to use for Claude Code | `"claude-sonnet-4-5-20250929"` |
@@ -170,6 +170,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `spinnerTipsEnabled` | Show tips in the spinner while Claude is working. Set to `false` to disable tips (default: `true`) | `false` |
 | `terminalProgressBarEnabled` | Enable the terminal progress bar that shows progress in supported terminals like Windows Terminal and iTerm2 (default: `true`) | `false` |
 | `prefersReducedMotion` | Reduce or disable UI animations (spinners, shimmer, flash effects) for accessibility | `true` |
+| `teammateMode` | How [agent team](agent-teams.md) teammates display: `auto` (picks split panes in tmux or iTerm2, in-process otherwise), `in-process`, or `tmux`. See [set up agent teams](agent-teams.md) | `"in-process"` |
 
 ### [​](#permission-settings) Permission settings
 
@@ -834,16 +835,19 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | Set the percentage of context capacity (1-100) at which auto-compaction triggers. By default, auto-compaction triggers at approximately 95% capacity. Use lower values like `50` to compact earlier. Values above the default threshold have no effect. Applies to both main conversations and subagents. This percentage aligns with the `context_window.used_percentage` field available in [status line](statusline.md) |  |
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Return to the original working directory after each Bash command |  |
 | `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD` | Set to `1` to load CLAUDE.md files from directories specified with `--add-dir`. By default, additional directories do not load memory files | `1` |
+| `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` | Set to `1` to enable [agent teams](agent-teams.md). Agent teams are experimental and disabled by default |  |
 | `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` | Interval in milliseconds at which credentials should be refreshed (when using `apiKeyHelper`) |  |
 | `CLAUDE_CODE_CLIENT_CERT` | Path to client certificate file for mTLS authentication |  |
 | `CLAUDE_CODE_CLIENT_KEY_PASSPHRASE` | Passphrase for encrypted CLAUDE\_CODE\_CLIENT\_KEY (optional) |  |
 | `CLAUDE_CODE_CLIENT_KEY` | Path to client private key file for mTLS authentication |  |
+| `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high` (default). Lower effort is faster and cheaper, higher effort provides deeper reasoning. Currently supported with Opus 4.6 only. See [Adjust effort level](model-config.md) |  |
 | `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to disable Anthropic API-specific `anthropic-beta` headers. Use this if experiencing issues like “Unexpected value(s) for the `anthropic-beta` header” when using an LLM gateway with third-party providers |  |
 | `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to disable all background task functionality, including the `run_in_background` parameter on Bash and subagent tools, auto-backgrounding, and the Ctrl+B shortcut |  |
 | `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` | Set to `1` to disable the “How is Claude doing?” session quality surveys. Also disabled when using third-party providers or when telemetry is disabled. See [Session quality surveys](data-usage.md) |  |
 | `CLAUDE_CODE_EXIT_AFTER_STOP_DELAY` | Time in milliseconds to wait after the query loop becomes idle before automatically exiting. Useful for automated workflows and scripts using SDK mode |  |
 | `CLAUDE_CODE_PROXY_RESOLVES_HOSTS` | Set to `true` to allow the proxy to perform DNS resolution instead of the caller. Opt-in for environments where the proxy should handle hostname resolution |  |
 | `CLAUDE_CODE_TASK_LIST_ID` | Share a task list across sessions. Set the same ID in multiple Claude Code instances to coordinate on a shared task list. See [Task list](interactive-mode.md) |  |
+| `CLAUDE_CODE_TEAM_NAME` | Name of the agent team this teammate belongs to. Set automatically on [agent team](agent-teams.md) members |  |
 | `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |  |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |  |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |  |
@@ -855,6 +859,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL` | Skip auto-installation of IDE extensions |  |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Set the maximum number of output tokens for most requests. Default: 32,000. Maximum: 64,000. Increasing this value reduces the effective context window available before [auto-compaction](costs.md) triggers. |  |
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic OpenTelemetry headers in milliseconds (default: 1740000 / 29 minutes). See [Dynamic headers](monitoring-usage.md) |  |
+| `CLAUDE_CODE_PLAN_MODE_REQUIRED` | Auto-set to `true` on [agent team](agent-teams.md) teammates that require plan approval. Read-only: set by Claude Code when spawning teammates. See [require plan approval](agent-teams.md) |  |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |  |
 | `CLAUDE_CODE_SHELL_PREFIX` | Command prefix to wrap all bash commands (for example, for logging or auditing). Example: `/path/to/logger.sh` will execute `/path/to/logger.sh <command>` |  |
 | `CLAUDE_CODE_SKIP_BEDROCK_AUTH` | Skip AWS authentication for Bedrock (for example, when using an LLM gateway) |  |
@@ -882,7 +887,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `HTTPS_PROXY` | Specify HTTPS proxy server for network connections |  |
 | `IS_DEMO` | Set to `true` to enable demo mode: hides email and organization from the UI, skips onboarding, and hides internal commands. Useful for streaming or recording sessions |  |
 | `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens (default: 25000) |  |
-| `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. Thinking is enabled at max budget (31,999 tokens) by default. Use this to limit the budget (for example, `MAX_THINKING_TOKENS=10000`) or disable thinking entirely (`MAX_THINKING_TOKENS=0`). Extended thinking improves performance on complex reasoning and coding tasks but impacts [prompt caching efficiency](build-with-claude/prompt-caching.md). |  |
+| `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. Thinking is enabled at max budget (31,999 tokens) by default. Use this to limit the budget (for example, `MAX_THINKING_TOKENS=10000`) or disable thinking entirely (`MAX_THINKING_TOKENS=0`). For Opus 4.6, thinking depth is controlled by [effort level](model-config.md) instead, and this variable is ignored unless set to `0` to disable thinking. |  |
 | `MCP_CLIENT_SECRET` | OAuth client secret for MCP servers that require [pre-configured credentials](mcp.md). Avoids the interactive prompt when adding a server with `--client-secret` |  |
 | `MCP_OAUTH_CALLBACK_PORT` | Fixed port for the OAuth redirect callback, as an alternative to `--callback-port` when adding an MCP server with [pre-configured credentials](mcp.md) |  |
 | `MCP_TIMEOUT` | Timeout in milliseconds for MCP server startup |  |

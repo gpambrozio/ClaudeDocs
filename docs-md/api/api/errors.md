@@ -67,7 +67,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-sonnet-4-5",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"}
@@ -92,6 +92,39 @@ If you are building a direct API integration, you should be aware that setting a
 
 Our [SDKs](api/client-sdks.md) will validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
 also will set a socket option for TCP keep-alive.
+
+If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:
+
+Python
+
+```shiki
+with client.messages.stream(
+    max_tokens=128000,
+    messages=[{"role": "user", "content": "Write a detailed analysis..."}],
+    model="claude-opus-4-6",
+) as stream:
+    message = stream.get_final_message()
+```
+
+See [Streaming Messages](build-with-claude/streaming.md) for more details.
+
+## Common validation errors
+
+### Prefill not supported
+
+Claude Opus 4.6 does not support prefilling assistant messages. Sending a request with a prefilled last assistant message to this model returns a 400 `invalid_request_error`:
+
+```shiki
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Prefilling assistant messages is not supported for this model."
+  }
+}
+```
+
+Use [structured outputs](build-with-claude/structured-outputs.md), system prompt instructions, or [`output_config.format`](build-with-claude/structured-outputs.md) instead.
 
 Was this page helpful?
 

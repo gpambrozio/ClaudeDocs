@@ -66,7 +66,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [
       {
@@ -117,7 +117,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<EOF
 {
-  "model": "claude-sonnet-4-5",
+  "model": "claude-opus-4-6",
   "max_tokens": 1024,
   "messages": [
     {
@@ -281,7 +281,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#bfccded3daccffded1cbd7cdd0cfd6dc91dcd0d2) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#f98a98959c8ab998978d918b9689909ad79a9694) if you need higher limits for your use case
 
 Was this page helpful?
 

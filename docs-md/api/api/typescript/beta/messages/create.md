@@ -20,7 +20,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 MessageCreateParams = MessageCreateParamsNonStreaming { stream }  | MessageCreateParamsStreaming { stream }
 
-MessageCreateParamsBase { max\_tokens, messages, model, 17 more }
+MessageCreateParamsBase { max\_tokens, messages, model, 18 more }
 
 max\_tokens: number
 
@@ -2930,6 +2930,53 @@ Accepts one of the following:
 
 "1h"
 
+BetaCompactionBlockParam { content, type, cache\_control }
+
+A compaction block containing summary of previous context.
+
+Users should round-trip these blocks from responses to subsequent requests
+to maintain context across compaction boundaries.
+
+When content is None, the block represents a failed compaction. The server
+treats these as no-ops. Empty string content is not allowed.
+
+content: string | null
+
+Summary of previously compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+Accepts one of the following:
+
+"ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: "user" | "assistant"
 
 Accepts one of the following:
@@ -2946,7 +2993,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more
+"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -3082,7 +3133,7 @@ Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep } >
+edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  | [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger } >
 
 List of context management edits to apply
 
@@ -3196,6 +3247,40 @@ Accepts one of the following:
 
 "all"
 
+BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger }
+
+Automatically compact older context when reaching the configured trigger threshold.
+
+type: "compact\_20260112"
+
+Accepts one of the following:
+
+"compact\_20260112"
+
+instructions?: string | null
+
+Additional instructions for summarization.
+
+pause\_after\_compaction?: boolean
+
+Whether to pause after compaction and return the compaction block to the user.
+
+trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | null
+
+When to trigger compaction. Defaults to 150000 input tokens.
+
+type: "input\_tokens"
+
+Accepts one of the following:
+
+"input\_tokens"
+
+value: number
+
+inference\_geo?: string | null
+
+Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 mcp\_servers?: Array<[BetaRequestMCPServerURLDefinition](api/beta.md) { name, type, url, 2 more } >
 
 Body param: MCP servers to be utilized in this request
@@ -3234,11 +3319,9 @@ output\_config?: [BetaOutputConfig](api/beta.md) { effort, format }
 
 Body param: Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | null
+effort?: "low" | "medium" | "high" | "max" | null
 
-How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
-
-Valid values are `low`, `medium`, or `high`.
+All possible effort levels.
 
 Accepts one of the following:
 
@@ -3247,6 +3330,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"max"
 
 format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
@@ -3497,6 +3582,14 @@ Accepts one of the following:
 
 "disabled"
 
+BetaThinkingConfigAdaptive { type }
+
+type: "adaptive"
+
+Accepts one of the following:
+
+"adaptive"
+
 tool\_choice?: [BetaToolChoice](api/beta.md)
 
 Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3631,7 +3724,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-BetaTool { input\_schema, name, allowed\_callers, 6 more }
+BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: InputSchema { type, properties, required }
 
@@ -3703,6 +3796,10 @@ description?: string
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming?: boolean | null
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 input\_examples?: Array<Record<string, unknown>>
 
@@ -4996,7 +5093,7 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 17 more }  { stream }
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 18 more }  { stream }
 
 stream?: false
 
@@ -5008,7 +5105,7 @@ Accepts one of the following:
 
 false
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 17 more }  { stream }
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 18 more }  { stream }
 
 stream?: false
 
@@ -5935,6 +6032,24 @@ Accepts one of the following:
 
 "container\_upload"
 
+BetaCompactionBlock { content, type }
+
+A compaction block returned when autocompact is triggered.
+
+When content is None, it indicates the compaction failed to produce a valid
+summary (e.g., malformed output from the model). Clients may round-trip
+compaction blocks with null content; the server treats them as no-ops.
+
+content: string | null
+
+Summary of compacted content, or null if compaction failed
+
+type: "compaction"
+
+Accepts one of the following:
+
+"compaction"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -5999,7 +6114,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-5-20251101" | "claude-opus-4-5" | "claude-3-7-sonnet-latest" | 17 more
+"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 "claude-opus-4-5-20251101"
 
@@ -6120,6 +6239,8 @@ Accepts one of the following:
 
 "pause\_turn"
 
+"compaction"
+
 "refusal"
 
 "model\_context\_window\_exceeded"
@@ -6140,7 +6261,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -6180,11 +6301,131 @@ The number of input tokens read from the cache.
 
 minimum0
 
+inference\_geo: string | null
+
+The geographic region where inference was performed for this request.
+
 input\_tokens: number
 
 The number of input tokens which were used.
 
 minimum0
+
+iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "message"
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+"message"
+
+BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "compaction"
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+"compaction"
 
 output\_tokens: number
 
@@ -6234,7 +6475,7 @@ const client = new Anthropic({
 const betaMessage = await client.beta.messages.create({
   max_tokens: 1024,
   messages: [{ content: 'Hello, world', role: 'user' }],
-  model: 'claude-sonnet-4-5-20250929',
+  model: 'claude-opus-4-6',
 });
 
 console.log(betaMessage.id);
@@ -6282,7 +6523,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -6294,7 +6535,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,
@@ -6349,7 +6604,7 @@ Response 200
       }
     ]
   },
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -6361,7 +6616,21 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
     "output_tokens": 503,
     "server_tool_use": {
       "web_fetch_requests": 2,

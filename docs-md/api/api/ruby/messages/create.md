@@ -1713,13 +1713,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -1803,6 +1807,10 @@ Our previous most fast and cost-effective
 
 String
 
+inference\_geo: String
+
+Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
 metadata: [Metadata](api/messages.md) { user\_id }
 
 An object describing metadata about the request.
@@ -1815,11 +1823,25 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-output\_config: { format\_}
+output\_config: [OutputConfig](api/messages.md) { effort, format\_ }
 
 Configuration options for the model's output, such as the output format.
 
-format\_: { schema, type}
+effort: :low | :medium | :high | :max
+
+All possible effort levels.
+
+Accepts one of the following:
+
+:low
+
+:medium
+
+:high
+
+:max
+
+format\_: [JSONOutputFormat](api/messages.md) { schema, type }
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -2052,6 +2074,14 @@ Accepts one of the following:
 
 :disabled
 
+class ThinkingConfigAdaptive { type }
+
+type: :adaptive
+
+Accepts one of the following:
+
+:adaptive
+
 tool\_choice: [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -2186,7 +2216,7 @@ See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 3 more }
+class Tool { input\_schema, name, cache\_control, 4 more }
 
 input\_schema: { type, properties, required}
 
@@ -2246,6 +2276,10 @@ description: String
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+eager\_input\_streaming: bool
+
+Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
 strict: bool
 
@@ -2857,13 +2891,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-5-20251101" | :"claude-opus-4-5" | :"claude-3-7-sonnet-latest" | 17 more
+:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
 
 :"claude-opus-4-5-20251101"
 
@@ -3002,7 +3040,7 @@ Accepts one of the following:
 
 :message
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -3041,6 +3079,10 @@ cache\_read\_input\_tokens: Integer
 The number of input tokens read from the cache.
 
 minimum0
+
+inference\_geo: String
+
+The geographic region where inference was performed for this request.
 
 input\_tokens: Integer
 
@@ -3088,7 +3130,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 message = anthropic.messages.create(
   max_tokens: 1024,
   messages: [{content: "Hello, world", role: :user}],
-  model: :"claude-sonnet-4-5-20250929"
+  model: :"claude-opus-4-6"
 )
 
 puts(message)
@@ -3116,7 +3158,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -3128,6 +3170,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {
@@ -3162,7 +3205,7 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-sonnet-4-5-20250929",
+  "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_reason": "end_turn",
   "stop_sequence": null,
@@ -3174,6 +3217,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
     "server_tool_use": {
