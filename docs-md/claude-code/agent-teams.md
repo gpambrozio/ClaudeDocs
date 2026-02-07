@@ -195,6 +195,13 @@ This removes the shared team resources. When the lead runs cleanup, it checks fo
 
 Always use the lead to clean up. Teammates should not run cleanup because their team context may not resolve correctly, potentially leaving resources in an inconsistent state.
 
+### [​](#enforce-quality-gates-with-hooks) Enforce quality gates with hooks
+
+Use [hooks](hooks.md) to enforce rules when teammates finish work or tasks complete:
+
+- [`TeammateIdle`](hooks.md): runs when a teammate is about to go idle. Exit with code 2 to send feedback and keep the teammate working.
+- [`TaskCompleted`](hooks.md): runs when a task is being marked complete. Exit with code 2 to prevent completion and send feedback.
+
 ## [​](#how-agent-teams-work) How agent teams work
 
 This section covers the architecture and mechanics behind agent teams. If you want to start using them, see [Control your agent team](#control-your-agent-team) above.

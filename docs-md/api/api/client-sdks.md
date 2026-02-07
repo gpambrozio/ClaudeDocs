@@ -2,139 +2,128 @@
 
 Copy page
 
-This page includes brief installation instructions and links to the open-source GitHub repositories for Anthropic's Client SDKs. For basic usage instructions, see the [API reference](api/overview.md) For detailed usage instructions, refer to each SDK's GitHub repository.
+Anthropic provides official client SDKs in multiple languages to make it easier to work with the Claude API. Each SDK provides idiomatic interfaces, type safety, and built-in support for features like streaming, retries, and error handling.
 
-Additional configuration is needed to use Anthropic's Client SDKs through a partner platform. If you are using Amazon Bedrock, see [this guide](build-with-claude/claude-on-amazon-bedrock.md); if you are using Google Cloud Vertex AI, see [this guide](build-with-claude/claude-on-vertex-ai.md); if you are using Microsoft Foundry, see [this guide](build-with-claude/claude-in-microsoft-foundry.md).
+[Python
 
-## Python
+Sync and async clients, Pydantic models](api/sdks/python.md)[TypeScript
 
-[Python library GitHub repo](https://github.com/anthropics/anthropic-sdk-python)
+Node.js, Deno, Bun, and browser support](api/sdks/typescript.md)[Java
 
-**Requirements:** Python 3.8+
+Builder pattern, CompletableFuture async](api/sdks/java.md)[Go
 
-**Minimum SDK version:** 0.22.0
+Context-based cancellation, functional options](api/sdks/go.md)[Ruby
 
-**Installation:**
+Sorbet types, streaming helpers](api/sdks/ruby.md)[C#
+
+.NET Standard 2.0+, IChatClient integration](api/sdks/csharp.md)[PHP
+
+Value objects, builder pattern](api/sdks/php.md)
+
+## Quick installation
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+Java
+
+Java
+
+Go
+
+Go
+
+Ruby
+
+Ruby
+
+C#
+
+C#
+
+PHP
+
+PHP
 
 ```shiki
 pip install anthropic
 ```
 
----
+## Quick start
 
-## TypeScript
-
-[TypeScript library GitHub repo](https://github.com/anthropics/anthropic-sdk-typescript)
-
-While this library is in TypeScript, it can also be used in JavaScript libraries.
-
-**Minimum SDK version:** 0.37.0
-
-**Installation:**
+Python
 
 ```shiki
-npm install @anthropic-ai/sdk
+import anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Hello, Claude"}
+    ]
+)
+print(message.content)
 ```
 
----
+## Platform support
 
-## Java
+All SDKs support multiple deployment options:
 
-[Java library GitHub repo](https://github.com/anthropics/anthropic-sdk-java)
+| Platform | Description |
+| --- | --- |
+| Claude API | Connect directly to Claude API endpoints |
+| [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) | Use Claude through AWS |
+| [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md) | Use Claude through Google Cloud |
+| [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) | Use Claude through Microsoft Azure |
 
-**Requirements:** Java 8 or later
+See individual SDK pages for platform-specific setup instructions.
 
-**Installation:**
+## Beta features
 
-Gradle:
+Access beta features using the `beta` namespace in any SDK:
+
+Python
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.10.0")
+message = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+    betas=["feature-name"]
+)
 ```
 
-Maven:
+See [Beta headers](api/beta-headers.md) for available beta features.
 
-```shiki
-<dependency>
-    <groupId>com.anthropic</groupId>
-    <artifactId>anthropic-java</artifactId>
-    <version>2.10.0</version>
-</dependency>
-```
+## Requirements
 
----
+| SDK | Minimum Version |
+| --- | --- |
+| Python | 3.9+ |
+| TypeScript | 4.9+ (Node.js 20+) |
+| Java | 8+ |
+| Go | 1.22+ |
+| Ruby | 3.2.0+ |
+| C# | .NET Standard 2.0 |
+| PHP | 8.1.0+ |
 
-## Go
+## GitHub repositories
 
-[Go library GitHub repo](https://github.com/anthropics/anthropic-sdk-go)
-
-**Requirements:** Go 1.22+
-
-**Installation:**
-
-```shiki
-go get -u 'github.com/anthropics/anthropic-sdk-go@v1.17.0'
-```
-
----
-
-## C#
-
-[C# library GitHub repo](https://github.com/anthropics/anthropic-sdk-csharp)
-
-The C# SDK is currently in beta.
-
-**Requirements:** .NET 8 or later
-
-**Installation:**
-
-```shiki
-dotnet add package Anthropic
-```
-
----
-
-## Ruby
-
-[Ruby library GitHub repo](https://github.com/anthropics/anthropic-sdk-ruby)
-
-**Requirements:** Ruby 3.2.0 or later
-
-**Installation:**
-
-Add to your Gemfile:
-
-```shiki
-gem "anthropic", "~> 1.13.0"
-```
-
-Then run:
-
-```shiki
-bundle install
-```
-
----
-
-## PHP
-
-[PHP library GitHub repo](https://github.com/anthropics/anthropic-sdk-php)
-
-The PHP SDK is currently in beta.
-
-**Requirements:** PHP 8.1.0 or higher
-
-**Installation:**
-
-```shiki
-composer require "anthropic-ai/sdk 0.3.0"
-```
-
----
-
-## Beta namespace in client SDKs
-
-Every SDK has a `beta` namespace that is available for accessing new features that Anthropic releases in beta versions. Use this in conjunction with [beta headers](api/beta-headers.md) to access these features. Refer to each SDK's GitHub repository for specific usage examples.
+- [anthropic-sdk-python](https://github.com/anthropics/anthropic-sdk-python)
+- [anthropic-sdk-typescript](https://github.com/anthropics/anthropic-sdk-typescript)
+- [anthropic-sdk-java](https://github.com/anthropics/anthropic-sdk-java)
+- [anthropic-sdk-go](https://github.com/anthropics/anthropic-sdk-go)
+- [anthropic-sdk-ruby](https://github.com/anthropics/anthropic-sdk-ruby)
+- [anthropic-sdk-csharp](https://github.com/anthropics/anthropic-sdk-csharp)
+- [anthropic-sdk-php](https://github.com/anthropics/anthropic-sdk-php)
 
 Was this page helpful?
 

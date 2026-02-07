@@ -309,6 +309,8 @@ Hook events fire at specific lifecycle points in Claude Code. When an event fire
 | `SubagentStart` | When a subagent is spawned |
 | `SubagentStop` | When a subagent finishes |
 | `Stop` | When Claude finishes responding |
+| `TeammateIdle` | When an [agent team](agent-teams.md) teammate is about to go idle |
+| `TaskCompleted` | When a task is being marked as completed |
 | `PreCompact` | Before context compaction |
 | `SessionEnd` | When a session terminates |
 
@@ -428,11 +430,11 @@ Each event type matches on a specific field. Matchers support exact strings and 
 | --- | --- | --- |
 | `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, `PermissionRequest` | tool name | `Bash`, `Edit|Write`, `mcp__.*` |
 | `SessionStart` | how the session started | `startup`, `resume`, `clear`, `compact` |
-| `SessionEnd` | why the session ended | `clear`, `logout`, `prompt_input_exit`, `other` |
+| `SessionEnd` | why the session ended | `clear`, `logout`, `prompt_input_exit`, `bypass_permissions_disabled`, `other` |
 | `Notification` | notification type | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog` |
 | `SubagentStart` | agent type | `Bash`, `Explore`, `Plan`, or custom agent names |
 | `PreCompact` | what triggered compaction | `manual`, `auto` |
-| `UserPromptSubmit`, `Stop` | no matcher support | always fires on every occurrence |
+| `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCompleted` | no matcher support | always fires on every occurrence |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
 
 A few more examples showing matchers on different event types:

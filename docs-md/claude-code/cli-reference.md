@@ -78,8 +78,12 @@ The `--agents` flag accepts a JSON object that defines one or more custom subage
 | --- | --- | --- |
 | `description` | Yes | Natural language description of when the subagent should be invoked |
 | `prompt` | Yes | The system prompt that guides the subagent’s behavior |
-| `tools` | No | Array of specific tools the subagent can use (for example, `["Read", "Edit", "Bash"]`). If omitted, inherits all tools |
-| `model` | No | Model alias to use: `sonnet`, `opus`, `haiku`, or `inherit`. If omitted, defaults to `inherit` (uses the main conversation’s model) |
+| `tools` | No | Array of specific tools the subagent can use, for example `["Read", "Edit", "Bash"]`. If omitted, inherits all tools. Supports [`Task(agent_type)`](sub-agents.md) syntax |
+| `disallowedTools` | No | Array of tool names to explicitly deny for this subagent |
+| `model` | No | Model alias to use: `sonnet`, `opus`, `haiku`, or `inherit`. If omitted, defaults to `inherit` |
+| `skills` | No | Array of [skill](skills.md) names to preload into the subagent’s context |
+| `mcpServers` | No | Array of [MCP servers](mcp.md) for this subagent. Each entry is a server name string or a `{name: config}` object |
+| `maxTurns` | No | Maximum number of agentic turns before the subagent stops |
 
 Example:
 

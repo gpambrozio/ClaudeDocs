@@ -264,6 +264,18 @@ Manage, transform and deliver your images & videosCommand
 
 `claude mcp add --transport http cloudinary https://asset-management.mcp.cloudinary.com/sse`
 
+[**Consensus**](https://docs.consensus.app/docs/mcp)
+
+Explore scientific researchCommand
+
+`claude mcp add --transport http consensus https://mcp.consensus.app/mcp`
+
+[**Context7**](https://context7.com/docs/overview)
+
+Up-to-date docs for LLMs and AI code editorsCommand
+
+`claude mcp add --transport http context7 https://mcp.context7.com/mcp`
+
 [**Crossbeam**](https://help.crossbeam.com/en/articles/12601327-crossbeam-mcp-server-beta)
 
 Explore partner data and ecosystem insights in ClaudeCommand

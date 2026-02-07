@@ -107,13 +107,18 @@ curl https://api.anthropic.com/v1/messages \
 
 ### Working with JSON outputs in SDKs
 
-The Python and TypeScript SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
+The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
 SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
 
-#### Using Pydantic and Zod
+#### Using native schema definitions
 
-For Python and TypeScript developers, you can use familiar schema definition tools like Pydantic and Zod instead of writing raw JSON schemas.
+Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language. Each SDK provides class-based or library-based schema support:
+
+- **Python**: [Pydantic](https://docs.pydantic.dev/) models
+- **TypeScript**: [Zod](https://zod.dev/) schemas
+- **Java**: Plain Java classes with annotation support (see [Java SDK structured outputs](api/sdks/java.md))
+- **Ruby**: `Anthropic::BaseModel` classes (see [Ruby SDK](api/sdks/ruby.md))
 
 Python
 
@@ -167,13 +172,23 @@ print(response.parsed_output)
 
 #### SDK-specific methods
 
-**Python: `client.messages.parse()` (Recommended)**
+Each SDK provides helpers that make working with structured outputs easier. See individual SDK pages for full details.
+
+Python
+
+Python
+
+Java
+
+Java
+
+**`client.messages.parse()` (Recommended)**
 
 The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
 
 ### Example usage
 
-**Python: `transform_schema()` helper**
+**`transform_schema()` helper**
 
 For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
 
@@ -181,7 +196,7 @@ For when you need to manually transform schemas before sending, or when you want
 
 #### How SDK transformation works
 
-Both Python and TypeScript SDKs automatically transform schemas with unsupported features:
+The Python and TypeScript SDKs automatically transform schemas with unsupported features:
 
 1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)
 2. **Update descriptions** with constraint info (e.g., "Must be at least 100"), when the constraint is not directly supported with structured outputs

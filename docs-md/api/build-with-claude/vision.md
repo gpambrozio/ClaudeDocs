@@ -28,15 +28,15 @@ While the API supports 100 images per request, there is a [32MB request size lim
 
 ### Evaluate image size
 
-For optimal performance, we recommend resizing images before uploading if they are too large. If your image’s long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it will first be scaled down, preserving aspect ratio, until it’s within the size limits.
+For optimal performance, resize images before uploading if they are too large. If your image’s long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it will first be scaled down, preserving aspect ratio, until it’s within the size limits.
 
 If your input image is too large and needs to be resized, it will increase latency of [time-to-first-token](about-claude/glossary.md), without giving you any additional model performance. Very small images under 200 pixels on any given edge may degrade performance.
 
-To improve [time-to-first-token](about-claude/glossary.md), we recommend
+To improve [time-to-first-token](about-claude/glossary.md), consider
 resizing images to no more than 1.15 megapixels (and within 1568 pixels in
 both dimensions).
 
-Here is a table of maximum image sizes accepted by our API that will not be resized for common aspect ratios. With Claude Opus 4.6, these images use approximately 1,600 tokens and around $4.80/1K images.
+Here is a table of maximum image sizes accepted by the API that will not be resized for common aspect ratios. With Claude Opus 4.6, these images use approximately 1,600 tokens and around $4.80/1K images.
 
 | Aspect ratio | Image size |
 | --- | --- |
@@ -52,7 +52,7 @@ Each image you include in a request to Claude counts towards your token usage. T
 
 If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
 
-Here are examples of approximate tokenization and costs for different image sizes within our API's size constraints based on Claude Opus 4.6 per-token price of $3 per million input tokens:
+Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Opus 4.6 per-token price of $3 per million input tokens:
 
 | Image size | # of Tokens | Cost / image | Cost / 1K images |
 | --- | --- | --- | --- |
@@ -78,7 +78,7 @@ These examples demonstrate best practice prompt structures involving images.
 
 Just as with document-query placement, Claude works best when images come
 before text. Images placed after text or interpolated with text will still
-perform well, but if your use case allows it, we recommend an image-then-text
+perform well, but if your use case allows it, prefer an image-then-text
 structure.
 
 ### About the prompt examples
@@ -237,7 +237,7 @@ While Claude's image understanding capabilities are cutting-edge, there are some
 - **Spatial reasoning**: Claude's spatial reasoning abilities are limited. It may struggle with tasks requiring precise localization or layouts, like reading an analog clock face or describing exact positions of chess pieces.
 - **Counting**: Claude can give approximate counts of objects in an image but may not always be precisely accurate, especially with large numbers of small objects.
 - **AI generated images**: Claude does not know if an image is AI-generated and may be incorrect if asked. Do not rely on it to detect fake or synthetic images.
-- **Inappropriate content**: Claude will not process inappropriate or explicit images that violate our [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
+- **Inappropriate content**: Claude will not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
 - **Healthcare applications**: While Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
 
 Always carefully review and verify Claude's image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.
@@ -271,9 +271,9 @@ Always carefully review and verify Claude's image interpretations, especially fo
 Ready to start building with images using Claude? Here are a few helpful resources:
 
 - [Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision): This cookbook has tips on [getting started with images](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision) and [best practice techniques](https://platform.claude.com/cookbook/multimodal-best-practices-for-vision) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/cookbook/multimodal-reading-charts-graphs-powerpoints) or [extracting content from forms](https://platform.claude.com/cookbook/multimodal-how-to-transcribe-text).
-- [API reference](api/messages.md): Visit our documentation for the Messages API, including example [API calls involving images](build-with-claude/working-with-messages.md).
+- [API reference](api/messages.md): Documentation for the Messages API, including example [API calls involving images](build-with-claude/working-with-messages.md).
 
-If you have any other questions, feel free to reach out to our [support team](https://support.claude.com/). You can also join our [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
+If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
 
 Was this page helpful?
 

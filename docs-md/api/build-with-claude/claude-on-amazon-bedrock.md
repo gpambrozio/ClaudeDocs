@@ -24,6 +24,24 @@ Anthropic's [client SDKs](api/client-sdks.md) support Bedrock. You can also use 
 
 Python
 
+Python
+
+TypeScript
+
+TypeScript
+
+Java
+
+Java
+
+Go
+
+Go
+
+Boto3 (Python)
+
+Boto3 (Python)
+
 ```shiki
 pip install -U "anthropic[bedrock]"
 ```

@@ -108,6 +108,8 @@ Ask AI
 - `SubagentStop`: When a subagent attempts to stop
 - `SessionStart`: At the beginning of sessions
 - `SessionEnd`: At the end of sessions
+- `TeammateIdle`: When an agent team teammate is about to go idle
+- `TaskCompleted`: When a task is being marked as completed
 - `PreCompact`: Before conversation history is compacted
 
 **Hook types**:

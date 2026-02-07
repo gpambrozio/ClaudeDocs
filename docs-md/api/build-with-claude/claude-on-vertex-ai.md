@@ -17,6 +17,20 @@ First, install Anthropic's [client SDK](api/client-sdks.md) for your language of
 
 Python
 
+Python
+
+TypeScript
+
+TypeScript
+
+Java
+
+Java
+
+Go
+
+Go
+
 ```shiki
 pip install -U google-cloud-aiplatform "anthropic[vertex]"
 ```
@@ -72,6 +86,8 @@ print(message)
 ```
 
 See our [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+
+Claude is also available through [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ## Activity logging
 
