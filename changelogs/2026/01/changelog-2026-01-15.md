@@ -1,5 +1,12 @@
 # [Claude docs changes for January 15th, 2025](https://github.com/gpambrozio/ClaudeDocs/tree/80fef6e2713048afca3b3c9445e7c9cb90eadfea) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/80fef6e2713048afca3b3c9445e7c9cb90eadfea)]
 
+## Executive Summary
+- Agent SDK structured outputs documentation completely rewritten with new methods and streaming support
+- New 'Let Claude interview you' workflow added using AskUserQuestion for interactive code generation
+- Multiple MCP server naming updates and new modifier keys section for the computer use tool
+
+## Detailed Changes
+
 ## Changed documents
 
 ### [agent-sdk/modifying-system-prompts](https://github.com/gpambrozio/ClaudeDocs/blob/80fef6e2713048afca3b3c9445e7c9cb90eadfea/docs-md/api/agent-sdk/modifying-system-prompts.md) [[Source](https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts)]

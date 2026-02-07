@@ -1,5 +1,11 @@
 # [Claude docs changes for January 26th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/23337a57d14360af62799ffc70f78bb3b3f22e7f) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/23337a57d14360af62799ffc70f78bb3b3f22e7f)]
 
+## Executive Summary
+- Asana MCP server connection updated from SSE to streamable-http transport
+- New Slack MCP server added for sending messages, creating canvases, and fetching Slack data
+
+## Detailed Changes
+
 ## Claude Code changes
 
 ### Changed documents

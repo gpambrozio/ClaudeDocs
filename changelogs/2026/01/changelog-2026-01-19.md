@@ -1,5 +1,12 @@
 # [Claude docs changes for January 19th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/987d53584e3bbce9cd839afaa1d8f87cc75d6a3b) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/987d53584e3bbce9cd839afaa1d8f87cc75d6a3b)]
 
+## Executive Summary
+- Clarified permission rule syntax for `--allowedTools` flag and `Bash(*)` vs `Bash` matching behavior
+- New MCP server integrations added: Gamma, Guru, Klaviyo, Wix, Port IO, and Hex
+- Comprehensive 'Permission rule syntax' section added to settings documentation
+
+## Detailed Changes
+
 ## Claude Code changes
 
 ### Changed documents

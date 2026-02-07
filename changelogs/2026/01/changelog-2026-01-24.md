@@ -1,5 +1,12 @@
 # [Claude docs changes for January 24th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/826b462865bf19e7b86ce6a69ecafee8da759ae3) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/826b462865bf19e7b86ce6a69ecafee8da759ae3)]
 
+## Executive Summary
+- New versions 2.1.18-2.1.19: Customizable keyboard shortcuts with chord sequences and `$0`/`$1` argument shorthands for skills
+- Skills without extra permissions no longer require user approval before execution
+- Many new MCP servers added and code intelligence plugins documentation expanded with LSP tool support
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.18](https://github.com/gpambrozio/ClaudeDocs/blob/826b462865bf19e7b86ce6a69ecafee8da759ae3/versions/2.1.18.md)

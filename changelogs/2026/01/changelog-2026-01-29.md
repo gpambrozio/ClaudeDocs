@@ -1,5 +1,12 @@
 # [Claude docs changes for January 29th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/0dc5151f61e30efeb12b9b83d14d61507a7f31da) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/0dc5151f61e30efeb12b9b83d14d61507a7f31da)]
 
+## Executive Summary
+- New version 2.1.23: Customizable spinner verbs, merged PR purple status indicator, and mTLS/proxy connectivity fixes
+- Comprehensive new keybindings documentation page covering custom keyboard shortcuts and chord sequences
+- Fixed temp directory isolation on shared systems and ripgrep timeouts silently failing
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.23](https://github.com/gpambrozio/ClaudeDocs/blob/0dc5151f61e30efeb12b9b83d14d61507a7f31da/versions/2.1.23.md)

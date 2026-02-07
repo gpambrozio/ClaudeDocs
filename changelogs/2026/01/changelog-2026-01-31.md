@@ -1,5 +1,12 @@
 # [Claude docs changes for January 31st, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/74a62ca8d633775e9b075f04454fe2ab8837a224) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/74a62ca8d633775e9b075f04454fe2ab8837a224)]
 
+## Executive Summary
+- New version 2.1.27: Added `--from-pr` flag to resume sessions linked to GitHub PRs with automatic PR linking
+- Hooks system received a complete documentation rewrite with new prompt-based and agent-based hook types
+- New MCP servers added: Google BigQuery, LILT, Make, Wyndham Hotels
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.27](https://github.com/gpambrozio/ClaudeDocs/blob/74a62ca8d633775e9b075f04454fe2ab8837a224/versions/2.1.27.md)

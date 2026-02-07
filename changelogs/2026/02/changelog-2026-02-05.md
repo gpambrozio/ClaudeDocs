@@ -1,5 +1,12 @@
 # [Claude docs changes for February 5th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/468fec2b3bf4b520ffb8870b6d16969c1f89e49c) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/468fec2b3bf4b520ffb8870b6d16969c1f89e49c)]
 
+## Executive Summary
+- Chrome integration documentation restructured with improved clarity, Windows-specific troubleshooting, and tab-sharing behavior
+- 100+ new MCP server integrations added including Circleback, Day AI, Linear, Netlify, Asana, Atlassian, Notion, and Slack
+- New `prefersReducedMotion` accessibility setting and `@browser` integration for VS Code documented
+
+## Detailed Changes
+
 ## Claude Code changes
 
 ### Changed documents

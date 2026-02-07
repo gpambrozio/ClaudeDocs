@@ -1,5 +1,12 @@
 # [Claude docs changes for January 21st, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/6c95db3) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/6c95db3)]
 
+## Executive Summary
+- New version 2.1.14: History-based autocomplete in bash mode, plugin pinning to git commit SHAs, and context window fix
+- Major terminology change: 'slash commands' renamed to 'skills' with `SKILL.md` files throughout all documentation
+- Comprehensive VS Code extension documentation rewrite and new AWS Guardrails section for Bedrock
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.14](https://github.com/gpambrozio/ClaudeDocs/blob/6c95db3/versions/2.1.14.md)

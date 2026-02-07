@@ -1,5 +1,13 @@
 # [Claude docs changes for February 7th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/bddd4e7558aef7fdecbeaeb9b97f9436126ea5b3) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/bddd4e7558aef7fdecbeaeb9b97f9436126ea5b3)]
 
+## Executive Summary
+- New version 2.1.34: Fixed sandbox bypass bug and crash when agent teams setting changed between renders
+- New `TeammateIdle` and `TaskCompleted` hook events added for multi-agent workflows across all hooks documentation
+- Seven new individual SDK documentation pages published for C#, Go, Java, PHP, Python, Ruby, and TypeScript
+- Checkpointing expanded with new 'Summarize from here' option for partial conversation summarization
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.34](https://github.com/gpambrozio/ClaudeDocs/blob/bddd4e7558aef7fdecbeaeb9b97f9436126ea5b3/versions/2.1.34.md)

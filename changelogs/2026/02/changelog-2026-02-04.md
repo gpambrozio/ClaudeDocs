@@ -1,5 +1,12 @@
 # [Claude docs changes for February 4th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/255fdf63c18994351939908df4c19216e0b64f64) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/255fdf63c18994351939908df4c19216e0b64f64)]
 
+## Executive Summary
+- New versions 2.1.30-2.1.31: PDF page-range reading, `/debug` command, and pre-configured OAuth for MCP servers
+- Session sharing documentation added with visibility options for Enterprise/Teams and Max/Pro accounts
+- New Zero Data Retention (ZDR) documentation covering eligible endpoints, limitations, and special cases
+
+## Detailed Changes
+
 ## New Claude Code versions
 
 ### [2.1.30](https://github.com/gpambrozio/ClaudeDocs/blob/255fdf63c18994351939908df4c19216e0b64f64/versions/2.1.30.md)

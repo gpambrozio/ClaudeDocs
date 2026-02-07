@@ -1,5 +1,12 @@
 # [Claude docs changes for February 2nd, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/29c89979ba3e7a31e9dd169fb4e76ec38f2dbc0b) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/29c89979ba3e7a31e9dd169fb4e76ec38f2dbc0b)]
 
+## Executive Summary
+- Session quality surveys can now be disabled via `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` environment variable
+- Hooks decision control documentation expanded with comprehensive tables and examples for each event type
+- New prompt suggestions feature documented with Tab/Enter acceptance and environment variable to disable
+
+## Detailed Changes
+
 ## Claude Code changes
 
 ### Changed documents
