@@ -1,5 +1,10 @@
 # [Claude docs changes for January 23rd, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/bb00727242a56829032c3094ccf15d8876c36282) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/bb00727242a56829032c3094ccf15d8876c36282)]
 
+## Executive Summary
+- New versions 2.1.16-2.1.17: New task management system with dependency tracking and native VS Code plugin management
+- TodoWrite replaced with four granular task tools (TaskCreate, TaskGet, TaskList, TaskUpdate)
+- WSL2 sandbox support added and prompt caching workspace-level isolation announced for February 5th
+
 ## New Claude Code versions
 
 ### [2.1.16](https://github.com/gpambrozio/ClaudeDocs/blob/bb00727242a56829032c3094ccf15d8876c36282/versions/2.1.16.md)

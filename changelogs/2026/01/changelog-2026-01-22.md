@@ -1,5 +1,10 @@
 # [Claude docs changes for January 22nd, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/2fd40c0332a3d490db0ca7a466e49103c0feddb6) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/2fd40c0332a3d490db0ca7a466e49103c0feddb6)]
 
+## Executive Summary
+- New version 2.1.15: npm installation deprecation notifications and improved UI rendering with React Compiler
+- Four major new documentation pages created: best-practices, features-overview, how-claude-code-works, and ide-integrations
+- Desktop and web platforms gained a new diff view for reviewing changes before creating PRs
+
 ## New Claude Code versions
 
 ### [2.1.15](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/versions/2.1.15.md)

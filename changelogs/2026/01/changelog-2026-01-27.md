@@ -1,5 +1,10 @@
 # [Claude docs changes for January 27th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/f8ead63199aed809a84306c64f9a77b278e6f9f1) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/f8ead63199aed809a84306c64f9a77b278e6f9f1)]
 
+## Executive Summary
+- New version 2.1.20: PR review status indicators in prompt footer, CLAUDE.md loading from additional directories, and task deletion
+- Numerous UI improvements including shimmer animation for thinking status and vim arrow key history navigation
+- New wildcard permission syntax documented and checkpoints became available in CLI
+
 ## New Claude Code versions
 
 ### [2.1.20](https://github.com/gpambrozio/ClaudeDocs/blob/f8ead63199aed809a84306c64f9a77b278e6f9f1/versions/2.1.20.md)

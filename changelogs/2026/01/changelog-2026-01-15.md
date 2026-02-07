@@ -1,4 +1,9 @@
-# [Claude docs changes for January 15th, 2025](https://github.com/gpambrozio/ClaudeDocs/tree/80fef6e2713048afca3b3c9445e7c9cb90eadfea) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/80fef6e2713048afca3b3c9445e7c9cb90eadfea)]
+# [Claude docs changes for January 15th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/80fef6e2713048afca3b3c9445e7c9cb90eadfea) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/80fef6e2713048afca3b3c9445e7c9cb90eadfea)]
+
+## Executive Summary
+- Agent SDK structured outputs documentation completely rewritten with new schema methods and error handling
+- New 'Let Claude interview you' workflow added using AskUserQuestion for interactive code generation
+- Multiple MCP server naming updates and new modifier keys section for the computer use tool
 
 ## Changed documents
 

@@ -1,5 +1,9 @@
 # [Claude docs changes for January 25th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/f175fc5cb3dfe1bd21a67c0ab7d707bb71d8105c) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/f175fc5cb3dfe1bd21a67c0ab7d707bb71d8105c)]
 
+## Executive Summary
+- Clarified that `Bash(*)` is equivalent to `Bash` and both syntaxes are interchangeable for permission matching
+- Updated contact email link formats in API documentation
+
 ## Claude Code changes
 
 ### Changed documents

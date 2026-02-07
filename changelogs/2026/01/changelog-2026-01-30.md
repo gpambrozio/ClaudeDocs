@@ -1,5 +1,10 @@
 # [Claude docs changes for January 30th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/ca2a4e3) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/ca2a4e3)]
 
+## Executive Summary
+- New version 2.1.25: Fixed beta header validation for Bedrock/Vertex gateway users
+- Structured outputs graduated from beta to GA with `output_format` renamed to `output_config.format` across all SDKs
+- Analytics documentation rewritten for Teams/Enterprise dashboards with GitHub contribution metrics
+
 ## New Claude Code versions
 
 ### [2.1.25](https://github.com/gpambrozio/ClaudeDocs/blob/ca2a4e3/versions/2.1.25.md)

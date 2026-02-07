@@ -1,5 +1,10 @@
 # [Claude docs changes for February 6th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/fa323a5b51a0fd1c33f433e13b2b594a0eb0bafb) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/fa323a5b51a0fd1c33f433e13b2b594a0eb0bafb)]
 
+## Executive Summary
+- New versions 2.1.32-2.1.33: Claude Opus 4.6 available, research preview agent teams for multi-agent collaboration, and auto memory feature
+- Claude API: Major release with adaptive thinking, compaction API, data residency controls, and 128K output tokens for Opus 4.6
+- Seven new language-specific SDK documentation pages and comprehensive migration guide for Claude 4.6
+
 ## New Claude Code versions
 
 ### [2.1.32](https://github.com/gpambrozio/ClaudeDocs/blob/fa323a5b51a0fd1c33f433e13b2b594a0eb0bafb/versions/2.1.32.md)

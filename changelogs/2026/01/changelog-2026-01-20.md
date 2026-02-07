@@ -1,5 +1,10 @@
 # [Claude docs changes for January 20th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/d281186446990ece703c03d3c219b0638c1a4a7d) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/d281186446990ece703c03d3c219b0638c1a4a7d)]
 
+## Executive Summary
+- New Ctrl+G keyboard shortcut for opening the text editor when providing custom responses
+- BashOutput tool renamed to TaskOutput across all documentation
+- New 'Generate visual output' section for Skills showing how to create interactive codebase visualizers
+
 ## Claude Code changes
 
 ### Changed documents

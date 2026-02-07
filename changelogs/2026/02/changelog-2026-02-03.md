@@ -1,5 +1,10 @@
 # [Claude docs changes for February 3rd, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/04448f07318631d89b108215bf121d1ae35c5d48) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/04448f07318631d89b108215bf121d1ae35c5d48)]
 
+## Executive Summary
+- New comprehensive Authentication and Permissions documentation pages covering all auth methods and permission rules
+- New `allowManagedPermissionRulesOnly` setting for enterprise deployments to prevent user/project permission rules
+- OpenTelemetry monitoring enhanced with `event.sequence` attributes for ordering events within sessions
+
 ## Claude Code changes
 
 ### New Documents

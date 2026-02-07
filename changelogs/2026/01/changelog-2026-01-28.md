@@ -1,5 +1,10 @@
 # [Claude docs changes for January 28th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/bb437c932a13e623b3cf5be546c4f101586c54a5) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/bb437c932a13e623b3cf5be546c4f101586c54a5)]
 
+## Executive Summary
+- New versions 2.1.21-2.1.22: Automatic Python virtual environment activation in VS Code and improved tool preference for file operations
+- Permission wildcard syntax updated from `:*` to ` *` (space before asterisk) across all documentation
+- New enterprise Skills governance guide published and desktop app documentation completely rewritten
+
 ## New Claude Code versions
 
 ### [2.1.21](https://github.com/gpambrozio/ClaudeDocs/blob/bb437c932a13e623b3cf5be546c4f101586c54a5/versions/2.1.21.md)

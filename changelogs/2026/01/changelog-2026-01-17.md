@@ -1,5 +1,10 @@
 # [Claude docs changes for January 17th, 2026](https://github.com/gpambrozio/ClaudeDocs/tree/d5088b6) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/d5088b6)]
 
+## Executive Summary
+- Three new versions released (2.1.10-2.1.12): New `Setup` hook event, improved file suggestions, and MCP connection fixes
+- Agent SDK MCP documentation completely rewritten with new quickstart, authentication, and troubleshooting sections
+- `dontAsk` permission mode replaced with `plan` mode for safer autonomous operation
+
 ## New Claude Code versions
 
 ### [2.1.10](https://github.com/gpambrozio/ClaudeDocs/blob/d5088b6/versions/2.1.10.md)
