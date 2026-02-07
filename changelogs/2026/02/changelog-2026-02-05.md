@@ -5,8 +5,6 @@
 - 100+ new MCP server integrations added including Circleback, Day AI, Linear, Netlify, Asana, Atlassian, Notion, and Slack
 - New `prefersReducedMotion` accessibility setting and `@browser` integration for VS Code documented
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents

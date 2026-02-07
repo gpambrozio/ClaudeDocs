@@ -5,8 +5,6 @@
 - BashOutput tool renamed to TaskOutput across all documentation
 - New 'Generate visual output' section for Skills showing how to create interactive codebase visualizers
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents

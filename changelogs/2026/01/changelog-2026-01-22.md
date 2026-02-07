@@ -5,8 +5,6 @@
 - Four major new documentation pages created: best-practices, features-overview, how-claude-code-works, and ide-integrations
 - Desktop and web platforms gained a new diff view for reviewing changes before creating PRs
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.15](https://github.com/gpambrozio/ClaudeDocs/blob/2fd40c0332a3d490db0ca7a466e49103c0feddb6/versions/2.1.15.md)

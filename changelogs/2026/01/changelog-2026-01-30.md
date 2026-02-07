@@ -5,8 +5,6 @@
 - Structured outputs graduated from beta to GA with `output_format` renamed to `output_config.format` across all SDKs
 - Analytics documentation rewritten for Teams/Enterprise dashboards with GitHub contribution metrics
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.25](https://github.com/gpambrozio/ClaudeDocs/blob/ca2a4e3/versions/2.1.25.md)

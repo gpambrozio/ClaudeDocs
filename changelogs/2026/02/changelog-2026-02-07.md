@@ -6,8 +6,6 @@
 - Seven new individual SDK documentation pages published for C#, Go, Java, PHP, Python, Ruby, and TypeScript
 - Checkpointing expanded with new 'Summarize from here' option for partial conversation summarization
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.34](https://github.com/gpambrozio/ClaudeDocs/blob/bddd4e7558aef7fdecbeaeb9b97f9436126ea5b3/versions/2.1.34.md)

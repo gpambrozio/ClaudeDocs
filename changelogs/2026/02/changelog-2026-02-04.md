@@ -5,8 +5,6 @@
 - Session sharing documentation added with visibility options for Enterprise/Teams and Max/Pro accounts
 - New Zero Data Retention (ZDR) documentation covering eligible endpoints, limitations, and special cases
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.30](https://github.com/gpambrozio/ClaudeDocs/blob/255fdf63c18994351939908df4c19216e0b64f64/versions/2.1.30.md)

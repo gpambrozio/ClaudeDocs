@@ -5,8 +5,6 @@
 - Numerous UI improvements including shimmer animation for thinking status and vim arrow key history navigation
 - New wildcard permission syntax documented and checkpoints became available in CLI
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.20](https://github.com/gpambrozio/ClaudeDocs/blob/f8ead63199aed809a84306c64f9a77b278e6f9f1/versions/2.1.20.md)

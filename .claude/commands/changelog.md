@@ -31,7 +31,7 @@ After determining all changes commit changes to the `docs-md` and `versions` fol
 
 Then create a markdown in this format. Files in `docs-md/claude-code` go in the `Claude Code changes` section and files in `docs-md/api` go in the `API changes` section.
 
-The executive summary should highlight the 3-5 most significant changes from the entire changelog. Focus on what matters most to users: new features, important fixes, and major documentation additions. Use concise, accessible language.
+The executive summary should highlight the 3-5 most significant changes from the entire changelog (fewer if the day had minimal changes). Focus on what matters most to users: new features, important fixes, and major documentation additions. Use concise, accessible language.
 
 ```
 # [Claude docs changes for <today's date, ie Sept, 10th 2025>](https://github.com/gpambrozio/ClaudeDocs/tree/{commit-hash}) [[diff](https://github.com/gpambrozio/ClaudeDocs/commit/{commit-hash})]
@@ -40,8 +40,6 @@ The executive summary should highlight the 3-5 most significant changes from the
 - Most important change described concisely
 - Second most important change
 - Third most important change
-
-## Detailed Changes
 
 ## New Claude Code versions
 

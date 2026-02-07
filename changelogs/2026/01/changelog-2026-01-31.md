@@ -5,8 +5,6 @@
 - Hooks system received a complete documentation rewrite with new prompt-based and agent-based hook types
 - New MCP servers added: Google BigQuery, LILT, Make, Wyndham Hotels
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.27](https://github.com/gpambrozio/ClaudeDocs/blob/74a62ca8d633775e9b075f04454fe2ab8837a224/versions/2.1.27.md)

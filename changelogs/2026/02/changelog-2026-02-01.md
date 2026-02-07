@@ -3,8 +3,6 @@
 ## Executive Summary
 - New version 2.1.29: Fixed startup performance issues when resuming sessions with `saved_hook_context`
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.29](https://github.com/gpambrozio/ClaudeDocs/blob/48fd3d4253a7d7efe34031ad4e62e23eecb4ff87/versions/2.1.29.md)

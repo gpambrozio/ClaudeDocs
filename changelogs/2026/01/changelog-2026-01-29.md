@@ -5,8 +5,6 @@
 - Comprehensive new keybindings documentation page covering custom keyboard shortcuts and chord sequences
 - Fixed temp directory isolation on shared systems and ripgrep timeouts silently failing
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.23](https://github.com/gpambrozio/ClaudeDocs/blob/0dc5151f61e30efeb12b9b83d14d61507a7f31da/versions/2.1.23.md)

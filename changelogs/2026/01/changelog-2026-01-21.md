@@ -5,8 +5,6 @@
 - Major terminology change: 'slash commands' renamed to 'skills' with `SKILL.md` files throughout all documentation
 - Comprehensive VS Code extension documentation rewrite and new AWS Guardrails section for Bedrock
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.14](https://github.com/gpambrozio/ClaudeDocs/blob/6c95db3/versions/2.1.14.md)

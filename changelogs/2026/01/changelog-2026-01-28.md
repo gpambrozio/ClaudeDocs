@@ -5,8 +5,6 @@
 - Permission wildcard syntax updated from `:*` to ` *` (space before asterisk) across all documentation
 - New enterprise Skills governance guide published and desktop app documentation completely rewritten
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.21](https://github.com/gpambrozio/ClaudeDocs/blob/bb437c932a13e623b3cf5be546c4f101586c54a5/versions/2.1.21.md)

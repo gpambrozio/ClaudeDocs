@@ -5,8 +5,6 @@
 - Extensive new CLI flags documented including `--remote`, `--teleport`, `--max-budget-usd`, and `--no-session-persistence`
 - New documentation for scaling with MCP Tool Search and fast mode configuration
 
-## Detailed Changes
-
 ## New Claude Code version ([2.1.9](https://github.com/gpambrozio/ClaudeDocs/blob/f2b35b2e9e6f5ec9acb26c1edfc1e64d2b3f1852/versions/2.1.9.md))
 
 ### New features

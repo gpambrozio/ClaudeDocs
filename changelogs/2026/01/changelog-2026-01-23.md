@@ -5,8 +5,6 @@
 - TodoWrite replaced with four granular task tools (TaskCreate, TaskGet, TaskList, TaskUpdate)
 - WSL2 sandbox support added and prompt caching workspace-level isolation announced for February 5th
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.16](https://github.com/gpambrozio/ClaudeDocs/blob/bb00727242a56829032c3094ccf15d8876c36282/versions/2.1.16.md)

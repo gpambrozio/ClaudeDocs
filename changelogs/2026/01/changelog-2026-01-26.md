@@ -4,8 +4,6 @@
 - Asana MCP server connection updated from SSE to streamable-http transport
 - New Slack MCP server added for sending messages, creating canvases, and fetching Slack data
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents

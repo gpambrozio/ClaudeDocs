@@ -5,8 +5,6 @@
 - New `allowManagedPermissionRulesOnly` setting for enterprise deployments to prevent user/project permission rules
 - OpenTelemetry monitoring enhanced with `event.sequence` attributes for ordering events within sessions
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### New Documents

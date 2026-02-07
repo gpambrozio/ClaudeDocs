@@ -5,8 +5,6 @@
 - New MCP server integrations added: Gamma, Guru, Klaviyo, Wix, Port IO, and Hex
 - Comprehensive 'Permission rule syntax' section added to settings documentation
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents

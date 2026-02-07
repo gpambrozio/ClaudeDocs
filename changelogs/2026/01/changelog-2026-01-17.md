@@ -5,8 +5,6 @@
 - Agent SDK MCP documentation completely rewritten with new quickstart, authentication, and troubleshooting sections
 - `dontAsk` permission mode replaced with `plan` mode for safer autonomous operation
 
-## Detailed Changes
-
 ## New Claude Code versions
 
 ### [2.1.10](https://github.com/gpambrozio/ClaudeDocs/blob/d5088b6/versions/2.1.10.md)

@@ -5,8 +5,6 @@
 - Hooks decision control documentation expanded with comprehensive tables and examples for each event type
 - New prompt suggestions feature documented with Tab/Enter acceptance and environment variable to disable
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents

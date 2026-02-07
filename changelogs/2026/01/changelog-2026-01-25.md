@@ -4,8 +4,6 @@
 - Clarified that `Bash(*)` is equivalent to `Bash` and both syntaxes are interchangeable for permission matching
 - Updated contact email link formats in API documentation
 
-## Detailed Changes
-
 ## Claude Code changes
 
 ### Changed documents
