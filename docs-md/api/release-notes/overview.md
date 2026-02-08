@@ -6,6 +6,10 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### February 7, 2026
+
+- We've launched [fast mode](build-with-claude/fast-mode.md) in research preview for Opus 4.6, providing significantly faster output token generation via the `speed` parameter. Fast mode is up to 2.5x as fast at premium pricing. Interested customers should join the [waitlist](https://claude.com/fast-mode).
+
 ### February 5, 2026
 
 - We've launched [Claude Opus 4.6](https://www.anthropic.com/news/claude-opus-4-6), our most intelligent model for complex agentic tasks and long-horizon work. Opus 4.6 recommends [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`); manual thinking (`type: "enabled"` with `budget_tokens`) is deprecated. Opus 4.6 does not support prefilling assistant messages. Learn more in [What's new in Claude 4.6](about-claude/models/whats-new-claude-4-6.md).

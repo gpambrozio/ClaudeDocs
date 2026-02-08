@@ -26,7 +26,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more
 
 Accepts one of the following:
 
@@ -67,6 +67,8 @@ Accepts one of the following:
 "model-context-window-exceeded-2025-08-26"
 
 "skills-2025-10-02"
+
+"fast-mode-2026-02-01"
 
 Download File
 

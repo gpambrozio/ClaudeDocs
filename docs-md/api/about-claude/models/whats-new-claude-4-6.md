@@ -39,13 +39,27 @@ The [effort parameter](build-with-claude/effort.md) is now generally available (
 
 [Compaction](build-with-claude/compaction.md) provides automatic, server-side context summarization, enabling effectively infinite conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation.
 
+### Fast mode (research preview)
+
+[Fast mode](build-with-claude/fast-mode.md) (`speed: "fast"`) delivers significantly faster output token generation for Opus models. Fast mode is up to 2.5x as fast at premium pricing ($30/$150 per MTok). This is the same model running with faster inference (no change to intelligence or capabilities).
+
+```shiki
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    speed="fast",
+    betas=["fast-mode-2026-02-01"],
+    messages=[{"role": "user", "content": "Refactor this module..."}]
+)
+```
+
 ### Fine-grained tool streaming (GA)
 
 [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) is now generally available on all models and platforms. No beta header is required.
 
 ### 128K output tokens
 
-Opus 4.6 supports up to 128K output tokens, doubling the previous 64K limit. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response — see [Streaming Messages](build-with-claude/streaming.md) for details.
+Opus 4.6 supports up to 128K output tokens, doubling the previous 64K limit. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response. See [Streaming Messages](build-with-claude/streaming.md) for details.
 
 ### Data residency controls
 
@@ -107,7 +121,9 @@ Learn how to use adaptive thinking mode.](build-with-claude/adaptive-thinking.md
 
 Compare all Claude models.](about-claude/models/overview.md)[Compaction
 
-Explore server-side context compaction.](build-with-claude/compaction.md)[Migration guide
+Explore server-side context compaction.](build-with-claude/compaction.md)[Fast mode
+
+Faster output token generation for Opus models.](build-with-claude/fast-mode.md)[Migration guide
 
 Step-by-step migration instructions.](about-claude/models/migration-guide.md)
 

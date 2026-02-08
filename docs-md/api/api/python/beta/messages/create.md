@@ -3411,6 +3411,16 @@ Accepts one of the following:
 
 "standard\_only"
 
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 stop\_sequences: Optional[[SequenceNotStr](api/beta/messages/create.md)[str]]
 
 Custom text sequences that will cause the model to stop generating.
@@ -5089,7 +5099,7 @@ Accepts one of the following:
 
 UnionMember0 = str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 16 more]
+UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -5130,6 +5140,8 @@ Accepts one of the following:
 "model-context-window-exceeded-2025-08-26"
 
 "skills-2025-10-02"
+
+"fast-mode-2026-02-01"
 
 ##### ReturnsExpand Collapse
 
@@ -6353,7 +6365,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -6503,6 +6515,16 @@ Accepts one of the following:
 
 "batch"
 
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 Create a Message
 
 Python
@@ -6599,7 +6621,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -6680,7 +6703,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```

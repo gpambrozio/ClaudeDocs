@@ -49,9 +49,9 @@ Time buckets that end before this RFC 3339 timestamp will be returned.
 
 formatdate-time
 
-group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 3 more
+group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 4 more
 
-Group by any subset of the available options.
+Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
 Accepts one of the following:
 
@@ -66,6 +66,8 @@ Accepts one of the following:
 "context\_window"
 
 "inference\_geo"
+
+"speed"
 
 inference\_geos: optional array of "global" or "us" or "not\_available"
 
@@ -116,6 +118,17 @@ Accepts one of the following:
 
 "flex\_discount"
 
+speeds: optional array of "standard" or "fast"
+
+Restrict usage returned to the specified speed(s) (research preview).
+Requires the `fast-mode-2026-02-01` beta header.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 workspace\_ids: optional array of string
 
 Restrict usage returned to the specified workspace ID(s).
@@ -140,7 +153,7 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -213,6 +226,17 @@ Accepts one of the following:
 
 "flex\_discount"
 
+speed: "standard" or "fast"
+
+Speed of the usage (research preview). `null` if not grouping by speed.
+Only returned when the `fast-mode-2026-02-01` beta header is provided.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 uncached\_input\_tokens: number
 
 The number of uncached input tokens processed.
@@ -268,6 +292,7 @@ Response 200
             "web_search_requests": 10
           },
           "service_tier": "standard",
+          "speed": "standard",
           "uncached_input_tokens": 1500,
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
         }
@@ -305,6 +330,7 @@ Response 200
             "web_search_requests": 10
           },
           "service_tier": "standard",
+          "speed": "standard",
           "uncached_input_tokens": 1500,
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
         }

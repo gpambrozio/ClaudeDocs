@@ -62,6 +62,8 @@ MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-20
 
 SKILLS\_2025\_10\_02("skills-2025-10-02")
 
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+
 long maxTokens
 
 The maximum number of tokens to generate before stopping.
@@ -3141,6 +3143,14 @@ AUTO("auto")
 
 STANDARD\_ONLY("standard\_only")
 
+Optional<Speed> speed
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+STANDARD("standard")
+
+FAST("fast")
+
 Optional<List<String>> stopSequences
 
 Custom text sequences that will cause the model to stop generating.
@@ -5887,7 +5897,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -6037,6 +6047,16 @@ PRIORITY("priority")
 
 BATCH("batch")
 
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
 Create a Message
 
 Java
@@ -6140,7 +6160,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -6221,7 +6242,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```

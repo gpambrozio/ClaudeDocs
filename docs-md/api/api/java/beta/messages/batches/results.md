@@ -66,6 +66,8 @@ MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-20
 
 SKILLS\_2025\_10\_02("skills-2025-10-02")
 
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -1276,7 +1278,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -1425,6 +1427,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 

@@ -6,7 +6,7 @@ TypeScript
 
 # Count tokens in a Message
 
-client.beta.messages.countTokens(MessageCountTokensParams { messages, model, context\_management, 8 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
+client.beta.messages.countTokens(MessageCountTokensParams { messages, model, context\_management, 9 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
 
 post/v1/messages/count\_tokens
 
@@ -18,7 +18,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-params: MessageCountTokensParams { messages, model, context\_management, 8 more }
+params: MessageCountTokensParams { messages, model, context\_management, 9 more }
 
 messages: Array<[BetaMessageParam](api/beta.md) { content, role } >
 
@@ -3289,6 +3289,10 @@ Accepts one of the following:
 
 "json\_schema"
 
+speed?: string | null
+
+Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
 system?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
 Body param: System prompt.
@@ -4915,7 +4919,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 16 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
 
 "message-batches-2024-09-24"
 
@@ -4954,6 +4958,8 @@ Accepts one of the following:
 "model-context-window-exceeded-2025-08-26"
 
 "skills-2025-10-02"
+
+"fast-mode-2026-02-01"
 
 ##### ReturnsExpand Collapse
 

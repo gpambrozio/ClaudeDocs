@@ -6193,6 +6193,122 @@ Accepts one of the following:
 
 value: int
 
+BetaIterationsUsage = Optional[List[BetaIterationsUsageItem]]
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+class BetaMessageIterationUsage: …
+
+Token usage for a sampling iteration.
+
+cache\_creation: Optional[BetaCacheCreation]
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: int
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: int
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: int
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: int
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: int
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: int
+
+The number of output tokens which were used.
+
+minimum0
+
+type: Literal["message"]
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+"message"
+
+class BetaCompactionIterationUsage: …
+
+Token usage for a compaction iteration.
+
+cache\_creation: Optional[BetaCacheCreation]
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: int
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: int
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: int
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: int
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: int
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: int
+
+The number of output tokens which were used.
+
+minimum0
+
+type: Literal["compaction"]
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+"compaction"
+
 class BetaJSONOutputFormat: …
 
 schema: Dict[str, object]
@@ -7997,7 +8113,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -8147,6 +8263,16 @@ Accepts one of the following:
 
 "batch"
 
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 class BetaMessageDeltaUsage: …
 
 cache\_creation\_input\_tokens: Optional[int]
@@ -8167,7 +8293,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -12707,7 +12833,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -14065,7 +14191,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -14214,6 +14340,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["message\_start"]
 
@@ -15455,7 +15591,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -15604,6 +15740,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["message\_start"]
 
@@ -15771,7 +15917,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -22475,7 +22621,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -22624,6 +22770,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 class BetaWebFetchBlock: …
 
@@ -25691,7 +25847,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -25840,6 +25996,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -27235,7 +27401,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -27384,6 +27550,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -28741,7 +28917,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -28890,6 +29066,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 

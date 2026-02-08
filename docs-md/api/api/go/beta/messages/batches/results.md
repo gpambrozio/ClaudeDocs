@@ -72,6 +72,8 @@ const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessageBatchIndividualResponse struct{…}
@@ -1292,7 +1294,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -1441,6 +1443,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 

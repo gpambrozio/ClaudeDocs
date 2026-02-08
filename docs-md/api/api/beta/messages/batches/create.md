@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 16 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more
 
 Accepts one of the following:
 
@@ -66,6 +66,8 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
+"fast-mode-2026-02-01"
+
 ##### Body ParametersExpand Collapse
 
 requests: array of object { custom\_id, params }
@@ -82,7 +84,7 @@ maxLength64
 
 minLength1
 
-params: object { max\_tokens, messages, model, 17 more }
+params: object { max\_tokens, messages, model, 18 more }
 
 Messages API creation parameters for the individual request.
 
@@ -3458,6 +3460,16 @@ Accepts one of the following:
 "auto"
 
 "standard\_only"
+
+speed: optional "standard" or "fast"
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 stop\_sequences: optional array of string
 

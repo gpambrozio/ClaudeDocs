@@ -1458,7 +1458,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -1508,7 +1508,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+iterations: [BetaIterationsUsage](api/beta.md) { ,  }
 
 Per-iteration token usage breakdown.
 
@@ -1657,6 +1657,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 
@@ -2980,7 +2990,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -3030,7 +3040,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+iterations: [BetaIterationsUsage](api/beta.md) { ,  }
 
 Per-iteration token usage breakdown.
 
@@ -3179,6 +3189,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 
@@ -4464,7 +4484,7 @@ Accepts one of the following:
 
 :message
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -4514,7 +4534,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array[[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } ]
+iterations: [BetaIterationsUsage](api/beta.md) { ,  }
 
 Per-iteration token usage breakdown.
 
@@ -4663,6 +4683,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 

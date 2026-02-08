@@ -56,6 +56,8 @@ const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+
 type BetaAPIError struct{…}
 
 Message string
@@ -6573,6 +6575,122 @@ const InputTokensInputTokens InputTokens = "input\_tokens"
 
 Value int64
 
+type BetaIterationsUsage []BetaIterationsUsageItemUnion
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+type BetaMessageIterationUsage struct{…}
+
+Token usage for a sampling iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Message
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+const MessageMessage Message = "message"
+
+type BetaCompactionIterationUsage struct{…}
+
+Token usage for a compaction iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+minimum0
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+minimum0
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+minimum0
+
+Type Compaction
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+const CompactionCompaction Compaction = "compaction"
+
 type BetaJSONOutputFormat struct{…}
 
 Schema map[string, any]
@@ -8355,7 +8473,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -8505,6 +8623,16 @@ const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
 
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
+
 type BetaMessageDeltaUsage struct{…}
 
 CacheCreationInputTokens int64
@@ -8525,7 +8653,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaMessageDeltaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -13061,7 +13189,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaMessageDeltaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -14397,7 +14525,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -14546,6 +14674,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type MessageStart
 
@@ -15765,7 +15903,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -15914,6 +16052,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type MessageStart
 
@@ -16081,7 +16229,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaMessageDeltaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -22783,7 +22931,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -22932,6 +23080,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 type BetaWebFetchBlock struct{…}
 
@@ -25977,7 +26135,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -26126,6 +26284,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 
@@ -27499,7 +27667,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -27648,6 +27816,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 
@@ -28983,7 +29161,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -29132,6 +29310,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 

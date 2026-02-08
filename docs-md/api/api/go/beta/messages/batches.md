@@ -1508,7 +1508,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -1657,6 +1657,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 
@@ -3030,7 +3040,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -3179,6 +3189,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 
@@ -4514,7 +4534,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -4663,6 +4683,16 @@ const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
+
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
 
 Type Succeeded
 

@@ -3023,6 +3023,10 @@ Body param: Deprecated: Use `output_config.format` instead. See [structured outp
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
+Speed param.Field[string]optional
+
+Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
 System param.Field[[BetaMessageCountTokensParamsSystemUnion](api/beta/messages/count_tokens.md)]optional
 
 Body param: System prompt.
@@ -4584,6 +4588,8 @@ const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-manage
 const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 ##### ReturnsExpand Collapse
 

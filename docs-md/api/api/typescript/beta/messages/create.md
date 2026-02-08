@@ -20,7 +20,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 MessageCreateParams = MessageCreateParamsNonStreaming { stream }  | MessageCreateParamsStreaming { stream }
 
-MessageCreateParamsBase { max\_tokens, messages, model, 18 more }
+MessageCreateParamsBase { max\_tokens, messages, model, 19 more }
 
 max\_tokens: number
 
@@ -3375,6 +3375,16 @@ Accepts one of the following:
 
 "standard\_only"
 
+speed?: "standard" | "fast" | null
+
+Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 stop\_sequences?: Array<string>
 
 Body param: Custom text sequences that will cause the model to stop generating.
@@ -5053,7 +5063,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 16 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
 
 "message-batches-2024-09-24"
 
@@ -5093,7 +5103,9 @@ Accepts one of the following:
 
 "skills-2025-10-02"
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 18 more }  { stream }
+"fast-mode-2026-02-01"
+
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 19 more }  { stream }
 
 stream?: false
 
@@ -5105,7 +5117,7 @@ Accepts one of the following:
 
 false
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 18 more }  { stream }
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 19 more }  { stream }
 
 stream?: false
 
@@ -6261,7 +6273,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -6311,7 +6323,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -6461,6 +6473,16 @@ Accepts one of the following:
 
 "batch"
 
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 Create a Message
 
 TypeScript
@@ -6555,7 +6577,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -6636,7 +6659,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```

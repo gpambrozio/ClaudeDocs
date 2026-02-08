@@ -182,7 +182,7 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -254,6 +254,17 @@ Accepts one of the following:
 "flex"
 
 "flex\_discount"
+
+speed: "standard" or "fast"
+
+Speed of the usage (research preview). `null` if not grouping by speed.
+Only returned when the `fast-mode-2026-02-01` beta header is provided.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 uncached\_input\_tokens: number
 

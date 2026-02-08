@@ -8,13 +8,13 @@ TypeScript
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 16 more
+AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
 
 Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 16 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
 
 "message-batches-2024-09-24"
 
@@ -53,6 +53,8 @@ Accepts one of the following:
 "model-context-window-exceeded-2025-08-26"
 
 "skills-2025-10-02"
+
+"fast-mode-2026-02-01"
 
 BetaAPIError { message, type }
 
@@ -394,7 +396,7 @@ post/v1/messages
 
 ##### [Count tokens in a Message](api/beta/messages/count_tokens.md)
 
-client.beta.messages.countTokens(MessageCountTokensParams { messages, model, context\_management, 8 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
+client.beta.messages.countTokens(MessageCountTokensParams { messages, model, context\_management, 9 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
 
 post/v1/messages/count\_tokens
 
@@ -6559,6 +6561,122 @@ Accepts one of the following:
 
 value: number
 
+BetaIterationsUsage = Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+
+Per-iteration token usage breakdown.
+
+Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+- Determine which iterations exceeded long context thresholds (>=200k tokens)
+- Calculate the true context window size from the last iteration
+- Understand token accumulation across server-side tool use loops
+
+Accepts one of the following:
+
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a sampling iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "message"
+
+Usage for a sampling iteration
+
+Accepts one of the following:
+
+"message"
+
+BetaCompactionIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+
+Token usage for a compaction iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+minimum0
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+minimum0
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+minimum0
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+minimum0
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+minimum0
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+minimum0
+
+type: "compaction"
+
+Usage for a compaction iteration
+
+Accepts one of the following:
+
+"compaction"
+
 BetaJSONOutputFormat { schema, type }
 
 schema: Record<string, unknown>
@@ -8285,7 +8403,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -8335,7 +8453,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -8485,6 +8603,16 @@ Accepts one of the following:
 
 "batch"
 
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 BetaMessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 cache\_creation\_input\_tokens: number | null
@@ -8505,7 +8633,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -13035,7 +13163,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -14315,7 +14443,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -14365,7 +14493,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -14514,6 +14642,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "message\_start"
 
@@ -15677,7 +15815,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -15727,7 +15865,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -15876,6 +16014,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "message\_start"
 
@@ -16043,7 +16191,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -22701,7 +22849,7 @@ Accepts one of the following:
 
 url: string
 
-BetaUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+BetaUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
 
@@ -22741,7 +22889,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -22890,6 +23038,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 BetaWebFetchBlock { content, retrieved\_at, type, url }
 
@@ -25875,7 +26033,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -25925,7 +26083,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -26074,6 +26232,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 
@@ -27391,7 +27559,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -27441,7 +27609,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -27590,6 +27758,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 
@@ -28869,7 +29047,7 @@ Accepts one of the following:
 
 "message"
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 Billing and rate-limit usage.
 
@@ -28919,7 +29097,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } > | null
+iterations: [BetaIterationsUsage](api/beta.md) | null
 
 Per-iteration token usage breakdown.
 
@@ -29068,6 +29246,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" | "fast" | null
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 

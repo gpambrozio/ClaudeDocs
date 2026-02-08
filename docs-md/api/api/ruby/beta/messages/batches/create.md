@@ -32,7 +32,7 @@ maxLength64
 
 minLength1
 
-params: { max\_tokens, messages, model, 17 more}
+params: { max\_tokens, messages, model, 18 more}
 
 Messages API creation parameters for the individual request.
 
@@ -3409,6 +3409,16 @@ Accepts one of the following:
 
 :standard\_only
 
+speed: :standard | :fast
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+:standard
+
+:fast
+
 stop\_sequences: Array[String]
 
 Custom text sequences that will cause the model to stop generating.
@@ -5083,7 +5093,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 16 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more
 
 Accepts one of the following:
 
@@ -5124,6 +5134,8 @@ Accepts one of the following:
 :"model-context-window-exceeded-2025-08-26"
 
 :"skills-2025-10-02"
+
+:"fast-mode-2026-02-01"
 
 ##### ReturnsExpand Collapse
 

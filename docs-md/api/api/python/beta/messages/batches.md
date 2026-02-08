@@ -1530,7 +1530,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -1679,6 +1679,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -3074,7 +3084,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -3223,6 +3233,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -4580,7 +4600,7 @@ The number of input tokens which were used.
 
 minimum0
 
-iterations: Optional[List[Iteration]]
+iterations: Optional[BetaIterationsUsage]
 
 Per-iteration token usage breakdown.
 
@@ -4729,6 +4749,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 

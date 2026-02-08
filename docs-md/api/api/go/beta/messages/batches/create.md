@@ -3407,6 +3407,16 @@ const BetaMessageBatchNewParamsRequestParamsServiceTierAuto BetaMessageBatchNewP
 
 const BetaMessageBatchNewParamsRequestParamsServiceTierStandardOnly BetaMessageBatchNewParamsRequestParamsServiceTier = "standard\_only"
 
+Speed stringoptional
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+const BetaMessageBatchNewParamsRequestParamsSpeedStandard BetaMessageBatchNewParamsRequestParamsSpeed = "standard"
+
+const BetaMessageBatchNewParamsRequestParamsSpeedFast BetaMessageBatchNewParamsRequestParamsSpeed = "fast"
+
 StopSequences []stringoptional
 
 Custom text sequences that will cause the model to stop generating.
@@ -5118,6 +5128,8 @@ const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-manage
 const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 ##### ReturnsExpand Collapse
 

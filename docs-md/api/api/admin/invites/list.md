@@ -52,7 +52,7 @@ RFC 3339 datetime string indicating when the Invite was created.
 
 formatdate-time
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or 3 more
 
 Organization role of the User.
 
@@ -67,6 +67,8 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
+
+"managed"
 
 status: "accepted" or "expired" or "deleted" or "pending"
 

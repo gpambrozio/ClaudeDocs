@@ -3095,6 +3095,14 @@ const BetaMessageNewParamsServiceTierAuto [BetaMessageNewParamsServiceTier](api/
 
 const BetaMessageNewParamsServiceTierStandardOnly [BetaMessageNewParamsServiceTier](api/beta/messages/create.md) = "standard\_only"
 
+Speed param.Field[[BetaMessageNewParamsSpeed](api/beta/messages/create.md)]optional
+
+Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+const BetaMessageNewParamsSpeedStandard [BetaMessageNewParamsSpeed](api/beta/messages/create.md) = "standard"
+
+const BetaMessageNewParamsSpeedFast [BetaMessageNewParamsSpeed](api/beta/messages/create.md) = "fast"
+
 StopSequences param.Field[[]string]optional
 
 Body param: Custom text sequences that will cause the model to stop generating.
@@ -4697,6 +4705,8 @@ const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessage struct{…}
@@ -5897,7 +5907,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Iterations []BetaUsageIterationUnion
+Iterations [BetaIterationsUsage](api/beta.md)
 
 Per-iteration token usage breakdown.
 
@@ -6047,6 +6057,16 @@ const BetaUsageServiceTierPriority BetaUsageServiceTier = "priority"
 
 const BetaUsageServiceTierBatch BetaUsageServiceTier = "batch"
 
+Speed BetaUsageSpeed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
+
+const BetaUsageSpeedFast BetaUsageSpeed = "fast"
+
 Create a Message
 
 Go
@@ -6159,7 +6179,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -6240,7 +6261,8 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```

@@ -8283,7 +8283,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -8433,6 +8433,16 @@ PRIORITY("priority")
 
 BATCH("batch")
 
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
 class BetaMessageDeltaUsage:
 
 Optional<Long> cacheCreationInputTokens
@@ -8453,7 +8463,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -12991,7 +13001,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -14317,7 +14327,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -14466,6 +14476,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "message\_start"constant"message\_start"constant
 
@@ -15673,7 +15693,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -15822,6 +15842,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "message\_start"constant"message\_start"constant
 
@@ -15989,7 +16019,7 @@ The cumulative number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -22681,7 +22711,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -22830,6 +22860,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 class BetaWebFetchBlock:
 
@@ -25857,7 +25897,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -26006,6 +26046,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -27367,7 +27417,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -27516,6 +27566,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -28841,7 +28901,7 @@ The number of input tokens which were used.
 
 minimum0
 
-Optional<List<Iteration>> iterations
+Optional<List<BetaIterationsUsageItems>> iterations
 
 Per-iteration token usage breakdown.
 
@@ -28990,6 +29050,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 

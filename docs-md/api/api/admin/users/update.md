@@ -16,7 +16,7 @@ ID of the User.
 
 ##### Body ParametersExpand Collapse
 
-role: "user" or "developer" or "billing" or "claude\_code\_user"
+role: "user" or "developer" or "billing" or 2 more
 
 New role for the User. Cannot be "admin".
 
@@ -29,6 +29,8 @@ Accepts one of the following:
 "billing"
 
 "claude\_code\_user"
+
+"managed"
 
 ##### ReturnsExpand Collapse
 
@@ -52,7 +54,7 @@ name: string
 
 Name of the User.
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or 3 more
 
 Organization role of the User.
 
@@ -67,6 +69,8 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
+
+"managed"
 
 type: "user"
 

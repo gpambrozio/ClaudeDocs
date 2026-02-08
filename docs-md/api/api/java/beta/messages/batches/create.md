@@ -62,6 +62,8 @@ MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-20
 
 SKILLS\_2025\_10\_02("skills-2025-10-02")
 
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+
 List<Request> requests
 
 List of requests for prompt completion. Each is an individual request to create a Message.
@@ -3442,6 +3444,16 @@ Accepts one of the following:
 AUTO("auto")
 
 STANDARD\_ONLY("standard\_only")
+
+Optional<Speed> speed
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 Optional<List<String>> stopSequences
 

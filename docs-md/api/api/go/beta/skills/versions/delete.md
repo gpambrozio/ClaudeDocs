@@ -76,6 +76,8 @@ const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model
 
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
+const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaSkillVersionDeleteResponse struct{…}

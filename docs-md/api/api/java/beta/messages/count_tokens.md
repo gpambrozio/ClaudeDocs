@@ -62,6 +62,8 @@ MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-20
 
 SKILLS\_2025\_10\_02("skills-2025-10-02")
 
+FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+
 List<[BetaMessageParam](api/beta.md)> messages
 
 Input messages.
@@ -3068,6 +3070,10 @@ DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
 Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
 A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+Optional<String> speed
+
+The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
 Optional<System> system
 

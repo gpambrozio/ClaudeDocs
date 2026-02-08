@@ -36,7 +36,7 @@ name: string
 
 Name of the User.
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or 3 more
 
 Organization role of the User.
 
@@ -51,6 +51,8 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
+
+"managed"
 
 type: "user"
 

@@ -78,7 +78,7 @@ RFC 3339 datetime string indicating when the Invite was created.
 
 formatdate-time
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or 3 more
 
 Organization role of the User.
 
@@ -93,6 +93,8 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
+
+"managed"
 
 status: "accepted" or "expired" or "deleted" or "pending"
 
@@ -158,7 +160,7 @@ name: string
 
 Name of the User.
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or 3 more
 
 Organization role of the User.
 
@@ -173,6 +175,8 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
+
+"managed"
 
 type: "user"
 
@@ -458,7 +462,7 @@ End of the time bucket (exclusive) in RFC 3339 format.
 
 formatdate-time
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 8 more }
+results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -531,6 +535,17 @@ Accepts one of the following:
 
 "flex\_discount"
 
+speed: "standard" or "fast"
+
+Speed of the usage (research preview). `null` if not grouping by speed.
+Only returned when the `fast-mode-2026-02-01` beta header is provided.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 uncached\_input\_tokens: number
 
 The number of uncached input tokens processed.
@@ -571,7 +586,7 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { amount, context\_window, cost\_type, 7 more }
+results: array of object { amount, context\_window, cost\_type, 8 more }
 
 List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -627,6 +642,17 @@ Accepts one of the following:
 "standard"
 
 "batch"
+
+speed: "standard" or "fast"
+
+Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
+Only returned when the `fast-mode-2026-02-01` beta header is provided.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
 

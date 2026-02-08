@@ -161,6 +161,12 @@ Custom
 | --- | --- | --- |
 | 50 | 100,000 | 100,000 |
 
+### Fast mode rate limits
+
+When using [fast mode](build-with-claude/fast-mode.md) (`speed: "fast"`) on Opus 4.6 (research preview), dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
+
+The response includes `anthropic-fast-*` headers that indicate your fast mode rate limit status. See the [fast mode documentation](build-with-claude/fast-mode.md) for details on these headers.
+
 ### Long context rate limits
 
 When using Claude Opus 4.6, Sonnet 4.5, or Sonnet 4 with the [1M token context window enabled](build-with-claude/context-windows.md), the following dedicated rate limits apply to requests exceeding 200K tokens.
