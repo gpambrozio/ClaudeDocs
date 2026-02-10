@@ -21,8 +21,8 @@ Claude Code on the web is available in research preview to:
 
 - **Pro users**
 - **Max users**
-- **Team premium seat users**
-- **Enterprise premium seat users**
+- **Team users**
+- **Enterprise users** with premium seats or Chat + Claude Code seats
 
 ## [​](#getting-started) Getting started
 
@@ -247,7 +247,8 @@ DEBUG=true
 
 ### [​](#dependency-management) Dependency management
 
-Configure automatic dependency installation using [SessionStart hooks](hooks.md). This can be configured in your repository’s `.claude/settings.json` file:
+Custom environment images and snapshots are not yet supported. As a workaround, you can use [SessionStart hooks](hooks.md) to install packages when a session starts. This approach has [known limitations](#dependency-management-limitations).
+To configure automatic dependency installation, add a SessionStart hook to your repository’s `.claude/settings.json` file:
 
 Copy
 
@@ -279,6 +280,12 @@ Ask AI
 
 ```shiki
 #!/bin/bash
+
+# Only run in remote environments
+if [ "$CLAUDE_CODE_REMOTE" != "true" ]; then
+  exit 0
+fi
+
 npm install
 pip install -r requirements.txt
 exit 0
@@ -286,29 +293,16 @@ exit 0
 
 Make it executable: `chmod +x scripts/install_pkgs.sh`
 
-#### [​](#local-vs-remote-execution) Local vs remote execution
+#### [​](#persist-environment-variables) Persist environment variables
 
-By default, all hooks execute both locally and in remote (web) environments. To run a hook only in one environment, check the `CLAUDE_CODE_REMOTE` environment variable in your hook script.
+SessionStart hooks can persist environment variables for subsequent Bash commands by writing to the file specified in the `CLAUDE_ENV_FILE` environment variable. For details, see [SessionStart hooks](hooks.md) in the hooks reference.
 
-Copy
+#### [​](#dependency-management-limitations) Dependency management limitations
 
-Ask AI
-
-```shiki
-#!/bin/bash
-
-# Example: Only run in remote environments
-if [ "$CLAUDE_CODE_REMOTE" != "true" ]; then
-  exit 0
-fi
-
-npm install
-pip install -r requirements.txt
-```
-
-#### [​](#persisting-environment-variables) Persisting environment variables
-
-SessionStart hooks can persist environment variables for subsequent bash commands by writing to the file specified in the `CLAUDE_ENV_FILE` environment variable. For details, see [SessionStart hooks](hooks.md) in the hooks reference.
+- **Hooks fire for all sessions**: SessionStart hooks run in both local and remote environments. There is no hook configuration to scope a hook to remote sessions only. To skip local execution, check the `CLAUDE_CODE_REMOTE` environment variable in your script as shown above.
+- **Requires network access**: Install commands need network access to reach package registries. If your environment is configured with “No internet” access, these hooks will fail. Use “Limited” (the default) or “Full” network access. The [default allowlist](#default-allowed-domains) includes common registries like npm, PyPI, RubyGems, and crates.io.
+- **Proxy compatibility**: All outbound traffic in remote environments passes through a [security proxy](#security-proxy). Some package managers do not work correctly with this proxy. Bun is a known example.
+- **Runs on every session start**: Hooks run each time a session starts or resumes, adding startup latency. Keep install scripts fast by checking whether dependencies are already present before reinstalling.
 
 ## [​](#network-access-and-security) Network access and security
 

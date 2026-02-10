@@ -208,7 +208,7 @@ Shorten links, generate QR Codes, and track performanceCommand
 
 Access and analyze blockchain dataCommand
 
-`claude mcp add blockscout --transport http https://mcp.blockscout.com/mcp/`
+`claude mcp add blockscout --transport http https://mcp.blockscout.com/mcp`
 
 [**MT Newswires**](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
@@ -528,7 +528,7 @@ Secure AI access to manage your WordPress.com sitesCommand
 
 `claude mcp add wordpress-com --transport http https://public-api.wordpress.com/wpcom/v2/mcp/v1`
 
-[**Workato**](https://docs.workato.com/en/mcp/mcp-cloud.html)
+[**Workato**](https://docs.workato.com/en/mcp.html)
 
 Automate workflows and connect your business appsRequires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp).
 
