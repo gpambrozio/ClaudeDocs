@@ -37,6 +37,8 @@ You can configure your model in several ways, listed in order of priority:
 
 Example usage:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -50,6 +52,8 @@ claude --model opus
 ```
 
 Example settings file:
+
+Report incorrect code
 
 Copy
 
@@ -107,6 +111,8 @@ The `[1m]` suffix enables a [1 million token context window](build-with-claude/c
 For Opus 4.6, the 1M context window is available for API and Claude Code pay-as-you-go users. Pro, Max, Teams, and Enterprise subscription users do not have access to Opus 4.6 1M context at launch.
 
 You can use the `[1m]` suffix with model aliases or full model names:
+
+Report incorrect code
 
 Copy
 

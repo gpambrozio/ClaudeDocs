@@ -29,6 +29,8 @@ Claude Code supports two authentication methods for Microsoft Foundry. Choose th
 3. Copy **API Key**
 4. Set the environment variable:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -41,6 +43,8 @@ export ANTHROPIC_FOUNDRY_API_KEY=your-azure-api-key
 When `ANTHROPIC_FOUNDRY_API_KEY` is not set, Claude Code automatically uses the Azure SDK [default credential chain](https://learn.microsoft.com/en-us/azure/developer/javascript/sdk/authentication/credential-chains#defaultazurecredential-overview).
 This supports a variety of methods for authenticating local and remote workloads.
 On local environments, you commonly may use the Azure CLI:
+
+Report incorrect code
 
 Copy
 
@@ -55,6 +59,8 @@ When using Microsoft Foundry, the `/login` and `/logout` commands are disabled s
 ### [​](#3-configure-claude-code) 3. Configure Claude Code
 
 Set the following environment variables to enable Microsoft Foundry. Note that your deployments’ names are set as the model identifiers in Claude Code (may be optional if using suggested deployment names).
+
+Report incorrect code
 
 Copy
 
@@ -81,6 +87,8 @@ For more details on model configuration options, see [Model configuration](model
 
 The `Azure AI User` and `Cognitive Services User` default roles include all required permissions for invoking Claude models.
 For more restrictive permissions, create a custom role with the following:
+
+Report incorrect code
 
 Copy
 

@@ -73,6 +73,8 @@ When you resume a session with `claude --continue` or `claude --resume`, you pic
 ![Session continuity: resume continues the same session, fork creates a new branch with a new ID.](https://mintcdn.com/claude-code/ELkJZG54dIaeldDC/images/session-continuity.svg?fit=max&auto=format&n=ELkJZG54dIaeldDC&q=85&s=f671b603cc856119c95475b9084ebfef)
 To branch off and try a different approach without affecting the original session, use the `--fork-session` flag:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -140,6 +142,8 @@ Built-in commands also guide you through setup:
 
 Claude Code is conversational. You don’t need perfect prompts. Start with what you want, then refine:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -164,6 +168,8 @@ You can interrupt Claude at any point. If it’s going down the wrong path, just
 
 The more precise your initial prompt, the fewer corrections you’ll need. Reference specific files, mention constraints, and point to example patterns.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -180,6 +186,8 @@ Vague prompts like “fix the login bug” work, but you’ll spend more time st
 
 Claude performs better when it can check its own work. Include test cases, paste screenshots of expected UI, or define the output you want.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -195,6 +203,8 @@ For visual work, paste a screenshot of the design and ask Claude to compare its 
 
 For complex problems, separate research from coding. Use plan mode (`Shift+Tab` twice) to analyze the codebase first:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -209,6 +219,8 @@ Review the plan, refine it through conversation, then let Claude implement. This
 ### [​](#delegate-don’t-dictate) Delegate, don’t dictate
 
 Think of delegating to a capable colleague. Give context and direction, then trust Claude to figure out the details:
+
+Report incorrect code
 
 Copy
 

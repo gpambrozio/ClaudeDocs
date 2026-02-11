@@ -26,6 +26,8 @@ Think of it like adding an app store: adding the store gives you access to brows
 The official Anthropic marketplace (`claude-plugins-official`) is automatically available when you start Claude Code. Run `/plugin` and go to the **Discover** tab to browse what’s available.
 To install a plugin from the official marketplace:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -107,6 +109,8 @@ Add the marketplace
 
 From within Claude Code, run the `plugin marketplace add` command for the `anthropics/claude-code` marketplace:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -142,6 +146,8 @@ Select a plugin to view its details, then choose an installation scope:
 
 For example, select **commit-commands** (a plugin that adds git workflow commands) and install it to your user scope.You can also install directly from the command line:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -157,6 +163,8 @@ See [Configuration scopes](settings.md) to learn more about scopes.
 Use your new plugin
 
 After installing, the plugin’s commands are immediately available. Plugin commands are namespaced by the plugin name, so **commit-commands** provides commands like `/commit-commands:commit`.Try it out by making a change to a file and running:
+
+Report incorrect code
 
 Copy
 
@@ -186,6 +194,8 @@ Use the `/plugin marketplace add` command to add marketplaces from different sou
 Add a GitHub repository that contains a `.claude-plugin/marketplace.json` file using the `owner/repo` format—where `owner` is the GitHub username or organization and `repo` is the repository name.
 For example, `anthropics/claude-code` refers to the `claude-code` repository owned by `anthropics`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -199,6 +209,8 @@ Ask AI
 Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers:
 Using HTTPS:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -209,6 +221,8 @@ Ask AI
 
 Using SSH:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -218,6 +232,8 @@ Ask AI
 ```
 
 To add a specific branch or tag, append `#` followed by the ref:
+
+Report incorrect code
 
 Copy
 
@@ -231,6 +247,8 @@ Ask AI
 
 Add a local directory that contains a `.claude-plugin/marketplace.json` file:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -240,6 +258,8 @@ Ask AI
 ```
 
 You can also add a direct path to a `marketplace.json` file:
+
+Report incorrect code
 
 Copy
 
@@ -252,6 +272,8 @@ Ask AI
 ### [​](#add-from-remote-urls) Add from remote URLs
 
 Add a remote `marketplace.json` file via URL:
+
+Report incorrect code
 
 Copy
 
@@ -266,6 +288,8 @@ URL-based marketplaces have some limitations compared to Git-based marketplaces.
 ## [​](#install-plugins) Install plugins
 
 Once you’ve added marketplaces, you can install plugins directly (installs to user scope by default):
+
+Report incorrect code
 
 Copy
 
@@ -292,6 +316,8 @@ Run `/plugin` and go to the **Installed** tab to view, enable, disable, or unins
 You can also manage plugins with direct commands.
 Disable a plugin without uninstalling:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -301,6 +327,8 @@ Ask AI
 ```
 
 Re-enable a disabled plugin:
+
+Report incorrect code
 
 Copy
 
@@ -312,6 +340,8 @@ Ask AI
 
 Completely remove a plugin:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -321,6 +351,8 @@ Ask AI
 ```
 
 The `--scope` option lets you target a specific scope with CLI commands:
+
+Report incorrect code
 
 Copy
 
@@ -349,6 +381,8 @@ Run `/plugin` and go to the **Marketplaces** tab to:
 You can also manage marketplaces with direct commands.
 List all configured marketplaces:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -359,6 +393,8 @@ Ask AI
 
 Refresh plugin listings from a marketplace:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -368,6 +404,8 @@ Ask AI
 ```
 
 Remove a marketplace:
+
+Report incorrect code
 
 Copy
 
@@ -392,6 +430,8 @@ Toggle auto-update for individual marketplaces through the UI:
 Official Anthropic marketplaces have auto-update enabled by default. Third-party and local development marketplaces have auto-update disabled by default.
 To disable all automatic updates entirely for both Claude Code and all plugins, set the `DISABLE_AUTOUPDATER` environment variable. See [Auto updates](setup.md) for details.
 To keep plugin auto-updates enabled while disabling Claude Code auto-updates, set `FORCE_AUTOUPDATE_PLUGINS=true` along with `DISABLE_AUTOUPDATER`:
+
+Report incorrect code
 
 Copy
 

@@ -71,6 +71,8 @@ The prompt box supports several features:
 
 Use @-mentions to give Claude context about specific files or folders. When you type `@` followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -175,6 +177,8 @@ For more about the plugin system, see [Plugins](plugins.md) and [Plugin marketpl
 Connect Claude to your Chrome browser to test web apps, debug with console logs, and automate browser workflows without leaving VS Code. This requires the [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or higher.
 Type `@browser` in the prompt box followed by what you want Claude to do:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -277,6 +281,8 @@ When Claude runs long-running commands, the extension shows progress in the stat
 MCP (Model Context Protocol) servers give Claude access to external tools, databases, and APIs. Configure them via CLI, then use them in both extension and CLI.
 To add an MCP server, open the integrated terminal (`` Ctrl+` `` or `` Cmd+` ``) and run:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -295,6 +301,8 @@ Claude Code integrates with git to help with version control workflows directly 
 
 Claude can stage changes, write commit messages, and create pull requests based on your work:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -310,6 +318,8 @@ When creating pull requests, Claude generates descriptions based on the actual c
 ### [​](#use-git-worktrees-for-parallel-tasks) Use git worktrees for parallel tasks
 
 Git worktrees allow multiple Claude Code sessions to work on separate branches simultaneously, each with isolated files:
+
+Report incorrect code
 
 Copy
 
@@ -396,6 +406,8 @@ To uninstall the Claude Code extension:
 3. Click **Uninstall**
 
 To also remove extension data and reset all settings:
+
+Report incorrect code
 
 Copy
 

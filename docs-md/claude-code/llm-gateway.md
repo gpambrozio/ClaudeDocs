@@ -52,6 +52,8 @@ LiteLLM is a third-party proxy service. Anthropic doesn’t endorse, maintain, o
 
 Simplest method using a fixed API key:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -76,6 +78,8 @@ For rotating keys or per-user authentication:
 
 1. Create an API key helper script:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -96,6 +100,8 @@ jwt encode \
 
 2. Configure Claude Code settings to use the helper:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -107,6 +113,8 @@ Ask AI
 ```
 
 3. Set token refresh interval:
+
+Report incorrect code
 
 Copy
 
@@ -122,6 +130,8 @@ This value will be sent as `Authorization` and `X-Api-Key` headers. The `apiKeyH
 #### [​](#unified-endpoint-recommended) Unified endpoint (recommended)
 
 Using LiteLLM’s [Anthropic format endpoint](https://docs.litellm.ai/docs/anthropic_unified):
+
+Report incorrect code
 
 Copy
 
@@ -143,6 +153,8 @@ export ANTHROPIC_BASE_URL=https://litellm-server:4000
 
 Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/anthropic_completion):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -154,6 +166,8 @@ export ANTHROPIC_BASE_URL=https://litellm-server:4000/anthropic
 ##### Amazon Bedrock through LiteLLM
 
 Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/bedrock):
+
+Report incorrect code
 
 Copy
 
@@ -168,6 +182,8 @@ export CLAUDE_CODE_USE_BEDROCK=1
 ##### Google Vertex AI through LiteLLM
 
 Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/vertex_ai):
+
+Report incorrect code
 
 Copy
 

@@ -84,7 +84,7 @@ Code through hierarchical settings:
 
   These are system-wide paths (not user home directories like `~/Library/...`) that require administrator privileges. They are designed to be deployed by IT administrators.
 
-  See [Managed settings](permissions.md) and [Managed MCP configuration](mcp.md) for details.
+  See [Managed settings](permissions.md) and [Managed MCP configuration](mcp.md) for details. For organizations without device management infrastructure, see [server-managed settings](server-managed-settings.md).
 
   Managed deployments can also restrict **plugin marketplace additions** using
   `strictKnownMarketplaces`. For more information, see [Managed marketplace restrictions](plugin-marketplaces.md).
@@ -93,6 +93,8 @@ Code through hierarchical settings:
 Claude Code automatically creates timestamped backups of configuration files and retains the five most recent backups to prevent data loss.
 
 Example settings.json
+
+Report incorrect code
 
 Copy
 
@@ -218,6 +220,8 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 
 **Configuration example:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -266,6 +270,8 @@ Claude Code adds attribution to git commits and pull requests. These are configu
 
 **Default commit attribution:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -278,6 +284,8 @@ Ask AI
 
 **Default pull request attribution:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -287,6 +295,8 @@ Ask AI
 ```
 
 **Example:**
+
+Report incorrect code
 
 Copy
 
@@ -307,6 +317,8 @@ The `attribution` setting takes precedence over the deprecated `includeCoAuthore
 
 Configure a custom command for `@` file path autocomplete. The built-in file suggestion uses fast filesystem traversal, but large monorepos may benefit from project-specific indexing such as a pre-built file index or custom tooling.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -322,6 +334,8 @@ Ask AI
 
 The command runs with the same environment variables as [hooks](hooks.md), including `CLAUDE_PROJECT_DIR`. It receives JSON via stdin with a `query` field:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -331,6 +345,8 @@ Ask AI
 ```
 
 Output newline-separated file paths to stdout (currently limited to 15):
+
+Report incorrect code
 
 Copy
 
@@ -343,6 +359,8 @@ src/components/Form.tsx
 ```
 
 **Example:**
+
+Report incorrect code
 
 Copy
 
@@ -364,6 +382,8 @@ your-repo-file-index --query "$query" | head -20
 
 **Configuration:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -378,8 +398,8 @@ Ask AI
 
 Settings apply in order of precedence. From highest to lowest:
 
-1. **Managed settings** (`managed-settings.json`)
-   - Policies deployed by IT/DevOps to system directories
+1. **Managed settings** ([`managed-settings.json`](permissions.md) or [server-managed settings](server-managed-settings.md))
+   - Policies deployed by IT/DevOps to system directories, or delivered from Anthropic’s servers for Claude for Enterprise customers
    - Cannot be overridden by user or project settings
 2. **Command line arguments**
    - Temporary overrides for a specific session
@@ -409,6 +429,8 @@ Claude Code’s internal system prompt is not published. To add custom instructi
 ### [​](#excluding-sensitive-files) Excluding sensitive files
 
 To prevent Claude Code from accessing files containing sensitive information like API keys, secrets, and environment files, use the `permissions.deny` setting in your `.claude/settings.json` file:
+
+Report incorrect code
 
 Copy
 
@@ -447,6 +469,8 @@ Claude Code supports a plugin system that lets you extend functionality with ski
 
 Plugin-related settings in `settings.json`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -478,6 +502,8 @@ Controls which plugins are enabled. Format: `"plugin-name@marketplace-name": tru
 
 **Example**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -503,6 +529,8 @@ Defines additional marketplaces that should be made available for the repository
 4. Installation respects trust boundaries and requires explicit consent
 
 **Example**:
+
+Report incorrect code
 
 Copy
 
@@ -561,6 +589,8 @@ The allowlist supports seven marketplace source types. Most sources use exact ma
 
 1. **GitHub repositories**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -575,6 +605,8 @@ Fields: `repo` (required), `ref` (optional: branch/tag/SHA), `path` (optional: s
 
 2. **Git repositories**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -588,6 +620,8 @@ Ask AI
 Fields: `url` (required), `ref` (optional: branch/tag/SHA), `path` (optional: subdirectory)
 
 3. **URL-based marketplaces**:
+
+Report incorrect code
 
 Copy
 
@@ -604,6 +638,8 @@ URL-based marketplaces only download the `marketplace.json` file. They do not do
 
 4. **NPM packages**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -616,6 +652,8 @@ Ask AI
 Fields: `package` (required, supports scoped packages)
 
 5. **File paths**:
+
+Report incorrect code
 
 Copy
 
@@ -630,6 +668,8 @@ Fields: `path` (required: absolute path to marketplace.json file)
 
 6. **Directory paths**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -642,6 +682,8 @@ Ask AI
 Fields: `path` (required: absolute path to directory containing `.claude-plugin/marketplace.json`)
 
 7. **Host pattern matching**:
+
+Report incorrect code
 
 Copy
 
@@ -663,6 +705,8 @@ Host extraction by source type:
 
 **Configuration examples**:
 Example: allow specific marketplaces only:
+
+Report incorrect code
 
 Copy
 
@@ -694,6 +738,8 @@ Ask AI
 
 Example - Disable all marketplace additions:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -705,6 +751,8 @@ Ask AI
 ```
 
 Example: allow all marketplaces from an internal git server:
+
+Report incorrect code
 
 Copy
 
@@ -729,6 +777,8 @@ Marketplace sources must match **exactly** for a user’s addition to be allowed
 - The `path` field must match exactly (or both be undefined)
 
 Examples of sources that **do NOT match**:
+
+Report incorrect code
 
 Copy
 
@@ -759,6 +809,8 @@ Ask AI
 **Format difference**:
 `strictKnownMarketplaces` uses direct source objects:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -772,6 +824,8 @@ Ask AI
 ```
 
 `extraKnownMarketplaces` requires named marketplaces:
+
+Report incorrect code
 
 Copy
 
@@ -943,6 +997,8 @@ To make environment variables available in Bash commands, you have **three optio
 **Option 1: Activate environment before starting Claude Code** (simplest approach)
 Activate your virtual environment in your terminal before launching Claude Code:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -957,6 +1013,8 @@ This works for shell environments but environment variables set within Claude’
 **Option 2: Set CLAUDE\_ENV\_FILE before starting Claude Code** (persistent environment setup)
 Export the path to a shell script containing your environment setup:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -967,6 +1025,8 @@ claude
 ```
 
 Where `/path/to/env-setup.sh` contains:
+
+Report incorrect code
 
 Copy
 
@@ -981,6 +1041,8 @@ conda activate myenv
 Claude Code will source this file before each Bash command, making the environment persistent across all commands.
 **Option 3: Use a SessionStart hook** (project-specific configuration)
 Configure in `.claude/settings.json`:
+
+Report incorrect code
 
 Copy
 

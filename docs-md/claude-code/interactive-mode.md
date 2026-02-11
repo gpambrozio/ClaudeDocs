@@ -235,6 +235,8 @@ To disable all background task functionality, set the `CLAUDE_CODE_DISABLE_BACKG
 
 Run bash commands directly without going through Claude by prefixing your input with `!`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -266,6 +268,8 @@ After Claude responds, suggestions continue to appear based on your conversation
 The suggestion runs as a background request that reuses the parent conversation’s prompt cache, so the additional cost is minimal. Claude Code skips suggestion generation when the cache is cold to avoid unnecessary cost.
 Suggestions are automatically skipped after the first turn of a conversation, in non-interactive mode, and in plan mode.
 To disable prompt suggestions entirely, set the environment variable or toggle the setting in `/config`:
+
+Report incorrect code
 
 Copy
 

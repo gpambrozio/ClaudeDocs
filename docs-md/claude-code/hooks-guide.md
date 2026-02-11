@@ -34,6 +34,8 @@ Select `+ Add new hook…`. The menu prompts you for a shell command to run when
 
 Uses [`osascript`](https://ss64.com/mac/osascript.html) to trigger a native macOS notification through AppleScript:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -44,6 +46,8 @@ osascript -e 'display notification "Claude Code needs your attention" with title
 
 Uses `notify-send`, which is pre-installed on most Linux desktops with a notification daemon:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -53,6 +57,8 @@ notify-send 'Claude Code' 'Claude Code needs your attention'
 ```
 
 Uses PowerShell to show a native message box through .NET’s Windows Forms:
+
+Report incorrect code
 
 Copy
 
@@ -93,6 +99,8 @@ This hook uses the `Notification` event, which fires when Claude is waiting for 
 - Linux
 - Windows (PowerShell)
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -115,6 +123,8 @@ Ask AI
 }
 ```
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -136,6 +146,8 @@ Ask AI
   }
 }
 ```
+
+Report incorrect code
 
 Copy
 
@@ -163,6 +175,8 @@ Ask AI
 
 Automatically run [Prettier](https://prettier.io/) on every file Claude edits, so formatting stays consistent without manual intervention.
 This hook uses the `PostToolUse` event with an `Edit|Write` matcher, so it runs only after file-editing tools. The command extracts the edited file path with [`jq`](https://jqlang.github.io/jq/) and passes it to Prettier. Add this to `.claude/settings.json` in your project root:
+
+Report incorrect code
 
 Copy
 
@@ -199,6 +213,8 @@ Create the hook script
 
 Save this to `.claude/hooks/protect-files.sh`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -228,6 +244,8 @@ Make the script executable (macOS/Linux)
 
 Hook scripts must be executable for Claude Code to run them:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -241,6 +259,8 @@ chmod +x .claude/hooks/protect-files.sh
 Register the hook
 
 Add a `PreToolUse` hook to `.claude/settings.json` that runs the script before any `Edit` or `Write` tool call:
+
+Report incorrect code
 
 Copy
 
@@ -268,6 +288,8 @@ Ask AI
 
 When Claude’s context window fills up, compaction summarizes the conversation to free space. This can lose important details. Use a `SessionStart` hook with a `compact` matcher to re-inject critical context after every compaction.
 Any text your command writes to stdout is added to Claude’s context. This example reminds Claude of project conventions and recent work. Add this to `.claude/settings.json` in your project root:
+
+Report incorrect code
 
 Copy
 
@@ -324,6 +346,8 @@ Hooks communicate with Claude Code through stdin, stdout, stderr, and exit codes
 
 Every event includes common fields like `session_id` and `cwd`, but each event type adds different data. For example, when Claude runs a Bash command, a `PreToolUse` hook receives something like this on stdin:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -345,6 +369,8 @@ Your script can parse that JSON and act on any of those fields. `UserPromptSubmi
 #### [​](#hook-output) Hook output
 
 Your script tells Claude Code what to do next by writing to stdout or stderr and exiting with a specific code. For example, a `PreToolUse` hook that wants to block a command:
+
+Report incorrect code
 
 Copy
 
@@ -377,6 +403,8 @@ Use exit 2 to block with a stderr message, or exit 0 with JSON for structured co
 
 For example, a `PreToolUse` hook can deny a tool call and tell Claude why, or escalate it to the user for approval:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -403,6 +431,8 @@ For `UserPromptSubmit` hooks, use `additionalContext` instead to inject text int
 ### [​](#filter-hooks-with-matchers) Filter hooks with matchers
 
 Without a matcher, a hook fires on every occurrence of its event. Matchers let you narrow that down. For example, if you want to run a formatter only after file edits (not after every tool call), add a matcher to your `PostToolUse` hook:
+
+Report incorrect code
 
 Copy
 
@@ -445,6 +475,8 @@ A few more examples showing matchers on different event types:
 
 Match only `Bash` tool calls and log each command to a file. The `PostToolUse` event fires after the command completes, so `tool_input.command` contains what ran. The hook receives the event data as JSON on stdin, and `jq -r '.tool_input.command'` extracts just the command string, which `>>` appends to the log file:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -469,6 +501,8 @@ Ask AI
 
 MCP tools use a different naming convention than built-in tools: `mcp__<server>__<tool>`, where `<server>` is the MCP server name and `<tool>` is the tool it provides. For example, `mcp__github__search_repositories` or `mcp__filesystem__read_file`. Use a regex matcher to target all tools from a specific server, or match across servers with a pattern like `mcp__.*__write.*`. See [Match MCP tools](hooks.md) in the reference for the full list of examples.The command below extracts the tool name from the hook’s JSON input with `jq` and writes it to stderr, where it shows up in verbose mode (`Ctrl+O`):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -492,6 +526,8 @@ Ask AI
 ```
 
 The `SessionEnd` event supports matchers on the reason the session ended. This hook only fires on `clear` (when you run `/clear`), not on normal exits:
+
+Report incorrect code
 
 Copy
 
@@ -543,6 +579,8 @@ The model’s only job is to return a yes/no decision as JSON:
 
 This example uses a `Stop` hook to ask the model whether all requested tasks are complete. If the model returns `"ok": false`, Claude keeps working and uses the `reason` as its next instruction:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -571,6 +609,8 @@ For full configuration options, see [Prompt-based hooks](hooks.md) in the refere
 When verification requires inspecting files or running commands, use `type: "agent"` hooks. Unlike prompt hooks which make a single LLM call, agent hooks spawn a subagent that can read files, search code, and use other tools to verify conditions before returning a decision.
 Agent hooks use the same `"ok"` / `"reason"` response format as prompt hooks, but with a longer default timeout of 60 seconds and up to 50 tool-use turns.
 This example verifies that tests pass before allowing Claude to stop:
+
+Report incorrect code
 
 Copy
 
@@ -622,6 +662,8 @@ You see a message like “PreToolUse hook error: …” in the transcript.
 
 - Your script exited with a non-zero code unexpectedly. Test it manually by piping sample JSON:
 
+  Report incorrect code
+
   Copy
 
   Ask AI
@@ -647,6 +689,8 @@ You edited a settings file but the hooks don’t appear in the menu.
 Claude keeps working in an infinite loop instead of stopping.
 Your Stop hook script needs to check whether it already triggered a continuation. Parse the `stop_hook_active` field from the JSON input and exit early if it’s `true`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -665,6 +709,8 @@ fi
 Claude Code shows a JSON parsing error even though your hook script outputs valid JSON.
 When Claude Code runs a hook, it spawns a shell that sources your profile (`~/.zshrc` or `~/.bashrc`). If your profile contains unconditional `echo` statements, that output gets prepended to your hook’s JSON:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -675,6 +721,8 @@ Shell ready on arm64
 ```
 
 Claude Code tries to parse this as JSON and fails. To fix this, wrap echo statements in your shell profile so they only run in interactive shells:
+
+Report incorrect code
 
 Copy
 

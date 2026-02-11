@@ -50,6 +50,8 @@ field in a settings file at a different level.
 Custom output styles are Markdown files with frontmatter and the text that will
 be added to the system prompt:
 
+Report incorrect code
+
 Copy
 
 Ask AI

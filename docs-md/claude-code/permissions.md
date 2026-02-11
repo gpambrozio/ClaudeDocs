@@ -67,6 +67,8 @@ Add a specifier in parentheses to match specific tool uses:
 
 Bash rules support glob patterns with `*`. Wildcards can appear at any position in the command. This configuration allows npm and git commit commands while blocking git push:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -165,6 +167,8 @@ Use `Task(AgentName)` rules to control which [subagents](sub-agents.md) Claude c
 
 Add these rules to the `deny` array in your settings or use the `--disallowedTools` CLI flag to disable specific agents. To disable the Explore agent:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -207,7 +211,7 @@ Use both for defense-in-depth:
 
 ## [​](#managed-settings) Managed settings
 
-For organizations that need centralized control over Claude Code configuration, administrators can deploy `managed-settings.json` files to system directories. These policy files follow the same format as regular settings files and cannot be overridden by user or project settings.
+For organizations that need centralized control over Claude Code configuration, administrators can deploy `managed-settings.json` files to system directories. These policy files follow the same format as regular settings files and cannot be overridden by user or project settings. For organizations without device management infrastructure, [server-managed settings](server-managed-settings.md) provide an alternative that delivers configurations from Anthropic’s servers.
 **Managed settings file locations**:
 
 - **macOS**: `/Library/Application Support/ClaudeCode/managed-settings.json`

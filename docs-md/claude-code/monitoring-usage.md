@@ -7,6 +7,8 @@ All metrics are time series data exported via OpenTelemetry’s standard metrics
 
 Configure OpenTelemetry using environment variables:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -42,6 +44,8 @@ For full configuration options, see the [OpenTelemetry specification](https://gi
 
 Administrators can configure OpenTelemetry settings for all users through the [managed settings file](settings.md). This allows for centralized control of telemetry settings across an organization. See the [settings precedence](settings.md) for more information about how settings are applied.
 Example managed settings configuration:
+
+Report incorrect code
 
 Copy
 
@@ -106,6 +110,8 @@ For enterprise environments that require dynamic authentication, you can configu
 
 Add to your `.claude/settings.json`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -119,6 +125,8 @@ Ask AI
 #### [​](#script-requirements) Script requirements
 
 The script must output valid JSON with string key-value pairs representing HTTP headers:
+
+Report incorrect code
 
 Copy
 
@@ -137,6 +145,8 @@ The headers helper script runs at startup and periodically thereafter to support
 ### [​](#multi-team-organization-support) Multi-team organization support
 
 Organizations with multiple teams or departments can add custom attributes to distinguish between different groups using the `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+
+Report incorrect code
 
 Copy
 
@@ -163,6 +173,8 @@ These custom attributes will be included in all metrics and events, allowing you
 
 **Examples:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -182,6 +194,8 @@ export OTEL_RESOURCE_ATTRIBUTES="org.name=John%27s%20Organization"
 Note: wrapping values in quotes doesn’t escape spaces. For example, `org.name="My Company"` results in the literal value `"My Company"` (with quotes included), not `My Company`.
 
 ### [​](#example-configurations) Example configurations
+
+Report incorrect code
 
 Copy
 

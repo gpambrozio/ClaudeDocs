@@ -12,6 +12,8 @@ Suppose you’ve just joined a new project and need to understand its structure 
 
 Navigate to the project root directory
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -23,6 +25,8 @@ cd /path/to/project
 2
 
 Start Claude Code
+
+Report incorrect code
 
 Copy
 
@@ -36,6 +40,8 @@ claude
 
 Ask for a high-level overview
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -48,6 +54,8 @@ Ask AI
 
 Dive deeper into specific components
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -56,6 +64,8 @@ Ask AI
 > explain the main architecture patterns used here
 ```
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -63,6 +73,8 @@ Ask AI
 ```shiki
 > what are the key data models?
 ```
+
+Report incorrect code
 
 Copy
 
@@ -86,6 +98,8 @@ Suppose you need to locate code related to a specific feature or functionality.
 
 Ask Claude to find relevant files
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -98,6 +112,8 @@ Ask AI
 
 Get context on how components interact
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -109,6 +125,8 @@ Ask AI
 3
 
 Understand the execution flow
+
+Report incorrect code
 
 Copy
 
@@ -134,6 +152,8 @@ Suppose you’ve encountered an error message and need to find and fix its sourc
 
 Share the error with Claude
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -146,6 +166,8 @@ Ask AI
 
 Ask for fix recommendations
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -157,6 +179,8 @@ Ask AI
 3
 
 Apply the fix
+
+Report incorrect code
 
 Copy
 
@@ -182,6 +206,8 @@ Suppose you need to update old code to use modern patterns and practices.
 
 Identify legacy code for refactoring
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -193,6 +219,8 @@ Ask AI
 2
 
 Get refactoring recommendations
+
+Report incorrect code
 
 Copy
 
@@ -206,6 +234,8 @@ Ask AI
 
 Apply the changes safely
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -217,6 +247,8 @@ Ask AI
 4
 
 Verify the refactoring
+
+Report incorrect code
 
 Copy
 
@@ -242,6 +274,8 @@ Suppose you want to use specialized AI subagents to handle specific tasks more e
 
 View available subagents
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -258,6 +292,8 @@ Use subagents automatically
 
 Claude Code automatically delegates appropriate tasks to specialized subagents:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -265,6 +301,8 @@ Ask AI
 ```shiki
 > review my recent code changes for security issues
 ```
+
+Report incorrect code
 
 Copy
 
@@ -278,6 +316,8 @@ Ask AI
 
 Explicitly request specific subagents
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -285,6 +325,8 @@ Ask AI
 ```shiki
 > use the code-reviewer subagent to check the auth module
 ```
+
+Report incorrect code
 
 Copy
 
@@ -297,6 +339,8 @@ Ask AI
 4
 
 Create custom subagents for your workflow
+
+Report incorrect code
 
 Copy
 
@@ -340,6 +384,8 @@ If you are in Normal Mode, **Shift+Tab** first switches into Auto-Accept Mode, i
 **Start a new session in Plan Mode**
 To start a new session in Plan Mode, use the `--permission-mode plan` flag:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -351,6 +397,8 @@ claude --permission-mode plan
 **Run “headless” queries in Plan Mode**
 You can also run a query in Plan Mode directly with `-p` (that is, in [“headless mode”](headless.md)):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -361,6 +409,8 @@ claude --permission-mode plan -p "Analyze the authentication system and suggest 
 
 ### [​](#example-planning-a-complex-refactor) Example: Planning a complex refactor
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -368,6 +418,8 @@ Ask AI
 ```shiki
 claude --permission-mode plan
 ```
+
+Report incorrect code
 
 Copy
 
@@ -378,6 +430,8 @@ Ask AI
 ```
 
 Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:
+
+Report incorrect code
 
 Copy
 
@@ -391,6 +445,8 @@ Ask AI
 Press `Ctrl+G` to open the plan in your default text editor, where you can edit it directly before Claude proceeds.
 
 ### [​](#configure-plan-mode-as-default) Configure Plan Mode as default
+
+Report incorrect code
 
 Copy
 
@@ -417,6 +473,8 @@ Suppose you need to add tests for uncovered code.
 
 Identify untested code
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -428,6 +486,8 @@ Ask AI
 2
 
 Generate test scaffolding
+
+Report incorrect code
 
 Copy
 
@@ -441,6 +501,8 @@ Ask AI
 
 Add meaningful test cases
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -452,6 +514,8 @@ Ask AI
 4
 
 Run and verify tests
+
+Report incorrect code
 
 Copy
 
@@ -470,6 +534,8 @@ For comprehensive coverage, ask Claude to identify edge cases you might have mis
 
 You can create pull requests by asking Claude directly (“create a pr for my changes”) or by using the `/commit-push-pr` skill, which commits, pushes, and opens a PR in one step.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -485,6 +551,8 @@ For more control over the process, guide Claude through it step-by-step or [crea
 
 Summarize your changes
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -497,6 +565,8 @@ Ask AI
 
 Generate a pull request
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -508,6 +578,8 @@ Ask AI
 3
 
 Review and refine
+
+Report incorrect code
 
 Copy
 
@@ -529,6 +601,8 @@ Suppose you need to add or update documentation for your code.
 
 Identify undocumented code
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -540,6 +614,8 @@ Ask AI
 2
 
 Generate documentation
+
+Report incorrect code
 
 Copy
 
@@ -553,6 +629,8 @@ Ask AI
 
 Review and enhance
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -564,6 +642,8 @@ Ask AI
 4
 
 Verify documentation
+
+Report incorrect code
 
 Copy
 
@@ -599,6 +679,8 @@ You can use any of these methods:
 
 Ask Claude to analyze the image
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -607,6 +689,8 @@ Ask AI
 > What does this image show?
 ```
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -614,6 +698,8 @@ Ask AI
 ```shiki
 > Describe the UI elements in this screenshot
 ```
+
+Report incorrect code
 
 Copy
 
@@ -627,6 +713,8 @@ Ask AI
 
 Use images for context
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -634,6 +722,8 @@ Ask AI
 ```shiki
 > Here's a screenshot of the error. What's causing it?
 ```
+
+Report incorrect code
 
 Copy
 
@@ -647,6 +737,8 @@ Ask AI
 
 Get code suggestions from visual content
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -654,6 +746,8 @@ Ask AI
 ```shiki
 > Generate CSS to match this design mockup
 ```
+
+Report incorrect code
 
 Copy
 
@@ -681,6 +775,8 @@ Use @ to quickly include files or directories without waiting for Claude to read
 
 Reference a single file
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -695,6 +791,8 @@ This includes the full content of the file in the conversation.
 
 Reference a directory
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -708,6 +806,8 @@ This provides a directory listing with file information.
 3
 
 Reference MCP resources
+
+Report incorrect code
 
 Copy
 
@@ -781,6 +881,8 @@ Name the current session
 
 Use `/rename` during a session to give it a memorable name:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -797,6 +899,8 @@ Resume by name later
 
 From the command line:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -806,6 +910,8 @@ claude --resume auth-refactor
 ```
 
 Or from inside an active session:
+
+Report incorrect code
 
 Copy
 
@@ -879,6 +985,8 @@ documentation](https://git-scm.com/docs/git-worktree).
 
 Create a new worktree
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -897,6 +1005,8 @@ This creates a new directory with a separate working copy of your repository.
 
 Run Claude Code in each worktree
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -913,6 +1023,8 @@ claude
 
 Run Claude in another worktree
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -925,6 +1037,8 @@ claude
 5
 
 Manage your worktrees
+
+Report incorrect code
 
 Copy
 
@@ -961,6 +1075,8 @@ For automated coordination of parallel sessions with shared tasks and messaging,
 Suppose you want to use Claude Code as a linter or code reviewer.
 **Add Claude to your build script:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -987,6 +1103,8 @@ Tips:
 Suppose you want to pipe data into Claude, and get back data in a structured format.
 **Pipe data through Claude:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1009,6 +1127,8 @@ Suppose you need Claude’s output in a specific format, especially when integra
 
 Use text format (default)
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1023,6 +1143,8 @@ This outputs just Claude’s plain text response (default behavior).
 
 Use JSON format
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1036,6 +1158,8 @@ This outputs a JSON array of messages with metadata including cost and duration.
 3
 
 Use streaming JSON format
+
+Report incorrect code
 
 Copy
 
@@ -1061,6 +1185,8 @@ Claude has built-in access to its documentation and can answer questions about i
 
 ### [​](#example-questions) Example questions
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1068,6 +1194,8 @@ Ask AI
 ```shiki
 > can Claude Code create pull requests?
 ```
+
+Report incorrect code
 
 Copy
 
@@ -1077,6 +1205,8 @@ Ask AI
 > how does Claude Code handle permissions?
 ```
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1084,6 +1214,8 @@ Ask AI
 ```shiki
 > what skills are available?
 ```
+
+Report incorrect code
 
 Copy
 
@@ -1093,6 +1225,8 @@ Ask AI
 > how do I use MCP with Claude Code?
 ```
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1100,6 +1234,8 @@ Ask AI
 ```shiki
 > how do I configure Claude Code for Amazon Bedrock?
 ```
+
+Report incorrect code
 
 Copy
 

@@ -36,6 +36,8 @@ Launch Claude Code with Chrome
 
 Start Claude Code with the `--chrome` flag:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -51,6 +53,8 @@ You can also enable Chrome from within an existing session by running `/chrome`.
 Ask Claude to use the browser
 
 This example navigates to a page, interacts with it, and reports what it finds, all from your terminal or editor:
+
+Report incorrect code
 
 Copy
 
@@ -83,6 +87,8 @@ These examples show common ways to combine browser actions with coding tasks. Ru
 
 When developing a web app, ask Claude to verify your changes work correctly:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -99,6 +105,8 @@ Claude navigates to your local server, interacts with the form, and reports what
 
 Claude can read console output to help diagnose problems. Tell Claude what patterns to look for rather than asking for all console output, since logs can be verbose:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -113,6 +121,8 @@ Claude reads the console messages and can filter for specific patterns or error 
 ### [​](#automate-form-filling) Automate form filling
 
 Speed up repetitive data entry tasks:
+
+Report incorrect code
 
 Copy
 
@@ -130,6 +140,8 @@ Claude reads your local file, navigates the web interface, and enters the data f
 
 Use Claude to write directly in your documents without API setup:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -144,6 +156,8 @@ Claude opens the document, clicks into the editor, and types the content. This w
 ### [​](#extract-data-from-web-pages) Extract data from web pages
 
 Pull structured information from websites:
+
+Report incorrect code
 
 Copy
 
@@ -160,6 +174,8 @@ Claude navigates to the page, reads the content, and compiles the data into a st
 
 Coordinate tasks across multiple websites:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -175,6 +191,8 @@ Claude works across tabs to gather information and complete the workflow.
 ### [​](#record-a-demo-gif) Record a demo GIF
 
 Create shareable recordings of browser interactions:
+
+Report incorrect code
 
 Copy
 

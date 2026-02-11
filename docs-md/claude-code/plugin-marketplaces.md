@@ -22,6 +22,8 @@ This example creates a marketplace with one plugin: a `/review` skill for code r
 
 Create the directory structure
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -39,6 +41,8 @@ Create the skill
 Create a `SKILL.md` file that defines what the `/review` skill does.
 
 my-marketplace/plugins/review-plugin/skills/review/SKILL.md
+
+Report incorrect code
 
 Copy
 
@@ -67,6 +71,8 @@ Create a `plugin.json` file that describes the plugin. The manifest goes in the 
 
 my-marketplace/plugins/review-plugin/.claude-plugin/plugin.json
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -86,6 +92,8 @@ Create the marketplace file
 Create the marketplace catalog that lists your plugin.
 
 my-marketplace/.claude-plugin/marketplace.json
+
+Report incorrect code
 
 Copy
 
@@ -113,6 +121,8 @@ Add and install
 
 Add the marketplace and install the plugin.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -127,6 +137,8 @@ Ask AI
 Try it out
 
 Select some code in your editor and run your new command.
+
+Report incorrect code
 
 Copy
 
@@ -144,6 +156,8 @@ To learn more about what plugins can do, including hooks, agents, MCP servers, a
 
 Create `.claude-plugin/marketplace.json` in your repository root. This file defines your marketplace’s name, owner information, and a list of plugins with their sources.
 Each plugin entry needs at minimum a `name` and `source` (where to fetch it from). See the [full schema](#marketplace-schema) below for all available fields.
+
+Report incorrect code
 
 Copy
 
@@ -249,6 +263,8 @@ Each plugin entry in the `plugins` array describes a plugin and where to find it
 
 For plugins in the same repository:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -263,6 +279,8 @@ Ask AI
 Relative paths only work when users add your marketplace via Git (GitHub, GitLab, or git URL). If users add your marketplace via a direct URL to the `marketplace.json` file, relative paths will not resolve correctly. For URL-based distribution, use GitHub, npm, or git URL sources instead. See [Troubleshooting](#plugins-with-relative-paths-fail-in-url-based-marketplaces) for details.
 
 ### [​](#github-repositories) GitHub repositories
+
+Report incorrect code
 
 Copy
 
@@ -279,6 +297,8 @@ Ask AI
 ```
 
 You can pin to a specific branch, tag, or commit:
+
+Report incorrect code
 
 Copy
 
@@ -304,6 +324,8 @@ Ask AI
 
 ### [​](#git-repositories) Git repositories
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -319,6 +341,8 @@ Ask AI
 ```
 
 You can pin to a specific branch, tag, or commit:
+
+Report incorrect code
 
 Copy
 
@@ -345,6 +369,8 @@ Ask AI
 ### [​](#advanced-plugin-entries) Advanced plugin entries
 
 This example shows a plugin entry using many of the optional fields, including custom paths for commands, agents, hooks, and MCP servers:
+
+Report incorrect code
 
 Copy
 
@@ -419,6 +445,8 @@ GitHub provides the easiest distribution method:
 
 Any git hosting service works, such as GitLab, Bitbucket, and self-hosted servers. Users add with the full repository URL:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -440,6 +468,8 @@ Background auto-updates run at startup without credential helpers, since interac
 
 Set the token in your shell configuration (for example, `.bashrc`, `.zshrc`) or pass it when running Claude Code:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -453,6 +483,8 @@ For CI/CD environments, configure the token as a secret environment variable. Gi
 ### [​](#test-locally-before-distribution) Test locally before distribution
 
 Test your marketplace locally before sharing:
+
+Report incorrect code
 
 Copy
 
@@ -468,6 +500,8 @@ For the full range of add commands (GitHub, Git URLs, local paths, remote URLs),
 ### [​](#require-marketplaces-for-your-team) Require marketplaces for your team
 
 You can configure your repository so team members are automatically prompted to install your marketplace when they trust the project folder. Add your marketplace to `.claude/settings.json`:
+
+Report incorrect code
 
 Copy
 
@@ -487,6 +521,8 @@ Ask AI
 ```
 
 You can also specify which plugins should be enabled by default:
+
+Report incorrect code
 
 Copy
 
@@ -518,6 +554,8 @@ When `strictKnownMarketplaces` is configured in managed settings, the restrictio
 
 Disable all marketplace additions:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -529,6 +567,8 @@ Ask AI
 ```
 
 Allow specific marketplaces only:
+
+Report incorrect code
 
 Copy
 
@@ -555,6 +595,8 @@ Ask AI
 ```
 
 Allow all marketplaces from an internal git server using regex pattern matching:
+
+Report incorrect code
 
 Copy
 
@@ -588,6 +630,8 @@ For complete configuration details including all supported source types and comp
 Test your marketplace before sharing.
 Validate your marketplace JSON syntax:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -597,6 +641,8 @@ claude plugin validate .
 ```
 
 Or from within Claude Code:
+
+Report incorrect code
 
 Copy
 
@@ -608,6 +654,8 @@ Ask AI
 
 Add the marketplace for testing:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -617,6 +665,8 @@ Ask AI
 ```
 
 Install a test plugin to verify everything works:
+
+Report incorrect code
 
 Copy
 
@@ -692,6 +742,8 @@ For background auto-updates:
 **Solutions**:
 
 - **Use external sources**: Change plugin entries to use GitHub, npm, or git URL sources instead of relative paths:
+
+  Report incorrect code
 
   Copy
 

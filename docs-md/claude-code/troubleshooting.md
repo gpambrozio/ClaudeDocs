@@ -19,6 +19,8 @@ To resolve this issue, fix your Linux PATH to ensure the Linux node/npm versions
 **Primary solution: Ensure nvm is properly loaded in your shell**
 The most common cause is that nvm isn’t loaded in non-interactive shells. Add the following to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -32,6 +34,8 @@ export NVM_DIR="$HOME/.nvm"
 
 Or run directly in your current session:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -42,6 +46,8 @@ source ~/.nvm/nvm.sh
 
 **Alternative: Adjust PATH order**
 If nvm is properly loaded but Windows paths still take priority, you can explicitly prepend your Linux paths to PATH in your shell configuration:
+
+Report incorrect code
 
 Copy
 
@@ -60,6 +66,8 @@ Avoid disabling Windows PATH importing (`appendWindowsPath = false`) as this bre
 - Ubuntu/Debian
 - Fedora
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -67,6 +75,8 @@ Ask AI
 ```shiki
 sudo apt-get install bubblewrap socat
 ```
+
+Report incorrect code
 
 Copy
 
@@ -89,6 +99,8 @@ Claude Code has a native installation that doesn’t depend on npm or Node.js.
 Use the following command to run the native installer.
 **macOS, Linux, WSL:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -105,6 +117,8 @@ curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
 ```
 
 **Windows PowerShell:**
+
+Report incorrect code
 
 Copy
 
@@ -130,6 +144,8 @@ Make sure that you have the installation directory in your system PATH.
 Claude Code on native Windows requires [Git for Windows](https://git-scm.com/downloads/win) which includes Git Bash. If Git is installed but not detected:
 
 1. Set the path explicitly in PowerShell before running Claude:
+
+   Report incorrect code
 
    Copy
 
@@ -158,6 +174,8 @@ Edit User PATH
 
 Under “User variables”, select **Path** and click **Edit**. Click **New** and add:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -173,6 +191,8 @@ Restart your terminal
 Close and reopen PowerShell or CMD for changes to take effect.
 
 Verify installation:
+
+Report incorrect code
 
 Copy
 
@@ -199,6 +219,8 @@ If you’re experiencing authentication problems:
 
 If the browser doesn’t open automatically during login, press `c` to copy the OAuth URL to your clipboard, then paste it into your browser manually.
 If problems persist, try:
+
+Report incorrect code
 
 Copy
 
@@ -238,6 +260,8 @@ For details on configuring these files, see [Settings](settings.md) and [MCP](mc
 
 To reset Claude Code to default settings, you can remove the configuration files:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -274,6 +298,8 @@ If Claude Code seems unresponsive:
 ### [​](#search-and-discovery-issues) Search and discovery issues
 
 If Search tool, `@file` mentions, custom agents, and custom skills aren’t working, install system `ripgrep`:
+
+Report incorrect code
 
 Copy
 
@@ -323,6 +349,8 @@ WSL2 uses NAT networking by default, which can prevent IDE detection. You have t
 
 1. Find your WSL2 IP address:
 
+   Report incorrect code
+
    Copy
 
    Ask AI
@@ -332,6 +360,8 @@ WSL2 uses NAT networking by default, which can prevent IDE detection. You have t
    # Example output: 172.21.123.456
    ```
 2. Open PowerShell as Administrator and create a firewall rule:
+
+   Report incorrect code
 
    Copy
 
@@ -346,6 +376,8 @@ WSL2 uses NAT networking by default, which can prevent IDE detection. You have t
 
 **Option 2: Switch to mirrored networking**
 Add to `.wslconfig` in your Windows user directory:
+
+Report incorrect code
 
 Copy
 
@@ -393,6 +425,8 @@ Claude Code sometimes generates markdown files with missing language tags on cod
 
 If you notice code blocks like this in generated markdown:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -406,6 +440,8 @@ function example() {
 ```
 
 Instead of properly tagged blocks like:
+
+Report incorrect code
 
 Copy
 

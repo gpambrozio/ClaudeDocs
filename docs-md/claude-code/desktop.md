@@ -210,6 +210,8 @@ Click the version number to copy it to your clipboard.
 
 Remote sessions can create branches that don’t exist on your local machine. Click the branch name in the session toolbar to copy it, then fetch it locally:
 
+Report incorrect code
+
 Copy
 
 Ask AI

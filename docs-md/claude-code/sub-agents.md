@@ -69,6 +69,8 @@ Open the subagents interface
 
 In Claude Code, run:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -88,6 +90,8 @@ Select **Create new agent**, then choose **User-level**. This saves the subagent
 Generate with Claude
 
 Select **Generate with Claude**. When prompted, describe the subagent:
+
+Report incorrect code
 
 Copy
 
@@ -124,6 +128,8 @@ Pick a background color for the subagent. This helps you identify which subagent
 Save and try it out
 
 Save the subagent. It’s available immediately (no restart needed). Try it:
+
+Report incorrect code
 
 Copy
 
@@ -167,6 +173,8 @@ Subagents are Markdown files with YAML frontmatter. Store them in different loca
 **User subagents** (`~/.claude/agents/`) are personal subagents available in all your projects.
 **CLI-defined subagents** are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -190,6 +198,8 @@ The `--agents` flag accepts JSON with the same [frontmatter](#supported-frontmat
 Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:
 
 Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use `/agents` to load it immediately.
+
+Report incorrect code
 
 Copy
 
@@ -244,6 +254,8 @@ You can control what subagents can do through tool access, permission modes, and
 Subagents can use any of Claude Code’s [internal tools](settings.md). By default, subagents inherit all tools from the main conversation, including MCP tools.
 To restrict tools, use the `tools` field (allowlist) or `disallowedTools` field (denylist):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -261,6 +273,8 @@ disallowedTools: Write, Edit
 
 When an agent runs as the main thread with `claude --agent`, it can spawn subagents using the Task tool. To restrict which subagent types it can spawn, use `Task(agent_type)` syntax in the `tools` field:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -275,6 +289,8 @@ tools: Task(worker, researcher), Read, Bash
 
 This is an allowlist: only the `worker` and `researcher` subagents can be spawned. If the agent tries to spawn any other type, the request fails and the agent sees only the allowed types in its prompt. To block specific agents while allowing all others, use [`permissions.deny`](#disable-specific-subagents) instead.
 To allow spawning any subagent without restrictions, use `Task` without parentheses:
+
+Report incorrect code
 
 Copy
 
@@ -307,6 +323,8 @@ If the parent uses `bypassPermissions`, this takes precedence and cannot be over
 
 Use the `skills` field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -330,6 +348,8 @@ This is the inverse of [running a skill in a subagent](skills.md). With `skills`
 #### [​](#enable-persistent-memory) Enable persistent memory
 
 The `memory` field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as codebase patterns, debugging insights, and architectural decisions.
+
+Report incorrect code
 
 Copy
 
@@ -367,6 +387,8 @@ When memory is enabled:
 - Ask the subagent to update its memory after completing a task: “Now that you’re done, save what you learned to your memory.” Over time, this builds a knowledge base that makes the subagent more effective.
 - Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base:
 
+  Report incorrect code
+
   Copy
 
   Ask AI
@@ -382,6 +404,8 @@ When memory is enabled:
 
 For more dynamic control over tool usage, use `PreToolUse` hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others.
 This example creates a subagent that only allows read-only database queries. The `PreToolUse` hook runs the script specified in `command` before each Bash command executes:
+
+Report incorrect code
 
 Copy
 
@@ -402,6 +426,8 @@ hooks:
 ```
 
 Claude Code [passes hook input as JSON](hooks.md) via stdin to hook commands. The validation script reads this JSON, extracts the Bash command, and [exits with code 2](hooks.md) to block write operations:
+
+Report incorrect code
 
 Copy
 
@@ -429,6 +455,8 @@ See [Hook input](hooks.md) for the complete input schema and [exit codes](hooks.
 
 You can prevent Claude from using specific subagents by adding them to the `deny` array in your [settings](settings.md). Use the format `Task(subagent-name)` where `subagent-name` matches the subagent’s name field.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -442,6 +470,8 @@ Ask AI
 ```
 
 This works for both built-in and custom subagents. You can also use the `--disallowedTools` CLI flag:
+
+Report incorrect code
 
 Copy
 
@@ -472,6 +502,8 @@ All [hook events](hooks.md) are supported. The most common events for subagents 
 | `Stop` | (none) | When the subagent finishes (converted to `SubagentStop` at runtime) |
 
 This example validates Bash commands with the `PreToolUse` hook and runs a linter after file edits with `PostToolUse`:
+
+Report incorrect code
 
 Copy
 
@@ -508,6 +540,8 @@ Configure hooks in `settings.json` that respond to subagent lifecycle events in 
 
 Both events support matchers to target specific agent types by name. This example runs a setup script only when the `db-agent` subagent starts, and a cleanup script when any subagent stops:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -543,6 +577,8 @@ See [Hooks](hooks.md) for the complete hook configuration format.
 Claude automatically delegates tasks based on the task description in your request, the `description` field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field.
 You can also request a specific subagent explicitly:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -573,6 +609,8 @@ To disable all background task functionality, set the `CLAUDE_CODE_DISABLE_BACKG
 
 One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -584,6 +622,8 @@ Use a subagent to run the test suite and report only the failing tests with thei
 #### [​](#run-parallel-research) Run parallel research
 
 For independent investigations, spawn multiple subagents to work simultaneously:
+
+Report incorrect code
 
 Copy
 
@@ -602,6 +642,8 @@ For tasks that need sustained parallelism or exceed your context window, [agent 
 #### [​](#chain-subagents) Chain subagents
 
 For multi-step workflows, ask Claude to use subagents in sequence. Each subagent completes its task and returns results to Claude, which then passes relevant context to the next subagent.
+
+Report incorrect code
 
 Copy
 
@@ -638,6 +680,8 @@ Each subagent invocation creates a new instance with fresh context. To continue 
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 When a subagent completes, Claude receives its agent ID. To resume a subagent, ask Claude to continue the previous work:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -661,6 +705,8 @@ Subagent transcripts persist independently of the main conversation:
 
 Subagents support automatic compaction using the same logic as the main conversation. By default, auto-compaction triggers at approximately 95% capacity. To trigger compaction earlier, set `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` to a lower percentage (for example, `50`). See [environment variables](settings.md) for details.
 Compaction events are logged in subagent transcript files:
+
+Report incorrect code
 
 Copy
 
@@ -693,6 +739,8 @@ These examples demonstrate effective patterns for building subagents. Use them a
 ### [​](#code-reviewer) Code reviewer
 
 A read-only subagent that reviews code without modifying it. This example shows how to design a focused subagent with limited tool access (no Edit or Write) and a detailed prompt that specifies exactly what to look for and how to format output.
+
+Report incorrect code
 
 Copy
 
@@ -735,6 +783,8 @@ Include specific examples of how to fix issues.
 
 A subagent that can both analyze and fix issues. Unlike the code reviewer, this one includes Edit because fixing bugs requires modifying code. The prompt provides a clear workflow from diagnosis to verification.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -775,6 +825,8 @@ Focus on fixing the underlying issue, not the symptoms.
 ### [​](#data-scientist) Data scientist
 
 A domain-specific subagent for data analysis work. This example shows how to create subagents for specialized workflows outside of typical coding tasks. It explicitly sets `model: sonnet` for more capable analysis.
+
+Report incorrect code
 
 Copy
 
@@ -817,6 +869,8 @@ Always ensure queries are efficient and cost-effective.
 
 A subagent that allows Bash access but validates commands to permit only read-only SQL queries. This example shows how to use `PreToolUse` hooks for conditional validation when you need finer control than the `tools` field provides.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -847,6 +901,8 @@ You cannot modify data. If asked to INSERT, UPDATE, DELETE, or modify schema, ex
 Claude Code [passes hook input as JSON](hooks.md) via stdin to hook commands. The validation script reads this JSON, extracts the command being executed, and checks it against a list of SQL write operations. If a write operation is detected, the script [exits with code 2](hooks.md) to block execution and returns an error message to Claude via stderr.
 Create the validation script anywhere in your project. The path must match the `command` field in your hook configuration:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -875,6 +931,8 @@ exit 0
 ```
 
 Make the script executable:
+
+Report incorrect code
 
 Copy
 

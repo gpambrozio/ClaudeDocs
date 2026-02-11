@@ -46,6 +46,8 @@ Enter Plan Mode. Claude reads files and answers questions without making changes
 
 claude (Plan Mode)
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -62,6 +64,8 @@ Plan
 Ask Claude to create a detailed implementation plan.
 
 claude (Plan Mode)
+
+Report incorrect code
 
 Copy
 
@@ -82,6 +86,8 @@ Switch back to Normal Mode and let Claude code, verifying against its plan.
 
 claude (Normal Mode)
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -98,6 +104,8 @@ Commit
 Ask Claude to commit with a descriptive message and create a PR.
 
 claude (Normal Mode)
+
+Report incorrect code
 
 Copy
 
@@ -154,6 +162,8 @@ There’s no required format for CLAUDE.md files, but keep it short and human-re
 
 CLAUDE.md
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -186,6 +196,8 @@ You can tune instructions by adding emphasis (e.g., “IMPORTANT” or “YOU MU
 CLAUDE.md files can import additional files using `@path/to/import` syntax:
 
 CLAUDE.md
+
+Report incorrect code
 
 Copy
 
@@ -250,6 +262,8 @@ Create a skill by adding a directory with a `SKILL.md` to `.claude/skills/`:
 
 .claude/skills/api-conventions/SKILL.md
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -269,6 +283,8 @@ description: REST API design conventions for our services
 Skills can also define repeatable workflows you invoke directly:
 
 .claude/skills/fix-issue/SKILL.md
+
+Report incorrect code
 
 Copy
 
@@ -301,6 +317,8 @@ Define specialized assistants in `.claude/agents/` that Claude can delegate to f
 [Subagents](sub-agents.md) run in their own context with their own set of allowed tools. They’re useful for tasks that read many files or need specialized focus without cluttering your main conversation.
 
 .claude/agents/security-reviewer.md
+
+Report incorrect code
 
 Copy
 
@@ -357,6 +375,8 @@ For larger features, have Claude interview you first. Start with a minimal promp
 
 Claude asks about things you might not have considered yet, including technical implementation, UI/UX, edge cases, and tradeoffs.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -409,6 +429,8 @@ Delegate research with `"use subagents to investigate X"`. They explore in a sep
 
 Since context is your fundamental constraint, subagents are one of the most powerful tools available. When Claude researches a codebase it reads lots of files, all of which consume your context. Subagents run in separate context windows and report back summaries:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -420,6 +442,8 @@ refresh, and whether we have any existing OAuth utilities I should reuse.
 
 The subagent explores the codebase, reads relevant files, and reports back with findings, all without cluttering your main conversation.
 You can also use subagents for verification after Claude implements something:
+
+Report incorrect code
 
 Copy
 
@@ -444,6 +468,8 @@ Run `claude --continue` to pick up where you left off, or `--resume` to choose f
 
 Claude Code saves conversations locally. When a task spans multiple sessions (you start a feature, get interrupted, come back the next day) you don’t have to re-explain the context:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -467,6 +493,8 @@ Everything so far assumes one human, one Claude, and one conversation. But Claud
 Use `claude -p "prompt"` in CI, pre-commit hooks, or scripts. Add `--output-format stream-json` for streaming JSON output.
 
 With `claude -p "your prompt"`, you can run Claude headlessly, without an interactive session. Headless mode is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats (plain text, JSON, streaming JSON) let you parse results programmatically.
+
+Report incorrect code
 
 Copy
 
@@ -520,6 +548,8 @@ Have Claude list all files that need migrating (e.g., `list all 2,000 Python fil
 
 Write a script to loop through the list
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -538,6 +568,8 @@ Test on a few files, then run at scale
 Refine your prompt based on what goes wrong with the first 2-3 files, then run on the full set. The `--allowedTools` flag restricts what Claude can do, which matters when you’re running unattended.
 
 You can also integrate Claude into existing data/processing pipelines:
+
+Report incorrect code
 
 Copy
 

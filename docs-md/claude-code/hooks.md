@@ -33,6 +33,8 @@ The table below summarizes when each event fires. The [Hook events](#hook-events
 
 To see how these pieces fit together, consider this `PreToolUse` hook that blocks destructive shell commands. The hook runs `block-rm.sh` before every Bash tool call:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -56,6 +58,8 @@ Ask AI
 ```
 
 The script reads the JSON input from stdin, extracts the command, and returns a `permissionDecision` of `"deny"` if it contains `rm -rf`:
+
+Report incorrect code
 
 Copy
 
@@ -89,6 +93,8 @@ Event fires
 
 The `PreToolUse` event fires. Claude Code sends the tool input as JSON on stdin to the hook:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -108,6 +114,8 @@ The matcher `"Bash"` matches the tool name, so `block-rm.sh` runs. If you omit t
 Hook handler runs
 
 The script extracts `"rm -rf /tmp/build"` from the input and finds `rm -rf`, so it prints a decision to stdout:
+
+Report incorrect code
 
 Copy
 
@@ -178,6 +186,8 @@ The `matcher` field is a regex string that filters when hooks fire. Use `"*"`, `
 The matcher is a regex, so `Edit|Write` matches either tool and `Notebook.*` matches any tool starting with Notebook. The matcher runs against a field from the [JSON input](#hook-input-and-output) that Claude Code sends to your hook on stdin. For tool events, that field is `tool_name`. Each [hook event](#hook-events) section lists the full set of matcher values and the input schema for that event.
 This example runs a linting script only when Claude writes or edits a file:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -217,6 +227,8 @@ Use regex patterns to target specific MCP tools or groups of tools:
 - `mcp__.*__write.*` matches any tool containing “write” from any server
 
 This example logs all memory server operations and validates write operations from any MCP server:
+
+Report incorrect code
 
 Copy
 
@@ -300,6 +312,8 @@ Use environment variables to reference hook scripts relative to the project or p
 
 This example uses `$CLAUDE_PROJECT_DIR` to run a style checker from the project’s `.claude/hooks/` directory after any `Write` or `Edit` tool call:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -323,6 +337,8 @@ Ask AI
 ```
 
 Define plugin hooks in `hooks/hooks.json` with an optional top-level `description` field. When a plugin is enabled, its hooks merge with your user and project hooks.This example runs a formatting script bundled with the plugin:
+
+Report incorrect code
 
 Copy
 
@@ -356,6 +372,8 @@ In addition to settings files and plugins, hooks can be defined directly in [ski
 All hook events are supported. For subagents, `Stop` hooks are automatically converted to `SubagentStop` since that is the event that fires when a subagent completes.
 Hooks use the same configuration format as settings-based hooks but are scoped to the component’s lifetime and cleaned up when it finishes.
 This skill defines a `PreToolUse` hook that runs a security validation script before each `Bash` command:
+
+Report incorrect code
 
 Copy
 
@@ -410,6 +428,8 @@ All hook events receive these fields via stdin as JSON, in addition to event-spe
 
 For example, a `PreToolUse` hook for a Bash command receives this on stdin:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -437,6 +457,8 @@ The exit code from your hook command tells Claude Code whether the action should
 **Exit 2** means a blocking error. Claude Code ignores stdout and any JSON in it. Instead, stderr text is fed back to Claude as an error message. The effect depends on the event: `PreToolUse` blocks the tool call, `UserPromptSubmit` rejects the prompt, and so on. See [exit code 2 behavior](#exit-code-2-behavior-per-event) for the full list.
 **Any other exit code** is a non-blocking error. stderr is shown in verbose mode (`Ctrl+O`) and execution continues.
 For example, a hook command script that blocks dangerous Bash commands:
+
+Report incorrect code
 
 Copy
 
@@ -498,6 +520,8 @@ The JSON object supports three kinds of fields:
 
 To stop Claude entirely regardless of event type:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -525,6 +549,8 @@ Here are examples of each pattern in action:
 
 Used by `UserPromptSubmit`, `PostToolUse`, `PostToolUseFailure`, `Stop`, and `SubagentStop`. The only value is `"block"`. To allow the action to proceed, omit `decision` from your JSON, or exit 0 without any JSON at all:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -537,6 +563,8 @@ Ask AI
 ```
 
 Uses `hookSpecificOutput` for richer control: allow, deny, or escalate to the user. You can also modify tool input before it runs or inject additional context for Claude. See [PreToolUse decision control](#pretooluse-decision-control) for the full set of options.
+
+Report incorrect code
 
 Copy
 
@@ -553,6 +581,8 @@ Ask AI
 ```
 
 Uses `hookSpecificOutput` to allow or deny a permission request on behalf of the user. When allowing, you can also modify the tool’s input or apply permission rules so the user isn’t prompted again. See [PermissionRequest decision control](#permissionrequest-decision-control) for the full set of options.
+
+Report incorrect code
 
 Copy
 
@@ -595,6 +625,8 @@ The matcher value corresponds to how the session was initiated:
 
 In addition to the [common input fields](#common-input-fields), SessionStart hooks receive `source`, `model`, and optionally `agent_type`. The `source` field indicates how the session started: `"startup"` for new sessions, `"resume"` for resumed sessions, `"clear"` after `/clear`, or `"compact"` after compaction. The `model` field contains the model identifier. If you start Claude Code with `claude --agent <name>`, an `agent_type` field contains the agent name.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -619,6 +651,8 @@ Any text your hook script prints to stdout is added as context for Claude. In ad
 | --- | --- |
 | `additionalContext` | String added to Claude’s context. Multiple hooks’ values are concatenated |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -637,6 +671,8 @@ Ask AI
 SessionStart hooks have access to the `CLAUDE_ENV_FILE` environment variable, which provides a file path where you can persist environment variables for subsequent Bash commands.
 To set individual environment variables, write `export` statements to `CLAUDE_ENV_FILE`. Use append (`>>`) to preserve variables set by other hooks:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -654,6 +690,8 @@ exit 0
 ```
 
 To capture all environment changes from setup commands, compare the exported variables before and after:
+
+Report incorrect code
 
 Copy
 
@@ -690,6 +728,8 @@ block certain types of prompts.
 
 In addition to the [common input fields](#common-input-fields), UserPromptSubmit hooks receive the `prompt` field containing the text the user submitted.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -721,6 +761,8 @@ To block a prompt, return a JSON object with `decision` set to `"block"`:
 | `decision` | `"block"` prevents the prompt from being processed and erases it from context. Omit to allow the prompt to proceed |
 | `reason` | Shown to the user when `decision` is `"block"`. Not added to context |
 | `additionalContext` | String added to Claude’s context |
+
+Report incorrect code
 
 Copy
 
@@ -853,6 +895,8 @@ Spawns a [subagent](sub-agents.md).
 | `updatedInput` | Modifies the tool’s input parameters before execution. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user |
 | `additionalContext` | String added to Claude’s context before the tool executes |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -882,6 +926,8 @@ Matches on tool name, same values as PreToolUse.
 #### [​](#permissionrequest-input) PermissionRequest input
 
 PermissionRequest hooks receive `tool_name` and `tool_input` fields like PreToolUse hooks, but without `tool_use_id`. An optional `permission_suggestions` array contains the “always allow” options the user would normally see in the permission dialog. The difference is when the hook fires: PermissionRequest hooks run when a permission dialog is about to be shown to the user, while PreToolUse hooks run before tool execution regardless of permission status.
+
+Report incorrect code
 
 Copy
 
@@ -917,6 +963,8 @@ Ask AI
 | `message` | For `"deny"` only: tells Claude why the permission was denied |
 | `interrupt` | For `"deny"` only: if `true`, stops Claude |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -943,6 +991,8 @@ Matches on tool name, same values as PreToolUse.
 #### [​](#posttooluse-input) PostToolUse input
 
 `PostToolUse` hooks fire after a tool has already executed successfully. The input includes both `tool_input`, the arguments sent to the tool, and `tool_response`, the result it returned. The exact schema for both depends on the tool.
+
+Report incorrect code
 
 Copy
 
@@ -979,6 +1029,8 @@ Ask AI
 | `additionalContext` | Additional context for Claude to consider |
 | `updatedMCPToolOutput` | For [MCP tools](#match-mcp-tools) only: replaces the tool’s output with the provided value |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1002,6 +1054,8 @@ Matches on tool name, same values as PreToolUse.
 #### [​](#posttoolusefailure-input) PostToolUseFailure input
 
 PostToolUseFailure hooks receive the same `tool_name` and `tool_input` fields as PostToolUse, along with error information as top-level fields:
+
+Report incorrect code
 
 Copy
 
@@ -1038,6 +1092,8 @@ Ask AI
 | --- | --- |
 | `additionalContext` | Additional context for Claude to consider alongside the error |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1055,6 +1111,8 @@ Ask AI
 
 Runs when Claude Code sends notifications. Matches on notification type: `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog`. Omit the matcher to run hooks for all notification types.
 Use separate matchers to run different handlers depending on the notification type. This configuration triggers a permission-specific alert script when Claude needs permission approval and a different notification when Claude has been idle:
+
+Report incorrect code
 
 Copy
 
@@ -1091,6 +1149,8 @@ Ask AI
 
 In addition to the [common input fields](#common-input-fields), Notification hooks receive `message` with the notification text, an optional `title`, and `notification_type` indicating which type fired.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1122,6 +1182,8 @@ Runs when a Claude Code subagent is spawned via the Task tool. Supports matchers
 
 In addition to the [common input fields](#common-input-fields), SubagentStart hooks receive `agent_id` with the unique identifier for the subagent and `agent_type` with the agent name (built-in agents like `"Bash"`, `"Explore"`, `"Plan"`, or custom agent names).
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1144,6 +1206,8 @@ SubagentStart hooks cannot block subagent creation, but they can inject context 
 | --- | --- |
 | `additionalContext` | String added to the subagent’s context |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1164,6 +1228,8 @@ Runs when a Claude Code subagent has finished responding. Matches on agent type,
 #### [​](#subagentstop-input) SubagentStop input
 
 In addition to the [common input fields](#common-input-fields), SubagentStop hooks receive `stop_hook_active`, `agent_id`, `agent_type`, and `agent_transcript_path`. The `agent_type` field is the value used for matcher filtering. The `transcript_path` is the main session’s transcript, while `agent_transcript_path` is the subagent’s own transcript stored in a nested `subagents/` folder.
+
+Report incorrect code
 
 Copy
 
@@ -1194,6 +1260,8 @@ the stoppage occurred due to a user interrupt.
 
 In addition to the [common input fields](#common-input-fields), Stop hooks receive `stop_hook_active`. This field is `true` when Claude Code is already continuing as a result of a stop hook. Check this value or process the transcript to prevent Claude Code from running indefinitely.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1218,6 +1286,8 @@ Ask AI
 | `decision` | `"block"` prevents Claude from stopping. Omit to allow Claude to stop |
 | `reason` | Required when `decision` is `"block"`. Tells Claude why it should continue |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1237,6 +1307,8 @@ When a `TeammateIdle` hook exits with code 2, the teammate receives the stderr m
 #### [​](#teammateidle-input) TeammateIdle input
 
 In addition to the [common input fields](#common-input-fields), TeammateIdle hooks receive `teammate_name` and `team_name`.
+
+Report incorrect code
 
 Copy
 
@@ -1263,6 +1335,8 @@ Ask AI
 
 TeammateIdle hooks use exit codes only, not JSON decision control. This example checks that a build artifact exists before allowing a teammate to go idle:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1286,6 +1360,8 @@ When a `TaskCompleted` hook exits with code 2, the task is not marked as complet
 #### [​](#taskcompleted-input) TaskCompleted input
 
 In addition to the [common input fields](#common-input-fields), TaskCompleted hooks receive `task_id`, `task_subject`, and optionally `task_description`, `teammate_name`, and `team_name`.
+
+Report incorrect code
 
 Copy
 
@@ -1318,6 +1394,8 @@ Ask AI
 
 TaskCompleted hooks use exit codes only, not JSON decision control. This example runs tests and blocks task completion if they fail:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1349,6 +1427,8 @@ The matcher value indicates whether compaction was triggered manually or automat
 #### [​](#precompact-input) PreCompact input
 
 In addition to the [common input fields](#common-input-fields), PreCompact hooks receive `trigger` and `custom_instructions`. For `manual`, `custom_instructions` contains what the user passes into `/compact`. For `auto`, `custom_instructions` is empty.
+
+Report incorrect code
 
 Copy
 
@@ -1384,6 +1464,8 @@ The `reason` field in the hook input indicates why the session ended:
 
 In addition to the [common input fields](#common-input-fields), SessionEnd hooks receive a `reason` field indicating why the session ended. See the [reason table](#sessionend) above for all values.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1418,6 +1500,8 @@ Instead of executing a Bash command, prompt-based hooks:
 Set `type` to `"prompt"` and provide a `prompt` string instead of a `command`. Use the `$ARGUMENTS` placeholder to inject the hook’s JSON input data into your prompt text. Claude Code sends the combined prompt and input to a fast Claude model, which returns a JSON decision.
 This `Stop` hook asks the LLM to evaluate whether all tasks are complete before allowing Claude to finish:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1450,6 +1534,8 @@ Ask AI
 
 The LLM must respond with JSON containing:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1469,6 +1555,8 @@ Ask AI
 ### [​](#example-multi-criteria-stop-hook) Example: Multi-criteria Stop hook
 
 This `Stop` hook uses a detailed prompt to check three conditions before allowing Claude to stop. If `"ok"` is `false`, Claude continues working with the provided reason as its next instruction. `SubagentStop` hooks use the same format to evaluate whether a [subagent](sub-agents.md) should stop:
+
+Report incorrect code
 
 Copy
 
@@ -1521,6 +1609,8 @@ Set `type` to `"agent"` and provide a `prompt` string. The configuration fields 
 The response schema is the same as prompt hooks: `{ "ok": true }` to allow or `{ "ok": false, "reason": "..." }` to block.
 This `Stop` hook verifies that all unit tests pass before allowing Claude to finish:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1551,6 +1641,8 @@ By default, hooks block Claude’s execution until they complete. For long-runni
 
 Add `"async": true` to a command hook’s configuration to run it in the background without blocking Claude. This field is only available on `type: "command"` hooks.
 This hook runs a test script after every `Write` tool call. Claude continues working immediately while `run-tests.sh` executes for up to 120 seconds. When the script finishes, its output is delivered on the next conversation turn:
+
+Report incorrect code
 
 Copy
 
@@ -1587,6 +1679,8 @@ After the background process exits, if the hook produced a JSON response with a 
 
 This hook starts a test suite in the background whenever Claude writes a file, then reports the results back to Claude when the tests finish. Save this script to `.claude/hooks/run-tests-async.sh` in your project and make it executable with `chmod +x`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -1616,6 +1710,8 @@ fi
 ```
 
 Then add this configuration to `.claude/settings.json` in your project root. The `async: true` flag lets Claude keep working while tests run:
+
+Report incorrect code
 
 Copy
 
@@ -1671,6 +1767,8 @@ Keep these practices in mind when writing hooks:
 ## [​](#debug-hooks) Debug hooks
 
 Run `claude --debug` to see hook execution details, including which hooks matched, their exit codes, and output. Toggle verbose mode with `Ctrl+O` to see hook progress in the transcript.
+
+Report incorrect code
 
 Copy
 

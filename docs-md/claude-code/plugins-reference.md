@@ -15,6 +15,8 @@ Plugins add skills to Claude Code, creating `/name` shortcuts that you or Claude
 **File format**: Skills are directories with `SKILL.md`; commands are simple markdown files
 **Skill structure**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -44,6 +46,8 @@ Plugins can provide specialized subagents for specific tasks that Claude can inv
 **File format**: Markdown files describing agent capabilities
 **Agent structure**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -72,6 +76,8 @@ Plugins can provide event handlers that respond to Claude Code events automatica
 **Location**: `hooks/hooks.json` in plugin root, or inline in plugin.json
 **Format**: JSON configuration with event matchers and actions
 **Hook configuration**:
+
+Report incorrect code
 
 Copy
 
@@ -125,6 +131,8 @@ Plugins can bundle Model Context Protocol (MCP) servers to connect Claude Code w
 **Format**: Standard MCP server configuration
 **MCP server configuration**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -170,6 +178,8 @@ LSP integration provides:
 **Format**: JSON configuration mapping language server names to their configurations
 **`.lsp.json` file format**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -187,6 +197,8 @@ Ask AI
 ```
 
 **Inline in `plugin.json`**:
+
+Report incorrect code
 
 Copy
 
@@ -265,6 +277,8 @@ The manifest is optional. If omitted, Claude Code auto-discovers components in [
 
 ### [​](#complete-schema) Complete schema
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -340,6 +354,8 @@ agent `agent-creator` for the plugin with name `plugin-dev` will appear as
 
 **Path examples**:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -360,6 +376,8 @@ Ask AI
 ### [​](#environment-variables) Environment variables
 
 **`${CLAUDE_PLUGIN_ROOT}`**: Contains the absolute path to your plugin directory. Use this in hooks, MCP servers, and scripts to ensure correct paths regardless of installation location.
+
+Report incorrect code
 
 Copy
 
@@ -414,6 +432,8 @@ If your plugin needs to access files outside its directory, you have two options
 **Option 1: Use symlinks**
 Create symbolic links to external files within your plugin directory. Symlinks are honored during the copy process:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -426,6 +446,8 @@ ln -s /path/to/shared-utils ./shared-utils
 The symlinked content will be copied into the plugin cache.
 **Option 2: Restructure your marketplace**
 Set the plugin path to a parent directory that contains all required files, then provide the rest of the plugin manifest directly in the marketplace entry:
+
+Report incorrect code
 
 Copy
 
@@ -453,6 +475,8 @@ Symlinks that point to locations outside the plugin’s logical root are followe
 ### [​](#standard-plugin-layout) Standard plugin layout
 
 A complete plugin follows this structure:
+
+Report incorrect code
 
 Copy
 
@@ -512,6 +536,8 @@ Claude Code provides CLI commands for non-interactive plugin management, useful 
 
 Install a plugin from available marketplaces.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -534,6 +560,8 @@ claude plugin install <plugin> [options]
 Scope determines which settings file the installed plugin is added to. For example, —scope project writes to `enabledPlugins` in .claude/settings.json, making the plugin available to everyone who clones the project repository.
 **Examples:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -552,6 +580,8 @@ claude plugin install formatter@my-marketplace --scope local
 ### [​](#plugin-uninstall) plugin uninstall
 
 Remove an installed plugin.
+
+Report incorrect code
 
 Copy
 
@@ -578,6 +608,8 @@ claude plugin uninstall <plugin> [options]
 
 Enable a disabled plugin.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -601,6 +633,8 @@ claude plugin enable <plugin> [options]
 
 Disable a plugin without uninstalling it.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -623,6 +657,8 @@ claude plugin disable <plugin> [options]
 ### [​](#plugin-update) plugin update
 
 Update a plugin to the latest version.
+
+Report incorrect code
 
 Copy
 
@@ -717,6 +753,8 @@ This shows:
 **Symptoms**: Plugin loads but components (commands, agents, hooks) are missing.
 **Correct structure**: Components must be at the plugin root, not inside `.claude-plugin/`. Only `plugin.json` belongs in `.claude-plugin/`.
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -744,6 +782,8 @@ If your components are inside `.claude-plugin/`, move them to the plugin root.
 ### [​](#version-management) Version management
 
 Follow semantic versioning for plugin releases:
+
+Report incorrect code
 
 Copy
 

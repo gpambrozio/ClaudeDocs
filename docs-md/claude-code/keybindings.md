@@ -16,6 +16,8 @@ Changes to the keybindings file are automatically detected and applied without r
 
 This example binds `Ctrl+E` to open an external editor in the chat context, and unbinds `Ctrl+U`:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -290,6 +292,8 @@ Use modifier keys with the `+` separator:
 
 For example:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -309,6 +313,8 @@ Uppercase letters with modifiers (e.g., `ctrl+K`) are treated as stylistic and d
 ### [​](#chords) Chords
 
 Chords are sequences of keystrokes separated by spaces:
+
+Report incorrect code
 
 Copy
 
@@ -330,6 +336,8 @@ ctrl+k ctrl+s   Press Ctrl+K, release, then Ctrl+S
 ## [​](#unbind-default-shortcuts) Unbind default shortcuts
 
 Set an action to `null` to unbind a default shortcut:
+
+Report incorrect code
 
 Copy
 

@@ -6,6 +6,8 @@ The CLI was previously called “headless mode.” The `-p` flag and all CLI opt
 
 To run Claude Code programmatically from the CLI, pass `-p` with your prompt and any [CLI options](cli-reference.md):
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -25,6 +27,8 @@ Add the `-p` (or `--print`) flag to any `claude` command to run it non-interacti
 - `--output-format` for [structured output](#get-structured-output)
 
 This example asks Claude a question about your codebase and prints the response:
+
+Report incorrect code
 
 Copy
 
@@ -48,6 +52,8 @@ Use `--output-format` to control how responses are returned:
 
 This example returns a project summary as JSON with session metadata, with the text result in the `result` field:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -58,6 +64,8 @@ claude -p "Summarize this project" --output-format json
 
 To get output conforming to a specific schema, use `--output-format json` with `--json-schema` and a [JSON Schema](https://json-schema.org/) definition. The response includes metadata about the request (session ID, usage, etc.) with the structured output in the `structured_output` field.
 This example extracts function names and returns them as an array of strings:
+
+Report incorrect code
 
 Copy
 
@@ -70,6 +78,8 @@ claude -p "Extract the main function names from auth.py" \
 ```
 
 Use a tool like [jq](https://jqlang.github.io/jq/) to parse the response and extract specific fields:
+
+Report incorrect code
 
 Copy
 
@@ -90,6 +100,8 @@ claude -p "Extract function names from auth.py" \
 
 Use `--output-format stream-json` with `--verbose` and `--include-partial-messages` to receive tokens as they’re generated. Each line is a JSON object representing an event:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -99,6 +111,8 @@ claude -p "Explain recursion" --output-format stream-json --verbose --include-pa
 ```
 
 The following example uses [jq](https://jqlang.github.io/jq/) to filter for text deltas and display just the streaming text. The `-r` flag outputs raw strings (no quotes) and `-j` joins without newlines so tokens stream continuously:
+
+Report incorrect code
 
 Copy
 
@@ -115,6 +129,8 @@ For programmatic streaming with callbacks and message objects, see [Stream respo
 
 Use `--allowedTools` to let Claude use certain tools without prompting. This example runs a test suite and fixes failures, allowing Claude to execute Bash commands and read/edit files without asking for permission:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -127,6 +143,8 @@ claude -p "Run the test suite and fix any failures" \
 ### [​](#create-a-commit) Create a commit
 
 This example reviews staged changes and creates a commit with an appropriate message:
+
+Report incorrect code
 
 Copy
 
@@ -145,6 +163,8 @@ User-invoked [skills](skills.md) like `/commit` and [built-in commands](interact
 
 Use `--append-system-prompt` to add instructions while keeping Claude Code’s default behavior. This example pipes a PR diff to Claude and instructs it to review for security vulnerabilities:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -161,6 +181,8 @@ See [system prompt flags](cli-reference.md) for more options including `--system
 
 Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. This example runs a review, then sends follow-up prompts:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -175,6 +197,8 @@ claude -p "Generate a summary of all issues found" --continue
 ```
 
 If you’re running multiple conversations, capture the session ID to resume a specific one:
+
+Report incorrect code
 
 Copy
 

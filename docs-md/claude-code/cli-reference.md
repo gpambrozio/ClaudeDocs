@@ -87,6 +87,8 @@ The `--agents` flag accepts a JSON object that defines one or more custom subage
 
 Example:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -123,6 +125,8 @@ Claude Code provides four flags for customizing the system prompt, each serving 
 
 - **`--system-prompt`**: Use when you need complete control over Claude’s system prompt. This removes all default Claude Code instructions, giving you a blank slate.
 
+  Report incorrect code
+
   Copy
 
   Ask AI
@@ -131,6 +135,8 @@ Claude Code provides four flags for customizing the system prompt, each serving 
   claude --system-prompt "You are a Python expert who only writes type-annotated code"
   ```
 - **`--system-prompt-file`**: Use when you want to load a custom prompt from a file, useful for team consistency or version-controlled prompt templates.
+
+  Report incorrect code
 
   Copy
 
@@ -141,6 +147,8 @@ Claude Code provides four flags for customizing the system prompt, each serving 
   ```
 - **`--append-system-prompt`**: Use when you want to add specific instructions while keeping Claude Code’s default capabilities intact. This is the safest option for most use cases.
 
+  Report incorrect code
+
   Copy
 
   Ask AI
@@ -149,6 +157,8 @@ Claude Code provides four flags for customizing the system prompt, each serving 
   claude --append-system-prompt "Always use TypeScript and include JSDoc comments"
   ```
 - **`--append-system-prompt-file`**: Use when you want to append instructions from a file while keeping Claude Code’s defaults. Useful for version-controlled additions.
+
+  Report incorrect code
 
   Copy
 

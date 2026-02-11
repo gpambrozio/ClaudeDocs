@@ -23,6 +23,8 @@ First-time users of Anthropic models are required to submit use case details bef
 Claude Code uses the default AWS SDK credential chain. Set up your credentials using one of these methods:
 **Option A: AWS CLI configuration**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -32,6 +34,8 @@ aws configure
 ```
 
 **Option B: Environment variables (access key)**
+
+Report incorrect code
 
 Copy
 
@@ -45,6 +49,8 @@ export AWS_SESSION_TOKEN=your-session-token
 
 **Option C: Environment variables (SSO profile)**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -57,6 +63,8 @@ export AWS_PROFILE=your-profile-name
 
 **Option D: AWS Management Console credentials**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -67,6 +75,8 @@ aws login
 
 [Learn more](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html) about `aws login`.
 **Option E: Bedrock API keys**
+
+Report incorrect code
 
 Copy
 
@@ -84,6 +94,8 @@ Claude Code supports automatic credential refresh for AWS SSO and corporate iden
 When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured `awsAuthRefresh` and/or `awsCredentialExport` commands to obtain new credentials before retrying the request.
 
 ##### Example configuration
+
+Report incorrect code
 
 Copy
 
@@ -103,6 +115,8 @@ Ask AI
 **`awsAuthRefresh`**: Use this for commands that modify the `.aws` directory, such as updating credentials, SSO cache, or config files. The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based SSO flows where the CLI displays a URL or code and you complete authentication in the browser.
 **`awsCredentialExport`**: Only use this if you can’t modify `.aws` and must directly return credentials. Output is captured silently and not shown to the user. The command must output JSON in this format:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -120,6 +134,8 @@ Ask AI
 ### [​](#3-configure-claude-code) 3. Configure Claude Code
 
 Set the following environment variables to enable Bedrock:
+
+Report incorrect code
 
 Copy
 
@@ -153,6 +169,8 @@ For Bedrock users, Claude Code won’t automatically upgrade from Haiku 3.5 to H
 
 To customize models, use one of these methods:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -174,6 +192,8 @@ export DISABLE_PROMPT_CACHING=1
 ## [​](#iam-configuration) IAM configuration
 
 Create an IAM policy with the required permissions for Claude Code:
+
+Report incorrect code
 
 Copy
 
@@ -224,6 +244,8 @@ We recommend creating a dedicated AWS account for Claude Code to simplify cost t
 
 [Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), publish a version, then add the Guardrail headers to your [settings file](settings.md). Enable Cross-Region inference on your Guardrail if you’re using cross-region inference profiles.
 Example configuration:
+
+Report incorrect code
 
 Copy
 

@@ -12,6 +12,8 @@ The `/cost` command shows API token usage and is intended for API users. Claude 
 
 The `/cost` command provides detailed token usage statistics for your current session:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -74,6 +76,8 @@ Use `/cost` to check your current token usage, or [configure your status line](s
 
 You can also customize compaction behavior in your CLAUDE.md:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -111,6 +115,8 @@ For example, this PreToolUse hook filters test output to show only failures:
 
 Add this to your [settings.json](settings.md) to run the hook before every Bash command:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -134,6 +140,8 @@ Ask AI
 ```
 
 The hook calls this script, which checks if the command is a test runner and modifies it to show only failures:
+
+Report incorrect code
 
 Copy
 

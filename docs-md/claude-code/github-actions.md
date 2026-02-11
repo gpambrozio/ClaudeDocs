@@ -87,6 +87,8 @@ All beta users must make these changes to their workflow files in order to upgra
 
 **Beta version:**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -103,6 +105,8 @@ Ask AI
 ```
 
 **GA version (v1.0):**
+
+Report incorrect code
 
 Copy
 
@@ -127,6 +131,8 @@ Claude Code GitHub Actions can help you with a variety of tasks. The [examples d
 
 ### [​](#basic-workflow) Basic workflow
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -150,6 +156,8 @@ jobs:
 
 ### [​](#using-skills) Using skills
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -171,6 +179,8 @@ jobs:
 ```
 
 ### [​](#custom-automation-with-prompts) Custom automation with prompts
+
+Report incorrect code
 
 Copy
 
@@ -195,6 +205,8 @@ jobs:
 ### [​](#common-use-cases) Common use cases
 
 In issue or PR comments:
+
+Report incorrect code
 
 Copy
 
@@ -256,6 +268,8 @@ When using Claude Code GitHub Actions, be aware of the associated costs:
 ## [​](#configuration-examples) Configuration examples
 
 The Claude Code Action v1 simplifies configuration with unified parameters:
+
+Report incorrect code
 
 Copy
 
@@ -460,6 +474,8 @@ AWS Bedrock workflow
 | `APP_ID` | Your GitHub App ID (from app settings) |
 | `APP_PRIVATE_KEY` | The private key you generated for your GitHub App |
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -532,6 +548,8 @@ Google Vertex AI workflow
 | `GCP_SERVICE_ACCOUNT` | Service account email with Vertex AI access |
 | `APP_ID` | Your GitHub App ID (from app settings) |
 | `APP_PRIVATE_KEY` | The private key you generated for your GitHub App |
+
+Report incorrect code
 
 Copy
 
@@ -629,6 +647,8 @@ The Claude Code Action v1 uses a simplified configuration:
 #### [​](#pass-cli-arguments) Pass CLI arguments
 
 The `claude_args` parameter accepts any Claude Code CLI arguments:
+
+Report incorrect code
 
 Copy
 

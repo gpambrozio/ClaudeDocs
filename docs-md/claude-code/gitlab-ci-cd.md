@@ -47,6 +47,8 @@ The fastest way to get started is to add a minimal job to your `.gitlab-ci.yml` 
    - Add `ANTHROPIC_API_KEY` (masked, protected as needed)
 2. **Add a Claude job to `.gitlab-ci.yml`**
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -110,6 +112,8 @@ If you prefer a more controlled setup or need enterprise providers:
 
 In an issue comment:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -124,6 +128,8 @@ Claude analyzes the issue and codebase, writes changes in a branch, and opens an
 
 In an MR discussion:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -137,6 +143,8 @@ Claude proposes changes, adds code with appropriate caching, and updates the MR.
 ### [​](#fix-bugs-quickly) Fix bugs quickly
 
 In an issue or MR comment:
+
+Report incorrect code
 
 Copy
 
@@ -182,6 +190,8 @@ Configure AWS to allow GitLab CI jobs to assume an IAM role via OIDC (no static 
 
 Add variables in Settings → CI/CD → Variables:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -222,6 +232,8 @@ Configure Google Cloud to allow GitLab CI jobs to impersonate a service account 
 
 Add variables in Settings → CI/CD → Variables:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -240,6 +252,8 @@ Use the Google Vertex AI job example above to authenticate without storing keys.
 Below are ready-to-use snippets you can adapt to your pipeline.
 
 ### [​](#basic-gitlab-ci-yml-claude-api) Basic .gitlab-ci.yml (Claude API)
+
+Report incorrect code
 
 Copy
 
@@ -284,6 +298,8 @@ claude:
 
 - `AWS_ROLE_TO_ASSUME`: ARN of the IAM role for Bedrock access
 - `AWS_REGION`: Bedrock region (for example, `us-west-2`)
+
+Report incorrect code
 
 Copy
 
@@ -338,6 +354,8 @@ Model IDs for Bedrock include region-specific prefixes and version suffixes (for
 - `GCP_WORKLOAD_IDENTITY_PROVIDER`: Full provider resource name
 - `GCP_SERVICE_ACCOUNT`: Service account email
 - `CLOUD_ML_REGION`: Vertex region (for example, `us-east5`)
+
+Report incorrect code
 
 Copy
 

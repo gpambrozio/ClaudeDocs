@@ -61,6 +61,8 @@ On **Linux and WSL2**, install the required packages first:
 - Ubuntu/Debian
 - Fedora
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -68,6 +70,8 @@ Ask AI
 ```shiki
 sudo apt-get install bubblewrap socat
 ```
+
+Report incorrect code
 
 Copy
 
@@ -80,6 +84,8 @@ sudo dnf install bubblewrap socat
 ### [​](#enable-sandboxing) Enable sandboxing
 
 You can enable sandboxing by running the `/sandbox` command:
+
+Report incorrect code
 
 Copy
 
@@ -192,6 +198,8 @@ For organizations requiring advanced network security, you can implement a custo
 - Log all network requests
 - Integrate with existing security infrastructure
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -226,6 +234,8 @@ The sandboxed bash tool works alongside:
 ## [​](#open-source) Open source
 
 The sandbox runtime is available as an open source npm package for use in your own agent projects. This enables the broader AI agent community to build safer, more secure autonomous systems. This can also be used to sandbox other programs you may wish to run. For example, to sandbox an MCP server you could run:
+
+Report incorrect code
 
 Copy
 

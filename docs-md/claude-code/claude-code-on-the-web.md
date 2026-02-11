@@ -66,6 +66,8 @@ Session handoff is one-way: you can pull web sessions into your terminal, but yo
 
 Start a message with `&` inside Claude Code to send a task to run on the web:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -76,6 +78,8 @@ Ask AI
 
 This creates a new web session on claude.ai with your current conversation context. The task runs in the cloud while you continue working locally. Use `/tasks` to check progress, or open the session on claude.ai or the Claude iOS app to interact directly. From there you can steer Claude, provide feedback, or answer questions just like any other conversation.
 You can also start a web session directly from the command line:
+
+Report incorrect code
 
 Copy
 
@@ -89,6 +93,8 @@ claude --remote "Fix the authentication bug in src/auth/login.ts"
 
 **Plan locally, execute remotely**: For complex tasks, start Claude in plan mode to collaborate on the approach before sending work to the web:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -98,6 +104,8 @@ claude --permission-mode plan
 ```
 
 In plan mode, Claude can only read files and explore the codebase. Once you’re satisfied with the plan, send it to the web for autonomous execution:
+
+Report incorrect code
 
 Copy
 
@@ -109,6 +117,8 @@ Ask AI
 
 This pattern gives you control over the strategy while letting Claude execute autonomously in the cloud.
 **Run tasks in parallel**: Each `&` command creates its own web session that runs independently. You can kick off multiple tasks and they’ll all run simultaneously in separate sessions:
+
+Report incorrect code
 
 Copy
 
@@ -185,6 +195,8 @@ We build and maintain a universal image with common toolchains and language ecos
 
 To see what’s pre-installed in your environment, ask Claude Code to run:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -236,6 +248,8 @@ Claude operates entirely through the terminal and CLI tools available in the env
 
 Environment variables must be specified as key-value pairs, in [`.env` format](https://www.dotenv.org/). For example:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -249,6 +263,8 @@ DEBUG=true
 
 Custom environment images and snapshots are not yet supported. As a workaround, you can use [SessionStart hooks](hooks.md) to install packages when a session starts. This approach has [known limitations](#dependency-management-limitations).
 To configure automatic dependency installation, add a SessionStart hook to your repository’s `.claude/settings.json` file:
+
+Report incorrect code
 
 Copy
 
@@ -273,6 +289,8 @@ Ask AI
 ```
 
 Create the corresponding script at `scripts/install_pkgs.sh`:
+
+Report incorrect code
 
 Copy
 

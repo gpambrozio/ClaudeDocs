@@ -22,6 +22,8 @@ Vertex AI may not support the Claude Code default models on global endpoints. Yo
 
 Enable the Vertex AI API in your GCP project:
 
+Report incorrect code
+
 Copy
 
 Ask AI
@@ -53,6 +55,8 @@ When authenticating, Claude Code will automatically use the project ID from the 
 ### [​](#4-configure-claude-code) 4. Configure Claude Code
 
 Set the following environment variables:
+
+Report incorrect code
 
 Copy
 
@@ -94,6 +98,8 @@ Claude Code uses these default models for Vertex AI:
 For Vertex AI users, Claude Code will not automatically upgrade from Haiku 3.5 to Haiku 4.5. To manually switch to a newer Haiku model, set the `ANTHROPIC_DEFAULT_HAIKU_MODEL` environment variable to the full model name (for example, `claude-haiku-4-5@20251001`).
 
 To customize models:
+
+Report incorrect code
 
 Copy
 
