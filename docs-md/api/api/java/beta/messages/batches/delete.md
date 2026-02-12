@@ -8,7 +8,7 @@ Java
 
 [BetaDeletedMessageBatch](api/beta.md) beta().messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -82,10 +82,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-MESSAGE\_BATCH\_DELETED("message\_batch\_deleted")
-
 Delete a Message Batch
 
 Java
@@ -109,25 +105,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
 
 ---
 

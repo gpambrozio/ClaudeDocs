@@ -10,13 +10,13 @@ TypeScript
 
 client.messages.create(MessageCreateParamsbody, RequestOptionsoptions?): [Message](api/messages.md) { id, content, model, 5 more }  | Stream<[RawMessageStreamEvent](api/messages.md)>
 
-post/v1/messages
+POST/v1/messages
 
 ##### [Count tokens in a Message](api/messages/count_tokens.md)
 
 client.messages.countTokens(MessageCountTokensParams { messages, model, output\_config, 4 more } body, RequestOptionsoptions?): [MessageTokensCount](api/messages.md) { input\_tokens }
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
@@ -38,33 +38,17 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 Base64PDFSource { data, media\_type, type }
 
 data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 CacheControlEphemeral { type, ttl }
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -89,13 +73,9 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -113,10 +93,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -130,10 +106,6 @@ end\_char\_index: number
 start\_char\_index: number
 
 type: "char\_location"
-
-Accepts one of the following:
-
-"char\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -151,10 +123,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -168,10 +136,6 @@ end\_block\_index: number
 start\_block\_index: number
 
 type: "content\_block\_location"
-
-Accepts one of the following:
-
-"content\_block\_location"
 
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -189,10 +153,6 @@ start\_page\_number: number
 
 type: "page\_location"
 
-Accepts one of the following:
-
-"page\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -206,10 +166,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
@@ -227,10 +183,6 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -240,10 +192,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -273,10 +221,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -292,10 +236,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -313,10 +253,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -326,10 +262,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -349,15 +281,7 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: "citations\_delta"
-
-Accepts one of the following:
-
-"citations\_delta"
 
 CitationsSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
@@ -375,10 +299,6 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -388,10 +308,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -425,10 +341,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -444,10 +356,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -465,10 +373,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -478,10 +382,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -501,17 +401,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -521,19 +413,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -545,10 +429,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -557,15 +437,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -593,10 +465,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -607,19 +475,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 7 more
 
@@ -633,19 +493,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -682,10 +534,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -699,10 +547,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -718,10 +562,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -731,10 +571,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -753,10 +589,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -782,35 +614,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -841,15 +657,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -857,15 +665,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -883,19 +683,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -932,10 +724,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -949,10 +737,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -968,10 +752,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -981,10 +761,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1003,10 +779,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -1032,35 +804,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1081,35 +837,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1144,19 +884,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1193,10 +925,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -1210,10 +938,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1229,10 +953,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1242,10 +962,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1265,29 +981,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1318,19 +1022,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlockParam { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlockParam { id, input, name, 2 more }
 
@@ -1342,19 +1038,11 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1379,19 +1067,11 @@ tool\_use\_id: string
 
 type: "tool\_result"
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1424,19 +1104,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1473,10 +1145,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -1490,10 +1158,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1509,10 +1173,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1522,10 +1182,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1544,10 +1200,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -1573,35 +1225,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1628,19 +1264,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1677,10 +1305,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -1694,10 +1318,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1713,10 +1333,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1726,10 +1342,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1749,29 +1361,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1806,15 +1406,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -1822,15 +1414,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -1848,19 +1432,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -1897,10 +1473,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -1914,10 +1486,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1933,10 +1501,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1946,10 +1510,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1968,10 +1528,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -1997,35 +1553,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2046,35 +1586,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2111,25 +1635,13 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2162,10 +1674,6 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 page\_age?: string | null
@@ -2190,27 +1698,15 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2245,19 +1741,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2294,10 +1782,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -2311,10 +1795,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2330,10 +1810,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -2343,10 +1819,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -2365,10 +1837,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -2394,35 +1862,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2443,10 +1895,6 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 ContentBlockSourceContent = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }
 
 Accepts one of the following:
@@ -2457,19 +1905,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2506,10 +1946,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -2523,10 +1959,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2542,10 +1974,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -2555,10 +1983,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -2577,10 +2001,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -2606,35 +2026,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2665,15 +2069,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -2681,15 +2077,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -2707,19 +2095,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2756,10 +2136,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -2773,10 +2149,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2792,10 +2164,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -2805,10 +2173,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -2827,10 +2191,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -2856,35 +2216,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2905,35 +2249,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -2984,35 +2312,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3037,10 +2349,6 @@ partial\_json: string
 
 type: "input\_json\_delta"
 
-Accepts one of the following:
-
-"input\_json\_delta"
-
 JSONOutputFormat { schema, type }
 
 schema: Record<string, unknown>
@@ -3048,10 +2356,6 @@ schema: Record<string, unknown>
 The JSON schema of the format
 
 type: "json\_schema"
-
-Accepts one of the following:
-
-"json\_schema"
 
 Message { id, content, model, 5 more }
 
@@ -3118,10 +2422,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -3137,10 +2437,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -3158,10 +2454,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -3171,10 +2463,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -3194,17 +2482,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -3214,19 +2494,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -3238,10 +2510,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -3250,15 +2518,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -3286,10 +2546,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -3300,19 +2556,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -3416,10 +2664,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -3461,10 +2705,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -3485,25 +2725,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -3513,13 +2745,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -3528,8 +2756,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -3557,10 +2783,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: "object"
 
-Accepts one of the following:
-
-"object"
-
 properties?: Record<string, unknown> | null
 
 required?: Array<string> | null
@@ -3580,10 +2802,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3618,10 +2836,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type?: "custom" | null
 
-Accepts one of the following:
-
-"custom"
-
 ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
@@ -3630,25 +2844,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: "bash\_20250124"
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3679,25 +2881,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: "text\_editor\_20250124"
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3728,25 +2918,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250429"
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3777,25 +2955,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250728"
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3818,8 +2984,6 @@ max\_characters?: number | null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -3832,15 +2996,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "web\_search\_20250305"
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_domains?: Array<string> | null
 
@@ -3855,10 +3011,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -3881,8 +3033,6 @@ max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -3893,41 +3043,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: "approximate"
 
-Accepts one of the following:
-
-"approximate"
-
 city?: string | null
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country?: string | null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region?: string | null
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone?: string | null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 MessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
@@ -3935,19 +3065,13 @@ cache\_creation\_input\_tokens: number | null
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: number | null
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: number
 
@@ -3960,8 +3084,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 MessageParam { content, role }
 
@@ -3979,19 +3101,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4028,10 +3142,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -4045,10 +3155,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4064,10 +3170,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -4077,10 +3179,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -4099,10 +3197,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -4128,35 +3222,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4187,15 +3265,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -4203,15 +3273,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -4229,19 +3291,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4278,10 +3332,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -4295,10 +3345,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4314,10 +3360,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -4327,10 +3369,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -4349,10 +3387,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -4378,35 +3412,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4427,35 +3445,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4490,19 +3492,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4539,10 +3533,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -4556,10 +3546,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4575,10 +3561,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -4588,10 +3570,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -4611,29 +3589,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4664,19 +3630,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlockParam { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlockParam { id, input, name, 2 more }
 
@@ -4688,19 +3646,11 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4725,19 +3675,11 @@ tool\_use\_id: string
 
 type: "tool\_result"
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4770,19 +3712,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4819,10 +3753,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -4836,10 +3766,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4855,10 +3781,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -4868,10 +3790,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -4890,10 +3808,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -4919,35 +3833,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -4974,19 +3872,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5023,10 +3913,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -5040,10 +3926,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -5059,10 +3941,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -5072,10 +3950,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -5095,29 +3969,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5152,15 +4014,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -5168,15 +4022,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -5194,19 +4040,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5243,10 +4081,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -5260,10 +4094,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -5279,10 +4109,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -5292,10 +4118,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -5314,10 +4136,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -5343,35 +4161,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5392,35 +4194,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5457,25 +4243,13 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5508,10 +4282,6 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 page\_age?: string | null
@@ -5536,27 +4306,15 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -5721,25 +4479,13 @@ The JSON schema of the format
 
 type: "json\_schema"
 
-Accepts one of the following:
-
-"json\_schema"
-
 PlainTextSource { data, media\_type, type }
 
 data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 RawContentBlockDelta = [TextDelta](api/messages.md) { text, type }  | [InputJSONDelta](api/messages.md) { partial\_json, type }  | [CitationsDelta](api/messages.md) { citation, type }  | 2 more
 
@@ -5751,19 +4497,11 @@ text: string
 
 type: "text\_delta"
 
-Accepts one of the following:
-
-"text\_delta"
-
 InputJSONDelta { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 CitationsDelta { citation, type }
 
@@ -5787,10 +4525,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -5806,10 +4540,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -5827,10 +4557,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -5840,10 +4566,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -5863,15 +4585,7 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: "citations\_delta"
-
-Accepts one of the following:
-
-"citations\_delta"
 
 ThinkingDelta { thinking, type }
 
@@ -5879,19 +4593,11 @@ thinking: string
 
 type: "thinking\_delta"
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 SignatureDelta { signature, type }
 
 signature: string
 
 type: "signature\_delta"
-
-Accepts one of the following:
-
-"signature\_delta"
 
 RawContentBlockDeltaEvent { delta, index, type }
 
@@ -5905,19 +4611,11 @@ text: string
 
 type: "text\_delta"
 
-Accepts one of the following:
-
-"text\_delta"
-
 InputJSONDelta { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 CitationsDelta { citation, type }
 
@@ -5941,10 +4639,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -5960,10 +4654,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -5981,10 +4671,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -5994,10 +4680,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -6017,15 +4699,7 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: "citations\_delta"
-
-Accepts one of the following:
-
-"citations\_delta"
 
 ThinkingDelta { thinking, type }
 
@@ -6033,27 +4707,15 @@ thinking: string
 
 type: "thinking\_delta"
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 SignatureDelta { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-Accepts one of the following:
-
-"signature\_delta"
-
 index: number
 
 type: "content\_block\_delta"
-
-Accepts one of the following:
-
-"content\_block\_delta"
 
 RawContentBlockStartEvent { content\_block, index, type }
 
@@ -6087,10 +4749,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -6106,10 +4764,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6127,10 +4781,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -6140,10 +4790,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -6163,17 +4809,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -6183,19 +4821,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -6207,10 +4837,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -6219,15 +4845,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -6255,10 +4873,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -6269,37 +4883,21 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result"
-
 index: number
 
 type: "content\_block\_start"
-
-Accepts one of the following:
-
-"content\_block\_start"
 
 RawContentBlockStopEvent { index, type }
 
 index: number
 
 type: "content\_block\_stop"
-
-Accepts one of the following:
-
-"content\_block\_stop"
 
 RawMessageDeltaEvent { delta, type, usage }
 
@@ -6325,10 +4923,6 @@ stop\_sequence: string | null
 
 type: "message\_delta"
 
-Accepts one of the following:
-
-"message\_delta"
-
 usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Billing and rate-limit usage.
@@ -6345,19 +4939,13 @@ cache\_creation\_input\_tokens: number | null
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: number | null
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: number
 
@@ -6370,8 +4958,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 RawMessageStartEvent { message, type }
 
@@ -6440,10 +5026,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -6459,10 +5041,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6480,10 +5058,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -6493,10 +5067,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -6516,17 +5086,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -6536,19 +5098,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -6560,10 +5114,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -6572,15 +5122,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -6608,10 +5150,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -6622,19 +5160,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -6738,10 +5268,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -6783,10 +5309,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -6807,25 +5329,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -6835,13 +5349,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -6850,8 +5360,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -6867,17 +5375,9 @@ Accepts one of the following:
 
 type: "message\_start"
 
-Accepts one of the following:
-
-"message\_start"
-
 RawMessageStopEvent { type }
 
 type: "message\_stop"
-
-Accepts one of the following:
-
-"message\_stop"
 
 RawMessageStreamEvent = [RawMessageStartEvent](api/messages.md) { message, type }  | [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  | [RawMessageStopEvent](api/messages.md) { type }  | 3 more
 
@@ -6950,10 +5450,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -6969,10 +5465,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6990,10 +5482,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -7003,10 +5491,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -7026,17 +5510,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -7046,19 +5522,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -7070,10 +5538,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -7082,15 +5546,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -7118,10 +5574,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -7132,19 +5584,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -7248,10 +5692,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -7293,10 +5733,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -7317,25 +5753,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -7345,13 +5773,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -7360,8 +5784,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -7376,10 +5798,6 @@ Accepts one of the following:
 "batch"
 
 type: "message\_start"
-
-Accepts one of the following:
-
-"message\_start"
 
 RawMessageDeltaEvent { delta, type, usage }
 
@@ -7405,10 +5823,6 @@ stop\_sequence: string | null
 
 type: "message\_delta"
 
-Accepts one of the following:
-
-"message\_delta"
-
 usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Billing and rate-limit usage.
@@ -7425,19 +5839,13 @@ cache\_creation\_input\_tokens: number | null
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: number | null
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: number
 
@@ -7451,15 +5859,9 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-minimum0
-
 RawMessageStopEvent { type }
 
 type: "message\_stop"
-
-Accepts one of the following:
-
-"message\_stop"
 
 RawContentBlockStartEvent { content\_block, index, type }
 
@@ -7493,10 +5895,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -7512,10 +5910,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -7533,10 +5927,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -7546,10 +5936,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -7569,17 +5955,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -7589,19 +5967,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -7613,10 +5983,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -7625,15 +5991,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -7661,10 +6019,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -7675,27 +6029,15 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result"
-
 index: number
 
 type: "content\_block\_start"
-
-Accepts one of the following:
-
-"content\_block\_start"
 
 RawContentBlockDeltaEvent { delta, index, type }
 
@@ -7709,19 +6051,11 @@ text: string
 
 type: "text\_delta"
 
-Accepts one of the following:
-
-"text\_delta"
-
 InputJSONDelta { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 CitationsDelta { citation, type }
 
@@ -7745,10 +6079,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -7764,10 +6094,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -7785,10 +6111,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -7798,10 +6120,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -7821,15 +6139,7 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: "citations\_delta"
-
-Accepts one of the following:
-
-"citations\_delta"
 
 ThinkingDelta { thinking, type }
 
@@ -7837,27 +6147,15 @@ thinking: string
 
 type: "thinking\_delta"
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 SignatureDelta { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-Accepts one of the following:
-
-"signature\_delta"
-
 index: number
 
 type: "content\_block\_delta"
-
-Accepts one of the following:
-
-"content\_block\_delta"
 
 RawContentBlockStopEvent { index, type }
 
@@ -7865,29 +6163,17 @@ index: number
 
 type: "content\_block\_stop"
 
-Accepts one of the following:
-
-"content\_block\_stop"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-Accepts one of the following:
-
-"redacted\_thinking"
-
 RedactedThinkingBlockParam { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 SearchResultBlockParam { content, source, title, 3 more }
 
@@ -7897,19 +6183,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -7946,10 +6224,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -7963,10 +6237,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -7982,10 +6252,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -7995,10 +6261,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -8018,29 +6280,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -8069,8 +6319,6 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-minimum0
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -8079,15 +6327,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 ServerToolUseBlockParam { id, input, name, 2 more }
 
@@ -8097,25 +6337,13 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -8139,10 +6367,6 @@ SignatureDelta { signature, type }
 signature: string
 
 type: "signature\_delta"
-
-Accepts one of the following:
-
-"signature\_delta"
 
 StopReason = "end\_turn" | "max\_tokens" | "stop\_sequence" | 3 more
 
@@ -8186,10 +6410,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -8205,10 +6425,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -8226,10 +6442,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -8239,10 +6451,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -8262,17 +6470,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 TextBlockParam { text, type, cache\_control, citations }
 
@@ -8280,19 +6480,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -8329,10 +6521,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -8346,10 +6534,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -8365,10 +6549,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -8378,10 +6558,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -8400,10 +6576,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 TextCitation = [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | 2 more
 
@@ -8425,10 +6597,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -8444,10 +6612,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -8465,10 +6629,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -8478,10 +6638,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -8501,10 +6657,6 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 TextCitationParam = [CitationCharLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | [CitationPageLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | [CitationContentBlockLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | 2 more
 
 Accepts one of the following:
@@ -8523,10 +6675,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -8540,10 +6688,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -8559,10 +6703,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -8572,10 +6712,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -8595,19 +6731,11 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 TextDelta { text, type }
 
 text: string
 
 type: "text\_delta"
-
-Accepts one of the following:
-
-"text\_delta"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -8617,10 +6745,6 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 ThinkingBlockParam { signature, thinking, type }
 
 signature: string
@@ -8629,25 +6753,13 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 ThinkingConfigAdaptive { type }
 
 type: "adaptive"
 
-Accepts one of the following:
-
-"adaptive"
-
 ThinkingConfigDisabled { type }
 
 type: "disabled"
-
-Accepts one of the following:
-
-"disabled"
 
 ThinkingConfigEnabled { budget\_tokens, type }
 
@@ -8662,10 +6774,6 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 minimum1024
 
 type: "enabled"
-
-Accepts one of the following:
-
-"enabled"
 
 ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type }  | [ThinkingConfigDisabled](api/messages.md) { type }  | [ThinkingConfigAdaptive](api/messages.md) { type }
 
@@ -8691,35 +6799,19 @@ minimum1024
 
 type: "enabled"
 
-Accepts one of the following:
-
-"enabled"
-
 ThinkingConfigDisabled { type }
 
 type: "disabled"
 
-Accepts one of the following:
-
-"disabled"
-
 ThinkingConfigAdaptive { type }
 
 type: "adaptive"
-
-Accepts one of the following:
-
-"adaptive"
 
 ThinkingDelta { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
-
-Accepts one of the following:
-
-"thinking\_delta"
 
 Tool { input\_schema, name, cache\_control, 4 more }
 
@@ -8730,10 +6822,6 @@ input\_schema: InputSchema { type, properties, required }
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: "object"
-
-Accepts one of the following:
-
-"object"
 
 properties?: Record<string, unknown> | null
 
@@ -8754,10 +6842,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -8792,10 +6876,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type?: "custom" | null
 
-Accepts one of the following:
-
-"custom"
-
 ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
@@ -8804,25 +6884,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: "bash\_20250124"
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -8857,10 +6925,6 @@ The model will automatically decide whether to use tools.
 
 type: "auto"
 
-Accepts one of the following:
-
-"auto"
-
 disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
@@ -8872,10 +6936,6 @@ ToolChoiceAny { type, disable\_parallel\_tool\_use }
 The model will use any available tools.
 
 type: "any"
-
-Accepts one of the following:
-
-"any"
 
 disable\_parallel\_tool\_use?: boolean
 
@@ -8893,10 +6953,6 @@ The name of the tool to use.
 
 type: "tool"
 
-Accepts one of the following:
-
-"tool"
-
 disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
@@ -8909,19 +6965,11 @@ The model will not be allowed to use tools.
 
 type: "none"
 
-Accepts one of the following:
-
-"none"
-
 ToolChoiceAny { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
 type: "any"
-
-Accepts one of the following:
-
-"any"
 
 disable\_parallel\_tool\_use?: boolean
 
@@ -8935,10 +6983,6 @@ The model will automatically decide whether to use tools.
 
 type: "auto"
 
-Accepts one of the following:
-
-"auto"
-
 disable\_parallel\_tool\_use?: boolean
 
 Whether to disable parallel tool use.
@@ -8951,10 +6995,6 @@ The model will not be allowed to use tools.
 
 type: "none"
 
-Accepts one of the following:
-
-"none"
-
 ToolChoiceTool { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
@@ -8964,10 +7004,6 @@ name: string
 The name of the tool to use.
 
 type: "tool"
-
-Accepts one of the following:
-
-"tool"
 
 disable\_parallel\_tool\_use?: boolean
 
@@ -8981,19 +7017,11 @@ tool\_use\_id: string
 
 type: "tool\_result"
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9026,19 +7054,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9075,10 +7095,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -9092,10 +7108,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9111,10 +7123,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -9124,10 +7132,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -9146,10 +7150,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -9175,35 +7175,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9230,19 +7214,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9279,10 +7255,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -9296,10 +7268,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9315,10 +7283,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -9328,10 +7292,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -9351,29 +7311,17 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: string
 
 title: string
 
 type: "search\_result"
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9408,15 +7356,7 @@ data: string
 
 media\_type: "application/pdf"
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: "base64"
-
-Accepts one of the following:
-
-"base64"
 
 PlainTextSource { data, media\_type, type }
 
@@ -9424,15 +7364,7 @@ data: string
 
 media\_type: "text/plain"
 
-Accepts one of the following:
-
-"text/plain"
-
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ContentBlockSource { content, type }
 
@@ -9450,19 +7382,11 @@ text: string
 
 type: "text"
 
-Accepts one of the following:
-
-"text"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9499,10 +7423,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
@@ -9516,10 +7436,6 @@ end\_page\_number: number
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9535,10 +7451,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -9548,10 +7460,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -9570,10 +7478,6 @@ start\_block\_index: number
 title: string | null
 
 type: "search\_result\_location"
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 ImageBlockParam { source, type, cache\_control }
 
@@ -9599,35 +7503,19 @@ Accepts one of the following:
 
 type: "base64"
 
-Accepts one of the following:
-
-"base64"
-
 URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "image"
-
-Accepts one of the following:
-
-"image"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9648,35 +7536,19 @@ Accepts one of the following:
 
 type: "content"
 
-Accepts one of the following:
-
-"content"
-
 URLPDFSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 type: "document"
-
-Accepts one of the following:
-
-"document"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9713,25 +7585,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: "text\_editor\_20250124"
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9762,25 +7622,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250429"
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9811,25 +7659,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250728"
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9852,8 +7688,6 @@ max\_characters?: number | null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -9871,10 +7705,6 @@ input\_schema: InputSchema { type, properties, required }
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: "object"
-
-Accepts one of the following:
-
-"object"
 
 properties?: Record<string, unknown> | null
 
@@ -9895,10 +7725,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9933,10 +7759,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type?: "custom" | null
 
-Accepts one of the following:
-
-"custom"
-
 ToolBash20250124 { name, type, cache\_control, strict }
 
 name: "bash"
@@ -9945,25 +7767,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: "bash\_20250124"
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -9994,25 +7804,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: "text\_editor\_20250124"
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10043,25 +7841,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250429"
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10092,25 +7878,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: "text\_editor\_20250728"
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10133,8 +7907,6 @@ max\_characters?: number | null
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -10147,15 +7919,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "web\_search\_20250305"
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_domains?: Array<string> | null
 
@@ -10170,10 +7934,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10196,8 +7956,6 @@ max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -10208,41 +7966,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: "approximate"
 
-Accepts one of the following:
-
-"approximate"
-
 city?: string | null
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country?: string | null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region?: string | null
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone?: string | null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 ToolUseBlock { id, input, name, type }
 
@@ -10254,10 +7992,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ToolUseBlockParam { id, input, name, 2 more }
 
 id: string
@@ -10268,19 +8002,11 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10303,19 +8029,11 @@ URLImageSource { type, url }
 
 type: "url"
 
-Accepts one of the following:
-
-"url"
-
 url: string
 
 URLPDFSource { type, url }
 
 type: "url"
-
-Accepts one of the following:
-
-"url"
 
 url: string
 
@@ -10329,25 +8047,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -10357,13 +8067,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -10372,8 +8078,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -10397,10 +8101,6 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 WebSearchResultBlockParam { encrypted\_content, title, type, 2 more }
@@ -10410,10 +8110,6 @@ encrypted\_content: string
 title: string
 
 type: "web\_search\_result"
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: string
 
@@ -10427,15 +8123,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "web\_search\_20250305"
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_domains?: Array<string> | null
 
@@ -10450,10 +8138,6 @@ cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10476,8 +8160,6 @@ max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
@@ -10488,41 +8170,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: "approximate"
 
-Accepts one of the following:
-
-"approximate"
-
 city?: string | null
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country?: string | null
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region?: string | null
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone?: string | null
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 WebSearchToolRequestError { error\_code, type }
 
@@ -10543,10 +8205,6 @@ Accepts one of the following:
 "request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -10574,10 +8232,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -10588,19 +8242,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 WebSearchToolResultBlockContent = [WebSearchToolResultError](api/messages.md) { error\_code, type }  | Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
@@ -10626,10 +8272,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -10639,10 +8281,6 @@ page\_age: string | null
 title: string
 
 type: "web\_search\_result"
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: string
 
@@ -10659,10 +8297,6 @@ encrypted\_content: string
 title: string
 
 type: "web\_search\_result"
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: string
 
@@ -10688,27 +8322,15 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
 
 Create a cache control breakpoint at this content block.
 
 type: "ephemeral"
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl?: "5m" | "1h"
 
@@ -10739,10 +8361,6 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 page\_age?: string | null
@@ -10767,10 +8385,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 WebSearchToolResultError { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "max\_uses\_exceeded" | 3 more
@@ -10791,47 +8405,43 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 #### MessagesBatches
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
 client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 client.messages.batches.retrieve(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 client.messages.batches.list(BatchListParams { after\_id, before\_id, limit } query?, RequestOptionsoptions?): Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 client.messages.batches.cancel(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages.md) { id, type }
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages.md) { custom\_id, result } >
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -10847,10 +8457,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 MessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
@@ -10863,19 +8469,13 @@ archived\_at: string | null
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: string | null
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: string | null
 
@@ -10888,8 +8488,6 @@ formatdate-time
 expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: "in\_progress" | "canceling" | "ended"
 
@@ -10949,17 +8547,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-"message\_batch"
-
 MessageBatchCanceledResult { type }
 
 type: "canceled"
-
-Accepts one of the following:
-
-"canceled"
 
 MessageBatchErroredResult { error, type }
 
@@ -10975,19 +8565,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -10995,19 +8577,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -11015,19 +8589,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -11035,19 +8601,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -11055,31 +8613,15 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchIndividualResponse { custom\_id, result }
 
@@ -11166,10 +8708,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -11185,10 +8723,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -11206,10 +8740,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -11219,10 +8749,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -11242,17 +8768,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -11262,19 +8780,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -11286,10 +8796,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -11298,15 +8804,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -11334,10 +8832,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -11348,19 +8842,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -11464,10 +8950,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -11509,10 +8991,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -11533,25 +9011,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -11561,13 +9031,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -11576,8 +9042,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -11593,10 +9057,6 @@ Accepts one of the following:
 
 type: "succeeded"
 
-Accepts one of the following:
-
-"succeeded"
-
 MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -11611,19 +9071,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -11631,19 +9083,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -11651,19 +9095,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -11671,19 +9107,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -11691,39 +9119,19 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchCanceledResult { type }
 
 type: "canceled"
 
-Accepts one of the following:
-
-"canceled"
-
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchRequestCounts { canceled, errored, expired, 2 more }
 
@@ -11830,10 +9238,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -11849,10 +9253,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -11870,10 +9270,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -11883,10 +9279,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -11906,17 +9298,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -11926,19 +9310,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -11950,10 +9326,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -11962,15 +9334,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -11998,10 +9362,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -12012,19 +9372,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -12128,10 +9480,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -12173,10 +9521,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -12197,25 +9541,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -12225,13 +9561,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -12240,8 +9572,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -12257,10 +9587,6 @@ Accepts one of the following:
 
 type: "succeeded"
 
-Accepts one of the following:
-
-"succeeded"
-
 MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -12275,19 +9601,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -12295,19 +9613,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -12315,19 +9625,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -12335,19 +9637,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -12355,39 +9649,19 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchCanceledResult { type }
 
 type: "canceled"
 
-Accepts one of the following:
-
-"canceled"
-
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchSucceededResult { message, type }
 
@@ -12456,10 +9730,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -12475,10 +9745,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -12496,10 +9762,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -12509,10 +9771,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -12532,17 +9790,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -12552,19 +9802,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -12576,10 +9818,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -12588,15 +9826,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -12624,10 +9854,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -12638,19 +9864,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -12754,10 +9972,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -12799,10 +10013,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -12823,25 +10033,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -12851,13 +10053,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -12866,8 +10064,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -12882,10 +10078,6 @@ Accepts one of the following:
 "batch"
 
 type: "succeeded"
-
-Accepts one of the following:
-
-"succeeded"
 
 ---
 

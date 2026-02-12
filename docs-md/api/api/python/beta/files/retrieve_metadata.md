@@ -8,7 +8,7 @@ Python
 
 beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 Get File Metadata
 
@@ -24,9 +24,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -84,39 +84,23 @@ created\_at: datetime
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: str
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: str
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: int
 
 Size of the file in bytes.
-
-minimum0
 
 type: Literal["file"]
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-"file"
 
 downloadable: Optional[bool]
 
@@ -139,35 +123,7 @@ file_metadata = client.beta.files.retrieve_metadata(
 print(file_metadata.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

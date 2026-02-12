@@ -8,7 +8,7 @@ Ruby
 
 models.list(\*\*kwargs) -> Page<[ModelInfo](api/models.md) { id, created\_at, display\_name, type } >
 
-get/v1/models
+GET/v1/models
 
 List available models.
 
@@ -98,8 +98,6 @@ created\_at: Time
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 display\_name: String
 
 A human-readable name for the model.
@@ -109,10 +107,6 @@ type: :model
 Object type.
 
 For Models, this is always `"model"`.
-
-Accepts one of the following:
-
-:model
 
 List Models
 
@@ -128,43 +122,7 @@ page = anthropic.models.list
 puts(page)
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "claude-opus-4-6",
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
-      "type": "model"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "claude-opus-4-6",
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
-      "type": "model"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

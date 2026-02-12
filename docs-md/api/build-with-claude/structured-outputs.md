@@ -141,7 +141,7 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_config={
@@ -149,7 +149,7 @@ response = client.messages.create(
             "type": "json_schema",
             "schema": transform_schema(ContactInfo),
         }
-    }
+    },
 )
 
 print(response.content[0].text)
@@ -161,7 +161,7 @@ response = client.messages.parse(
     messages=[
         {
             "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
     ],
     output_format=ContactInfo,
@@ -331,7 +331,9 @@ Python
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[{"role": "user", "content": "Help me plan a trip to Paris for next month"}],
+    messages=[
+        {"role": "user", "content": "Help me plan a trip to Paris for next month"}
+    ],
     # JSON outputs: structured response format
     output_config={
         "format": {
@@ -340,27 +342,29 @@ response = client.messages.create(
                 "type": "object",
                 "properties": {
                     "summary": {"type": "string"},
-                    "next_steps": {"type": "array", "items": {"type": "string"}}
+                    "next_steps": {"type": "array", "items": {"type": "string"}},
                 },
                 "required": ["summary", "next_steps"],
-                "additionalProperties": False
-            }
+                "additionalProperties": False,
+            },
         }
     },
     # Strict tool use: guaranteed tool parameters
-    tools=[{
-        "name": "search_flights",
-        "strict": True,
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "destination": {"type": "string"},
-                "date": {"type": "string", "format": "date"}
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {"type": "string"},
+                    "date": {"type": "string", "format": "date"},
+                },
+                "required": ["destination", "date"],
+                "additionalProperties": False,
             },
-            "required": ["destination", "date"],
-            "additionalProperties": False
         }
-    }]
+    ],
 )
 ```
 

@@ -8,7 +8,7 @@ Go
 
 client.Beta.Messages.Batches.List(ctx, params) (\*Page[[BetaMessageBatch](api/beta.md)], error)
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
@@ -100,19 +100,13 @@ ArchivedAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 CancelInitiatedAt Time
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 CreatedAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 EndedAt Time
 
@@ -125,8 +119,6 @@ formatdate-time
 ExpiresAt Time
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 ProcessingStatus BetaMessageBatchProcessingStatus
 
@@ -186,10 +178,6 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-const MessageBatchMessageBatch MessageBatch = "message\_batch"
-
 List Message Batches
 
 Go
@@ -219,67 +207,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

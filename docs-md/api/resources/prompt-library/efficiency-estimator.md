@@ -32,10 +32,10 @@ Copy page
 >
 > The outer loop iterates `n` times, and for each iteration, the inner loop also iterates `n` times. In each iteration of the inner loop, a constant-time operation (`print(j, k)`) is performed. Therefore, the time complexity of the nested loops is O(n \* n) = O(n^2).
 >
-> Step 3: Combining the time complexities  
+> Step 3: Combining the time complexities
 > The function `example_function(n)` consists of two steps: the first loop and the nested loops. The overall time complexity is the sum of the time complexities of each step.
 >
-> Time complexity of the first loop: O(n)  
+> Time complexity of the first loop: O(n)
 > Time complexity of the nested loops: O(n^2)
 >
 > To determine the overall time complexity, we consider the dominant term, which is the term with the highest order of growth. In this case, O(n^2) dominates O(n).
@@ -68,11 +68,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "def example_function(n):\n    for i in range(n):\n        print(i)\n\n    for j in range(n):\n        for k in range(n):\n            print(j, k)"
+                    "text": "def example_function(n):\n    for i in range(n):\n        print(i)\n\n    for j in range(n):\n        for k in range(n):\n            print(j, k)",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

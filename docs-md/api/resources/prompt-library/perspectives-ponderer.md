@@ -62,24 +62,24 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=1000,
-  temperature=1,
-  messages=[
-    {
-    "role": "user",
-    "content": [
+    model="claude-opus-4-6",
+    max_tokens=1000,
+    temperature=1,
+    messages=[
         {
-          "type": "text",
-          "text": "Analyze the pros and cons of implementing a four-day workweek as a standard practice in the corporate world."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Analyze the pros and cons of implementing a four-day workweek as a standard practice in the corporate world.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

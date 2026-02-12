@@ -44,7 +44,7 @@ Resources for AI ingestion
 
 [API primer for Claude ingestion
 
-Concise API guide meant for ingestion by Claude.](claude_api_primer.md.md)[Claude API Docs Overview
+Concise API guide meant for ingestion by Claude.](claude_api_primer.md)[Claude API Docs Overview
 
 Concise overview of Claude API documentation, optimized for LLM ingestion.](/docs/for-claude)[llms.txt
 

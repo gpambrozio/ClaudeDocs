@@ -3,7 +3,7 @@
 Claude Code integrates with the Claude in Chrome browser extension to give you browser automation capabilities from the CLI or the [VS Code extension](vs-code.md). Build your code, then test and debug in the browser without switching contexts.
 Claude opens new tabs for browser tasks and shares your browser’s login state, so it can access any site you’re already signed into. Browser actions run in a visible Chrome window in real time. When Claude encounters a login page or CAPTCHA, it pauses and asks you to handle it manually.
 
-Chrome integration is in beta and currently works with Google Chrome only. It is not yet supported on Brave, Arc, or other Chromium-based browsers. WSL (Windows Subsystem for Linux) is also not supported.
+Chrome integration is in beta and currently works with Google Chrome and Microsoft Edge. It is not yet supported on Brave, Arc, or other Chromium-based browsers. WSL (Windows Subsystem for Linux) is also not supported.
 
 ## [​](#capabilities) Capabilities
 
@@ -21,8 +21,8 @@ With Chrome connected, you can chain browser actions with coding tasks in a sing
 
 Before using Claude Code with Chrome, you need:
 
-- [Google Chrome](https://www.google.com/chrome/) browser
-- [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or higher
+- [Google Chrome](https://www.google.com/chrome/) or [Microsoft Edge](https://www.microsoft.com/edge) browser
+- [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or higher, available in the Chrome Web Store for both browsers
 - [Claude Code](quickstart.md) version 2.0.73 or higher
 - A direct Anthropic plan (Pro, Max, Team, or Enterprise)
 
@@ -219,10 +219,17 @@ If Claude Code shows “Chrome extension not detected”:
 
 The first time you enable Chrome integration, Claude Code installs a native messaging host configuration file. Chrome reads this file on startup, so if the extension isn’t detected on your first attempt, restart Chrome to pick up the new configuration.
 If the connection still fails, verify the host configuration file exists at:
+For Chrome:
 
 - **macOS**: `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json`
 - **Linux**: `~/.config/google-chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json`
 - **Windows**: check `HKCU\Software\Google\Chrome\NativeMessagingHosts\` in the Windows Registry
+
+For Edge:
+
+- **macOS**: `~/Library/Application Support/Microsoft Edge/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json`
+- **Linux**: `~/.config/microsoft-edge/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json`
+- **Windows**: check `HKCU\Software\Microsoft\Edge\NativeMessagingHosts\` in the Windows Registry
 
 ### [​](#browser-not-responding) Browser not responding
 

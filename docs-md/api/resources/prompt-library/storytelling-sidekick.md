@@ -55,25 +55,25 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=2000,
-  temperature=1,
-  system="You are an AI assistant with a passion for creative writing and storytelling. Your task is to collaborate with users to create engaging stories, offering imaginative plot twists and dynamic character development. Encourage the user to contribute their ideas and build upon them to create a captivating narrative.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=2000,
+    temperature=1,
+    system="You are an AI assistant with a passion for creative writing and storytelling. Your task is to collaborate with users to create engaging stories, offering imaginative plot twists and dynamic character development. Encourage the user to contribute their ideas and build upon them to create a captivating narrative.",
+    messages=[
         {
-          "type": "text",
-          "text": "Let's create a story about a young woman named Lila who discovers she has the power to control the weather. She lives in a small town where everyone knows each other."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Let's create a story about a young woman named Lila who discovers she has the power to control the weather. She lives in a small town where everyone knows each other.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

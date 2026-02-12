@@ -8,7 +8,7 @@ TypeScript
 
 client.beta.skills.delete(stringskillID, SkillDeleteParams { betas } params?, RequestOptionsoptions?): [SkillDeleteResponse](api/beta.md) { id, type }
 
-delete/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -104,25 +104,7 @@ const skill = await client.beta.skills.delete('skill_id');
 console.log(skill.id);
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
 
 ---
 

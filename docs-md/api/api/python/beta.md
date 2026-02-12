@@ -8,13 +8,13 @@ Python
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]]
+Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]]
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -64,19 +64,11 @@ message: str
 
 type: Literal["api\_error"]
 
-Accepts one of the following:
-
-"api\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -84,11 +76,7 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
-BetaError = [BetaError](api/beta.md)
+[BetaError](api/beta.md)
 
 Accepts one of the following:
 
@@ -98,19 +86,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -118,19 +98,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class BetaPermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class BetaNotFoundError: …
 
@@ -138,19 +110,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class BetaGatewayTimeoutError: …
 
@@ -158,29 +122,17 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class BetaAPIError: …
 
 message: str
 
 type: Literal["api\_error"]
 
-Accepts one of the following:
-
-"api\_error"
-
 class BetaOverloadedError: …
 
 message: str
 
 type: Literal["overloaded\_error"]
-
-Accepts one of the following:
-
-"overloaded\_error"
 
 class BetaErrorResponse: …
 
@@ -194,19 +146,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -214,19 +158,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class BetaPermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class BetaNotFoundError: …
 
@@ -234,29 +170,17 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
 
-Accepts one of the following:
-
-"rate\_limit\_error"
-
 class BetaGatewayTimeoutError: …
 
 message: str
 
 type: Literal["timeout\_error"]
-
-Accepts one of the following:
-
-"timeout\_error"
 
 class BetaAPIError: …
 
@@ -264,27 +188,15 @@ message: str
 
 type: Literal["api\_error"]
 
-Accepts one of the following:
-
-"api\_error"
-
 class BetaOverloadedError: …
 
 message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
-
-Accepts one of the following:
-
-"error"
 
 class BetaGatewayTimeoutError: …
 
@@ -292,19 +204,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class BetaInvalidRequestError: …
 
 message: str
 
 type: Literal["invalid\_request\_error"]
-
-Accepts one of the following:
-
-"invalid\_request\_error"
 
 class BetaNotFoundError: …
 
@@ -312,19 +216,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaOverloadedError: …
 
 message: str
 
 type: Literal["overloaded\_error"]
-
-Accepts one of the following:
-
-"overloaded\_error"
 
 class BetaPermissionError: …
 
@@ -332,19 +228,11 @@ message: str
 
 type: Literal["permission\_error"]
 
-Accepts one of the following:
-
-"permission\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 #### BetaModels
 
@@ -352,13 +240,13 @@ Accepts one of the following:
 
 beta.models.list(ModelListParams\*\*kwargs)  -> SyncPage[[BetaModelInfo](api/beta.md)]
 
-get/v1/models
+GET/v1/models
 
 ##### [Get a Model](api/beta/models/retrieve.md)
 
 beta.models.retrieve(strmodel\_id, ModelRetrieveParams\*\*kwargs)  -> [BetaModelInfo](api/beta.md)
 
-get/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
@@ -372,8 +260,6 @@ created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 display\_name: str
 
 A human-readable name for the model.
@@ -384,33 +270,25 @@ Object type.
 
 For Models, this is always `"model"`.
 
-Accepts one of the following:
-
-"model"
-
 #### BetaMessages
 
 ##### [Create a Message](api/beta/messages/create.md)
 
 beta.messages.create(MessageCreateParams\*\*kwargs)  -> [BetaMessage](api/beta.md)
 
-post/v1/messages
+POST/v1/messages
 
 ##### [Count tokens in a Message](api/beta/messages/count_tokens.md)
 
 beta.messages.count\_tokens(MessageCountTokensParams\*\*kwargs)  -> [BetaMessageTokensCount](api/beta.md)
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
 class BetaAllThinkingTurns: …
 
 type: Literal["all"]
-
-Accepts one of the following:
-
-"all"
 
 class BetaBase64ImageSource: …
 
@@ -430,25 +308,13 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaBase64PDFSource: …
 
 data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaBashCodeExecutionOutputBlock: …
 
@@ -456,19 +322,11 @@ file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
-
 class BetaBashCodeExecutionOutputBlockParam: …
 
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 class BetaBashCodeExecutionResultBlock: …
 
@@ -478,10 +336,6 @@ file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -489,10 +343,6 @@ stderr: str
 stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
 
 class BetaBashCodeExecutionResultBlockParam: …
 
@@ -502,10 +352,6 @@ file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -513,10 +359,6 @@ stderr: str
 stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -542,10 +384,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -553,10 +391,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -566,17 +400,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlockParam: …
 
@@ -602,10 +428,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlockParam: …
 
 content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
@@ -613,10 +435,6 @@ content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -626,27 +444,15 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -683,10 +489,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
@@ -705,17 +507,9 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaCacheControlEphemeral: …
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -740,13 +534,9 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 class BetaCitationCharLocation: …
 
@@ -764,10 +554,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationCharLocationParam: …
 
 cited\_text: str
@@ -781,10 +567,6 @@ end\_char\_index: int
 start\_char\_index: int
 
 type: Literal["char\_location"]
-
-Accepts one of the following:
-
-"char\_location"
 
 class BetaCitationConfig: …
 
@@ -806,10 +588,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationContentBlockLocationParam: …
 
 cited\_text: str
@@ -823,10 +601,6 @@ end\_block\_index: int
 start\_block\_index: int
 
 type: Literal["content\_block\_location"]
-
-Accepts one of the following:
-
-"content\_block\_location"
 
 class BetaCitationPageLocation: …
 
@@ -844,10 +618,6 @@ start\_page\_number: int
 
 type: Literal["page\_location"]
 
-Accepts one of the following:
-
-"page\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -861,10 +631,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationSearchResultLocation: …
 
@@ -882,10 +648,6 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 class BetaCitationSearchResultLocationParam: …
 
 cited\_text: str
@@ -902,10 +664,6 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -915,10 +673,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -948,10 +702,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -967,10 +717,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -988,10 +734,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -1001,10 +743,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1024,15 +762,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: Literal["citations\_delta"]
-
-Accepts one of the following:
-
-"citations\_delta"
 
 class BetaCitationsWebSearchResultLocation: …
 
@@ -1044,19 +774,11 @@ title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
 
-Accepts one of the following:
-
-"web\_search\_result\_location"
-
 url: str
 
 class BetaClearThinking20251015Edit: …
 
 type: Literal["clear\_thinking\_20251015"]
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 keep: Optional[Keep]
 
@@ -1068,25 +790,13 @@ class BetaThinkingTurns: …
 
 type: Literal["thinking\_turns"]
 
-Accepts one of the following:
-
-"thinking\_turns"
-
 value: int
 
 class BetaAllThinkingTurns: …
 
 type: Literal["all"]
 
-Accepts one of the following:
-
-"all"
-
-KeepUnionMember2 = Literal["all"]
-
-Accepts one of the following:
-
-"all"
+Literal["all"]
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -1094,39 +804,23 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
-
-minimum0
 
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
 
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
-
 class BetaClearToolUses20250919Edit: …
 
 type: Literal["clear\_tool\_uses\_20250919"]
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 clear\_at\_least: Optional[BetaInputTokensClearAtLeast]
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
 type: Literal["input\_tokens"]
-
-Accepts one of the following:
-
-"input\_tokens"
 
 value: int
 
@@ -1136,9 +830,9 @@ Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
 Accepts one of the following:
 
-ClearToolInputsUnionMember0 = bool
+bool
 
-ClearToolInputsUnionMember1 = List[str]
+List[str]
 
 exclude\_tools: Optional[List[str]]
 
@@ -1149,10 +843,6 @@ keep: Optional[BetaToolUsesKeep]
 Number of tool uses to retain in the conversation
 
 type: Literal["tool\_uses"]
-
-Accepts one of the following:
-
-"tool\_uses"
 
 value: int
 
@@ -1166,19 +856,11 @@ class BetaInputTokensTrigger: …
 
 type: Literal["input\_tokens"]
 
-Accepts one of the following:
-
-"input\_tokens"
-
 value: int
 
 class BetaToolUsesTrigger: …
 
 type: Literal["tool\_uses"]
-
-Accepts one of the following:
-
-"tool\_uses"
 
 value: int
 
@@ -1188,21 +870,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaCodeExecutionOutputBlock: …
 
@@ -1210,19 +884,11 @@ file\_id: str
 
 type: Literal["code\_execution\_output"]
 
-Accepts one of the following:
-
-"code\_execution\_output"
-
 class BetaCodeExecutionOutputBlockParam: …
 
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 class BetaCodeExecutionResultBlock: …
 
@@ -1232,10 +898,6 @@ file\_id: str
 
 type: Literal["code\_execution\_output"]
 
-Accepts one of the following:
-
-"code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -1243,10 +905,6 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_result"
 
 class BetaCodeExecutionResultBlockParam: …
 
@@ -1256,10 +914,6 @@ file\_id: str
 
 type: Literal["code\_execution\_output"]
 
-Accepts one of the following:
-
-"code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -1267,10 +921,6 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_result"
 
 class BetaCodeExecutionTool20250522: …
 
@@ -1280,15 +930,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"code\_execution"
-
 type: Literal["code\_execution\_20250522"]
-
-Accepts one of the following:
-
-"code\_execution\_20250522"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -1303,10 +945,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1341,15 +979,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"code\_execution"
-
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -1364,10 +994,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1416,10 +1042,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -1427,10 +1049,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -1440,19 +1058,11 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
-
-BetaCodeExecutionToolResultBlockContent = [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+[BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Accepts one of the following:
 
@@ -1472,10 +1082,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -1484,10 +1090,6 @@ file\_id: str
 
 type: Literal["code\_execution\_output"]
 
-Accepts one of the following:
-
-"code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -1495,10 +1097,6 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_result"
 
 class BetaCodeExecutionToolResultBlockParam: …
 
@@ -1522,10 +1120,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlockParam: …
 
 content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
@@ -1533,10 +1127,6 @@ content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -1546,27 +1136,15 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1585,7 +1163,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCodeExecutionToolResultBlockParamContent = [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+[BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Accepts one of the following:
 
@@ -1605,10 +1183,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlockParam: …
 
 content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
@@ -1617,10 +1191,6 @@ file\_id: str
 
 type: Literal["code\_execution\_output"]
 
-Accepts one of the following:
-
-"code\_execution\_output"
-
 return\_code: int
 
 stderr: str
@@ -1628,10 +1198,6 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_result"
 
 class BetaCodeExecutionToolResultError: …
 
@@ -1649,11 +1215,7 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
-BetaCodeExecutionToolResultErrorCode = Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
+Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
 Accepts one of the following:
 
@@ -1681,19 +1243,11 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCompact20260112Edit: …
 
 Automatically compact older context when reaching the configured trigger threshold.
 
 type: Literal["compact\_20260112"]
-
-Accepts one of the following:
-
-"compact\_20260112"
 
 instructions: Optional[str]
 
@@ -1708,10 +1262,6 @@ trigger: Optional[BetaInputTokensTrigger]
 When to trigger compaction. Defaults to 150000 input tokens.
 
 type: Literal["input\_tokens"]
-
-Accepts one of the following:
-
-"input\_tokens"
 
 value: int
 
@@ -1729,10 +1279,6 @@ Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 class BetaCompactionBlockParam: …
 
 A compaction block containing summary of previous context.
@@ -1749,19 +1295,11 @@ Summary of previously compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1786,10 +1324,6 @@ content: Optional[str]
 
 type: Literal["compaction\_delta"]
 
-Accepts one of the following:
-
-"compaction\_delta"
-
 class BetaCompactionIterationUsage: …
 
 Token usage for a compaction iteration.
@@ -1802,45 +1336,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["compaction"]
 
 Usage for a compaction iteration
-
-Accepts one of the following:
-
-"compaction"
 
 class BetaContainer: …
 
@@ -1854,8 +1372,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -1863,10 +1379,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -1881,10 +1393,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 class BetaContainerParams: …
 
@@ -1902,10 +1410,6 @@ skill\_id: str
 
 Skill ID
 
-maxLength64
-
-minLength1
-
 type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1920,10 +1424,6 @@ version: Optional[str]
 
 Skill version or 'latest' for most recent version
 
-maxLength64
-
-minLength1
-
 class BetaContainerUploadBlock: …
 
 Response model for a file uploaded to the container.
@@ -1931,10 +1431,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaContainerUploadBlockParam: …
 
@@ -1945,19 +1441,11 @@ file\_id: str
 
 type: Literal["container\_upload"]
 
-Accepts one of the following:
-
-"container\_upload"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1976,7 +1464,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaContentBlock = [BetaContentBlock](api/beta.md)
+[BetaContentBlock](api/beta.md)
 
 Response model for a file uploaded to the container.
 
@@ -2008,10 +1496,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -2027,10 +1511,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -2048,10 +1528,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -2061,10 +1537,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -2084,17 +1556,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -2104,19 +1568,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -2127,10 +1583,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -2144,10 +1596,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -2155,10 +1603,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -2186,10 +1630,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -2202,10 +1642,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -2213,10 +1649,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -2244,11 +1676,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -2258,19 +1686,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -2302,10 +1722,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -2326,15 +1742,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -2342,15 +1750,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -2358,19 +1758,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -2379,10 +1771,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -2406,10 +1794,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -2417,10 +1801,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -2430,17 +1810,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -2466,10 +1838,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -2477,10 +1845,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -2490,17 +1854,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -2528,10 +1884,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -2554,19 +1906,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -2582,17 +1926,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -2618,10 +1954,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -2630,23 +1962,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -2664,19 +1984,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -2702,10 +2018,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -2721,10 +2033,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -2742,10 +2050,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -2755,10 +2059,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -2778,27 +2078,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -2807,10 +2095,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -2826,11 +2110,7 @@ Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
-BetaContentBlockParam = [BetaContentBlockParam](api/beta.md)
+[BetaContentBlockParam](api/beta.md)
 
 Regular text content.
 
@@ -2842,19 +2122,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2891,10 +2163,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -2908,10 +2176,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -2927,10 +2191,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -2940,10 +2200,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -2962,10 +2218,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -2991,17 +2243,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -3011,25 +2255,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3060,15 +2292,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -3076,15 +2300,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -3092,9 +2308,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -3104,19 +2320,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3153,10 +2361,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -3170,10 +2374,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -3189,10 +2389,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -3202,10 +2398,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -3224,10 +2416,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -3253,17 +2441,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -3273,25 +2453,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3312,17 +2480,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -3332,25 +2492,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3385,19 +2533,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3434,10 +2574,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -3451,10 +2587,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -3470,10 +2602,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -3483,10 +2611,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -3506,29 +2630,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3559,19 +2671,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlockParam: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlockParam: …
 
@@ -3583,19 +2687,11 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3626,10 +2722,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -3638,29 +2730,17 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaToolResultBlockParam: …
 
 tool\_use\_id: str
 
 type: Literal["tool\_result"]
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3683,9 +2763,9 @@ content: Optional[Union[str, List[Content], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-Content = List[Content]
+List[Content]
 
 Accepts one of the following:
 
@@ -3695,19 +2775,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3744,10 +2816,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -3761,10 +2829,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -3780,10 +2844,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -3793,10 +2853,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -3815,10 +2871,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -3844,17 +2896,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -3864,25 +2908,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3909,19 +2941,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -3958,10 +2982,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -3975,10 +2995,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -3994,10 +3010,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -4007,10 +3019,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -4030,29 +3038,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4087,15 +3083,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -4103,15 +3091,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -4119,9 +3099,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -4131,19 +3111,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4180,10 +3152,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -4197,10 +3165,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -4216,10 +3180,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -4229,10 +3189,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -4251,10 +3207,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -4280,17 +3232,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -4300,25 +3244,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4339,17 +3271,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -4359,25 +3283,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4412,19 +3324,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4471,19 +3375,11 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4514,10 +3410,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -4526,27 +3418,19 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 Accepts one of the following:
 
-ResultBlock = List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
 encrypted\_content: str
 
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -4572,27 +3456,15 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4641,10 +3513,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlockParam: …
 
 content: [BetaRequestDocumentBlock](api/beta.md)
@@ -4659,15 +3527,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -4675,15 +3535,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -4691,9 +3543,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -4703,19 +3555,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4752,10 +3596,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -4769,10 +3609,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -4788,10 +3624,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -4801,10 +3633,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -4823,10 +3651,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -4852,17 +3676,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -4872,25 +3688,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4911,17 +3715,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -4931,25 +3727,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -4978,10 +3762,6 @@ title: Optional[str]
 
 type: Literal["web\_fetch\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_result"
-
 url: str
 
 Fetched content URL
@@ -4994,19 +3774,11 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5047,10 +3819,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlockParam: …
 
 content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
@@ -5058,10 +3826,6 @@ content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -5071,27 +3835,15 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5134,10 +3886,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlockParam: …
 
 content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
@@ -5145,10 +3893,6 @@ content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -5158,27 +3902,15 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5221,10 +3953,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 error\_message: Optional[str]
 
 class BetaTextEditorCodeExecutionViewResultBlockParam: …
@@ -5243,10 +3971,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 num\_lines: Optional[int]
 
 start\_line: Optional[int]
@@ -5259,17 +3983,9 @@ is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
-
 class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
 
 lines: Optional[List[str]]
 
@@ -5285,19 +4001,11 @@ tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5338,10 +4046,6 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlockParam: …
 
 tool\_references: List[[BetaToolReferenceBlockParam](api/beta.md)]
@@ -5350,19 +4054,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5383,27 +4079,15 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_search\_result"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
-
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5436,19 +4120,11 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5473,19 +4149,11 @@ tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
 
-Accepts one of the following:
-
-"mcp\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5508,27 +4176,19 @@ content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockParamContent = List[[BetaTextBlockParam](api/beta.md)]
+List[[BetaTextBlockParam](api/beta.md)]
 
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5565,10 +4225,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -5582,10 +4238,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -5601,10 +4253,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -5614,10 +4262,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -5637,10 +4281,6 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 is\_error: Optional[bool]
 
 class BetaContainerUploadBlockParam: …
@@ -5652,19 +4292,11 @@ file\_id: str
 
 type: Literal["container\_upload"]
 
-Accepts one of the following:
-
-"container\_upload"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5699,19 +4331,11 @@ Summary of previously compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5736,9 +4360,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -5748,19 +4372,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5797,10 +4413,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -5814,10 +4426,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -5833,10 +4441,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -5846,10 +4450,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -5868,10 +4468,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -5897,17 +4493,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -5917,25 +4505,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -5956,11 +4532,7 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
-BetaContentBlockSourceContent = [BetaContentBlockSourceContent](api/beta.md)
+[BetaContentBlockSourceContent](api/beta.md)
 
 Accepts one of the following:
 
@@ -5970,19 +4542,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -6019,10 +4583,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -6036,10 +4596,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -6055,10 +4611,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -6068,10 +4620,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -6090,10 +4638,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -6119,17 +4663,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -6139,25 +4675,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -6188,19 +4712,11 @@ class BetaClearToolUses20250919Edit: …
 
 type: Literal["clear\_tool\_uses\_20250919"]
 
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
-
 clear\_at\_least: Optional[BetaInputTokensClearAtLeast]
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
 type: Literal["input\_tokens"]
-
-Accepts one of the following:
-
-"input\_tokens"
 
 value: int
 
@@ -6210,9 +4726,9 @@ Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
 Accepts one of the following:
 
-ClearToolInputsUnionMember0 = bool
+bool
 
-ClearToolInputsUnionMember1 = List[str]
+List[str]
 
 exclude\_tools: Optional[List[str]]
 
@@ -6223,10 +4739,6 @@ keep: Optional[BetaToolUsesKeep]
 Number of tool uses to retain in the conversation
 
 type: Literal["tool\_uses"]
-
-Accepts one of the following:
-
-"tool\_uses"
 
 value: int
 
@@ -6240,29 +4752,17 @@ class BetaInputTokensTrigger: …
 
 type: Literal["input\_tokens"]
 
-Accepts one of the following:
-
-"input\_tokens"
-
 value: int
 
 class BetaToolUsesTrigger: …
 
 type: Literal["tool\_uses"]
 
-Accepts one of the following:
-
-"tool\_uses"
-
 value: int
 
 class BetaClearThinking20251015Edit: …
 
 type: Literal["clear\_thinking\_20251015"]
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 keep: Optional[Keep]
 
@@ -6274,35 +4774,19 @@ class BetaThinkingTurns: …
 
 type: Literal["thinking\_turns"]
 
-Accepts one of the following:
-
-"thinking\_turns"
-
 value: int
 
 class BetaAllThinkingTurns: …
 
 type: Literal["all"]
 
-Accepts one of the following:
-
-"all"
-
-KeepUnionMember2 = Literal["all"]
-
-Accepts one of the following:
-
-"all"
+Literal["all"]
 
 class BetaCompact20260112Edit: …
 
 Automatically compact older context when reaching the configured trigger threshold.
 
 type: Literal["compact\_20260112"]
-
-Accepts one of the following:
-
-"compact\_20260112"
 
 instructions: Optional[str]
 
@@ -6317,10 +4801,6 @@ trigger: Optional[BetaInputTokensTrigger]
 When to trigger compaction. Defaults to 150000 input tokens.
 
 type: Literal["input\_tokens"]
-
-Accepts one of the following:
-
-"input\_tokens"
 
 value: int
 
@@ -6338,21 +4818,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -6360,21 +4832,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 class BetaCountTokensContextManagementResponse: …
 
@@ -6387,10 +4851,6 @@ class BetaDirectCaller: …
 Tool invocation directly from the model.
 
 type: Literal["direct"]
-
-Accepts one of the following:
-
-"direct"
 
 class BetaDocumentBlock: …
 
@@ -6410,15 +4870,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -6426,15 +4878,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -6442,29 +4886,17 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 class BetaFileDocumentSource: …
 
 file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 class BetaFileImageSource: …
 
 file\_id: str
 
 type: Literal["file"]
-
-Accepts one of the following:
-
-"file"
 
 class BetaImageBlockParam: …
 
@@ -6490,17 +4922,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -6510,25 +4934,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -6553,17 +4965,9 @@ partial\_json: str
 
 type: Literal["input\_json\_delta"]
 
-Accepts one of the following:
-
-"input\_json\_delta"
-
 class BetaInputTokensClearAtLeast: …
 
 type: Literal["input\_tokens"]
-
-Accepts one of the following:
-
-"input\_tokens"
 
 value: int
 
@@ -6571,13 +4975,9 @@ class BetaInputTokensTrigger: …
 
 type: Literal["input\_tokens"]
 
-Accepts one of the following:
-
-"input\_tokens"
-
 value: int
 
-BetaIterationsUsage = Optional[List[BetaIterationsUsageItem]]
+Optional[List[BetaIterationsUsageItem]]
 
 Per-iteration token usage breakdown.
 
@@ -6601,45 +5001,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -6653,45 +5037,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["compaction"]
 
 Usage for a compaction iteration
-
-Accepts one of the following:
-
-"compaction"
 
 class BetaJSONOutputFormat: …
 
@@ -6700,10 +5068,6 @@ schema: Dict[str, object]
 The JSON schema of the format
 
 type: Literal["json\_schema"]
-
-Accepts one of the following:
-
-"json\_schema"
 
 class BetaMCPToolConfig: …
 
@@ -6727,9 +5091,9 @@ content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -6755,10 +5119,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -6774,10 +5134,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -6795,10 +5151,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -6808,10 +5160,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -6831,27 +5179,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -6869,10 +5205,6 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolUseBlockParam: …
 
 id: str
@@ -6887,19 +5219,11 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -6929,25 +5253,13 @@ mcp\_server\_name: str
 
 Name of the MCP server to configure tools for
 
-maxLength255
-
-minLength1
-
 type: Literal["mcp\_toolset"]
-
-Accepts one of the following:
-
-"mcp\_toolset"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -6990,15 +5302,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"memory"
-
 type: Literal["memory\_20250818"]
-
-Accepts one of the following:
-
-"memory\_20250818"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -7013,10 +5317,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -7045,7 +5345,7 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMemoryTool20250818Command = [BetaMemoryTool20250818Command](api/beta.md)
+[BetaMemoryTool20250818Command](api/beta.md)
 
 Accepts one of the following:
 
@@ -7054,10 +5354,6 @@ class BetaMemoryTool20250818ViewCommand: …
 command: Literal["view"]
 
 Command type identifier
-
-Accepts one of the following:
-
-"view"
 
 path: str
 
@@ -7073,10 +5369,6 @@ command: Literal["create"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"create"
-
 file\_text: str
 
 Content to write to the file
@@ -7090,10 +5382,6 @@ class BetaMemoryTool20250818StrReplaceCommand: …
 command: Literal["str\_replace"]
 
 Command type identifier
-
-Accepts one of the following:
-
-"str\_replace"
 
 new\_str: str
 
@@ -7113,15 +5401,9 @@ command: Literal["insert"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"insert"
-
 insert\_line: int
 
 Line number where text should be inserted
-
-minimum1
 
 insert\_text: str
 
@@ -7137,10 +5419,6 @@ command: Literal["delete"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"delete"
-
 path: str
 
 Path to the file or directory to delete
@@ -7150,10 +5428,6 @@ class BetaMemoryTool20250818RenameCommand: …
 command: Literal["rename"]
 
 Command type identifier
-
-Accepts one of the following:
-
-"rename"
 
 new\_path: str
 
@@ -7169,10 +5443,6 @@ command: Literal["create"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"create"
-
 file\_text: str
 
 Content to write to the file
@@ -7187,10 +5457,6 @@ command: Literal["delete"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"delete"
-
 path: str
 
 Path to the file or directory to delete
@@ -7201,15 +5467,9 @@ command: Literal["insert"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"insert"
-
 insert\_line: int
 
 Line number where text should be inserted
-
-minimum1
 
 insert\_text: str
 
@@ -7225,10 +5485,6 @@ command: Literal["rename"]
 
 Command type identifier
 
-Accepts one of the following:
-
-"rename"
-
 new\_path: str
 
 New path for the file or directory
@@ -7242,10 +5498,6 @@ class BetaMemoryTool20250818StrReplaceCommand: …
 command: Literal["str\_replace"]
 
 Command type identifier
-
-Accepts one of the following:
-
-"str\_replace"
 
 new\_str: str
 
@@ -7264,10 +5516,6 @@ class BetaMemoryTool20250818ViewCommand: …
 command: Literal["view"]
 
 Command type identifier
-
-Accepts one of the following:
-
-"view"
 
 path: str
 
@@ -7297,8 +5545,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -7306,10 +5552,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -7324,10 +5566,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -7386,10 +5624,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -7405,10 +5639,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -7426,10 +5656,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -7439,10 +5665,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -7462,17 +5684,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -7482,19 +5696,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -7505,10 +5711,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -7522,10 +5724,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -7533,10 +5731,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -7564,10 +5758,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -7580,10 +5770,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -7591,10 +5777,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -7622,11 +5804,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -7636,19 +5814,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -7680,10 +5850,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -7704,15 +5870,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -7720,15 +5878,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -7736,19 +5886,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -7757,10 +5899,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -7784,10 +5922,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -7795,10 +5929,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -7808,17 +5938,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -7844,10 +5966,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -7855,10 +5973,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -7868,17 +5982,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -7906,10 +6012,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -7932,19 +6034,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -7960,17 +6054,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -7996,10 +6082,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -8008,23 +6090,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -8042,19 +6112,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -8080,10 +6146,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -8099,10 +6161,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -8120,10 +6178,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -8133,10 +6187,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -8156,27 +6206,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -8185,10 +6223,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -8203,10 +6237,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -8226,21 +6256,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -8248,21 +6270,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -8272,7 +6286,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -8386,17 +6400,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -8443,10 +6453,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -8467,25 +6473,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -8494,8 +6492,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -8521,45 +6517,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -8573,51 +6553,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -8627,13 +6589,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -8663,19 +6621,13 @@ cache\_creation\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Optional[int]
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -8701,45 +6653,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -8753,45 +6689,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["compaction"]
 
 Usage for a compaction iteration
-
-Accepts one of the following:
-
-"compaction"
 
 output\_tokens: int
 
@@ -8805,13 +6725,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 class BetaMessageIterationUsage: …
 
@@ -8825,45 +6741,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaMessageParam: …
 
@@ -8871,9 +6771,9 @@ content: Union[str, List[[BetaContentBlockParam](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentUnionMember1 = List[[BetaContentBlockParam](api/beta.md)]
+List[[BetaContentBlockParam](api/beta.md)]
 
 Accepts one of the following:
 
@@ -8883,19 +6783,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -8932,10 +6824,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -8949,10 +6837,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -8968,10 +6852,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -8981,10 +6861,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -9003,10 +6879,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -9032,17 +6904,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -9052,25 +6916,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9101,15 +6953,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -9117,15 +6961,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -9133,9 +6969,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -9145,19 +6981,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9194,10 +7022,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -9211,10 +7035,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -9230,10 +7050,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -9243,10 +7059,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -9265,10 +7077,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -9294,17 +7102,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -9314,25 +7114,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9353,17 +7141,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -9373,25 +7153,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9426,19 +7194,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9475,10 +7235,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -9492,10 +7248,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -9511,10 +7263,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -9524,10 +7272,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -9547,29 +7291,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9600,19 +7332,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlockParam: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlockParam: …
 
@@ -9624,19 +7348,11 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9667,10 +7383,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -9679,29 +7391,17 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaToolResultBlockParam: …
 
 tool\_use\_id: str
 
 type: Literal["tool\_result"]
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9724,9 +7424,9 @@ content: Optional[Union[str, List[Content], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-Content = List[Content]
+List[Content]
 
 Accepts one of the following:
 
@@ -9736,19 +7436,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9785,10 +7477,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -9802,10 +7490,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -9821,10 +7505,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -9834,10 +7514,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -9856,10 +7532,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -9885,17 +7557,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -9905,25 +7569,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9950,19 +7602,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -9999,10 +7643,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -10016,10 +7656,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -10035,10 +7671,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -10048,10 +7680,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -10071,29 +7699,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10128,15 +7744,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -10144,15 +7752,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -10160,9 +7760,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -10172,19 +7772,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10221,10 +7813,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -10238,10 +7826,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -10257,10 +7841,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -10270,10 +7850,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -10292,10 +7868,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -10321,17 +7893,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -10341,25 +7905,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10380,17 +7932,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -10400,25 +7944,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10453,19 +7985,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10512,19 +8036,11 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10555,10 +8071,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -10567,27 +8079,19 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 Accepts one of the following:
 
-ResultBlock = List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
 encrypted\_content: str
 
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -10613,27 +8117,15 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10682,10 +8174,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlockParam: …
 
 content: [BetaRequestDocumentBlock](api/beta.md)
@@ -10700,15 +8188,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -10716,15 +8196,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -10732,9 +8204,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -10744,19 +8216,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10793,10 +8257,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -10810,10 +8270,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -10829,10 +8285,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -10842,10 +8294,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -10864,10 +8312,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -10893,17 +8337,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -10913,25 +8349,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -10952,17 +8376,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -10972,25 +8388,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11019,10 +8423,6 @@ title: Optional[str]
 
 type: Literal["web\_fetch\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_result"
-
 url: str
 
 Fetched content URL
@@ -11035,19 +8435,11 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11088,10 +8480,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlockParam: …
 
 content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
@@ -11099,10 +8487,6 @@ content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -11112,27 +8496,15 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11175,10 +8547,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlockParam: …
 
 content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
@@ -11186,10 +8554,6 @@ content: List[[BetaBashCodeExecutionOutputBlockParam](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -11199,27 +8563,15 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11262,10 +8614,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 error\_message: Optional[str]
 
 class BetaTextEditorCodeExecutionViewResultBlockParam: …
@@ -11284,10 +8632,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 num\_lines: Optional[int]
 
 start\_line: Optional[int]
@@ -11300,17 +8644,9 @@ is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
-
 class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
 
 lines: Optional[List[str]]
 
@@ -11326,19 +8662,11 @@ tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11379,10 +8707,6 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlockParam: …
 
 tool\_references: List[[BetaToolReferenceBlockParam](api/beta.md)]
@@ -11391,19 +8715,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11424,27 +8740,15 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_search\_result"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
-
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11477,19 +8781,11 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11514,19 +8810,11 @@ tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
 
-Accepts one of the following:
-
-"mcp\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11549,27 +8837,19 @@ content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockParamContent = List[[BetaTextBlockParam](api/beta.md)]
+List[[BetaTextBlockParam](api/beta.md)]
 
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11606,10 +8886,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -11623,10 +8899,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -11642,10 +8914,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -11655,10 +8923,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -11678,10 +8942,6 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 is\_error: Optional[bool]
 
 class BetaContainerUploadBlockParam: …
@@ -11693,19 +8953,11 @@ file\_id: str
 
 type: Literal["container\_upload"]
 
-Accepts one of the following:
-
-"container\_upload"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11740,19 +8992,11 @@ Summary of previously compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -11829,27 +9073,15 @@ The JSON schema of the format
 
 type: Literal["json\_schema"]
 
-Accepts one of the following:
-
-"json\_schema"
-
 class BetaPlainTextSource: …
 
 data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
-BetaRawContentBlockDelta = [BetaRawContentBlockDelta](api/beta.md)
+[BetaRawContentBlockDelta](api/beta.md)
 
 Accepts one of the following:
 
@@ -11859,19 +9091,11 @@ text: str
 
 type: Literal["text\_delta"]
 
-Accepts one of the following:
-
-"text\_delta"
-
 class BetaInputJSONDelta: …
 
 partial\_json: str
 
 type: Literal["input\_json\_delta"]
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 class BetaCitationsDelta: …
 
@@ -11895,10 +9119,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -11914,10 +9134,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -11935,10 +9151,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -11948,10 +9160,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -11971,15 +9179,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: Literal["citations\_delta"]
-
-Accepts one of the following:
-
-"citations\_delta"
 
 class BetaThinkingDelta: …
 
@@ -11987,29 +9187,17 @@ thinking: str
 
 type: Literal["thinking\_delta"]
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 class BetaSignatureDelta: …
 
 signature: str
 
 type: Literal["signature\_delta"]
 
-Accepts one of the following:
-
-"signature\_delta"
-
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
 
 type: Literal["compaction\_delta"]
-
-Accepts one of the following:
-
-"compaction\_delta"
 
 class BetaRawContentBlockDeltaEvent: …
 
@@ -12023,19 +9211,11 @@ text: str
 
 type: Literal["text\_delta"]
 
-Accepts one of the following:
-
-"text\_delta"
-
 class BetaInputJSONDelta: …
 
 partial\_json: str
 
 type: Literal["input\_json\_delta"]
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 class BetaCitationsDelta: …
 
@@ -12059,10 +9239,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -12078,10 +9254,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -12099,10 +9271,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -12112,10 +9280,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -12135,15 +9299,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: Literal["citations\_delta"]
-
-Accepts one of the following:
-
-"citations\_delta"
 
 class BetaThinkingDelta: …
 
@@ -12151,19 +9307,11 @@ thinking: str
 
 type: Literal["thinking\_delta"]
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 class BetaSignatureDelta: …
 
 signature: str
 
 type: Literal["signature\_delta"]
-
-Accepts one of the following:
-
-"signature\_delta"
 
 class BetaCompactionContentBlockDelta: …
 
@@ -12171,17 +9319,9 @@ content: Optional[str]
 
 type: Literal["compaction\_delta"]
 
-Accepts one of the following:
-
-"compaction\_delta"
-
 index: int
 
 type: Literal["content\_block\_delta"]
-
-Accepts one of the following:
-
-"content\_block\_delta"
 
 class BetaRawContentBlockStartEvent: …
 
@@ -12217,10 +9357,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -12236,10 +9372,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -12257,10 +9389,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -12270,10 +9398,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -12293,17 +9417,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -12313,19 +9429,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -12336,10 +9444,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -12353,10 +9457,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -12364,10 +9464,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -12395,10 +9491,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -12411,10 +9503,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -12422,10 +9510,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -12453,11 +9537,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -12467,19 +9547,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -12511,10 +9583,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -12535,15 +9603,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -12551,15 +9611,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -12567,19 +9619,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -12588,10 +9632,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -12615,10 +9655,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -12626,10 +9662,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -12639,17 +9671,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -12675,10 +9699,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -12686,10 +9706,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -12699,17 +9715,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -12737,10 +9745,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -12763,19 +9767,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -12791,17 +9787,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -12827,10 +9815,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -12839,23 +9823,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -12873,19 +9845,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -12911,10 +9879,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -12930,10 +9894,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -12951,10 +9911,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -12964,10 +9920,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -12987,27 +9939,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -13016,10 +9956,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -13035,27 +9971,15 @@ Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 index: int
 
 type: Literal["content\_block\_start"]
-
-Accepts one of the following:
-
-"content\_block\_start"
 
 class BetaRawContentBlockStopEvent: …
 
 index: int
 
 type: Literal["content\_block\_stop"]
-
-Accepts one of the following:
-
-"content\_block\_stop"
 
 class BetaRawMessageDeltaEvent: …
 
@@ -13075,21 +9999,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -13097,21 +10013,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 delta: Delta
 
@@ -13127,8 +10035,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -13136,10 +10042,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -13154,10 +10056,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -13183,10 +10081,6 @@ stop\_sequence: Optional[str]
 
 type: Literal["message\_delta"]
 
-Accepts one of the following:
-
-"message\_delta"
-
 usage: [BetaMessageDeltaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -13203,19 +10097,13 @@ cache\_creation\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Optional[int]
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -13241,45 +10129,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -13293,45 +10165,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["compaction"]
 
 Usage for a compaction iteration
-
-Accepts one of the following:
-
-"compaction"
 
 output\_tokens: int
 
@@ -13345,13 +10201,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 class BetaRawMessageStartEvent: …
 
@@ -13375,8 +10227,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -13384,10 +10234,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -13402,10 +10248,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -13464,10 +10306,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -13483,10 +10321,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -13504,10 +10338,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -13517,10 +10347,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -13540,17 +10366,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -13560,19 +10378,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -13583,10 +10393,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -13600,10 +10406,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -13611,10 +10413,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -13642,10 +10440,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -13658,10 +10452,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -13669,10 +10459,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -13700,11 +10486,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -13714,19 +10496,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -13758,10 +10532,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -13782,15 +10552,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -13798,15 +10560,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -13814,19 +10568,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -13835,10 +10581,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -13862,10 +10604,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -13873,10 +10611,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -13886,17 +10620,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -13922,10 +10648,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -13933,10 +10655,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -13946,17 +10664,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -13984,10 +10694,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -14010,19 +10716,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -14038,17 +10736,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -14074,10 +10764,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -14086,23 +10772,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -14120,19 +10794,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -14158,10 +10828,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -14177,10 +10843,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -14198,10 +10860,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -14211,10 +10869,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -14234,27 +10888,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -14263,10 +10905,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -14281,10 +10919,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -14304,21 +10938,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -14326,21 +10952,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -14350,7 +10968,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -14464,17 +11082,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -14521,10 +11135,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -14545,25 +11155,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -14572,8 +11174,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -14599,45 +11199,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -14651,51 +11235,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -14705,13 +11271,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -14737,19 +11299,11 @@ Accepts one of the following:
 
 type: Literal["message\_start"]
 
-Accepts one of the following:
-
-"message\_start"
-
 class BetaRawMessageStopEvent: …
 
 type: Literal["message\_stop"]
 
-Accepts one of the following:
-
-"message\_stop"
-
-BetaRawMessageStreamEvent = [BetaRawMessageStreamEvent](api/beta.md)
+[BetaRawMessageStreamEvent](api/beta.md)
 
 Accepts one of the following:
 
@@ -14775,8 +11329,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -14784,10 +11336,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -14802,10 +11350,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -14864,10 +11408,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -14883,10 +11423,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -14904,10 +11440,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -14917,10 +11449,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -14940,17 +11468,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -14960,19 +11480,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -14983,10 +11495,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -15000,10 +11508,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -15011,10 +11515,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -15042,10 +11542,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -15058,10 +11554,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -15069,10 +11561,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -15100,11 +11588,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -15114,19 +11598,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -15158,10 +11634,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -15182,15 +11654,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -15198,15 +11662,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -15214,19 +11670,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -15235,10 +11683,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -15262,10 +11706,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -15273,10 +11713,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -15286,17 +11722,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -15322,10 +11750,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -15333,10 +11757,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -15346,17 +11766,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -15384,10 +11796,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -15410,19 +11818,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -15438,17 +11838,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -15474,10 +11866,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -15486,23 +11874,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -15520,19 +11896,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -15558,10 +11930,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -15577,10 +11945,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -15598,10 +11962,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -15611,10 +11971,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -15634,27 +11990,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -15663,10 +12007,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -15681,10 +12021,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -15704,21 +12040,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -15726,21 +12054,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -15750,7 +12070,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -15864,17 +12184,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -15921,10 +12237,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -15945,25 +12257,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -15972,8 +12276,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -15999,45 +12301,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -16051,51 +12337,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -16105,13 +12373,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -16137,10 +12401,6 @@ Accepts one of the following:
 
 type: Literal["message\_start"]
 
-Accepts one of the following:
-
-"message\_start"
-
 class BetaRawMessageDeltaEvent: …
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -16159,21 +12419,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -16181,21 +12433,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 delta: Delta
 
@@ -16211,8 +12455,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -16220,10 +12462,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -16238,10 +12476,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -16267,10 +12501,6 @@ stop\_sequence: Optional[str]
 
 type: Literal["message\_delta"]
 
-Accepts one of the following:
-
-"message\_delta"
-
 usage: [BetaMessageDeltaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -16287,19 +12517,13 @@ cache\_creation\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Optional[int]
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -16325,45 +12549,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -16377,45 +12585,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["compaction"]
 
 Usage for a compaction iteration
-
-Accepts one of the following:
-
-"compaction"
 
 output\_tokens: int
 
@@ -16429,21 +12621,13 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
 
-minimum0
-
 class BetaRawMessageStopEvent: …
 
 type: Literal["message\_stop"]
-
-Accepts one of the following:
-
-"message\_stop"
 
 class BetaRawContentBlockStartEvent: …
 
@@ -16479,10 +12663,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -16498,10 +12678,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -16519,10 +12695,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -16532,10 +12704,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -16555,17 +12723,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -16575,19 +12735,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -16598,10 +12750,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -16615,10 +12763,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -16626,10 +12770,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -16657,10 +12797,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -16673,10 +12809,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -16684,10 +12816,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -16715,11 +12843,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -16729,19 +12853,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -16773,10 +12889,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -16797,15 +12909,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -16813,15 +12917,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -16829,19 +12925,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -16850,10 +12938,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -16877,10 +12961,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -16888,10 +12968,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -16901,17 +12977,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -16937,10 +13005,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -16948,10 +13012,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -16961,17 +13021,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -16999,10 +13051,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -17025,19 +13073,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -17053,17 +13093,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -17089,10 +13121,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -17101,23 +13129,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -17135,19 +13151,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -17173,10 +13185,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -17192,10 +13200,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -17213,10 +13217,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -17226,10 +13226,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -17249,27 +13245,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -17278,10 +13262,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -17297,17 +13277,9 @@ Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
 
-Accepts one of the following:
-
-"compaction"
-
 index: int
 
 type: Literal["content\_block\_start"]
-
-Accepts one of the following:
-
-"content\_block\_start"
 
 class BetaRawContentBlockDeltaEvent: …
 
@@ -17321,19 +13293,11 @@ text: str
 
 type: Literal["text\_delta"]
 
-Accepts one of the following:
-
-"text\_delta"
-
 class BetaInputJSONDelta: …
 
 partial\_json: str
 
 type: Literal["input\_json\_delta"]
-
-Accepts one of the following:
-
-"input\_json\_delta"
 
 class BetaCitationsDelta: …
 
@@ -17357,10 +13321,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -17376,10 +13336,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -17397,10 +13353,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -17410,10 +13362,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -17433,15 +13381,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 type: Literal["citations\_delta"]
-
-Accepts one of the following:
-
-"citations\_delta"
 
 class BetaThinkingDelta: …
 
@@ -17449,19 +13389,11 @@ thinking: str
 
 type: Literal["thinking\_delta"]
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 class BetaSignatureDelta: …
 
 signature: str
 
 type: Literal["signature\_delta"]
-
-Accepts one of the following:
-
-"signature\_delta"
 
 class BetaCompactionContentBlockDelta: …
 
@@ -17469,17 +13401,9 @@ content: Optional[str]
 
 type: Literal["compaction\_delta"]
 
-Accepts one of the following:
-
-"compaction\_delta"
-
 index: int
 
 type: Literal["content\_block\_delta"]
-
-Accepts one of the following:
-
-"content\_block\_delta"
 
 class BetaRawContentBlockStopEvent: …
 
@@ -17487,29 +13411,17 @@ index: int
 
 type: Literal["content\_block\_stop"]
 
-Accepts one of the following:
-
-"content\_block\_stop"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaRedactedThinkingBlockParam: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaRequestDocumentBlock: …
 
@@ -17523,15 +13435,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -17539,15 +13443,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -17555,9 +13451,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -17567,19 +13463,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -17616,10 +13504,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -17633,10 +13517,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -17652,10 +13532,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -17665,10 +13541,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -17687,10 +13559,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -17716,17 +13584,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -17736,25 +13596,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -17775,17 +13623,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -17795,25 +13635,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -17852,10 +13680,6 @@ name: str
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 authorization\_token: Optional[str]
@@ -17872,19 +13696,11 @@ tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
 
-Accepts one of the following:
-
-"mcp\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -17907,27 +13723,19 @@ content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockParamContent = List[[BetaTextBlockParam](api/beta.md)]
+List[[BetaTextBlockParam](api/beta.md)]
 
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -17964,10 +13772,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -17981,10 +13785,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -18000,10 +13800,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -18013,10 +13809,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18035,10 +13827,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 is\_error: Optional[bool]
 
@@ -18050,19 +13838,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -18099,10 +13879,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -18116,10 +13892,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -18135,10 +13907,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -18148,10 +13916,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18171,29 +13935,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -18224,23 +13976,15 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaServerToolUsage: …
 
 web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 class BetaServerToolUseBlock: …
 
@@ -18268,10 +14012,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -18284,10 +14024,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -18295,10 +14031,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlockParam: …
 
@@ -18326,19 +14058,11 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -18369,10 +14093,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -18381,19 +14101,11 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaSignatureDelta: …
 
 signature: str
 
 type: Literal["signature\_delta"]
-
-Accepts one of the following:
-
-"signature\_delta"
 
 class BetaSkill: …
 
@@ -18402,10 +14114,6 @@ A skill that was loaded in a container (response model).
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -18421,10 +14129,6 @@ version: str
 
 Skill version or 'latest' for most recent version
 
-maxLength64
-
-minLength1
-
 class BetaSkillParams: …
 
 Specification for a skill to be loaded in a container (request model).
@@ -18432,10 +14136,6 @@ Specification for a skill to be loaded in a container (request model).
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -18451,11 +14151,7 @@ version: Optional[str]
 
 Skill version or 'latest' for most recent version
 
-maxLength64
-
-minLength1
-
-BetaStopReason = Literal["end\_turn", "max\_tokens", "stop\_sequence", 5 more]
+Literal["end\_turn", "max\_tokens", "stop\_sequence", 5 more]
 
 Accepts one of the following:
 
@@ -18501,10 +14197,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -18520,10 +14212,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -18541,10 +14229,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -18554,10 +14238,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18577,17 +14257,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaTextBlockParam: …
 
@@ -18595,19 +14267,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -18644,10 +14308,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -18661,10 +14321,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -18680,10 +14336,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -18693,10 +14345,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18716,11 +14364,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
-BetaTextCitation = [BetaTextCitation](api/beta.md)
+[BetaTextCitation](api/beta.md)
 
 Accepts one of the following:
 
@@ -18740,10 +14384,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -18759,10 +14399,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -18780,10 +14416,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -18793,10 +14425,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18816,11 +14444,7 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
-BetaTextCitationParam = [BetaTextCitationParam](api/beta.md)
+[BetaTextCitationParam](api/beta.md)
 
 Accepts one of the following:
 
@@ -18838,10 +14462,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -18855,10 +14475,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -18874,10 +14490,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -18887,10 +14499,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -18910,19 +14518,11 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 class BetaTextDelta: …
 
 text: str
 
 type: Literal["text\_delta"]
-
-Accepts one of the following:
-
-"text\_delta"
 
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
@@ -18930,19 +14530,11 @@ is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlockParam: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -18958,17 +14550,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
 
 lines: Optional[List[str]]
 
@@ -19006,10 +14590,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -19032,19 +14612,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -19060,17 +14632,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlockParam: …
 
@@ -19096,10 +14660,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 error\_message: Optional[str]
 
 class BetaTextEditorCodeExecutionViewResultBlockParam: …
@@ -19118,10 +14678,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 num\_lines: Optional[int]
 
 start\_line: Optional[int]
@@ -19134,17 +14690,9 @@ is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
-
 class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
 
 lines: Optional[List[str]]
 
@@ -19160,19 +14708,11 @@ tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19211,10 +14751,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
@@ -19232,10 +14768,6 @@ Accepts one of the following:
 "file\_not\_found"
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: Optional[str]
 
@@ -19261,10 +14793,6 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionViewResultBlockParam: …
 
 content: str
@@ -19281,10 +14809,6 @@ Accepts one of the following:
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 num\_lines: Optional[int]
 
 start\_line: Optional[int]
@@ -19299,10 +14823,6 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaThinkingBlockParam: …
 
 signature: str
@@ -19311,25 +14831,13 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaThinkingConfigAdaptive: …
 
 type: Literal["adaptive"]
 
-Accepts one of the following:
-
-"adaptive"
-
 class BetaThinkingConfigDisabled: …
 
 type: Literal["disabled"]
-
-Accepts one of the following:
-
-"disabled"
 
 class BetaThinkingConfigEnabled: …
 
@@ -19345,11 +14853,7 @@ minimum1024
 
 type: Literal["enabled"]
 
-Accepts one of the following:
-
-"enabled"
-
-BetaThinkingConfigParam = [BetaThinkingConfigParam](api/beta.md)
+[BetaThinkingConfigParam](api/beta.md)
 
 Configuration for enabling Claude's extended thinking.
 
@@ -19373,25 +14877,13 @@ minimum1024
 
 type: Literal["enabled"]
 
-Accepts one of the following:
-
-"enabled"
-
 class BetaThinkingConfigDisabled: …
 
 type: Literal["disabled"]
 
-Accepts one of the following:
-
-"disabled"
-
 class BetaThinkingConfigAdaptive: …
 
 type: Literal["adaptive"]
-
-Accepts one of the following:
-
-"adaptive"
 
 class BetaThinkingDelta: …
 
@@ -19399,17 +14891,9 @@ thinking: str
 
 type: Literal["thinking\_delta"]
 
-Accepts one of the following:
-
-"thinking\_delta"
-
 class BetaThinkingTurns: …
 
 type: Literal["thinking\_turns"]
-
-Accepts one of the following:
-
-"thinking\_turns"
 
 value: int
 
@@ -19422,10 +14906,6 @@ input\_schema: InputSchema
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: Literal["object"]
-
-Accepts one of the following:
-
-"object"
 
 properties: Optional[Dict[str, object]]
 
@@ -19454,10 +14934,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19498,10 +14974,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: Optional[Literal["custom"]]
 
-Accepts one of the following:
-
-"custom"
-
 class BetaToolBash20241022: …
 
 name: Literal["bash"]
@@ -19510,15 +14982,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: Literal["bash\_20241022"]
-
-Accepts one of the following:
-
-"bash\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -19533,10 +14997,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19573,15 +15033,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: Literal["bash\_20250124"]
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -19596,10 +15048,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19628,7 +15076,7 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolChoice = [BetaToolChoice](api/beta.md)
+[BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -19640,10 +15088,6 @@ The model will automatically decide whether to use tools.
 
 type: Literal["auto"]
 
-Accepts one of the following:
-
-"auto"
-
 disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
@@ -19655,10 +15099,6 @@ class BetaToolChoiceAny: …
 The model will use any available tools.
 
 type: Literal["any"]
-
-Accepts one of the following:
-
-"any"
 
 disable\_parallel\_tool\_use: Optional[bool]
 
@@ -19676,10 +15116,6 @@ The name of the tool to use.
 
 type: Literal["tool"]
 
-Accepts one of the following:
-
-"tool"
-
 disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
@@ -19692,19 +15128,11 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-Accepts one of the following:
-
-"none"
-
 class BetaToolChoiceAny: …
 
 The model will use any available tools.
 
 type: Literal["any"]
-
-Accepts one of the following:
-
-"any"
 
 disable\_parallel\_tool\_use: Optional[bool]
 
@@ -19718,10 +15146,6 @@ The model will automatically decide whether to use tools.
 
 type: Literal["auto"]
 
-Accepts one of the following:
-
-"auto"
-
 disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
@@ -19734,10 +15158,6 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-Accepts one of the following:
-
-"none"
-
 class BetaToolChoiceTool: …
 
 The model will use the specified tool with `tool_choice.name`.
@@ -19747,10 +15167,6 @@ name: str
 The name of the tool to use.
 
 type: Literal["tool"]
-
-Accepts one of the following:
-
-"tool"
 
 disable\_parallel\_tool\_use: Optional[bool]
 
@@ -19764,13 +15180,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -19778,15 +15190,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20241022"]
-
-Accepts one of the following:
-
-"computer\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -19801,10 +15205,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19830,8 +15230,6 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
-
-minimum0
 
 input\_examples: Optional[List[Dict[str, object]]]
 
@@ -19845,13 +15243,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -19859,15 +15253,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20250124"]
-
-Accepts one of the following:
-
-"computer\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -19882,10 +15268,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19911,8 +15293,6 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
-
-minimum0
 
 input\_examples: Optional[List[Dict[str, object]]]
 
@@ -19926,13 +15306,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -19940,15 +15316,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20251124"]
-
-Accepts one of the following:
-
-"computer\_20251124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -19963,10 +15331,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -19992,8 +15356,6 @@ If true, tool will not be included in initial system prompt. Only loaded when re
 display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
-
-minimum0
 
 enable\_zoom: Optional[bool]
 
@@ -20011,10 +15373,6 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 class BetaToolReferenceBlockParam: …
 
 Tool reference block that can be included in tool\_result content.
@@ -20023,19 +15381,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20060,19 +15410,11 @@ tool\_use\_id: str
 
 type: Literal["tool\_result"]
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20095,9 +15437,9 @@ content: Optional[Union[str, List[Content], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-Content = List[Content]
+List[Content]
 
 Accepts one of the following:
 
@@ -20107,19 +15449,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20156,10 +15490,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -20173,10 +15503,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -20192,10 +15518,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -20205,10 +15527,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -20227,10 +15545,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -20256,17 +15570,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -20276,25 +15582,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20321,19 +15615,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20370,10 +15656,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -20387,10 +15669,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -20406,10 +15684,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -20419,10 +15693,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -20442,29 +15712,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20499,15 +15757,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -20515,15 +15765,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -20531,9 +15773,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -20543,19 +15785,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20592,10 +15826,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -20609,10 +15839,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -20628,10 +15854,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -20641,10 +15863,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -20663,10 +15881,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -20692,17 +15906,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -20712,25 +15918,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20751,17 +15945,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -20771,25 +15957,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20824,19 +15998,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20865,10 +16031,6 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"tool\_search\_tool\_bm25"
-
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
 Accepts one of the following:
@@ -20890,10 +16052,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -20928,10 +16086,6 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"tool\_search\_tool\_regex"
-
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
 Accepts one of the following:
@@ -20953,10 +16107,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21007,10 +16157,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -21019,23 +16165,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaToolSearchToolResultBlockParam: …
 
@@ -21059,10 +16193,6 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlockParam: …
 
 tool\_references: List[[BetaToolReferenceBlockParam](api/beta.md)]
@@ -21071,19 +16201,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21104,27 +16226,15 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_search\_result"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
-
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21161,10 +16271,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
@@ -21181,10 +16287,6 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -21193,15 +16295,7 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 class BetaToolSearchToolSearchResultBlockParam: …
 
@@ -21211,19 +16305,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21244,10 +16330,6 @@ Accepts one of the following:
 
 type: Literal["tool\_search\_tool\_search\_result"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
-
 class BetaToolTextEditor20241022: …
 
 name: Literal["str\_replace\_editor"]
@@ -21256,15 +16338,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: Literal["text\_editor\_20241022"]
-
-Accepts one of the following:
-
-"text\_editor\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21279,10 +16353,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21319,15 +16389,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: Literal["text\_editor\_20250124"]
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21342,10 +16404,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21382,15 +16440,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250429"]
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21405,10 +16455,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21445,15 +16491,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250728"]
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21468,10 +16506,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21500,13 +16534,11 @@ max\_characters: Optional[int]
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolUnion = [BetaToolUnion](api/beta.md)
+[BetaToolUnion](api/beta.md)
 
 Configuration for a group of tools from an MCP server.
 
@@ -21524,10 +16556,6 @@ input\_schema: InputSchema
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: Literal["object"]
-
-Accepts one of the following:
-
-"object"
 
 properties: Optional[Dict[str, object]]
 
@@ -21556,10 +16584,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21600,10 +16624,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: Optional[Literal["custom"]]
 
-Accepts one of the following:
-
-"custom"
-
 class BetaToolBash20241022: …
 
 name: Literal["bash"]
@@ -21612,15 +16632,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: Literal["bash\_20241022"]
-
-Accepts one of the following:
-
-"bash\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21635,10 +16647,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21675,15 +16683,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: Literal["bash\_20250124"]
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21698,10 +16698,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21738,15 +16734,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"code\_execution"
-
 type: Literal["code\_execution\_20250522"]
-
-Accepts one of the following:
-
-"code\_execution\_20250522"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21761,10 +16749,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21799,15 +16783,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"code\_execution"
-
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21822,10 +16798,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21858,13 +16830,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -21872,15 +16840,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20241022"]
-
-Accepts one of the following:
-
-"computer\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21895,10 +16855,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -21925,8 +16881,6 @@ display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
@@ -21941,15 +16895,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"memory"
-
 type: Literal["memory\_20250818"]
-
-Accepts one of the following:
-
-"memory\_20250818"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -21964,10 +16910,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22002,13 +16944,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -22016,15 +16954,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20250124"]
-
-Accepts one of the following:
-
-"computer\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22039,10 +16969,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22069,8 +16995,6 @@ display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
@@ -22085,15 +17009,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: Literal["text\_editor\_20241022"]
-
-Accepts one of the following:
-
-"text\_editor\_20241022"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22108,10 +17024,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22146,13 +17058,9 @@ display\_height\_px: int
 
 The height of the display in pixels.
 
-minimum1
-
 display\_width\_px: int
 
 The width of the display in pixels.
-
-minimum1
 
 name: Literal["computer"]
 
@@ -22160,15 +17068,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"computer"
-
 type: Literal["computer\_20251124"]
-
-Accepts one of the following:
-
-"computer\_20251124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22183,10 +17083,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22213,8 +17109,6 @@ display\_number: Optional[int]
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 enable\_zoom: Optional[bool]
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
@@ -22233,15 +17127,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: Literal["text\_editor\_20250124"]
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22256,10 +17142,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22296,15 +17178,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250429"]
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22319,10 +17193,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22359,15 +17229,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250728"]
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22382,10 +17244,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22414,8 +17272,6 @@ max\_characters: Optional[int]
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
@@ -22428,15 +17284,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["web\_search\_20250305"]
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22459,10 +17307,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22489,8 +17333,6 @@ max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
@@ -22501,41 +17343,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: Literal["approximate"]
 
-Accepts one of the following:
-
-"approximate"
-
 city: Optional[str]
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: Optional[str]
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: Optional[str]
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class BetaWebFetchTool20250910: …
 
@@ -22545,15 +17367,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_fetch"
-
 type: Literal["web\_fetch\_20250910"]
-
-Accepts one of the following:
-
-"web\_fetch\_20250910"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -22576,10 +17390,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22612,13 +17422,9 @@ max\_content\_tokens: Optional[int]
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-exclusiveMinimum0
-
 max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
-
-exclusiveMinimum0
 
 strict: Optional[bool]
 
@@ -22631,10 +17437,6 @@ name: Literal["tool\_search\_tool\_bm25"]
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
-
-Accepts one of the following:
-
-"tool\_search\_tool\_bm25"
 
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
@@ -22657,10 +17459,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22695,10 +17493,6 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"tool\_search\_tool\_regex"
-
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
 Accepts one of the following:
@@ -22720,10 +17514,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22761,25 +17551,13 @@ mcp\_server\_name: str
 
 Name of the MCP server to configure tools for
 
-maxLength255
-
-minLength1
-
 type: Literal["mcp\_toolset"]
-
-Accepts one of the following:
-
-"mcp\_toolset"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22824,10 +17602,6 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -22840,10 +17614,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -22851,10 +17621,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaToolUseBlockParam: …
 
@@ -22866,19 +17632,11 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -22909,10 +17667,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -22921,17 +17675,9 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-Accepts one of the following:
-
-"code\_execution\_20250825"
-
 class BetaToolUsesKeep: …
 
 type: Literal["tool\_uses"]
-
-Accepts one of the following:
-
-"tool\_uses"
 
 value: int
 
@@ -22939,29 +17685,17 @@ class BetaToolUsesTrigger: …
 
 type: Literal["tool\_uses"]
 
-Accepts one of the following:
-
-"tool\_uses"
-
 value: int
 
 class BetaURLImageSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -22975,25 +17709,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -23002,8 +17728,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -23029,45 +17753,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -23081,51 +17789,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -23135,13 +17825,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -23185,15 +17871,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -23201,15 +17879,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -23217,19 +17887,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -23249,15 +17911,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -23265,15 +17919,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -23281,9 +17927,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -23293,19 +17939,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -23342,10 +17980,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -23359,10 +17993,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -23378,10 +18008,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -23391,10 +18017,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -23413,10 +18035,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -23442,17 +18060,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -23462,25 +18072,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -23501,17 +18099,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -23521,25 +18111,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -23568,10 +18146,6 @@ title: Optional[str]
 
 type: Literal["web\_fetch\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_result"
-
 url: str
 
 Fetched content URL
@@ -23588,15 +18162,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_fetch"
-
 type: Literal["web\_fetch\_20250910"]
-
-Accepts one of the following:
-
-"web\_fetch\_20250910"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -23619,10 +18185,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -23655,13 +18217,9 @@ max\_content\_tokens: Optional[int]
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-exclusiveMinimum0
-
 max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
-
-exclusiveMinimum0
 
 strict: Optional[bool]
 
@@ -23697,10 +18255,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -23721,15 +18275,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -23737,15 +18283,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -23753,19 +18291,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -23774,10 +18304,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaWebFetchToolResultBlockParam: …
 
@@ -23809,10 +18335,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlockParam: …
 
 content: [BetaRequestDocumentBlock](api/beta.md)
@@ -23827,15 +18349,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -23843,15 +18357,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaContentBlockSource: …
 
@@ -23859,9 +18365,9 @@ content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaContentBlockSourceContent = List[[BetaContentBlockSourceContent](api/beta.md)]
+List[[BetaContentBlockSourceContent](api/beta.md)]
 
 Accepts one of the following:
 
@@ -23871,19 +18377,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -23920,10 +18418,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocationParam: …
 
 cited\_text: str
@@ -23937,10 +18431,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocationParam: …
 
@@ -23956,10 +18446,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -23969,10 +18455,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -23991,10 +18473,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class BetaImageBlockParam: …
 
@@ -24020,17 +18498,9 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class BetaURLImageSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -24040,25 +18510,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -24079,17 +18537,9 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class BetaURLPDFSource: …
 
 type: Literal["url"]
-
-Accepts one of the following:
-
-"url"
 
 url: str
 
@@ -24099,25 +18549,13 @@ file\_id: str
 
 type: Literal["file"]
 
-Accepts one of the following:
-
-"file"
-
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -24146,10 +18584,6 @@ title: Optional[str]
 
 type: Literal["web\_fetch\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_result"
-
 url: str
 
 Fetched content URL
@@ -24162,19 +18596,11 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
-
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -24217,10 +18643,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
@@ -24245,11 +18667,7 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
-BetaWebFetchToolResultErrorCode = Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 5 more]
+Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 5 more]
 
 Accepts one of the following:
 
@@ -24279,10 +18697,6 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 class BetaWebSearchResultBlockParam: …
@@ -24292,10 +18706,6 @@ encrypted\_content: str
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -24309,15 +18719,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["web\_search\_20250305"]
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -24340,10 +18742,6 @@ cache\_control: Optional[BetaCacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -24370,8 +18768,6 @@ max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
@@ -24382,41 +18778,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: Literal["approximate"]
 
-Accepts one of the following:
-
-"approximate"
-
 city: Optional[str]
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: Optional[str]
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: Optional[str]
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class BetaWebSearchToolRequestError: …
 
@@ -24437,10 +18813,6 @@ Accepts one of the following:
 "request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -24468,11 +18840,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -24482,21 +18850,13 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result"
-
-BetaWebSearchToolResultBlockContent = [BetaWebSearchToolResultBlockContent](api/beta.md)
+[BetaWebSearchToolResultBlockContent](api/beta.md)
 
 Accepts one of the following:
 
@@ -24520,11 +18880,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -24534,10 +18890,6 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 class BetaWebSearchToolResultBlockParam: …
@@ -24546,17 +18898,13 @@ content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 Accepts one of the following:
 
-ResultBlock = List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
 encrypted\_content: str
 
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -24582,27 +18930,15 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -24621,21 +18957,17 @@ Accepts one of the following:
 
 "1h"
 
-BetaWebSearchToolResultBlockParamContent = [BetaWebSearchToolResultBlockParamContent](api/beta.md)
+[BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
 Accepts one of the following:
 
-ResultBlock = List[[BetaWebSearchResultBlockParam](api/beta.md)]
+List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
 encrypted\_content: str
 
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -24661,10 +18993,6 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
@@ -24685,11 +19013,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-BetaWebSearchToolResultErrorCode = Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
 
 Accepts one of the following:
 
@@ -24711,37 +19035,37 @@ Accepts one of the following:
 
 beta.messages.batches.create(BatchCreateParams\*\*kwargs)  -> [BetaMessageBatch](api/beta.md)
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
 
 beta.messages.batches.retrieve(strmessage\_batch\_id, BatchRetrieveParams\*\*kwargs)  -> [BetaMessageBatch](api/beta.md)
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/beta/messages/batches/list.md)
 
 beta.messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[BetaMessageBatch](api/beta.md)]
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
 
 beta.messages.batches.cancel(strmessage\_batch\_id, BatchCancelParams\*\*kwargs)  -> [BetaMessageBatch](api/beta.md)
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
 
 beta.messages.batches.delete(strmessage\_batch\_id, BatchDeleteParams\*\*kwargs)  -> [BetaDeletedMessageBatch](api/beta.md)
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
 
 beta.messages.batches.results(strmessage\_batch\_id, BatchResultsParams\*\*kwargs)  -> [BetaMessageBatchIndividualResponse](api/beta.md)
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -24757,10 +19081,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 class BetaMessageBatch: …
 
 id: str
@@ -24773,19 +19093,13 @@ archived\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: Optional[datetime]
 
@@ -24798,8 +19112,6 @@ formatdate-time
 expires\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: Literal["in\_progress", "canceling", "ended"]
 
@@ -24859,17 +19171,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-"message\_batch"
-
 class BetaMessageBatchCanceledResult: …
 
 type: Literal["canceled"]
-
-Accepts one of the following:
-
-"canceled"
 
 class BetaMessageBatchErroredResult: …
 
@@ -24885,19 +19189,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -24905,19 +19201,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class BetaPermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class BetaNotFoundError: …
 
@@ -24925,19 +19213,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class BetaGatewayTimeoutError: …
 
@@ -24945,19 +19225,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class BetaAPIError: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class BetaOverloadedError: …
 
@@ -24965,31 +19237,15 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class BetaMessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class BetaMessageBatchIndividualResponse: …
 
@@ -25031,8 +19287,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -25040,10 +19294,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -25058,10 +19308,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -25120,10 +19366,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -25139,10 +19381,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -25160,10 +19398,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -25173,10 +19407,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -25196,17 +19426,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -25216,19 +19438,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -25239,10 +19453,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -25256,10 +19466,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -25267,10 +19473,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -25298,10 +19500,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -25314,10 +19512,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -25325,10 +19519,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -25356,11 +19546,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -25370,19 +19556,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -25414,10 +19592,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -25438,15 +19612,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -25454,15 +19620,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -25470,19 +19628,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -25491,10 +19641,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -25518,10 +19664,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -25529,10 +19671,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -25542,17 +19680,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -25578,10 +19708,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -25589,10 +19715,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -25602,17 +19724,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -25640,10 +19754,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -25666,19 +19776,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -25694,17 +19796,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -25730,10 +19824,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -25742,23 +19832,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -25776,19 +19854,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -25814,10 +19888,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -25833,10 +19903,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -25854,10 +19920,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -25867,10 +19929,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -25890,27 +19948,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -25919,10 +19965,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -25937,10 +19979,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -25960,21 +19998,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -25982,21 +20012,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -26006,7 +20028,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -26120,17 +20142,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -26177,10 +20195,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -26201,25 +20215,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -26228,8 +20234,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -26255,45 +20259,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -26307,51 +20295,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -26361,13 +20331,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -26393,10 +20359,6 @@ Accepts one of the following:
 
 type: Literal["succeeded"]
 
-Accepts one of the following:
-
-"succeeded"
-
 class BetaMessageBatchErroredResult: …
 
 error: [BetaErrorResponse](api/beta.md)
@@ -26411,19 +20373,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -26431,19 +20385,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class BetaPermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class BetaNotFoundError: …
 
@@ -26451,19 +20397,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class BetaGatewayTimeoutError: …
 
@@ -26471,19 +20409,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class BetaAPIError: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class BetaOverloadedError: …
 
@@ -26491,39 +20421,19 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class BetaMessageBatchCanceledResult: …
 
 type: Literal["canceled"]
 
-Accepts one of the following:
-
-"canceled"
-
 class BetaMessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class BetaMessageBatchRequestCounts: …
 
@@ -26555,7 +20465,7 @@ Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-BetaMessageBatchResult = [BetaMessageBatchResult](api/beta.md)
+[BetaMessageBatchResult](api/beta.md)
 
 Processing result for this request.
 
@@ -26585,8 +20495,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -26594,10 +20502,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -26612,10 +20516,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -26674,10 +20574,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -26693,10 +20589,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -26714,10 +20606,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -26727,10 +20615,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -26750,17 +20634,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -26770,19 +20646,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -26793,10 +20661,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -26810,10 +20674,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -26821,10 +20681,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -26852,10 +20708,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -26868,10 +20720,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -26879,10 +20727,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -26910,11 +20754,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -26924,19 +20764,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -26968,10 +20800,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -26992,15 +20820,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -27008,15 +20828,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -27024,19 +20836,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -27045,10 +20849,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -27072,10 +20872,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -27083,10 +20879,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -27096,17 +20888,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -27132,10 +20916,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -27143,10 +20923,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -27156,17 +20932,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -27194,10 +20962,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -27220,19 +20984,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -27248,17 +21004,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -27284,10 +21032,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -27296,23 +21040,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -27330,19 +21062,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -27368,10 +21096,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -27387,10 +21111,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -27408,10 +21128,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -27421,10 +21137,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -27444,27 +21156,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -27473,10 +21173,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -27491,10 +21187,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -27514,21 +21206,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -27536,21 +21220,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -27560,7 +21236,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -27674,17 +21350,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -27731,10 +21403,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -27755,25 +21423,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -27782,8 +21442,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -27809,45 +21467,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -27861,51 +21503,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -27915,13 +21539,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -27947,10 +21567,6 @@ Accepts one of the following:
 
 type: Literal["succeeded"]
 
-Accepts one of the following:
-
-"succeeded"
-
 class BetaMessageBatchErroredResult: …
 
 error: [BetaErrorResponse](api/beta.md)
@@ -27965,19 +21581,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class BetaAuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BetaBillingError: …
 
@@ -27985,19 +21593,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class BetaPermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class BetaNotFoundError: …
 
@@ -28005,19 +21605,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class BetaRateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class BetaGatewayTimeoutError: …
 
@@ -28025,19 +21617,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class BetaAPIError: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class BetaOverloadedError: …
 
@@ -28045,39 +21629,19 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class BetaMessageBatchCanceledResult: …
 
 type: Literal["canceled"]
 
-Accepts one of the following:
-
-"canceled"
-
 class BetaMessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class BetaMessageBatchSucceededResult: …
 
@@ -28101,8 +21665,6 @@ expires\_at: datetime
 
 The time at which the container will expire.
 
-formatdate-time
-
 skills: Optional[List[[BetaSkill](api/beta.md)]]
 
 Skills loaded in the container
@@ -28110,10 +21672,6 @@ Skills loaded in the container
 skill\_id: str
 
 Skill ID
-
-maxLength64
-
-minLength1
 
 type: Literal["anthropic", "custom"]
 
@@ -28128,10 +21686,6 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
-
-maxLength64
-
-minLength1
 
 content: List[[BetaContentBlock](api/beta.md)]
 
@@ -28190,10 +21744,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -28209,10 +21759,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -28230,10 +21776,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -28243,10 +21785,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -28266,17 +21804,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class BetaThinkingBlock: …
 
@@ -28286,19 +21816,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class BetaRedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class BetaToolUseBlock: …
 
@@ -28309,10 +21831,6 @@ input: Dict[str, object]
 name: str
 
 type: Literal["tool\_use"]
-
-Accepts one of the following:
-
-"tool\_use"
 
 caller: Optional[Caller]
 
@@ -28326,10 +21844,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -28337,10 +21851,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaServerToolUseBlock: …
 
@@ -28368,10 +21878,6 @@ Accepts one of the following:
 
 type: Literal["server\_tool\_use"]
 
-Accepts one of the following:
-
-"server\_tool\_use"
-
 caller: Optional[Caller]
 
 Tool invocation directly from the model.
@@ -28384,10 +21890,6 @@ Tool invocation directly from the model.
 
 type: Literal["direct"]
 
-Accepts one of the following:
-
-"direct"
-
 class BetaServerToolCaller: …
 
 Tool invocation generated by a server-side tool.
@@ -28395,10 +21897,6 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
-
-Accepts one of the following:
-
-"code\_execution\_20250825"
 
 class BetaWebSearchToolResultBlock: …
 
@@ -28426,11 +21924,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[BetaWebSearchResultBlock](api/beta.md)]
+List[[BetaWebSearchResultBlock](api/beta.md)]
 
 encrypted\_content: str
 
@@ -28440,19 +21934,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 class BetaWebFetchToolResultBlock: …
 
@@ -28484,10 +21970,6 @@ Accepts one of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_fetch\_tool\_result\_error"
-
 class BetaWebFetchBlock: …
 
 content: [BetaDocumentBlock](api/beta.md)
@@ -28508,15 +21990,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class BetaPlainTextSource: …
 
@@ -28524,15 +21998,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 title: Optional[str]
 
@@ -28540,19 +22006,11 @@ The title of the document
 
 type: Literal["document"]
 
-Accepts one of the following:
-
-"document"
-
 retrieved\_at: Optional[str]
 
 ISO 8601 timestamp when the content was retrieved
 
 type: Literal["web\_fetch\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_result"
 
 url: str
 
@@ -28561,10 +22019,6 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_fetch\_tool\_result"
 
 class BetaCodeExecutionToolResultBlock: …
 
@@ -28588,10 +22042,6 @@ Accepts one of the following:
 
 type: Literal["code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"code\_execution\_tool\_result\_error"
-
 class BetaCodeExecutionResultBlock: …
 
 content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
@@ -28599,10 +22049,6 @@ content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["code\_execution\_output"]
-
-Accepts one of the following:
-
-"code\_execution\_output"
 
 return\_code: int
 
@@ -28612,17 +22058,9 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
-Accepts one of the following:
-
-"code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"code\_execution\_tool\_result"
 
 class BetaBashCodeExecutionToolResultBlock: …
 
@@ -28648,10 +22086,6 @@ Accepts one of the following:
 
 type: Literal["bash\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result\_error"
-
 class BetaBashCodeExecutionResultBlock: …
 
 content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
@@ -28659,10 +22093,6 @@ content: List[[BetaBashCodeExecutionOutputBlock](api/beta.md)]
 file\_id: str
 
 type: Literal["bash\_code\_execution\_output"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_output"
 
 return\_code: int
 
@@ -28672,17 +22102,9 @@ stdout: str
 
 type: Literal["bash\_code\_execution\_result"]
 
-Accepts one of the following:
-
-"bash\_code\_execution\_result"
-
 tool\_use\_id: str
 
 type: Literal["bash\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"bash\_code\_execution\_tool\_result"
 
 class BetaTextEditorCodeExecutionToolResultBlock: …
 
@@ -28710,10 +22132,6 @@ error\_message: Optional[str]
 
 type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result\_error"
-
 class BetaTextEditorCodeExecutionViewResultBlock: …
 
 content: str
@@ -28736,19 +22154,11 @@ total\_lines: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_view\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_view\_result"
-
 class BetaTextEditorCodeExecutionCreateResultBlock: …
 
 is\_file\_update: bool
 
 type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_create\_result"
 
 class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
 
@@ -28764,17 +22174,9 @@ old\_start: Optional[int]
 
 type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
 
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_str\_replace\_result"
-
 tool\_use\_id: str
 
 type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-Accepts one of the following:
-
-"text\_editor\_code\_execution\_tool\_result"
 
 class BetaToolSearchToolResultBlock: …
 
@@ -28800,10 +22202,6 @@ error\_message: Optional[str]
 
 type: Literal["tool\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"tool\_search\_tool\_result\_error"
-
 class BetaToolSearchToolSearchResultBlock: …
 
 tool\_references: List[[BetaToolReferenceBlock](api/beta.md)]
@@ -28812,23 +22210,11 @@ tool\_name: str
 
 type: Literal["tool\_reference"]
 
-Accepts one of the following:
-
-"tool\_reference"
-
 type: Literal["tool\_search\_tool\_search\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_search\_result"
 
 tool\_use\_id: str
 
 type: Literal["tool\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"tool\_search\_tool\_result"
 
 class BetaMCPToolUseBlock: …
 
@@ -28846,19 +22232,15 @@ The name of the MCP server
 
 type: Literal["mcp\_tool\_use"]
 
-Accepts one of the following:
-
-"mcp\_tool\_use"
-
 class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentBetaMCPToolResultBlockContent = List[[BetaTextBlock](api/beta.md)]
+List[[BetaTextBlock](api/beta.md)]
 
 citations: Optional[List[[BetaTextCitation](api/beta.md)]]
 
@@ -28884,10 +22266,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class BetaCitationPageLocation: …
 
 cited\_text: str
@@ -28903,10 +22281,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class BetaCitationContentBlockLocation: …
 
@@ -28924,10 +22298,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class BetaCitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -28937,10 +22307,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -28960,27 +22326,15 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 is\_error: bool
 
 tool\_use\_id: str
 
 type: Literal["mcp\_tool\_result"]
-
-Accepts one of the following:
-
-"mcp\_tool\_result"
 
 class BetaContainerUploadBlock: …
 
@@ -28989,10 +22343,6 @@ Response model for a file uploaded to the container.
 file\_id: str
 
 type: Literal["container\_upload"]
-
-Accepts one of the following:
-
-"container\_upload"
 
 class BetaCompactionBlock: …
 
@@ -29007,10 +22357,6 @@ content: Optional[str]
 Summary of compacted content, or null if compaction failed
 
 type: Literal["compaction"]
-
-Accepts one of the following:
-
-"compaction"
 
 context\_management: Optional[BetaContextManagementResponse]
 
@@ -29030,21 +22376,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_tool\_uses: int
 
 Number of tool uses that were cleared.
 
-minimum0
-
 type: Literal["clear\_tool\_uses\_20250919"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_tool\_uses\_20250919"
 
 class BetaClearThinking20251015EditResponse: …
 
@@ -29052,21 +22390,13 @@ cleared\_input\_tokens: int
 
 Number of input tokens cleared by this edit.
 
-minimum0
-
 cleared\_thinking\_turns: int
 
 Number of thinking turns that were cleared.
 
-minimum0
-
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
-
-Accepts one of the following:
-
-"clear\_thinking\_20251015"
 
 model: [Model](api/messages.md)
 
@@ -29076,7 +22406,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -29190,17 +22520,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -29247,10 +22573,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [BetaUsage](api/beta.md)
 
 Billing and rate-limit usage.
@@ -29271,25 +22593,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -29298,8 +22612,6 @@ The geographic region where inference was performed for this request.
 input\_tokens: int
 
 The number of input tokens which were used.
-
-minimum0
 
 iterations: Optional[BetaIterationsUsage]
 
@@ -29325,45 +22637,29 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
 
-minimum0
-
 type: Literal["message"]
 
 Usage for a sampling iteration
-
-Accepts one of the following:
-
-"message"
 
 class BetaCompactionIterationUsage: …
 
@@ -29377,51 +22673,33 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: int
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: int
 
 The number of input tokens read from the cache.
-
-minimum0
 
 input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 type: Literal["compaction"]
 
 Usage for a compaction iteration
 
-Accepts one of the following:
-
-"compaction"
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -29431,13 +22709,9 @@ web\_fetch\_requests: int
 
 The number of web fetch tool requests.
 
-minimum0
-
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -29463,41 +22737,37 @@ Accepts one of the following:
 
 type: Literal["succeeded"]
 
-Accepts one of the following:
-
-"succeeded"
-
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
 
 beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
 
-post/v1/files
+POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
 beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta.md)]
 
-get/v1/files
+GET/v1/files
 
 ##### [Download File](api/beta/files/download.md)
 
 beta.files.download(strfile\_id, FileDownloadParams\*\*kwargs)  -> BinaryResponseContent
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
 beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta.md)
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
 beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta.md)
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
@@ -29513,10 +22783,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-"file\_deleted"
-
 class FileMetadata: …
 
 id: str
@@ -29529,39 +22795,23 @@ created\_at: datetime
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: str
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: str
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: int
 
 Size of the file in bytes.
-
-minimum0
 
 type: Literal["file"]
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-"file"
 
 downloadable: Optional[bool]
 
@@ -29573,25 +22823,25 @@ Whether the file can be downloaded.
 
 beta.skills.create(SkillCreateParams\*\*kwargs)  -> [SkillCreateResponse](api/beta.md)
 
-post/v1/skills
+POST/v1/skills
 
 ##### [List Skills](api/beta/skills/list.md)
 
 beta.skills.list(SkillListParams\*\*kwargs)  -> SyncPageCursor[[SkillListResponse](api/beta.md)]
 
-get/v1/skills
+GET/v1/skills
 
 ##### [Get Skill](api/beta/skills/retrieve.md)
 
 beta.skills.retrieve(strskill\_id, SkillRetrieveParams\*\*kwargs)  -> [SkillRetrieveResponse](api/beta.md)
 
-get/v1/skills/{skill\_id}
+GET/v1/skills/{skill\_id}
 
 ##### [Delete Skill](api/beta/skills/delete.md)
 
 beta.skills.delete(strskill\_id, SkillDeleteParams\*\*kwargs)  -> [SkillDeleteResponse](api/beta.md)
 
-delete/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 #### BetaSkillsVersions
 
@@ -29599,25 +22849,25 @@ delete/v1/skills/{skill\_id}
 
 beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta.md)
 
-post/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 ##### [List Skill Versions](api/beta/skills/versions/list.md)
 
 beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta.md)]
 
-get/v1/skills/{skill\_id}/versions
+GET/v1/skills/{skill\_id}/versions
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta.md)
 
-get/v1/skills/{skill\_id}/versions/{version}
+GET/v1/skills/{skill\_id}/versions/{version}
 
 ##### [Delete Skill Version](api/beta/skills/versions/delete.md)
 
 beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta.md)
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ---
 

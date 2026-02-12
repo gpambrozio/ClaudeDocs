@@ -102,7 +102,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ff8c9e939a8cbf9e918b978d908f969cd19c9092).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#34475558514774555a405c465b445d571a575b59).
 
 ### Streaming thinking
 
@@ -339,8 +339,8 @@ User: "What's the weather in Paris?"
 **Request 2:**
 
 ```inline-block
-User: ["What's the weather in Paris?"], 
-Assistant: [thinking_block_1] + [tool_use block 1], 
+User: ["What's the weather in Paris?"],
+Assistant: [thinking_block_1] + [tool_use block 1],
 User: [tool_result_1, cache=True]
 ```
 

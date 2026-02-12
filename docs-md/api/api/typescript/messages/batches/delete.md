@@ -8,7 +8,7 @@ TypeScript
 
 client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages.md) { id, type }
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -36,10 +36,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 Delete a Message Batch
 
 TypeScript
@@ -56,25 +52,7 @@ const deletedMessageBatch = await client.messages.batches.delete('message_batch_
 console.log(deletedMessageBatch.id);
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
 
 ---
 

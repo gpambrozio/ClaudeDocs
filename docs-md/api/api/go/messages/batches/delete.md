@@ -8,7 +8,7 @@ Go
 
 client.Messages.Batches.Delete(ctx, messageBatchID) (\*[DeletedMessageBatch](api/messages.md), error)
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -35,10 +35,6 @@ Type MessageBatchDeleted
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
-
-Accepts one of the following:
-
-const MessageBatchDeletedMessageBatchDeleted MessageBatchDeleted = "message\_batch\_deleted"
 
 Delete a Message Batch
 
@@ -67,25 +63,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
 
 ---
 

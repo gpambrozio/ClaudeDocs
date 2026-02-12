@@ -10,37 +10,37 @@ Python
 
 messages.batches.create(BatchCreateParams\*\*kwargs)  -> [MessageBatch](api/messages.md)
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 messages.batches.retrieve(strmessage\_batch\_id)  -> [MessageBatch](api/messages.md)
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[MessageBatch](api/messages.md)]
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 messages.batches.cancel(strmessage\_batch\_id)  -> [MessageBatch](api/messages.md)
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 messages.batches.delete(strmessage\_batch\_id)  -> [DeletedMessageBatch](api/messages.md)
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 messages.batches.results(strmessage\_batch\_id)  -> [MessageBatchIndividualResponse](api/messages.md)
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -56,10 +56,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 class MessageBatch: …
 
 id: str
@@ -72,19 +68,13 @@ archived\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: Optional[datetime]
 
@@ -97,8 +87,6 @@ formatdate-time
 expires\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: Literal["in\_progress", "canceling", "ended"]
 
@@ -158,17 +146,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-"message\_batch"
-
 class MessageBatchCanceledResult: …
 
 type: Literal["canceled"]
-
-Accepts one of the following:
-
-"canceled"
 
 class MessageBatchErroredResult: …
 
@@ -184,19 +164,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class AuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BillingError: …
 
@@ -204,19 +176,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class PermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class NotFoundError: …
 
@@ -224,19 +188,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class RateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class GatewayTimeoutError: …
 
@@ -244,19 +200,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class APIErrorObject: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class OverloadedError: …
 
@@ -264,31 +212,15 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class MessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class MessageBatchIndividualResponse: …
 
@@ -375,10 +307,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocation: …
 
 cited\_text: str
@@ -394,10 +322,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocation: …
 
@@ -415,10 +339,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -428,10 +348,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -451,17 +367,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class ThinkingBlock: …
 
@@ -471,19 +379,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class RedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class ToolUseBlock: …
 
@@ -495,10 +395,6 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 class ServerToolUseBlock: …
 
 id: str
@@ -507,15 +403,7 @@ input: Dict[str, object]
 
 name: Literal["web\_search"]
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 class WebSearchToolResultBlock: …
 
@@ -543,11 +431,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[WebSearchResultBlock](api/messages.md)]
+List[[WebSearchResultBlock](api/messages.md)]
 
 encrypted\_content: str
 
@@ -557,19 +441,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -579,7 +455,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -693,17 +569,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[StopReason]
 
@@ -746,10 +618,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md)
 
 Billing and rate-limit usage.
@@ -770,25 +638,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -798,13 +658,9 @@ input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -813,8 +669,6 @@ The number of server tool requests.
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -830,10 +684,6 @@ Accepts one of the following:
 
 type: Literal["succeeded"]
 
-Accepts one of the following:
-
-"succeeded"
-
 class MessageBatchErroredResult: …
 
 error: [ErrorResponse](api/$shared.md)
@@ -848,19 +698,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class AuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BillingError: …
 
@@ -868,19 +710,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class PermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class NotFoundError: …
 
@@ -888,19 +722,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class RateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class GatewayTimeoutError: …
 
@@ -908,19 +734,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class APIErrorObject: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class OverloadedError: …
 
@@ -928,39 +746,19 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class MessageBatchCanceledResult: …
 
 type: Literal["canceled"]
 
-Accepts one of the following:
-
-"canceled"
-
 class MessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class MessageBatchRequestCounts: …
 
@@ -992,7 +790,7 @@ Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
-MessageBatchResult = [MessageBatchResult](api/messages.md)
+[MessageBatchResult](api/messages.md)
 
 Processing result for this request.
 
@@ -1067,10 +865,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocation: …
 
 cited\_text: str
@@ -1086,10 +880,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocation: …
 
@@ -1107,10 +897,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -1120,10 +906,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1143,17 +925,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class ThinkingBlock: …
 
@@ -1163,19 +937,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class RedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class ToolUseBlock: …
 
@@ -1187,10 +953,6 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 class ServerToolUseBlock: …
 
 id: str
@@ -1199,15 +961,7 @@ input: Dict[str, object]
 
 name: Literal["web\_search"]
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 class WebSearchToolResultBlock: …
 
@@ -1235,11 +989,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[WebSearchResultBlock](api/messages.md)]
+List[[WebSearchResultBlock](api/messages.md)]
 
 encrypted\_content: str
 
@@ -1249,19 +999,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -1271,7 +1013,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -1385,17 +1127,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[StopReason]
 
@@ -1438,10 +1176,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md)
 
 Billing and rate-limit usage.
@@ -1462,25 +1196,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -1490,13 +1216,9 @@ input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -1505,8 +1227,6 @@ The number of server tool requests.
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -1522,10 +1242,6 @@ Accepts one of the following:
 
 type: Literal["succeeded"]
 
-Accepts one of the following:
-
-"succeeded"
-
 class MessageBatchErroredResult: …
 
 error: [ErrorResponse](api/$shared.md)
@@ -1540,19 +1256,11 @@ message: str
 
 type: Literal["invalid\_request\_error"]
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 class AuthenticationError: …
 
 message: str
 
 type: Literal["authentication\_error"]
-
-Accepts one of the following:
-
-"authentication\_error"
 
 class BillingError: …
 
@@ -1560,19 +1268,11 @@ message: str
 
 type: Literal["billing\_error"]
 
-Accepts one of the following:
-
-"billing\_error"
-
 class PermissionError: …
 
 message: str
 
 type: Literal["permission\_error"]
-
-Accepts one of the following:
-
-"permission\_error"
 
 class NotFoundError: …
 
@@ -1580,19 +1280,11 @@ message: str
 
 type: Literal["not\_found\_error"]
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 class RateLimitError: …
 
 message: str
 
 type: Literal["rate\_limit\_error"]
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 class GatewayTimeoutError: …
 
@@ -1600,19 +1292,11 @@ message: str
 
 type: Literal["timeout\_error"]
 
-Accepts one of the following:
-
-"timeout\_error"
-
 class APIErrorObject: …
 
 message: str
 
 type: Literal["api\_error"]
-
-Accepts one of the following:
-
-"api\_error"
 
 class OverloadedError: …
 
@@ -1620,39 +1304,19 @@ message: str
 
 type: Literal["overloaded\_error"]
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: Optional[str]
 
 type: Literal["error"]
 
-Accepts one of the following:
-
-"error"
-
 type: Literal["errored"]
-
-Accepts one of the following:
-
-"errored"
 
 class MessageBatchCanceledResult: …
 
 type: Literal["canceled"]
 
-Accepts one of the following:
-
-"canceled"
-
 class MessageBatchExpiredResult: …
 
 type: Literal["expired"]
-
-Accepts one of the following:
-
-"expired"
 
 class MessageBatchSucceededResult: …
 
@@ -1721,10 +1385,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocation: …
 
 cited\_text: str
@@ -1740,10 +1400,6 @@ file\_id: Optional[str]
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocation: …
 
@@ -1761,10 +1417,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationsWebSearchResultLocation: …
 
 cited\_text: str
@@ -1774,10 +1426,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1797,17 +1445,9 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class ThinkingBlock: …
 
@@ -1817,19 +1457,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class RedactedThinkingBlock: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class ToolUseBlock: …
 
@@ -1841,10 +1473,6 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 class ServerToolUseBlock: …
 
 id: str
@@ -1853,15 +1481,7 @@ input: Dict[str, object]
 
 name: Literal["web\_search"]
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 class WebSearchToolResultBlock: …
 
@@ -1889,11 +1509,7 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
-UnionMember1 = List[[WebSearchResultBlock](api/messages.md)]
+List[[WebSearchResultBlock](api/messages.md)]
 
 encrypted\_content: str
 
@@ -1903,19 +1519,11 @@ title: str
 
 type: Literal["web\_search\_result"]
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: str
 
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -1925,7 +1533,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -2039,17 +1647,13 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 role: Literal["assistant"]
 
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
-
-Accepts one of the following:
-
-"assistant"
 
 stop\_reason: Optional[StopReason]
 
@@ -2092,10 +1696,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md)
 
 Billing and rate-limit usage.
@@ -2116,25 +1716,17 @@ ephemeral\_1h\_input\_tokens: int
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Optional[int]
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Optional[int]
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: Optional[str]
 
@@ -2144,13 +1736,9 @@ input\_tokens: int
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: int
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -2159,8 +1747,6 @@ The number of server tool requests.
 web\_search\_requests: int
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
@@ -2175,10 +1761,6 @@ Accepts one of the following:
 "batch"
 
 type: Literal["succeeded"]
-
-Accepts one of the following:
-
-"succeeded"
 
 ---
 

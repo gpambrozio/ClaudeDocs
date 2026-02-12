@@ -31,10 +31,8 @@ client = Anthropic()
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
-    betas=["code-execution-2025-08-25"]
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    betas=["code-execution-2025-08-25"],
 )
 ```
 

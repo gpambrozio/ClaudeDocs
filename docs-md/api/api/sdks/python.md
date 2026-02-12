@@ -182,10 +182,7 @@ You can also count tokens before making a request:
 
 ```shiki
 count = client.messages.count_tokens(
-    model="claude-opus-4-6",
-    messages=[
-        {"role": "user", "content": "Hello, world"}
-    ]
+    model="claude-opus-4-6", messages=[{"role": "user", "content": "Hello, world"}]
 )
 print(count.input_tokens)  # 10
 ```
@@ -210,11 +207,13 @@ def get_weather(location: str) -> str:
     Args:
         location: The city and state, e.g. San Francisco, CA
     """
-    return json.dumps({
-        "location": location,
-        "temperature": "68°F",
-        "condition": "Sunny",
-    })
+    return json.dumps(
+        {
+            "location": location,
+            "temperature": "68°F",
+            "condition": "Sunny",
+        }
+    )
 
 # Use the tool_runner to automatically handle tool calls
 runner = client.beta.messages.tool_runner(
@@ -353,9 +352,7 @@ All object responses in the SDK provide a `_request_id` property which is added 
 ```shiki
 message = client.messages.create(
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-6",
 )
 print(message._request_id)  # e.g., req_018EeWyXxfu5pfWkrYcMdjWG
@@ -378,9 +375,7 @@ client = Anthropic(
 # Or, configure per-request:
 client.with_options(max_retries=5).messages.create(
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-6",
 )
 ```
@@ -406,9 +401,7 @@ client = Anthropic(
 # Override per-request:
 client.with_options(timeout=5.0).messages.create(
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-6",
 )
 ```
@@ -486,9 +479,7 @@ client = Anthropic()
 
 client.messages.with_raw_response.create(
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-6",
     extra_headers={"anthropic-version": "My-Custom-Value"},
 )
@@ -539,14 +530,14 @@ client = Anthropic()
 
 response = client.messages.with_raw_response.create(
     max_tokens=1024,
-    messages=[
-        {"role": "user", "content": "Hello, Claude"}
-    ],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-6",
 )
 
 print(response.headers.get("x-request-id"))
-message = response.parse()  # get the object that `messages.create()` would have returned
+message = (
+    response.parse()
+)  # get the object that `messages.create()` would have returned
 print(message.content)
 ```
 

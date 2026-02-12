@@ -10,7 +10,7 @@ Python
 
 completions.create(CompletionCreateParams\*\*kwargs)  -> [Completion](api/completions.md)
 
-post/v1/complete
+POST/v1/complete
 
 ##### ModelsExpand Collapse
 
@@ -34,7 +34,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -148,7 +148,7 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 stop\_reason: Optional[str]
 
@@ -164,10 +164,6 @@ type: Literal["completion"]
 Object type.
 
 For Text Completions, this is always `"completion"`.
-
-Accepts one of the following:
-
-"completion"
 
 ---
 

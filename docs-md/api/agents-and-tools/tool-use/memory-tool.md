@@ -416,10 +416,7 @@ response = client.beta.messages.create(
     max_tokens=4096,
     messages=[...],
     tools=[
-        {
-            "type": "memory_20250818",
-            "name": "memory"
-        },
+        {"type": "memory_20250818", "name": "memory"},
         # Your other tools
     ],
     betas=["context-management-2025-06-27"],
@@ -427,17 +424,11 @@ response = client.beta.messages.create(
         "edits": [
             {
                 "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 100000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 3
-                }
+                "trigger": {"type": "input_tokens", "value": 100000},
+                "keep": {"type": "tool_uses", "value": 3},
             }
         ]
-    }
+    },
 )
 ```
 
@@ -446,13 +437,8 @@ You can also exclude memory tool calls from being cleared to ensure Claude alway
 Python
 
 ```shiki
-context_management={
-    "edits": [
-        {
-            "type": "clear_tool_uses_20250919",
-            "exclude_tools": ["memory"]
-        }
-    ]
+context_management = {
+    "edits": [{"type": "clear_tool_uses_20250919", "exclude_tools": ["memory"]}]
 }
 ```
 

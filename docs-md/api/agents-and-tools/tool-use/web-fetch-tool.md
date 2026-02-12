@@ -288,31 +288,25 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
+    betas=["web-fetch-2025-09-10"],
     messages=[
         {
             "role": "user",
-            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+            "content": "Find recent articles about quantum computing and analyze the most relevant one in detail",
         }
     ],
     tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 3
-        },
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 3},
         {
             "type": "web_fetch_20250910",
             "name": "web_fetch",
             "max_uses": 5,
-            "citations": {"enabled": True}
-        }
+            "citations": {"enabled": True},
+        },
     ],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
 )
 ```
 
@@ -336,47 +330,36 @@ client = anthropic.Anthropic()
 messages = [
     {
         "role": "user",
-        "content": "Analyze this research paper: https://arxiv.org/abs/2024.12345"
+        "content": "Analyze this research paper: https://arxiv.org/abs/2024.12345",
     }
 ]
 
-response1 = client.messages.create(
+response1 = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
+    betas=["web-fetch-2025-09-10"],
     messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch"}],
 )
 
 # Add Claude's response to conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
+messages.append({"role": "assistant", "content": response1.content})
 
 # Second request with cache breakpoint
-messages.append({
-    "role": "user",
-    "content": "What methodology does the paper use?",
-    "cache_control": {"type": "ephemeral"}
-})
+messages.append(
+    {
+        "role": "user",
+        "content": "What methodology does the paper use?",
+        "cache_control": {"type": "ephemeral"},
+    }
+)
 
-response2 = client.messages.create(
+response2 = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
+    betas=["web-fetch-2025-09-10"],
     messages=messages,
-    tools=[{
-        "type": "web_fetch_20250910",
-        "name": "web_fetch"
-    }],
-    extra_headers={
-        "anthropic-beta": "web-fetch-2025-09-10"
-    }
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch"}],
 )
 
 # The second response benefits from cached fetch results

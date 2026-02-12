@@ -8,7 +8,7 @@ Python
 
 beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta.md)
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -32,9 +32,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -112,25 +112,7 @@ version = client.beta.skills.versions.delete(
 print(version.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
 
 ---
 

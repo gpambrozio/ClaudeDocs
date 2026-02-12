@@ -8,7 +8,7 @@ Go
 
 client.Messages.Batches.Results(ctx, messageBatchID) (\*[MessageBatchIndividualResponse](api/messages.md), error)
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -109,10 +109,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocation struct{…}
 
 CitedText string
@@ -128,10 +124,6 @@ FileID string
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocation struct{…}
 
@@ -149,10 +141,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationsWebSearchResultLocation struct{…}
 
 CitedText string
@@ -162,10 +150,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -185,17 +169,9 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Text string
 
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ThinkingBlock struct{…}
 
@@ -205,19 +181,11 @@ Thinking string
 
 Type Thinking
 
-Accepts one of the following:
-
-const ThinkingThinking Thinking = "thinking"
-
 type RedactedThinkingBlock struct{…}
 
 Data string
 
 Type RedactedThinking
-
-Accepts one of the following:
-
-const RedactedThinkingRedactedThinking RedactedThinking = "redacted\_thinking"
 
 type ToolUseBlock struct{…}
 
@@ -229,10 +197,6 @@ Name string
 
 Type ToolUse
 
-Accepts one of the following:
-
-const ToolUseToolUse ToolUse = "tool\_use"
-
 type ServerToolUseBlock struct{…}
 
 ID string
@@ -241,15 +205,7 @@ Input map[string, any]
 
 Name WebSearch
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
 
 type WebSearchToolResultBlock struct{…}
 
@@ -277,10 +233,6 @@ const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorE
 
 Type WebSearchToolResultError
 
-Accepts one of the following:
-
-const WebSearchToolResultErrorWebSearchToolResultError WebSearchToolResultError = "web\_search\_tool\_result\_error"
-
 type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
 
 EncryptedContent string
@@ -291,19 +243,11 @@ Title string
 
 Type WebSearchResult
 
-Accepts one of the following:
-
-const WebSearchResultWebSearchResult WebSearchResult = "web\_search\_result"
-
 URL string
 
 ToolUseID string
 
 Type WebSearchToolResult
-
-Accepts one of the following:
-
-const WebSearchToolResultWebSearchToolResult WebSearchToolResult = "web\_search\_tool\_result"
 
 Model Model
 
@@ -413,10 +357,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-const AssistantAssistant Assistant = "assistant"
-
 StopReason [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -458,10 +398,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-const MessageMessage Message = "message"
-
 Usage [Usage](api/messages.md)
 
 Billing and rate-limit usage.
@@ -482,25 +418,17 @@ Ephemeral1hInputTokens int64
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 Ephemeral5mInputTokens int64
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 CacheCreationInputTokens int64
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 CacheReadInputTokens int64
 
 The number of input tokens read from the cache.
-
-minimum0
 
 InferenceGeo string
 
@@ -510,13 +438,9 @@ InputTokens int64
 
 The number of input tokens which were used.
 
-minimum0
-
 OutputTokens int64
 
 The number of output tokens which were used.
-
-minimum0
 
 ServerToolUse [ServerToolUsage](api/messages.md)
 
@@ -525,8 +449,6 @@ The number of server tool requests.
 WebSearchRequests int64
 
 The number of web search tool requests.
-
-minimum0
 
 ServiceTier UsageServiceTier
 
@@ -542,10 +464,6 @@ const UsageServiceTierBatch UsageServiceTier = "batch"
 
 Type Succeeded
 
-Accepts one of the following:
-
-const SucceededSucceeded Succeeded = "succeeded"
-
 type MessageBatchErroredResult struct{…}
 
 Error [ErrorResponse](api/$shared.md)
@@ -560,19 +478,11 @@ Message string
 
 Type InvalidRequestError
 
-Accepts one of the following:
-
-const InvalidRequestErrorInvalidRequestError InvalidRequestError = "invalid\_request\_error"
-
 type AuthenticationError struct{…}
 
 Message string
 
 Type AuthenticationError
-
-Accepts one of the following:
-
-const AuthenticationErrorAuthenticationError AuthenticationError = "authentication\_error"
 
 type BillingError struct{…}
 
@@ -580,19 +490,11 @@ Message string
 
 Type BillingError
 
-Accepts one of the following:
-
-const BillingErrorBillingError BillingError = "billing\_error"
-
 type PermissionError struct{…}
 
 Message string
 
 Type PermissionError
-
-Accepts one of the following:
-
-const PermissionErrorPermissionError PermissionError = "permission\_error"
 
 type NotFoundError struct{…}
 
@@ -600,19 +502,11 @@ Message string
 
 Type NotFoundError
 
-Accepts one of the following:
-
-const NotFoundErrorNotFoundError NotFoundError = "not\_found\_error"
-
 type RateLimitError struct{…}
 
 Message string
 
 Type RateLimitError
-
-Accepts one of the following:
-
-const RateLimitErrorRateLimitError RateLimitError = "rate\_limit\_error"
 
 type GatewayTimeoutError struct{…}
 
@@ -620,19 +514,11 @@ Message string
 
 Type TimeoutError
 
-Accepts one of the following:
-
-const TimeoutErrorTimeoutError TimeoutError = "timeout\_error"
-
 type APIErrorObject struct{…}
 
 Message string
 
 Type APIError
-
-Accepts one of the following:
-
-const APIErrorAPIError APIError = "api\_error"
 
 type OverloadedError struct{…}
 
@@ -640,39 +526,19 @@ Message string
 
 Type OverloadedError
 
-Accepts one of the following:
-
-const OverloadedErrorOverloadedError OverloadedError = "overloaded\_error"
-
 RequestID string
 
 Type Error
 
-Accepts one of the following:
-
-const ErrorError Error = "error"
-
 Type Errored
-
-Accepts one of the following:
-
-const ErroredErrored Errored = "errored"
 
 type MessageBatchCanceledResult struct{…}
 
 Type Canceled
 
-Accepts one of the following:
-
-const CanceledCanceled Canceled = "canceled"
-
 type MessageBatchExpiredResult struct{…}
 
 Type Expired
-
-Accepts one of the following:
-
-const ExpiredExpired Expired = "expired"
 
 Retrieve Message Batch results
 

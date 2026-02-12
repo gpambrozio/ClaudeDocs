@@ -10,13 +10,13 @@ Ruby
 
 messages.create(\*\*kwargs) -> [Message](api/messages.md) { id, content, model, 5 more }
 
-post/v1/messages
+POST/v1/messages
 
 ##### [Count tokens in a Message](api/messages/count_tokens.md)
 
 messages.count\_tokens(\*\*kwargs) -> [MessageTokensCount](api/messages.md) { input\_tokens }
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
@@ -38,33 +38,17 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class Base64PDFSource { data, media\_type, type }
 
 data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class CacheControlEphemeral { type, ttl }
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -89,13 +73,9 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 class CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -113,10 +93,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -130,10 +106,6 @@ end\_char\_index: Integer
 start\_char\_index: Integer
 
 type: :char\_location
-
-Accepts one of the following:
-
-:char\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -151,10 +123,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -168,10 +136,6 @@ end\_block\_index: Integer
 start\_block\_index: Integer
 
 type: :content\_block\_location
-
-Accepts one of the following:
-
-:content\_block\_location
 
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -189,10 +153,6 @@ start\_page\_number: Integer
 
 type: :page\_location
 
-Accepts one of the following:
-
-:page\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -206,10 +166,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
@@ -227,10 +183,6 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -240,10 +192,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -273,10 +221,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -292,10 +236,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -313,10 +253,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -326,10 +262,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -349,15 +281,7 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 type: :citations\_delta
-
-Accepts one of the following:
-
-:citations\_delta
 
 class CitationsSearchResultLocation { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
@@ -375,10 +299,6 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -388,10 +308,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -425,10 +341,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -444,10 +356,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -465,10 +373,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -478,10 +382,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -501,17 +401,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -521,19 +413,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -545,10 +429,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -557,15 +437,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -593,10 +465,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -607,19 +475,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 7 more
 
@@ -633,19 +493,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -682,10 +534,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -699,10 +547,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -718,10 +562,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -731,10 +571,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -753,10 +589,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -782,35 +614,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -841,15 +657,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -857,15 +665,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -885,19 +685,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -934,10 +726,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -951,10 +739,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -970,10 +754,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -983,10 +763,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1005,10 +781,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -1034,35 +806,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1083,35 +839,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1146,19 +886,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1195,10 +927,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -1212,10 +940,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1231,10 +955,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1244,10 +964,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1267,29 +983,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1320,19 +1024,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlockParam { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlockParam { id, input, name, 2 more }
 
@@ -1344,19 +1040,11 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1381,19 +1069,11 @@ tool\_use\_id: String
 
 type: :tool\_result
 
-Accepts one of the following:
-
-:tool\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1428,19 +1108,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1477,10 +1149,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -1494,10 +1162,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1513,10 +1177,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1526,10 +1186,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1548,10 +1204,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -1577,35 +1229,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1632,19 +1268,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1681,10 +1309,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -1698,10 +1322,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1717,10 +1337,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1730,10 +1346,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1753,29 +1365,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1810,15 +1410,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -1826,15 +1418,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -1854,19 +1438,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -1903,10 +1479,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -1920,10 +1492,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1939,10 +1507,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1952,10 +1516,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1974,10 +1534,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -2003,35 +1559,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2052,35 +1592,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2117,25 +1641,13 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2168,10 +1680,6 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 page\_age: String
@@ -2196,27 +1704,15 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2253,19 +1749,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2302,10 +1790,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -2319,10 +1803,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2338,10 +1818,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -2351,10 +1827,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -2373,10 +1845,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -2402,35 +1870,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2451,10 +1903,6 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 ContentBlockSourceContent = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }
 
 Accepts one of the following:
@@ -2465,19 +1913,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2514,10 +1954,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -2531,10 +1967,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2550,10 +1982,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -2563,10 +1991,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -2585,10 +2009,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -2614,35 +2034,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2673,15 +2077,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -2689,15 +2085,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -2717,19 +2105,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2766,10 +2146,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -2783,10 +2159,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2802,10 +2174,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -2815,10 +2183,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -2837,10 +2201,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -2866,35 +2226,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2915,35 +2259,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -2994,35 +2322,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3047,10 +2359,6 @@ partial\_json: String
 
 type: :input\_json\_delta
 
-Accepts one of the following:
-
-:input\_json\_delta
-
 class JSONOutputFormat { schema, type }
 
 schema: Hash[Symbol, untyped]
@@ -3058,10 +2366,6 @@ schema: Hash[Symbol, untyped]
 The JSON schema of the format
 
 type: :json\_schema
-
-Accepts one of the following:
-
-:json\_schema
 
 class Message { id, content, model, 5 more }
 
@@ -3128,10 +2432,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -3147,10 +2447,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -3168,10 +2464,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -3181,10 +2473,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -3204,17 +2492,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -3224,19 +2504,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -3248,10 +2520,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -3260,15 +2528,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -3296,10 +2556,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -3310,19 +2566,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -3432,10 +2680,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -3477,10 +2721,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -3501,25 +2741,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -3529,13 +2761,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -3544,8 +2772,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -3573,10 +2799,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: :object
 
-Accepts one of the following:
-
-:object
-
 properties: Hash[Symbol, untyped]
 
 required: Array[String]
@@ -3596,10 +2818,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3634,10 +2852,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-Accepts one of the following:
-
-:custom
-
 class ToolBash20250124 { name, type, cache\_control, strict }
 
 name: :bash
@@ -3646,25 +2860,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:bash
-
 type: :bash\_20250124
-
-Accepts one of the following:
-
-:bash\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3695,25 +2897,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_editor
-
 type: :text\_editor\_20250124
-
-Accepts one of the following:
-
-:text\_editor\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3744,25 +2934,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250429
-
-Accepts one of the following:
-
-:text\_editor\_20250429
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3793,25 +2971,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250728
-
-Accepts one of the following:
-
-:text\_editor\_20250728
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3834,8 +3000,6 @@ max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -3848,15 +3012,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:web\_search
-
 type: :web\_search\_20250305
-
-Accepts one of the following:
-
-:web\_search\_20250305
 
 allowed\_domains: Array[String]
 
@@ -3871,10 +3027,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -3897,8 +3049,6 @@ max\_uses: Integer
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -3909,41 +3059,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: :approximate
 
-Accepts one of the following:
-
-:approximate
-
 city: String
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: String
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: String
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: String
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class MessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
@@ -3951,19 +3081,13 @@ cache\_creation\_input\_tokens: Integer
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Integer
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: Integer
 
@@ -3976,8 +3100,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 class MessageParam { content, role }
 
@@ -3997,19 +3119,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4046,10 +3160,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -4063,10 +3173,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4082,10 +3188,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -4095,10 +3197,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -4117,10 +3215,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -4146,35 +3240,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4205,15 +3283,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -4221,15 +3291,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -4249,19 +3311,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4298,10 +3352,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -4315,10 +3365,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4334,10 +3380,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -4347,10 +3389,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -4369,10 +3407,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -4398,35 +3432,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4447,35 +3465,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4510,19 +3512,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4559,10 +3553,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -4576,10 +3566,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4595,10 +3581,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -4608,10 +3590,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -4631,29 +3609,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4684,19 +3650,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlockParam { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlockParam { id, input, name, 2 more }
 
@@ -4708,19 +3666,11 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4745,19 +3695,11 @@ tool\_use\_id: String
 
 type: :tool\_result
 
-Accepts one of the following:
-
-:tool\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4792,19 +3734,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4841,10 +3775,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -4858,10 +3788,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -4877,10 +3803,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -4890,10 +3812,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -4912,10 +3830,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -4941,35 +3855,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -4996,19 +3894,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5045,10 +3935,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -5062,10 +3948,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -5081,10 +3963,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -5094,10 +3972,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -5117,29 +3991,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5174,15 +4036,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -5190,15 +4044,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -5218,19 +4064,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5267,10 +4105,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -5284,10 +4118,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -5303,10 +4133,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -5316,10 +4142,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -5338,10 +4160,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -5367,35 +4185,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5416,35 +4218,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5481,25 +4267,13 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5532,10 +4306,6 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 page\_age: String
@@ -5560,27 +4330,15 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -5751,25 +4509,13 @@ The JSON schema of the format
 
 type: :json\_schema
 
-Accepts one of the following:
-
-:json\_schema
-
 class PlainTextSource { data, media\_type, type }
 
 data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 RawContentBlockDelta = [TextDelta](api/messages.md) { text, type }  | [InputJSONDelta](api/messages.md) { partial\_json, type }  | [CitationsDelta](api/messages.md) { citation, type }  | 2 more
 
@@ -5781,19 +4527,11 @@ text: String
 
 type: :text\_delta
 
-Accepts one of the following:
-
-:text\_delta
-
 class InputJSONDelta { partial\_json, type }
 
 partial\_json: String
 
 type: :input\_json\_delta
-
-Accepts one of the following:
-
-:input\_json\_delta
 
 class CitationsDelta { citation, type }
 
@@ -5817,10 +4555,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -5836,10 +4570,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -5857,10 +4587,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -5870,10 +4596,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -5893,15 +4615,7 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 type: :citations\_delta
-
-Accepts one of the following:
-
-:citations\_delta
 
 class ThinkingDelta { thinking, type }
 
@@ -5909,19 +4623,11 @@ thinking: String
 
 type: :thinking\_delta
 
-Accepts one of the following:
-
-:thinking\_delta
-
 class SignatureDelta { signature, type }
 
 signature: String
 
 type: :signature\_delta
-
-Accepts one of the following:
-
-:signature\_delta
 
 class RawContentBlockDeltaEvent { delta, index, type }
 
@@ -5935,19 +4641,11 @@ text: String
 
 type: :text\_delta
 
-Accepts one of the following:
-
-:text\_delta
-
 class InputJSONDelta { partial\_json, type }
 
 partial\_json: String
 
 type: :input\_json\_delta
-
-Accepts one of the following:
-
-:input\_json\_delta
 
 class CitationsDelta { citation, type }
 
@@ -5971,10 +4669,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -5990,10 +4684,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6011,10 +4701,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -6024,10 +4710,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -6047,15 +4729,7 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 type: :citations\_delta
-
-Accepts one of the following:
-
-:citations\_delta
 
 class ThinkingDelta { thinking, type }
 
@@ -6063,27 +4737,15 @@ thinking: String
 
 type: :thinking\_delta
 
-Accepts one of the following:
-
-:thinking\_delta
-
 class SignatureDelta { signature, type }
 
 signature: String
 
 type: :signature\_delta
 
-Accepts one of the following:
-
-:signature\_delta
-
 index: Integer
 
 type: :content\_block\_delta
-
-Accepts one of the following:
-
-:content\_block\_delta
 
 class RawContentBlockStartEvent { content\_block, index, type }
 
@@ -6117,10 +4779,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -6136,10 +4794,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6157,10 +4811,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -6170,10 +4820,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -6193,17 +4839,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -6213,19 +4851,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -6237,10 +4867,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -6249,15 +4875,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -6285,10 +4903,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -6299,37 +4913,21 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
-Accepts one of the following:
-
-:web\_search\_tool\_result
-
 index: Integer
 
 type: :content\_block\_start
-
-Accepts one of the following:
-
-:content\_block\_start
 
 class RawContentBlockStopEvent { index, type }
 
 index: Integer
 
 type: :content\_block\_stop
-
-Accepts one of the following:
-
-:content\_block\_stop
 
 class RawMessageDeltaEvent { delta, type, usage }
 
@@ -6355,10 +4953,6 @@ stop\_sequence: String
 
 type: :message\_delta
 
-Accepts one of the following:
-
-:message\_delta
-
 usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Billing and rate-limit usage.
@@ -6375,19 +4969,13 @@ cache\_creation\_input\_tokens: Integer
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Integer
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: Integer
 
@@ -6400,8 +4988,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 class RawMessageStartEvent { message, type }
 
@@ -6470,10 +5056,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -6489,10 +5071,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -6510,10 +5088,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -6523,10 +5097,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -6546,17 +5116,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -6566,19 +5128,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -6590,10 +5144,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -6602,15 +5152,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -6638,10 +5180,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -6652,19 +5190,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -6774,10 +5304,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -6819,10 +5345,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -6843,25 +5365,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -6871,13 +5385,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -6886,8 +5396,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -6903,17 +5411,9 @@ Accepts one of the following:
 
 type: :message\_start
 
-Accepts one of the following:
-
-:message\_start
-
 class RawMessageStopEvent { type }
 
 type: :message\_stop
-
-Accepts one of the following:
-
-:message\_stop
 
 RawMessageStreamEvent = [RawMessageStartEvent](api/messages.md) { message, type }  | [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  | [RawMessageStopEvent](api/messages.md) { type }  | 3 more
 
@@ -6986,10 +5486,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -7005,10 +5501,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -7026,10 +5518,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -7039,10 +5527,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -7062,17 +5546,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -7082,19 +5558,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -7106,10 +5574,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -7118,15 +5582,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -7154,10 +5610,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -7168,19 +5620,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -7290,10 +5734,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -7335,10 +5775,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -7359,25 +5795,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -7387,13 +5815,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -7402,8 +5826,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -7418,10 +5840,6 @@ Accepts one of the following:
 :batch
 
 type: :message\_start
-
-Accepts one of the following:
-
-:message\_start
 
 class RawMessageDeltaEvent { delta, type, usage }
 
@@ -7447,10 +5865,6 @@ stop\_sequence: String
 
 type: :message\_delta
 
-Accepts one of the following:
-
-:message\_delta
-
 usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Billing and rate-limit usage.
@@ -7467,19 +5881,13 @@ cache\_creation\_input\_tokens: Integer
 
 The cumulative number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The cumulative number of input tokens read from the cache.
 
-minimum0
-
 input\_tokens: Integer
 
 The cumulative number of input tokens which were used.
-
-minimum0
 
 output\_tokens: Integer
 
@@ -7493,15 +5901,9 @@ web\_search\_requests: Integer
 
 The number of web search tool requests.
 
-minimum0
-
 class RawMessageStopEvent { type }
 
 type: :message\_stop
-
-Accepts one of the following:
-
-:message\_stop
 
 class RawContentBlockStartEvent { content\_block, index, type }
 
@@ -7535,10 +5937,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -7554,10 +5952,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -7575,10 +5969,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -7588,10 +5978,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -7611,17 +5997,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -7631,19 +6009,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -7655,10 +6025,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -7667,15 +6033,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -7703,10 +6061,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -7717,27 +6071,15 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
-Accepts one of the following:
-
-:web\_search\_tool\_result
-
 index: Integer
 
 type: :content\_block\_start
-
-Accepts one of the following:
-
-:content\_block\_start
 
 class RawContentBlockDeltaEvent { delta, index, type }
 
@@ -7751,19 +6093,11 @@ text: String
 
 type: :text\_delta
 
-Accepts one of the following:
-
-:text\_delta
-
 class InputJSONDelta { partial\_json, type }
 
 partial\_json: String
 
 type: :input\_json\_delta
-
-Accepts one of the following:
-
-:input\_json\_delta
 
 class CitationsDelta { citation, type }
 
@@ -7787,10 +6121,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -7806,10 +6136,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -7827,10 +6153,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -7840,10 +6162,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -7863,15 +6181,7 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 type: :citations\_delta
-
-Accepts one of the following:
-
-:citations\_delta
 
 class ThinkingDelta { thinking, type }
 
@@ -7879,27 +6189,15 @@ thinking: String
 
 type: :thinking\_delta
 
-Accepts one of the following:
-
-:thinking\_delta
-
 class SignatureDelta { signature, type }
 
 signature: String
 
 type: :signature\_delta
 
-Accepts one of the following:
-
-:signature\_delta
-
 index: Integer
 
 type: :content\_block\_delta
-
-Accepts one of the following:
-
-:content\_block\_delta
 
 class RawContentBlockStopEvent { index, type }
 
@@ -7907,29 +6205,17 @@ index: Integer
 
 type: :content\_block\_stop
 
-Accepts one of the following:
-
-:content\_block\_stop
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
 
-Accepts one of the following:
-
-:redacted\_thinking
-
 class RedactedThinkingBlockParam { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class SearchResultBlockParam { content, source, title, 3 more }
 
@@ -7939,19 +6225,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -7988,10 +6266,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -8005,10 +6279,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -8024,10 +6294,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -8037,10 +6303,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -8060,29 +6322,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -8111,8 +6361,6 @@ web\_search\_requests: Integer
 
 The number of web search tool requests.
 
-minimum0
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -8121,15 +6369,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class ServerToolUseBlockParam { id, input, name, 2 more }
 
@@ -8139,25 +6379,13 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -8181,10 +6409,6 @@ class SignatureDelta { signature, type }
 signature: String
 
 type: :signature\_delta
-
-Accepts one of the following:
-
-:signature\_delta
 
 StopReason = :end\_turn | :max\_tokens | :stop\_sequence | 3 more
 
@@ -8228,10 +6452,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -8247,10 +6467,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -8268,10 +6484,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -8281,10 +6493,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -8304,17 +6512,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -8322,19 +6522,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -8371,10 +6563,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -8388,10 +6576,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -8407,10 +6591,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -8420,10 +6600,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -8442,10 +6618,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 TextCitation = [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | 2 more
 
@@ -8467,10 +6639,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -8486,10 +6654,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -8507,10 +6671,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -8520,10 +6680,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -8543,10 +6699,6 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 TextCitationParam = [CitationCharLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | [CitationPageLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | [CitationContentBlockLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  | 2 more
 
 Accepts one of the following:
@@ -8565,10 +6717,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -8582,10 +6730,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -8601,10 +6745,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -8614,10 +6754,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -8637,19 +6773,11 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 class TextDelta { text, type }
 
 text: String
 
 type: :text\_delta
-
-Accepts one of the following:
-
-:text\_delta
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -8659,10 +6787,6 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class ThinkingBlockParam { signature, thinking, type }
 
 signature: String
@@ -8671,25 +6795,13 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class ThinkingConfigAdaptive { type }
 
 type: :adaptive
 
-Accepts one of the following:
-
-:adaptive
-
 class ThinkingConfigDisabled { type }
 
 type: :disabled
-
-Accepts one of the following:
-
-:disabled
 
 class ThinkingConfigEnabled { budget\_tokens, type }
 
@@ -8704,10 +6816,6 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 minimum1024
 
 type: :enabled
-
-Accepts one of the following:
-
-:enabled
 
 ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type }  | [ThinkingConfigDisabled](api/messages.md) { type }  | [ThinkingConfigAdaptive](api/messages.md) { type }
 
@@ -8733,35 +6841,19 @@ minimum1024
 
 type: :enabled
 
-Accepts one of the following:
-
-:enabled
-
 class ThinkingConfigDisabled { type }
 
 type: :disabled
 
-Accepts one of the following:
-
-:disabled
-
 class ThinkingConfigAdaptive { type }
 
 type: :adaptive
-
-Accepts one of the following:
-
-:adaptive
 
 class ThinkingDelta { thinking, type }
 
 thinking: String
 
 type: :thinking\_delta
-
-Accepts one of the following:
-
-:thinking\_delta
 
 class Tool { input\_schema, name, cache\_control, 4 more }
 
@@ -8772,10 +6864,6 @@ input\_schema: { type, properties, required}
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: :object
-
-Accepts one of the following:
-
-:object
 
 properties: Hash[Symbol, untyped]
 
@@ -8796,10 +6884,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -8834,10 +6918,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-Accepts one of the following:
-
-:custom
-
 class ToolBash20250124 { name, type, cache\_control, strict }
 
 name: :bash
@@ -8846,25 +6926,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:bash
-
 type: :bash\_20250124
-
-Accepts one of the following:
-
-:bash\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -8899,10 +6967,6 @@ The model will automatically decide whether to use tools.
 
 type: :auto
 
-Accepts one of the following:
-
-:auto
-
 disable\_parallel\_tool\_use: bool
 
 Whether to disable parallel tool use.
@@ -8914,10 +6978,6 @@ class ToolChoiceAny { type, disable\_parallel\_tool\_use }
 The model will use any available tools.
 
 type: :any
-
-Accepts one of the following:
-
-:any
 
 disable\_parallel\_tool\_use: bool
 
@@ -8935,10 +6995,6 @@ The name of the tool to use.
 
 type: :tool
 
-Accepts one of the following:
-
-:tool
-
 disable\_parallel\_tool\_use: bool
 
 Whether to disable parallel tool use.
@@ -8951,19 +7007,11 @@ The model will not be allowed to use tools.
 
 type: :none
 
-Accepts one of the following:
-
-:none
-
 class ToolChoiceAny { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
 type: :any
-
-Accepts one of the following:
-
-:any
 
 disable\_parallel\_tool\_use: bool
 
@@ -8977,10 +7025,6 @@ The model will automatically decide whether to use tools.
 
 type: :auto
 
-Accepts one of the following:
-
-:auto
-
 disable\_parallel\_tool\_use: bool
 
 Whether to disable parallel tool use.
@@ -8993,10 +7037,6 @@ The model will not be allowed to use tools.
 
 type: :none
 
-Accepts one of the following:
-
-:none
-
 class ToolChoiceTool { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
@@ -9006,10 +7046,6 @@ name: String
 The name of the tool to use.
 
 type: :tool
-
-Accepts one of the following:
-
-:tool
 
 disable\_parallel\_tool\_use: bool
 
@@ -9023,19 +7059,11 @@ tool\_use\_id: String
 
 type: :tool\_result
 
-Accepts one of the following:
-
-:tool\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9070,19 +7098,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9119,10 +7139,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -9136,10 +7152,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9155,10 +7167,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -9168,10 +7176,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -9190,10 +7194,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -9219,35 +7219,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9274,19 +7258,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9323,10 +7299,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -9340,10 +7312,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9359,10 +7327,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -9372,10 +7336,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -9395,29 +7355,17 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 source: String
 
 title: String
 
 type: :search\_result
 
-Accepts one of the following:
-
-:search\_result
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9452,15 +7400,7 @@ data: String
 
 media\_type: :"application/pdf"
 
-Accepts one of the following:
-
-:"application/pdf"
-
 type: :base64
-
-Accepts one of the following:
-
-:base64
 
 class PlainTextSource { data, media\_type, type }
 
@@ -9468,15 +7408,7 @@ data: String
 
 media\_type: :"text/plain"
 
-Accepts one of the following:
-
-:"text/plain"
-
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ContentBlockSource { content, type }
 
@@ -9496,19 +7428,11 @@ text: String
 
 type: :text
 
-Accepts one of the following:
-
-:text
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9545,10 +7469,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: String
@@ -9562,10 +7482,6 @@ end\_page\_number: Integer
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -9581,10 +7497,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -9594,10 +7506,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -9616,10 +7524,6 @@ start\_block\_index: Integer
 title: String
 
 type: :search\_result\_location
-
-Accepts one of the following:
-
-:search\_result\_location
 
 class ImageBlockParam { source, type, cache\_control }
 
@@ -9645,35 +7549,19 @@ Accepts one of the following:
 
 type: :base64
 
-Accepts one of the following:
-
-:base64
-
 class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :image
-
-Accepts one of the following:
-
-:image
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9694,35 +7582,19 @@ Accepts one of the following:
 
 type: :content
 
-Accepts one of the following:
-
-:content
-
 class URLPDFSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 type: :document
-
-Accepts one of the following:
-
-:document
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9759,25 +7631,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_editor
-
 type: :text\_editor\_20250124
-
-Accepts one of the following:
-
-:text\_editor\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9808,25 +7668,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250429
-
-Accepts one of the following:
-
-:text\_editor\_20250429
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9857,25 +7705,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250728
-
-Accepts one of the following:
-
-:text\_editor\_20250728
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9898,8 +7734,6 @@ max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -9917,10 +7751,6 @@ input\_schema: { type, properties, required}
 This defines the shape of the `input` that your tool accepts and that the model will produce.
 
 type: :object
-
-Accepts one of the following:
-
-:object
 
 properties: Hash[Symbol, untyped]
 
@@ -9941,10 +7771,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -9979,10 +7805,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-Accepts one of the following:
-
-:custom
-
 class ToolBash20250124 { name, type, cache\_control, strict }
 
 name: :bash
@@ -9991,25 +7813,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:bash
-
 type: :bash\_20250124
-
-Accepts one of the following:
-
-:bash\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10040,25 +7850,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_editor
-
 type: :text\_editor\_20250124
-
-Accepts one of the following:
-
-:text\_editor\_20250124
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10089,25 +7887,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250429
-
-Accepts one of the following:
-
-:text\_editor\_20250429
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10138,25 +7924,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:str\_replace\_based\_edit\_tool
-
 type: :text\_editor\_20250728
-
-Accepts one of the following:
-
-:text\_editor\_20250728
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10179,8 +7953,6 @@ max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -10193,15 +7965,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:web\_search
-
 type: :web\_search\_20250305
-
-Accepts one of the following:
-
-:web\_search\_20250305
 
 allowed\_domains: Array[String]
 
@@ -10216,10 +7980,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10242,8 +8002,6 @@ max\_uses: Integer
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -10254,41 +8012,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: :approximate
 
-Accepts one of the following:
-
-:approximate
-
 city: String
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: String
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: String
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: String
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class ToolUseBlock { id, input, name, type }
 
@@ -10300,10 +8038,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ToolUseBlockParam { id, input, name, 2 more }
 
 id: String
@@ -10314,19 +8048,11 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10349,19 +8075,11 @@ class URLImageSource { type, url }
 
 type: :url
 
-Accepts one of the following:
-
-:url
-
 url: String
 
 class URLPDFSource { type, url }
 
 type: :url
-
-Accepts one of the following:
-
-:url
 
 url: String
 
@@ -10375,25 +8093,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -10403,13 +8113,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -10418,8 +8124,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -10443,10 +8147,6 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 class WebSearchResultBlockParam { encrypted\_content, title, type, 2 more }
@@ -10456,10 +8156,6 @@ encrypted\_content: String
 title: String
 
 type: :web\_search\_result
-
-Accepts one of the following:
-
-:web\_search\_result
 
 url: String
 
@@ -10473,15 +8169,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-:web\_search
-
 type: :web\_search\_20250305
-
-Accepts one of the following:
-
-:web\_search\_20250305
 
 allowed\_domains: Array[String]
 
@@ -10496,10 +8184,6 @@ cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10522,8 +8206,6 @@ max\_uses: Integer
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
@@ -10534,41 +8216,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: :approximate
 
-Accepts one of the following:
-
-:approximate
-
 city: String
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: String
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: String
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: String
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class WebSearchToolRequestError { error\_code, type }
 
@@ -10589,10 +8251,6 @@ Accepts one of the following:
 :request\_too\_large
 
 type: :web\_search\_tool\_result\_error
-
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -10620,10 +8278,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -10634,19 +8288,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 WebSearchToolResultBlockContent = [WebSearchToolResultError](api/messages.md) { error\_code, type }  | Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
@@ -10672,10 +8318,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -10685,10 +8327,6 @@ page\_age: String
 title: String
 
 type: :web\_search\_result
-
-Accepts one of the following:
-
-:web\_search\_result
 
 url: String
 
@@ -10705,10 +8343,6 @@ encrypted\_content: String
 title: String
 
 type: :web\_search\_result
-
-Accepts one of the following:
-
-:web\_search\_result
 
 url: String
 
@@ -10734,27 +8368,15 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
 
 type: :ephemeral
-
-Accepts one of the following:
-
-:ephemeral
 
 ttl: :"5m" | :"1h"
 
@@ -10785,10 +8407,6 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 page\_age: String
@@ -10813,10 +8431,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 class WebSearchToolResultError { error\_code, type }
 
 error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
@@ -10837,47 +8451,43 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 #### MessagesBatches
 
 ##### [Create a Message Batch](api/messages/batches/create.md)
 
 messages.batches.create(\*\*kwargs) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 messages.batches.retrieve(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 messages.batches.list(\*\*kwargs) -> Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 messages.batches.cancel(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages.md) { id, type }
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 messages.batches.results(message\_batch\_id) -> [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -10893,10 +8503,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-:message\_batch\_deleted
-
 class MessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: String
@@ -10909,19 +8515,13 @@ archived\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: Time
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: Time
 
@@ -10934,8 +8534,6 @@ formatdate-time
 expires\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: :in\_progress | :canceling | :ended
 
@@ -10995,17 +8593,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-:message\_batch
-
 class MessageBatchCanceledResult { type }
 
 type: :canceled
-
-Accepts one of the following:
-
-:canceled
 
 class MessageBatchErroredResult { error, type }
 
@@ -11021,19 +8611,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -11041,19 +8623,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -11061,19 +8635,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -11081,19 +8647,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -11101,31 +8659,15 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchIndividualResponse { custom\_id, result }
 
@@ -11212,10 +8754,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -11231,10 +8769,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -11252,10 +8786,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -11265,10 +8795,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -11288,17 +8814,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -11308,19 +8826,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -11332,10 +8842,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -11344,15 +8850,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -11380,10 +8878,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -11394,19 +8888,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -11516,10 +9002,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -11561,10 +9043,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -11585,25 +9063,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -11613,13 +9083,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -11628,8 +9094,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -11645,10 +9109,6 @@ Accepts one of the following:
 
 type: :succeeded
 
-Accepts one of the following:
-
-:succeeded
-
 class MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -11663,19 +9123,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -11683,19 +9135,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -11703,19 +9147,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -11723,19 +9159,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -11743,39 +9171,19 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchCanceledResult { type }
 
 type: :canceled
 
-Accepts one of the following:
-
-:canceled
-
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchRequestCounts { canceled, errored, expired, 2 more }
 
@@ -11882,10 +9290,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -11901,10 +9305,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -11922,10 +9322,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -11935,10 +9331,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -11958,17 +9350,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -11978,19 +9362,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -12002,10 +9378,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -12014,15 +9386,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -12050,10 +9414,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -12064,19 +9424,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -12186,10 +9538,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -12231,10 +9579,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -12255,25 +9599,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -12283,13 +9619,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -12298,8 +9630,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -12315,10 +9645,6 @@ Accepts one of the following:
 
 type: :succeeded
 
-Accepts one of the following:
-
-:succeeded
-
 class MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -12333,19 +9659,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -12353,19 +9671,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -12373,19 +9683,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -12393,19 +9695,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -12413,39 +9707,19 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchCanceledResult { type }
 
 type: :canceled
 
-Accepts one of the following:
-
-:canceled
-
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchSucceededResult { message, type }
 
@@ -12514,10 +9788,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -12533,10 +9803,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -12554,10 +9820,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -12567,10 +9829,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -12590,17 +9848,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -12610,19 +9860,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -12634,10 +9876,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -12646,15 +9884,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -12682,10 +9912,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -12696,19 +9922,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -12818,10 +10036,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -12863,10 +10077,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -12887,25 +10097,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -12915,13 +10117,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -12930,8 +10128,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -12946,10 +10142,6 @@ Accepts one of the following:
 :batch
 
 type: :succeeded
-
-Accepts one of the following:
-
-:succeeded
 
 ---
 

@@ -50,17 +50,7 @@ message = client.messages.create(
     max_tokens=1000,
     temperature=1,
     system="Your task is to create alliterative phrases and sentences for the given subject. Ensure that the alliterations not only sound pleasing but also convey relevant information or evoke appropriate emotions related to the subject.",
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Ocean"
-                }
-            ]
-        }
-    ]
+    messages=[{"role": "user", "content": [{"type": "text", "text": "Ocean"}]}],
 )
 print(message.content)
 ```

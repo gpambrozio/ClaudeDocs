@@ -140,7 +140,9 @@ import anthropic
 client = anthropic.Anthropic()
 
 # Long document content (e.g., technical documentation)
-long_document = "This is a very long document with thousands of words..." + " ... " * 1000  # Minimum cacheable length
+long_document = (
+    "This is a very long document with thousands of words..." + " ... " * 1000
+)  # Minimum cacheable length
 
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -154,18 +156,20 @@ response = client.messages.create(
                     "source": {
                         "type": "text",
                         "media_type": "text/plain",
-                        "data": long_document
+                        "data": long_document,
                     },
                     "citations": {"enabled": True},
-                    "cache_control": {"type": "ephemeral"}  # Cache the document content
+                    "cache_control": {
+                        "type": "ephemeral"
+                    },  # Cache the document content
                 },
                 {
                     "type": "text",
-                    "text": "What does this document say about API features?"
-                }
-            ]
+                    "text": "What does this document say about API features?",
+                },
+            ],
         }
-    ]
+    ],
 )
 ```
 
@@ -208,11 +212,11 @@ Files API
     "source": {
         "type": "text",
         "media_type": "text/plain",
-        "data": "Plain text content..."
+        "data": "Plain text content...",
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -236,11 +240,11 @@ Files API
     "source": {
         "type": "base64",
         "media_type": "application/pdf",
-        "data": base64_encoded_pdf_data
+        "data": base64_encoded_pdf_data,
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -257,12 +261,12 @@ Custom content documents give you control over citation granularity. No addition
         "type": "content",
         "content": [
             {"type": "text", "text": "First chunk"},
-            {"type": "text", "text": "Second chunk"}
-        ]
+            {"type": "text", "text": "Second chunk"},
+        ],
     },
-    "title": "Document Title", # optional
-    "context": "Context about the document that will not be cited from", # optional
-    "citations": {"enabled": True}
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
 }
 ```
 
@@ -277,37 +281,35 @@ When citations are enabled, responses include multiple text blocks with citation
 ```shiki
 {
     "content": [
-        {
-            "type": "text",
-            "text": "According to the document, "
-        },
+        {"type": "text", "text": "According to the document, "},
         {
             "type": "text",
             "text": "the grass is green",
-            "citations": [{
-                "type": "char_location",
-                "cited_text": "The grass is green.",
-                "document_index": 0,
-                "document_title": "Example Document",
-                "start_char_index": 0,
-                "end_char_index": 20
-            }]
+            "citations": [
+                {
+                    "type": "char_location",
+                    "cited_text": "The grass is green.",
+                    "document_index": 0,
+                    "document_title": "Example Document",
+                    "start_char_index": 0,
+                    "end_char_index": 20,
+                }
+            ],
         },
-        {
-            "type": "text",
-            "text": " and "
-        },
+        {"type": "text", "text": " and "},
         {
             "type": "text",
             "text": "the sky is blue",
-            "citations": [{
-                "type": "char_location",
-                "cited_text": "The sky is blue.",
-                "document_index": 0,
-                "document_title": "Example Document",
-                "start_char_index": 20,
-                "end_char_index": 36
-            }]
+            "citations": [
+                {
+                    "type": "char_location",
+                    "cited_text": "The sky is blue.",
+                    "document_index": 0,
+                    "document_title": "Example Document",
+                    "start_char_index": 20,
+                    "end_char_index": 36,
+                }
+            ],
         },
         {
             "type": "text",
@@ -316,14 +318,16 @@ When citations are enabled, responses include multiple text blocks with citation
         {
             "type": "text",
             "text": "water is essential",
-            "citations": [{
-                "type": "page_location",
-                "cited_text": "Water is essential for life.",
-                "document_index": 1,
-                "document_title": "PDF Document",
-                "start_page_number": 5,
-                "end_page_number": 6
-            }]
+            "citations": [
+                {
+                    "type": "page_location",
+                    "cited_text": "Water is essential for life.",
+                    "document_index": 1,
+                    "document_title": "PDF Document",
+                    "start_page_number": 5,
+                    "end_page_number": 6,
+                }
+            ],
         },
         {
             "type": "text",
@@ -332,15 +336,17 @@ When citations are enabled, responses include multiple text blocks with citation
         {
             "type": "text",
             "text": "important findings",
-            "citations": [{
-                "type": "content_block_location",
-                "cited_text": "These are important findings.",
-                "document_index": 2,
-                "document_title": "Custom Content Document",
-                "start_block_index": 0,
-                "end_block_index": 1
-            }]
-        }
+            "citations": [
+                {
+                    "type": "content_block_location",
+                    "cited_text": "These are important findings.",
+                    "document_index": 2,
+                    "document_title": "Custom Content Document",
+                    "start_block_index": 0,
+                    "end_block_index": 1,
+                }
+            ],
+        },
     ]
 }
 ```

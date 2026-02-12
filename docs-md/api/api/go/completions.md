@@ -10,7 +10,7 @@ Go
 
 client.Completions.New(ctx, params) (\*[Completion](api/completions.md), error)
 
-post/v1/complete
+POST/v1/complete
 
 ##### ModelsExpand Collapse
 
@@ -142,10 +142,6 @@ Type Completion
 Object type.
 
 For Text Completions, this is always `"completion"`.
-
-Accepts one of the following:
-
-const CompletionCompletion Completion = "completion"
 
 ---
 

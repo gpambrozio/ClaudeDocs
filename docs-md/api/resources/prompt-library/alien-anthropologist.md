@@ -45,13 +45,10 @@ message = client.messages.create(
         {
             "role": "user",
             "content": [
-                {
-                    "type": "text",
-                    "text": "Human social interactions and relationships"
-                }
-            ]
+                {"type": "text", "text": "Human social interactions and relationships"}
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

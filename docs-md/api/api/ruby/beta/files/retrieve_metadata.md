@@ -8,7 +8,7 @@ Ruby
 
 beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 Get File Metadata
 
@@ -84,39 +84,23 @@ created\_at: Time
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: String
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: String
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: Integer
 
 Size of the file in bytes.
-
-minimum0
 
 type: :file
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-:file
 
 downloadable: bool
 
@@ -136,35 +120,7 @@ file_metadata = anthropic.beta.files.retrieve_metadata("file_id")
 puts(file_metadata)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

@@ -8,7 +8,7 @@ Java
 
 [BetaMessageTokensCount](api/beta.md) beta().messages().countTokens(MessageCountTokensParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 Count the number of tokens in a Message.
 
@@ -131,19 +131,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -180,10 +172,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -197,10 +185,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -216,10 +200,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -229,10 +209,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -251,10 +227,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class BetaImageBlockParam:
 
@@ -280,17 +252,9 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class BetaUrlImageSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -300,25 +264,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -349,15 +301,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class BetaPlainTextSource:
 
@@ -365,15 +309,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class BetaContentBlockSource:
 
@@ -393,19 +329,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -442,10 +370,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -459,10 +383,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -478,10 +398,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -491,10 +407,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -513,10 +425,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class BetaImageBlockParam:
 
@@ -542,17 +450,9 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class BetaUrlImageSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -562,25 +462,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -601,17 +489,9 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class BetaUrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -621,25 +501,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -674,19 +542,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -723,10 +583,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -740,10 +596,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -759,10 +611,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -772,10 +620,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -795,29 +639,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -848,19 +680,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class BetaRedactedThinkingBlockParam:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class BetaToolUseBlockParam:
 
@@ -872,19 +696,11 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -915,10 +731,6 @@ Tool invocation directly from the model.
 
 JsonValue; type "direct"constant"direct"constant
 
-Accepts one of the following:
-
-DIRECT("direct")
-
 class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
@@ -927,29 +739,17 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-Accepts one of the following:
-
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
-
 class BetaToolResultBlockParam:
 
 String toolUseId
 
 JsonValue; type "tool\_result"constant"tool\_result"constant
 
-Accepts one of the following:
-
-TOOL\_RESULT("tool\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -984,19 +784,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1033,10 +825,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -1050,10 +838,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -1069,10 +853,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -1082,10 +862,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1104,10 +880,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class BetaImageBlockParam:
 
@@ -1133,17 +905,9 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class BetaUrlImageSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -1153,25 +917,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1198,19 +950,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1247,10 +991,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -1264,10 +1004,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -1283,10 +1019,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -1296,10 +1028,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1319,29 +1047,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1376,15 +1092,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class BetaPlainTextSource:
 
@@ -1392,15 +1100,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class BetaContentBlockSource:
 
@@ -1420,19 +1120,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1469,10 +1161,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -1486,10 +1174,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -1505,10 +1189,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -1518,10 +1198,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1540,10 +1216,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class BetaImageBlockParam:
 
@@ -1569,17 +1241,9 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class BetaUrlImageSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -1589,25 +1253,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1628,17 +1280,9 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class BetaUrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -1648,25 +1292,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1701,19 +1333,11 @@ String toolName
 
 JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
-Accepts one of the following:
-
-TOOL\_REFERENCE("tool\_reference")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1760,19 +1384,11 @@ TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1803,10 +1419,6 @@ Tool invocation directly from the model.
 
 JsonValue; type "direct"constant"direct"constant
 
-Accepts one of the following:
-
-DIRECT("direct")
-
 class BetaServerToolCaller:
 
 Tool invocation generated by a server-side tool.
@@ -1814,10 +1426,6 @@ Tool invocation generated by a server-side tool.
 String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-Accepts one of the following:
-
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 class BetaWebSearchToolResultBlockParam:
 
@@ -1832,10 +1440,6 @@ String encryptedContent
 String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
 
 String url
 
@@ -1861,27 +1465,15 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1930,10 +1522,6 @@ UNAVAILABLE("unavailable")
 
 JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_FETCH\_TOOL\_RESULT\_ERROR("web\_fetch\_tool\_result\_error")
-
 class BetaWebFetchBlockParam:
 
 [BetaRequestDocumentBlock](api/beta.md) content
@@ -1948,15 +1536,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class BetaPlainTextSource:
 
@@ -1964,15 +1544,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class BetaContentBlockSource:
 
@@ -1992,19 +1564,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2041,10 +1605,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -2058,10 +1618,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -2077,10 +1633,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -2090,10 +1642,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -2112,10 +1660,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class BetaImageBlockParam:
 
@@ -2141,17 +1685,9 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class BetaUrlImageSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -2161,25 +1697,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2200,17 +1724,9 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class BetaUrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
-
-Accepts one of the following:
-
-URL("url")
 
 String url
 
@@ -2220,25 +1736,13 @@ String fileId
 
 JsonValue; type "file"constant"file"constant
 
-Accepts one of the following:
-
-FILE("file")
-
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2267,10 +1771,6 @@ Optional<String> title
 
 JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
 
-Accepts one of the following:
-
-WEB\_FETCH\_RESULT("web\_fetch\_result")
-
 String url
 
 Fetched content URL
@@ -2283,19 +1783,11 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
-Accepts one of the following:
-
-WEB\_FETCH\_TOOL\_RESULT("web\_fetch\_tool\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2336,10 +1828,6 @@ EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
 JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-CODE\_EXECUTION\_TOOL\_RESULT\_ERROR("code\_execution\_tool\_result\_error")
-
 class BetaCodeExecutionResultBlockParam:
 
 List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
@@ -2347,10 +1835,6 @@ List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
 String fileId
 
 JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-Accepts one of the following:
-
-CODE\_EXECUTION\_OUTPUT("code\_execution\_output")
 
 long returnCode
 
@@ -2360,27 +1844,15 @@ String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
 
-Accepts one of the following:
-
-CODE\_EXECUTION\_RESULT("code\_execution\_result")
-
 String toolUseId
 
 JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-Accepts one of the following:
-
-CODE\_EXECUTION\_TOOL\_RESULT("code\_execution\_tool\_result")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2423,10 +1895,6 @@ OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
 
 JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-BASH\_CODE\_EXECUTION\_TOOL\_RESULT\_ERROR("bash\_code\_execution\_tool\_result\_error")
-
 class BetaBashCodeExecutionResultBlockParam:
 
 List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
@@ -2434,10 +1902,6 @@ List<[BetaBashCodeExecutionOutputBlockParam](api/beta.md)> content
 String fileId
 
 JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
-
-Accepts one of the following:
-
-BASH\_CODE\_EXECUTION\_OUTPUT("bash\_code\_execution\_output")
 
 long returnCode
 
@@ -2447,27 +1911,15 @@ String stdout
 
 JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
 
-Accepts one of the following:
-
-BASH\_CODE\_EXECUTION\_RESULT("bash\_code\_execution\_result")
-
 String toolUseId
 
 JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
-
-Accepts one of the following:
-
-BASH\_CODE\_EXECUTION\_TOOL\_RESULT("bash\_code\_execution\_tool\_result")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2510,10 +1962,6 @@ FILE\_NOT\_FOUND("file\_not\_found")
 
 JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-TEXT\_EDITOR\_CODE\_EXECUTION\_TOOL\_RESULT\_ERROR("text\_editor\_code\_execution\_tool\_result\_error")
-
 Optional<String> errorMessage
 
 class BetaTextEditorCodeExecutionViewResultBlockParam:
@@ -2532,10 +1980,6 @@ PDF("pdf")
 
 JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
 
-Accepts one of the following:
-
-TEXT\_EDITOR\_CODE\_EXECUTION\_VIEW\_RESULT("text\_editor\_code\_execution\_view\_result")
-
 Optional<Long> numLines
 
 Optional<Long> startLine
@@ -2548,17 +1992,9 @@ boolean isFileUpdate
 
 JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
 
-Accepts one of the following:
-
-TEXT\_EDITOR\_CODE\_EXECUTION\_CREATE\_RESULT("text\_editor\_code\_execution\_create\_result")
-
 class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:
 
 JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_CODE\_EXECUTION\_STR\_REPLACE\_RESULT("text\_editor\_code\_execution\_str\_replace\_result")
 
 Optional<List<String>> lines
 
@@ -2574,19 +2010,11 @@ String toolUseId
 
 JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
 
-Accepts one of the following:
-
-TEXT\_EDITOR\_CODE\_EXECUTION\_TOOL\_RESULT("text\_editor\_code\_execution\_tool\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2627,10 +2055,6 @@ EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
 JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-TOOL\_SEARCH\_TOOL\_RESULT\_ERROR("tool\_search\_tool\_result\_error")
-
 class BetaToolSearchToolSearchResultBlockParam:
 
 List<[BetaToolReferenceBlockParam](api/beta.md)> toolReferences
@@ -2639,19 +2063,11 @@ String toolName
 
 JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
-Accepts one of the following:
-
-TOOL\_REFERENCE("tool\_reference")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2672,27 +2088,15 @@ TTL\_1H("1h")
 
 JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
 
-Accepts one of the following:
-
-TOOL\_SEARCH\_TOOL\_SEARCH\_RESULT("tool\_search\_tool\_search\_result")
-
 String toolUseId
 
 JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-TOOL\_SEARCH\_TOOL\_RESULT("tool\_search\_tool\_result")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2725,19 +2129,11 @@ The name of the MCP server
 
 JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
 
-Accepts one of the following:
-
-MCP\_TOOL\_USE("mcp\_tool\_use")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2762,19 +2158,11 @@ String toolUseId
 
 JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
 
-Accepts one of the following:
-
-MCP\_TOOL\_RESULT("mcp\_tool\_result")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2805,19 +2193,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2854,10 +2234,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -2871,10 +2247,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -2890,10 +2262,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -2903,10 +2271,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -2926,10 +2290,6 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 Optional<Boolean> isError
 
 class BetaContainerUploadBlockParam:
@@ -2941,19 +2301,11 @@ String fileId
 
 JsonValue; type "container\_upload"constant"container\_upload"constant
 
-Accepts one of the following:
-
-CONTAINER\_UPLOAD("container\_upload")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2988,19 +2340,11 @@ Summary of previously compacted content, or null if compaction failed
 
 JsonValue; type "compaction"constant"compaction"constant
 
-Accepts one of the following:
-
-COMPACTION("compaction")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3047,10 +2391,6 @@ String name
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 Optional<String> authorizationToken
@@ -3089,19 +2429,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3138,10 +2470,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class BetaCitationPageLocationParam:
 
 String citedText
@@ -3155,10 +2483,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class BetaCitationContentBlockLocationParam:
 
@@ -3174,10 +2498,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class BetaCitationWebSearchResultLocationParam:
 
 String citedText
@@ -3187,10 +2507,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -3209,10 +2525,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 Optional<[BetaThinkingConfigParam](api/beta.md)> thinking
 
@@ -3300,10 +2612,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 JsonValue; type "object"constant"object"constant
 
-Accepts one of the following:
-
-OBJECT("object")
-
 Optional<Properties> properties
 
 Optional<List<String>> required
@@ -3331,10 +2639,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3375,10 +2679,6 @@ When true, guarantees schema validation on tool names and inputs
 
 Optional<Type> type
 
-Accepts one of the following:
-
-CUSTOM("custom")
-
 class BetaToolBash20241022:
 
 JsonValue; name "bash"constant"bash"constant
@@ -3387,15 +2687,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-BASH("bash")
-
 JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
-
-Accepts one of the following:
-
-BASH\_20241022("bash\_20241022")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3410,10 +2702,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3450,15 +2738,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-BASH("bash")
-
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
-
-Accepts one of the following:
-
-BASH\_20250124("bash\_20250124")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3473,10 +2753,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3513,15 +2789,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-CODE\_EXECUTION("code\_execution")
-
 JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
-
-Accepts one of the following:
-
-CODE\_EXECUTION\_20250522("code\_execution\_20250522")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3536,10 +2804,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3574,15 +2838,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-CODE\_EXECUTION("code\_execution")
-
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-Accepts one of the following:
-
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3597,10 +2853,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3633,13 +2885,9 @@ long displayHeightPx
 
 The height of the display in pixels.
 
-minimum1
-
 long displayWidthPx
 
 The width of the display in pixels.
-
-minimum1
 
 JsonValue; name "computer"constant"computer"constant
 
@@ -3647,15 +2895,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-COMPUTER("computer")
-
 JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
-
-Accepts one of the following:
-
-COMPUTER\_20241022("computer\_20241022")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3670,10 +2910,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3700,8 +2936,6 @@ Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
@@ -3716,15 +2950,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-MEMORY("memory")
-
 JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
-
-Accepts one of the following:
-
-MEMORY\_20250818("memory\_20250818")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3739,10 +2965,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3777,13 +2999,9 @@ long displayHeightPx
 
 The height of the display in pixels.
 
-minimum1
-
 long displayWidthPx
 
 The width of the display in pixels.
-
-minimum1
 
 JsonValue; name "computer"constant"computer"constant
 
@@ -3791,15 +3009,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-COMPUTER("computer")
-
 JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
-
-Accepts one of the following:
-
-COMPUTER\_20250124("computer\_20250124")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3814,10 +3024,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3844,8 +3050,6 @@ Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
@@ -3860,15 +3064,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_EDITOR("str\_replace\_editor")
-
 JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20241022("text\_editor\_20241022")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3883,10 +3079,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3921,13 +3113,9 @@ long displayHeightPx
 
 The height of the display in pixels.
 
-minimum1
-
 long displayWidthPx
 
 The width of the display in pixels.
-
-minimum1
 
 JsonValue; name "computer"constant"computer"constant
 
@@ -3935,15 +3123,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-COMPUTER("computer")
-
 JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
-
-Accepts one of the following:
-
-COMPUTER\_20251124("computer\_20251124")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -3958,10 +3138,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -3988,8 +3164,6 @@ Optional<Long> displayNumber
 
 The X11 display number (e.g. 0, 1) for the display.
 
-minimum0
-
 Optional<Boolean> enableZoom
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
@@ -4008,15 +3182,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_EDITOR("str\_replace\_editor")
-
 JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250124("text\_editor\_20250124")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -4031,10 +3197,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4071,15 +3233,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250429("text\_editor\_20250429")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -4094,10 +3248,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4134,15 +3284,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250728("text\_editor\_20250728")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -4157,10 +3299,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4189,8 +3327,6 @@ Optional<Long> maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -4203,15 +3339,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_20250305("web\_search\_20250305")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -4234,10 +3362,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4264,8 +3388,6 @@ Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -4276,41 +3398,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 JsonValue; type "approximate"constant"approximate"constant
 
-Accepts one of the following:
-
-APPROXIMATE("approximate")
-
 Optional<String> city
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 Optional<String> country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 Optional<String> region
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 class BetaWebFetchTool20250910:
 
@@ -4320,15 +3422,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-WEB\_FETCH("web\_fetch")
-
 JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
-
-Accepts one of the following:
-
-WEB\_FETCH\_20250910("web\_fetch\_20250910")
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -4351,10 +3445,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4387,13 +3477,9 @@ Optional<Long> maxContentTokens
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-exclusiveMinimum0
-
 Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
-
-exclusiveMinimum0
 
 Optional<Boolean> strict
 
@@ -4406,10 +3492,6 @@ JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"cons
 Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
-
-Accepts one of the following:
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 Type type
 
@@ -4432,10 +3514,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4470,10 +3548,6 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
 Type type
 
 Accepts one of the following:
@@ -4495,10 +3569,6 @@ Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4536,25 +3606,13 @@ String mcpServerName
 
 Name of the MCP server to configure tools for
 
-maxLength255
-
-minLength1
-
 JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
-
-Accepts one of the following:
-
-MCP\_TOOLSET("mcp\_toolset")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -4633,29 +3691,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "context_management": {
-    "original_input_tokens": 0
-  },
-  "input_tokens": 2095
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "context_management": {
-    "original_input_tokens": 0
-  },
-  "input_tokens": 2095
-}
-```
 
 ---
 

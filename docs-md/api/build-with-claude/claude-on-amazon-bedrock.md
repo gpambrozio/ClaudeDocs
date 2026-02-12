@@ -104,7 +104,7 @@ client = AnthropicBedrock(
 message = client.messages.create(
     model="global.anthropic.claude-opus-4-6-v1",
     max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}]
+    messages=[{"role": "user", "content": "Hello, world"}],
 )
 print(message.content)
 ```
@@ -184,7 +184,7 @@ client = AnthropicBedrock(aws_region="us-west-2")
 message = client.messages.create(
     model="global.anthropic.claude-opus-4-6-v1",
     max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}]
+    messages=[{"role": "user", "content": "Hello, world"}],
 )
 ```
 
@@ -203,7 +203,7 @@ client = AnthropicBedrock(aws_region="us-west-2")
 message = client.messages.create(
     model="anthropic.claude-opus-4-6-v1",  # No global. prefix
     max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}]
+    messages=[{"role": "user", "content": "Hello, world"}],
 )
 ```
 

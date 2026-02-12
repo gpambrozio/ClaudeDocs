@@ -8,7 +8,7 @@ Python
 
 beta.skills.delete(strskill\_id, SkillDeleteParams\*\*kwargs)  -> [SkillDeleteResponse](api/beta.md)
 
-delete/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -26,9 +26,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -105,25 +105,7 @@ skill = client.beta.skills.delete(
 print(skill.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
 
 ---
 

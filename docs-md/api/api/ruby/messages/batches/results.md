@@ -8,7 +8,7 @@ Ruby
 
 messages.batches.results(message\_batch\_id) -> [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -109,10 +109,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -128,10 +124,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -149,10 +141,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -162,10 +150,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -185,17 +169,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -205,19 +181,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -229,10 +197,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -241,15 +205,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -277,10 +233,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -291,19 +243,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -413,10 +357,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -458,10 +398,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -482,25 +418,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -510,13 +438,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -525,8 +449,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -542,10 +464,6 @@ Accepts one of the following:
 
 type: :succeeded
 
-Accepts one of the following:
-
-:succeeded
-
 class MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -560,19 +478,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -580,19 +490,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -600,19 +502,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -620,19 +514,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -640,39 +526,19 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchCanceledResult { type }
 
 type: :canceled
 
-Accepts one of the following:
-
-:canceled
-
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 Retrieve Message Batch results
 

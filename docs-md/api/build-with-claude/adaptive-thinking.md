@@ -70,16 +70,9 @@ client = anthropic.Anthropic()
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=16000,
-    thinking={
-        "type": "adaptive"
-    },
-    output_config={
-        "effort": "medium"
-    },
-    messages=[{
-        "role": "user",
-        "content": "What is the capital of France?"
-    }]
+    thinking={"type": "adaptive"},
+    output_config={"effort": "medium"},
+    messages=[{"role": "user", "content": "What is the capital of France?"}],
 )
 
 print(response.content[0].text)
@@ -100,7 +93,12 @@ with client.messages.stream(
     model="claude-opus-4-6",
     max_tokens=16000,
     thinking={"type": "adaptive"},
-    messages=[{"role": "user", "content": "What is the greatest common divisor of 1071 and 462?"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "What is the greatest common divisor of 1071 and 462?",
+        }
+    ],
 ) as stream:
     for event in stream:
         if event.type == "content_block_start":
@@ -169,7 +167,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#1a697b767f695a7b746e7268756a737934797577).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#4231232e273102232c362a302d322b216c212d2f).
 
 ### Thinking encryption
 

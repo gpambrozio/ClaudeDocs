@@ -6,7 +6,7 @@ cURL
 
 # Retrieve Message Batch results
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -107,10 +107,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -126,10 +122,6 @@ file\_id: string
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
 
@@ -147,10 +139,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -160,10 +148,6 @@ encrypted\_index: string
 title: string
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -183,17 +167,9 @@ title: string
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock = object { signature, thinking, type }
 
@@ -203,19 +179,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock = object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock = object { id, input, name, type }
 
@@ -227,10 +195,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock = object { id, input, name, type }
 
 id: string
@@ -239,15 +203,7 @@ input: map[unknown]
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock = object { content, tool\_use\_id, type }
 
@@ -275,10 +231,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
@@ -289,19 +241,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -411,10 +355,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -456,10 +396,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -480,25 +416,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string
 
@@ -508,13 +436,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -523,8 +447,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" or "priority" or "batch"
 
@@ -540,10 +462,6 @@ Accepts one of the following:
 
 type: "succeeded"
 
-Accepts one of the following:
-
-"succeeded"
-
 MessageBatchErroredResult = object { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -558,19 +476,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError = object { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError = object { message, type }
 
@@ -578,19 +488,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError = object { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError = object { message, type }
 
@@ -598,19 +500,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError = object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError = object { message, type }
 
@@ -618,19 +512,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject = object { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError = object { message, type }
 
@@ -638,39 +524,19 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchCanceledResult = object { type }
 
 type: "canceled"
 
-Accepts one of the following:
-
-"canceled"
-
 MessageBatchExpiredResult = object { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 Retrieve Message Batch results
 

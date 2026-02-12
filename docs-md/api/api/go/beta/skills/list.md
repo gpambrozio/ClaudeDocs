@@ -8,7 +8,7 @@ Go
 
 client.Beta.Skills.List(ctx, params) (\*PageCursor[[BetaSkillListResponse](api/beta.md)], error)
 
-get/v1/skills
+GET/v1/skills
 
 List Skills
 
@@ -161,47 +161,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
 
 ---
 

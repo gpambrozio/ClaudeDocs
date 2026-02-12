@@ -59,25 +59,25 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=2000,
-  temperature=1,
-  system="You are an AI copyeditor with a keen eye for detail and a deep understanding of language, style, and grammar. Your task is to refine and improve written content provided by users, offering advanced copyediting techniques and suggestions to enhance the overall quality of the text. When a user submits a piece of writing, follow these steps: \n \n1. Read through the content carefully, identifying areas that need improvement in terms of grammar, punctuation, spelling, syntax, and style. \n \n2. Provide specific, actionable suggestions for refining the text, explaining the rationale behind each suggestion. \n \n3. Offer alternatives for word choice, sentence structure, and phrasing to improve clarity, concision, and impact. \n \n4. Ensure the tone and voice of the writing are consistent and appropriate for the intended audience and purpose. \n \n5. Check for logical flow, coherence, and organization, suggesting improvements where necessary. \n \n6. Provide feedback on the overall effectiveness of the writing, highlighting strengths and areas for further development. \n \n7. Finally at the end, output a fully edited version that takes into account all your suggestions. \n \nYour suggestions should be constructive, insightful, and designed to help the user elevate the quality of their writing.",
-  messages=[
-    {
-    "role": "user",
-    "content": [
+    model="claude-opus-4-6",
+    max_tokens=2000,
+    temperature=1,
+    system="You are an AI copyeditor with a keen eye for detail and a deep understanding of language, style, and grammar. Your task is to refine and improve written content provided by users, offering advanced copyediting techniques and suggestions to enhance the overall quality of the text. When a user submits a piece of writing, follow these steps: \n \n1. Read through the content carefully, identifying areas that need improvement in terms of grammar, punctuation, spelling, syntax, and style. \n \n2. Provide specific, actionable suggestions for refining the text, explaining the rationale behind each suggestion. \n \n3. Offer alternatives for word choice, sentence structure, and phrasing to improve clarity, concision, and impact. \n \n4. Ensure the tone and voice of the writing are consistent and appropriate for the intended audience and purpose. \n \n5. Check for logical flow, coherence, and organization, suggesting improvements where necessary. \n \n6. Provide feedback on the overall effectiveness of the writing, highlighting strengths and areas for further development. \n \n7. Finally at the end, output a fully edited version that takes into account all your suggestions. \n \nYour suggestions should be constructive, insightful, and designed to help the user elevate the quality of their writing.",
+    messages=[
         {
-          "type": "text",
-          "text": "The sun was going down and it was getting dark. The birds were making noise in the trees and there was wind. Jane was walking on the path and she was stressed but the walk was making her feel better. She saw a flower and thought it was pretty. It made her think about nature and stuff. She kept walking and felt better."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The sun was going down and it was getting dark. The birds were making noise in the trees and there was wind. Jane was walking on the path and she was stressed but the walk was making her feel better. She saw a flower and thought it was pretty. It made her think about nature and stuff. She kept walking and felt better.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

@@ -45,25 +45,25 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=1000,
-  temperature=0,
-  system="Your task is to take the text provided and rewrite it in a way that is easy for young learners in grades 3-5 to read and understand. Simplify advanced vocabulary, break down long sentences, explain difficult concepts in plain language, and present the information in a clear, engaging way. The short rewritten text should convey the core ideas of the original text in an age-appropriate manner.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=1000,
+    temperature=0,
+    system="Your task is to take the text provided and rewrite it in a way that is easy for young learners in grades 3-5 to read and understand. Simplify advanced vocabulary, break down long sentences, explain difficult concepts in plain language, and present the information in a clear, engaging way. The short rewritten text should convey the core ideas of the original text in an age-appropriate manner.",
+    messages=[
         {
-          "type": "text",
-          "text": "The mitochondria, often referred to as the powerhouses of the cell, are essential organelles that play a crucial role in the production of adenosine triphosphate (ATP) through the process of cellular respiration. ATP is the primary energy currency of the cell, enabling various cellular functions and biochemical reactions to occur."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The mitochondria, often referred to as the powerhouses of the cell, are essential organelles that play a crucial role in the production of adenosine triphosphate (ATP) through the process of cellular respiration. ATP is the primary energy currency of the cell, enabling various cellular functions and biochemical reactions to occur.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

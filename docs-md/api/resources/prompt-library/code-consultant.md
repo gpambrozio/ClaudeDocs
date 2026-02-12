@@ -77,10 +77,6 @@ message = client.messages.create(
 print(message.content)
 ```
 
-```inline-block
-
-```
-
 Was this page helpful?
 
 ---

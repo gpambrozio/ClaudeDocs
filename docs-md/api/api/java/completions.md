@@ -10,7 +10,7 @@ Java
 
 [Completion](api/completions.md) completions().create(CompletionCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/complete
+POST/v1/complete
 
 ##### ModelsExpand Collapse
 
@@ -132,10 +132,6 @@ JsonValue; type "completion"constant"completion"constant
 Object type.
 
 For Text Completions, this is always `"completion"`.
-
-Accepts one of the following:
-
-COMPLETION("completion")
 
 ---
 

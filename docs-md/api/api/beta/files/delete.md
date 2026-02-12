@@ -6,7 +6,7 @@ cURL
 
 # Delete File
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -84,10 +84,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-"file\_deleted"
-
 Delete File
 
 cURL
@@ -100,25 +96,7 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
 
 ---
 

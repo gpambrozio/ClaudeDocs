@@ -8,7 +8,7 @@ Go
 
 client.Messages.CountTokens(ctx, body) (\*[MessageTokensCount](api/messages.md), error)
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 Count the number of tokens in a Message.
 
@@ -85,19 +85,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -134,10 +126,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -151,10 +139,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -170,10 +154,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -183,10 +163,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -205,10 +181,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -234,35 +206,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -293,15 +249,7 @@ Data string
 
 MediaType ApplicationPDF
 
-Accepts one of the following:
-
-const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"
-
 Type Base64
-
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
 
 type PlainTextSource struct{…}
 
@@ -309,15 +257,7 @@ Data string
 
 MediaType TextPlain
 
-Accepts one of the following:
-
-const TextPlainTextPlain TextPlain = "text/plain"
-
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ContentBlockSource struct{…}
 
@@ -337,19 +277,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -386,10 +318,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -403,10 +331,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -422,10 +346,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -435,10 +355,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -457,10 +373,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -486,35 +398,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -535,35 +431,19 @@ const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
 Type Content
 
-Accepts one of the following:
-
-const ContentContent Content = "content"
-
 type URLPDFSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Document
-
-Accepts one of the following:
-
-const DocumentDocument Document = "document"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -598,19 +478,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -647,10 +519,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -664,10 +532,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -683,10 +547,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -696,10 +556,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -719,29 +575,17 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Source string
 
 Title string
 
 Type SearchResult
 
-Accepts one of the following:
-
-const SearchResultSearchResult SearchResult = "search\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -772,19 +616,11 @@ Thinking string
 
 Type Thinking
 
-Accepts one of the following:
-
-const ThinkingThinking Thinking = "thinking"
-
 type RedactedThinkingBlockParamResp struct{…}
 
 Data string
 
 Type RedactedThinking
-
-Accepts one of the following:
-
-const RedactedThinkingRedactedThinking RedactedThinking = "redacted\_thinking"
 
 type ToolUseBlockParamResp struct{…}
 
@@ -796,19 +632,11 @@ Name string
 
 Type ToolUse
 
-Accepts one of the following:
-
-const ToolUseToolUse ToolUse = "tool\_use"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -833,19 +661,11 @@ ToolUseID string
 
 Type ToolResult
 
-Accepts one of the following:
-
-const ToolResultToolResult ToolResult = "tool\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -878,19 +698,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -927,10 +739,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -944,10 +752,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -963,10 +767,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -976,10 +776,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -998,10 +794,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -1027,35 +819,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1082,19 +858,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1131,10 +899,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1148,10 +912,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1167,10 +927,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1180,10 +936,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1203,29 +955,17 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Source string
 
 Title string
 
 Type SearchResult
 
-Accepts one of the following:
-
-const SearchResultSearchResult SearchResult = "search\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1260,15 +1000,7 @@ Data string
 
 MediaType ApplicationPDF
 
-Accepts one of the following:
-
-const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"
-
 Type Base64
-
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
 
 type PlainTextSource struct{…}
 
@@ -1276,15 +1008,7 @@ Data string
 
 MediaType TextPlain
 
-Accepts one of the following:
-
-const TextPlainTextPlain TextPlain = "text/plain"
-
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ContentBlockSource struct{…}
 
@@ -1304,19 +1028,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1353,10 +1069,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1370,10 +1082,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1389,10 +1097,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1402,10 +1106,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1424,10 +1124,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -1453,35 +1149,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1502,35 +1182,19 @@ const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
 Type Content
 
-Accepts one of the following:
-
-const ContentContent Content = "content"
-
 type URLPDFSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Document
-
-Accepts one of the following:
-
-const DocumentDocument Document = "document"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1567,25 +1231,13 @@ Input map[string, any]
 
 Name WebSearch
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1618,10 +1270,6 @@ Title string
 
 Type WebSearchResult
 
-Accepts one of the following:
-
-const WebSearchResultWebSearchResult WebSearchResult = "web\_search\_result"
-
 URL string
 
 PageAge stringoptional
@@ -1646,27 +1294,15 @@ const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErro
 
 Type WebSearchToolResultError
 
-Accepts one of the following:
-
-const WebSearchToolResultErrorWebSearchToolResultError WebSearchToolResultError = "web\_search\_tool\_result\_error"
-
 ToolUseID string
 
 Type WebSearchToolResult
-
-Accepts one of the following:
-
-const WebSearchToolResultWebSearchToolResult WebSearchToolResult = "web\_search\_tool\_result"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1717,19 +1353,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1766,10 +1394,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1783,10 +1407,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1802,10 +1422,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1815,10 +1431,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1837,10 +1449,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 Thinking param.Field[[ThinkingConfigParamUnionResp](api/messages.md)]optional
 
@@ -1928,10 +1536,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 Type Object
 
-Accepts one of the following:
-
-const ObjectObject Object = "object"
-
 Properties map[string, any]optional
 
 Required []stringoptional
@@ -1951,10 +1555,6 @@ CacheControl [CacheControlEphemeral](api/messages.md)optional
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1989,10 +1589,6 @@ When true, guarantees schema validation on tool names and inputs
 
 Type ToolTypeoptional
 
-Accepts one of the following:
-
-const ToolTypeCustom ToolType = "custom"
-
 type ToolBash20250124 struct{…}
 
 Name Bash
@@ -2001,25 +1597,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const BashBash Bash = "bash"
-
 Type Bash20250124
-
-Accepts one of the following:
-
-const Bash20250124Bash20250124 Bash20250124 = "bash\_20250124"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2050,25 +1634,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceEditorStrReplaceEditor StrReplaceEditor = "str\_replace\_editor"
-
 Type TextEditor20250124
-
-Accepts one of the following:
-
-const TextEditor20250124TextEditor20250124 TextEditor20250124 = "text\_editor\_20250124"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2099,25 +1671,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceBasedEditToolStrReplaceBasedEditTool StrReplaceBasedEditTool = "str\_replace\_based\_edit\_tool"
-
 Type TextEditor20250429
-
-Accepts one of the following:
-
-const TextEditor20250429TextEditor20250429 TextEditor20250429 = "text\_editor\_20250429"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2148,25 +1708,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceBasedEditToolStrReplaceBasedEditTool StrReplaceBasedEditTool = "str\_replace\_based\_edit\_tool"
-
 Type TextEditor20250728
-
-Accepts one of the following:
-
-const TextEditor20250728TextEditor20250728 TextEditor20250728 = "text\_editor\_20250728"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2189,8 +1737,6 @@ MaxCharacters int64optional
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
@@ -2203,15 +1749,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type WebSearch20250305
-
-Accepts one of the following:
-
-const WebSearch20250305WebSearch20250305 WebSearch20250305 = "web\_search\_20250305"
 
 AllowedDomains []stringoptional
 
@@ -2226,10 +1764,6 @@ CacheControl [CacheControlEphemeral](api/messages.md)optional
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2252,8 +1786,6 @@ MaxUses int64optional
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
@@ -2264,41 +1796,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 Type Approximate
 
-Accepts one of the following:
-
-const ApproximateApproximate Approximate = "approximate"
-
 City stringoptional
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 Country stringoptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 Region stringoptional
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 Timezone stringoptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 ##### ReturnsExpand Collapse
 
@@ -2345,23 +1857,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "input_tokens": 2095
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "input_tokens": 2095
-}
-```
 
 ---
 

@@ -44,11 +44,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Description: A noise-canceling, wireless, over-ear headphone with a 20-hour battery life and touch controls. Designed for audiophiles and frequent travelers.  \n  \nKeywords: immersive, comfortable, high-fidelity, long-lasting, convenient"
+                    "text": "Description: A noise-canceling, wireless, over-ear headphone with a 20-hour battery life and touch controls. Designed for audiophiles and frequent travelers.  \n  \nKeywords: immersive, comfortable, high-fidelity, long-lasting, convenient",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

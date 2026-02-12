@@ -8,7 +8,7 @@ Go
 
 client.Beta.Files.Download(ctx, fileID, query) (\*Response, error)
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 

@@ -15,7 +15,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 async def main():
     async for message in query(
         prompt="Find and fix the bug in auth.py",
-        options=ClaudeAgentOptions(allowed_tools=["Read", "Edit", "Bash"])
+        options=ClaudeAgentOptions(allowed_tools=["Read", "Edit", "Bash"]),
     ):
         print(message)  # Claude reads the file, finds the bug, edits it
 
@@ -81,7 +81,7 @@ Email assistant, research agent, and more](https://github.com/anthropics/claude-
    async def main():
        async for message in query(
            prompt="What files are in this directory?",
-           options=ClaudeAgentOptions(allowed_tools=["Bash", "Glob"])
+           options=ClaudeAgentOptions(allowed_tools=["Bash", "Glob"]),
        ):
            if hasattr(message, "result"):
                print(message.result)
@@ -144,7 +144,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 async def main():
     async for message in query(
         prompt="Find all TODO comments and create a summary",
-        options=ClaudeAgentOptions(allowed_tools=["Read", "Glob", "Grep"])
+        options=ClaudeAgentOptions(allowed_tools=["Read", "Glob", "Grep"]),
     ):
         if hasattr(message, "result"):
             print(message.result)
@@ -186,7 +186,7 @@ Python
 response = client.messages.create(...)
 while response.stop_reason == "tool_use":
     result = your_tool_executor(response.tool_use)
-    response = client.messages.create(tool_result=result, ...)
+    response = client.messages.create(tool_result=result, **params)
 
 # Agent SDK: Claude handles tools autonomously
 async for message in query(prompt="Fix the bug in auth.py"):

@@ -8,7 +8,7 @@ Go
 
 client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta.md), error)
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -127,25 +127,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
 
 ---
 

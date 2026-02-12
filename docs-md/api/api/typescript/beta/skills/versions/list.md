@@ -8,7 +8,7 @@ TypeScript
 
 client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta.md) { id, created\_at, description, 5 more } >
 
-get/v1/skills/{skill\_id}/versions
+GET/v1/skills/{skill\_id}/versions
 
 List Skill Versions
 
@@ -147,49 +147,7 @@ for await (const versionListResponse of client.beta.skills.versions.list('skill_
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
 
 ---
 

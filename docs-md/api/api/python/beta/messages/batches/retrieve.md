@@ -8,7 +8,7 @@ Python
 
 beta.messages.batches.retrieve(strmessage\_batch\_id, BatchRetrieveParams\*\*kwargs)  -> [BetaMessageBatch](api/beta.md)
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
@@ -26,9 +26,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -86,19 +86,13 @@ archived\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: Optional[datetime]
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: Optional[datetime]
 
@@ -111,8 +105,6 @@ formatdate-time
 expires\_at: datetime
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: Literal["in\_progress", "canceling", "ended"]
 
@@ -172,10 +164,6 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-"message\_batch"
-
 Retrieve a Message Batch
 
 Python
@@ -193,53 +181,7 @@ beta_message_batch = client.beta.messages.batches.retrieve(
 print(beta_message_batch.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
 
 ---
 

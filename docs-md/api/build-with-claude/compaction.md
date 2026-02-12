@@ -87,13 +87,10 @@ response = client.beta.messages.create(
         "edits": [
             {
                 "type": "compact_20260112",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 150000
-                }
+                "trigger": {"type": "input_tokens", "value": 150000},
             }
         ]
-    }
+    },
 )
 ```
 
@@ -119,10 +116,10 @@ response = client.beta.messages.create(
         "edits": [
             {
                 "type": "compact_20260112",
-                "instructions": "Focus on preserving code snippets, variable names, and technical decisions."
+                "instructions": "Focus on preserving code snippets, variable names, and technical decisions.",
             }
         ]
-    }
+    },
 )
 ```
 
@@ -141,13 +138,8 @@ response = client.beta.messages.create(
     max_tokens=4096,
     messages=messages,
     context_management={
-        "edits": [
-            {
-                "type": "compact_20260112",
-                "pause_after_compaction": True
-            }
-        ]
-    }
+        "edits": [{"type": "compact_20260112", "pause_after_compaction": True}]
+    },
 )
 
 # Check if compaction triggered a pause
@@ -161,9 +153,7 @@ if response.stop_reason == "compaction":
         model="claude-opus-4-6",
         max_tokens=4096,
         messages=messages,
-        context_management={
-            "edits": [{"type": "compact_20260112"}]
-        }
+        context_management={"edits": [{"type": "compact_20260112"}]},
     )
 ```
 
@@ -200,10 +190,12 @@ if response.stop_reason == "compaction":
 
     # Estimate total tokens consumed; prompt wrap-up if over budget
     if n_compactions * TRIGGER_THRESHOLD >= TOTAL_TOKEN_BUDGET:
-        messages.append({
-            "role": "user",
-            "content": "Please wrap up your current work and summarize the final state.",
-        })
+        messages.append(
+            {
+                "role": "user",
+                "content": "Please wrap up your current work and summarize the final state.",
+            }
+        )
 ```
 
 ## Working with compaction blocks
@@ -245,9 +237,7 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
     messages=messages,
-    context_management={
-        "edits": [{"type": "compact_20260112"}]
-    }
+    context_management={"edits": [{"type": "compact_20260112"}]},
 )
 ```
 
@@ -272,9 +262,7 @@ with client.beta.messages.stream(
     model="claude-opus-4-6",
     max_tokens=4096,
     messages=messages,
-    context_management={
-        "edits": [{"type": "compact_20260112"}]
-    }
+    context_management={"edits": [{"type": "compact_20260112"}]},
 ) as stream:
     for event in stream:
         if event.type == "content_block_start":
@@ -335,13 +323,13 @@ response = client.beta.messages.create(
         {
             "type": "text",
             "text": "You are a helpful coding assistant...",
-            "cache_control": {"type": "ephemeral"}  # Cache the system prompt separately
+            "cache_control": {
+                "type": "ephemeral"
+            },  # Cache the system prompt separately
         }
     ],
     messages=messages,
-    context_management={
-        "edits": [{"type": "compact_20260112"}]
-    }
+    context_management={"edits": [{"type": "compact_20260112"}]},
 )
 ```
 
@@ -395,9 +383,7 @@ count_response = client.beta.messages.count_tokens(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
     messages=messages,
-    context_management={
-        "edits": [{"type": "compact_20260112"}]
-    }
+    context_management={"edits": [{"type": "compact_20260112"}]},
 )
 
 print(f"Current tokens: {count_response.input_tokens}")
@@ -429,19 +415,17 @@ def chat(user_message: str) -> str:
             "edits": [
                 {
                     "type": "compact_20260112",
-                    "trigger": {"type": "input_tokens", "value": 100000}
+                    "trigger": {"type": "input_tokens", "value": 100000},
                 }
             ]
-        }
+        },
     )
 
     # Append response (compaction blocks are automatically included)
     messages.append({"role": "assistant", "content": response.content})
 
     # Return the text content
-    return next(
-        block.text for block in response.content if block.type == "text"
-    )
+    return next(block.text for block in response.content if block.type == "text")
 
 # Run a long conversation
 print(chat("Help me build a Python web scraper"))
@@ -475,10 +459,10 @@ def chat(user_message: str) -> str:
                 {
                     "type": "compact_20260112",
                     "trigger": {"type": "input_tokens", "value": 100000},
-                    "pause_after_compaction": True
+                    "pause_after_compaction": True,
                 }
             ]
-        }
+        },
     )
 
     # Check if compaction occurred and paused
@@ -502,9 +486,7 @@ def chat(user_message: str) -> str:
             model="claude-opus-4-6",
             max_tokens=4096,
             messages=messages_after_compaction,
-            context_management={
-                "edits": [{"type": "compact_20260112"}]
-            }
+            context_management={"edits": [{"type": "compact_20260112"}]},
         )
 
         # Update our message list to reflect the compaction
@@ -515,9 +497,7 @@ def chat(user_message: str) -> str:
     messages.append({"role": "assistant", "content": response.content})
 
     # Return the text content
-    return next(
-        block.text for block in response.content if block.type == "text"
-    )
+    return next(block.text for block in response.content if block.type == "text")
 
 # Run a long conversation
 print(chat("Help me build a Python web scraper"))

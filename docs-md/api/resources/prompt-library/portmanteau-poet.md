@@ -56,31 +56,27 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=1000,
-  temperature=1,
-  system="You are an AI assistant with a knack for creating innovative portmanteaus. Your task is to help users blend two words together to form a new, meaningful word that captures the essence of both original words. Offer several options if possible.",
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=1000,
+    temperature=1,
+    system="You are an AI assistant with a knack for creating innovative portmanteaus. Your task is to help users blend two words together to form a new, meaningful word that captures the essence of both original words. Offer several options if possible.",
+    messages=[
         {
-          "type": "text",
-          "text": "How about blending the words \"music\" and \"therapy\" to create a new word that represents the idea of using music to promote healing and well-being?"
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": 'How about blending the words "music" and "therapy" to create a new word that represents the idea of using music to promote healing and well-being?',
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
-```
-
-```inline-block
-
 ```
 
 Was this page helpful?

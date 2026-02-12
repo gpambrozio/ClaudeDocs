@@ -76,7 +76,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.messages.create(
+response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     betas=["advanced-tool-use-2025-11-20"],
@@ -89,34 +89,26 @@ response = client.messages.create(
                 "properties": {
                     "location": {
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA"
+                        "description": "The city and state, e.g. San Francisco, CA",
                     },
                     "unit": {
                         "type": "string",
                         "enum": ["celsius", "fahrenheit"],
-                        "description": "The unit of temperature"
-                    }
+                        "description": "The unit of temperature",
+                    },
                 },
-                "required": ["location"]
+                "required": ["location"],
             },
             "input_examples": [
-                {
-                    "location": "San Francisco, CA",
-                    "unit": "fahrenheit"
-                },
-                {
-                    "location": "Tokyo, Japan",
-                    "unit": "celsius"
-                },
+                {"location": "San Francisco, CA", "unit": "fahrenheit"},
+                {"location": "Tokyo, Japan", "unit": "celsius"},
                 {
                     "location": "New York, NY"  # 'unit' is optional
-                }
-            ]
+                },
+            ],
         }
     ],
-    messages=[
-        {"role": "user", "content": "What's the weather like in San Francisco?"}
-    ]
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
 )
 ```
 
@@ -201,8 +193,11 @@ runner = client.beta.messages.tool_runner(
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
-        {"role": "user", "content": "What's the weather like in Paris? Also, what's 15 + 27?"}
-    ]
+        {
+            "role": "user",
+            "content": "What's the weather like in Paris? Also, what's 15 + 27?",
+        }
+    ],
 )
 for message in runner:
     print(message.content[0].text)
@@ -264,8 +259,11 @@ runner = client.beta.messages.tool_runner(
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
-        {"role": "user", "content": "What's the weather like in Paris? Also, what's 15 + 27?"}
-    ]
+        {
+            "role": "user",
+            "content": "What's the weather like in Paris? Also, what's 15 + 27?",
+        }
+    ],
 )
 final_message = runner.until_done()
 print(final_message.content[0].text)
@@ -294,7 +292,7 @@ runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=[get_weather],
-    messages=[{"role": "user", "content": "What's the weather in San Francisco?"}]
+    messages=[{"role": "user", "content": "What's the weather in San Francisco?"}],
 )
 for message in runner:
     # Optional: inspect the tool response (automatically appended by the runner)
@@ -303,10 +301,12 @@ for message in runner:
         print(f"Tool result: {tool_response}")
 
     # Customize the next request
-    runner.set_messages_params(lambda params: {
-        **params,
-        "max_tokens": 2048  # Increase tokens for next request
-    })
+    runner.set_messages_params(
+        lambda params: {
+            **params,
+            "max_tokens": 2048,  # Increase tokens for next request
+        }
+    )
 
     # Or add additional messages
     runner.append_messages(
@@ -355,7 +355,7 @@ runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=[my_tool],
-    messages=[{"role": "user", "content": "Run the tool"}]
+    messages=[{"role": "user", "content": "Run the tool"}],
 )
 
 for message in runner:
@@ -398,7 +398,12 @@ runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=[search_documents],
-    messages=[{"role": "user", "content": "Search for information about the climate of San Francisco"}]
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for information about the climate of San Francisco",
+        }
+    ],
 )
 
 for message in runner:
@@ -443,14 +448,14 @@ runner = client.beta.messages.tool_runner(
     max_tokens=1024,
     tools=[calculate_sum],
     messages=[{"role": "user", "content": "What is 15 + 27?"}],
-    stream=True
+    stream=True,
 )
 
 # When streaming, the runner returns BetaMessageStream
 for message_stream in runner:
     for event in message_stream:
-        print('event:', event)
-    print('message:', message_stream.get_final_message())
+        print("event:", event)
+    print("message:", message_stream.get_final_message())
 
 print(runner.until_done())
 ```
@@ -638,7 +643,7 @@ if response.stop_reason == "max_tokens":
             model="claude-opus-4-6",
             max_tokens=4096,  # Increased limit
             messages=messages,
-            tools=tools
+            tools=tools,
         )
 ```
 
@@ -662,22 +667,21 @@ response = client.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Search for comprehensive information about quantum computing breakthroughs in 2025"
+            "content": "Search for comprehensive information about quantum computing breakthroughs in 2025",
         }
     ],
-    tools=[{
-        "type": "web_search_20250305",
-        "name": "web_search",
-        "max_uses": 10
-    }]
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
 )
 
 # Check if the response has pause_turn stop reason
 if response.stop_reason == "pause_turn":
     # Continue the conversation with the paused content
     messages = [
-        {"role": "user", "content": "Search for comprehensive information about quantum computing breakthroughs in 2025"},
-        {"role": "assistant", "content": response.content}
+        {
+            "role": "user",
+            "content": "Search for comprehensive information about quantum computing breakthroughs in 2025",
+        },
+        {"role": "assistant", "content": response.content},
     ]
 
     # Send the continuation request
@@ -685,11 +689,7 @@ if response.stop_reason == "pause_turn":
         model="claude-3-7-sonnet-latest",
         max_tokens=1024,
         messages=messages,
-        tools=[{
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 10
-        }]
+        tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
     )
 
     print(continuation)

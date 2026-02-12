@@ -172,7 +172,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -d '{
-    "model": "claude-opus-4-6", 
+    "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "messages": [{
       "role": "user",

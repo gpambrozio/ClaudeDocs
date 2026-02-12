@@ -150,11 +150,13 @@ async def get_claude_tools(mcp_session: ClientSession):
 
     claude_tools = []
     for tool in mcp_tools.tools:
-        claude_tools.append({
-            "name": tool.name,
-            "description": tool.description or "",
-            "input_schema": tool.inputSchema  # Rename inputSchema to input_schema
-        })
+        claude_tools.append(
+            {
+                "name": tool.name,
+                "description": tool.description or "",
+                "input_schema": tool.inputSchema,  # Rename inputSchema to input_schema
+            }
+        )
 
     return claude_tools
 ```
@@ -173,7 +175,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=claude_tools,
-    messages=[{"role": "user", "content": "What tools do you have available?"}]
+    messages=[{"role": "user", "content": "What tools do you have available?"}],
 )
 ```
 

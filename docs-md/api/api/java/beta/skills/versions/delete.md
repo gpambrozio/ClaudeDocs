@@ -8,7 +8,7 @@ Java
 
 [VersionDeleteResponse](api/beta.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -115,25 +115,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
 
 ---
 

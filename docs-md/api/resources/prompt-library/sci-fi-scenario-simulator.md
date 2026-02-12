@@ -47,11 +47,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "A future where humans can upload their consciousness into a digital realm."
+                    "text": "A future where humans can upload their consciousness into a digital realm.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

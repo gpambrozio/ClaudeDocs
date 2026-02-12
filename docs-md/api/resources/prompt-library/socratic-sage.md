@@ -35,13 +35,10 @@ message = client.messages.create(
         {
             "role": "user",
             "content": [
-                {
-                    "type": "text",
-                    "text": "Let's discuss the ethics of animal testing."
-                }
-            ]
+                {"type": "text", "text": "Let's discuss the ethics of animal testing."}
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

@@ -6,7 +6,7 @@ cURL
 
 # Create Skill Version
 
-post/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 Create Skill Version
 
@@ -72,6 +72,14 @@ Accepts one of the following:
 
 "fast-mode-2026-02-01"
 
+##### Body ParametersForm DataExpand Collapse
+
+files: optional array of string
+
+Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
 ##### ReturnsExpand Collapse
 
 id: string
@@ -130,37 +138,7 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
 
 ---
 

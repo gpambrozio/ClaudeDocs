@@ -6,7 +6,7 @@ cURL
 
 # Delete Skill Version
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -104,25 +104,7 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
 
 ---
 

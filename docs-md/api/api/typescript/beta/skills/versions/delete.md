@@ -8,7 +8,7 @@ TypeScript
 
 client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta.md) { id, type }
 
-delete/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -110,25 +110,7 @@ const version = await client.beta.skills.versions.delete('version', { skill_id: 
 console.log(version.id);
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
 
 ---
 

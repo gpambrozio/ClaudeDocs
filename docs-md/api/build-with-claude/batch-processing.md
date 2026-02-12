@@ -176,9 +176,7 @@ client = anthropic.Anthropic()
 
 message_batch = None
 while True:
-    message_batch = client.messages.batches.retrieve(
-        MESSAGE_BATCH_ID
-    )
+    message_batch = client.messages.batches.retrieve(MESSAGE_BATCH_ID)
     if message_batch.processing_status == "ended":
         break
 
@@ -199,9 +197,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 # Automatically fetches more pages as needed.
-for message_batch in client.messages.batches.list(
-    limit=20
-):
+for message_batch in client.messages.batches.list(limit=20):
     print(message_batch)
 ```
 

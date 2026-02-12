@@ -227,34 +227,22 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     messages=[...],
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000
-    },
+    thinking={"type": "enabled", "budget_tokens": 10000},
     tools=[...],
     betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
             {
                 "type": "clear_thinking_20251015",
-                "keep": {
-                    "type": "thinking_turns",
-                    "value": 2
-                }
+                "keep": {"type": "thinking_turns", "value": 2},
             },
             {
                 "type": "clear_tool_uses_20250919",
-                "trigger": {
-                    "type": "input_tokens",
-                    "value": 50000
-                },
-                "keep": {
-                    "type": "tool_uses",
-                    "value": 5
-                }
-            }
+                "trigger": {"type": "input_tokens", "value": 50000},
+                "keep": {"type": "tool_uses", "value": 5},
+            },
         ]
-    }
+    },
 )
 ```
 
@@ -394,18 +382,11 @@ response = client.beta.messages.create(
     max_tokens=4096,
     messages=[...],
     tools=[
-        {
-            "type": "memory_20250818",
-            "name": "memory"
-        },
+        {"type": "memory_20250818", "name": "memory"},
         # Your other tools
     ],
     betas=["context-management-2025-06-27"],
-    context_management={
-        "edits": [
-            {"type": "clear_tool_uses_20250919"}
-        ]
-    }
+    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
 )
 ```
 
@@ -444,13 +425,10 @@ runner = client.beta.messages.tool_runner(
     messages=[
         {
             "role": "user",
-            "content": "Analyze all the files in this directory and write a summary report."
+            "content": "Analyze all the files in this directory and write a summary report.",
         }
     ],
-    compaction_control={
-        "enabled": True,
-        "context_token_threshold": 100000
-    }
+    compaction_control={"enabled": True, "context_token_threshold": 100000},
 )
 
 for message in runner:
@@ -509,16 +487,10 @@ Python
 
 ```shiki
 # More frequent compaction for memory-constrained scenarios
-compaction_control={
-    "enabled": True,
-    "context_token_threshold": 50000
-}
+compaction_control = {"enabled": True, "context_token_threshold": 50000}
 
 # Less frequent compaction when you need more context
-compaction_control={
-    "enabled": True,
-    "context_token_threshold": 150000
-}
+compaction_control = {"enabled": True, "context_token_threshold": 150000}
 ```
 
 #### Using a different model for summaries
@@ -528,10 +500,10 @@ You can use a faster or cheaper model for generating summaries:
 Python
 
 ```shiki
-compaction_control={
+compaction_control = {
     "enabled": True,
     "context_token_threshold": 100000,
-    "model": "claude-haiku-4-5"
+    "model": "claude-haiku-4-5",
 }
 ```
 
@@ -542,7 +514,7 @@ You can provide a custom prompt for domain-specific needs. Your prompt should in
 Python
 
 ```shiki
-compaction_control={
+compaction_control = {
     "enabled": True,
     "context_token_threshold": 100000,
     "summary_prompt": """Summarize the research conducted so far, including:
@@ -550,7 +522,7 @@ compaction_control={
 - Questions answered and remaining unknowns
 - Recommended next steps
 
-Wrap your summary in <summary></summary> tags."""
+Wrap your summary in <summary></summary> tags.""",
 }
 ```
 

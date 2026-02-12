@@ -10,37 +10,37 @@ TypeScript
 
 client.messages.batches.create(BatchCreateParams { requests } body, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 client.messages.batches.retrieve(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 client.messages.batches.list(BatchListParams { after\_id, before\_id, limit } query?, RequestOptionsoptions?): Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 client.messages.batches.cancel(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages.md) { id, type }
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 client.messages.batches.results(stringmessageBatchID, RequestOptionsoptions?): [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }  | Stream<[MessageBatchIndividualResponse](api/messages.md) { custom\_id, result } >
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -56,10 +56,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 MessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
@@ -72,19 +68,13 @@ archived\_at: string | null
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: string | null
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: string | null
 
@@ -97,8 +87,6 @@ formatdate-time
 expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: "in\_progress" | "canceling" | "ended"
 
@@ -158,17 +146,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-"message\_batch"
-
 MessageBatchCanceledResult { type }
 
 type: "canceled"
-
-Accepts one of the following:
-
-"canceled"
 
 MessageBatchErroredResult { error, type }
 
@@ -184,19 +164,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -204,19 +176,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -224,19 +188,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -244,19 +200,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -264,31 +212,15 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchIndividualResponse { custom\_id, result }
 
@@ -375,10 +307,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -394,10 +322,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -415,10 +339,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -428,10 +348,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -451,17 +367,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -471,19 +379,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -495,10 +395,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -507,15 +403,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -543,10 +431,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -557,19 +441,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -673,10 +549,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -718,10 +590,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -742,25 +610,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -770,13 +630,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -785,8 +641,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -802,10 +656,6 @@ Accepts one of the following:
 
 type: "succeeded"
 
-Accepts one of the following:
-
-"succeeded"
-
 MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -820,19 +670,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -840,19 +682,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -860,19 +694,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -880,19 +706,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -900,39 +718,19 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchCanceledResult { type }
 
 type: "canceled"
 
-Accepts one of the following:
-
-"canceled"
-
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchRequestCounts { canceled, errored, expired, 2 more }
 
@@ -1039,10 +837,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -1058,10 +852,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1079,10 +869,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1092,10 +878,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1115,17 +897,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -1135,19 +909,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -1159,10 +925,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -1171,15 +933,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -1207,10 +961,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -1221,19 +971,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -1337,10 +1079,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -1382,10 +1120,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -1406,25 +1140,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -1434,13 +1160,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -1449,8 +1171,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -1466,10 +1186,6 @@ Accepts one of the following:
 
 type: "succeeded"
 
-Accepts one of the following:
-
-"succeeded"
-
 MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -1484,19 +1200,11 @@ message: string
 
 type: "invalid\_request\_error"
 
-Accepts one of the following:
-
-"invalid\_request\_error"
-
 AuthenticationError { message, type }
 
 message: string
 
 type: "authentication\_error"
-
-Accepts one of the following:
-
-"authentication\_error"
 
 BillingError { message, type }
 
@@ -1504,19 +1212,11 @@ message: string
 
 type: "billing\_error"
 
-Accepts one of the following:
-
-"billing\_error"
-
 PermissionError { message, type }
 
 message: string
 
 type: "permission\_error"
-
-Accepts one of the following:
-
-"permission\_error"
 
 NotFoundError { message, type }
 
@@ -1524,19 +1224,11 @@ message: string
 
 type: "not\_found\_error"
 
-Accepts one of the following:
-
-"not\_found\_error"
-
 RateLimitError { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
-
-Accepts one of the following:
-
-"rate\_limit\_error"
 
 GatewayTimeoutError { message, type }
 
@@ -1544,19 +1236,11 @@ message: string
 
 type: "timeout\_error"
 
-Accepts one of the following:
-
-"timeout\_error"
-
 APIErrorObject { message, type }
 
 message: string
 
 type: "api\_error"
-
-Accepts one of the following:
-
-"api\_error"
 
 OverloadedError { message, type }
 
@@ -1564,39 +1248,19 @@ message: string
 
 type: "overloaded\_error"
 
-Accepts one of the following:
-
-"overloaded\_error"
-
 request\_id: string | null
 
 type: "error"
 
-Accepts one of the following:
-
-"error"
-
 type: "errored"
-
-Accepts one of the following:
-
-"errored"
 
 MessageBatchCanceledResult { type }
 
 type: "canceled"
 
-Accepts one of the following:
-
-"canceled"
-
 MessageBatchExpiredResult { type }
 
 type: "expired"
-
-Accepts one of the following:
-
-"expired"
 
 MessageBatchSucceededResult { message, type }
 
@@ -1665,10 +1329,6 @@ start\_char\_index: number
 
 type: "char\_location"
 
-Accepts one of the following:
-
-"char\_location"
-
 CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
@@ -1684,10 +1344,6 @@ file\_id: string | null
 start\_page\_number: number
 
 type: "page\_location"
-
-Accepts one of the following:
-
-"page\_location"
 
 CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1705,10 +1361,6 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
@@ -1718,10 +1370,6 @@ encrypted\_index: string
 title: string | null
 
 type: "web\_search\_result\_location"
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: string
 
@@ -1741,17 +1389,9 @@ title: string | null
 
 type: "search\_result\_location"
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 text: string
 
 type: "text"
-
-Accepts one of the following:
-
-"text"
 
 ThinkingBlock { signature, thinking, type }
 
@@ -1761,19 +1401,11 @@ thinking: string
 
 type: "thinking"
 
-Accepts one of the following:
-
-"thinking"
-
 RedactedThinkingBlock { data, type }
 
 data: string
 
 type: "redacted\_thinking"
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 ToolUseBlock { id, input, name, type }
 
@@ -1785,10 +1417,6 @@ name: string
 
 type: "tool\_use"
 
-Accepts one of the following:
-
-"tool\_use"
-
 ServerToolUseBlock { id, input, name, type }
 
 id: string
@@ -1797,15 +1425,7 @@ input: Record<string, unknown>
 
 name: "web\_search"
 
-Accepts one of the following:
-
-"web\_search"
-
 type: "server\_tool\_use"
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -1833,10 +1453,6 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 Array<[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } >
 
 encrypted\_content: string
@@ -1847,19 +1463,11 @@ title: string
 
 type: "web\_search\_result"
 
-Accepts one of the following:
-
-"web\_search\_result"
-
 url: string
 
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 model: [Model](api/messages.md)
 
@@ -1963,10 +1571,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-"assistant"
-
 stop\_reason: [StopReason](api/messages.md) | null
 
 The reason that we stopped.
@@ -2008,10 +1612,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-"message"
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -2032,25 +1632,17 @@ ephemeral\_1h\_input\_tokens: number
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: number | null
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: number | null
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: string | null
 
@@ -2060,13 +1652,9 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: number
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }  | null
 
@@ -2075,8 +1663,6 @@ The number of server tool requests.
 web\_search\_requests: number
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: "standard" | "priority" | "batch" | null
 
@@ -2091,10 +1677,6 @@ Accepts one of the following:
 "batch"
 
 type: "succeeded"
-
-Accepts one of the following:
-
-"succeeded"
 
 ---
 

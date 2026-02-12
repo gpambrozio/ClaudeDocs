@@ -8,7 +8,7 @@ Python
 
 beta.models.retrieve(strmodel\_id, ModelRetrieveParams\*\*kwargs)  -> [BetaModelInfo](api/beta.md)
 
-get/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -26,9 +26,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -84,8 +84,6 @@ created\_at: datetime
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 display\_name: str
 
 A human-readable name for the model.
@@ -95,10 +93,6 @@ type: Literal["model"]
 Object type.
 
 For Models, this is always `"model"`.
-
-Accepts one of the following:
-
-"model"
 
 Get a Model
 
@@ -117,29 +111,7 @@ beta_model_info = client.beta.models.retrieve(
 print(beta_model_info.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
 
 ---
 

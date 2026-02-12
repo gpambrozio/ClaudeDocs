@@ -75,11 +75,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)"
+                    "text": "Subject: Introduction to Photosynthesis  \nGrade Level: 7th Grade (Ages 12-13)",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

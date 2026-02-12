@@ -8,7 +8,7 @@ Python
 
 messages.count\_tokens(MessageCountTokensParams\*\*kwargs)  -> [MessageTokensCount](api/messages.md)
 
-post/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 Count the number of tokens in a Message.
 
@@ -73,9 +73,9 @@ content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockPar
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentUnionMember1 = List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 8 more]]
+List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 8 more]]
 
 Accepts one of the following:
 
@@ -85,19 +85,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -134,10 +126,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -151,10 +139,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -170,10 +154,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -183,10 +163,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -205,10 +181,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class ImageBlockParam: …
 
@@ -234,35 +206,19 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class URLImageSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -293,15 +249,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class PlainTextSource: …
 
@@ -309,15 +257,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class ContentBlockSource: …
 
@@ -325,9 +265,9 @@ content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentContentBlockSourceContent = List[[ContentBlockSourceContent](api/messages.md)]
+List[[ContentBlockSourceContent](api/messages.md)]
 
 Accepts one of the following:
 
@@ -337,19 +277,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -386,10 +318,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -403,10 +331,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -422,10 +346,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -435,10 +355,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -457,10 +373,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class ImageBlockParam: …
 
@@ -486,35 +398,19 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class URLImageSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -535,35 +431,19 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class URLPDFSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -598,19 +478,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -647,10 +519,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -664,10 +532,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -683,10 +547,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -696,10 +556,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -719,29 +575,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -772,19 +616,11 @@ thinking: str
 
 type: Literal["thinking"]
 
-Accepts one of the following:
-
-"thinking"
-
 class RedactedThinkingBlockParam: …
 
 data: str
 
 type: Literal["redacted\_thinking"]
-
-Accepts one of the following:
-
-"redacted\_thinking"
 
 class ToolUseBlockParam: …
 
@@ -796,19 +632,11 @@ name: str
 
 type: Literal["tool\_use"]
 
-Accepts one of the following:
-
-"tool\_use"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -833,19 +661,11 @@ tool\_use\_id: str
 
 type: Literal["tool\_result"]
 
-Accepts one of the following:
-
-"tool\_result"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -868,9 +688,9 @@ content: Optional[Union[str, List[Content], null]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-Content = List[Content]
+List[Content]
 
 Accepts one of the following:
 
@@ -880,19 +700,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -929,10 +741,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -946,10 +754,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -965,10 +769,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -978,10 +778,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1000,10 +796,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class ImageBlockParam: …
 
@@ -1029,35 +821,19 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class URLImageSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1084,19 +860,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1133,10 +901,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -1150,10 +914,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -1169,10 +929,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -1182,10 +938,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1205,29 +957,17 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-Accepts one of the following:
-
-"search\_result\_location"
-
 source: str
 
 title: str
 
 type: Literal["search\_result"]
 
-Accepts one of the following:
-
-"search\_result"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1262,15 +1002,7 @@ data: str
 
 media\_type: Literal["application/pdf"]
 
-Accepts one of the following:
-
-"application/pdf"
-
 type: Literal["base64"]
-
-Accepts one of the following:
-
-"base64"
 
 class PlainTextSource: …
 
@@ -1278,15 +1010,7 @@ data: str
 
 media\_type: Literal["text/plain"]
 
-Accepts one of the following:
-
-"text/plain"
-
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 class ContentBlockSource: …
 
@@ -1294,9 +1018,9 @@ content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
 Accepts one of the following:
 
-ContentUnionMember0 = str
+str
 
-ContentContentBlockSourceContent = List[[ContentBlockSourceContent](api/messages.md)]
+List[[ContentBlockSourceContent](api/messages.md)]
 
 Accepts one of the following:
 
@@ -1306,19 +1030,11 @@ text: str
 
 type: Literal["text"]
 
-Accepts one of the following:
-
-"text"
-
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1355,10 +1071,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -1372,10 +1084,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -1391,10 +1099,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -1404,10 +1108,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1426,10 +1126,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 class ImageBlockParam: …
 
@@ -1455,35 +1151,19 @@ Accepts one of the following:
 
 type: Literal["base64"]
 
-Accepts one of the following:
-
-"base64"
-
 class URLImageSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["image"]
-
-Accepts one of the following:
-
-"image"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1504,35 +1184,19 @@ Accepts one of the following:
 
 type: Literal["content"]
 
-Accepts one of the following:
-
-"content"
-
 class URLPDFSource: …
 
 type: Literal["url"]
 
-Accepts one of the following:
-
-"url"
-
 url: str
 
 type: Literal["document"]
-
-Accepts one of the following:
-
-"document"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1569,25 +1233,13 @@ input: Dict[str, object]
 
 name: Literal["web\_search"]
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["server\_tool\_use"]
-
-Accepts one of the following:
-
-"server\_tool\_use"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1612,17 +1264,13 @@ content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
 Accepts one of the following:
 
-WebSearchToolResultBlockItem = List[[WebSearchResultBlockParam](api/messages.md)]
+List[[WebSearchResultBlockParam](api/messages.md)]
 
 encrypted\_content: str
 
 title: str
 
 type: Literal["web\_search\_result"]
-
-Accepts one of the following:
-
-"web\_search\_result"
 
 url: str
 
@@ -1648,27 +1296,15 @@ Accepts one of the following:
 
 type: Literal["web\_search\_tool\_result\_error"]
 
-Accepts one of the following:
-
-"web\_search\_tool\_result\_error"
-
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
-
-Accepts one of the following:
-
-"web\_search\_tool\_result"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1703,7 +1339,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
 
 The model that will complete your prompt.
 
@@ -1817,7 +1453,7 @@ Excels at writing and complex tasks
 
 Our previous most fast and cost-effective
 
-UnionMember1 = str
+str
 
 output\_config: Optional[[OutputConfigParam](api/messages.md)]
 
@@ -1847,10 +1483,6 @@ The JSON schema of the format
 
 type: Literal["json\_schema"]
 
-Accepts one of the following:
-
-"json\_schema"
-
 system: Optional[Union[str, Iterable[[TextBlockParam](api/messages.md)]]]
 
 System prompt.
@@ -1859,27 +1491,19 @@ A system prompt is a way of providing context and instructions to Claude, such a
 
 Accepts one of the following:
 
-SystemUnionMember0 = str
+str
 
-SystemUnionMember1 = Iterable[[TextBlockParam](api/messages.md)]
+Iterable[[TextBlockParam](api/messages.md)]
 
 text: str
 
 type: Literal["text"]
-
-Accepts one of the following:
-
-"text"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -1916,10 +1540,6 @@ start\_char\_index: int
 
 type: Literal["char\_location"]
 
-Accepts one of the following:
-
-"char\_location"
-
 class CitationPageLocationParam: …
 
 cited\_text: str
@@ -1933,10 +1553,6 @@ end\_page\_number: int
 start\_page\_number: int
 
 type: Literal["page\_location"]
-
-Accepts one of the following:
-
-"page\_location"
 
 class CitationContentBlockLocationParam: …
 
@@ -1952,10 +1568,6 @@ start\_block\_index: int
 
 type: Literal["content\_block\_location"]
 
-Accepts one of the following:
-
-"content\_block\_location"
-
 class CitationWebSearchResultLocationParam: …
 
 cited\_text: str
@@ -1965,10 +1577,6 @@ encrypted\_index: str
 title: Optional[str]
 
 type: Literal["web\_search\_result\_location"]
-
-Accepts one of the following:
-
-"web\_search\_result\_location"
 
 url: str
 
@@ -1987,10 +1595,6 @@ start\_block\_index: int
 title: Optional[str]
 
 type: Literal["search\_result\_location"]
-
-Accepts one of the following:
-
-"search\_result\_location"
 
 thinking: Optional[[ThinkingConfigParam](api/messages.md)]
 
@@ -2016,25 +1620,13 @@ minimum1024
 
 type: Literal["enabled"]
 
-Accepts one of the following:
-
-"enabled"
-
 class ThinkingConfigDisabled: …
 
 type: Literal["disabled"]
 
-Accepts one of the following:
-
-"disabled"
-
 class ThinkingConfigAdaptive: …
 
 type: Literal["adaptive"]
-
-Accepts one of the following:
-
-"adaptive"
 
 tool\_choice: Optional[[ToolChoiceParam](api/messages.md)]
 
@@ -2048,10 +1640,6 @@ The model will automatically decide whether to use tools.
 
 type: Literal["auto"]
 
-Accepts one of the following:
-
-"auto"
-
 disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
@@ -2063,10 +1651,6 @@ class ToolChoiceAny: …
 The model will use any available tools.
 
 type: Literal["any"]
-
-Accepts one of the following:
-
-"any"
 
 disable\_parallel\_tool\_use: Optional[bool]
 
@@ -2084,10 +1668,6 @@ The name of the tool to use.
 
 type: Literal["tool"]
 
-Accepts one of the following:
-
-"tool"
-
 disable\_parallel\_tool\_use: Optional[bool]
 
 Whether to disable parallel tool use.
@@ -2099,10 +1679,6 @@ class ToolChoiceNone: …
 The model will not be allowed to use tools.
 
 type: Literal["none"]
-
-Accepts one of the following:
-
-"none"
 
 tools: Optional[[Iterable](api/messages/count_tokens.md)[[MessageCountTokensToolParam](api/messages.md)]]
 
@@ -2180,10 +1756,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 type: Literal["object"]
 
-Accepts one of the following:
-
-"object"
-
 properties: Optional[Dict[str, object]]
 
 required: Optional[List[str]]
@@ -2203,10 +1775,6 @@ cache\_control: Optional[CacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2241,10 +1809,6 @@ When true, guarantees schema validation on tool names and inputs
 
 type: Optional[Literal["custom"]]
 
-Accepts one of the following:
-
-"custom"
-
 class ToolBash20250124: …
 
 name: Literal["bash"]
@@ -2253,25 +1817,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"bash"
-
 type: Literal["bash\_20250124"]
-
-Accepts one of the following:
-
-"bash\_20250124"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2302,25 +1854,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_editor"
-
 type: Literal["text\_editor\_20250124"]
-
-Accepts one of the following:
-
-"text\_editor\_20250124"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2351,25 +1891,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250429"]
-
-Accepts one of the following:
-
-"text\_editor\_20250429"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2400,25 +1928,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"str\_replace\_based\_edit\_tool"
-
 type: Literal["text\_editor\_20250728"]
-
-Accepts one of the following:
-
-"text\_editor\_20250728"
 
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2441,8 +1957,6 @@ max\_characters: Optional[int]
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
@@ -2455,15 +1969,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-"web\_search"
-
 type: Literal["web\_search\_20250305"]
-
-Accepts one of the following:
-
-"web\_search\_20250305"
 
 allowed\_domains: Optional[List[str]]
 
@@ -2478,10 +1984,6 @@ cache\_control: Optional[CacheControlEphemeral]
 Create a cache control breakpoint at this content block.
 
 type: Literal["ephemeral"]
-
-Accepts one of the following:
-
-"ephemeral"
 
 ttl: Optional[Literal["5m", "1h"]]
 
@@ -2504,8 +2006,6 @@ max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
@@ -2516,41 +2016,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 type: Literal["approximate"]
 
-Accepts one of the following:
-
-"approximate"
-
 city: Optional[str]
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 country: Optional[str]
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 region: Optional[str]
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 ##### ReturnsExpand Collapse
 
@@ -2581,23 +2061,7 @@ message_tokens_count = client.messages.count_tokens(
 print(message_tokens_count.input_tokens)
 ```
 
-Response 200
-
-```shiki
-{
-  "input_tokens": 2095
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "input_tokens": 2095
-}
-```
 
 ---
 

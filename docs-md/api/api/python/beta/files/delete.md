@@ -8,7 +8,7 @@ Python
 
 beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta.md)
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -24,9 +24,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -84,10 +84,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-"file\_deleted"
-
 Delete File
 
 Python
@@ -105,25 +101,7 @@ deleted_file = client.beta.files.delete(
 print(deleted_file.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
 
 ---
 

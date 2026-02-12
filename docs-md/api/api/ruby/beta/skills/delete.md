@@ -8,7 +8,7 @@ Ruby
 
 beta.skills.delete(skill\_id, \*\*kwargs) -> [SkillDeleteResponse](api/beta.md) { id, type }
 
-delete/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -102,25 +102,7 @@ skill = anthropic.beta.skills.delete("skill_id")
 puts(skill)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
 
 ---
 

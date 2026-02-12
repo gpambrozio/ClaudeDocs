@@ -10,37 +10,37 @@ Java
 
 [MessageBatch](api/messages.md) messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 [MessageBatch](api/messages.md) messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 BatchListPage messages().batches().list(BatchListParamsparams = BatchListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 [MessageBatch](api/messages.md) messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 [DeletedMessageBatch](api/messages.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 [MessageBatchIndividualResponse](api/messages.md) messages().batches().resultsStreaming(BatchResultsParamsparams = BatchResultsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -56,10 +56,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-MESSAGE\_BATCH\_DELETED("message\_batch\_deleted")
-
 class MessageBatch:
 
 String id
@@ -72,19 +68,13 @@ Optional<LocalDateTime> archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 Optional<LocalDateTime> cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 LocalDateTime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 Optional<LocalDateTime> endedAt
 
@@ -97,8 +87,6 @@ formatdate-time
 LocalDateTime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 ProcessingStatus processingStatus
 
@@ -158,17 +146,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-MESSAGE\_BATCH("message\_batch")
-
 class MessageBatchCanceledResult:
 
 JsonValue; type "canceled"constant"canceled"constant
-
-Accepts one of the following:
-
-CANCELED("canceled")
 
 class MessageBatchErroredResult:
 
@@ -184,19 +164,11 @@ String message
 
 JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-Accepts one of the following:
-
-INVALID\_REQUEST\_ERROR("invalid\_request\_error")
-
 class AuthenticationError:
 
 String message
 
 JsonValue; type "authentication\_error"constant"authentication\_error"constant
-
-Accepts one of the following:
-
-AUTHENTICATION\_ERROR("authentication\_error")
 
 class BillingError:
 
@@ -204,19 +176,11 @@ String message
 
 JsonValue; type "billing\_error"constant"billing\_error"constant
 
-Accepts one of the following:
-
-BILLING\_ERROR("billing\_error")
-
 class PermissionError:
 
 String message
 
 JsonValue; type "permission\_error"constant"permission\_error"constant
-
-Accepts one of the following:
-
-PERMISSION\_ERROR("permission\_error")
 
 class NotFoundError:
 
@@ -224,19 +188,11 @@ String message
 
 JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-Accepts one of the following:
-
-NOT\_FOUND\_ERROR("not\_found\_error")
-
 class RateLimitError:
 
 String message
 
 JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
-
-Accepts one of the following:
-
-RATE\_LIMIT\_ERROR("rate\_limit\_error")
 
 class GatewayTimeoutError:
 
@@ -244,19 +200,11 @@ String message
 
 JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-Accepts one of the following:
-
-TIMEOUT\_ERROR("timeout\_error")
-
 class ApiErrorObject:
 
 String message
 
 JsonValue; type "api\_error"constant"api\_error"constant
-
-Accepts one of the following:
-
-API\_ERROR("api\_error")
 
 class OverloadedError:
 
@@ -264,31 +212,15 @@ String message
 
 JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
 
-Accepts one of the following:
-
-OVERLOADED\_ERROR("overloaded\_error")
-
 Optional<String> requestId
 
 JsonValue; type "error"constant"error"constant
 
-Accepts one of the following:
-
-ERROR("error")
-
 JsonValue; type "errored"constant"errored"constant
-
-Accepts one of the following:
-
-ERRORED("errored")
 
 class MessageBatchExpiredResult:
 
 JsonValue; type "expired"constant"expired"constant
-
-Accepts one of the following:
-
-EXPIRED("expired")
 
 class MessageBatchIndividualResponse:
 
@@ -375,10 +307,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocation:
 
 String citedText
@@ -394,10 +322,6 @@ Optional<String> fileId
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocation:
 
@@ -415,10 +339,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationsWebSearchResultLocation:
 
 String citedText
@@ -428,10 +348,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -451,17 +367,9 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String text
 
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ThinkingBlock:
 
@@ -471,19 +379,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlock:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlock:
 
@@ -495,10 +395,6 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 class ServerToolUseBlock:
 
 String id
@@ -507,15 +403,7 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 class WebSearchToolResultBlock:
 
@@ -543,10 +431,6 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 List<[WebSearchResultBlock](api/messages.md)>
 
 String encryptedContent
@@ -557,19 +441,11 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Model model
 
@@ -669,10 +545,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-ASSISTANT("assistant")
-
 Optional<[StopReason](api/messages.md)> stopReason
 
 The reason that we stopped.
@@ -714,10 +586,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-MESSAGE("message")
-
 [Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
@@ -738,25 +606,17 @@ long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
-
-minimum0
 
 Optional<String> inferenceGeo
 
@@ -766,13 +626,9 @@ long inputTokens
 
 The number of input tokens which were used.
 
-minimum0
-
 long outputTokens
 
 The number of output tokens which were used.
-
-minimum0
 
 Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
@@ -781,8 +637,6 @@ The number of server tool requests.
 long webSearchRequests
 
 The number of web search tool requests.
-
-minimum0
 
 Optional<ServiceTier> serviceTier
 
@@ -798,10 +652,6 @@ BATCH("batch")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
-Accepts one of the following:
-
-SUCCEEDED("succeeded")
-
 class MessageBatchErroredResult:
 
 [ErrorResponse](api/$shared.md) error
@@ -816,19 +666,11 @@ String message
 
 JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-Accepts one of the following:
-
-INVALID\_REQUEST\_ERROR("invalid\_request\_error")
-
 class AuthenticationError:
 
 String message
 
 JsonValue; type "authentication\_error"constant"authentication\_error"constant
-
-Accepts one of the following:
-
-AUTHENTICATION\_ERROR("authentication\_error")
 
 class BillingError:
 
@@ -836,19 +678,11 @@ String message
 
 JsonValue; type "billing\_error"constant"billing\_error"constant
 
-Accepts one of the following:
-
-BILLING\_ERROR("billing\_error")
-
 class PermissionError:
 
 String message
 
 JsonValue; type "permission\_error"constant"permission\_error"constant
-
-Accepts one of the following:
-
-PERMISSION\_ERROR("permission\_error")
 
 class NotFoundError:
 
@@ -856,19 +690,11 @@ String message
 
 JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-Accepts one of the following:
-
-NOT\_FOUND\_ERROR("not\_found\_error")
-
 class RateLimitError:
 
 String message
 
 JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
-
-Accepts one of the following:
-
-RATE\_LIMIT\_ERROR("rate\_limit\_error")
 
 class GatewayTimeoutError:
 
@@ -876,19 +702,11 @@ String message
 
 JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-Accepts one of the following:
-
-TIMEOUT\_ERROR("timeout\_error")
-
 class ApiErrorObject:
 
 String message
 
 JsonValue; type "api\_error"constant"api\_error"constant
-
-Accepts one of the following:
-
-API\_ERROR("api\_error")
 
 class OverloadedError:
 
@@ -896,39 +714,19 @@ String message
 
 JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
 
-Accepts one of the following:
-
-OVERLOADED\_ERROR("overloaded\_error")
-
 Optional<String> requestId
 
 JsonValue; type "error"constant"error"constant
 
-Accepts one of the following:
-
-ERROR("error")
-
 JsonValue; type "errored"constant"errored"constant
-
-Accepts one of the following:
-
-ERRORED("errored")
 
 class MessageBatchCanceledResult:
 
 JsonValue; type "canceled"constant"canceled"constant
 
-Accepts one of the following:
-
-CANCELED("canceled")
-
 class MessageBatchExpiredResult:
 
 JsonValue; type "expired"constant"expired"constant
-
-Accepts one of the following:
-
-EXPIRED("expired")
 
 class MessageBatchRequestCounts:
 
@@ -1033,10 +831,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocation:
 
 String citedText
@@ -1052,10 +846,6 @@ Optional<String> fileId
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocation:
 
@@ -1073,10 +863,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationsWebSearchResultLocation:
 
 String citedText
@@ -1086,10 +872,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1109,17 +891,9 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String text
 
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ThinkingBlock:
 
@@ -1129,19 +903,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlock:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlock:
 
@@ -1153,10 +919,6 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 class ServerToolUseBlock:
 
 String id
@@ -1165,15 +927,7 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 class WebSearchToolResultBlock:
 
@@ -1201,10 +955,6 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 List<[WebSearchResultBlock](api/messages.md)>
 
 String encryptedContent
@@ -1215,19 +965,11 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Model model
 
@@ -1327,10 +1069,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-ASSISTANT("assistant")
-
 Optional<[StopReason](api/messages.md)> stopReason
 
 The reason that we stopped.
@@ -1372,10 +1110,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-MESSAGE("message")
-
 [Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
@@ -1396,25 +1130,17 @@ long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
-
-minimum0
 
 Optional<String> inferenceGeo
 
@@ -1424,13 +1150,9 @@ long inputTokens
 
 The number of input tokens which were used.
 
-minimum0
-
 long outputTokens
 
 The number of output tokens which were used.
-
-minimum0
 
 Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
@@ -1439,8 +1161,6 @@ The number of server tool requests.
 long webSearchRequests
 
 The number of web search tool requests.
-
-minimum0
 
 Optional<ServiceTier> serviceTier
 
@@ -1456,10 +1176,6 @@ BATCH("batch")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
-Accepts one of the following:
-
-SUCCEEDED("succeeded")
-
 class MessageBatchErroredResult:
 
 [ErrorResponse](api/$shared.md) error
@@ -1474,19 +1190,11 @@ String message
 
 JsonValue; type "invalid\_request\_error"constant"invalid\_request\_error"constant
 
-Accepts one of the following:
-
-INVALID\_REQUEST\_ERROR("invalid\_request\_error")
-
 class AuthenticationError:
 
 String message
 
 JsonValue; type "authentication\_error"constant"authentication\_error"constant
-
-Accepts one of the following:
-
-AUTHENTICATION\_ERROR("authentication\_error")
 
 class BillingError:
 
@@ -1494,19 +1202,11 @@ String message
 
 JsonValue; type "billing\_error"constant"billing\_error"constant
 
-Accepts one of the following:
-
-BILLING\_ERROR("billing\_error")
-
 class PermissionError:
 
 String message
 
 JsonValue; type "permission\_error"constant"permission\_error"constant
-
-Accepts one of the following:
-
-PERMISSION\_ERROR("permission\_error")
 
 class NotFoundError:
 
@@ -1514,19 +1214,11 @@ String message
 
 JsonValue; type "not\_found\_error"constant"not\_found\_error"constant
 
-Accepts one of the following:
-
-NOT\_FOUND\_ERROR("not\_found\_error")
-
 class RateLimitError:
 
 String message
 
 JsonValue; type "rate\_limit\_error"constant"rate\_limit\_error"constant
-
-Accepts one of the following:
-
-RATE\_LIMIT\_ERROR("rate\_limit\_error")
 
 class GatewayTimeoutError:
 
@@ -1534,19 +1226,11 @@ String message
 
 JsonValue; type "timeout\_error"constant"timeout\_error"constant
 
-Accepts one of the following:
-
-TIMEOUT\_ERROR("timeout\_error")
-
 class ApiErrorObject:
 
 String message
 
 JsonValue; type "api\_error"constant"api\_error"constant
-
-Accepts one of the following:
-
-API\_ERROR("api\_error")
 
 class OverloadedError:
 
@@ -1554,39 +1238,19 @@ String message
 
 JsonValue; type "overloaded\_error"constant"overloaded\_error"constant
 
-Accepts one of the following:
-
-OVERLOADED\_ERROR("overloaded\_error")
-
 Optional<String> requestId
 
 JsonValue; type "error"constant"error"constant
 
-Accepts one of the following:
-
-ERROR("error")
-
 JsonValue; type "errored"constant"errored"constant
-
-Accepts one of the following:
-
-ERRORED("errored")
 
 class MessageBatchCanceledResult:
 
 JsonValue; type "canceled"constant"canceled"constant
 
-Accepts one of the following:
-
-CANCELED("canceled")
-
 class MessageBatchExpiredResult:
 
 JsonValue; type "expired"constant"expired"constant
-
-Accepts one of the following:
-
-EXPIRED("expired")
 
 class MessageBatchSucceededResult:
 
@@ -1655,10 +1319,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocation:
 
 String citedText
@@ -1674,10 +1334,6 @@ Optional<String> fileId
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocation:
 
@@ -1695,10 +1351,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationsWebSearchResultLocation:
 
 String citedText
@@ -1708,10 +1360,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1731,17 +1379,9 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String text
 
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ThinkingBlock:
 
@@ -1751,19 +1391,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlock:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlock:
 
@@ -1775,10 +1407,6 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 class ServerToolUseBlock:
 
 String id
@@ -1787,15 +1415,7 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 class WebSearchToolResultBlock:
 
@@ -1823,10 +1443,6 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 List<[WebSearchResultBlock](api/messages.md)>
 
 String encryptedContent
@@ -1837,19 +1453,11 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Model model
 
@@ -1949,10 +1557,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-ASSISTANT("assistant")
-
 Optional<[StopReason](api/messages.md)> stopReason
 
 The reason that we stopped.
@@ -1994,10 +1598,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-MESSAGE("message")
-
 [Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
@@ -2018,25 +1618,17 @@ long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
-
-minimum0
 
 Optional<String> inferenceGeo
 
@@ -2046,13 +1638,9 @@ long inputTokens
 
 The number of input tokens which were used.
 
-minimum0
-
 long outputTokens
 
 The number of output tokens which were used.
-
-minimum0
 
 Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
@@ -2061,8 +1649,6 @@ The number of server tool requests.
 long webSearchRequests
 
 The number of web search tool requests.
-
-minimum0
 
 Optional<ServiceTier> serviceTier
 
@@ -2077,10 +1663,6 @@ PRIORITY("priority")
 BATCH("batch")
 
 JsonValue; type "succeeded"constant"succeeded"constant
-
-Accepts one of the following:
-
-SUCCEEDED("succeeded")
 
 ---
 

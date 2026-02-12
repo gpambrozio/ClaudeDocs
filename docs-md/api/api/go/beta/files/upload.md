@@ -8,7 +8,7 @@ Go
 
 client.Beta.Files.Upload(ctx, params) (\*[FileMetadata](api/beta.md), error)
 
-post/v1/files
+POST/v1/files
 
 Upload File
 
@@ -19,8 +19,6 @@ params BetaFileUploadParams
 File param.Field[[Reader](api/beta/files/upload.md)]
 
 Body param: The file to upload
-
-formatbinary
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -86,39 +84,23 @@ CreatedAt Time
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 Filename string
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 MimeType string
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 SizeBytes int64
 
 Size of the file in bytes.
-
-minimum0
 
 Type File
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-const FileFile File = "file"
 
 Downloadable booloptional
 
@@ -155,35 +137,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

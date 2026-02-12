@@ -20,8 +20,8 @@ with client.messages.stream(
     messages=[{"role": "user", "content": "Hello"}],
     model="claude-opus-4-6",
 ) as stream:
-  for text in stream.text_stream:
-      print(text, end="", flush=True)
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 ```
 
 ## Get the final message without handling events

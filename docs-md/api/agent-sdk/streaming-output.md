@@ -56,10 +56,10 @@ Python
 ```shiki
 @dataclass
 class StreamEvent:
-    uuid: str                      # Unique identifier for this event
-    session_id: str                # Session identifier
-    event: dict[str, Any]          # The raw Claude API stream event
-    parent_tool_use_id: str | None # Parent tool ID if from a subagent
+    uuid: str  # Unique identifier for this event
+    session_id: str  # Session identifier
+    event: dict[str, Any]  # The raw Claude API stream event
+    parent_tool_use_id: str | None  # Parent tool ID if from a subagent
 ```
 
 The `event` field contains the raw streaming event from the [Claude API](build-with-claude/streaming.md). Common event types include:
@@ -200,8 +200,7 @@ async def streaming_ui():
     in_tool = False
 
     async for message in query(
-        prompt="Find all TODO comments in the codebase",
-        options=options
+        prompt="Find all TODO comments in the codebase", options=options
     ):
         if isinstance(message, StreamEvent):
             event = message.event

@@ -8,7 +8,7 @@ Java
 
 [MessageBatch](api/messages.md) messages().batches().create(BatchCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 Send a batch of Message creation requests.
 
@@ -117,19 +117,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -166,10 +158,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -183,10 +171,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -202,10 +186,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -215,10 +195,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -237,10 +213,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -266,35 +238,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -325,15 +281,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class PlainTextSource:
 
@@ -341,15 +289,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ContentBlockSource:
 
@@ -369,19 +309,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -418,10 +350,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -435,10 +363,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -454,10 +378,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -467,10 +387,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -489,10 +405,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -518,35 +430,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -567,35 +463,19 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class UrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -630,19 +510,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -679,10 +551,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -696,10 +564,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -715,10 +579,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -728,10 +588,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -751,29 +607,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -804,19 +648,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlockParam:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlockParam:
 
@@ -828,19 +664,11 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -865,19 +693,11 @@ String toolUseId
 
 JsonValue; type "tool\_result"constant"tool\_result"constant
 
-Accepts one of the following:
-
-TOOL\_RESULT("tool\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -912,19 +732,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -961,10 +773,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -978,10 +786,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -997,10 +801,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1010,10 +810,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1032,10 +828,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -1061,35 +853,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1116,19 +892,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1165,10 +933,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1182,10 +946,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1201,10 +961,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1214,10 +970,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1237,29 +989,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1294,15 +1034,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class PlainTextSource:
 
@@ -1310,15 +1042,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ContentBlockSource:
 
@@ -1338,19 +1062,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1387,10 +1103,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1404,10 +1116,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1423,10 +1131,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1436,10 +1140,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1458,10 +1158,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -1487,35 +1183,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1536,35 +1216,19 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class UrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1601,25 +1265,13 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1652,10 +1304,6 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 Optional<String> pageAge
@@ -1680,27 +1328,15 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1863,10 +1499,6 @@ The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
 
-Accepts one of the following:
-
-JSON\_SCHEMA("json\_schema")
-
 Optional<ServiceTier> serviceTier
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -1909,19 +1541,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1958,10 +1582,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1975,10 +1595,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1994,10 +1610,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -2007,10 +1619,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -2029,10 +1637,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 Optional<Double> temperature
 
@@ -2070,25 +1674,13 @@ minimum1024
 
 JsonValue; type "enabled"constant"enabled"constant
 
-Accepts one of the following:
-
-ENABLED("enabled")
-
 class ThinkingConfigDisabled:
 
 JsonValue; type "disabled"constant"disabled"constant
 
-Accepts one of the following:
-
-DISABLED("disabled")
-
 class ThinkingConfigAdaptive:
 
 JsonValue; type "adaptive"constant"adaptive"constant
-
-Accepts one of the following:
-
-ADAPTIVE("adaptive")
 
 Optional<[ToolChoice](api/messages.md)> toolChoice
 
@@ -2102,10 +1694,6 @@ The model will automatically decide whether to use tools.
 
 JsonValue; type "auto"constant"auto"constant
 
-Accepts one of the following:
-
-AUTO("auto")
-
 Optional<Boolean> disableParallelToolUse
 
 Whether to disable parallel tool use.
@@ -2117,10 +1705,6 @@ class ToolChoiceAny:
 The model will use any available tools.
 
 JsonValue; type "any"constant"any"constant
-
-Accepts one of the following:
-
-ANY("any")
 
 Optional<Boolean> disableParallelToolUse
 
@@ -2138,10 +1722,6 @@ The name of the tool to use.
 
 JsonValue; type "tool"constant"tool"constant
 
-Accepts one of the following:
-
-TOOL("tool")
-
 Optional<Boolean> disableParallelToolUse
 
 Whether to disable parallel tool use.
@@ -2153,10 +1733,6 @@ class ToolChoiceNone:
 The model will not be allowed to use tools.
 
 JsonValue; type "none"constant"none"constant
-
-Accepts one of the following:
-
-NONE("none")
 
 Optional<List<[ToolUnion](api/messages.md)>> tools
 
@@ -2234,10 +1810,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 JsonValue; type "object"constant"object"constant
 
-Accepts one of the following:
-
-OBJECT("object")
-
 Optional<Properties> properties
 
 Optional<List<String>> required
@@ -2257,10 +1829,6 @@ Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2295,10 +1863,6 @@ When true, guarantees schema validation on tool names and inputs
 
 Optional<Type> type
 
-Accepts one of the following:
-
-CUSTOM("custom")
-
 class ToolBash20250124:
 
 JsonValue; name "bash"constant"bash"constant
@@ -2307,25 +1871,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-BASH("bash")
-
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
-
-Accepts one of the following:
-
-BASH\_20250124("bash\_20250124")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2356,25 +1908,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_EDITOR("str\_replace\_editor")
-
 JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250124("text\_editor\_20250124")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2405,25 +1945,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250429("text\_editor\_20250429")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2454,25 +1982,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250728("text\_editor\_20250728")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2495,8 +2011,6 @@ Optional<Long> maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -2509,15 +2023,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_20250305("web\_search\_20250305")
 
 Optional<List<String>> allowedDomains
 
@@ -2532,10 +2038,6 @@ Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2558,8 +2060,6 @@ Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -2570,41 +2070,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 JsonValue; type "approximate"constant"approximate"constant
 
-Accepts one of the following:
-
-APPROXIMATE("approximate")
-
 Optional<String> city
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 Optional<String> country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 Optional<String> region
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 Optional<Long> topK
 
@@ -2642,19 +2122,13 @@ Optional<LocalDateTime> archivedAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 Optional<LocalDateTime> cancelInitiatedAt
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 LocalDateTime createdAt
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 Optional<LocalDateTime> endedAt
 
@@ -2667,8 +2141,6 @@ formatdate-time
 LocalDateTime expiresAt
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 ProcessingStatus processingStatus
 
@@ -2728,10 +2200,6 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-MESSAGE\_BATCH("message\_batch")
-
 Create a Message Batch
 
 Java
@@ -2766,53 +2234,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
 
 ---
 

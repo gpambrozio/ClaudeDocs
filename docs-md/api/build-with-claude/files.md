@@ -74,7 +74,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
         "content": [
           {
             "type": "text",
-            "text": "Please summarize this document for me."          
+            "text": "Please summarize this document for me."
           },
           {
             "type": "document",
@@ -148,7 +148,7 @@ For PDFs and text files, use the `document` content block:
     "file_id": "file_011CNha8iCJcU1wXNR6q4V8w"
   },
   "title": "Document Title", // Optional
-  "context": "Context about the document", // Optional  
+  "context": "Context about the document", // Optional
   "citations": {"enabled": true} // Optional, enables citations
 }
 ```
@@ -281,7 +281,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#394a58555c4a7958574d514b5649505a175a5654) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#ea998b868f99aa8b849e8298859a8389c4898587) if you need higher limits for your use case
 
 Was this page helpful?
 

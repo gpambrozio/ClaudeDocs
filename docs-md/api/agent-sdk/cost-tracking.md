@@ -34,9 +34,9 @@ const result = await query({
   prompt: "Analyze this codebase and run tests",
   options: {
     onMessage: (message) => {
-      if (message.type === 'assistant' && message.usage) {
+      if (message.type === "assistant" && message.usage) {
         console.log(`Message ID: ${message.id}`);
-        console.log(`Usage:`, message.usage);
+        console.log("Usage:", message.usage);
       }
     }
   }
@@ -70,9 +70,9 @@ assistant (text)      { id: "msg_2", usage: { output_tokens: 98, ... } }
 ```shiki
 // All these messages have the same ID and usage
 const messages = [
-  { type: 'assistant', id: 'msg_123', usage: { output_tokens: 100 } },
-  { type: 'assistant', id: 'msg_123', usage: { output_tokens: 100 } },
-  { type: 'assistant', id: 'msg_123', usage: { output_tokens: 100 } }
+  { type: "assistant", id: "msg_123", usage: { output_tokens: 100 } },
+  { type: "assistant", id: "msg_123", usage: { output_tokens: 100 } },
+  { type: "assistant", id: "msg_123", usage: { output_tokens: 100 } }
 ];
 
 // Charge only once per unique message ID
@@ -139,7 +139,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 class CostTracker {
   private processedMessageIds = new Set<string>();
   private stepUsages: Array<any> = [];
-  
+
   async trackConversation(prompt: string) {
     const result = await query({
       prompt,
@@ -149,25 +149,25 @@ class CostTracker {
         }
       }
     });
-    
+
     return {
       result,
       stepUsages: this.stepUsages,
       totalCost: result.usage?.total_cost_usd || 0
     };
   }
-  
+
   private processMessage(message: any) {
     // Only process assistant messages with usage
-    if (message.type !== 'assistant' || !message.usage) {
+    if (message.type !== "assistant" || !message.usage) {
       return;
     }
-    
+
     // Skip if we've already processed this message ID
     if (this.processedMessageIds.has(message.id)) {
       return;
     }
-    
+
     // Mark as processed and record usage
     this.processedMessageIds.add(message.id);
     this.stepUsages.push({
@@ -177,14 +177,14 @@ class CostTracker {
       costUSD: this.calculateCost(message.usage)
     });
   }
-  
+
   private calculateCost(usage: any): number {
     // Implement your pricing calculation here
     // This is a simplified example
     const inputCost = usage.input_tokens * 0.00003;
     const outputCost = usage.output_tokens * 0.00015;
     const cacheReadCost = (usage.cache_read_input_tokens || 0) * 0.0000075;
-    
+
     return inputCost + outputCost + cacheReadCost;
   }
 }
@@ -254,31 +254,31 @@ class BillingAggregator {
     totalCost: number;
     conversations: number;
   }>();
-  
+
   async processUserRequest(userId: string, prompt: string) {
     const tracker = new CostTracker();
     const { result, stepUsages, totalCost } = await tracker.trackConversation(prompt);
-    
+
     // Update user totals
     const current = this.userUsage.get(userId) || {
       totalTokens: 0,
       totalCost: 0,
       conversations: 0
     };
-    
-    const totalTokens = stepUsages.reduce((sum, step) => 
+
+    const totalTokens = stepUsages.reduce((sum, step) =>
       sum + step.usage.input_tokens + step.usage.output_tokens, 0
     );
-    
+
     this.userUsage.set(userId, {
       totalTokens: current.totalTokens + totalTokens,
       totalCost: current.totalCost + totalCost,
       conversations: current.conversations + 1
     });
-    
+
     return result;
   }
-  
+
   getUserBilling(userId: string) {
     return this.userUsage.get(userId) || {
       totalTokens: 0,

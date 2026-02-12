@@ -28,7 +28,7 @@ For example, instead of:
 User
 
 ```inline-block
-Think through this math problem step by step: 
+Think through this math problem step by step:
 1. First, identify the variables
 2. Then, set up the equation
 3. Next, solve for x
@@ -40,7 +40,7 @@ Consider:
 User
 
 ```inline-block
-Please think about this math problem thoroughly and in great detail. 
+Please think about this math problem thoroughly and in great detail.
 Consider multiple approaches and show your complete reasoning.
 Try different methods if your first approach doesn't work.
 ```
@@ -138,7 +138,7 @@ Example:
 User
 
 ```inline-block
-Write a function to calculate the factorial of a number. 
+Write a function to calculate the factorial of a number.
 Before you finish, please verify your solution with test cases for:
 - n=0
 - n=1

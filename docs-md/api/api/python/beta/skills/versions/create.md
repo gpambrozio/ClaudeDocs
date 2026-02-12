@@ -8,7 +8,7 @@ Python
 
 beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta.md)
 
-post/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 Create Skill Version
 
@@ -32,9 +32,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -143,37 +143,7 @@ version = client.beta.skills.versions.create(
 print(version.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
 
 ---
 

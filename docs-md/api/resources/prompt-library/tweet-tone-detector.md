@@ -36,11 +36,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Wow, I'm so impressed by the company's handling of this crisis. 🙄 They really have their priorities straight. #sarcasm #fail"
+                    "text": "Wow, I'm so impressed by the company's handling of this crisis. 🙄 They really have their priorities straight. #sarcasm #fail",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

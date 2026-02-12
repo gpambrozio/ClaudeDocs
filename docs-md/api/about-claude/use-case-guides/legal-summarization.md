@@ -28,12 +28,12 @@ For instance, when summarizing a sublease agreement, you might wish to extract t
 
 ```shiki
 details_to_extract = [
-    'Parties involved (sublessor, sublessee, and original lessor)',
-    'Property details (address, description, and permitted use)', 
-    'Term and rent (start date, end date, monthly rent, and security deposit)',
-    'Responsibilities (utilities, maintenance, and repairs)',
-    'Consent and notices (landlord\'s consent, and notice requirements)',
-    'Special provisions (furniture, parking, and subletting restrictions)'
+    "Parties involved (sublessor, sublessee, and original lessor)",
+    "Property details (address, description, and permitted use)",
+    "Term and rent (start date, end date, monthly rent, and security deposit)",
+    "Responsibilities (utilities, maintenance, and repairs)",
+    "Consent and notices (landlord's consent, and notice requirements)",
+    "Special provisions (furniture, parking, and subletting restrictions)",
 ]
 ```
 
@@ -106,10 +106,10 @@ def get_llm_text(pdf_file):
     text = "\n".join([page.extract_text() for page in reader.pages])
 
     # Remove extra whitespace
-    text = re.sub(r'\s+', ' ', text) 
+    text = re.sub(r"\s+", " ", text)
 
     # Remove page numbers
-    text = re.sub(r'\n\s*\d+\s*\n', '\n', text) 
+    text = re.sub(r"\n\s*\d+\s*\n", "\n", text)
 
     return text
 
@@ -123,7 +123,7 @@ response = requests.get(url)
 # Load the PDF from memory
 pdf_file = BytesIO(response.content)
 
-document_text = get_llm_text(pdf_file) 
+document_text = get_llm_text(pdf_file)
 print(document_text[:50000])
 ```
 
@@ -143,11 +143,12 @@ import anthropic
 # Initialize the Anthropic client
 client = anthropic.Anthropic()
 
-def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
-
+def summarize_document(
+    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+):
     # Format the details to extract to be placed within the prompt's context
-    details_to_extract_str = '\n'.join(details_to_extract)
-    
+    details_to_extract_str = "\n".join(details_to_extract)
+
     # Prompt the model to summarize the sublease agreement
     prompt = f"""Summarize the following sublease agreement. Focus on these key aspects:
 
@@ -159,7 +160,7 @@ def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_to
     - Sublessor: [Name]
     // Add more details as needed
     </parties involved>
-    
+
     If any information is not explicitly stated in the document, note it as "Not specified". Do not preamble.
 
     Sublease agreement text:
@@ -172,9 +173,12 @@ def summarize_document(text, details_to_extract, model="claude-opus-4-6", max_to
         system="You are a legal analyst specializing in real estate law, known for highly accurate and detailed summaries of sublease agreements.",
         messages=[
             {"role": "user", "content": prompt},
-            {"role": "assistant", "content": "Here is the summary of the sublease agreement: <summary>"}
+            {
+                "role": "assistant",
+                "content": "Here is the summary of the sublease agreement: <summary>",
+            },
         ],
-        stop_sequences=["</summary>"]
+        stop_sequences=["</summary>"],
     )
 
     return response.content[0].text
@@ -230,19 +234,25 @@ import anthropic
 client = anthropic.Anthropic()
 
 def chunk_text(text, chunk_size=20000):
-    return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 
-def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", max_tokens=1000):
-
+def summarize_long_document(
+    text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
+):
     # Format the details to extract to be placed within the prompt's context
-    details_to_extract_str = '\n'.join(details_to_extract)
+    details_to_extract_str = "\n".join(details_to_extract)
 
     # Iterate over chunks and summarize each one
-    chunk_summaries = [summarize_document(chunk, details_to_extract, model=model, max_tokens=max_tokens) for chunk in chunk_text(text)]
-    
+    chunk_summaries = [
+        summarize_document(
+            chunk, details_to_extract, model=model, max_tokens=max_tokens
+        )
+        for chunk in chunk_text(text)
+    ]
+
     final_summary_prompt = f"""
-    
-    You are looking at the chunked summaries of multiple documents that are all related. 
+
+    You are looking at the chunked summaries of multiple documents that are all related.
     Combine the following summaries of the document from different truthful sources into a coherent overall summary:
 
     <chunked_summaries>
@@ -258,7 +268,7 @@ def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", m
     - Sublessor: [Name]
     // Add more details as needed
     </parties involved>
-    
+
     If any information is not explicitly stated in the document, note it as "Not specified". Do not preamble.
     """
 
@@ -267,13 +277,15 @@ def summarize_long_document(text, details_to_extract, model="claude-opus-4-6", m
         max_tokens=max_tokens,
         system="You are a legal expert that summarizes notes on one document.",
         messages=[
-            {"role": "user",  "content": final_summary_prompt},
-            {"role": "assistant", "content": "Here is the summary of the sublease agreement: <summary>"}
-
+            {"role": "user", "content": final_summary_prompt},
+            {
+                "role": "assistant",
+                "content": "Here is the summary of the sublease agreement: <summary>",
+            },
         ],
-        stop_sequences=["</summary>"]
+        stop_sequences=["</summary>"],
     )
-    
+
     return response.content[0].text
 
 long_summary = summarize_long_document(document_text, details_to_extract)

@@ -34,10 +34,7 @@ client = anthropic.Anthropic()
 response = client.messages.count_tokens(
     model="claude-opus-4-6",
     system="You are a scientist",
-    messages=[{
-        "role": "user",
-        "content": "Hello, Claude"
-    }],
+    messages=[{"role": "user", "content": "Hello, Claude"}],
 )
 
 print(response.json())
@@ -78,7 +75,7 @@ response = client.messages.count_tokens(
             },
         }
     ],
-    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}]
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
 )
 
 print(response.json())

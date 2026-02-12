@@ -27,7 +27,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=16000,
     thinking={"type": "adaptive"},
-    messages=[{"role": "user", "content": "Solve this complex problem..."}]
+    messages=[{"role": "user", "content": "Solve this complex problem..."}],
 )
 ```
 
@@ -49,7 +49,7 @@ response = client.beta.messages.create(
     max_tokens=4096,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
-    messages=[{"role": "user", "content": "Refactor this module..."}]
+    messages=[{"role": "user", "content": "Refactor this module..."}],
 )
 ```
 
@@ -83,13 +83,13 @@ The `output_format` parameter for [structured outputs](build-with-claude/structu
 # Before
 response = client.messages.create(
     output_format={"type": "json_schema", "schema": {...}},
-    ...
+    # ...
 )
 
 # After
 response = client.messages.create(
     output_config={"format": {"type": "json_schema", "schema": {...}}},
-    ...
+    # ...
 )
 ```
 

@@ -50,7 +50,7 @@ Java
        "max_tokens": 1000,
        "messages": [
          {
-           "role": "user", 
+           "role": "user",
            "content": "What should I search for to find the latest developments in renewable energy?"
          }
        ]
@@ -62,7 +62,7 @@ Java
    ```shiki
    {
      "id": "msg_01HCDu5LRGeP2o7s2xGmxyx8",
-     "type": "message", 
+     "type": "message",
      "role": "assistant",
      "content": [
        {

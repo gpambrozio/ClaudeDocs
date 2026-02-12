@@ -6,7 +6,7 @@ cURL
 
 # Upload File
 
-post/v1/files
+POST/v1/files
 
 Upload File
 
@@ -64,6 +64,12 @@ Accepts one of the following:
 
 "fast-mode-2026-02-01"
 
+##### Body ParametersForm DataExpand Collapse
+
+file: file
+
+The file to upload
+
 ##### ReturnsExpand Collapse
 
 FileMetadata = object { id, created\_at, filename, 4 more }
@@ -78,39 +84,23 @@ created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: string
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: string
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: number
 
 Size of the file in bytes.
-
-minimum0
 
 type: "file"
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-"file"
 
 downloadable: optional boolean
 
@@ -129,35 +119,7 @@ curl https://api.anthropic.com/v1/files \
     -F 'file=@/path/to/file'
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

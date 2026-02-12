@@ -26,7 +26,7 @@ Text 2:
 3. Emotional impact and engagement: The text conveys a positive emotion by stating "It made me happy," but it does not provide a strong emotional connection or engagement due to the lack of descriptive language and imagery.
 4. Grammar and punctuation: The text appears to be grammatically correct and well-punctuated, with no obvious errors or issues.
 
-Comparative Analysis:  
+Comparative Analysis:
 Based on the evaluation, Text 1 performs significantly better than Text 2 in terms of descriptive language, imagery, sentence structure, variety, and emotional impact. Text 1 creates a vivid and immersive experience for the reader and demonstrates a higher quality of writing based on the given criteria, with its strong descriptive language, varied sentence structures, and effective emotional engagement. Text 2, while grammatically correct, lacks the descriptive richness and emotional impact present in Text 1.
 
 ---

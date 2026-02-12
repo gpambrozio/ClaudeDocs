@@ -50,11 +50,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Personal style: Edgy, minimal, with a touch of androgyny  \nFavorite colors: Black, white, and deep red  \nPreferred materials: Leather, denim, and high-quality cotton  \nBody type: Tall and lean  \nFashion goals: To create a striking, fearless look for an art gallery opening"
+                    "text": "Personal style: Edgy, minimal, with a touch of androgyny  \nFavorite colors: Black, white, and deep red  \nPreferred materials: Leather, denim, and high-quality cotton  \nBody type: Tall and lean  \nFashion goals: To create a striking, fearless look for an art gallery opening",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

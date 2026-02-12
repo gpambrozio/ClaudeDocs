@@ -49,11 +49,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it."
+                    "text": "I've been struggling to find motivation to work on my novel. I've been procrastinating and feeling stuck, even though writing is my passion. I'm afraid I might never finish it.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

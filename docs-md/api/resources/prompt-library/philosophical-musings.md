@@ -49,11 +49,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "The trolley problem and the ethics of utilitarianism"
+                    "text": "The trolley problem and the ethics of utilitarianism",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

@@ -28,6 +28,12 @@ Search and access context from meetingsCommand
 
 `claude mcp add circleback --transport http https://app.circleback.ai/api/mcp`
 
+[**Clarify**](https://docs.clarify.ai/en/articles/13367278-clarify-mcp)
+
+Query your CRM. Create records. Ask anything.Command
+
+`claude mcp add --transport http clarify https://api.clarify.ai/mcp`
+
 [**Day AI**](https://day.ai/mcp)
 
 Analyze & update CRM recordsCommand

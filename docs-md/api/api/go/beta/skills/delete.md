@@ -8,7 +8,7 @@ Go
 
 client.Beta.Skills.Delete(ctx, skillID, body) (\*[BetaSkillDeleteResponse](api/beta.md), error)
 
-delete/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -121,25 +121,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
 
 ---
 

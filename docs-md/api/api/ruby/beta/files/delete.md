@@ -8,7 +8,7 @@ Ruby
 
 beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta.md) { id, type }
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -84,10 +84,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-:file\_deleted
-
 Delete File
 
 Ruby
@@ -102,25 +98,7 @@ deleted_file = anthropic.beta.files.delete("file_id")
 puts(deleted_file)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
 
 ---
 

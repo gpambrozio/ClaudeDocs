@@ -8,7 +8,7 @@ Go
 
 client.Beta.Skills.Versions.New(ctx, skillID, params) (\*[BetaSkillVersionNewResponse](api/beta.md), error)
 
-post/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 Create Skill Version
 
@@ -159,37 +159,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
 
 ---
 

@@ -80,23 +80,17 @@ response = client.beta.messages.create(
     max_tokens=1024,
     tools=[
         {
-          "type": "computer_20251124",
-          "name": "computer",
-          "display_width_px": 1024,
-          "display_height_px": 768,
-          "display_number": 1,
+            "type": "computer_20251124",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+            "display_number": 1,
         },
-        {
-          "type": "text_editor_20250728",
-          "name": "str_replace_based_edit_tool"
-        },
-        {
-          "type": "bash_20250124",
-          "name": "bash"
-        }
+        {"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
     ],
     messages=[{"role": "user", "content": "Save a picture of a cat to my desktop."}],
-    betas=["computer-use-2025-11-24"]
+    betas=["computer-use-2025-11-24"],
 )
 print(response)
 ```
@@ -197,13 +191,22 @@ async def sampling_loop(
     """
     # Set up tools and API parameters
     client = Anthropic(api_key=api_key)
-    beta_flag = "computer-use-2025-01-24" if "20250124" in tool_version else "computer-use-2024-10-22"
+    beta_flag = (
+        "computer-use-2025-01-24"
+        if "20250124" in tool_version
+        else "computer-use-2024-10-22"
+    )
 
     # Configure tools - you should already have these initialized elsewhere
     tools = [
-        {"type": f"computer_{tool_version}", "name": "computer", "display_width_px": 1024, "display_height_px": 768},
+        {
+            "type": f"computer_{tool_version}",
+            "name": "computer",
+            "display_width_px": 1024,
+            "display_height_px": 768,
+        },
         {"type": f"text_editor_{tool_version}", "name": "str_replace_editor"},
-        {"type": f"bash_{tool_version}", "name": "bash"}
+        {"type": f"bash_{tool_version}", "name": "bash"},
     ]
 
     # Main agent loop (with iteration limit to prevent runaway API costs)
@@ -222,7 +225,7 @@ async def sampling_loop(
             messages=messages,
             tools=tools,
             betas=[beta_flag],
-            thinking=thinking
+            thinking=thinking,
         )
 
         # Add Claude's response to the conversation history
@@ -238,11 +241,9 @@ async def sampling_loop(
                 result = {"result": "Tool executed successfully"}
 
                 # Format the result for Claude
-                tool_results.append({
-                    "type": "tool_result",
-                    "tool_use_id": block.id,
-                    "content": result
-                })
+                tool_results.append(
+                    {"type": "tool_result", "tool_use_id": block.id, "content": result}
+                )
 
         # If no tools were used, Claude is done - return the final messages
         if not tool_results:
@@ -473,12 +474,12 @@ The computer use tool is implemented as a schema-less tool. When using this tool
        if content.type == "tool_use":
            action = content.input["action"]
            result = handle_computer_action(action, content.input)
-           
+
            # Return result to Claude
            tool_result = {
                "type": "tool_result",
                "tool_use_id": content.id,
-               "content": result
+               "content": result,
            }
    ```
 4. 4
@@ -490,14 +491,14 @@ The computer use tool is implemented as a schema-less tool. When using this tool
    ```shiki
    while True:
        response = client.beta.messages.create(...)
-       
+
        # Check if Claude used any tools
        tool_results = process_tool_calls(response)
-       
+
        if not tool_results:
            # No more tool use, task complete
            break
-           
+
        # Continue conversation with tool results
        messages.append({"role": "user", "content": tool_results})
    ```

@@ -8,7 +8,7 @@ Ruby
 
 beta.files.download(file\_id, \*\*kwargs) -> StringIO
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 

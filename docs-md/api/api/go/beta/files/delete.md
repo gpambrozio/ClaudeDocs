@@ -8,7 +8,7 @@ Go
 
 client.Beta.Files.Delete(ctx, fileID, body) (\*[DeletedFile](api/beta.md), error)
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -84,10 +84,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-const DeletedFileTypeFileDeleted DeletedFileType = "file\_deleted"
-
 Delete File
 
 Go
@@ -121,25 +117,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
 
 ---
 

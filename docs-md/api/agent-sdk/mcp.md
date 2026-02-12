@@ -52,7 +52,7 @@ for await (const message of query({
   prompt: "List files in my project",
   options: {
     mcpServers: {
-      "filesystem": {
+      filesystem: {
         command: "npx",
         args: ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me/projects"]
       }
@@ -239,7 +239,7 @@ TypeScript
 const options = {
   mcpServers: { /* your MCP servers */ },
   env: {
-    ENABLE_TOOL_SEARCH: "auto:5"  // Enable at 5% threshold
+    ENABLE_TOOL_SEARCH: "auto:5" // Enable at 5% threshold
   }
 };
 ```
@@ -353,7 +353,7 @@ for await (const message of query({
   prompt: "List the 3 most recent issues in anthropics/claude-code",
   options: {
     mcpServers: {
-      "github": {
+      github: {
         command: "npx",
         args: ["-y", "@modelcontextprotocol/server-github"],
         env: {
@@ -402,7 +402,7 @@ for await (const message of query({
   prompt: "How many users signed up last week? Break it down by day.",
   options: {
     mcpServers: {
-      "postgres": {
+      postgres: {
         command: "npx",
         // Pass connection string as argument to the server
         args: ["-y", "@modelcontextprotocol/server-postgres", connectionString]

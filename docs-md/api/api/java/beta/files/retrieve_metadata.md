@@ -8,7 +8,7 @@ Java
 
 [FileMetadata](api/beta.md) beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 Get File Metadata
 
@@ -78,39 +78,23 @@ LocalDateTime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 String filename
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 String mimeType
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 long sizeBytes
 
 Size of the file in bytes.
-
-minimum0
 
 JsonValue; type "file"constant"file"constant
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-FILE("file")
 
 Optional<Boolean> downloadable
 
@@ -139,35 +123,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

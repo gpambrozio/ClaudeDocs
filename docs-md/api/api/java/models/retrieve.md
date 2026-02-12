@@ -8,7 +8,7 @@ Java
 
 [ModelInfo](api/models.md) models().retrieve(ModelRetrieveParamsparams = ModelRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -78,8 +78,6 @@ LocalDateTime createdAt
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 String displayName
 
 A human-readable name for the model.
@@ -89,10 +87,6 @@ JsonValue; type "model"constant"model"constant
 Object type.
 
 For Models, this is always `"model"`.
-
-Accepts one of the following:
-
-MODEL("model")
 
 Get a Model
 
@@ -117,29 +111,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
 
 ---
 

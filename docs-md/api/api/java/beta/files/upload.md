@@ -8,7 +8,7 @@ Java
 
 [FileMetadata](api/beta.md) beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/files
+POST/v1/files
 
 Upload File
 
@@ -60,11 +60,9 @@ SKILLS\_2025\_10\_02("skills-2025-10-02")
 
 FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
-String file
+InputStream file
 
 The file to upload
-
-formatbinary
 
 ##### ReturnsExpand Collapse
 
@@ -80,39 +78,23 @@ LocalDateTime createdAt
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 String filename
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 String mimeType
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 long sizeBytes
 
 Size of the file in bytes.
-
-minimum0
 
 JsonValue; type "file"constant"file"constant
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-FILE("file")
 
 Optional<Boolean> downloadable
 
@@ -145,35 +127,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
-  "type": "file",
-  "downloadable": true
-}
-```
 
 ---
 

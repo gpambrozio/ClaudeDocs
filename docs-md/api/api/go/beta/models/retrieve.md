@@ -8,7 +8,7 @@ Go
 
 client.Beta.Models.Get(ctx, modelID, query) (\*[BetaModelInfo](api/beta.md), error)
 
-get/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -84,8 +84,6 @@ CreatedAt Time
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 DisplayName string
 
 A human-readable name for the model.
@@ -95,10 +93,6 @@ Type Model
 Object type.
 
 For Models, this is always `"model"`.
-
-Accepts one of the following:
-
-const ModelModel Model = "model"
 
 Get a Model
 
@@ -133,29 +127,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
 
 ---
 

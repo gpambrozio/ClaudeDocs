@@ -43,7 +43,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates for prompts <= 200K tokens, and 12x standard Opus rates for prompts > 200K tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
+Fast mode is priced at 6x standard Opus rates for prompts ≤200K tokens, and 12x standard Opus rates for prompts > 200K tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
 
 | Context window | Input | Output |
 | --- | --- | --- |
@@ -137,9 +137,15 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
             del params["speed"]
             return create_message_with_fast_fallback(**params)
         raise
-    except (anthropic.InternalServerError, anthropic.OverloadedError, anthropic.APIConnectionError):
+    except (
+        anthropic.InternalServerError,
+        anthropic.OverloadedError,
+        anthropic.APIConnectionError,
+    ):
         if max_attempts > 1:
-            return create_message_with_fast_fallback(max_attempts=max_attempts - 1, **params)
+            return create_message_with_fast_fallback(
+                max_attempts=max_attempts - 1, **params
+            )
         raise
 
 message = create_message_with_fast_fallback(

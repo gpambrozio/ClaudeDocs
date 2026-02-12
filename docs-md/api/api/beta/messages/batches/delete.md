@@ -6,7 +6,7 @@ cURL
 
 # Delete a Message Batch
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -88,10 +88,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-"message\_batch\_deleted"
-
 Delete a Message Batch
 
 cURL
@@ -104,25 +100,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
 
 ---
 

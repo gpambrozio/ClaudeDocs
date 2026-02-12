@@ -386,12 +386,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 # First request with tool search
-messages = [
-    {
-        "role": "user",
-        "content": "What's the weather in Seattle?"
-    }
-]
+messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
 
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -399,37 +394,31 @@ response1 = client.beta.messages.create(
     max_tokens=2048,
     messages=messages,
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "name": "get_weather",
             "description": "Get weather for a location",
             "input_schema": {
                 "type": "object",
-                "properties": {
-                    "location": {"type": "string"}
-                },
-                "required": ["location"]
+                "properties": {"location": {"type": "string"}},
+                "required": ["location"],
             },
-            "defer_loading": True
-        }
-    ]
+            "defer_loading": True,
+        },
+    ],
 )
 
 # Add Claude's response to conversation
-messages.append({
-    "role": "assistant",
-    "content": response1.content
-})
+messages.append({"role": "assistant", "content": response1.content})
 
 # Second request with cache breakpoint
-messages.append({
-    "role": "user",
-    "content": "What about New York?",
-    "cache_control": {"type": "ephemeral"}
-})
+messages.append(
+    {
+        "role": "user",
+        "content": "What about New York?",
+        "cache_control": {"type": "ephemeral"},
+    }
+)
 
 response2 = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -437,23 +426,18 @@ response2 = client.beta.messages.create(
     max_tokens=2048,
     messages=messages,
     tools=[
-        {
-            "type": "tool_search_tool_regex_20251119",
-            "name": "tool_search_tool_regex"
-        },
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
         {
             "name": "get_weather",
             "description": "Get weather for a location",
             "input_schema": {
                 "type": "object",
-                "properties": {
-                    "location": {"type": "string"}
-                },
-                "required": ["location"]
+                "properties": {"location": {"type": "string"}},
+                "required": ["location"],
             },
-            "defer_loading": True
-        }
-    ]
+            "defer_loading": True,
+        },
+    ],
 )
 
 print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")

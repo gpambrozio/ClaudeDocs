@@ -6,7 +6,7 @@ cURL
 
 # Get a Model
 
-get/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -84,8 +84,6 @@ created\_at: string
 
 RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-formatdate-time
-
 display\_name: string
 
 A human-readable name for the model.
@@ -95,10 +93,6 @@ type: "model"
 Object type.
 
 For Models, this is always `"model"`.
-
-Accepts one of the following:
-
-"model"
 
 Get a Model
 
@@ -110,29 +104,7 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
-}
-```
 
 ---
 

@@ -37,11 +37,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Das Wetter heute ist wunderschön, lass uns spazieren gehen. --> Italienisch"
+                    "text": "Das Wetter heute ist wunderschön, lass uns spazieren gehen. --> Italienisch",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

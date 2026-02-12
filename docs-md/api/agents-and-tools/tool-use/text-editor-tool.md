@@ -334,12 +334,7 @@ Python
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    tools=[
-        {
-            "type": "text_editor_20250728",
-            "name": "str_replace_based_edit_tool"
-        }
-    ],
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
         # Previous messages...
         {
@@ -347,7 +342,7 @@ response = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.",
                 },
                 {
                     "type": "tool_use",
@@ -357,10 +352,10 @@ response = client.messages.create(
                         "command": "str_replace",
                         "path": "primes.py",
                         "old_str": "    for num in range(2, limit + 1)",
-                        "new_str": "    for num in range(2, limit + 1):"
-                    }
-                }
-            ]
+                        "new_str": "    for num in range(2, limit + 1):",
+                    },
+                },
+            ],
         },
         {
             "role": "user",
@@ -368,11 +363,11 @@ response = client.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01PqRsTuVwXyZAbCdEfGh",
-                    "content": "Successfully replaced text at exactly one location."
+                    "content": "Successfully replaced text at exactly one location.",
                 }
-            ]
-        }
-    ]
+            ],
+        },
+    ],
 )
 ```
 
@@ -418,24 +413,24 @@ The tool type depends on the model version:
    ```shiki
    def handle_editor_tool(tool_call, model_version):
        input_params = tool_call.input
-       command = input_params.get('command', '')
-       file_path = input_params.get('path', '')
-       
-       if command == 'view':
+       command = input_params.get("command", "")
+       file_path = input_params.get("path", "")
+
+       if command == "view":
            # Read and return file contents
            pass
-       elif command == 'str_replace':
+       elif command == "str_replace":
            # Replace text in file
            pass
-       elif command == 'create':
+       elif command == "create":
            # Create new file
            pass
-       elif command == 'insert':
+       elif command == "insert":
            # Insert text at location
            pass
-       elif command == 'undo_edit':
+       elif command == "undo_edit":
            # Check if it's a Claude 4 model
-           if 'str_replace_based_edit_tool' in model_version:
+           if "str_replace_based_edit_tool" in model_version:
                return {"error": "undo_edit command is not supported in Claude 4"}
            # Restore from backup for Claude 3.7
            pass
@@ -462,12 +457,12 @@ The tool type depends on the model version:
        if content.type == "tool_use":
            # Execute the tool based on command
            result = handle_editor_tool(content)
-           
+
            # Return result to Claude
            tool_result = {
                "type": "tool_result",
                "tool_use_id": content.id,
-               "content": result
+               "content": result,
            }
    ```
 

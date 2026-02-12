@@ -63,11 +63,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices."
+                    "text": "Brand specs:\nThis is a brand that focuses on creating high-quality, stylish clothing and accessories using eco-friendly materials and ethical production methods\nThe brand targets environmentally conscious consumers aged 25-40 who value fashion, sustainability, and social responsibility.\nThe brand identity should achieve the following goals:\n1. Reflect the brand's commitment to sustainability, ethical practices, and environmental stewardship.\n2. Appeal to the target audience by conveying a sense of style, quality, and trendiness.\n3. Differentiate the brand from competitors in the sustainable fashion market.\n4. Create a strong emotional connection with consumers and inspire them to make more environmentally friendly choices.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

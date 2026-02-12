@@ -197,25 +197,24 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Create a matplotlib visualization and save it as output.png"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a matplotlib visualization and save it as output.png",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 # Extract file IDs from the response
 def extract_file_ids(response):
     file_ids = []
     for item in response.content:
-        if item.type == 'bash_code_execution_tool_result':
+        if item.type == "bash_code_execution_tool_result":
             content_item = item.content
-            if content_item.type == 'bash_code_execution_result':
+            if content_item.type == "bash_code_execution_result":
                 for file in content_item.content:
-                    if hasattr(file, 'file_id'):
+                    if hasattr(file, "file_id"):
                         file_ids.append(file.file_id)
     return file_ids
 
@@ -258,11 +257,11 @@ curl https://api.anthropic.com/v1/messages \
             "role": "user",
             "content": [
                 {
-                    "type": "text", 
+                    "type": "text",
                     "text": "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
                 },
                 {
-                    "type": "container_upload", 
+                    "type": "container_upload",
                     "file_id": "'$FILE_ID'"
                 }
             ]
@@ -496,23 +495,20 @@ import os
 from anthropic import Anthropic
 
 # Initialize the client
-client = Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY")
-)
+client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 # First request: Create a file with a random number
 response1 = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Write a file with a random number and save it to '/tmp/number.txt'"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 # Extract the container ID from the first response
@@ -524,14 +520,13 @@ response2 = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["code-execution-2025-08-25"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Read the number from '/tmp/number.txt' and calculate its square"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Read the number from '/tmp/number.txt' and calculate its square",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
@@ -616,22 +611,20 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Get weather for 5 cities and find the warmest"
-    }],
+    messages=[
+        {"role": "user", "content": "Get weather for 5 cities and find the warmest"}
+    ],
     tools=[
-        {
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        },
+        {"type": "code_execution_20250825", "name": "code_execution"},
         {
             "name": "get_weather",
             "description": "Get weather for a city",
             "input_schema": {...},
-            "allowed_callers": ["code_execution_20250825"]  # Enable programmatic calling
-        }
-    ]
+            "allowed_callers": [
+                "code_execution_20250825"
+            ],  # Enable programmatic calling
+        },
+    ],
 )
 ```
 

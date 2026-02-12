@@ -8,7 +8,7 @@ Go
 
 client.Messages.New(ctx, body) (\*[Message](api/messages.md), error)
 
-post/v1/messages
+POST/v1/messages
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -95,19 +95,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -144,10 +136,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -161,10 +149,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -180,10 +164,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -193,10 +173,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -215,10 +191,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -244,35 +216,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -303,15 +259,7 @@ Data string
 
 MediaType ApplicationPDF
 
-Accepts one of the following:
-
-const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"
-
 Type Base64
-
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
 
 type PlainTextSource struct{…}
 
@@ -319,15 +267,7 @@ Data string
 
 MediaType TextPlain
 
-Accepts one of the following:
-
-const TextPlainTextPlain TextPlain = "text/plain"
-
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ContentBlockSource struct{…}
 
@@ -347,19 +287,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -396,10 +328,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -413,10 +341,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -432,10 +356,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -445,10 +365,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -467,10 +383,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -496,35 +408,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -545,35 +441,19 @@ const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
 Type Content
 
-Accepts one of the following:
-
-const ContentContent Content = "content"
-
 type URLPDFSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Document
-
-Accepts one of the following:
-
-const DocumentDocument Document = "document"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -608,19 +488,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -657,10 +529,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -674,10 +542,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -693,10 +557,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -706,10 +566,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -729,29 +585,17 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Source string
 
 Title string
 
 Type SearchResult
 
-Accepts one of the following:
-
-const SearchResultSearchResult SearchResult = "search\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -782,19 +626,11 @@ Thinking string
 
 Type Thinking
 
-Accepts one of the following:
-
-const ThinkingThinking Thinking = "thinking"
-
 type RedactedThinkingBlockParamResp struct{…}
 
 Data string
 
 Type RedactedThinking
-
-Accepts one of the following:
-
-const RedactedThinkingRedactedThinking RedactedThinking = "redacted\_thinking"
 
 type ToolUseBlockParamResp struct{…}
 
@@ -806,19 +642,11 @@ Name string
 
 Type ToolUse
 
-Accepts one of the following:
-
-const ToolUseToolUse ToolUse = "tool\_use"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -843,19 +671,11 @@ ToolUseID string
 
 Type ToolResult
 
-Accepts one of the following:
-
-const ToolResultToolResult ToolResult = "tool\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -888,19 +708,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -937,10 +749,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -954,10 +762,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -973,10 +777,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -986,10 +786,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1008,10 +804,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -1037,35 +829,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1092,19 +868,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1141,10 +909,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1158,10 +922,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1177,10 +937,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1190,10 +946,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1213,29 +965,17 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Source string
 
 Title string
 
 Type SearchResult
 
-Accepts one of the following:
-
-const SearchResultSearchResult SearchResult = "search\_result"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1270,15 +1010,7 @@ Data string
 
 MediaType ApplicationPDF
 
-Accepts one of the following:
-
-const ApplicationPDFApplicationPDF ApplicationPDF = "application/pdf"
-
 Type Base64
-
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
 
 type PlainTextSource struct{…}
 
@@ -1286,15 +1018,7 @@ Data string
 
 MediaType TextPlain
 
-Accepts one of the following:
-
-const TextPlainTextPlain TextPlain = "text/plain"
-
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ContentBlockSource struct{…}
 
@@ -1314,19 +1038,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1363,10 +1079,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1380,10 +1092,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1399,10 +1107,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1412,10 +1116,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1434,10 +1134,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 type ImageBlockParamResp struct{…}
 
@@ -1463,35 +1159,19 @@ const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/we
 
 Type Base64
 
-Accepts one of the following:
-
-const Base64Base64 Base64 = "base64"
-
 type URLImageSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Image
-
-Accepts one of the following:
-
-const ImageImage Image = "image"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1512,35 +1192,19 @@ const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
 Type Content
 
-Accepts one of the following:
-
-const ContentContent Content = "content"
-
 type URLPDFSource struct{…}
 
 Type URL
 
-Accepts one of the following:
-
-const URLURL URL = "url"
-
 URL string
 
 Type Document
-
-Accepts one of the following:
-
-const DocumentDocument Document = "document"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1577,25 +1241,13 @@ Input map[string, any]
 
 Name WebSearch
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1628,10 +1280,6 @@ Title string
 
 Type WebSearchResult
 
-Accepts one of the following:
-
-const WebSearchResultWebSearchResult WebSearchResult = "web\_search\_result"
-
 URL string
 
 PageAge stringoptional
@@ -1656,27 +1304,15 @@ const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErro
 
 Type WebSearchToolResultError
 
-Accepts one of the following:
-
-const WebSearchToolResultErrorWebSearchToolResultError WebSearchToolResultError = "web\_search\_tool\_result\_error"
-
 ToolUseID string
 
 Type WebSearchToolResult
-
-Accepts one of the following:
-
-const WebSearchToolResultWebSearchToolResult WebSearchToolResult = "web\_search\_tool\_result"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1751,19 +1387,11 @@ Text string
 
 Type Text
 
-Accepts one of the following:
-
-const TextText Text = "text"
-
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -1800,10 +1428,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocationParamResp struct{…}
 
 CitedText string
@@ -1817,10 +1441,6 @@ EndPageNumber int64
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocationParamResp struct{…}
 
@@ -1836,10 +1456,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationWebSearchResultLocationParamResp struct{…}
 
 CitedText string
@@ -1849,10 +1465,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -1871,10 +1483,6 @@ StartBlockIndex int64
 Title string
 
 Type SearchResultLocation
-
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
 
 Temperature param.Field[float64]optional
 
@@ -1974,10 +1582,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 Type Object
 
-Accepts one of the following:
-
-const ObjectObject Object = "object"
-
 Properties map[string, any]optional
 
 Required []stringoptional
@@ -1997,10 +1601,6 @@ CacheControl [CacheControlEphemeral](api/messages.md)optional
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2035,10 +1635,6 @@ When true, guarantees schema validation on tool names and inputs
 
 Type ToolTypeoptional
 
-Accepts one of the following:
-
-const ToolTypeCustom ToolType = "custom"
-
 type ToolBash20250124 struct{…}
 
 Name Bash
@@ -2047,25 +1643,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const BashBash Bash = "bash"
-
 Type Bash20250124
-
-Accepts one of the following:
-
-const Bash20250124Bash20250124 Bash20250124 = "bash\_20250124"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2096,25 +1680,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceEditorStrReplaceEditor StrReplaceEditor = "str\_replace\_editor"
-
 Type TextEditor20250124
-
-Accepts one of the following:
-
-const TextEditor20250124TextEditor20250124 TextEditor20250124 = "text\_editor\_20250124"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2145,25 +1717,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceBasedEditToolStrReplaceBasedEditTool StrReplaceBasedEditTool = "str\_replace\_based\_edit\_tool"
-
 Type TextEditor20250429
-
-Accepts one of the following:
-
-const TextEditor20250429TextEditor20250429 TextEditor20250429 = "text\_editor\_20250429"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2194,25 +1754,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const StrReplaceBasedEditToolStrReplaceBasedEditTool StrReplaceBasedEditTool = "str\_replace\_based\_edit\_tool"
-
 Type TextEditor20250728
-
-Accepts one of the following:
-
-const TextEditor20250728TextEditor20250728 TextEditor20250728 = "text\_editor\_20250728"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2235,8 +1783,6 @@ MaxCharacters int64optional
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
@@ -2249,15 +1795,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type WebSearch20250305
-
-Accepts one of the following:
-
-const WebSearch20250305WebSearch20250305 WebSearch20250305 = "web\_search\_20250305"
 
 AllowedDomains []stringoptional
 
@@ -2272,10 +1810,6 @@ CacheControl [CacheControlEphemeral](api/messages.md)optional
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
-
-Accepts one of the following:
-
-const EphemeralEphemeral Ephemeral = "ephemeral"
 
 TTL CacheControlEphemeralTTLoptional
 
@@ -2298,8 +1832,6 @@ MaxUses int64optional
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
@@ -2310,41 +1842,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 Type Approximate
 
-Accepts one of the following:
-
-const ApproximateApproximate Approximate = "approximate"
-
 City stringoptional
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 Country stringoptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 Region stringoptional
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 Timezone stringoptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 TopK param.Field[int64]optional
 
@@ -2435,10 +1947,6 @@ StartCharIndex int64
 
 Type CharLocation
 
-Accepts one of the following:
-
-const CharLocationCharLocation CharLocation = "char\_location"
-
 type CitationPageLocation struct{…}
 
 CitedText string
@@ -2454,10 +1962,6 @@ FileID string
 StartPageNumber int64
 
 Type PageLocation
-
-Accepts one of the following:
-
-const PageLocationPageLocation PageLocation = "page\_location"
 
 type CitationContentBlockLocation struct{…}
 
@@ -2475,10 +1979,6 @@ StartBlockIndex int64
 
 Type ContentBlockLocation
 
-Accepts one of the following:
-
-const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content\_block\_location"
-
 type CitationsWebSearchResultLocation struct{…}
 
 CitedText string
@@ -2488,10 +1988,6 @@ EncryptedIndex string
 Title string
 
 Type WebSearchResultLocation
-
-Accepts one of the following:
-
-const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web\_search\_result\_location"
 
 URL string
 
@@ -2511,17 +2007,9 @@ Title string
 
 Type SearchResultLocation
 
-Accepts one of the following:
-
-const SearchResultLocationSearchResultLocation SearchResultLocation = "search\_result\_location"
-
 Text string
 
 Type Text
-
-Accepts one of the following:
-
-const TextText Text = "text"
 
 type ThinkingBlock struct{…}
 
@@ -2531,19 +2019,11 @@ Thinking string
 
 Type Thinking
 
-Accepts one of the following:
-
-const ThinkingThinking Thinking = "thinking"
-
 type RedactedThinkingBlock struct{…}
 
 Data string
 
 Type RedactedThinking
-
-Accepts one of the following:
-
-const RedactedThinkingRedactedThinking RedactedThinking = "redacted\_thinking"
 
 type ToolUseBlock struct{…}
 
@@ -2555,10 +2035,6 @@ Name string
 
 Type ToolUse
 
-Accepts one of the following:
-
-const ToolUseToolUse ToolUse = "tool\_use"
-
 type ServerToolUseBlock struct{…}
 
 ID string
@@ -2567,15 +2043,7 @@ Input map[string, any]
 
 Name WebSearch
 
-Accepts one of the following:
-
-const WebSearchWebSearch WebSearch = "web\_search"
-
 Type ServerToolUse
-
-Accepts one of the following:
-
-const ServerToolUseServerToolUse ServerToolUse = "server\_tool\_use"
 
 type WebSearchToolResultBlock struct{…}
 
@@ -2603,10 +2071,6 @@ const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorE
 
 Type WebSearchToolResultError
 
-Accepts one of the following:
-
-const WebSearchToolResultErrorWebSearchToolResultError WebSearchToolResultError = "web\_search\_tool\_result\_error"
-
 type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
 
 EncryptedContent string
@@ -2617,19 +2081,11 @@ Title string
 
 Type WebSearchResult
 
-Accepts one of the following:
-
-const WebSearchResultWebSearchResult WebSearchResult = "web\_search\_result"
-
 URL string
 
 ToolUseID string
 
 Type WebSearchToolResult
-
-Accepts one of the following:
-
-const WebSearchToolResultWebSearchToolResult WebSearchToolResult = "web\_search\_tool\_result"
 
 Model Model
 
@@ -2739,9 +2195,429 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopReason [StopReason](api/messages.md)
+
+The reason that we stopped.
+
+This may be one the following values:
+
+- `"end_turn"`: the model reached a natural stopping point
+- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+- `"tool_use"`: the model invoked one or more tools
+- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+
+In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
 Accepts one of the following:
 
-const AssistantAssistant Assistant = "assistant"
+const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
+
+const StopReasonMaxTokens [StopReason](api/messages.md) = "max\_tokens"
+
+const StopReasonStopSequence [StopReason](api/messages.md) = "stop\_sequence"
+
+const StopReasonToolUse [StopReason](api/messages.md) = "tool\_use"
+
+const StopReasonPauseTurn [StopReason](api/messages.md) = "pause\_turn"
+
+const StopReasonRefusal [StopReason](api/messages.md) = "refusal"
+
+StopSequence string
+
+Which custom stop sequence was generated, if any.
+
+This value will be a non-null string if one of your custom stop sequences was generated.
+
+Type Message
+
+Object type.
+
+For Messages, this is always `"message"`.
+
+Usage [Usage](api/messages.md)
+
+Billing and rate-limit usage.
+
+Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+CacheCreation [CacheCreation](api/messages.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+InferenceGeo string
+
+The geographic region where inference was performed for this request.
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+ServerToolUse [ServerToolUsage](api/messages.md)
+
+The number of server tool requests.
+
+WebSearchRequests int64
+
+The number of web search tool requests.
+
+ServiceTier UsageServiceTier
+
+If the request used the priority, standard, or batch tier.
+
+Accepts one of the following:
+
+const UsageServiceTierStandard UsageServiceTier = "standard"
+
+const UsageServiceTierPriority UsageServiceTier = "priority"
+
+const UsageServiceTierBatch UsageServiceTier = "batch"
+
+type MessageStreamEventUnion interface{…}
+
+Accepts one of the following:
+
+type MessageStartEvent struct{…}
+
+Message [Message](api/messages.md)
+
+ID string
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+Content [][ContentBlockUnion](api/messages.md)
+
+Content generated by the model.
+
+This is an array of content blocks, each of which has a `type` that determines its shape.
+
+Example:
+
+```shiki
+[{"type": "text", "text": "Hi, I'm Claude."}]
+```
+
+If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+For example, if the input `messages` were:
+
+```shiki
+[
+  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+  {"role": "assistant", "content": "The best answer is ("}
+]
+```
+
+Then the response `content` might be:
+
+```shiki
+[{"type": "text", "text": "B)"}]
+```
+
+Accepts one of the following:
+
+type TextBlock struct{…}
+
+Citations [][TextCitationUnion](api/messages.md)
+
+Citations supporting the text block.
+
+The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+Accepts one of the following:
+
+type CitationCharLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+FileID string
+
+StartCharIndex int64
+
+Type CharLocation
+
+type CitationPageLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+FileID string
+
+StartPageNumber int64
+
+Type PageLocation
+
+type CitationContentBlockLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+FileID string
+
+StartBlockIndex int64
+
+Type ContentBlockLocation
+
+type CitationsWebSearchResultLocation struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type CitationsSearchResultLocation struct{…}
+
+CitedText string
+
+EndBlockIndex int64
+
+SearchResultIndex int64
+
+Source string
+
+StartBlockIndex int64
+
+Title string
+
+Type SearchResultLocation
+
+Text string
+
+Type Text
+
+type ThinkingBlock struct{…}
+
+Signature string
+
+Thinking string
+
+Type Thinking
+
+type RedactedThinkingBlock struct{…}
+
+Data string
+
+Type RedactedThinking
+
+type ToolUseBlock struct{…}
+
+ID string
+
+Input map[string, any]
+
+Name string
+
+Type ToolUse
+
+type ServerToolUseBlock struct{…}
+
+ID string
+
+Input map[string, any]
+
+Name WebSearch
+
+Type ServerToolUse
+
+type WebSearchToolResultBlock struct{…}
+
+Content [WebSearchToolResultBlockContentUnion](api/messages.md)
+
+Accepts one of the following:
+
+type WebSearchToolResultError struct{…}
+
+ErrorCode WebSearchToolResultErrorErrorCode
+
+Accepts one of the following:
+
+const WebSearchToolResultErrorErrorCodeInvalidToolInput WebSearchToolResultErrorErrorCode = "invalid\_tool\_input"
+
+const WebSearchToolResultErrorErrorCodeUnavailable WebSearchToolResultErrorErrorCode = "unavailable"
+
+const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorErrorCode = "max\_uses\_exceeded"
+
+const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
+
+const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
+Type WebSearchToolResultError
+
+type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
+
+EncryptedContent string
+
+PageAge string
+
+Title string
+
+Type WebSearchResult
+
+URL string
+
+ToolUseID string
+
+Type WebSearchToolResult
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaude3\_7SonnetLatest Model = "claude-3-7-sonnet-latest"
+
+High-performance model with early extended thinking
+
+const ModelClaude3\_7Sonnet20250219 Model = "claude-3-7-sonnet-20250219"
+
+High-performance model with early extended thinking
+
+const ModelClaude3\_5HaikuLatest Model = "claude-3-5-haiku-latest"
+
+Fastest and most compact model for near-instant responsiveness
+
+const ModelClaude3\_5Haiku20241022 Model = "claude-3-5-haiku-20241022"
+
+Our fastest model
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Hybrid model, capable of near-instant responses and extended thinking
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Hybrid model, capable of near-instant responses and extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaude4Sonnet20250514 Model = "claude-4-sonnet-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+Our best model for real-world agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+Our best model for real-world agents and coding
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Our most capable model
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Our most capable model
+
+const ModelClaude4Opus20250514 Model = "claude-4-opus-20250514"
+
+Our most capable model
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Our most capable model
+
+const ModelClaude3OpusLatest Model = "claude-3-opus-latest"
+
+Excels at writing and complex tasks
+
+const ModelClaude\_3\_Opus\_20240229 Model = "claude-3-opus-20240229"
+
+Excels at writing and complex tasks
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Our previous most fast and cost-effective
+
+string
+
+Role Assistant
+
+Conversational role of the generated message.
+
+This will always be `"assistant"`.
 
 StopReason [StopReason](api/messages.md)
 
@@ -2784,10 +2660,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-const MessageMessage Message = "message"
-
 Usage [Usage](api/messages.md)
 
 Billing and rate-limit usage.
@@ -2808,25 +2680,17 @@ Ephemeral1hInputTokens int64
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 Ephemeral5mInputTokens int64
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 CacheCreationInputTokens int64
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 CacheReadInputTokens int64
 
 The number of input tokens read from the cache.
-
-minimum0
 
 InferenceGeo string
 
@@ -2836,13 +2700,9 @@ InputTokens int64
 
 The number of input tokens which were used.
 
-minimum0
-
 OutputTokens int64
 
 The number of output tokens which were used.
-
-minimum0
 
 ServerToolUse [ServerToolUsage](api/messages.md)
 
@@ -2851,8 +2711,6 @@ The number of server tool requests.
 WebSearchRequests int64
 
 The number of web search tool requests.
-
-minimum0
 
 ServiceTier UsageServiceTier
 
@@ -2865,6 +2723,372 @@ const UsageServiceTierStandard UsageServiceTier = "standard"
 const UsageServiceTierPriority UsageServiceTier = "priority"
 
 const UsageServiceTierBatch UsageServiceTier = "batch"
+
+Type MessageStart
+
+type MessageDeltaEvent struct{…}
+
+Delta MessageDeltaEventDelta
+
+StopReason [StopReason](api/messages.md)
+
+Accepts one of the following:
+
+const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
+
+const StopReasonMaxTokens [StopReason](api/messages.md) = "max\_tokens"
+
+const StopReasonStopSequence [StopReason](api/messages.md) = "stop\_sequence"
+
+const StopReasonToolUse [StopReason](api/messages.md) = "tool\_use"
+
+const StopReasonPauseTurn [StopReason](api/messages.md) = "pause\_turn"
+
+const StopReasonRefusal [StopReason](api/messages.md) = "refusal"
+
+StopSequence string
+
+Type MessageDelta
+
+Usage [MessageDeltaUsage](api/messages.md)
+
+Billing and rate-limit usage.
+
+Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+CacheCreationInputTokens int64
+
+The cumulative number of input tokens used to create the cache entry.
+
+CacheReadInputTokens int64
+
+The cumulative number of input tokens read from the cache.
+
+InputTokens int64
+
+The cumulative number of input tokens which were used.
+
+OutputTokens int64
+
+The cumulative number of output tokens which were used.
+
+ServerToolUse [ServerToolUsage](api/messages.md)
+
+The number of server tool requests.
+
+WebSearchRequests int64
+
+The number of web search tool requests.
+
+type MessageStopEvent struct{…}
+
+Type MessageStop
+
+type ContentBlockStartEvent struct{…}
+
+ContentBlock ContentBlockStartEventContentBlockUnion
+
+Accepts one of the following:
+
+type TextBlock struct{…}
+
+Citations [][TextCitationUnion](api/messages.md)
+
+Citations supporting the text block.
+
+The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+Accepts one of the following:
+
+type CitationCharLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+FileID string
+
+StartCharIndex int64
+
+Type CharLocation
+
+type CitationPageLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+FileID string
+
+StartPageNumber int64
+
+Type PageLocation
+
+type CitationContentBlockLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+FileID string
+
+StartBlockIndex int64
+
+Type ContentBlockLocation
+
+type CitationsWebSearchResultLocation struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type CitationsSearchResultLocation struct{…}
+
+CitedText string
+
+EndBlockIndex int64
+
+SearchResultIndex int64
+
+Source string
+
+StartBlockIndex int64
+
+Title string
+
+Type SearchResultLocation
+
+Text string
+
+Type Text
+
+type ThinkingBlock struct{…}
+
+Signature string
+
+Thinking string
+
+Type Thinking
+
+type RedactedThinkingBlock struct{…}
+
+Data string
+
+Type RedactedThinking
+
+type ToolUseBlock struct{…}
+
+ID string
+
+Input map[string, any]
+
+Name string
+
+Type ToolUse
+
+type ServerToolUseBlock struct{…}
+
+ID string
+
+Input map[string, any]
+
+Name WebSearch
+
+Type ServerToolUse
+
+type WebSearchToolResultBlock struct{…}
+
+Content [WebSearchToolResultBlockContentUnion](api/messages.md)
+
+Accepts one of the following:
+
+type WebSearchToolResultError struct{…}
+
+ErrorCode WebSearchToolResultErrorErrorCode
+
+Accepts one of the following:
+
+const WebSearchToolResultErrorErrorCodeInvalidToolInput WebSearchToolResultErrorErrorCode = "invalid\_tool\_input"
+
+const WebSearchToolResultErrorErrorCodeUnavailable WebSearchToolResultErrorErrorCode = "unavailable"
+
+const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorErrorCode = "max\_uses\_exceeded"
+
+const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
+
+const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+
+const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+
+Type WebSearchToolResultError
+
+type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
+
+EncryptedContent string
+
+PageAge string
+
+Title string
+
+Type WebSearchResult
+
+URL string
+
+ToolUseID string
+
+Type WebSearchToolResult
+
+Index int64
+
+Type ContentBlockStart
+
+type ContentBlockDeltaEvent struct{…}
+
+Delta [RawContentBlockDeltaUnion](api/messages.md)
+
+Accepts one of the following:
+
+type TextDelta struct{…}
+
+Text string
+
+Type TextDelta
+
+type InputJSONDelta struct{…}
+
+PartialJSON string
+
+Type InputJSONDelta
+
+type CitationsDelta struct{…}
+
+Citation CitationsDeltaCitationUnion
+
+Accepts one of the following:
+
+type CitationCharLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+FileID string
+
+StartCharIndex int64
+
+Type CharLocation
+
+type CitationPageLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+FileID string
+
+StartPageNumber int64
+
+Type PageLocation
+
+type CitationContentBlockLocation struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+FileID string
+
+StartBlockIndex int64
+
+Type ContentBlockLocation
+
+type CitationsWebSearchResultLocation struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type CitationsSearchResultLocation struct{…}
+
+CitedText string
+
+EndBlockIndex int64
+
+SearchResultIndex int64
+
+Source string
+
+StartBlockIndex int64
+
+Title string
+
+Type SearchResultLocation
+
+Type CitationsDelta
+
+type ThinkingDelta struct{…}
+
+Thinking string
+
+Type ThinkingDelta
+
+type SignatureDelta struct{…}
+
+Signature string
+
+Type SignatureDelta
+
+Index int64
+
+Type ContentBlockDelta
+
+type ContentBlockStopEvent struct{…}
+
+Index int64
+
+Type ContentBlockStop
 
 Create a Message
 
@@ -2904,97 +3128,7 @@ func main() {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "content": [
-    {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "output_tokens": 503,
-    "server_tool_use": {
-      "web_search_requests": 0
-    },
-    "service_tier": "standard"
-  }
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "content": [
-    {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "output_tokens": 503,
-    "server_tool_use": {
-      "web_search_requests": 0
-    },
-    "service_tier": "standard"
-  }
-}
-```
 
 ---
 

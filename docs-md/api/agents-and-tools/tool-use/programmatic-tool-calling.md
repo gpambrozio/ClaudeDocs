@@ -173,22 +173,21 @@ response = client.beta.messages.create(
     model="claude-opus-4-6",
     betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
-    messages=[{
-        "role": "user",
-        "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"
-    }],
-    tools=[
+    messages=[
         {
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        },
+            "role": "user",
+            "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue",
+        }
+    ],
+    tools=[
+        {"type": "code_execution_20250825", "name": "code_execution"},
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
             "input_schema": {...},
-            "allowed_callers": ["code_execution_20250825"]
-        }
-    ]
+            "allowed_callers": ["code_execution_20250825"],
+        },
+    ],
 )
 ```
 
@@ -244,16 +243,22 @@ response = client.beta.messages.create(
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[
-        {"role": "user", "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue"},
+        {
+            "role": "user",
+            "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue",
+        },
         {
             "role": "assistant",
             "content": [
-                {"type": "text", "text": "I'll query the purchase history and analyze the results."},
+                {
+                    "type": "text",
+                    "text": "I'll query the purchase history and analyze the results.",
+                },
                 {
                     "type": "server_tool_use",
                     "id": "srvtoolu_abc123",
                     "name": "code_execution",
-                    "input": {"code": "..."}
+                    "input": {"code": "..."},
                 },
                 {
                     "type": "tool_use",
@@ -262,10 +267,10 @@ response = client.beta.messages.create(
                     "input": {"sql": "<sql>"},
                     "caller": {
                         "type": "code_execution_20250825",
-                        "tool_id": "srvtoolu_abc123"
-                    }
-                }
-            ]
+                        "tool_id": "srvtoolu_abc123",
+                    },
+                },
+            ],
         },
         {
             "role": "user",
@@ -273,12 +278,12 @@ response = client.beta.messages.create(
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_def456",
-                    "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}, {\"customer_id\": \"C2\", \"revenue\": 38000}, ...]"
+                    "content": '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]',
                 }
-            ]
-        }
+            ],
+        },
     ],
-    tools=[...]
+    tools=[...],
 )
 ```
 
@@ -472,7 +477,7 @@ If your tool returns an error:
 {
     "type": "tool_result",
     "tool_use_id": "toolu_abc123",
-    "content": "Error: Query timeout - table lock exceeded 30 seconds"
+    "content": "Error: Query timeout - table lock exceeded 30 seconds",
 }
 ```
 

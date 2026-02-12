@@ -10,16 +10,16 @@ Copy page
 
 ## Example Output
 
-Tongue Twister 1:  
+Tongue Twister 1:
 The shrewd shrew chewed through the shiny, shimmering shoe.
 
-Tongue Twister 2:  
+Tongue Twister 2:
 Brisk breezes blew by the blue-blooded, blabbering, babbling baboon.
 
-Tongue Twister 3:  
+Tongue Twister 3:
 The perplexed piper picked a peck of pickled peppers while practicing his piping.
 
-Tongue Twister 4:  
+Tongue Twister 4:
 Six sleek, slick, slender sleds slid swiftly down the steep, snowy slope.
 
 ---
@@ -54,24 +54,24 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=1000,
-  temperature=1,
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=1000,
+    temperature=1,
+    messages=[
         {
-          "type": "text",
-          "text": "Generate complex and creative tongue twisters. Aim to create tongue twisters that are not only challenging to say but also engaging, entertaining, and potentially humorous. Consider incorporating wordplay, rhyme, and alliteration to enhance the difficulty and enjoyment of the tongue twisters."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Generate complex and creative tongue twisters. Aim to create tongue twisters that are not only challenging to say but also engaging, entertaining, and potentially humorous. Consider incorporating wordplay, rhyme, and alliteration to enhance the difficulty and enjoyment of the tongue twisters.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

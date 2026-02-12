@@ -8,7 +8,7 @@ TypeScript
 
 client.beta.files.download(stringfileID, FileDownloadParams { betas } params?, RequestOptionsoptions?): Response
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 

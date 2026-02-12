@@ -8,7 +8,7 @@ Ruby
 
 beta.skills.retrieve(skill\_id, \*\*kwargs) -> [SkillRetrieveResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
 
-get/v1/skills/{skill\_id}
+GET/v1/skills/{skill\_id}
 
 Get Skill
 
@@ -131,35 +131,7 @@ skill = anthropic.beta.skills.retrieve("skill_id")
 puts(skill)
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
 
 ---
 

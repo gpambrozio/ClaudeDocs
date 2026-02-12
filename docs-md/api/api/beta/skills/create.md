@@ -6,7 +6,7 @@ cURL
 
 # Create Skill
 
-post/v1/skills
+POST/v1/skills
 
 Create Skill
 
@@ -64,6 +64,20 @@ Accepts one of the following:
 
 "fast-mode-2026-02-01"
 
+##### Body ParametersForm DataExpand Collapse
+
+display\_title: optional string
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+files: optional array of string
+
+Files to upload for the skill.
+
+All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
 ##### ReturnsExpand Collapse
 
 id: string
@@ -119,35 +133,7 @@ curl https://api.anthropic.com/v1/skills \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
 
 ---
 

@@ -8,7 +8,7 @@ Python
 
 beta.files.download(strfile\_id, FileDownloadParams\*\*kwargs)  -> BinaryResponseContent
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 
@@ -24,9 +24,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 

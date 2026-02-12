@@ -33,10 +33,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 # List Anthropic-managed Skills
-skills = client.beta.skills.list(
-    source="anthropic",
-    betas=["skills-2025-10-02"]
-)
+skills = client.beta.skills.list(source="anthropic", betas=["skills-2025-10-02"])
 
 for skill in skills.data:
     print(f"{skill.id}: {skill.display_title}")
@@ -63,22 +60,15 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pptx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a presentation about renewable energy with 5 slides"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a presentation about renewable energy with 5 slides",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
 print(response.content)
@@ -105,18 +95,17 @@ Python
 # Extract file ID from response
 file_id = None
 for block in response.content:
-    if block.type == 'tool_use' and block.name == 'code_execution':
+    if block.type == "tool_use" and block.name == "code_execution":
         # File ID is in the tool result
         for result_block in block.content:
-            if hasattr(result_block, 'file_id'):
+            if hasattr(result_block, "file_id"):
                 file_id = result_block.file_id
                 break
 
 if file_id:
     # Download the file
     file_content = client.beta.files.download(
-        file_id=file_id,
-        betas=["files-api-2025-04-14"]
+        file_id=file_id, betas=["files-api-2025-04-14"]
     )
 
     # Save to disk
@@ -142,22 +131,15 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "xlsx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Create a quarterly sales tracking spreadsheet with sample data"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a quarterly sales tracking spreadsheet with sample data",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
@@ -171,22 +153,15 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "docx",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Write a 2-page report on the benefits of renewable energy"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a 2-page report on the benefits of renewable energy",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 
@@ -200,22 +175,10 @@ response = client.beta.messages.create(
     max_tokens=4096,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
-        "skills": [
-            {
-                "type": "anthropic",
-                "skill_id": "pdf",
-                "version": "latest"
-            }
-        ]
+        "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
-    messages=[{
-        "role": "user",
-        "content": "Generate a PDF invoice template"
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
-    }]
+    messages=[{"role": "user", "content": "Generate a PDF invoice template"}],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```
 

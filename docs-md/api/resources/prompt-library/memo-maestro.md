@@ -31,28 +31,28 @@ Program Components:
 - Mental health resources: access to counseling services, meditation apps, and stress-relief workshops
 - Wellness workshops: seminars on topics such as nutrition, sleep hygiene, and work-life balance
 
-Partnerships and Discounts:  
+Partnerships and Discounts:
 To further support your wellness journey, we have partnered with local gyms and wellness centers to offer discounted memberships exclusively for our employees. Take advantage of these special rates to access a wide range of fitness facilities and classes.
 
-Incentives for Participation:  
+Incentives for Participation:
 To encourage active participation in the Fit4Success program, we will be offering the following incentives:
 
 - Fitness trackers for all participants to monitor their progress and set personal goals
 - Wellness points earned through program participation, redeemable for additional rewards
 - Monthly prize drawings for participants who meet specific wellness milestones
 
-Enrollment Process:  
+Enrollment Process:
 To enroll in the Fit4Success program, please visit our company intranet and complete the online registration form. The deadline for enrollment is May 25, 2023. If you have any questions or concerns about the enrollment process, please contact our Human Resources team.
 
-Program Coordination:  
+Program Coordination:
 The Fit4Success program will be jointly coordinated by our Human Resources and Employee Engagement teams. They will be available to provide guidance, support, and resources throughout your wellness journey.
 
 We strongly believe that investing in the well-being of our employees is crucial to the success and growth of our organization. We encourage you to take advantage of this exciting opportunity and join us in creating a healthier, happier, and more productive workplace.
 
 Let's embrace the Fit4Success program and work together towards a healthier future!
 
-Best regards,  
-[Your Name]  
+Best regards,
+[Your Name]
 [Your Title]
 
 ---
@@ -101,11 +101,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "- Announcement of a new employee wellness program: \"Fit4Success\"  \n- Program objectives: promote physical and mental well-being, reduce stress, and increase productivity  \n- Components: on-site fitness classes, healthy meal options, mental health resources, and wellness workshops  \n- Partnership with local gyms and wellness centers for discounted memberships  \n- Incentives for participation: fitness trackers, wellness points, and prize drawings  \n- Program launch date: June 1, 2023  \n- Enrollment process: online registration through company intranet  \n- Program coordinators: Human Resources and Employee Engagement teams"
+                    "text": '- Announcement of a new employee wellness program: "Fit4Success"  \n- Program objectives: promote physical and mental well-being, reduce stress, and increase productivity  \n- Components: on-site fitness classes, healthy meal options, mental health resources, and wellness workshops  \n- Partnership with local gyms and wellness centers for discounted memberships  \n- Incentives for participation: fitness trackers, wellness points, and prize drawings  \n- Program launch date: June 1, 2023  \n- Enrollment process: online registration through company intranet  \n- Program coordinators: Human Resources and Employee Engagement teams',
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

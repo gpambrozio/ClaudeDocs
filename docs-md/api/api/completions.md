@@ -8,7 +8,7 @@ cURL
 
 ##### [Create a Text Completion](api/completions/create.md)
 
-post/v1/complete
+POST/v1/complete
 
 ##### ModelsExpand Collapse
 
@@ -140,10 +140,6 @@ type: "completion"
 Object type.
 
 For Text Completions, this is always `"completion"`.
-
-Accepts one of the following:
-
-"completion"
 
 ---
 

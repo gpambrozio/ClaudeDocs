@@ -28,6 +28,14 @@ URL
 
 `https://app.circleback.ai/api/mcp`
 
+[Clarify](https://docs.clarify.ai/en/articles/13367278-clarify-mcp)
+
+Query your CRM. Create records. Ask anything.
+
+URL
+
+`https://api.clarify.ai/mcp`
+
 [Day AI](https://day.ai/mcp)
 
 Analyze & update CRM records
@@ -686,6 +694,14 @@ URL
 
 `https://mcp.supabase.com/mcp`
 
+[Supermetrics](https://mcp.supermetrics.com/docs)
+
+Analyze marketing performance across 200+ platforms
+
+URL
+
+`https://mcp.supermetrics.com/mcp`
+
 [Udemy Business](https://business-support.udemy.com/hc/en-us/articles/34213384429335-How-to-Integrate-the-Udemy-Business-MCP-Server-With-Your-AI-Tool#h_01K9CA42YGCV1AVXPY1RKABKP1)
 
 Search and explore skill-building resources
@@ -752,7 +768,7 @@ Real-time Yardi data & insights
 
 URL
 
-`http://mcp.virtuoso.ai/mcp`
+`https://mcp.virtuoso.ai/mcp`
 
 [Zapier](https://docs.zapier.com/mcp/home)
 

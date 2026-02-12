@@ -10,37 +10,37 @@ Ruby
 
 messages.batches.create(\*\*kwargs) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
 
 messages.batches.retrieve(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-get/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/messages/batches/list.md)
 
 messages.batches.list(\*\*kwargs) -> Page<[MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more } >
 
-get/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/messages/batches/cancel.md)
 
 messages.batches.cancel(message\_batch\_id) -> [MessageBatch](api/messages.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
-post/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/messages/batches/delete.md)
 
 messages.batches.delete(message\_batch\_id) -> [DeletedMessageBatch](api/messages.md) { id, type }
 
-delete/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/messages/batches/results.md)
 
 messages.batches.results(message\_batch\_id) -> [MessageBatchIndividualResponse](api/messages.md) { custom\_id, result }
 
-get/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
@@ -56,10 +56,6 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Accepts one of the following:
-
-:message\_batch\_deleted
-
 class MessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: String
@@ -72,19 +68,13 @@ archived\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-formatdate-time
-
 cancel\_initiated\_at: Time
 
 RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-formatdate-time
-
 created\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-formatdate-time
 
 ended\_at: Time
 
@@ -97,8 +87,6 @@ formatdate-time
 expires\_at: Time
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-formatdate-time
 
 processing\_status: :in\_progress | :canceling | :ended
 
@@ -158,17 +146,9 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-Accepts one of the following:
-
-:message\_batch
-
 class MessageBatchCanceledResult { type }
 
 type: :canceled
-
-Accepts one of the following:
-
-:canceled
 
 class MessageBatchErroredResult { error, type }
 
@@ -184,19 +164,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -204,19 +176,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -224,19 +188,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -244,19 +200,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -264,31 +212,15 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchIndividualResponse { custom\_id, result }
 
@@ -375,10 +307,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -394,10 +322,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -415,10 +339,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -428,10 +348,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -451,17 +367,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -471,19 +379,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -495,10 +395,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -507,15 +403,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -543,10 +431,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -557,19 +441,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -679,10 +555,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -724,10 +596,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -748,25 +616,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -776,13 +636,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -791,8 +647,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -808,10 +662,6 @@ Accepts one of the following:
 
 type: :succeeded
 
-Accepts one of the following:
-
-:succeeded
-
 class MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -826,19 +676,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -846,19 +688,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -866,19 +700,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -886,19 +712,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -906,39 +724,19 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchCanceledResult { type }
 
 type: :canceled
 
-Accepts one of the following:
-
-:canceled
-
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchRequestCounts { canceled, errored, expired, 2 more }
 
@@ -1045,10 +843,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -1064,10 +858,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1085,10 +875,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1098,10 +884,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1121,17 +903,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -1141,19 +915,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -1165,10 +931,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -1177,15 +939,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -1213,10 +967,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -1227,19 +977,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -1349,10 +1091,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -1394,10 +1132,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -1418,25 +1152,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -1446,13 +1172,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -1461,8 +1183,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -1478,10 +1198,6 @@ Accepts one of the following:
 
 type: :succeeded
 
-Accepts one of the following:
-
-:succeeded
-
 class MessageBatchErroredResult { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
@@ -1496,19 +1212,11 @@ message: String
 
 type: :invalid\_request\_error
 
-Accepts one of the following:
-
-:invalid\_request\_error
-
 class AuthenticationError { message, type }
 
 message: String
 
 type: :authentication\_error
-
-Accepts one of the following:
-
-:authentication\_error
 
 class BillingError { message, type }
 
@@ -1516,19 +1224,11 @@ message: String
 
 type: :billing\_error
 
-Accepts one of the following:
-
-:billing\_error
-
 class PermissionError { message, type }
 
 message: String
 
 type: :permission\_error
-
-Accepts one of the following:
-
-:permission\_error
 
 class NotFoundError { message, type }
 
@@ -1536,19 +1236,11 @@ message: String
 
 type: :not\_found\_error
 
-Accepts one of the following:
-
-:not\_found\_error
-
 class RateLimitError { message, type }
 
 message: String
 
 type: :rate\_limit\_error
-
-Accepts one of the following:
-
-:rate\_limit\_error
 
 class GatewayTimeoutError { message, type }
 
@@ -1556,19 +1248,11 @@ message: String
 
 type: :timeout\_error
 
-Accepts one of the following:
-
-:timeout\_error
-
 class APIErrorObject { message, type }
 
 message: String
 
 type: :api\_error
-
-Accepts one of the following:
-
-:api\_error
 
 class OverloadedError { message, type }
 
@@ -1576,39 +1260,19 @@ message: String
 
 type: :overloaded\_error
 
-Accepts one of the following:
-
-:overloaded\_error
-
 request\_id: String
 
 type: :error
 
-Accepts one of the following:
-
-:error
-
 type: :errored
-
-Accepts one of the following:
-
-:errored
 
 class MessageBatchCanceledResult { type }
 
 type: :canceled
 
-Accepts one of the following:
-
-:canceled
-
 class MessageBatchExpiredResult { type }
 
 type: :expired
-
-Accepts one of the following:
-
-:expired
 
 class MessageBatchSucceededResult { message, type }
 
@@ -1677,10 +1341,6 @@ start\_char\_index: Integer
 
 type: :char\_location
 
-Accepts one of the following:
-
-:char\_location
-
 class CitationPageLocation { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: String
@@ -1696,10 +1356,6 @@ file\_id: String
 start\_page\_number: Integer
 
 type: :page\_location
-
-Accepts one of the following:
-
-:page\_location
 
 class CitationContentBlockLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1717,10 +1373,6 @@ start\_block\_index: Integer
 
 type: :content\_block\_location
 
-Accepts one of the following:
-
-:content\_block\_location
-
 class CitationsWebSearchResultLocation { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: String
@@ -1730,10 +1382,6 @@ encrypted\_index: String
 title: String
 
 type: :web\_search\_result\_location
-
-Accepts one of the following:
-
-:web\_search\_result\_location
 
 url: String
 
@@ -1753,17 +1401,9 @@ title: String
 
 type: :search\_result\_location
 
-Accepts one of the following:
-
-:search\_result\_location
-
 text: String
 
 type: :text
-
-Accepts one of the following:
-
-:text
 
 class ThinkingBlock { signature, thinking, type }
 
@@ -1773,19 +1413,11 @@ thinking: String
 
 type: :thinking
 
-Accepts one of the following:
-
-:thinking
-
 class RedactedThinkingBlock { data, type }
 
 data: String
 
 type: :redacted\_thinking
-
-Accepts one of the following:
-
-:redacted\_thinking
 
 class ToolUseBlock { id, input, name, type }
 
@@ -1797,10 +1429,6 @@ name: String
 
 type: :tool\_use
 
-Accepts one of the following:
-
-:tool\_use
-
 class ServerToolUseBlock { id, input, name, type }
 
 id: String
@@ -1809,15 +1437,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search
 
-Accepts one of the following:
-
-:web\_search
-
 type: :server\_tool\_use
-
-Accepts one of the following:
-
-:server\_tool\_use
 
 class WebSearchToolResultBlock { content, tool\_use\_id, type }
 
@@ -1845,10 +1465,6 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Accepts one of the following:
-
-:web\_search\_tool\_result\_error
-
 Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
@@ -1859,19 +1475,11 @@ title: String
 
 type: :web\_search\_result
 
-Accepts one of the following:
-
-:web\_search\_result
-
 url: String
 
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
-
-Accepts one of the following:
-
-:web\_search\_tool\_result
 
 model: [Model](api/messages.md)
 
@@ -1981,10 +1589,6 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-Accepts one of the following:
-
-:assistant
-
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -2026,10 +1630,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-:message
-
 usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
@@ -2050,25 +1650,17 @@ ephemeral\_1h\_input\_tokens: Integer
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 ephemeral\_5m\_input\_tokens: Integer
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 cache\_creation\_input\_tokens: Integer
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 cache\_read\_input\_tokens: Integer
 
 The number of input tokens read from the cache.
-
-minimum0
 
 inference\_geo: String
 
@@ -2078,13 +1670,9 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-minimum0
-
 output\_tokens: Integer
 
 The number of output tokens which were used.
-
-minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
 
@@ -2093,8 +1681,6 @@ The number of server tool requests.
 web\_search\_requests: Integer
 
 The number of web search tool requests.
-
-minimum0
 
 service\_tier: :standard | :priority | :batch
 
@@ -2109,10 +1695,6 @@ Accepts one of the following:
 :batch
 
 type: :succeeded
-
-Accepts one of the following:
-
-:succeeded
 
 ---
 

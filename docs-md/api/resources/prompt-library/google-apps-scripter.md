@@ -28,7 +28,7 @@ function translateSlidesToKorean() {
         var shape = pageElement.asShape();
         if (shape.getText() !== null) {
           var text = shape.getText().asString();
-          var translatedText = LanguageApp.translate(text, '', 'ko');
+          var translatedText = LanguageApp.translate(text, "", "ko");
           shape.getText().setText(translatedText);
         }
       } else if (pageElement.getPageElementType() === SlidesApp.PageElementType.TABLE) {
@@ -40,7 +40,7 @@ function translateSlidesToKorean() {
           for (var col = 0; col < numColumns; col++) {
             var tableCell = table.getCell(row, col);
             var text = tableCell.getText().asString();
-            var translatedText = LanguageApp.translate(text, '', 'ko');
+            var translatedText = LanguageApp.translate(text, "", "ko");
             tableCell.getText().setText(translatedText);
           }
         }
@@ -105,24 +105,24 @@ Vertex AI TypeScript
 import anthropic
 
 client = anthropic.Anthropic(
-  # defaults to os.environ.get("ANTHROPIC_API_KEY")
-  api_key="my_api_key",
+    # defaults to os.environ.get("ANTHROPIC_API_KEY")
+    api_key="my_api_key",
 )
 message = client.messages.create(
-  model="claude-opus-4-6",
-  max_tokens=2000,
-  temperature=0,
-  messages=[
-    {
-      "role": "user",
-      "content": [
+    model="claude-opus-4-6",
+    max_tokens=2000,
+    temperature=0,
+    messages=[
         {
-          "type": "text",
-          "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Write me a Google apps script that will translate all text in a Google Slides presentation to Korean.",
+                }
+            ],
         }
-      ]
-    }
-  ]
+    ],
 )
 print(message.content)
 ```

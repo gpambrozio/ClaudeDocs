@@ -30,14 +30,14 @@ from openai import OpenAI
 
 client = OpenAI(
     api_key="ANTHROPIC_API_KEY",  # Your Claude API key
-    base_url="https://api.anthropic.com/v1/"  # the Claude API endpoint
+    base_url="https://api.anthropic.com/v1/",  # the Claude API endpoint
 )
 
 response = client.chat.completions.create(
-    model="claude-opus-4-6", # Anthropic model name
+    model="claude-opus-4-6",  # Anthropic model name
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who are you?"}
+        {"role": "user", "content": "Who are you?"},
     ],
 )
 
@@ -75,9 +75,7 @@ Python
 response = client.chat.completions.create(
     model="claude-sonnet-4-5",
     messages=...,
-    extra_body={
-        "thinking": { "type": "enabled", "budget_tokens": 2000 }
-    }
+    extra_body={"thinking": {"type": "enabled", "budget_tokens": 2000}},
 )
 ```
 

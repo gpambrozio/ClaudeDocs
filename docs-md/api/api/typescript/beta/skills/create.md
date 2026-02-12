@@ -8,7 +8,7 @@ TypeScript
 
 client.beta.skills.create(SkillCreateParams { display\_title, files, betas } params?, RequestOptionsoptions?): [SkillCreateResponse](api/beta.md) { id, created\_at, display\_title, 4 more }
 
-post/v1/skills
+POST/v1/skills
 
 Create Skill
 
@@ -139,35 +139,7 @@ const skill = await client.beta.skills.create();
 console.log(skill.id);
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
 
 ---
 

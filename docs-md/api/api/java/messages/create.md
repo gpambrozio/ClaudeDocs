@@ -8,7 +8,7 @@ Java
 
 [Message](api/messages.md) messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
-post/v1/messages
+POST/v1/messages
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -97,19 +97,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -146,10 +138,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -163,10 +151,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -182,10 +166,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -195,10 +175,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -217,10 +193,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -246,35 +218,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -305,15 +261,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class PlainTextSource:
 
@@ -321,15 +269,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ContentBlockSource:
 
@@ -349,19 +289,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -398,10 +330,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -415,10 +343,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -434,10 +358,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -447,10 +367,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -469,10 +385,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -498,35 +410,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -547,35 +443,19 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class UrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -610,19 +490,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -659,10 +531,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -676,10 +544,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -695,10 +559,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -708,10 +568,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -731,29 +587,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -784,19 +628,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlockParam:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlockParam:
 
@@ -808,19 +644,11 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -845,19 +673,11 @@ String toolUseId
 
 JsonValue; type "tool\_result"constant"tool\_result"constant
 
-Accepts one of the following:
-
-TOOL\_RESULT("tool\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -892,19 +712,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -941,10 +753,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -958,10 +766,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -977,10 +781,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -990,10 +790,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1012,10 +808,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -1041,35 +833,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1096,19 +872,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1145,10 +913,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1162,10 +926,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1181,10 +941,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1194,10 +950,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1217,29 +969,17 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String source
 
 String title
 
 JsonValue; type "search\_result"constant"search\_result"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT("search\_result")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1274,15 +1014,7 @@ String data
 
 JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
-Accepts one of the following:
-
-APPLICATION\_PDF("application/pdf")
-
 JsonValue; type "base64"constant"base64"constant
-
-Accepts one of the following:
-
-BASE64("base64")
 
 class PlainTextSource:
 
@@ -1290,15 +1022,7 @@ String data
 
 JsonValue; mediaType "text/plain"constant"text/plain"constant
 
-Accepts one of the following:
-
-TEXT\_PLAIN("text/plain")
-
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ContentBlockSource:
 
@@ -1318,19 +1042,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1367,10 +1083,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1384,10 +1096,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1403,10 +1111,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1416,10 +1120,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1438,10 +1138,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 class ImageBlockParam:
 
@@ -1467,35 +1163,19 @@ IMAGE\_WEBP("image/webp")
 
 JsonValue; type "base64"constant"base64"constant
 
-Accepts one of the following:
-
-BASE64("base64")
-
 class UrlImageSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "image"constant"image"constant
-
-Accepts one of the following:
-
-IMAGE("image")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1516,35 +1196,19 @@ TTL\_1H("1h")
 
 JsonValue; type "content"constant"content"constant
 
-Accepts one of the following:
-
-CONTENT("content")
-
 class UrlPdfSource:
 
 JsonValue; type "url"constant"url"constant
 
-Accepts one of the following:
-
-URL("url")
-
 String url
 
 JsonValue; type "document"constant"document"constant
-
-Accepts one of the following:
-
-DOCUMENT("document")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1581,25 +1245,13 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1632,10 +1284,6 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 Optional<String> pageAge
@@ -1660,27 +1308,15 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1757,19 +1393,11 @@ String text
 
 JsonValue; type "text"constant"text"constant
 
-Accepts one of the following:
-
-TEXT("text")
-
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -1806,10 +1434,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocationParam:
 
 String citedText
@@ -1823,10 +1447,6 @@ long endPageNumber
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocationParam:
 
@@ -1842,10 +1462,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationWebSearchResultLocationParam:
 
 String citedText
@@ -1855,10 +1471,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -1877,10 +1489,6 @@ long startBlockIndex
 Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
 
 Optional<Double> temperature
 
@@ -1980,10 +1588,6 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 JsonValue; type "object"constant"object"constant
 
-Accepts one of the following:
-
-OBJECT("object")
-
 Optional<Properties> properties
 
 Optional<List<String>> required
@@ -2003,10 +1607,6 @@ Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2041,10 +1641,6 @@ When true, guarantees schema validation on tool names and inputs
 
 Optional<Type> type
 
-Accepts one of the following:
-
-CUSTOM("custom")
-
 class ToolBash20250124:
 
 JsonValue; name "bash"constant"bash"constant
@@ -2053,25 +1649,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-BASH("bash")
-
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
-
-Accepts one of the following:
-
-BASH\_20250124("bash\_20250124")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2102,25 +1686,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_EDITOR("str\_replace\_editor")
-
 JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250124("text\_editor\_20250124")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2151,25 +1723,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250429("text\_editor\_20250429")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2200,25 +1760,13 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-STR\_REPLACE\_BASED\_EDIT\_TOOL("str\_replace\_based\_edit\_tool")
-
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
-
-Accepts one of the following:
-
-TEXT\_EDITOR\_20250728("text\_editor\_20250728")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2241,8 +1789,6 @@ Optional<Long> maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-minimum1
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -2255,15 +1801,7 @@ Name of the tool.
 
 This is how the tool will be called by the model and in `tool_use` blocks.
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_20250305("web\_search\_20250305")
 
 Optional<List<String>> allowedDomains
 
@@ -2278,10 +1816,6 @@ Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 Create a cache control breakpoint at this content block.
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
-
-Accepts one of the following:
-
-EPHEMERAL("ephemeral")
 
 Optional<Ttl> ttl
 
@@ -2304,8 +1838,6 @@ Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
 
-exclusiveMinimum0
-
 Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
@@ -2316,41 +1848,21 @@ Parameters for the user's location. Used to provide more relevant search results
 
 JsonValue; type "approximate"constant"approximate"constant
 
-Accepts one of the following:
-
-APPROXIMATE("approximate")
-
 Optional<String> city
 
 The city of the user.
-
-maxLength255
-
-minLength1
 
 Optional<String> country
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-maxLength2
-
-minLength2
-
 Optional<String> region
 
 The region of the user.
 
-maxLength255
-
-minLength1
-
 Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-
-maxLength255
-
-minLength1
 
 Optional<Long> topK
 
@@ -2441,10 +1953,6 @@ long startCharIndex
 
 JsonValue; type "char\_location"constant"char\_location"constant
 
-Accepts one of the following:
-
-CHAR\_LOCATION("char\_location")
-
 class CitationPageLocation:
 
 String citedText
@@ -2460,10 +1968,6 @@ Optional<String> fileId
 long startPageNumber
 
 JsonValue; type "page\_location"constant"page\_location"constant
-
-Accepts one of the following:
-
-PAGE\_LOCATION("page\_location")
 
 class CitationContentBlockLocation:
 
@@ -2481,10 +1985,6 @@ long startBlockIndex
 
 JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
 
-Accepts one of the following:
-
-CONTENT\_BLOCK\_LOCATION("content\_block\_location")
-
 class CitationsWebSearchResultLocation:
 
 String citedText
@@ -2494,10 +1994,6 @@ String encryptedIndex
 Optional<String> title
 
 JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT\_LOCATION("web\_search\_result\_location")
 
 String url
 
@@ -2517,17 +2013,9 @@ Optional<String> title
 
 JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
 
-Accepts one of the following:
-
-SEARCH\_RESULT\_LOCATION("search\_result\_location")
-
 String text
 
 JsonValue; type "text"constant"text"constant
-
-Accepts one of the following:
-
-TEXT("text")
 
 class ThinkingBlock:
 
@@ -2537,19 +2025,11 @@ String thinking
 
 JsonValue; type "thinking"constant"thinking"constant
 
-Accepts one of the following:
-
-THINKING("thinking")
-
 class RedactedThinkingBlock:
 
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-Accepts one of the following:
-
-REDACTED\_THINKING("redacted\_thinking")
 
 class ToolUseBlock:
 
@@ -2561,10 +2041,6 @@ String name
 
 JsonValue; type "tool\_use"constant"tool\_use"constant
 
-Accepts one of the following:
-
-TOOL\_USE("tool\_use")
-
 class ServerToolUseBlock:
 
 String id
@@ -2573,15 +2049,7 @@ Input input
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH("web\_search")
-
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-Accepts one of the following:
-
-SERVER\_TOOL\_USE("server\_tool\_use")
 
 class WebSearchToolResultBlock:
 
@@ -2609,10 +2077,6 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT\_ERROR("web\_search\_tool\_result\_error")
-
 List<[WebSearchResultBlock](api/messages.md)>
 
 String encryptedContent
@@ -2623,19 +2087,11 @@ String title
 
 JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
 
-Accepts one of the following:
-
-WEB\_SEARCH\_RESULT("web\_search\_result")
-
 String url
 
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-Accepts one of the following:
-
-WEB\_SEARCH\_TOOL\_RESULT("web\_search\_tool\_result")
 
 Model model
 
@@ -2735,9 +2191,417 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[StopReason](api/messages.md)> stopReason
+
+The reason that we stopped.
+
+This may be one the following values:
+
+- `"end_turn"`: the model reached a natural stopping point
+- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+- `"tool_use"`: the model invoked one or more tools
+- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+
+In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
 Accepts one of the following:
 
-ASSISTANT("assistant")
+END\_TURN("end\_turn")
+
+MAX\_TOKENS("max\_tokens")
+
+STOP\_SEQUENCE("stop\_sequence")
+
+TOOL\_USE("tool\_use")
+
+PAUSE\_TURN("pause\_turn")
+
+REFUSAL("refusal")
+
+Optional<String> stopSequence
+
+Which custom stop sequence was generated, if any.
+
+This value will be a non-null string if one of your custom stop sequences was generated.
+
+JsonValue; type "message"constant"message"constant
+
+Object type.
+
+For Messages, this is always `"message"`.
+
+[Usage](api/messages.md) usage
+
+Billing and rate-limit usage.
+
+Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+Optional<[CacheCreation](api/messages.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+Optional<Long> cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+Optional<Long> cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+Optional<String> inferenceGeo
+
+The geographic region where inference was performed for this request.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+long outputTokens
+
+The number of output tokens which were used.
+
+Optional<[ServerToolUsage](api/messages.md)> serverToolUse
+
+The number of server tool requests.
+
+long webSearchRequests
+
+The number of web search tool requests.
+
+Optional<ServiceTier> serviceTier
+
+If the request used the priority, standard, or batch tier.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+PRIORITY("priority")
+
+BATCH("batch")
+
+class RawMessageStreamEvent: A class that can be one of several variants.union
+
+class RawMessageStartEvent:
+
+[Message](api/messages.md) message
+
+String id
+
+Unique object identifier.
+
+The format and length of IDs may change over time.
+
+List<[ContentBlock](api/messages.md)> content
+
+Content generated by the model.
+
+This is an array of content blocks, each of which has a `type` that determines its shape.
+
+Example:
+
+```shiki
+[{"type": "text", "text": "Hi, I'm Claude."}]
+```
+
+If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+For example, if the input `messages` were:
+
+```shiki
+[
+  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+  {"role": "assistant", "content": "The best answer is ("}
+]
+```
+
+Then the response `content` might be:
+
+```shiki
+[{"type": "text", "text": "B)"}]
+```
+
+Accepts one of the following:
+
+class TextBlock:
+
+Optional<List<[TextCitation](api/messages.md)>> citations
+
+Citations supporting the text block.
+
+The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+Accepts one of the following:
+
+class CitationCharLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+Optional<String> fileId
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+Optional<String> fileId
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Optional<String> fileId
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationsWebSearchResultLocation:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationsSearchResultLocation:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+class ThinkingBlock:
+
+String signature
+
+String thinking
+
+JsonValue; type "thinking"constant"thinking"constant
+
+class RedactedThinkingBlock:
+
+String data
+
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+
+class ToolUseBlock:
+
+String id
+
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+class ServerToolUseBlock:
+
+String id
+
+Input input
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+class WebSearchToolResultBlock:
+
+[WebSearchToolResultBlockContent](api/messages.md) content
+
+Accepts one of the following:
+
+class WebSearchToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+
+List<[WebSearchResultBlock](api/messages.md)>
+
+String encryptedContent
+
+Optional<String> pageAge
+
+String title
+
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+
+String url
+
+String toolUseId
+
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_3\_7\_SONNET\_LATEST("claude-3-7-sonnet-latest")
+
+High-performance model with early extended thinking
+
+CLAUDE\_3\_7\_SONNET\_20250219("claude-3-7-sonnet-20250219")
+
+High-performance model with early extended thinking
+
+CLAUDE\_3\_5\_HAIKU\_LATEST("claude-3-5-haiku-latest")
+
+Fastest and most compact model for near-instant responsiveness
+
+CLAUDE\_3\_5\_HAIKU\_20241022("claude-3-5-haiku-20241022")
+
+Our fastest model
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Hybrid model, capable of near-instant responses and extended thinking
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Hybrid model, capable of near-instant responses and extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_4\_SONNET\_20250514("claude-4-sonnet-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+Our best model for real-world agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+Our best model for real-world agents and coding
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Our most capable model
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Our most capable model
+
+CLAUDE\_4\_OPUS\_20250514("claude-4-opus-20250514")
+
+Our most capable model
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Our most capable model
+
+CLAUDE\_3\_OPUS\_LATEST("claude-3-opus-latest")
+
+Excels at writing and complex tasks
+
+CLAUDE\_3\_OPUS\_20240229("claude-3-opus-20240229")
+
+Excels at writing and complex tasks
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Our previous most fast and cost-effective
+
+JsonValue; role "assistant"constant"assistant"constant
+
+Conversational role of the generated message.
+
+This will always be `"assistant"`.
 
 Optional<[StopReason](api/messages.md)> stopReason
 
@@ -2780,10 +2644,6 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-Accepts one of the following:
-
-MESSAGE("message")
-
 [Usage](api/messages.md) usage
 
 Billing and rate-limit usage.
@@ -2804,25 +2664,17 @@ long ephemeral1hInputTokens
 
 The number of input tokens used to create the 1 hour cache entry.
 
-minimum0
-
 long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
-
-minimum0
 
 Optional<Long> cacheCreationInputTokens
 
 The number of input tokens used to create the cache entry.
 
-minimum0
-
 Optional<Long> cacheReadInputTokens
 
 The number of input tokens read from the cache.
-
-minimum0
 
 Optional<String> inferenceGeo
 
@@ -2832,13 +2684,9 @@ long inputTokens
 
 The number of input tokens which were used.
 
-minimum0
-
 long outputTokens
 
 The number of output tokens which were used.
-
-minimum0
 
 Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
@@ -2847,8 +2695,6 @@ The number of server tool requests.
 long webSearchRequests
 
 The number of web search tool requests.
-
-minimum0
 
 Optional<ServiceTier> serviceTier
 
@@ -2861,6 +2707,372 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+JsonValue; type "message\_start"constant"message\_start"constant
+
+class RawMessageDeltaEvent:
+
+Delta delta
+
+Optional<[StopReason](api/messages.md)> stopReason
+
+Accepts one of the following:
+
+END\_TURN("end\_turn")
+
+MAX\_TOKENS("max\_tokens")
+
+STOP\_SEQUENCE("stop\_sequence")
+
+TOOL\_USE("tool\_use")
+
+PAUSE\_TURN("pause\_turn")
+
+REFUSAL("refusal")
+
+Optional<String> stopSequence
+
+JsonValue; type "message\_delta"constant"message\_delta"constant
+
+[MessageDeltaUsage](api/messages.md) usage
+
+Billing and rate-limit usage.
+
+Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+Optional<Long> cacheCreationInputTokens
+
+The cumulative number of input tokens used to create the cache entry.
+
+Optional<Long> cacheReadInputTokens
+
+The cumulative number of input tokens read from the cache.
+
+Optional<Long> inputTokens
+
+The cumulative number of input tokens which were used.
+
+long outputTokens
+
+The cumulative number of output tokens which were used.
+
+Optional<[ServerToolUsage](api/messages.md)> serverToolUse
+
+The number of server tool requests.
+
+long webSearchRequests
+
+The number of web search tool requests.
+
+class RawMessageStopEvent:
+
+JsonValue; type "message\_stop"constant"message\_stop"constant
+
+class RawContentBlockStartEvent:
+
+ContentBlock contentBlock
+
+Accepts one of the following:
+
+class TextBlock:
+
+Optional<List<[TextCitation](api/messages.md)>> citations
+
+Citations supporting the text block.
+
+The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+Accepts one of the following:
+
+class CitationCharLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+Optional<String> fileId
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+Optional<String> fileId
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Optional<String> fileId
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationsWebSearchResultLocation:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationsSearchResultLocation:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+class ThinkingBlock:
+
+String signature
+
+String thinking
+
+JsonValue; type "thinking"constant"thinking"constant
+
+class RedactedThinkingBlock:
+
+String data
+
+JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+
+class ToolUseBlock:
+
+String id
+
+Input input
+
+String name
+
+JsonValue; type "tool\_use"constant"tool\_use"constant
+
+class ServerToolUseBlock:
+
+String id
+
+Input input
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+
+class WebSearchToolResultBlock:
+
+[WebSearchToolResultBlockContent](api/messages.md) content
+
+Accepts one of the following:
+
+class WebSearchToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
+
+JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+
+List<[WebSearchResultBlock](api/messages.md)>
+
+String encryptedContent
+
+Optional<String> pageAge
+
+String title
+
+JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+
+String url
+
+String toolUseId
+
+JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+long index
+
+JsonValue; type "content\_block\_start"constant"content\_block\_start"constant
+
+class RawContentBlockDeltaEvent:
+
+[RawContentBlockDelta](api/messages.md) delta
+
+Accepts one of the following:
+
+class TextDelta:
+
+String text
+
+JsonValue; type "text\_delta"constant"text\_delta"constant
+
+class InputJsonDelta:
+
+String partialJson
+
+JsonValue; type "input\_json\_delta"constant"input\_json\_delta"constant
+
+class CitationsDelta:
+
+Citation citation
+
+Accepts one of the following:
+
+class CitationCharLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+Optional<String> fileId
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+Optional<String> fileId
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocation:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Optional<String> fileId
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationsWebSearchResultLocation:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationsSearchResultLocation:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+JsonValue; type "citations\_delta"constant"citations\_delta"constant
+
+class ThinkingDelta:
+
+String thinking
+
+JsonValue; type "thinking\_delta"constant"thinking\_delta"constant
+
+class SignatureDelta:
+
+String signature
+
+JsonValue; type "signature\_delta"constant"signature\_delta"constant
+
+long index
+
+JsonValue; type "content\_block\_delta"constant"content\_block\_delta"constant
+
+class RawContentBlockStopEvent:
+
+long index
+
+JsonValue; type "content\_block\_stop"constant"content\_block\_stop"constant
 
 Create a Message
 
@@ -2891,97 +3103,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "content": [
-    {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "output_tokens": 503,
-    "server_tool_use": {
-      "web_search_requests": 0
-    },
-    "service_tier": "standard"
-  }
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "content": [
-    {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "output_tokens": 503,
-    "server_tool_use": {
-      "web_search_requests": 0
-    },
-    "service_tier": "standard"
-  }
-}
-```
 
 ---
 

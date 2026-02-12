@@ -85,7 +85,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Load a plugin with a custom /greet command
 for await (const message of query({
-  prompt: "/my-plugin:greet",  // Use plugin command with namespace
+  prompt: "/my-plugin:greet", // Use plugin command with namespace
   options: {
     plugins: [{ type: "local", path: "./my-plugin" }]
   }
@@ -171,7 +171,7 @@ Load plugins during development without installing them globally:
 ```shiki
 plugins: [
   { type: "local", path: "./dev-plugins/my-plugin" }
-]
+];
 ```
 
 ### Project-specific extensions
@@ -181,7 +181,7 @@ Include plugins in your project repository for team-wide consistency:
 ```shiki
 plugins: [
   { type: "local", path: "./project-plugins/team-workflows" }
-]
+];
 ```
 
 ### Multiple plugin sources
@@ -192,7 +192,7 @@ Combine plugins from different locations:
 plugins: [
   { type: "local", path: "./local-plugin" },
   { type: "local", path: "~/.claude/custom-plugins/shared-plugin" }
-]
+];
 ```
 
 ## Troubleshooting

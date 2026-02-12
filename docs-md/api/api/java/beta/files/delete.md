@@ -8,7 +8,7 @@ Java
 
 [DeletedFile](api/beta.md) beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -78,10 +78,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-FILE\_DELETED("file\_deleted")
-
 Delete File
 
 Java
@@ -105,25 +101,7 @@ public final class Main {
 }
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "id",
-  "type": "file_deleted"
-}
-```
 
 ---
 

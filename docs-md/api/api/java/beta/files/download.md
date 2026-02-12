@@ -8,7 +8,7 @@ Java
 
 HttpResponse beta().files().download(FileDownloadParamsparams = FileDownloadParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 

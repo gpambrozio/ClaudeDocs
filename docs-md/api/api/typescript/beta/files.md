@@ -10,31 +10,31 @@ TypeScript
 
 client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
 
-post/v1/files
+POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
 client.beta.files.list(FileListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 4 more } >
 
-get/v1/files
+GET/v1/files
 
 ##### [Download File](api/beta/files/download.md)
 
 client.beta.files.download(stringfileID, FileDownloadParams { betas } params?, RequestOptionsoptions?): Response
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
 client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
 
-get/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 ##### [Delete File](api/beta/files/delete.md)
 
 client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, RequestOptionsoptions?): [DeletedFile](api/beta.md) { id, type }
 
-delete/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
@@ -50,10 +50,6 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-Accepts one of the following:
-
-"file\_deleted"
-
 FileMetadata { id, created\_at, filename, 4 more }
 
 id: string
@@ -66,39 +62,23 @@ created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
-formatdate-time
-
 filename: string
 
 Original filename of the uploaded file.
-
-maxLength500
-
-minLength1
 
 mime\_type: string
 
 MIME type of the file.
 
-maxLength255
-
-minLength1
-
 size\_bytes: number
 
 Size of the file in bytes.
-
-minimum0
 
 type: "file"
 
 Object type.
 
 For files, this is always `"file"`.
-
-Accepts one of the following:
-
-"file"
 
 downloadable?: boolean
 

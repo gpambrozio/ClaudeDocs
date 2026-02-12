@@ -52,11 +52,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "import random\n\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n-1):\n        for j in range(n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nnumbers = [random.randint(1, 100) for _ in range(10)]\nprint(\"Unsorted array:\", numbers)\nsorted_numbers = bubble_sort(numbers)\nprint(\"Sorted array:\", sorted_numbers)"
+                    "text": 'import random\n\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n-1):\n        for j in range(n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nnumbers = [random.randint(1, 100) for _ in range(10)]\nprint("Unsorted array:", numbers)\nsorted_numbers = bubble_sort(numbers)\nprint("Sorted array:", sorted_numbers)',
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```

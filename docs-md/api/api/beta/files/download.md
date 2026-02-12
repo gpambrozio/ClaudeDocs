@@ -6,7 +6,7 @@ cURL
 
 # Download File
 
-get/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 

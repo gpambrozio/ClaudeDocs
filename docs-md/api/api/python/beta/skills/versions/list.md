@@ -8,7 +8,7 @@ Python
 
 beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta.md)]
 
-get/v1/skills/{skill\_id}/versions
+GET/v1/skills/{skill\_id}/versions
 
 List Skill Versions
 
@@ -36,9 +36,9 @@ Optional header to specify the beta version(s) you want to use.
 
 Accepts one of the following:
 
-UnionMember0 = str
+str
 
-UnionMember1 = Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
 
 Accepts one of the following:
 
@@ -148,49 +148,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
 
 ---
 

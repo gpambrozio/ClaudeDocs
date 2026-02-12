@@ -40,11 +40,11 @@ message = client.messages.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "My next trip involves flying from Seattle to Amsterdam. I'll be spending a few days in Amsterdam before heading to Paris for a connecting flight to Rome."
+                    "text": "My next trip involves flying from Seattle to Amsterdam. I'll be spending a few days in Amsterdam before heading to Paris for a connecting flight to Rome.",
                 }
-            ]
+            ],
         }
-    ]
+    ],
 )
 print(message.content)
 ```
