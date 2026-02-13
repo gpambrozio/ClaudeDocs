@@ -102,7 +102,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#34475558514774555a405c465b445d571a575b59).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#54273538312714353a203c263b243d377a373b39).
 
 ### Streaming thinking
 
@@ -284,7 +284,7 @@ Here are some important considerations for interleaved thinking:
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
 - For Claude 4 models, interleaved thinking requires the beta header `interleaved-thinking-2025-05-14`.
 - Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect.
-- On 3rd-party platforms (e.g., [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
+- On 3rd-party platforms (for example, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
 
 ### Tool use without interleaved thinking
 

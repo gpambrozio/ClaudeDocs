@@ -15,16 +15,16 @@ Copy page
 >
 > Step 1: Analyzing the first loop
 >
-> ```inline-block
+> ```shiki
 > for i in range(n):
->    print(i)
+>     print(i)
 > ```
 
 > This loop iterates `n` times and performs a constant-time operation (`print(i)`) in each iteration. Therefore, the time complexity of this step is O(n).
 >
 > Step 2: Analyzing the nested loops
 >
-> ```inline-block
+> ```shiki
 > for j in range(n):
 >     for k in range(n):
 >         print(j, k)

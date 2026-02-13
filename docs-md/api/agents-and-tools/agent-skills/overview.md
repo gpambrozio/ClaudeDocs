@@ -157,7 +157,7 @@ The Claude API supports both pre-built Agent Skills and custom Skills. Both work
 - `skills-2025-10-02` - Enables Skills functionality
 - `files-api-2025-04-14` - Required for uploading/downloading files to/from the container
 
-Use pre-built Agent Skills by referencing their `skill_id` (e.g., `pptx`, `xlsx`), or create and upload your own via the Skills API (`/v1/skills` endpoints). Custom Skills are shared organization-wide.
+Use pre-built Agent Skills by referencing their `skill_id` (for example, `pptx`, `xlsx`), or create and upload your own via the Skills API (`/v1/skills` endpoints). Custom Skills are shared organization-wide.
 
 To learn more, see [Use Skills with the Claude API](build-with-claude/skills-guide.md).
 

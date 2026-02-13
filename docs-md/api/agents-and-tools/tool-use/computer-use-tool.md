@@ -108,7 +108,7 @@ The example above shows all three tools being used together, which requires the 
    Provide Claude with the computer use tool and a user prompt
 
    - Add the computer use tool (and optionally other tools) to your API request.
-   - Include a user prompt that requires desktop interaction, e.g., "Save a picture of a cat to my desktop."
+   - Include a user prompt that requires desktop interaction, for example, "Save a picture of a cat to my desktop."
 2. 2
 
    Claude decides to use the computer use tool
@@ -131,7 +131,7 @@ The example above shows all three tools being used together, which requires the 
    - If Claude decides it needs another tool, it responds with another `tool_use` `stop_reason` and you should return to step 3.
    - Otherwise, it crafts a text response to the user.
 
-We refer to the repetition of steps 3 and 4 without user input as the "agent loop" - i.e., Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request.
+We refer to the repetition of steps 3 and 4 without user input as the "agent loop" (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
 
 ### The computing environment
 
@@ -288,7 +288,7 @@ The computer use tool supports these actions:
 - **screenshot** - Capture the current display
 - **left\_click** - Click at coordinates `[x, y]`
 - **type** - Type text string
-- **key** - Press key or key combination (e.g., "ctrl+s")
+- **key** - Press key or key combination (for example, "ctrl+s")
 - **mouse\_move** - Move cursor to coordinates
 
 **Enhanced actions (`computer_20250124`)**
@@ -569,7 +569,7 @@ def execute_click(x, y):
 
 The computer use functionality is in beta. While Claude's capabilities are cutting edge, developers should be aware of its limitations:
 
-1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. We recommend focusing on use cases where speed isn't critical (e.g., background information gathering, automated software testing) in trusted environments.
+1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. We recommend focusing on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
 2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude Sonnet 3.7 introduces the thinking capability that can help you understand the model's reasoning and identify potential issues.
 3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. We recommend that users prompt the model carefully when requesting complex tasks.
 4. **Scrolling reliability**: Claude Sonnet 3.7 introduced dedicated scroll actions with direction control that improves reliability. The model can now explicitly scroll in any direction (up/down/left/right) by a specified amount.

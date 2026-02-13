@@ -188,6 +188,12 @@ Access Jira & Confluence from ClaudeCommand
 
 `claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp`
 
+[**Attio**](https://docs.attio.com/mcp/overview)
+
+Search, manage, and update your Attio CRM from ClaudeCommand
+
+`claude mcp add --transport http attio https://mcp.attio.com/mcp`
+
 [**Aura**](https://docs.getaura.ai/)
 
 Company intelligence & workforce analyticsCommand

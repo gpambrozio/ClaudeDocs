@@ -20,7 +20,7 @@ WHERE r.review_id IS NULL
 GROUP BY c.customer_id, c.first_name, c.last_name;
 ```
 
-## API Request
+## API request
 
 ---
 

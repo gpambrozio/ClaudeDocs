@@ -8,7 +8,7 @@ We recommend using the latest Claude Opus (4.6) model for complex tools and ambi
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
-If using Claude with tool use and extended thinking, refer to our guide [here](build-with-claude/extended-thinking.md) for more information.
+If using Claude with tool use and extended thinking, refer to the [extended thinking guide](build-with-claude/extended-thinking.md) for more information.
 
 ## Specifying client tools
 
@@ -578,7 +578,7 @@ When you receive a tool use response for a client tool, you should:
 2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
    - `tool_use_id`: The `id` of the tool use request this is a result for.
-   - `content`: The result of the tool, as a string (e.g. `"content": "15 degrees"`), a list of nested content blocks (e.g. `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (e.g. `"content": ["type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}]`). These content blocks can use the `text`, `image`, or `document` types.
+   - `content`: The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": ["type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}]`). These content blocks can use the `text`, `image`, or `document` types.
    - `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
 **Important formatting requirements**:

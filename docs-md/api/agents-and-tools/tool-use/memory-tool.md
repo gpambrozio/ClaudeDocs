@@ -174,7 +174,7 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 ```
 
 - Lists files up to 2 levels deep
-- Shows human-readable sizes (e.g., `5.5K`, `1.2M`)
+- Shows human-readable sizes (for example, `5.5K`, `1.2M`)
 - Excludes hidden items (files starting with `.`) and `node_modules`
 - Uses tab character between size and path
 
@@ -344,7 +344,7 @@ If you observe Claude creating cluttered memory files, you can include this inst
 
 > Note: when editing your memory folder, always try to keep its content up-to-date, coherent and organized. You can rename or delete files that are no longer relevant. Do not create new files unless necessary.
 
-You can also guide what Claude writes to memory, e.g., "Only write down information relevant to <topic> in your memory system."
+You can also guide what Claude writes to memory. For example: "Only write down information relevant to <topic> in your memory system."
 
 ## Security considerations
 
@@ -372,7 +372,7 @@ Consider these safeguards:
 - Resolve paths to their canonical form and verify they remain within the memory directory
 - Reject paths containing sequences like `../`, `..\\`, or other traversal patterns
 - Watch for URL-encoded traversal sequences (`%2e%2e%2f`)
-- Use your language's built-in path security utilities (e.g., Python's `pathlib.Path.resolve()` and `relative_to()`)
+- Use your language's built-in path security utilities (for example, Python's `pathlib.Path.resolve()` and `relative_to()`)
 
 ## Error handling
 
@@ -399,7 +399,7 @@ Consider a code refactoring project with many file operations:
 
 1. Claude makes numerous edits to files, generating many tool results
 2. As the context grows and approaches your threshold, Claude receives a warning
-3. Claude summarizes the changes made so far to a memory file (e.g., `/memories/refactoring_progress.xml`)
+3. Claude summarizes the changes made so far to a memory file (for example, `/memories/refactoring_progress.xml`)
 4. Context editing clears the older tool results automatically
 5. Claude continues working, referencing the memory file when it needs to recall what changes were already completed
 6. The workflow can continue indefinitely, with Claude managing both active context and persistent memory

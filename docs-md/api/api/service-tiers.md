@@ -2,7 +2,7 @@
 
 Copy page
 
-We offer three service tiers:
+Anthropic offers three service tiers:
 
 - **Priority Tier:** Best for workflows deployed in production where time, availability, and predictable pricing are important
 - **Standard:** Default tier for both piloting and scaling everyday use cases
@@ -10,11 +10,11 @@ We offer three service tiers:
 
 ## Standard Tier
 
-The standard tier is the default service tier for all API requests. Requests in this tier are prioritized alongside all other requests and observe best-effort availability.
+The standard tier is the default service tier for all API requests. The API prioritizes these requests alongside all other requests with best-effort availability.
 
 ## Priority Tier
 
-Requests in this tier are prioritized over all other requests to Anthropic. This prioritization helps minimize ["server overloaded" errors](api/errors.md), even during peak times.
+The API prioritizes requests in this tier over all other requests. This prioritization helps minimize ["server overloaded" errors](api/errors.md), even during peak times.
 
 For more information, see [Get started with Priority Tier](#get-started-with-priority-tier)
 

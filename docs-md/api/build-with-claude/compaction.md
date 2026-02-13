@@ -508,7 +508,7 @@ print(chat("Now add rate limiting and error handling"))
 
 ## Current limitations
 
-- **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (e.g., cheaper) model for the summary.
+- **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (for example, cheaper) model for the summary.
 
 ## Next steps
 

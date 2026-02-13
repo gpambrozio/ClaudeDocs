@@ -194,6 +194,14 @@ URL
 
 `https://app.airops.com/mcp`
 
+[Attio](https://docs.attio.com/mcp/overview)
+
+Search, manage, and update your Attio CRM from Claude
+
+URL
+
+`https://mcp.attio.com/mcp`
+
 [Benchling](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
 
 Connect to R&D data, source experiments, and notebooks

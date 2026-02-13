@@ -2,9 +2,9 @@
 
 Copy page
 
-Adaptive thinking is the recommended way to use [extended thinking](build-with-claude/extended-thinking.md) with Claude Opus 4.6. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically decide when and how much to think based on the complexity of each request.
+Adaptive thinking is the recommended way to use [extended thinking](build-with-claude/extended-thinking.md) with Claude Opus 4.6. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request.
 
-Adaptive thinking reliably drives better performance than extended thinking with a fixed `budget_tokens`, and we recommend moving to adaptive thinking to get the most intelligent responses from Opus 4.6. No beta header is required.
+Adaptive thinking reliably drives better performance than extended thinking with a fixed `budget_tokens`. Move to adaptive thinking to get the most intelligent responses from Opus 4.6. No beta header is required.
 
 ## Supported models
 
@@ -18,7 +18,7 @@ Older models (Sonnet 4.5, Opus 4.5, etc.) do not support adaptive thinking and r
 
 ## How adaptive thinking works
 
-In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and decides whether and how much to think. At the default effort level (`high`), Claude will almost always think. At lower effort levels, Claude may skip thinking for simpler problems.
+In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default effort level (`high`), Claude will almost always think. At lower effort levels, Claude may skip thinking for simpler problems.
 
 Adaptive thinking also automatically enables [interleaved thinking](build-with-claude/extended-thinking.md). This means Claude can think between tool calls, making it especially effective for agentic workflows.
 
@@ -114,11 +114,11 @@ with client.messages.stream(
 
 | Mode | Config | Availability | When to use |
 | --- | --- | --- | --- |
-| **Adaptive** | `thinking: {type: "adaptive"}` | Opus 4.6 | Claude decides when and how much to think. Use `effort` to guide. |
+| **Adaptive** | `thinking: {type: "adaptive"}` | Opus 4.6 | Claude determines when and how much to use extended thinking. Use `effort` to guide. |
 | **Manual** | `thinking: {type: "enabled", budget_tokens: N}` | All models. Deprecated on Opus 4.6 — use adaptive mode instead. | When you need precise control over thinking token spend. |
 | **Disabled** | Omit `thinking` parameter | All models | When you don't need extended thinking and want the lowest latency. |
 
-Adaptive thinking is currently available on Opus 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On Opus 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated — we recommend using adaptive thinking with the [effort parameter](build-with-claude/effort.md) instead.
+Adaptive thinking is currently available on Opus 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On Opus 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated. Use adaptive thinking with the [effort parameter](build-with-claude/effort.md) instead.
 
 ## Important considerations
 
@@ -167,7 +167,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#4231232e273102232c362a302d322b216c212d2f).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#7102101d140231101f0519031e0118125f121e1c).
 
 ### Thinking encryption
 
