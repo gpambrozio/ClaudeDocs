@@ -108,8 +108,9 @@ A standalone app for running Claude Code outside your IDE or terminal. Review di
 
 - [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) (Intel and Apple Silicon)
 - [Windows](https://claude.ai/api/desktop/win32/x64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs) (x64)
+- [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs) (remote sessions only)
 
-After installing, launch Claude, sign in, and click the **Code** tab to start coding.[Learn more about the desktop app →](desktop.md)
+After installing, launch Claude, sign in, and click the **Code** tab to start coding. A [paid subscription](https://claude.com/pricing) is required.[Learn more about the desktop app →](desktop.md)
 
 Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they’re done, work on repos you don’t have locally, or run multiple tasks in parallel. Available on desktop browsers and the Claude iOS app.Start coding at [claude.ai/code](https://claude.ai/code).[Get started on the web →](claude-code-on-the-web.md)
 
@@ -190,7 +191,11 @@ See the [CLI reference](cli-reference.md) for the full set of commands and flags
 
 Work from anywhere
 
-Start a task on your laptop and pick it up on your phone. [Claude Code on the web](claude-code-on-the-web.md) and the [Claude iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684) run sessions on cloud infrastructure, so you can kick off work from anywhere without a local dev environment.You can also route coding tasks straight from team chat: mention `@Claude` in [Slack](slack.md) with a bug report or feature request, and get a pull request back.
+Sessions aren’t tied to a single surface. Move work between environments as your context changes:
+
+- Kick off a long-running task on the [web](claude-code-on-the-web.md) or [iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684), then pull it into your terminal with `/teleport`
+- Hand off a terminal session to the [Desktop app](desktop.md) with `/desktop` for visual diff review
+- Route tasks from team chat: mention `@Claude` in [Slack](slack.md) with a bug report and get a pull request back
 
 ## [​](#use-claude-code-everywhere) Use Claude Code everywhere
 

@@ -648,6 +648,14 @@ URL
 
 `https://mcp.bigdata.com/`
 
+[Razorpay](https://razorpay.com/docs/mcp-server/?preferred-country=IN)
+
+Turn Claude into your Razorpay Dashboard Assistant
+
+URL
+
+`https://mcp.razorpay.com/mcp`
+
 [Similarweb](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
 
 Real time web, mobile app, and market data.
@@ -815,6 +823,14 @@ Manage your Stytch Project
 URL
 
 `https://mcp.stytch.dev/mcp`
+
+[Common Room](https://www.commonroom.io/docs/signals/mcp/)
+
+Ask questions about your contacts and accounts
+
+URL
+
+`https://mcp.commonroom.io/mcp`
 
 [Coupler.io](https://help.coupler.io/article/592-coupler-local-mcp-server)
 

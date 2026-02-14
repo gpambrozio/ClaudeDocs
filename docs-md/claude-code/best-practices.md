@@ -517,7 +517,7 @@ Run multiple Claude sessions in parallel to speed up development, run isolated e
 
 There are three main ways to run parallel sessions:
 
-- [Claude Desktop](desktop.md): Manage multiple local sessions visually. Each session gets its own isolated worktree.
+- [Claude Code desktop app](desktop.md): Manage multiple local sessions visually. Each session gets its own isolated worktree.
 - [Claude Code on the web](claude-code-on-the-web.md): Run on Anthropic’s secure cloud infrastructure in isolated VMs.
 - [Agent teams](agent-teams.md): Automated coordination of multiple sessions with shared tasks, messaging, and a team lead.
 
