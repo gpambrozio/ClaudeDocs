@@ -6,7 +6,7 @@ Copy page
 
 ##### [Get Cost Report](api/admin/cost_report/retrieve.md)
 
-get/v1/organizations/cost\_report
+GET/v1/organizations/cost\_report
 
 ##### ModelsExpand Collapse
 
@@ -117,8 +117,6 @@ Indicates if there are more results.
 next\_page: string
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
-
-formatdate-time
 
 ---
 

@@ -6,11 +6,11 @@ Copy page
 
 ##### [Get Messages Usage Report](api/admin/usage_report/retrieve_messages.md)
 
-get/v1/organizations/usage\_report/messages
+GET/v1/organizations/usage\_report/messages
 
 ##### [Get Claude Code Usage Report](api/admin/usage_report/retrieve_claude_code.md)
 
-get/v1/organizations/usage\_report/claude\_code
+GET/v1/organizations/usage\_report/claude\_code
 
 ##### ModelsExpand Collapse
 
@@ -34,10 +34,6 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-Accepts one of the following:
-
-"user\_actor"
-
 APIActor = object { api\_key\_name, type }
 
 api\_key\_name: string
@@ -45,10 +41,6 @@ api\_key\_name: string
 Name of the API key used to perform Claude Code actions.
 
 type: "api\_actor"
-
-Accepts one of the following:
-
-"api\_actor"
 
 core\_metrics: object { commits\_by\_claude\_code, lines\_of\_code, num\_sessions, pull\_requests\_by\_claude\_code }
 
@@ -91,8 +83,6 @@ Accepts one of the following:
 date: string
 
 UTC date for the usage metrics in YYYY-MM-DD format.
-
-formatdate-time
 
 model\_breakdown: array of object { estimated\_cost, model, tokens }
 
@@ -179,8 +169,6 @@ data: array of object { ending\_at, results, starting\_at }
 ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
-
-formatdate-time
 
 results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
 
@@ -278,8 +266,6 @@ starting\_at: string
 
 Start of the time bucket (inclusive) in RFC 3339 format.
 
-formatdate-time
-
 has\_more: boolean
 
 Indicates if there are more results.
@@ -287,8 +273,6 @@ Indicates if there are more results.
 next\_page: string
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
-
-formatdate-time
 
 ---
 

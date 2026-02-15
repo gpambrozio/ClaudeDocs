@@ -4,7 +4,7 @@ Copy page
 
 # Get Workspace Member
 
-get/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Get Workspace Member
 
@@ -27,10 +27,6 @@ type: "workspace\_member"
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
-
-Accepts one of the following:
-
-"workspace\_member"
 
 user\_id: string
 
@@ -62,29 +58,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
 
 ---
 

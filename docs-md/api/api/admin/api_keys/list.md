@@ -4,7 +4,7 @@ Copy page
 
 # List API Keys
 
-get/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 List API Keys
 
@@ -60,8 +60,6 @@ created\_at: string
 
 RFC 3339 datetime string indicating when the API Key was created.
 
-formatdate-time
-
 created\_by: object { id, type }
 
 The ID and type of the actor that created the API key.
@@ -100,10 +98,6 @@ Object type.
 
 For API Keys, this is always `"api_key"`.
 
-Accepts one of the following:
-
-"api\_key"
-
 workspace\_id: string
 
 ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
@@ -128,57 +122,7 @@ curl https://api.anthropic.com/v1/organizations/api_keys \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "type": "user"
-      },
-      "name": "Developer Key",
-      "partial_key_hint": "sk-ant-api03-R2D...igAA",
-      "status": "active",
-      "type": "api_key",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "type": "user"
-      },
-      "name": "Developer Key",
-      "partial_key_hint": "sk-ant-api03-R2D...igAA",
-      "status": "active",
-      "type": "api_key",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

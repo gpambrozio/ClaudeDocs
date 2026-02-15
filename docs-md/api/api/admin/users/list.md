@@ -4,7 +4,7 @@ Copy page
 
 # List Users
 
-get/v1/organizations/users
+GET/v1/organizations/users
 
 List Users
 
@@ -21,8 +21,6 @@ ID of the object to use as a cursor for pagination. When provided, returns the p
 email: optional string
 
 Filter by user email.
-
-formatemail
 
 limit: optional number
 
@@ -45,8 +43,6 @@ ID of the User.
 added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
-
-formatdate-time
 
 email: string
 
@@ -80,10 +76,6 @@ Object type.
 
 For Users, this is always `"user"`.
 
-Accepts one of the following:
-
-"user"
-
 first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -104,47 +96,7 @@ curl https://api.anthropic.com/v1/organizations/users \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "added_at": "2024-10-30T23:58:27.427722Z",
-      "email": "user@emaildomain.com",
-      "name": "Jane Doe",
-      "role": "user",
-      "type": "user"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "added_at": "2024-10-30T23:58:27.427722Z",
-      "email": "user@emaildomain.com",
-      "name": "Jane Doe",
-      "role": "user",
-      "type": "user"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

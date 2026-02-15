@@ -4,7 +4,7 @@ Copy page
 
 # List Workspaces
 
-get/v1/organizations/workspaces
+GET/v1/organizations/workspaces
 
 List Workspaces
 
@@ -44,13 +44,9 @@ archived\_at: string
 
 RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
-formatdate-time
-
 created\_at: string
 
 RFC 3339 datetime string indicating when the Workspace was created.
-
-formatdate-time
 
 data\_residency: object { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
 
@@ -65,10 +61,6 @@ Accepts one of the following:
 UnionMember0 = array of string
 
 UnionMember1 = "unrestricted"
-
-Accepts one of the following:
-
-"unrestricted"
 
 default\_inference\_geo: string
 
@@ -92,10 +84,6 @@ Object type.
 
 For Workspaces, this is always `"workspace"`.
 
-Accepts one of the following:
-
-"workspace"
-
 first\_id: string
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -116,61 +104,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "archived_at": "2024-11-01T23:59:27.427722Z",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "data_residency": {
-        "allowed_inference_geos": [
-          "string"
-        ],
-        "default_inference_geo": "default_inference_geo",
-        "workspace_geo": "workspace_geo"
-      },
-      "display_color": "#6C5BB9",
-      "name": "Workspace Name",
-      "type": "workspace"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "archived_at": "2024-11-01T23:59:27.427722Z",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "data_residency": {
-        "allowed_inference_geos": [
-          "string"
-        ],
-        "default_inference_geo": "default_inference_geo",
-        "workspace_geo": "workspace_geo"
-      },
-      "display_color": "#6C5BB9",
-      "name": "Workspace Name",
-      "type": "workspace"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

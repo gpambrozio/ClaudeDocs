@@ -4,7 +4,7 @@ Copy page
 
 # Create Workspace Member
 
-post/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 Create Workspace Member
 
@@ -14,7 +14,7 @@ workspace\_id: string
 
 ID of the Workspace.
 
-##### Body ParametersExpand Collapse
+##### Body ParametersJSONExpand Collapse
 
 user\_id: string
 
@@ -41,10 +41,6 @@ type: "workspace\_member"
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
-
-Accepts one of the following:
-
-"workspace\_member"
 
 user\_id: string
 
@@ -81,29 +77,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
         }'
 ```
 
-Response 200
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
 
 ---
 

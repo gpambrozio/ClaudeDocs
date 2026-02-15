@@ -4,7 +4,7 @@ Copy page
 
 # List Workspace Members
 
-get/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 List Workspace Members
 
@@ -43,10 +43,6 @@ type: "workspace\_member"
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
-
-Accepts one of the following:
-
-"workspace\_member"
 
 user\_id: string
 
@@ -90,43 +86,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "type": "workspace_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "workspace_role": "workspace_user"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "type": "workspace_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "workspace_role": "workspace_user"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
 
 ---
 

@@ -6,19 +6,19 @@ Copy page
 
 ##### [Get User](api/admin/users/retrieve.md)
 
-get/v1/organizations/users/{user\_id}
+GET/v1/organizations/users/{user\_id}
 
 ##### [List Users](api/admin/users/list.md)
 
-get/v1/organizations/users
+GET/v1/organizations/users
 
 ##### [Update User](api/admin/users/update.md)
 
-post/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 ##### [Remove User](api/admin/users/delete.md)
 
-delete/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
 ##### ModelsExpand Collapse
 
@@ -31,8 +31,6 @@ ID of the User.
 added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
-
-formatdate-time
 
 email: string
 
@@ -65,10 +63,6 @@ type: "user"
 Object type.
 
 For Users, this is always `"user"`.
-
-Accepts one of the following:
-
-"user"
 
 ---
 

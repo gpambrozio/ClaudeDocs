@@ -4,7 +4,7 @@ Copy page
 
 # Update User
 
-post/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 Update User
 
@@ -14,7 +14,7 @@ user\_id: string
 
 ID of the User.
 
-##### Body ParametersExpand Collapse
+##### Body ParametersJSONExpand Collapse
 
 role: "user" or "developer" or "billing" or 2 more
 
@@ -43,8 +43,6 @@ ID of the User.
 added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
-
-formatdate-time
 
 email: string
 
@@ -78,10 +76,6 @@ Object type.
 
 For Users, this is always `"user"`.
 
-Accepts one of the following:
-
-"user"
-
 Update User
 
 ```shiki
@@ -94,33 +88,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
         }'
 ```
 
-Response 200
-
-```shiki
-{
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "added_at": "2024-10-30T23:58:27.427722Z",
-  "email": "user@emaildomain.com",
-  "name": "Jane Doe",
-  "role": "user",
-  "type": "user"
-}
-```
-
 ##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "added_at": "2024-10-30T23:58:27.427722Z",
-  "email": "user@emaildomain.com",
-  "name": "Jane Doe",
-  "role": "user",
-  "type": "user"
-}
-```
 
 ---
 

@@ -10,7 +10,7 @@ cURL
 
 ##### [Get Current Organization](api/admin/organizations/me.md)
 
-get/v1/organizations/me
+GET/v1/organizations/me
 
 ##### ModelsExpand Collapse
 
@@ -19,8 +19,6 @@ Organization = object { id, name, type }
 id: string
 
 ID of the Organization.
-
-formatuuid
 
 name: string
 
@@ -32,27 +30,23 @@ Object type.
 
 For Organizations, this is always `"organization"`.
 
-Accepts one of the following:
-
-"organization"
-
 #### AdminInvites
 
 ##### [Create Invite](api/admin/invites/create.md)
 
-post/v1/organizations/invites
+POST/v1/organizations/invites
 
 ##### [Get Invite](api/admin/invites/retrieve.md)
 
-get/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
 ##### [List Invites](api/admin/invites/list.md)
 
-get/v1/organizations/invites
+GET/v1/organizations/invites
 
 ##### [Delete Invite](api/admin/invites/delete.md)
 
-delete/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
 ##### ModelsExpand Collapse
 
@@ -70,13 +64,9 @@ expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-formatdate-time
-
 invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
-
-formatdate-time
 
 role: "user" or "developer" or "billing" or 3 more
 
@@ -116,27 +106,23 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
-Accepts one of the following:
-
-"invite"
-
 #### AdminUsers
 
 ##### [Get User](api/admin/users/retrieve.md)
 
-get/v1/organizations/users/{user\_id}
+GET/v1/organizations/users/{user\_id}
 
 ##### [List Users](api/admin/users/list.md)
 
-get/v1/organizations/users
+GET/v1/organizations/users
 
 ##### [Update User](api/admin/users/update.md)
 
-post/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 ##### [Remove User](api/admin/users/delete.md)
 
-delete/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
 ##### ModelsExpand Collapse
 
@@ -149,8 +135,6 @@ ID of the User.
 added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
-
-formatdate-time
 
 email: string
 
@@ -184,53 +168,49 @@ Object type.
 
 For Users, this is always `"user"`.
 
-Accepts one of the following:
-
-"user"
-
 #### AdminWorkspaces
 
 ##### [Create Workspace](api/admin/workspaces/create.md)
 
-post/v1/organizations/workspaces
+POST/v1/organizations/workspaces
 
 ##### [Get Workspace](api/admin/workspaces/retrieve.md)
 
-get/v1/organizations/workspaces/{workspace\_id}
+GET/v1/organizations/workspaces/{workspace\_id}
 
 ##### [List Workspaces](api/admin/workspaces/list.md)
 
-get/v1/organizations/workspaces
+GET/v1/organizations/workspaces
 
 ##### [Update Workspace](api/admin/workspaces/update.md)
 
-post/v1/organizations/workspaces/{workspace\_id}
+POST/v1/organizations/workspaces/{workspace\_id}
 
 ##### [Archive Workspace](api/admin/workspaces/archive.md)
 
-post/v1/organizations/workspaces/{workspace\_id}/archive
+POST/v1/organizations/workspaces/{workspace\_id}/archive
 
 #### AdminWorkspacesMembers
 
 ##### [Create Workspace Member](api/admin/workspaces/members/create.md)
 
-post/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Get Workspace Member](api/admin/workspaces/members/retrieve.md)
 
-get/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [List Workspace Members](api/admin/workspaces/members/list.md)
 
-get/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Update Workspace Member](api/admin/workspaces/members/update.md)
 
-post/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Delete Workspace Member](api/admin/workspaces/members/delete.md)
 
-delete/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### ModelsExpand Collapse
 
@@ -241,10 +221,6 @@ type: "workspace\_member"
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
-
-Accepts one of the following:
-
-"workspace\_member"
 
 user\_id: string
 
@@ -272,25 +248,25 @@ Accepts one of the following:
 
 ##### [Get API Key](api/admin/api_keys/retrieve.md)
 
-get/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
 ##### [List API Keys](api/admin/api_keys/list.md)
 
-get/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 ##### [Update API Key](api/admin/api_keys/update.md)
 
-post/v1/organizations/api\_keys/{api\_key\_id}
+POST/v1/organizations/api\_keys/{api\_key\_id}
 
 #### AdminUsage Report
 
 ##### [Get Messages Usage Report](api/admin/usage_report/retrieve_messages.md)
 
-get/v1/organizations/usage\_report/messages
+GET/v1/organizations/usage\_report/messages
 
 ##### [Get Claude Code Usage Report](api/admin/usage_report/retrieve_claude_code.md)
 
-get/v1/organizations/usage\_report/claude\_code
+GET/v1/organizations/usage\_report/claude\_code
 
 ##### ModelsExpand Collapse
 
@@ -314,10 +290,6 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-Accepts one of the following:
-
-"user\_actor"
-
 APIActor = object { api\_key\_name, type }
 
 api\_key\_name: string
@@ -325,10 +297,6 @@ api\_key\_name: string
 Name of the API key used to perform Claude Code actions.
 
 type: "api\_actor"
-
-Accepts one of the following:
-
-"api\_actor"
 
 core\_metrics: object { commits\_by\_claude\_code, lines\_of\_code, num\_sessions, pull\_requests\_by\_claude\_code }
 
@@ -371,8 +339,6 @@ Accepts one of the following:
 date: string
 
 UTC date for the usage metrics in YYYY-MM-DD format.
-
-formatdate-time
 
 model\_breakdown: array of object { estimated\_cost, model, tokens }
 
@@ -459,8 +425,6 @@ data: array of object { ending\_at, results, starting\_at }
 ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
-
-formatdate-time
 
 results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
 
@@ -558,8 +522,6 @@ starting\_at: string
 
 Start of the time bucket (inclusive) in RFC 3339 format.
 
-formatdate-time
-
 has\_more: boolean
 
 Indicates if there are more results.
@@ -568,13 +530,11 @@ next\_page: string
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
-formatdate-time
-
 #### AdminCost Report
 
 ##### [Get Cost Report](api/admin/cost_report/retrieve.md)
 
-get/v1/organizations/cost\_report
+GET/v1/organizations/cost\_report
 
 ##### ModelsExpand Collapse
 
@@ -685,8 +645,6 @@ Indicates if there are more results.
 next\_page: string
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
-
-formatdate-time
 
 ---
 

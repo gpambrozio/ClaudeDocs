@@ -6,19 +6,19 @@ Copy page
 
 ##### [Create Invite](api/admin/invites/create.md)
 
-post/v1/organizations/invites
+POST/v1/organizations/invites
 
 ##### [Get Invite](api/admin/invites/retrieve.md)
 
-get/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
 ##### [List Invites](api/admin/invites/list.md)
 
-get/v1/organizations/invites
+GET/v1/organizations/invites
 
 ##### [Delete Invite](api/admin/invites/delete.md)
 
-delete/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
 ##### ModelsExpand Collapse
 
@@ -36,13 +36,9 @@ expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
-formatdate-time
-
 invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
-
-formatdate-time
 
 role: "user" or "developer" or "billing" or 3 more
 
@@ -81,10 +77,6 @@ type: "invite"
 Object type.
 
 For Invites, this is always `"invite"`.
-
-Accepts one of the following:
-
-"invite"
 
 ---
 

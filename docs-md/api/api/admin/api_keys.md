@@ -6,15 +6,15 @@ Copy page
 
 ##### [Get API Key](api/admin/api_keys/retrieve.md)
 
-get/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
 ##### [List API Keys](api/admin/api_keys/list.md)
 
-get/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 ##### [Update API Key](api/admin/api_keys/update.md)
 
-post/v1/organizations/api\_keys/{api\_key\_id}
+POST/v1/organizations/api\_keys/{api\_key\_id}
 
 ---
 
