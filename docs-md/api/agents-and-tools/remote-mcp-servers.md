@@ -556,6 +556,14 @@ URL
 
 `https://mcp.mercury.com/mcp`
 
+[Microsoft Learn](https://learn.microsoft.com/en-us/training/support/mcp)
+
+Search trusted Microsoft docs to power your development
+
+URL
+
+`https://learn.microsoft.com/api/mcp`
+
 [monday.com](https://developer.monday.com/apps/docs/mondaycom-mcp-integration)
 
 Manage projects, boards, and workflows in monday.com
@@ -587,6 +595,14 @@ Analyze your data with natural language
 URL
 
 `https://api.motherduck.com/mcp`
+
+[MSCI](https://www.msci.com/downloads/documents/index/resources/indexai-insights-user-guide-feb26.pdf)
+
+Converse, query and comprehend a world of MSCI indexes
+
+URL
+
+`https://mcp.msci.com/index/index-mcp/v1.0/mcp`
 
 [NetSuite](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_7200233106.html)
 

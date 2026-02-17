@@ -4,9 +4,7 @@ Copy page
 
 Jailbreaking and prompt injections occur when users craft prompts to exploit model vulnerabilities, aiming to generate inappropriate content. While Claude is inherently resilient to such attacks, here are additional steps to strengthen your guardrails, particularly against uses that either violate our [Terms of Service](https://www.anthropic.com/legal/commercial-terms) or [Usage Policy](https://www.anthropic.com/legal/aup).
 
-Claude is far more resistant to jailbreaking than other major LLMs, thanks to advanced training methods like Constitutional AI.
-
-- **Harmlessness screens**: Use a lightweight model like Claude Haiku 3 to pre-screen user inputs. (Note: prefilling is deprecated and not supported on Claude Opus 4.6 and Sonnet 4.5.)
+- **Harmlessness screens**: Use a lightweight model like Claude Haiku 4.5 to pre-screen user inputs. Use [structured outputs](build-with-claude/structured-outputs.md) to constrain the response to a simple classification.
 
   ### Example: Harmlessness screen for content moderation
 - **Input validation**: Filter prompts for jailbreaking patterns. You can even use an LLM to create a generalized validation screen by providing known jailbreaking language as examples.
