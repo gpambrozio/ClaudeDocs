@@ -6,6 +6,8 @@ This guide will walk you through the process of setting up and making API calls 
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.
 
+Foundry is supported by the C#, Java, Python, and TypeScript SDKs. The Go, PHP, and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
+
 ## Preview
 
 In this preview platform integration, Claude models run on Anthropic's infrastructure. This is a commercial integration for billing and access through Azure. As an independent processor for Microsoft, customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. Anthropic continues to provide its industry-leading safety and data commitments, including zero data retention availability.
@@ -30,6 +32,10 @@ TypeScript
 
 TypeScript
 
+Java
+
+Java
+
 C#
 
 C#
@@ -52,7 +58,7 @@ To provision your resource:
 2. Create a new Foundry resource or select an existing one
 3. Configure access management using Azure-issued API keys or Entra ID for role-based access control
 4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security
-5. Note your resource name—you'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
+5. Note your resource name. You'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
 
 ### Creating Foundry deployments
 
@@ -60,7 +66,7 @@ After creating your resource, deploy a Claude model to make it available for API
 
 1. In the Foundry portal, navigate to your resource
 2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**
-3. Search for and select a Claude model (e.g., `claude-sonnet-4-5`)
+3. Search for and select a Claude model (e.g., `claude-sonnet-4-6`)
 4. Configure deployment settings:
    - **Deployment name**: Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.
    - **Deployment type**: Select Global Standard (recommended for Claude)
@@ -174,12 +180,13 @@ For details on response headers specific to Foundry, see the [correlation reques
 
 ## API model IDs and deployments
 
-The following Claude models are available through Foundry. The latest generation models (Opus 4.6, Sonnet 4.5, and Haiku 4.5) offer the most advanced capabilities:
+The following Claude models are available through Foundry. The latest generation models (Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
 
 | Model | Default Deployment Name |
 | --- | --- |
 | Claude Opus 4.6 | `claude-opus-4-6` |
 | Claude Opus 4.5 | `claude-opus-4-5` |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` |
 | Claude Sonnet 4.5 | `claude-sonnet-4-5` |
 | Claude Opus 4.1 | `claude-opus-4-1` |
 | Claude Haiku 4.5 | `claude-haiku-4-5` |
@@ -226,7 +233,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error**: `Model not found` or `Deployment not found`
 
-- **Solution**: Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-5`).
+- **Solution**: Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-6`).
 - **Solution**: Ensure the model/deployment is available in your Azure region.
 
 **Error**: `Invalid model parameter`

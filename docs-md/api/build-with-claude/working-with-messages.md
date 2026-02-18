@@ -4,6 +4,8 @@ Copy page
 
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages.md).
 
+This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 ## Basic request and response
 
 Shell
@@ -140,7 +142,7 @@ JSON
 }
 ```
 
-Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
+Prefilling is deprecated and not supported on Claude Opus 4.6, Claude Sonnet 4.6, and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
 
 ## Vision
 

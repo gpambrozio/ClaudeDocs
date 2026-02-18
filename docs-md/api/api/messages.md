@@ -42,6 +42,211 @@ media\_type: "application/pdf"
 
 type: "base64"
 
+BashCodeExecutionOutputBlock = object { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+BashCodeExecutionOutputBlockParam = object { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
 CacheControlEphemeral = object { type, ttl }
 
 type: "ephemeral"
@@ -191,6 +396,10 @@ type: "web\_search\_result\_location"
 
 url: string
 
+CitationsConfig = object { enabled }
+
+enabled: boolean
+
 CitationsConfigParam = object { enabled }
 
 enabled: optional boolean
@@ -307,7 +516,506 @@ type: "web\_search\_result\_location"
 
 url: string
 
-ContentBlock = [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 3 more
+CodeExecutionOutputBlock = object { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+CodeExecutionOutputBlockParam = object { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250522"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250825"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+CodeExecutionToolResultBlockContent = [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+CodeExecutionToolResultBlockParamContent = [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+CodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+Container = object { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
+ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: string
+
+type: "container\_upload"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ContentBlock = [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -415,9 +1123,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -425,17 +1159,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -477,7 +1279,337 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  or 7 more
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
+ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  or 13 more
 
 Regular text content.
 
@@ -1026,7 +2158,7 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlockParam = object { id, input, name, 2 more }
+ToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
@@ -1059,6 +2191,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
@@ -1088,13 +2246,13 @@ Accepts one of the following:
 
 "1h"
 
-content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
@@ -1627,15 +2785,62 @@ context: optional string
 
 title: optional string
 
+ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 is\_error: optional boolean
 
-ServerToolUseBlockParam = object { id, input, name, 2 more }
+ServerToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
@@ -1662,7 +2867,33 @@ Accepts one of the following:
 
 "1h"
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -1703,6 +2934,721 @@ type: "web\_search\_tool\_result\_error"
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlockParam = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlockParam = object { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+ContentBlockSource = object { content, type }
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+UnionMember0 = string
+
+ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+TextBlockParam = object { text, type, cache\_control, citations }
+
+text: string
+
+type: "text"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional array of [TextCitationParam](api/messages.md)
+
+Accepts one of the following:
+
+CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+start\_block\_index: number
+
+type: "content\_block\_location"
+
+CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+end\_block\_index: number
+
+search\_result\_index: number
+
+source: string
+
+start\_block\_index: number
+
+title: string
+
+type: "search\_result\_location"
+
+ImageBlockParam = object { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64ImageSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: "base64"
+
+URLImageSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "image"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "content"
+
+URLPDFSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "document"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: optional boolean
+
+context: optional string
+
+title: optional string
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+retrieved\_at: optional string
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+error\_message: optional string
+
+TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+num\_lines: optional number
+
+start\_line: optional number
+
+total\_lines: optional number
+
+TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultErrorParam = object { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: string
+
+type: "container\_upload"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2061,6 +4007,46 @@ Accepts one of the following:
 
 "1h"
 
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+DocumentBlock = object { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
 DocumentBlockParam = object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
@@ -2294,6 +4280,42 @@ context: optional string
 
 title: optional string
 
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
 ImageBlockParam = object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
@@ -2363,13 +4385,76 @@ The JSON schema of the format
 
 type: "json\_schema"
 
-Message = object { id, content, model, 5 more }
+MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+
+name: "memory"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "memory\_20250818"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+Message = object { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -2506,9 +4591,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -2516,17 +4627,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -2568,6 +4747,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -2576,7 +5085,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -2587,6 +5096,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -2717,7 +5230,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -2761,9 +5274,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -2781,11 +5298,23 @@ Accepts one of the following:
 
 "batch"
 
-MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  or [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  or [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  or 3 more
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
 
 Accepts one of the following:
 
-Tool = object { input\_schema, name, cache\_control, 4 more }
+"standard"
+
+"fast"
+
+MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 12 more
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+Accepts one of the following:
+
+Tool = object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -2809,6 +5338,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2831,6 +5368,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: optional string
 
@@ -2842,13 +5383,15 @@ eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, cache\_control, strict }
+ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -2858,6 +5401,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2881,11 +5432,217 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250124 = object { name, type, cache\_control, strict }
+CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250522"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250825"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260120"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+
+name: "memory"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "memory\_20250818"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -2895,6 +5652,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2918,11 +5683,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, cache\_control, strict }
+ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -2932,6 +5703,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2955,11 +5734,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, cache\_control, 2 more }
+ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -2969,6 +5754,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2992,6 +5785,12 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -3000,7 +5799,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20250305 = object { name, type, allowed\_domains, 5 more }
+WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -3009,6 +5808,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 allowed\_domains: optional array of string
 
@@ -3041,6 +5848,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
@@ -3071,6 +5882,341 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20250910"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: optional array of string
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: optional object { type, city, country, 2 more }
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city: optional string
+
+The city of the user.
+
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_bm25"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_regex"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 MessageDeltaUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 cache\_creation\_input\_tokens: number
@@ -3089,9 +6235,13 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -3652,7 +6802,7 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlockParam = object { id, input, name, 2 more }
+ToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
@@ -3685,6 +6835,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
@@ -3714,13 +6890,13 @@ Accepts one of the following:
 
 "1h"
 
-content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
@@ -4253,15 +7429,62 @@ context: optional string
 
 title: optional string
 
+ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 is\_error: optional boolean
 
-ServerToolUseBlockParam = object { id, input, name, 2 more }
+ServerToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
@@ -4288,7 +7511,33 @@ Accepts one of the following:
 
 "1h"
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -4353,6 +7602,721 @@ Accepts one of the following:
 
 "1h"
 
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlockParam = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlockParam = object { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+ContentBlockSource = object { content, type }
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+UnionMember0 = string
+
+ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+TextBlockParam = object { text, type, cache\_control, citations }
+
+text: string
+
+type: "text"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional array of [TextCitationParam](api/messages.md)
+
+Accepts one of the following:
+
+CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+start\_block\_index: number
+
+type: "content\_block\_location"
+
+CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+end\_block\_index: number
+
+search\_result\_index: number
+
+source: string
+
+start\_block\_index: number
+
+title: string
+
+type: "search\_result\_location"
+
+ImageBlockParam = object { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64ImageSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: "base64"
+
+URLImageSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "image"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "content"
+
+URLPDFSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "document"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: optional boolean
+
+context: optional string
+
+title: optional string
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+retrieved\_at: optional string
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+error\_message: optional string
+
+TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+num\_lines: optional number
+
+start\_line: optional number
+
+total\_lines: optional number
+
+TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultErrorParam = object { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: string
+
+type: "container\_upload"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: "user" or "assistant"
 
 Accepts one of the following:
@@ -4377,7 +8341,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-Model = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more or string
+Model = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more or string
 
 The model that will complete your prompt.
 
@@ -4385,7 +8349,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -4396,6 +8360,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -4745,7 +8713,9 @@ type: "content\_block\_delta"
 
 RawContentBlockStartEvent = object { content\_block, index, type }
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 3 more
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -4853,9 +8823,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -4863,17 +8859,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -4914,6 +8978,336 @@ url: string
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
+
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
 
 index: number
 
@@ -4927,7 +9321,19 @@ type: "content\_block\_stop"
 
 RawMessageDeltaEvent = object { delta, type, usage }
 
-delta: object { stop\_reason, stop\_sequence }
+delta: object { container, stop\_reason, stop\_sequence }
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -4977,9 +9383,13 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -4987,13 +9397,25 @@ The number of web search tool requests.
 
 RawMessageStartEvent = object { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -5130,9 +9552,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -5140,17 +9588,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5192,6 +9708,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5200,7 +10046,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -5211,6 +10057,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -5341,7 +10191,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -5385,9 +10235,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -5404,6 +10258,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "message\_start"
 
@@ -5417,13 +10281,25 @@ Accepts one of the following:
 
 RawMessageStartEvent = object { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -5560,9 +10436,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -5570,17 +10472,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5622,6 +10592,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5630,7 +10930,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -5641,6 +10941,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -5771,7 +11075,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -5815,9 +11119,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -5835,11 +11143,33 @@ Accepts one of the following:
 
 "batch"
 
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 type: "message\_start"
 
 RawMessageDeltaEvent = object { delta, type, usage }
 
-delta: object { stop\_reason, stop\_sequence }
+delta: object { container, stop\_reason, stop\_sequence }
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -5889,9 +11219,13 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -5903,7 +11237,9 @@ type: "message\_stop"
 
 RawContentBlockStartEvent = object { content\_block, index, type }
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 3 more
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -6011,9 +11347,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -6021,17 +11383,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -6072,6 +11502,336 @@ url: string
 tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
+
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
 
 index: number
 
@@ -6351,29 +12111,99 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-ServerToolUsage = object { web\_search\_requests }
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+ServerToolUsage = object { web\_fetch\_requests, web\_search\_requests }
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
 The number of web search tool requests.
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-ServerToolUseBlockParam = object { id, input, name, 2 more }
+ServerToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
@@ -6399,6 +12229,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 SignatureDelta = object { signature, type }
 
@@ -6775,6 +12631,311 @@ text: string
 
 type: "text\_delta"
 
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+error\_message: optional string
+
+TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+num\_lines: optional number
+
+start\_line: optional number
+
+total\_lines: optional number
+
+TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+lines: optional array of string
+
+new\_lines: optional number
+
+new\_start: optional number
+
+old\_lines: optional number
+
+old\_start: optional number
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+error\_message: optional string
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+num\_lines: optional number
+
+start\_line: optional number
+
+total\_lines: optional number
+
 ThinkingBlock = object { signature, thinking, type }
 
 signature: string
@@ -6851,7 +13012,7 @@ thinking: string
 
 type: "thinking\_delta"
 
-Tool = object { input\_schema, name, cache\_control, 4 more }
+Tool = object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -6875,6 +13036,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -6897,6 +13066,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: optional string
 
@@ -6908,13 +13081,15 @@ eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, cache\_control, strict }
+ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -6923,6 +13098,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -6946,6 +13129,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
 
 strict: optional boolean
 
@@ -7049,6 +13238,43 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
+ToolReferenceBlock = object { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
@@ -7078,13 +13304,13 @@ Accepts one of the following:
 
 "1h"
 
-content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
 Accepts one of the following:
 
@@ -7617,9 +13843,359 @@ context: optional string
 
 title: optional string
 
+ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 is\_error: optional boolean
 
-ToolTextEditor20250124 = object { name, type, cache\_control, strict }
+ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_bm25"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_regex"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultErrorParam = object { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+ToolSearchToolResultErrorParam = object { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "tool\_search\_tool\_search\_result"
+
+ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -7629,6 +14205,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7652,11 +14236,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, cache\_control, strict }
+ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -7666,6 +14256,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7689,11 +14287,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, cache\_control, 2 more }
+ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -7703,6 +14307,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7726,6 +14338,12 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7734,11 +14352,13 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  or [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  or [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  or 3 more
+ToolUnion = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 12 more
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
-Tool = object { input\_schema, name, cache\_control, 4 more }
+Tool = object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -7762,6 +14382,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7784,6 +14412,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: optional string
 
@@ -7795,13 +14427,15 @@ eager\_input\_streaming: optional boolean
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, cache\_control, strict }
+ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -7811,6 +14445,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7834,11 +14476,217 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250124 = object { name, type, cache\_control, strict }
+CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250522"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20250825"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260120"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+
+name: "memory"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "memory\_20250818"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -7848,6 +14696,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7871,11 +14727,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, cache\_control, strict }
+ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -7885,6 +14747,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7908,11 +14778,17 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, cache\_control, 2 more }
+ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -7922,6 +14798,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7945,6 +14829,12 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: optional array of map[unknown]
+
 max\_characters: optional number
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7953,7 +14843,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20250305 = object { name, type, allowed\_domains, 5 more }
+WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -7962,6 +14852,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 allowed\_domains: optional array of string
 
@@ -7994,6 +14892,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: optional number
 
 Maximum number of times the tool can be used in the API request.
@@ -8024,9 +14926,370 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-ToolUseBlock = object { id, input, name, type }
+WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20250910"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: optional array of string
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: optional object { type, city, country, 2 more }
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city: optional string
+
+The city of the user.
+
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_bm25"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+
+name: "tool\_search\_tool\_regex"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -8034,7 +15297,7 @@ name: string
 
 type: "tool\_use"
 
-ToolUseBlockParam = object { id, input, name, 2 more }
+ToolUseBlockParam = object { id, input, name, 3 more }
 
 id: string
 
@@ -8067,6 +15330,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 URLImageSource = object { type, url }
 
 type: "url"
@@ -8079,7 +15368,7 @@ type: "url"
 
 url: string
 
-Usage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+Usage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -8113,9 +15402,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -8132,6 +15425,880 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+WebFetchBlockParam = object { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+ContentBlockSource = object { content, type }
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+UnionMember0 = string
+
+ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+TextBlockParam = object { text, type, cache\_control, citations }
+
+text: string
+
+type: "text"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional array of [TextCitationParam](api/messages.md)
+
+Accepts one of the following:
+
+CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+start\_block\_index: number
+
+type: "content\_block\_location"
+
+CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+end\_block\_index: number
+
+search\_result\_index: number
+
+source: string
+
+start\_block\_index: number
+
+title: string
+
+type: "search\_result\_location"
+
+ImageBlockParam = object { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64ImageSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: "base64"
+
+URLImageSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "image"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "content"
+
+URLPDFSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "document"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: optional boolean
+
+context: optional string
+
+title: optional string
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+retrieved\_at: optional string
+
+ISO 8601 timestamp when the content was retrieved
+
+WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20250910"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlockParam = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlockParam = object { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+ContentBlockSource = object { content, type }
+
+content: string or array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+UnionMember0 = string
+
+ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
+
+Accepts one of the following:
+
+TextBlockParam = object { text, type, cache\_control, citations }
+
+text: string
+
+type: "text"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional array of [TextCitationParam](api/messages.md)
+
+Accepts one of the following:
+
+CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+start\_block\_index: number
+
+type: "content\_block\_location"
+
+CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+end\_block\_index: number
+
+search\_result\_index: number
+
+source: string
+
+start\_block\_index: number
+
+title: string
+
+type: "search\_result\_location"
+
+ImageBlockParam = object { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+Base64ImageSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: "base64"
+
+URLImageSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "image"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: "content"
+
+URLPDFSource = object { type, url }
+
+type: "url"
+
+url: string
+
+type: "document"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: optional boolean
+
+context: optional string
+
+title: optional string
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+retrieved\_at: optional string
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchToolResultErrorBlockParam = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchToolResultErrorCode = "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
 
 WebSearchResultBlock = object { encrypted\_content, page\_age, title, 2 more }
 
@@ -8157,7 +16324,7 @@ url: string
 
 page\_age: optional string
 
-WebSearchTool20250305 = object { name, type, allowed\_domains, 5 more }
+WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -8166,6 +16333,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 allowed\_domains: optional array of string
 
@@ -8197,6 +16372,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 max\_uses: optional number
 
@@ -8248,7 +16427,33 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8326,7 +16531,7 @@ type: "web\_search\_result"
 
 url: string
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -8390,6 +16595,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 WebSearchToolResultBlockParamContent = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
 
@@ -8673,13 +16904,25 @@ Accepts one of the following:
 
 MessageBatchSucceededResult = object { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -8816,9 +17059,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -8826,17 +17095,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8878,6 +17215,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -8886,7 +17553,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -8897,6 +17564,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -9027,7 +17698,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -9071,9 +17742,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -9090,6 +17765,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 
@@ -9209,13 +17894,25 @@ Accepts one of the following:
 
 MessageBatchSucceededResult = object { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -9352,9 +18049,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -9362,17 +18085,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -9414,6 +18205,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -9422,7 +18543,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -9433,6 +18554,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -9563,7 +18688,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -9607,9 +18732,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -9626,6 +18755,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 
@@ -9707,13 +18846,25 @@ type: "expired"
 
 MessageBatchSucceededResult = object { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: string
+
+Identifier for the container used in this request
+
+expires\_at: string
+
+The time at which the container will expire.
 
 content: array of [ContentBlock](api/messages.md)
 
@@ -9850,9 +19001,35 @@ data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, input, name, type }
+ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 input: map[unknown]
 
@@ -9860,17 +19037,85 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, input, name, type }
+ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 input: map[unknown]
 
-name: "web\_search"
+name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { content, tool\_use\_id, type }
+WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -9912,6 +19157,336 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+DirectCaller = object { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+ServerToolCaller = object { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+CodeExecution20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+WebFetchToolResultErrorBlock = object { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: "web\_fetch\_tool\_result\_error"
+
+WebFetchBlock = object { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: boolean
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+Base64PDFSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "application/pdf"
+
+type: "base64"
+
+PlainTextSource = object { data, media\_type, type }
+
+data: string
+
+media\_type: "text/plain"
+
+type: "text"
+
+title: string
+
+The title of the document
+
+type: "document"
+
+retrieved\_at: string
+
+ISO 8601 timestamp when the content was retrieved
+
+type: "web\_fetch\_result"
+
+url: string
+
+Fetched content URL
+
+tool\_use\_id: string
+
+type: "web\_fetch\_tool\_result"
+
+CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+CodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: "code\_execution\_tool\_result\_error"
+
+CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "code\_execution\_result"
+
+EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "code\_execution\_tool\_result"
+
+BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+BashCodeExecutionToolResultError = object { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: "bash\_code\_execution\_tool\_result\_error"
+
+BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+
+content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
+
+file\_id: string
+
+type: "bash\_code\_execution\_output"
+
+return\_code: number
+
+stderr: string
+
+stdout: string
+
+type: "bash\_code\_execution\_result"
+
+tool\_use\_id: string
+
+type: "bash\_code\_execution\_tool\_result"
+
+TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: string
+
+type: "text\_editor\_code\_execution\_tool\_result\_error"
+
+TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+
+content: string
+
+file\_type: "text" or "image" or "pdf"
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: number
+
+start\_line: number
+
+total\_lines: number
+
+type: "text\_editor\_code\_execution\_view\_result"
+
+TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+
+is\_file\_update: boolean
+
+type: "text\_editor\_code\_execution\_create\_result"
+
+TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+
+lines: array of string
+
+new\_lines: number
+
+new\_start: number
+
+old\_lines: number
+
+old\_start: number
+
+type: "text\_editor\_code\_execution\_str\_replace\_result"
+
+tool\_use\_id: string
+
+type: "text\_editor\_code\_execution\_tool\_result"
+
+ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+ToolSearchToolResultError = object { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: string
+
+type: "tool\_search\_tool\_result\_error"
+
+ToolSearchToolSearchResultBlock = object { tool\_references, type }
+
+tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
+
+tool\_name: string
+
+type: "tool\_reference"
+
+type: "tool\_search\_tool\_search\_result"
+
+tool\_use\_id: string
+
+type: "tool\_search\_tool\_result"
+
+ContainerUploadBlock = object { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: string
+
+type: "container\_upload"
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -9920,7 +19495,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-opus-4-5-20251101" or "claude-opus-4-5" or 18 more
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-opus-4-5-20251101" or 19 more
 
 The model that will complete your prompt.
 
@@ -9931,6 +19506,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -10061,7 +19640,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -10105,9 +19684,13 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: number
+
+The number of web fetch tool requests.
 
 web\_search\_requests: number
 
@@ -10124,6 +19707,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: "standard" or "fast"
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: "succeeded"
 

@@ -108,7 +108,25 @@ version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 puts(version)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
 
 ---
 

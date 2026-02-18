@@ -17,7 +17,7 @@ remembering exact version numbers:
 | Model alias | Behavior |
 | --- | --- |
 | **`default`** | Recommended model setting, depending on your account type |
-| **`sonnet`** | Uses the latest Sonnet model (currently Sonnet 4.5) for daily coding tasks |
+| **`sonnet`** | Uses the latest Sonnet model (currently Sonnet 4.6) for daily coding tasks |
 | **`opus`** | Uses the latest Opus model (currently Opus 4.6) for complex reasoning tasks |
 | **`haiku`** | Uses the fast and efficient Haiku model for simple tasks |
 | **`sonnet[1m]`** | Uses Sonnet with a [1 million token context window](build-with-claude/context-windows.md) for long sessions |
@@ -128,8 +128,8 @@ When `availableModels` is set at multiple levels, such as user settings and proj
 
 The behavior of `default` depends on your account type:
 
-- **Max and Teams**: defaults to Opus 4.6
-- **Pro**: defaults to Opus 4.6 in Claude Code
+- **Max and Team Premium**: defaults to Opus 4.6
+- **Pro and Team Standard**: defaults to Sonnet 4.6
 - **Enterprise**: Opus 4.6 is available but not the default
 
 Claude Code may automatically fall back to Sonnet if you hit a usage threshold with Opus.
@@ -177,7 +177,7 @@ Ask AI
 /model sonnet[1m]
 
 # Or append [1m] to a full model name
-/model claude-sonnet-4-5-20250929[1m]
+/model claude-sonnet-4-6[1m]
 ```
 
 Note: Extended context models have

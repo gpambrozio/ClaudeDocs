@@ -34,7 +34,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -45,6 +45,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -284,7 +288,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -295,6 +299,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -413,7 +421,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -424,6 +432,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -540,7 +552,31 @@ completion = anthropic.completions.create(
 puts(completion)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
+```
 
 ---
 

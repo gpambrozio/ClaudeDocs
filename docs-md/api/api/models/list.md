@@ -130,7 +130,43 @@ curl https://api.anthropic.com/v1/models \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "claude-opus-4-6",
+      "created_at": "2026-02-04T00:00:00Z",
+      "display_name": "Claude Opus 4.6",
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "claude-opus-4-6",
+      "created_at": "2026-02-04T00:00:00Z",
+      "display_name": "Claude Opus 4.6",
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
 
 ---
 

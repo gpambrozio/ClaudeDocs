@@ -111,7 +111,7 @@ Upload File
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/files \
+curl https://api.anthropic.com/v1/files?beta=true \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
@@ -119,7 +119,35 @@ curl https://api.anthropic.com/v1/files \
     -F 'file=@/path/to/file'
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```
 
 ---
 

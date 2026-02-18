@@ -102,7 +102,25 @@ skill = anthropic.beta.skills.delete("skill_id")
 puts(skill)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
 
 ---
 

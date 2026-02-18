@@ -73,7 +73,7 @@ Python
 
 ```shiki
 response = client.chat.completions.create(
-    model="claude-sonnet-4-5",
+    model="claude-sonnet-4-6",
     messages=...,
     extra_body={"thinking": {"type": "enabled", "budget_tokens": 2000}},
 )

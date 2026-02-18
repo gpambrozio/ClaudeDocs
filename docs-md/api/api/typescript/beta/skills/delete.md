@@ -104,7 +104,25 @@ const skill = await client.beta.skills.delete('skill_id');
 console.log(skill.id);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
 
 ---
 

@@ -97,14 +97,32 @@ Delete Skill Version
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION?beta=true \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
 
 ---
 

@@ -9,6 +9,8 @@ For complete API reference including request/response schemas and all parameters
 - [Skill Management API Reference](api/skills/list-skills.md) - CRUD operations for Skills
 - [Skill Versions API Reference](api/skills/list-skill-versions.md) - Version management
 
+This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+
 ## Quick Links
 
 [Get started with Agent Skills

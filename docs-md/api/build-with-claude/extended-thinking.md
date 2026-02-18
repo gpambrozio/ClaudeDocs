@@ -10,10 +10,11 @@ For Claude Opus 4.6, we recommend using [adaptive thinking](build-with-claude/ad
 
 Extended thinking is supported in the following models:
 
-- Claude Opus 4.6 (`claude-opus-4-6`) — [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated
+- Claude Opus 4.6 (`claude-opus-4-6`) — [adaptive thinking](build-with-claude/adaptive-thinking.md) only; manual mode (`type: "enabled"`) is deprecated
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
+- Claude Sonnet 4.6 (`claude-sonnet-4-6`) — supports both manual extended thinking with [interleaved mode](#interleaved-thinking) and [adaptive thinking](build-with-claude/adaptive-thinking.md)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Sonnet 4 (`claude-sonnet-4-20250514`)
 - Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](about-claude/model-deprecations.md))
@@ -62,7 +63,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-sonnet-4-6",
     "max_tokens": 16000,
     "thinking": {
         "type": "enabled",
@@ -102,7 +103,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#5e2d3f323b2d1e3f302a362c312e373d703d3133).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#1063717c756350717e6478627f6079733e737f7d).
 
 ### Streaming thinking
 
@@ -123,7 +124,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-sonnet-4-6",
     "max_tokens": 16000,
     "stream": true,
     "thinking": {
@@ -145,7 +146,7 @@ Example streaming output:
 
 ```shiki
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-5", "stop_reason": null, "stop_sequence": null}}
+data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-6", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": ""}}
@@ -274,17 +275,18 @@ With interleaved thinking, Claude can:
 - Chain multiple tool calls with reasoning steps in between
 - Make more nuanced decisions based on intermediate results
 
-For Claude Opus 4.6, interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) — no beta header is needed.
+**Model support:**
 
-For Claude 4 models, add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
+- **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) — no beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
+- **Claude Sonnet 4.6**: Supports the `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`). You can also use [adaptive thinking](build-with-claude/adaptive-thinking.md), which automatically enables interleaved thinking.
+- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4, Sonnet 4.5, Sonnet 4): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
-- For Claude 4 models, interleaved thinking requires the beta header `interleaved-thinking-2025-05-14`.
-- Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect.
-- On 3rd-party platforms (for example, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, or Sonnet 4, your request will fail.
+- Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect (except Opus 4.6, where it's deprecated and safely ignored).
+- On 3rd-party platforms (for example, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, Sonnet 4.5, or Sonnet 4, your request will fail.
 
 ### Tool use without interleaved thinking
 
@@ -500,11 +502,11 @@ The Messages API handles thinking differently across Claude Sonnet 3.7 and Claud
 
 See the table below for a condensed comparison:
 
-| Feature | Claude Sonnet 3.7 | Claude 4 Models (pre-Opus 4.5) | Claude Opus 4.5 | Claude Opus 4.6 ([adaptive thinking](build-with-claude/adaptive-thinking.md)) |
-| --- | --- | --- | --- | --- |
-| **Thinking Output** | Returns full thinking output | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking |
-| **Interleaved Thinking** | Not supported | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header | Automatic with adaptive thinking (no beta header needed) |
-| **Thinking Block Preservation** | Not preserved across turns | Not preserved across turns | **Preserved by default** | **Preserved by default** |
+| Feature | Claude Sonnet 3.7 | Claude 4 Models (pre-Opus 4.5) | Claude Opus 4.5 | Claude Sonnet 4.6 | Claude Opus 4.6 ([adaptive thinking](build-with-claude/adaptive-thinking.md)) |
+| --- | --- | --- | --- | --- | --- |
+| **Thinking Output** | Returns full thinking output | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking |
+| **Interleaved Thinking** | Not supported | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header or automatic with [adaptive thinking](build-with-claude/adaptive-thinking.md) | Automatic with adaptive thinking (beta header not supported) |
+| **Thinking Block Preservation** | Not preserved across turns | Not preserved across turns | **Preserved by default** | **Preserved by default** | **Preserved by default** |
 
 ### Thinking block preservation in Claude Opus 4.5 and later
 

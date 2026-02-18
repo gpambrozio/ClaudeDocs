@@ -9,8 +9,11 @@ Claude 4.6 represents the next generation of Claude models, bringing significant
 | Model | API model ID | Description |
 | --- | --- | --- |
 | Claude Opus 4.6 | `claude-opus-4-6` | Our most intelligent model for building agents and coding |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` | Our best combination of speed and intelligence |
 
 Claude Opus 4.6 supports a 200K context window (with [1M token context window](build-with-claude/context-windows.md) available in beta), 128K max output tokens, extended thinking, and all existing Claude API features.
+
+Claude Sonnet 4.6 supports a 200K context window (with [1M token context window](build-with-claude/context-windows.md) available in beta), 64K max output tokens, extended thinking, and adaptive thinking.
 
 For complete pricing and specs, see the [models overview](about-claude/models/overview.md).
 
@@ -18,9 +21,9 @@ For complete pricing and specs, see the [models overview](about-claude/models/ov
 
 ### Adaptive thinking mode
 
-[Adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) is the recommended thinking mode for Opus 4.6. Claude dynamically decides when and how much to think. At the default effort level (`high`), Claude will almost always think. At lower effort levels, it may skip thinking for simpler problems.
+[Adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) is the recommended thinking mode for Opus 4.6 and Sonnet 4.6. Claude dynamically decides when and how much to think. At the default effort level (`high`), Claude will almost always think. At lower effort levels, it may skip thinking for simpler problems.
 
-`thinking: {type: "enabled"}` and `budget_tokens` are **deprecated** on Opus 4.6. They remain functional but will be removed in a future model release. Use adaptive thinking and the [effort parameter](build-with-claude/effort.md) to control thinking depth instead. Adaptive thinking also automatically enables interleaved thinking.
+`thinking: {type: "enabled"}` and `budget_tokens` are **deprecated** on Opus 4.6 and Sonnet 4.6. They remain functional but will be removed in a future model release. Use adaptive thinking and the [effort parameter](build-with-claude/effort.md) to control thinking depth instead. Adaptive thinking also automatically enables interleaved thinking.
 
 ```shiki
 response = client.messages.create(
@@ -34,6 +37,27 @@ response = client.messages.create(
 ### Effort parameter GA
 
 The [effort parameter](build-with-claude/effort.md) is now generally available (no beta header required). A new `max` effort level provides the absolute highest capability on Opus 4.6. Combine effort with adaptive thinking for optimal cost-quality tradeoffs.
+
+Sonnet 4.6 introduces the effort parameter to the Sonnet family. We recommend setting effort to `medium` for most Sonnet 4.6 use cases to balance speed, cost, and performance.
+
+### Code execution is now free with web tools
+
+[Code execution](agents-and-tools/tool-use/code-execution-tool.md) is now free when used with [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md). When either tool is included in your API request, there are no additional charges for code execution beyond standard input and output token costs. Code execution enables dynamic filtering in web search and web fetch tools, improving accuracy while reducing token consumption. See the [code execution pricing](agents-and-tools/tool-use/code-execution-tool.md) for details on standalone usage.
+
+### Improved web search and web fetch with dynamic filtering (beta)
+
+[Web search](agents-and-tools/tool-use/web-search-tool.md) and [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) tools now support dynamic filtering in public beta with Opus 4.6 and Sonnet 4.6. Claude can write and execute code to filter results before they reach the context window, keeping only relevant information and improving accuracy while reducing token consumption. To enable dynamic filtering, use the `web_search_20260209` or `web_fetch_20260209` tool versions with the `code-execution-web-tools-2026-02-09` beta header.
+
+### Tools graduating to general availability
+
+The following tools are now generally available:
+
+- [Code execution](agents-and-tools/tool-use/code-execution-tool.md) (free with web tools)
+- [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md)
+- [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md)
+- [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)
+- [Tool use examples](agents-and-tools/tool-use/implement-tool-use.md)
+- [Memory tool](agents-and-tools/tool-use/memory-tool.md)
 
 ### Compaction API (beta)
 
@@ -74,6 +98,8 @@ Opus 4.6 supports up to 128K output tokens, doubling the previous 64K limit. Thi
 ### `interleaved-thinking-2025-05-14` beta header
 
 The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6. It is safely ignored if included, but is no longer required. [Adaptive thinking](build-with-claude/adaptive-thinking.md) automatically enables [interleaved thinking](build-with-claude/extended-thinking.md). Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests when using Opus 4.6.
+
+**Sonnet 4.6** continues to support the `interleaved-thinking-2025-05-14` beta header for use with manual extended thinking (`thinking: {type: "enabled"}`). You can use either interleaved thinking with the beta header or adaptive thinking on Sonnet 4.6.
 
 ### `output_format`
 

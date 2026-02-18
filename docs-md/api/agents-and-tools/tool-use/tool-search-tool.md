@@ -11,15 +11,9 @@ This approach solves two critical challenges as tool libraries scale:
 
 Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
-The tool search tool is currently in public beta. Include the appropriate [beta header](api/beta-headers.md) for your provider:
-
-| Provider | Beta header | Supported models |
-| --- | --- | --- |
-| Claude API Microsoft Foundry | `advanced-tool-use-2025-11-20` | Claude Opus 4.6 Claude Opus 4.5 Claude Sonnet 4.5 |
-| Google Cloud's Vertex AI | `tool-search-tool-2025-10-19` | Claude Opus 4.6 Claude Opus 4.5 Claude Sonnet 4.5 |
-| Amazon Bedrock | `tool-search-tool-2025-10-19` | Claude Opus 4.6 Claude Opus 4.5 Claude Sonnet 4.5 |
-
 Please reach out through our [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA) to share your feedback on this feature.
+
+Server-side tool search is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy. [Custom client-side tool search implementations](#custom-tool-search-implementation) use the standard Messages API and are ZDR-eligible.
 
 On Amazon Bedrock, server-side tool search is available only via the [invoke
 API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
@@ -56,7 +50,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: advanced-tool-use-2025-11-20" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -240,7 +233,7 @@ Shell
 curl https://api.anthropic.com/v1/messages \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --header "anthropic-version: 2023-06-01" \
-  --header "anthropic-beta: advanced-tool-use-2025-11-20,mcp-client-2025-11-20" \
+  --header "anthropic-beta: mcp-client-2025-11-20" \
   --header "content-type: application/json" \
   --data '{
     "model": "claude-opus-4-6",
@@ -388,9 +381,8 @@ client = anthropic.Anthropic()
 # First request with tool search
 messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
 
-response1 = client.beta.messages.create(
+response1 = client.messages.create(
     model="claude-opus-4-6",
-    betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
     messages=messages,
     tools=[
@@ -420,9 +412,8 @@ messages.append(
     }
 )
 
-response2 = client.beta.messages.create(
+response2 = client.messages.create(
     model="claude-opus-4-6",
-    betas=["advanced-tool-use-2025-11-20"],
     max_tokens=2048,
     messages=messages,
     tools=[

@@ -89,14 +89,32 @@ Delete File
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/files/$FILE_ID \
+curl https://api.anthropic.com/v1/files/$FILE_ID?beta=true \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

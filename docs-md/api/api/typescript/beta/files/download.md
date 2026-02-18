@@ -72,7 +72,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-unnamed\_schema\_2 = Response
+unnamed\_schema\_1 = Response
 
 Download File
 

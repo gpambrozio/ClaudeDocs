@@ -6,6 +6,13 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### February 17, 2026
+
+- We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](build-with-claude/extended-thinking.md) and a [1M token context window](build-with-claude/context-windows.md) (beta). See [Models & Pricing](about-claude/models.md) for details.
+- API [code execution](agents-and-tools/tool-use/code-execution-tool.md) is now **free when used with web search or web fetch**. Sandboxed code execution improves model capability and token efficiency. See the [pricing details](agents-and-tools/tool-use/code-execution-tool.md) for standalone usage.
+- The [web search tool](agents-and-tools/tool-use/web-search-tool.md) and [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) are now generally available (no beta header required). Web search and web fetch now support [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) in public beta, which uses code execution to filter results before they reach the context window for better performance and reduced token cost.
+- The [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), [web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md), [tool search tool](agents-and-tools/tool-use/tool-search-tool.md), [tool use examples](agents-and-tools/tool-use/implement-tool-use.md), and [memory tool](agents-and-tools/tool-use/memory-tool.md) are now generally available (no beta header required).
+
 ### February 7, 2026
 
 - We've launched [fast mode](build-with-claude/fast-mode.md) in research preview for Opus 4.6, providing significantly faster output token generation via the `speed` parameter. Fast mode is up to 2.5x as fast at premium pricing. Interested customers should join the [waitlist](https://claude.com/fast-mode).

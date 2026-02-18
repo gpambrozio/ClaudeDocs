@@ -105,7 +105,25 @@ public final class Main {
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
 
 ---
 

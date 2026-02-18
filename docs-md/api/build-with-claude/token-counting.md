@@ -8,6 +8,8 @@ Token counting enables you to determine the number of tokens in a message before
 - Make smart model routing decisions
 - Optimize prompts to be a specific length
 
+This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 ---
 
 ## How to count message tokens
@@ -139,7 +141,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "content-type: application/json" \
     --header "anthropic-version: 2023-06-01" \
     --data '{
-      "model": "claude-sonnet-4-5",
+      "model": "claude-sonnet-4-6",
       "thinking": {
         "type": "enabled",
         "budget_tokens": 16000

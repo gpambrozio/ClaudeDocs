@@ -754,9 +754,62 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
+type BetaCodeExecutionTool20260120 struct{…}
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+Name CodeExecution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type CodeExecution20260120
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool20260120AllowedCaller = "direct"
+
+const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -791,6 +844,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -798,6 +869,8 @@ Type CodeExecutionToolResult
 
 type BetaCodeExecutionToolResultBlockContentUnion interface{…}
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 Accepts one of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
@@ -832,9 +905,29 @@ Stdout string
 
 Type CodeExecutionResult
 
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
+
 type BetaCodeExecutionToolResultBlockParamResp struct{…}
 
 Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -869,6 +962,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -899,6 +1010,8 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 type BetaCodeExecutionToolResultBlockParamContentUnionResp interface{…}
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 Accepts one of the following:
 
 type BetaCodeExecutionToolResultErrorParamResp struct{…}
@@ -932,6 +1045,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 type BetaCodeExecutionToolResultError struct{…}
 
@@ -1338,6 +1469,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -1384,6 +1521,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -1425,6 +1568,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -1506,9 +1675,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1543,6 +1740,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -2464,6 +2679,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaToolResultBlockParamResp struct{…}
 
 ToolUseID string
@@ -3150,6 +3371,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlockParamResp struct{…}
 
 Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
@@ -3214,6 +3441,32 @@ Accepts one of the following:
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlockParamResp struct{…}
 
@@ -3529,9 +3782,37 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlockParamResp struct{…}
 
 Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -3566,6 +3847,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -4618,6 +4917,42 @@ The title of the document
 
 Type Document
 
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
+
 type BetaFileDocumentSource struct{…}
 
 FileID string
@@ -5464,6 +5799,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -5510,6 +5851,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -5551,6 +5898,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -5632,9 +6005,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -5669,6 +6070,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -6029,6 +6448,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -7099,6 +7522,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaToolResultBlockParamResp struct{…}
 
 ToolUseID string
@@ -7785,6 +8214,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlockParamResp struct{…}
 
 Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
@@ -7849,6 +8284,32 @@ Accepts one of the following:
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlockParamResp struct{…}
 
@@ -8164,9 +8625,37 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlockParamResp struct{…}
 
 Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -8201,6 +8690,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlockParamResp](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -9171,6 +9678,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -9217,6 +9730,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -9258,6 +9777,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -9339,9 +9884,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -9376,6 +9949,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -10120,6 +10711,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -10166,6 +10763,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -10207,6 +10810,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -10288,9 +10917,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -10325,6 +10982,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -10685,6 +11360,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -11200,6 +11879,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -11246,6 +11931,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -11287,6 +11978,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -11368,9 +12085,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -11405,6 +12150,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -11765,6 +12528,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -12433,6 +13200,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -12479,6 +13252,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -12520,6 +13299,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -12601,9 +13406,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -12638,6 +13471,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -13638,6 +14489,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUsage struct{…}
 
 WebFetchRequests int64
@@ -13693,6 +14550,12 @@ Tool invocation generated by a server-side tool.
 ToolID string
 
 Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaServerToolUseBlockParamResp struct{…}
 
@@ -13762,6 +14625,12 @@ Tool invocation generated by a server-side tool.
 ToolID string
 
 Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaSignatureDelta struct{…}
 
@@ -16200,10 +17069,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type BetaToolUnion interface{…}
 
-Configuration for a group of tools from an MCP server.
-
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
@@ -16452,6 +17318,57 @@ Accepts one of the following:
 const BetaCodeExecutionTool20250825AllowedCallerDirect BetaCodeExecutionTool20250825AllowedCaller = "direct"
 
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+type BetaCodeExecutionTool20260120 struct{…}
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+Name CodeExecution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type CodeExecution20260120
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool20260120AllowedCaller = "direct"
+
+const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -16997,7 +17914,7 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation BetaWebSearchTool20250305UserLocationoptional
+UserLocation [BetaUserLocation](api/beta.md)optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -17036,6 +17953,160 @@ Accepts one of the following:
 const BetaWebFetchTool20250910AllowedCallerDirect BetaWebFetchTool20250910AllowedCaller = "direct"
 
 const BetaWebFetchTool20250910AllowedCallerCodeExecution20250825 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20250825"
+
+AllowedDomains []stringoptional
+
+List of domains to allow fetching from
+
+BlockedDomains []stringoptional
+
+List of domains to block fetching from
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Enabled booloptional
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxContentTokens int64optional
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+type BetaWebSearchTool20260209 struct{…}
+
+Name WebSearch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebSearch20260209
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209AllowedCaller = "direct"
+
+const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+AllowedDomains []stringoptional
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+BlockedDomains []stringoptional
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+UserLocation [BetaUserLocation](api/beta.md)optional
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+Type Approximate
+
+City stringoptional
+
+The city of the user.
+
+Country stringoptional
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Region stringoptional
+
+The region of the user.
+
+Timezone stringoptional
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+type BetaWebFetchTool20260209 struct{…}
+
+Name WebFetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebFetch20260209
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaWebFetchTool20260209AllowedCallerDirect BetaWebFetchTool20260209AllowedCaller = "direct"
+
+const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
 
 AllowedDomains []stringoptional
 
@@ -17282,6 +18353,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaToolUseBlockParamResp struct{…}
 
 ID string
@@ -17334,6 +18411,12 @@ Tool invocation generated by a server-side tool.
 ToolID string
 
 Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaToolUsesKeep struct{…}
 
@@ -17510,6 +18593,26 @@ Accepts one of the following:
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
 const BetaUsageSpeedFast BetaUsageSpeed = "fast"
+
+type BetaUserLocation struct{…}
+
+Type Approximate
+
+City stringoptional
+
+The city of the user.
+
+Country stringoptional
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Region stringoptional
+
+The region of the user.
+
+Timezone stringoptional
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 type BetaWebFetchBlock struct{…}
 
@@ -17885,6 +18988,77 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
+type BetaWebFetchTool20260209 struct{…}
+
+Name WebFetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebFetch20260209
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaWebFetchTool20260209AllowedCallerDirect BetaWebFetchTool20260209AllowedCaller = "direct"
+
+const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+AllowedDomains []stringoptional
+
+List of domains to allow fetching from
+
+BlockedDomains []stringoptional
+
+List of domains to block fetching from
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Enabled booloptional
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxContentTokens int64optional
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
@@ -17964,6 +19138,32 @@ Fetched content URL
 ToolUseID string
 
 Type WebFetchToolResult
+
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlockParamResp struct{…}
 
@@ -18279,6 +19479,32 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
@@ -18432,7 +19658,90 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation BetaWebSearchTool20250305UserLocationoptional
+UserLocation [BetaUserLocation](api/beta.md)optional
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+Type Approximate
+
+City stringoptional
+
+The city of the user.
+
+Country stringoptional
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Region stringoptional
+
+The region of the user.
+
+Timezone stringoptional
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+type BetaWebSearchTool20260209 struct{…}
+
+Name WebSearch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebSearch20260209
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209AllowedCaller = "direct"
+
+const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+AllowedDomains []stringoptional
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+BlockedDomains []stringoptional
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+UserLocation [BetaUserLocation](api/beta.md)optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -18515,6 +19824,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebSearchToolResultBlockContentUnion interface{…}
 
@@ -18616,6 +19951,32 @@ Accepts one of the following:
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebSearchToolResultBlockParamContentUnionResp interface{…}
 
@@ -19134,6 +20495,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -19180,6 +20547,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -19221,6 +20594,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -19302,9 +20701,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -19339,6 +20766,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -19699,6 +21144,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -20320,6 +21769,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -20366,6 +21821,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -20407,6 +21868,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -20488,9 +21975,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -20525,6 +22040,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -20885,6 +22418,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
@@ -21468,6 +23005,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaServerToolUseBlock struct{…}
 
 ID string
@@ -21514,6 +23057,12 @@ ToolID string
 
 Type CodeExecution20250825
 
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
@@ -21555,6 +23104,32 @@ URL string
 ToolUseID string
 
 Type WebSearchToolResult
+
+Caller BetaWebSearchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
 
 type BetaWebFetchToolResultBlock struct{…}
 
@@ -21636,9 +23211,37 @@ ToolUseID string
 
 Type WebFetchToolResult
 
+Caller BetaWebFetchToolResultBlockCallerUnionoptional
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+type BetaDirectCaller struct{…}
+
+Tool invocation directly from the model.
+
+Type Direct
+
+type BetaServerToolCaller struct{…}
+
+Tool invocation generated by a server-side tool.
+
+ToolID string
+
+Type CodeExecution20250825
+
+type BetaServerToolCaller20260120 struct{…}
+
+ToolID string
+
+Type CodeExecution20260120
+
 type BetaCodeExecutionToolResultBlock struct{…}
 
 Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -21673,6 +23276,24 @@ Stderr string
 Stdout string
 
 Type CodeExecutionResult
+
+type BetaEncryptedCodeExecutionResultBlock struct{…}
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Content [][BetaCodeExecutionOutputBlock](api/beta.md)
+
+FileID string
+
+Type CodeExecutionOutput
+
+EncryptedStdout string
+
+ReturnCode int64
+
+Stderr string
+
+Type EncryptedCodeExecutionResult
 
 ToolUseID string
 
@@ -22033,6 +23654,10 @@ Accepts one of the following:
 const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 

@@ -99,12 +99,34 @@ Get a Model
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/models/$MODEL_ID \
+curl https://api.anthropic.com/v1/models/$MODEL_ID?beta=true \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
+  "type": "model"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
+  "type": "model"
+}
+```
 
 ---
 

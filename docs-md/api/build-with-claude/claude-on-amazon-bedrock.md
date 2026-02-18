@@ -6,6 +6,8 @@ Calling Claude through Bedrock slightly differs from how you would call Claude w
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
+The PHP SDK does not currently support Amazon Bedrock. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
+
 ## Install and configure the AWS CLI
 
 1. [Install a version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) at or newer than version `2.13.23`
@@ -38,6 +40,14 @@ Go
 
 Go
 
+C#
+
+C#
+
+Ruby
+
+Ruby
+
 Boto3 (Python)
 
 Boto3 (Python)
@@ -57,6 +67,7 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
+| Claude Sonnet 4.6 | anthropic.claude-sonnet-4-6 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4 | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
 | Claude Sonnet 3.7 ⚠️ | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
@@ -109,7 +120,39 @@ message = client.messages.create(
 print(message.content)
 ```
 
-See our [client SDKs](api/client-sdks.md) for more details, and the official Bedrock docs [here](https://docs.aws.amazon.com/bedrock/).
+See the [client SDKs](api/client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+
+### Bearer token authentication
+
+You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
+
+Bearer token authentication is supported in the C#, Go, and Java SDKs. The Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
+
+The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which is automatically detected by `fromEnv()` credential resolution.
+
+To provide a token programmatically:
+
+C#
+
+```shiki
+using Anthropic.Bedrock;
+using Anthropic.Models.Messages;
+
+var client = new AnthropicBedrockClient(
+    new AnthropicBedrockApiTokenCredentials
+    {
+        BearerToken = "your-bearer-token",
+        Region = "us-east-1",
+    }
+);
+
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Hello!" }],
+});
+```
 
 ## Activity logging
 
@@ -121,7 +164,7 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 
 ## Feature support
 
-You can find all the features currently supported on Bedrock [here](api/overview.md).
+For all currently supported features on Bedrock, see [API features overview](api/overview.md).
 
 ### PDF Support on Bedrock
 

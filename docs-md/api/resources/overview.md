@@ -4,7 +4,9 @@ Model cards
 
 [Claude Opus 4.6 System Card
 
-Detailed documentation of Claude Opus 4.6.](https://www.anthropic.com/claude-opus-4-6-system-card)[Claude Opus 4.5 System Card
+Detailed documentation of Claude Opus 4.6.](https://www.anthropic.com/claude-opus-4-6-system-card)[Claude Sonnet 4.6 System Card
+
+Detailed documentation of Claude Sonnet 4.6.](https://www.anthropic.com/claude-sonnet-4-6-system-card)[Claude Opus 4.5 System Card
 
 Detailed documentation of Claude Opus 4.5.](https://www.anthropic.com/claude-opus-4-5-system-card)[Claude Haiku 4.5 System Card
 

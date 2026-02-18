@@ -102,7 +102,25 @@ beta_deleted_message_batch = anthropic.beta.messages.batches.delete("message_bat
 puts(beta_deleted_message_batch)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
 
 ---
 

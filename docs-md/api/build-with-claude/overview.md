@@ -27,9 +27,9 @@ Built-in tools that Claude invokes via `tool_use`. Server-side tools are run by 
 
 | Feature | Description | Availability |
 | --- | --- | --- |
-| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run Python code in a sandboxed environment for advanced data analysis. | Claude API (Beta)  Microsoft Foundry (Beta) |
-| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
-| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | Claude API (Beta)  Microsoft Foundry (Beta) |
+| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Claude API  Microsoft Foundry |
+| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry |
+| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | Claude API  Microsoft Foundry |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | Claude API  Google Cloud's Vertex AI  Microsoft Foundry |
 
 ### Client-side tools
@@ -49,8 +49,8 @@ Infrastructure that supports discovering, orchestrating, and scaling tool use.
 | [Agent Skills](agents-and-tools/agent-skills/overview.md) | Extend Claude's capabilities with Skills. Use pre-built Skills (PowerPoint, Excel, Word, PDF) or create custom Skills with instructions and scripts. Skills use progressive disclosure to efficiently manage context. | Claude API (Beta)  Microsoft Foundry (Beta) |
 | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | Stream tool use parameters without buffering/JSON validation, reducing latency for receiving large parameters. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry |
 | [MCP connector](agents-and-tools/mcp-connector.md) | Connect to remote [MCP](mcp.md) servers directly from the Messages API without a separate MCP client. | Claude API (Beta)  Microsoft Foundry (Beta) |
-| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | Enable Claude to call your tools programmatically from within code execution containers, reducing latency and token consumption for multi-tool workflows. | Claude API (Beta)  Microsoft Foundry (Beta) |
-| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | Scale to thousands of tools by dynamically discovering and loading tools on-demand using regex-based search, optimizing context usage and improving tool selection accuracy. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
+| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | Enable Claude to call your tools programmatically from within code execution containers, reducing latency and token consumption for multi-tool workflows. | Claude API  Microsoft Foundry |
+| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | Scale to thousands of tools by dynamically discovering and loading tools on-demand using regex-based search, optimizing context usage and improving tool selection accuracy. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry |
 
 ## Context management
 

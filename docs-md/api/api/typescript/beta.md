@@ -1020,9 +1020,62 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
+BetaCodeExecutionTool20260120 { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260120"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1057,12 +1110,32 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaCodeExecutionToolResultBlockContent = [BetaCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
+BetaCodeExecutionToolResultBlockContent = [BetaCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }  | [BetaEncryptedCodeExecutionResultBlock](api/beta.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1098,9 +1171,29 @@ stdout: string
 
 type: "code\_execution\_result"
 
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
 BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1135,6 +1228,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -1163,7 +1274,9 @@ Accepts one of the following:
 
 "1h"
 
-BetaCodeExecutionToolResultBlockParamContent = [BetaCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
+BetaCodeExecutionToolResultBlockParamContent = [BetaCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }  | [BetaEncryptedCodeExecutionResultBlockParam](api/beta.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1198,6 +1311,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 BetaCodeExecutionToolResultError { error\_code, type }
 
@@ -1584,7 +1715,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1603,6 +1734,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -1630,7 +1767,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1650,7 +1787,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -1692,7 +1835,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -1772,9 +1941,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1809,6 +2006,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -2708,7 +2923,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -2727,6 +2942,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
 
@@ -3392,7 +3613,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3412,7 +3633,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
@@ -3477,7 +3704,33 @@ Accepts one of the following:
 
 "1h"
 
-BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
@@ -3789,9 +4042,37 @@ Accepts one of the following:
 
 "1h"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -3826,6 +4107,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -4878,6 +5177,42 @@ The title of the document
 
 type: "document"
 
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
+
 BetaFileDocumentSource { file\_id, type }
 
 file\_id: string
@@ -5704,7 +6039,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5723,6 +6058,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -5750,7 +6091,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5770,7 +6111,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -5812,7 +6159,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -5892,9 +6265,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -5929,6 +6330,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -6278,11 +6697,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -7331,7 +7754,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -7350,6 +7773,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
 
@@ -8015,7 +8444,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -8035,7 +8464,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
@@ -8100,7 +8535,33 @@ Accepts one of the following:
 
 "1h"
 
-BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
@@ -8412,9 +8873,37 @@ Accepts one of the following:
 
 "1h"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -8449,6 +8938,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -9399,7 +9906,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9418,6 +9925,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -9445,7 +9958,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9465,7 +9978,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -9507,7 +10026,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -9587,9 +10132,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -9624,6 +10197,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -10348,7 +10939,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10367,6 +10958,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -10394,7 +10991,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10414,7 +11011,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -10456,7 +11059,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -10536,9 +11165,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -10573,6 +11230,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -10922,11 +11597,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -11422,7 +12101,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11441,6 +12120,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -11468,7 +12153,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11488,7 +12173,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -11530,7 +12221,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -11610,9 +12327,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -11647,6 +12392,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -11996,11 +12759,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -12649,7 +13416,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -12668,6 +13435,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -12695,7 +13468,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -12715,7 +13488,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -12757,7 +13536,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -12837,9 +13642,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -12874,6 +13707,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -13872,6 +14723,12 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaServerToolUsage { web\_fetch\_requests, web\_search\_requests }
 
 web\_fetch\_requests: number
@@ -13908,7 +14765,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -13927,6 +14784,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlockParam { id, input, name, 3 more }
 
@@ -13977,7 +14840,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -13996,6 +14859,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaSignatureDelta { signature, type }
 
@@ -16430,12 +17299,9 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 15 more
+BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 18 more
 
-Configuration for a group of tools from an MCP server.
-
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
@@ -16676,6 +17542,57 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250825"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+BetaCodeExecutionTool20260120 { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260120"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
 
@@ -17229,7 +18146,7 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location?: UserLocation | null
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -17260,6 +18177,160 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20250910"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains?: Array<string> | null
+
+List of domains to allow fetching from
+
+blocked\_domains?: Array<string> | null
+
+List of domains to block fetching from
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled?: boolean
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens?: number | null
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+BetaWebSearchTool20260209 { name, type, allowed\_callers, 7 more }
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260209"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains?: Array<string> | null
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains?: Array<string> | null
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city?: string | null
+
+The city of the user.
+
+country?: string | null
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region?: string | null
+
+The region of the user.
+
+timezone?: string | null
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+BetaWebFetchTool20260209 { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260209"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
 
@@ -17494,7 +18565,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17513,6 +18584,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaToolUseBlockParam { id, input, name, 3 more }
 
@@ -17547,7 +18624,7 @@ Accepts one of the following:
 
 "1h"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17566,6 +18643,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaToolUsesKeep { type, value }
 
@@ -17742,6 +18825,26 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+BetaUserLocation { type, city, country, 2 more }
+
+type: "approximate"
+
+city?: string | null
+
+The city of the user.
+
+country?: string | null
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region?: string | null
+
+The region of the user.
+
+timezone?: string | null
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 BetaWebFetchBlock { content, retrieved\_at, type, url }
 
@@ -18115,7 +19218,78 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+BetaWebFetchTool20260209 { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260209"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains?: Array<string> | null
+
+List of domains to allow fetching from
+
+blocked\_domains?: Array<string> | null
+
+List of domains to block fetching from
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled?: boolean
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens?: number | null
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -18195,7 +19369,33 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
@@ -18507,6 +19707,32 @@ Accepts one of the following:
 
 "1h"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaWebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
@@ -18660,7 +19886,90 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location?: UserLocation | null
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city?: string | null
+
+The city of the user.
+
+country?: string | null
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region?: string | null
+
+The region of the user.
+
+timezone?: string | null
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+BetaWebSearchTool20260209 { name, type, allowed\_callers, 7 more }
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260209"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains?: Array<string> | null
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains?: Array<string> | null
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location?: [BetaUserLocation](api/beta.md) { type, city, country, 2 more }  | null
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -18702,7 +20011,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -18744,6 +20053,32 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaWebSearchToolResultBlockContent = [BetaWebSearchToolResultError](api/beta.md) { error\_code, type }  | Array<[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } >
 
 Accepts one of the following:
@@ -18780,7 +20115,7 @@ type: "web\_search\_result"
 
 url: string
 
-BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
@@ -18844,6 +20179,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaWebSearchToolResultBlockParamContent = Array<[BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more } > | [BetaWebSearchToolRequestError](api/beta.md) { error\_code, type }
 
@@ -19342,7 +20703,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19361,6 +20722,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -19388,7 +20755,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19408,7 +20775,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -19450,7 +20823,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -19530,9 +20929,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -19567,6 +20994,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -19916,11 +21361,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -20522,7 +21971,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -20541,6 +21990,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -20568,7 +22023,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -20588,7 +22043,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -20630,7 +22091,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -20710,9 +22197,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -20747,6 +22262,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -21096,11 +22629,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -21664,7 +23201,7 @@ name: string
 
 type: "tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -21683,6 +23220,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: string
 
 type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
 
 BetaServerToolUseBlock { id, input, name, 2 more }
 
@@ -21710,7 +23253,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -21730,7 +23273,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaWebSearchToolResultBlock { content, tool\_use\_id, type }
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -21772,7 +23321,33 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-BetaWebFetchToolResultBlock { content, tool\_use\_id, type }
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
+BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
@@ -21852,9 +23427,37 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
+caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/beta.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta.md) { tool\_id, type }
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+BetaDirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: "direct"
+
+BetaServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: string
+
+type: "code\_execution\_20250825"
+
+BetaServerToolCaller20260120 { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -21889,6 +23492,24 @@ stderr: string
 stdout: string
 
 type: "code\_execution\_result"
+
+BetaEncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array<[BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type } >
+
+file\_id: string
+
+type: "code\_execution\_output"
+
+encrypted\_stdout: string
+
+return\_code: number
+
+stderr: string
+
+type: "encrypted\_code\_execution\_result"
 
 tool\_use\_id: string
 
@@ -22238,11 +23859,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-opus-4-5-20251101" | "claude-opus-4-5" | 18 more
+"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-opus-4-5-20251101" | 19 more
 
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 

@@ -4,7 +4,7 @@ Copy page
 
 This guide provides actionable tips to keep Claude in character, even during long, complex interactions.
 
-Prefilling is deprecated and not supported on Claude Opus 4.6 and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
+Prefilling is deprecated and not supported on Claude Opus 4.6, Claude Sonnet 4.6, and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
 
 - **Use system prompts to set the role:** Use [system prompts](build-with-claude/prompt-engineering/system-prompts.md) to define Claude's role and personality. This sets a strong foundation for consistent responses.
 

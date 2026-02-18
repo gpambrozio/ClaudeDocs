@@ -6,9 +6,9 @@ The memory tool enables Claude to store and retrieve information across conversa
 
 The memory tool operates client-side—you control where and how the data is stored through your own infrastructure.
 
-The memory tool is currently in beta. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
-
 Please reach out through our [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+
+This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Use cases
 
@@ -101,6 +101,7 @@ The memory tool is available on:
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
+- Claude Sonnet 4.6 (`claude-sonnet-4-6`)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Sonnet 4 (`claude-sonnet-4-20250514`)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
@@ -109,9 +110,8 @@ The memory tool is available on:
 
 To use the memory tool:
 
-1. Include the beta header `context-management-2025-06-27` in your API requests
-2. Add the memory tool to your request
-3. Implement client-side handlers for memory operations
+1. Add the memory tool to your request
+2. Implement client-side handlers for memory operations
 
 To handle memory tool operations in your application, you need to implement handlers for each memory command. Our SDKs provide memory tool helpers that handle the tool interface—you can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
 
@@ -129,7 +129,6 @@ curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
         "model": "claude-opus-4-6",
         "max_tokens": 2048,
@@ -411,7 +410,7 @@ To use both features together:
 Python
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
     messages=[...],
@@ -419,7 +418,6 @@ response = client.beta.messages.create(
         {"type": "memory_20250818", "name": "memory"},
         # Your other tools
     ],
-    betas=["context-management-2025-06-27"],
     context_management={
         "edits": [
             {

@@ -115,7 +115,25 @@ public final class Main {
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
 
 ---
 

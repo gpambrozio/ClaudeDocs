@@ -1020,9 +1020,62 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaCodeExecutionTool20260120: …
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260120"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1057,6 +1110,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -1064,6 +1135,8 @@ type: Literal["code\_execution\_tool\_result"]
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 Accepts one of the following:
 
 class BetaCodeExecutionToolResultError: …
@@ -1098,9 +1171,29 @@ stdout: str
 
 type: Literal["code\_execution\_result"]
 
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
 class BetaCodeExecutionToolResultBlockParam: …
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1135,6 +1228,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -1165,6 +1276,8 @@ Accepts one of the following:
 
 [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 Accepts one of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
@@ -1198,6 +1311,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 class BetaCodeExecutionToolResultError: …
 
@@ -1604,6 +1735,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -1650,6 +1787,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -1691,6 +1834,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -1772,9 +1941,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1809,6 +2006,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -2730,6 +2945,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaToolResultBlockParam: …
 
 tool\_use\_id: str
@@ -3418,6 +3639,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
@@ -3482,6 +3709,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlockParam: …
 
@@ -3797,9 +4050,37 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlockParam: …
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -3834,6 +4115,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -4886,6 +5185,42 @@ The title of the document
 
 type: Literal["document"]
 
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
 class BetaFileDocumentSource: …
 
 file\_id: str
@@ -5732,6 +6067,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -5778,6 +6119,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -5819,6 +6166,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -5900,9 +6273,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -5937,6 +6338,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -6286,13 +6705,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -6319,6 +6739,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -7391,6 +7815,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaToolResultBlockParam: …
 
 tool\_use\_id: str
@@ -8079,6 +8509,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
@@ -8143,6 +8579,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlockParam: …
 
@@ -8458,9 +8920,37 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlockParam: …
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -8495,6 +8985,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlockParam](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -9465,6 +9973,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -9511,6 +10025,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -9552,6 +10072,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -9633,9 +10179,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -9670,6 +10244,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -10414,6 +11006,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -10460,6 +11058,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -10501,6 +11105,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -10582,9 +11212,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -10619,6 +11277,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -10968,13 +11644,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -11001,6 +11678,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -11516,6 +12197,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -11562,6 +12249,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -11603,6 +12296,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -11684,9 +12403,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -11721,6 +12468,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -12070,13 +12835,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -12103,6 +12869,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -12771,6 +13541,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -12817,6 +13593,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -12858,6 +13640,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -12939,9 +13747,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -12976,6 +13812,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -13976,6 +14830,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUsage: …
 
 web\_fetch\_requests: int
@@ -14031,6 +14891,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaServerToolUseBlockParam: …
 
@@ -14100,6 +14966,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaSignatureDelta: …
 
@@ -16540,10 +17412,7 @@ When true, guarantees schema validation on tool names and inputs
 
 [BetaToolUnion](api/beta.md)
 
-Configuration for a group of tools from an MCP server.
-
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
@@ -16784,6 +17653,57 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250825"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class BetaCodeExecutionTool20260120: …
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260120"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -17337,7 +18257,7 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[UserLocation]
+user\_location: Optional[BetaUserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -17368,6 +18288,160 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20250910"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[BetaCitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class BetaWebSearchTool20260209: …
+
+name: Literal["web\_search"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_search\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Optional[List[str]]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: Optional[BetaUserLocation]
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class BetaWebFetchTool20260209: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
 
@@ -17622,6 +18696,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaToolUseBlockParam: …
 
 id: str
@@ -17674,6 +18754,12 @@ Tool invocation generated by a server-side tool.
 tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaToolUsesKeep: …
 
@@ -17850,6 +18936,26 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+class BetaUserLocation: …
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class BetaWebFetchBlock: …
 
@@ -18225,6 +19331,77 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaWebFetchTool20260209: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[BetaCitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaWebFetchToolResultBlock: …
 
 content: Content
@@ -18304,6 +19481,32 @@ Fetched content URL
 tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlockParam: …
 
@@ -18619,6 +19822,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
@@ -18772,7 +20001,90 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[UserLocation]
+user\_location: Optional[BetaUserLocation]
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class BetaWebSearchTool20260209: …
+
+name: Literal["web\_search"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_search\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Optional[List[str]]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: Optional[BetaUserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -18855,6 +20167,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 [BetaWebSearchToolResultBlockContent](api/beta.md)
 
@@ -18956,6 +20294,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
@@ -19474,6 +20838,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -19520,6 +20890,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -19561,6 +20937,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -19642,9 +21044,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -19679,6 +21109,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -20028,13 +21476,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -20061,6 +21510,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -20682,6 +22135,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -20728,6 +22187,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -20769,6 +22234,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -20850,9 +22341,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -20887,6 +22406,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -21236,13 +22773,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -21269,6 +22807,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -21852,6 +23394,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaServerToolUseBlock: …
 
 id: str
@@ -21898,6 +23446,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
@@ -21939,6 +23493,32 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class BetaWebFetchToolResultBlock: …
 
@@ -22020,9 +23600,37 @@ tool\_use\_id: str
 
 type: Literal["web\_fetch\_tool\_result"]
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class BetaServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class BetaServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class BetaCodeExecutionToolResultBlock: …
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -22057,6 +23665,24 @@ stderr: str
 stdout: str
 
 type: Literal["code\_execution\_result"]
+
+class BetaEncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[BetaCodeExecutionOutputBlock](api/beta.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
 
 tool\_use\_id: str
 
@@ -22406,13 +24032,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -22439,6 +24066,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 

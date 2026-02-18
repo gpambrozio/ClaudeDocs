@@ -227,6 +227,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 | Claude Opus 4.5 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.1 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
+| Claude Sonnet 4.6 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Sonnet 4.5 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Sonnet 4 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)) | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |

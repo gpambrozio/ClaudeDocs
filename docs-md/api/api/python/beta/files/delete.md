@@ -101,7 +101,25 @@ deleted_file = client.beta.files.delete(
 print(deleted_file.id)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

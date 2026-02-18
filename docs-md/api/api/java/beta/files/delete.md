@@ -101,7 +101,25 @@ public final class Main {
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

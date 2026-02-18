@@ -19,7 +19,7 @@ Client tools (both Anthropic-defined and user-defined) are specified in the `too
 | `name` | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`. |
 | `description` | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |
 | `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool. |
-| `input_examples` | (Optional, beta) An array of example input objects to help Claude understand how to use the tool. See [Providing tool use examples](#providing-tool-use-examples). |
+| `input_examples` | (Optional) An array of example input objects to help Claude understand how to use the tool. See [Providing tool use examples](#providing-tool-use-examples). |
 
 ### Example simple tool definition
 
@@ -46,7 +46,7 @@ To get the best performance out of Claude when using tools, follow these guideli
   - When it should be used (and when it shouldn't)
   - What each parameter means and how it affects the tool's behavior
   - Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.
-- **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field (beta) to provide schema-validated examples. See [Providing tool use examples](#providing-tool-use-examples) for details.
+- **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field to provide schema-validated examples. See [Providing tool use examples](#providing-tool-use-examples) for details.
 
 ### Example of a good tool description
 
@@ -57,13 +57,6 @@ The good description clearly explains what the tool does, when to use it, what d
 ## Providing tool use examples
 
 You can provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.
-
-Tool use examples is a beta feature. Include the appropriate [beta header](api/beta-headers.md) for your provider:
-
-| Provider | Beta header | Supported models |
-| --- | --- | --- |
-| Claude API, Microsoft Foundry | `advanced-tool-use-2025-11-20` | All models |
-| Vertex AI, Amazon Bedrock | `tool-examples-2025-10-29` | Claude Opus 4.6, Claude Opus 4.5 |
 
 ### Basic usage
 
@@ -76,10 +69,9 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
-    betas=["advanced-tool-use-2025-11-20"],
     tools=[
         {
             "name": "get_weather",

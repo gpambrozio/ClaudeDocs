@@ -4,13 +4,9 @@ Copy page
 
 Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](agents-and-tools/tool-use/code-execution-tool.md) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window.
 
-Programmatic tool calling is currently in public beta.
-
-To use this feature, add the `"advanced-tool-use-2025-11-20"` [beta header](api/beta-headers.md) to your API requests.
-
 This feature requires the code execution tool to be enabled.
 
-Please reach out through our [feedback form](https://forms.gle/MVGTnrHe73HpMiho8) to share your feedback on this feature.
+This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 
@@ -19,6 +15,7 @@ Programmatic tool calling is available on the following models:
 | Model | Tool Version |
 | --- | --- |
 | Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825` |
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
 
@@ -34,7 +31,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: advanced-tool-use-2025-11-20" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -169,9 +165,8 @@ Provide detailed descriptions of your tool's output format in the tool descripti
 Python
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
-    betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     messages=[
         {
@@ -237,9 +232,8 @@ Include the full conversation history plus your tool result:
 Python
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
-    betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[
@@ -442,7 +436,7 @@ When all tool calls are satisfied and code completes:
 | --- | --- | --- |
 | `invalid_tool_input` | Tool input doesn't match schema | Validate your tool's input\_schema |
 | `tool_not_allowed` | Tool doesn't allow the requested caller type | Check `allowed_callers` includes the right contexts |
-| `missing_beta_header` | PTC beta header not provided | Add both beta headers to your request |
+| `missing_beta_header` | Required beta header not provided | Add the required beta headers to your request |
 
 ### Container expiration during tool call
 
@@ -589,17 +583,12 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 **"Tool not allowed" error**
 
 - Verify your tool definition includes `"allowed_callers": ["code_execution_20250825"]`
-- Check that you're using the correct beta headers
 
 **Container expiration**
 
 - Ensure you respond to tool calls within the container's lifetime (~4.5 minutes)
 - Monitor the `expires_at` field in responses
 - Consider implementing faster tool execution
-
-**Beta header issues**
-
-- You need the header: `"advanced-tool-use-2025-11-20"`
 
 **Tool result not parsed correctly**
 

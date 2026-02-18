@@ -4,7 +4,9 @@ Copy page
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. Claude automatically cites sources from search results as part of its answer.
 
-Please reach out through our [feedback form](https://forms.gle/sWjBtsrNEY2oKGuE8) to share your experience with the web search tool.
+The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Opus 4.6 and Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
+
+This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Supported models
 
@@ -14,6 +16,7 @@ Web search is available on:
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
+- Claude Sonnet 4.6 (`claude-sonnet-4-6`)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Sonnet 4 (`claude-sonnet-4-20250514`)
 - Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)) (`claude-3-7-sonnet-20250219`)
@@ -27,6 +30,47 @@ When you add the web search tool to your API request:
 1. Claude decides when to search based on the prompt.
 2. The API executes the searches and provides Claude with the results. This process may repeat multiple times throughout a single request.
 3. At the end of its turn, Claude provides a final response with cited sources.
+
+### Dynamic filtering with Opus 4.6 and Sonnet 4.6
+
+Web search is a token-intensive task. With basic web search, Claude needs to pull search results into context, fetch full HTML from multiple websites, and reason over all of it before arriving at an answer. Often, much of this content is irrelevant, which can degrade response quality.
+
+With the `web_search_20260209` tool version, Claude can write and execute code to post-process query results. Instead of reasoning over full HTML files, Claude dynamically filters search results before loading them into context, keeping only what's relevant and discarding the rest.
+
+Dynamic filtering is particularly effective for:
+
+- Searching through technical documentation
+- Literature review and citation verification
+- Technical research
+- Response grounding and verification
+
+Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The improved web search tool is available on the Claude API and Microsoft Azure. On Google Vertex AI, the basic web search tool (without dynamic filtering) is available.
+
+To enable dynamic filtering, use the `web_search_20260209` tool version with the `code-execution-web-tools-2026-02-09` beta header:
+
+Shell
+
+```shiki
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "anthropic-beta: code-execution-web-tools-2026-02-09" \
+    --header "content-type: application/json" \
+    --data '{
+        "model": "claude-opus-4-6",
+        "max_tokens": 4096,
+        "messages": [
+            {
+                "role": "user",
+                "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
+            }
+        ],
+        "tools": [{
+            "type": "web_search_20260209",
+            "name": "web_search"
+        }]
+    }'
+```
 
 ## How to use web search
 

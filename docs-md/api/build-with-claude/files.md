@@ -6,6 +6,8 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 The Files API is currently in beta. Please reach out through our [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
 
+This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+
 ## Supported models
 
 Referencing a `file_id` in a Messages request is supported in all models that support the given file type. For example, [images](build-with-claude/vision.md) are supported in all Claude 3+ models, [PDFs](build-with-claude/pdf-support.md) in all Claude 3.5+ models, and [various other file types](agents-and-tools/tool-use/code-execution-tool.md) for the code execution tool in Claude Haiku 4.5 plus all Claude 3.7+ models.
@@ -281,7 +283,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#493a28252c3a0928273d213b2639202a672a2624) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#681b09040d1b2809061c001a0718010b460b0705) if you need higher limits for your use case
 
 Was this page helpful?
 

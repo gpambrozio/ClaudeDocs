@@ -7,11 +7,11 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
-The `output_format` parameter has been moved to `output_config.format`. The old `output_format` parameter still works temporarily but is deprecated and will be removed in a future API version. Update your code to use `output_config: {format: {...}}` instead.
-
 These features can be used independently or together in the same request.
 
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
+
+Prompts and responses using structured outputs are processed with [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). However, the JSON schema itself is temporarily cached for up to 24 hours for optimization purposes. No prompt or response data is retained.
 
 **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The old beta header (`structured-outputs-2025-11-13`) and `output_format` parameter will continue working for a transition period. See code examples below for the updated API shape.
 
@@ -113,18 +113,19 @@ SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `
 
 #### Using native schema definitions
 
-Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language. Each SDK provides class-based or library-based schema support:
+Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
-- **Python**: [Pydantic](https://docs.pydantic.dev/) models
-- **TypeScript**: [Zod](https://zod.dev/) schemas
-- **Java**: Plain Java classes with annotation support (see [Java SDK structured outputs](api/sdks/java.md))
-- **Ruby**: `Anthropic::BaseModel` classes (see [Ruby SDK](api/sdks/ruby.md))
+- **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
+- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
+- **Java**: Plain Java classes with automatic schema derivation via `outputFormat(Class<T>)`
+- **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
+- **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
 
 Python
 
 ```shiki
 from pydantic import BaseModel
-from anthropic import Anthropic, transform_schema
+from anthropic import Anthropic
 
 class ContactInfo(BaseModel):
     name: str
@@ -134,27 +135,6 @@ class ContactInfo(BaseModel):
 
 client = Anthropic()
 
-# With .create() - requires transform_schema()
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
-        }
-    ],
-    output_config={
-        "format": {
-            "type": "json_schema",
-            "schema": transform_schema(ContactInfo),
-        }
-    },
-)
-
-print(response.content[0].text)
-
-# With .parse() - can pass Pydantic model directly
 response = client.messages.parse(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -178,9 +158,29 @@ Python
 
 Python
 
+TypeScript
+
+TypeScript
+
 Java
 
 Java
+
+Go
+
+Go
+
+Ruby
+
+Ruby
+
+C#
+
+C#
+
+PHP
+
+PHP
 
 **`client.messages.parse()` (Recommended)**
 

@@ -8,7 +8,7 @@ Ruby
 
 ##### [Create a Message](api/messages/create.md)
 
-messages.create(\*\*kwargs) -> [Message](api/messages.md) { id, content, model, 5 more }
+messages.create(\*\*kwargs) -> [Message](api/messages.md) { id, container, content, 6 more }
 
 POST/v1/messages
 
@@ -45,6 +45,211 @@ data: String
 media\_type: :"application/pdf"
 
 type: :base64
+
+class BashCodeExecutionOutputBlock { file\_id, type }
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+class BashCodeExecutionOutputBlockParam { file\_id, type }
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+class BashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+BashCodeExecutionToolResultErrorCode = :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+class BashCodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
 
 class CacheControlEphemeral { type, ttl }
 
@@ -195,6 +400,10 @@ type: :web\_search\_result\_location
 
 url: String
 
+class CitationsConfig { enabled }
+
+enabled: bool
+
 class CitationsConfigParam { enabled }
 
 enabled: bool
@@ -311,7 +520,506 @@ type: :web\_search\_result\_location
 
 url: String
 
-ContentBlock = [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 3 more
+class CodeExecutionOutputBlock { file\_id, type }
+
+file\_id: String
+
+type: :code\_execution\_output
+
+class CodeExecutionOutputBlockParam { file\_id, type }
+
+file\_id: String
+
+type: :code\_execution\_output
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class CodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class CodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250522
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250825
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+CodeExecutionToolResultBlockContent = [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  | [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+class CodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+CodeExecutionToolResultBlockParamContent = [CodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [CodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }  | [EncryptedCodeExecutionResultBlockParam](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+CodeExecutionToolResultErrorCode = :invalid\_tool\_input | :unavailable | :too\_many\_requests | :execution\_time\_exceeded
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+class CodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class Container { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
+class ContainerUploadBlockParam { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: String
+
+type: :container\_upload
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+ContentBlock = [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -419,9 +1127,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -429,17 +1163,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -481,7 +1283,337 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
-ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 7 more
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
+ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 13 more
 
 Regular text content.
 
@@ -1030,7 +2162,7 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlockParam { id, input, name, 2 more }
+class ToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
@@ -1063,6 +2195,32 @@ Accepts one of the following:
 
 :"1h"
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 class ToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: String
@@ -1092,13 +2250,13 @@ Accepts one of the following:
 
 :"1h"
 
-content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
 String
 
-Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
@@ -1631,15 +2789,62 @@ context: String
 
 title: String
 
+class ToolReferenceBlockParam { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 is\_error: bool
 
-class ServerToolUseBlockParam { id, input, name, 2 more }
+class ServerToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
@@ -1666,7 +2871,33 @@ Accepts one of the following:
 
 :"1h"
 
-class WebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class WebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -1707,6 +2938,721 @@ type: :web\_search\_tool\_result\_error
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class WebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  | [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlockParam { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+class ContentBlockSource { content, type }
+
+content: String | Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+String
+
+Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam { text, type, cache\_control, citations }
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+Accepts one of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+start\_block\_index: Integer
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+end\_block\_index: Integer
+
+search\_result\_index: Integer
+
+source: String
+
+start\_block\_index: Integer
+
+title: String
+
+type: :search\_result\_location
+
+class ImageBlockParam { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64ImageSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+Accepts one of the following:
+
+:"image/jpeg"
+
+:"image/png"
+
+:"image/gif"
+
+:"image/webp"
+
+type: :base64
+
+class URLImageSource { type, url }
+
+type: :url
+
+url: String
+
+type: :image
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :content
+
+class URLPDFSource { type, url }
+
+type: :url
+
+url: String
+
+type: :document
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: bool
+
+context: String
+
+title: String
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class CodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class BashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class TextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  | [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+error\_message: String
+
+class TextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+type: :text\_editor\_code\_execution\_view\_result
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+class TextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more }
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlockParam { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class ContainerUploadBlockParam { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: String
+
+type: :container\_upload
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2065,6 +4011,46 @@ Accepts one of the following:
 
 :"1h"
 
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class DocumentBlock { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
 class DocumentBlockParam { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
@@ -2298,6 +4284,42 @@ context: String
 
 title: String
 
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+class EncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
 class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
@@ -2367,13 +4389,76 @@ The JSON schema of the format
 
 type: :json\_schema
 
-class Message { id, content, model, 5 more }
+class MemoryTool20250818 { name, type, allowed\_callers, 4 more }
+
+name: :memory
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :memory\_20250818
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class Message { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -2510,9 +4595,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -2520,17 +4631,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -2572,6 +4751,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -2580,7 +5089,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -2591,6 +5100,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -2721,7 +5234,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -2765,9 +5278,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -2785,11 +5302,23 @@ Accepts one of the following:
 
 :batch
 
-MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
+speed: :standard | :fast
+
+The inference speed mode used for this request.
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 4 more }
+:standard
+
+:fast
+
+MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 12 more
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+Accepts one of the following:
+
+class Tool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: { type, properties, required}
 
@@ -2813,6 +5342,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2835,6 +5372,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: String
 
@@ -2846,13 +5387,15 @@ eager\_input\_streaming: bool
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-class ToolBash20250124 { name, type, cache\_control, strict }
+class ToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
 
@@ -2862,6 +5405,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2885,11 +5436,217 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250124 { name, type, cache\_control, strict }
+class CodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250522
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250825
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120 { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20260120
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818 { name, type, allowed\_callers, 4 more }
+
+name: :memory
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :memory\_20250818
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
 
@@ -2899,6 +5656,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2922,11 +5687,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250429 { name, type, cache\_control, strict }
+class ToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -2936,6 +5707,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2959,11 +5738,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250728 { name, type, cache\_control, 2 more }
+class ToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -2973,6 +5758,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -2996,6 +5789,12 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -3004,7 +5803,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
+class WebSearchTool20250305 { name, type, allowed\_callers, 7 more }
 
 name: :web\_search
 
@@ -3013,6 +5812,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
 
 allowed\_domains: Array[String]
 
@@ -3045,6 +5852,10 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: Integer
 
 Maximum number of times the tool can be used in the API request.
@@ -3075,6 +5886,341 @@ timezone: String
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910 { name, type, allowed\_callers, 8 more }
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20250910
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209 { name, type, allowed\_callers, 7 more }
+
+name: :web\_search
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_search\_20260209
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Array[String]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: { type, city, country, 2 more}
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: :approximate
+
+city: String
+
+The city of the user.
+
+country: String
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: String
+
+The region of the user.
+
+timezone: String
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209 { name, type, allowed\_callers, 8 more }
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260209
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_bm25
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_bm25\_20251119 | :tool\_search\_tool\_bm25
+
+Accepts one of the following:
+
+:tool\_search\_tool\_bm25\_20251119
+
+:tool\_search\_tool\_bm25
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_regex
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_regex\_20251119 | :tool\_search\_tool\_regex
+
+Accepts one of the following:
+
+:tool\_search\_tool\_regex\_20251119
+
+:tool\_search\_tool\_regex
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
 class MessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 cache\_creation\_input\_tokens: Integer
@@ -3093,9 +6239,13 @@ output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -3656,7 +6806,7 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlockParam { id, input, name, 2 more }
+class ToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
@@ -3689,6 +6839,32 @@ Accepts one of the following:
 
 :"1h"
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 class ToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: String
@@ -3718,13 +6894,13 @@ Accepts one of the following:
 
 :"1h"
 
-content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
 String
 
-Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
@@ -4257,15 +7433,62 @@ context: String
 
 title: String
 
+class ToolReferenceBlockParam { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 is\_error: bool
 
-class ServerToolUseBlockParam { id, input, name, 2 more }
+class ServerToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
@@ -4292,7 +7515,33 @@ Accepts one of the following:
 
 :"1h"
 
-class WebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class WebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -4357,6 +7606,721 @@ Accepts one of the following:
 
 :"1h"
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class WebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  | [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlockParam { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+class ContentBlockSource { content, type }
+
+content: String | Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+String
+
+Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam { text, type, cache\_control, citations }
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+Accepts one of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+start\_block\_index: Integer
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+end\_block\_index: Integer
+
+search\_result\_index: Integer
+
+source: String
+
+start\_block\_index: Integer
+
+title: String
+
+type: :search\_result\_location
+
+class ImageBlockParam { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64ImageSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+Accepts one of the following:
+
+:"image/jpeg"
+
+:"image/png"
+
+:"image/gif"
+
+:"image/webp"
+
+type: :base64
+
+class URLImageSource { type, url }
+
+type: :url
+
+url: String
+
+type: :image
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :content
+
+class URLPDFSource { type, url }
+
+type: :url
+
+url: String
+
+type: :document
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: bool
+
+context: String
+
+title: String
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class CodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class BashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class TextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  | [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+error\_message: String
+
+class TextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+type: :text\_editor\_code\_execution\_view\_result
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+class TextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more }
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlockParam { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class ContainerUploadBlockParam { file\_id, type, cache\_control }
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: String
+
+type: :container\_upload
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 role: :user | :assistant
 
 Accepts one of the following:
@@ -4381,7 +8345,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-Model = :"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more | String
+Model = :"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more | String
 
 The model that will complete your prompt.
 
@@ -4389,7 +8353,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -4400,6 +8364,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -4749,7 +8717,9 @@ type: :content\_block\_delta
 
 class RawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 3 more
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -4857,9 +8827,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -4867,17 +8863,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -4918,6 +8982,336 @@ url: String
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
+
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
 
 index: Integer
 
@@ -4931,7 +9325,19 @@ type: :content\_block\_stop
 
 class RawMessageDeltaEvent { delta, type, usage }
 
-delta: { stop\_reason, stop\_sequence}
+delta: { container, stop\_reason, stop\_sequence}
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -4981,9 +9387,13 @@ output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -4991,13 +9401,25 @@ The number of web search tool requests.
 
 class RawMessageStartEvent { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -5134,9 +9556,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -5144,17 +9592,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5196,6 +9712,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5204,7 +10050,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -5215,6 +10061,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -5345,7 +10195,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -5389,9 +10239,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -5408,6 +10262,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :message\_start
 
@@ -5421,13 +10285,25 @@ Accepts one of the following:
 
 class RawMessageStartEvent { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -5564,9 +10440,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -5574,17 +10476,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5626,6 +10596,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5634,7 +10934,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -5645,6 +10945,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -5775,7 +11079,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -5819,9 +11123,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -5839,11 +11147,33 @@ Accepts one of the following:
 
 :batch
 
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
+
 type: :message\_start
 
 class RawMessageDeltaEvent { delta, type, usage }
 
-delta: { stop\_reason, stop\_sequence}
+delta: { container, stop\_reason, stop\_sequence}
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -5893,9 +11223,13 @@ output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -5907,7 +11241,9 @@ type: :message\_stop
 
 class RawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 3 more
+content\_block: [TextBlock](api/messages.md) { citations, text, type }  | [ThinkingBlock](api/messages.md) { signature, thinking, type }  | [RedactedThinkingBlock](api/messages.md) { data, type }  | 9 more
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -6015,9 +11351,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -6025,17 +11387,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -6076,6 +11506,336 @@ url: String
 tool\_use\_id: String
 
 type: :web\_search\_tool\_result
+
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
 
 index: Integer
 
@@ -6355,29 +12115,99 @@ citations: [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: bool
 
-class ServerToolUsage { web\_search\_requests }
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class ServerToolUsage { web\_fetch\_requests, web\_search\_requests }
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
 The number of web search tool requests.
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class ServerToolUseBlockParam { id, input, name, 2 more }
+class ServerToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
@@ -6403,6 +12233,32 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 class SignatureDelta { signature, type }
 
@@ -6779,6 +12635,311 @@ text: String
 
 type: :text\_delta
 
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more }
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  | [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+error\_message: String
+
+class TextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+type: :text\_editor\_code\_execution\_view\_result
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+class TextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more }
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+TextEditorCodeExecutionToolResultErrorCode = :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+class TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+error\_message: String
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+type: :text\_editor\_code\_execution\_view\_result
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
 class ThinkingBlock { signature, thinking, type }
 
 signature: String
@@ -6855,7 +13016,7 @@ thinking: String
 
 type: :thinking\_delta
 
-class Tool { input\_schema, name, cache\_control, 4 more }
+class Tool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: { type, properties, required}
 
@@ -6879,6 +13040,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -6901,6 +13070,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: String
 
@@ -6912,13 +13085,15 @@ eager\_input\_streaming: bool
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-class ToolBash20250124 { name, type, cache\_control, strict }
+class ToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
 
@@ -6927,6 +13102,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -6950,6 +13133,12 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
 
 strict: bool
 
@@ -7053,6 +13242,43 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
+class ToolReferenceBlock { tool\_name, type }
+
+tool\_name: String
+
+type: :tool\_reference
+
+class ToolReferenceBlockParam { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 class ToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: String
@@ -7082,13 +13308,13 @@ Accepts one of the following:
 
 :"1h"
 
-content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
 String
 
-Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more } ]
+Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
 Accepts one of the following:
 
@@ -7621,9 +13847,359 @@ context: String
 
 title: String
 
+class ToolReferenceBlockParam { tool\_name, type, cache\_control }
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 is\_error: bool
 
-class ToolTextEditor20250124 { name, type, cache\_control, strict }
+class ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_bm25
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_bm25\_20251119 | :tool\_search\_tool\_bm25
+
+Accepts one of the following:
+
+:tool\_search\_tool\_bm25\_20251119
+
+:tool\_search\_tool\_bm25
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_regex
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_regex\_20251119 | :tool\_search\_tool\_regex
+
+Accepts one of the following:
+
+:tool\_search\_tool\_regex\_20251119
+
+:tool\_search\_tool\_regex
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlockParam { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+ToolSearchToolResultErrorCode = :invalid\_tool\_input | :unavailable | :too\_many\_requests | :execution\_time\_exceeded
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+class ToolSearchToolResultErrorParam { error\_code, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+class ToolSearchToolSearchResultBlockParam { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :tool\_search\_tool\_search\_result
+
+class ToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
 
@@ -7633,6 +14209,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7656,11 +14240,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250429 { name, type, cache\_control, strict }
+class ToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -7670,6 +14260,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7693,11 +14291,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250728 { name, type, cache\_control, 2 more }
+class ToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -7707,6 +14311,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7730,6 +14342,12 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7738,11 +14356,13 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnion = [Tool](api/messages.md) { input\_schema, name, cache\_control, 4 more }  | [ToolBash20250124](api/messages.md) { name, type, cache\_control, strict }  | [ToolTextEditor20250124](api/messages.md) { name, type, cache\_control, strict }  | 3 more
+ToolUnion = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 12 more
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
-class Tool { input\_schema, name, cache\_control, 4 more }
+class Tool { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: { type, properties, required}
 
@@ -7766,6 +14386,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7788,6 +14416,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 description: String
 
@@ -7799,13 +14431,15 @@ eager\_input\_streaming: bool
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
 type: :custom
 
-class ToolBash20250124 { name, type, cache\_control, strict }
+class ToolBash20250124 { name, type, allowed\_callers, 4 more }
 
 name: :bash
 
@@ -7815,6 +14449,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7838,11 +14480,217 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250124 { name, type, cache\_control, strict }
+class CodeExecutionTool20250522 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250522
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825 { name, type, allowed\_callers, 3 more }
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20250825
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120 { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: :code\_execution
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :code\_execution\_20260120
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818 { name, type, allowed\_callers, 4 more }
+
+name: :memory
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :memory\_20250818
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolTextEditor20250124 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_editor
 
@@ -7852,6 +14700,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7875,11 +14731,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250429 { name, type, cache\_control, strict }
+class ToolTextEditor20250429 { name, type, allowed\_callers, 4 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -7889,6 +14751,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7912,11 +14782,17 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class ToolTextEditor20250728 { name, type, cache\_control, 2 more }
+class ToolTextEditor20250728 { name, type, allowed\_callers, 5 more }
 
 name: :str\_replace\_based\_edit\_tool
 
@@ -7926,6 +14802,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
 Create a cache control breakpoint at this content block.
@@ -7949,6 +14833,12 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Array[Hash[Symbol, untyped]]
+
 max\_characters: Integer
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7957,7 +14847,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
+class WebSearchTool20250305 { name, type, allowed\_callers, 7 more }
 
 name: :web\_search
 
@@ -7966,6 +14856,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
 
 allowed\_domains: Array[String]
 
@@ -7998,6 +14896,10 @@ Accepts one of the following:
 
 :"1h"
 
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: Integer
 
 Maximum number of times the tool can be used in the API request.
@@ -8028,9 +14930,370 @@ timezone: String
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-class ToolUseBlock { id, input, name, type }
+class WebFetchTool20250910 { name, type, allowed\_callers, 8 more }
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20250910
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209 { name, type, allowed\_callers, 7 more }
+
+name: :web\_search
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_search\_20260209
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Array[String]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: { type, city, country, 2 more}
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: :approximate
+
+city: String
+
+The city of the user.
+
+country: String
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: String
+
+The region of the user.
+
+timezone: String
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209 { name, type, allowed\_callers, 8 more }
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260209
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_bm25
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_bm25\_20251119 | :tool\_search\_tool\_bm25
+
+Accepts one of the following:
+
+:tool\_search\_tool\_bm25\_20251119
+
+:tool\_search\_tool\_bm25
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more }
+
+name: :tool\_search\_tool\_regex
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :tool\_search\_tool\_regex\_20251119 | :tool\_search\_tool\_regex
+
+Accepts one of the following:
+
+:tool\_search\_tool\_regex\_20251119
+
+:tool\_search\_tool\_regex
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -8038,7 +15301,7 @@ name: String
 
 type: :tool\_use
 
-class ToolUseBlockParam { id, input, name, 2 more }
+class ToolUseBlockParam { id, input, name, 3 more }
 
 id: String
 
@@ -8071,6 +15334,32 @@ Accepts one of the following:
 
 :"1h"
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 class URLImageSource { type, url }
 
 type: :url
@@ -8083,7 +15372,7 @@ type: :url
 
 url: String
 
-class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -8117,9 +15406,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -8136,6 +15429,880 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+class WebFetchBlockParam { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+class ContentBlockSource { content, type }
+
+content: String | Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+String
+
+Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam { text, type, cache\_control, citations }
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+Accepts one of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+start\_block\_index: Integer
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+end\_block\_index: Integer
+
+search\_result\_index: Integer
+
+source: String
+
+start\_block\_index: Integer
+
+title: String
+
+type: :search\_result\_location
+
+class ImageBlockParam { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64ImageSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+Accepts one of the following:
+
+:"image/jpeg"
+
+:"image/png"
+
+:"image/gif"
+
+:"image/webp"
+
+type: :base64
+
+class URLImageSource { type, url }
+
+type: :url
+
+url: String
+
+type: :image
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :content
+
+class URLPDFSource { type, url }
+
+type: :url
+
+url: String
+
+type: :document
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: bool
+
+context: String
+
+title: String
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+class WebFetchTool20250910 { name, type, allowed\_callers, 8 more }
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20250910
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class WebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
+
+content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  | [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlockParam { content, type, url, retrieved\_at }
+
+content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+class ContentBlockSource { content, type }
+
+content: String | Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+String
+
+Array[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam { text, type, cache\_control, citations }
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+Accepts one of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+start\_block\_index: Integer
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+end\_block\_index: Integer
+
+search\_result\_index: Integer
+
+source: String
+
+start\_block\_index: Integer
+
+title: String
+
+type: :search\_result\_location
+
+class ImageBlockParam { source, type, cache\_control }
+
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
+
+Accepts one of the following:
+
+class Base64ImageSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+Accepts one of the following:
+
+:"image/jpeg"
+
+:"image/png"
+
+:"image/gif"
+
+:"image/webp"
+
+type: :base64
+
+class URLImageSource { type, url }
+
+type: :url
+
+url: String
+
+type: :image
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+type: :content
+
+class URLPDFSource { type, url }
+
+type: :url
+
+url: String
+
+type: :document
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+enabled: bool
+
+context: String
+
+title: String
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchToolResultErrorBlockParam { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+WebFetchToolResultErrorCode = :invalid\_tool\_input | :url\_too\_long | :url\_not\_allowed | 5 more
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
 
 class WebSearchResultBlock { encrypted\_content, page\_age, title, 2 more }
 
@@ -8161,7 +16328,7 @@ url: String
 
 page\_age: String
 
-class WebSearchTool20250305 { name, type, allowed\_domains, 5 more }
+class WebSearchTool20250305 { name, type, allowed\_callers, 7 more }
 
 name: :web\_search
 
@@ -8170,6 +16337,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
 
 allowed\_domains: Array[String]
 
@@ -8201,6 +16376,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 max\_uses: Integer
 
@@ -8252,7 +16431,33 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8330,7 +16535,7 @@ type: :web\_search\_result
 
 url: String
 
-class WebSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
+class WebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -8394,6 +16599,32 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 WebSearchToolResultBlockParamContent = Array[[WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } ] | [WebSearchToolRequestError](api/messages.md) { error\_code, type }
 
@@ -8689,13 +16920,25 @@ Accepts one of the following:
 
 class MessageBatchSucceededResult { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -8832,9 +17075,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -8842,17 +17111,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8894,6 +17231,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -8902,7 +17569,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -8913,6 +17580,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -9043,7 +17714,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -9087,9 +17758,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -9106,6 +17781,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 
@@ -9225,13 +17910,25 @@ Accepts one of the following:
 
 class MessageBatchSucceededResult { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -9368,9 +18065,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -9378,17 +18101,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -9430,6 +18221,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -9438,7 +18559,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -9449,6 +18570,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -9579,7 +18704,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -9623,9 +18748,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -9642,6 +18771,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 
@@ -9723,13 +18862,25 @@ type: :expired
 
 class MessageBatchSucceededResult { message, type }
 
-message: [Message](api/messages.md) { id, content, model, 5 more }
+message: [Message](api/messages.md) { id, container, content, 6 more }
 
 id: String
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: [Container](api/messages.md) { id, expires\_at }
+
+Information about the container used in the request (for the code execution tool)
+
+id: String
+
+Identifier for the container used in this request
+
+expires\_at: Time
+
+The time at which the container will expire.
 
 content: Array[[ContentBlock](api/messages.md)]
 
@@ -9866,9 +19017,35 @@ data: String
 
 type: :redacted\_thinking
 
-class ToolUseBlock { id, input, name, type }
+class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 input: Hash[Symbol, untyped]
 
@@ -9876,17 +19053,85 @@ name: String
 
 type: :tool\_use
 
-class ServerToolUseBlock { id, input, name, type }
+class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
 input: Hash[Symbol, untyped]
 
-name: :web\_search
+name: :web\_search | :web\_fetch | :code\_execution | 4 more
+
+Accepts one of the following:
+
+:web\_search
+
+:web\_fetch
+
+:code\_execution
+
+:bash\_code\_execution
+
+:text\_editor\_code\_execution
+
+:tool\_search\_tool\_regex
+
+:tool\_search\_tool\_bm25
 
 type: :server\_tool\_use
 
-class WebSearchToolResultBlock { content, tool\_use\_id, type }
+class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -9928,6 +19173,336 @@ tool\_use\_id: String
 
 type: :web\_search\_tool\_result
 
+class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
+
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller { type }
+
+Tool invocation directly from the model.
+
+type: :direct
+
+class ServerToolCaller { tool\_id, type }
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: String
+
+type: :code\_execution\_20250825
+
+class CodeExecution20260120 { tool\_id, type }
+
+tool\_id: String
+
+type: :code\_execution\_20260120
+
+content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock { error\_code, type }
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:url\_too\_long
+
+:url\_not\_allowed
+
+:url\_not\_accessible
+
+:unsupported\_content\_type
+
+:too\_many\_requests
+
+:max\_uses\_exceeded
+
+:unavailable
+
+type: :web\_fetch\_tool\_result\_error
+
+class WebFetchBlock { content, retrieved\_at, type, url }
+
+content: [DocumentBlock](api/messages.md) { citations, source, title, type }
+
+citations: [CitationsConfig](api/messages.md) { enabled }
+
+Citation configuration for the document
+
+enabled: bool
+
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
+
+Accepts one of the following:
+
+class Base64PDFSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"application/pdf"
+
+type: :base64
+
+class PlainTextSource { data, media\_type, type }
+
+data: String
+
+media\_type: :"text/plain"
+
+type: :text
+
+title: String
+
+The title of the document
+
+type: :document
+
+retrieved\_at: String
+
+ISO 8601 timestamp when the content was retrieved
+
+type: :web\_fetch\_result
+
+url: String
+
+Fetched content URL
+
+tool\_use\_id: String
+
+type: :web\_fetch\_tool\_result
+
+class CodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError { error\_code, type }
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+type: :code\_execution\_tool\_result\_error
+
+class CodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :code\_execution\_result
+
+class EncryptedCodeExecutionResultBlock { content, encrypted\_stdout, return\_code, 2 more }
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: Array[[CodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :code\_execution\_output
+
+encrypted\_stdout: String
+
+return\_code: Integer
+
+stderr: String
+
+type: :encrypted\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :code\_execution\_tool\_result
+
+class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError { error\_code, type }
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:output\_file\_too\_large
+
+type: :bash\_code\_execution\_tool\_result\_error
+
+class BashCodeExecutionResultBlock { content, return\_code, stderr, 2 more }
+
+content: Array[[BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } ]
+
+file\_id: String
+
+type: :bash\_code\_execution\_output
+
+return\_code: Integer
+
+stderr: String
+
+stdout: String
+
+type: :bash\_code\_execution\_result
+
+tool\_use\_id: String
+
+type: :bash\_code\_execution\_tool\_result
+
+class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
+
+content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+:file\_not\_found
+
+error\_message: String
+
+type: :text\_editor\_code\_execution\_tool\_result\_error
+
+class TextEditorCodeExecutionViewResultBlock { content, file\_type, num\_lines, 3 more }
+
+content: String
+
+file\_type: :text | :image | :pdf
+
+Accepts one of the following:
+
+:text
+
+:image
+
+:pdf
+
+num\_lines: Integer
+
+start\_line: Integer
+
+total\_lines: Integer
+
+type: :text\_editor\_code\_execution\_view\_result
+
+class TextEditorCodeExecutionCreateResultBlock { is\_file\_update, type }
+
+is\_file\_update: bool
+
+type: :text\_editor\_code\_execution\_create\_result
+
+class TextEditorCodeExecutionStrReplaceResultBlock { lines, new\_lines, new\_start, 3 more }
+
+lines: Array[String]
+
+new\_lines: Integer
+
+new\_start: Integer
+
+old\_lines: Integer
+
+old\_start: Integer
+
+type: :text\_editor\_code\_execution\_str\_replace\_result
+
+tool\_use\_id: String
+
+type: :text\_editor\_code\_execution\_tool\_result
+
+class ToolSearchToolResultBlock { content, tool\_use\_id, type }
+
+content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
+
+Accepts one of the following:
+
+class ToolSearchToolResultError { error\_code, error\_message, type }
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+:invalid\_tool\_input
+
+:unavailable
+
+:too\_many\_requests
+
+:execution\_time\_exceeded
+
+error\_message: String
+
+type: :tool\_search\_tool\_result\_error
+
+class ToolSearchToolSearchResultBlock { tool\_references, type }
+
+tool\_references: Array[[ToolReferenceBlock](api/messages.md) { tool\_name, type } ]
+
+tool\_name: String
+
+type: :tool\_reference
+
+type: :tool\_search\_tool\_search\_result
+
+tool\_use\_id: String
+
+type: :tool\_search\_tool\_result
+
+class ContainerUploadBlock { file\_id, type }
+
+Response model for a file uploaded to the container.
+
+file\_id: String
+
+type: :container\_upload
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -9936,7 +19511,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-opus-4-5-20251101" | :"claude-opus-4-5" | 18 more
+:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-opus-4-5-20251101" | 19 more
 
 The model that will complete your prompt.
 
@@ -9947,6 +19522,10 @@ Accepts one of the following:
 :"claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+:"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 :"claude-opus-4-5-20251101"
 
@@ -10077,7 +19656,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -10121,9 +19700,13 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_search\_requests }
+server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
+
+web\_fetch\_requests: Integer
+
+The number of web fetch tool requests.
 
 web\_search\_requests: Integer
 
@@ -10140,6 +19723,16 @@ Accepts one of the following:
 :priority
 
 :batch
+
+speed: :standard | :fast
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+:standard
+
+:fast
 
 type: :succeeded
 

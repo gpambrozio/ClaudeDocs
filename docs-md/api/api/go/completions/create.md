@@ -186,6 +186,10 @@ const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
 
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -315,6 +319,10 @@ const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
 
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+
 const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
 
 Premium model combining maximum intelligence with practical performance
@@ -443,7 +451,31 @@ func main() {
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
+```
 
 ---
 

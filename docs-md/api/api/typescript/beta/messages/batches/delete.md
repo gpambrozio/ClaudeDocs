@@ -104,7 +104,25 @@ const betaDeletedMessageBatch = await client.beta.messages.batches.delete('messa
 console.log(betaDeletedMessageBatch.id);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
 
 ---
 

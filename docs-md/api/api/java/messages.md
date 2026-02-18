@@ -46,6 +46,209 @@ JsonValue; mediaType "application/pdf"constant"application/pdf"constant
 
 JsonValue; type "base64"constant"base64"constant
 
+class BashCodeExecutionOutputBlock:
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+class BashCodeExecutionOutputBlockParam:
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+class BashCodeExecutionResultBlockParam:
+
+List<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+List<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+enum BashCodeExecutionToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+class BashCodeExecutionToolResultErrorParam:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
 class CacheControlEphemeral:
 
 JsonValue; type "ephemeral"constant"ephemeral"constant
@@ -195,6 +398,10 @@ JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_loc
 
 String url
 
+class CitationsConfig:
+
+boolean enabled
+
 class CitationsConfigParam:
 
 Optional<Boolean> enabled
@@ -311,7 +518,500 @@ JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_loc
 
 String url
 
+class CodeExecutionOutputBlock:
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+class CodeExecutionOutputBlockParam:
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class CodeExecutionResultBlockParam:
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class CodeExecutionTool20250522:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class CodeExecutionToolResultBlockContent: A class that can be one of several variants.union
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+class CodeExecutionToolResultBlockParam:
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class CodeExecutionToolResultBlockParamContent: A class that can be one of several variants.union
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+class CodeExecutionToolResultErrorParam:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+enum CodeExecutionToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+class CodeExecutionToolResultErrorParam:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class Container:
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
 class ContentBlock: A class that can be one of several variants.union
+
+Response model for a file uploaded to the container.
 
 class TextBlock:
 
@@ -421,6 +1121,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -431,13 +1157,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -478,6 +1272,336 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
 class ContentBlockParam: A class that can be one of several variants.union
 
@@ -1059,6 +2183,32 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class ToolResultBlockParam:
 
 String toolUseId
@@ -1627,6 +2777,37 @@ Optional<String> context
 
 Optional<String> title
 
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
 Optional<Boolean> isError
 
 class ServerToolUseBlockParam:
@@ -1635,7 +2816,23 @@ String id
 
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
@@ -1661,6 +2858,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class WebSearchToolResultBlockParam:
 
@@ -1703,6 +2926,721 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_re
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class WebFetchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+[DocumentBlockParam](api/messages.md) content
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+class ContentBlockSource:
+
+Content content
+
+Accepts one of the following:
+
+String
+
+List<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[TextCitationParam](api/messages.md)>> citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationSearchResultLocationParam:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+class ImageBlockParam:
+
+Source source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+String data
+
+MediaType mediaType
+
+Accepts one of the following:
+
+IMAGE\_JPEG("image/jpeg")
+
+IMAGE\_PNG("image/png")
+
+IMAGE\_GIF("image/gif")
+
+IMAGE\_WEBP("image/webp")
+
+JsonValue; type "base64"constant"base64"constant
+
+class UrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "image"constant"image"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "content"constant"content"constant
+
+class UrlPdfSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "document"constant"document"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Optional<Boolean> enabled
+
+Optional<String> context
+
+Optional<String> title
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class CodeExecutionToolResultBlockParam:
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class BashCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+List<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+Optional<String> errorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class ToolSearchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -2059,6 +3997,46 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class DocumentBlock:
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
 class DocumentBlockParam:
 
 Source source
@@ -2292,6 +4270,42 @@ Optional<String> context
 
 Optional<String> title
 
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
 class ImageBlockParam:
 
 Source source
@@ -2361,6 +4375,57 @@ The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
 
+class MemoryTool20250818:
+
+JsonValue; name "memory"constant"memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class Message:
 
 String id
@@ -2368,6 +4433,18 @@ String id
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
 
 List<[ContentBlock](api/messages.md)> content
 
@@ -2508,6 +4585,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -2518,13 +4621,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -2566,6 +4737,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -2577,6 +5078,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -2753,6 +5258,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -2769,7 +5278,19 @@ PRIORITY("priority")
 
 BATCH("batch")
 
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
 class MessageCountTokensTool: A class that can be one of several variants.union
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 class Tool:
 
@@ -2795,6 +5316,14 @@ maxLength128
 
 minLength1
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2818,6 +5347,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Optional<String> description
 
 Description of what this tool does.
@@ -2827,6 +5360,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Optional<Boolean> eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -2844,6 +5379,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2866,6 +5409,210 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20260120
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818:
+
+JsonValue; name "memory"constant"memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -2881,6 +5628,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2903,6 +5658,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -2918,6 +5679,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2940,6 +5709,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -2955,6 +5730,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2977,6 +5760,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Long> maxCharacters
 
@@ -2995,6 +5784,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 Optional<List<String>> allowedDomains
 
@@ -3027,6 +5824,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
@@ -3057,6 +5858,341 @@ Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20260209
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+Optional<List<String>> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<UserLocation> userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+WebFetchTool20260209
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119:
+
+JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class MessageDeltaUsage:
 
 Optional<Long> cacheCreationInputTokens
@@ -3078,6 +6214,10 @@ The cumulative number of output tokens which were used.
 Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
+
+long webFetchRequests
+
+The number of web fetch tool requests.
 
 long webSearchRequests
 
@@ -3671,6 +6811,32 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class ToolResultBlockParam:
 
 String toolUseId
@@ -4239,6 +7405,37 @@ Optional<String> context
 
 Optional<String> title
 
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
 Optional<Boolean> isError
 
 class ServerToolUseBlockParam:
@@ -4247,7 +7444,23 @@ String id
 
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
@@ -4273,6 +7486,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class WebSearchToolResultBlockParam:
 
@@ -4315,6 +7554,721 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_re
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class WebFetchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+[DocumentBlockParam](api/messages.md) content
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+class ContentBlockSource:
+
+Content content
+
+Accepts one of the following:
+
+String
+
+List<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[TextCitationParam](api/messages.md)>> citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationSearchResultLocationParam:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+class ImageBlockParam:
+
+Source source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+String data
+
+MediaType mediaType
+
+Accepts one of the following:
+
+IMAGE\_JPEG("image/jpeg")
+
+IMAGE\_PNG("image/png")
+
+IMAGE\_GIF("image/gif")
+
+IMAGE\_WEBP("image/webp")
+
+JsonValue; type "base64"constant"base64"constant
+
+class UrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "image"constant"image"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "content"constant"content"constant
+
+class UrlPdfSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "document"constant"document"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Optional<Boolean> enabled
+
+Optional<String> context
+
+Optional<String> title
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class CodeExecutionToolResultBlockParam:
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class BashCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+List<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+Optional<String> errorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class ToolSearchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -4629,6 +8583,8 @@ class RawContentBlockStartEvent:
 
 ContentBlock contentBlock
 
+Response model for a file uploaded to the container.
+
 Accepts one of the following:
 
 class TextBlock:
@@ -4739,6 +8695,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -4749,13 +8731,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -4797,6 +8847,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 long index
 
 JsonValue; type "content\_block\_start"constant"content\_block\_start"constant
@@ -4810,6 +9190,18 @@ JsonValue; type "content\_block\_stop"constant"content\_block\_stop"constant
 class RawMessageDeltaEvent:
 
 Delta delta
+
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
 
 Optional<[StopReason](api/messages.md)> stopReason
 
@@ -4863,6 +9255,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -4876,6 +9272,18 @@ String id
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
 
 List<[ContentBlock](api/messages.md)> content
 
@@ -5016,6 +9424,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -5026,13 +9460,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -5074,6 +9576,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -5085,6 +9917,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -5261,6 +10097,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -5276,6 +10116,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "message\_start"constant"message\_start"constant
 
@@ -5295,6 +10145,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
+
 List<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
@@ -5434,6 +10296,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -5444,13 +10332,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -5492,6 +10448,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -5503,6 +10789,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -5679,6 +10969,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -5695,11 +10989,33 @@ PRIORITY("priority")
 
 BATCH("batch")
 
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
 JsonValue; type "message\_start"constant"message\_start"constant
 
 class RawMessageDeltaEvent:
 
 Delta delta
+
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
 
 Optional<[StopReason](api/messages.md)> stopReason
 
@@ -5753,6 +11069,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -5764,6 +11084,8 @@ JsonValue; type "message\_stop"constant"message\_stop"constant
 class RawContentBlockStartEvent:
 
 ContentBlock contentBlock
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -5875,6 +11197,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -5885,13 +11233,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -5932,6 +11348,336 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
 
 long index
 
@@ -6211,7 +11957,19 @@ Optional<[CitationsConfigParam](api/messages.md)> citations
 
 Optional<Boolean> enabled
 
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
 class ServerToolUsage:
+
+long webFetchRequests
+
+The number of web fetch tool requests.
 
 long webSearchRequests
 
@@ -6221,9 +11979,51 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
@@ -6233,7 +12033,23 @@ String id
 
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
@@ -6259,6 +12075,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class SignatureDelta:
 
@@ -6629,6 +12471,309 @@ String text
 
 JsonValue; type "text\_delta"constant"text\_delta"constant
 
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+Optional<String> errorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+enum TextEditorCodeExecutionToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+Optional<String> errorMessage
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
 class ThinkingBlock:
 
 String signature
@@ -6727,6 +12872,14 @@ maxLength128
 
 minLength1
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -6750,6 +12903,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Optional<String> description
 
 Description of what this tool does.
@@ -6759,6 +12916,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Optional<Boolean> eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -6776,6 +12935,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -6798,6 +12965,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -6898,6 +13071,43 @@ Optional<Boolean> disableParallelToolUse
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+class ToolReferenceBlock:
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 class ToolResultBlockParam:
 
@@ -7467,17 +13677,13 @@ Optional<String> context
 
 Optional<String> title
 
-Optional<Boolean> isError
+class ToolReferenceBlockParam:
 
-class ToolTextEditor20250124:
+Tool reference block that can be included in tool\_result content.
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+String toolName
 
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -7501,6 +13707,372 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> isError
+
+class ToolSearchToolBm25\_20251119:
+
+JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ToolSearchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+enum ToolSearchToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+class ToolSearchToolResultErrorParam:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+class ToolTextEditor20250124:
+
+JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7516,6 +14088,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7538,6 +14118,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7553,6 +14139,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7576,6 +14170,12 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
+
 Optional<Long> maxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7585,6 +14185,8 @@ Optional<Boolean> strict
 When true, guarantees schema validation on tool names and inputs
 
 class ToolUnion: A class that can be one of several variants.union
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 class Tool:
 
@@ -7610,6 +14212,14 @@ maxLength128
 
 minLength1
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7633,6 +14243,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Optional<String> description
 
 Description of what this tool does.
@@ -7642,6 +14256,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Optional<Boolean> eagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7659,6 +14275,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7681,6 +14305,210 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20260120
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818:
+
+JsonValue; name "memory"constant"memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7696,6 +14524,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7718,6 +14554,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7733,6 +14575,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7755,6 +14605,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Boolean> strict
 
@@ -7770,6 +14626,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7792,6 +14656,12 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<List<InputExample>> inputExamples
 
 Optional<Long> maxCharacters
 
@@ -7810,6 +14680,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
 Optional<List<String>> allowedDomains
 
@@ -7842,6 +14720,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Optional<Long> maxUses
 
 Maximum number of times the tool can be used in the API request.
@@ -7872,9 +14754,370 @@ Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+WebSearchTool20260209
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+Optional<List<String>> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<UserLocation> userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+WebFetchTool20260209
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119:
+
+JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type type
+
+Accepts one of the following:
+
+TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolUseBlock:
 
 String id
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 Input input
 
@@ -7914,6 +15157,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class UrlImageSource:
 
@@ -7965,6 +15234,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -7980,6 +15253,878 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+class WebFetchBlockParam:
+
+[DocumentBlockParam](api/messages.md) content
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+class ContentBlockSource:
+
+Content content
+
+Accepts one of the following:
+
+String
+
+List<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[TextCitationParam](api/messages.md)>> citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationSearchResultLocationParam:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+class ImageBlockParam:
+
+Source source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+String data
+
+MediaType mediaType
+
+Accepts one of the following:
+
+IMAGE\_JPEG("image/jpeg")
+
+IMAGE\_PNG("image/png")
+
+IMAGE\_GIF("image/gif")
+
+IMAGE\_WEBP("image/webp")
+
+JsonValue; type "base64"constant"base64"constant
+
+class UrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "image"constant"image"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "content"constant"content"constant
+
+class UrlPdfSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "document"constant"document"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Optional<Boolean> enabled
+
+Optional<String> context
+
+Optional<String> title
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+class WebFetchTool20250910:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class WebFetchToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+[DocumentBlockParam](api/messages.md) content
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+class ContentBlockSource:
+
+Content content
+
+Accepts one of the following:
+
+String
+
+List<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[TextCitationParam](api/messages.md)>> citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class CitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+long startBlockIndex
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class CitationSearchResultLocationParam:
+
+String citedText
+
+long endBlockIndex
+
+long searchResultIndex
+
+String source
+
+long startBlockIndex
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+class ImageBlockParam:
+
+Source source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+String data
+
+MediaType mediaType
+
+Accepts one of the following:
+
+IMAGE\_JPEG("image/jpeg")
+
+IMAGE\_PNG("image/png")
+
+IMAGE\_GIF("image/gif")
+
+IMAGE\_WEBP("image/webp")
+
+JsonValue; type "base64"constant"base64"constant
+
+class UrlImageSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "image"constant"image"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+JsonValue; type "content"constant"content"constant
+
+class UrlPdfSource:
+
+JsonValue; type "url"constant"url"constant
+
+String url
+
+JsonValue; type "document"constant"document"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Optional<Boolean> enabled
+
+Optional<String> context
+
+Optional<String> title
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchToolResultErrorBlockParam:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+enum WebFetchToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
 
 class WebSearchResultBlock:
 
@@ -8015,6 +16160,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
 
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -8045,6 +16198,10 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 Optional<Long> maxUses
 
@@ -8097,6 +16254,32 @@ REQUEST\_TOO\_LARGE("request\_too\_large")
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -8236,6 +16419,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class WebSearchToolResultBlockParamContent: A class that can be one of several variants.union
 
@@ -8537,6 +16746,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
+
 List<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
@@ -8676,6 +16897,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -8686,13 +16933,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -8734,6 +17049,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -8745,6 +17390,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -8921,6 +17570,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -8936,6 +17589,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -9061,6 +17724,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
+
 List<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
@@ -9200,6 +17875,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -9210,13 +17911,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -9258,6 +18027,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -9269,6 +18368,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -9445,6 +18548,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -9460,6 +18567,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -9549,6 +18666,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+Optional<[Container](api/messages.md)> container
+
+Information about the container used in the request (for the code execution tool)
+
+String id
+
+Identifier for the container used in this request
+
+LocalDateTime expiresAt
+
+The time at which the container will expire.
+
 List<[ContentBlock](api/messages.md)> content
 
 Content generated by the model.
@@ -9688,6 +18817,32 @@ class ToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
 String name
@@ -9698,13 +18853,81 @@ class ServerToolUseBlock:
 
 String id
 
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 Input input
 
-JsonValue; name "web\_search"constant"web\_search"constant
+Name name
+
+Accepts one of the following:
+
+WEB\_SEARCH("web\_search")
+
+WEB\_FETCH("web\_fetch")
+
+CODE\_EXECUTION("code\_execution")
+
+BASH\_CODE\_EXECUTION("bash\_code\_execution")
+
+TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+
+TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+
+TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
@@ -9746,6 +18969,336 @@ String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+Caller caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class CodeExecution20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Content content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+[WebFetchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+URL\_TOO\_LONG("url\_too\_long")
+
+URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+
+UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+UNAVAILABLE("unavailable")
+
+JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+[DocumentBlock](api/messages.md) content
+
+Optional<[CitationsConfig](api/messages.md)> citations
+
+Citation configuration for the document
+
+boolean enabled
+
+Source source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+String data
+
+JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+
+JsonValue; type "base64"constant"base64"constant
+
+class PlainTextSource:
+
+String data
+
+JsonValue; mediaType "text/plain"constant"text/plain"constant
+
+JsonValue; type "text"constant"text"constant
+
+Optional<String> title
+
+The title of the document
+
+JsonValue; type "document"constant"document"constant
+
+Optional<String> retrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+
+String url
+
+Fetched content URL
+
+String toolUseId
+
+JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+[CodeExecutionToolResultBlockContent](api/messages.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[CodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+
+JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+List<[BashCodeExecutionOutputBlock](api/messages.md)> content
+
+String fileId
+
+JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+
+long returnCode
+
+String stderr
+
+String stdout
+
+JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+
+String toolUseId
+
+JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+FILE\_NOT\_FOUND("file\_not\_found")
+
+Optional<String> errorMessage
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+String content
+
+FileType fileType
+
+Accepts one of the following:
+
+TEXT("text")
+
+IMAGE("image")
+
+PDF("pdf")
+
+Optional<Long> numLines
+
+Optional<Long> startLine
+
+Optional<Long> totalLines
+
+JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+boolean isFileUpdate
+
+JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+Optional<List<String>> lines
+
+Optional<Long> newLines
+
+Optional<Long> newStart
+
+Optional<Long> oldLines
+
+Optional<Long> oldStart
+
+JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+
+String toolUseId
+
+JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+[ToolSearchToolResultErrorCode](api/messages.md) errorCode
+
+Accepts one of the following:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+Optional<String> errorMessage
+
+JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+List<[ToolReferenceBlock](api/messages.md)> toolReferences
+
+String toolName
+
+JsonValue; type "tool\_reference"constant"tool\_reference"constant
+
+JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+
+String toolUseId
+
+JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+String fileId
+
+JsonValue; type "container\_upload"constant"container\_upload"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -9757,6 +19310,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -9933,6 +19490,10 @@ Optional<[ServerToolUsage](api/messages.md)> serverToolUse
 
 The number of server tool requests.
 
+long webFetchRequests
+
+The number of web fetch tool requests.
+
 long webSearchRequests
 
 The number of web search tool requests.
@@ -9948,6 +19509,16 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
+
+Optional<Speed> speed
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 

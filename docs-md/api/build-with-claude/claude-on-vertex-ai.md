@@ -31,9 +31,15 @@ Go
 
 Go
 
+Ruby
+
+Ruby
+
 ```shiki
 pip install -U google-cloud-aiplatform "anthropic[vertex]"
 ```
+
+The PHP SDK does not currently support Google Vertex AI. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
 
 ## Accessing Vertex AI
 
@@ -46,6 +52,7 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 | Model | Vertex AI API model ID |
 | --- | --- |
 | Claude Opus 4.6 | claude-opus-4-6 |
+| Claude Sonnet 4.6 | claude-sonnet-4-6 |
 | Claude Sonnet 4.5 | claude-sonnet-4-5@20250929 |
 | Claude Sonnet 4 | claude-sonnet-4@20250514 |
 | Claude Sonnet 3.7 ⚠️ | claude-3-7-sonnet@20250219 |
@@ -85,7 +92,7 @@ message = client.messages.create(
 print(message)
 ```
 
-See our [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
 Claude is also available through [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
@@ -99,7 +106,7 @@ Turning on this service does not give Google or Anthropic any access to your con
 
 ## Feature support
 
-You can find all the features currently supported on Vertex [here](api/overview.md).
+For all currently supported features on Vertex AI, see [API features overview](api/overview.md).
 
 ## Global vs regional endpoints
 

@@ -968,9 +968,62 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaCodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1005,6 +1058,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -1012,6 +1083,8 @@ JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_r
 
 class BetaCodeExecutionToolResultBlockContent: A class that can be one of several variants.union
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
@@ -1044,9 +1117,29 @@ String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
 
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
 class BetaCodeExecutionToolResultBlockParam:
 
 [BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1081,6 +1174,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -1111,6 +1222,8 @@ TTL\_1H("1h")
 
 class BetaCodeExecutionToolResultBlockParamContent: A class that can be one of several variants.union
 
+Code execution result with encrypted stdout for PFC + web\_search results.
+
 class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
@@ -1142,6 +1255,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 class BetaCodeExecutionToolResultError:
 
@@ -1544,6 +1675,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -1590,6 +1727,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -1631,6 +1774,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -1712,9 +1881,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -1749,6 +1946,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -2668,6 +2883,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaToolResultBlockParam:
 
 String toolUseId
@@ -3356,6 +3577,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlockParam:
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md) content
@@ -3420,6 +3647,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlockParam:
 
@@ -3735,9 +3988,37 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlockParam:
 
 [BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -3772,6 +4053,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -4822,6 +5121,42 @@ The title of the document
 
 JsonValue; type "document"constant"document"constant
 
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+
 class BetaFileDocumentSource:
 
 String fileId
@@ -5582,6 +5917,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -5628,6 +5969,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -5669,6 +6016,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -5750,9 +6123,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -5787,6 +6188,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -6139,6 +6558,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -7209,6 +7632,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaToolResultBlockParam:
 
 String toolUseId
@@ -7897,6 +8326,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlockParam:
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md) content
@@ -7961,6 +8396,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlockParam:
 
@@ -8276,9 +8737,37 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlockParam:
 
 [BetaCodeExecutionToolResultBlockParamContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -8313,6 +8802,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlockParam](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -9281,6 +9788,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -9327,6 +9840,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -9368,6 +9887,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -9449,9 +9994,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -9486,6 +10059,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -10230,6 +10821,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -10276,6 +10873,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -10317,6 +10920,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -10398,9 +11027,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -10435,6 +11092,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -10787,6 +11462,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -11298,6 +11977,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -11344,6 +12029,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -11385,6 +12076,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -11466,9 +12183,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -11503,6 +12248,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -11855,6 +12618,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -12521,6 +13288,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -12567,6 +13340,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -12608,6 +13387,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -12689,9 +13494,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -12726,6 +13559,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -13726,6 +14577,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUsage:
 
 long webFetchRequests
@@ -13781,6 +14638,12 @@ Tool invocation generated by a server-side tool.
 String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaServerToolUseBlockParam:
 
@@ -13850,6 +14713,12 @@ Tool invocation generated by a server-side tool.
 String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaSignatureDelta:
 
@@ -16280,10 +17149,7 @@ When true, guarantees schema validation on tool names and inputs
 
 class BetaToolUnion: A class that can be one of several variants.union
 
-Configuration for a group of tools from an MCP server.
-
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 class BetaTool:
 
@@ -16522,6 +17388,57 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class BetaCodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -17075,7 +17992,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[BetaUserLocation](api/beta.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -17106,6 +18023,160 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class BetaWebSearchTool20260209:
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+Optional<List<String>> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<[BetaUserLocation](api/beta.md)> userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class BetaWebFetchTool20260209:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
@@ -17360,6 +18431,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaToolUseBlockParam:
 
 String id
@@ -17412,6 +18489,12 @@ Tool invocation generated by a server-side tool.
 String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaToolUsesKeep:
 
@@ -17588,6 +18671,26 @@ Accepts one of the following:
 STANDARD("standard")
 
 FAST("fast")
+
+class BetaUserLocation:
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class BetaWebFetchBlock:
 
@@ -17963,6 +19066,77 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaWebFetchTool20260209:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaWebFetchToolResultBlock:
 
 Content content
@@ -18042,6 +19216,32 @@ Fetched content URL
 String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlockParam:
 
@@ -18357,6 +19557,32 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
@@ -18508,7 +19734,90 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[BetaUserLocation](api/beta.md)> userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class BetaWebSearchTool20260209:
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+Optional<List<String>> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+Optional<List<String>> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<[BetaUserLocation](api/beta.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -18591,6 +19900,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebSearchToolResultBlockContent: A class that can be one of several variants.union
 
@@ -18690,6 +20025,32 @@ Accepts one of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebSearchToolResultBlockParamContent: A class that can be one of several variants.union
 
@@ -19204,6 +20565,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -19250,6 +20617,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -19291,6 +20664,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -19372,9 +20771,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -19409,6 +20836,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -19761,6 +21206,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -20378,6 +21827,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -20424,6 +21879,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -20465,6 +21926,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -20546,9 +22033,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -20583,6 +22098,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -20935,6 +22468,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
@@ -21516,6 +23053,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaServerToolUseBlock:
 
 String id
@@ -21562,6 +23105,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
@@ -21603,6 +23152,32 @@ String url
 String toolUseId
 
 JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
 
 class BetaWebFetchToolResultBlock:
 
@@ -21684,9 +23259,37 @@ String toolUseId
 
 JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
 
+Optional<Caller> caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class BetaDirectCaller:
+
+Tool invocation directly from the model.
+
+JsonValue; type "direct"constant"direct"constant
+
+class BetaServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+String toolId
+
+JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+
+class BetaServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class BetaCodeExecutionToolResultBlock:
 
 [BetaCodeExecutionToolResultBlockContent](api/beta.md) content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
 
 Accepts one of the following:
 
@@ -21721,6 +23324,24 @@ String stderr
 String stdout
 
 JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+
+class BetaEncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+List<[BetaCodeExecutionOutputBlock](api/beta.md)> content
+
+String fileId
+
+JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+
+String encryptedStdout
+
+long returnCode
+
+String stderr
+
+JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
 
 String toolUseId
 
@@ -22073,6 +23694,10 @@ Accepts one of the following:
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
 Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 

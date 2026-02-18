@@ -2,15 +2,15 @@
 
 Copy page
 
-Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded
-files directly within the API conversation.
-The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
+Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
 
-The code execution tool is currently in public beta.
+**Code execution is free when used with web search or web fetch.** When `web_search_20260209` or `web_fetch_20260209` is included in your request, there are no additional charges for code execution tool calls beyond the standard input and output token costs. Standard code execution charges apply when these tools are not included.
 
-To use this feature, add the `"code-execution-2025-08-25"` [beta header](api/beta-headers.md) to your API requests.
+Code execution is a core primitive for building high-performance agents. It enables dynamic filtering in web search and web fetch tools, allowing Claude to process results before they reach the context window—improving accuracy while reducing token consumption.
 
 Please reach out through our [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
+
+This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 
@@ -19,6 +19,7 @@ The code execution tool is available on the following models:
 | Model | Tool Version |
 | --- | --- |
 | Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825` |
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
 | Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
@@ -32,6 +33,15 @@ The current version `code_execution_20250825` supports Bash commands and file op
 
 Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
 
+## Platform availability
+
+Code execution is available on:
+
+- **Claude API** (Anthropic)
+- **Microsoft Azure AI Foundry**
+
+Code execution is not currently available on Amazon Bedrock or Google Vertex AI.
+
 ## Quick start
 
 Here's a simple example that asks Claude to perform a calculation:
@@ -42,7 +52,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -84,7 +93,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -110,7 +118,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -130,7 +137,7 @@ curl https://api.anthropic.com/v1/messages \
 
 To analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:
 
-Using the Files API with Code Execution requires two beta headers: `"anthropic-beta": "code-execution-2025-08-25,files-api-2025-04-14"`
+Using the Files API with Code Execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
 The Python environment can process various file types uploaded via the Files API, including:
 
@@ -161,7 +168,7 @@ curl https://api.anthropic.com/v1/files \
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
+    --header "anthropic-beta: files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -195,7 +202,7 @@ client = Anthropic()
 # Request code execution that creates files
 response = client.beta.messages.create(
     model="claude-opus-4-6",
-    betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
+    betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
         {
@@ -248,7 +255,7 @@ FILE_ID=$(jq -r '.id' file_response.json)
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14" \
+    --header "anthropic-beta: files-api-2025-04-14" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",
@@ -498,9 +505,8 @@ from anthropic import Anthropic
 client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 # First request: Create a file with a random number
-response1 = client.beta.messages.create(
+response1 = client.messages.create(
     model="claude-opus-4-6",
-    betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[
         {
@@ -515,10 +521,9 @@ response1 = client.beta.messages.create(
 container_id = response1.container.id
 
 # Second request: Reuse the container to read the file
-response2 = client.beta.messages.create(
+response2 = client.messages.create(
     container=container_id,  # Reuse the same container
     model="claude-opus-4-6",
-    betas=["code-execution-2025-08-25"],
     max_tokens=4096,
     messages=[
         {
@@ -555,10 +560,26 @@ You can include the code execution tool in the [Messages Batches API](build-with
 
 ## Usage and pricing
 
-Code execution tool usage is tracked separately from token usage. Execution time has a minimum of 5 minutes.
-If files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.
+**Code execution is free when used with web search or web fetch.** When `web_search_20260209` or `web_fetch_20260209` is included in your API request, there are no additional charges for code execution tool calls beyond the standard input and output token costs.
 
-Each organization receives 1,550 free hours of usage with the code execution tool per month. Additional usage beyond the first 1,550 hours is billed at $0.05 per hour, per container.
+When used without these tools, code execution is billed by execution time, tracked separately from token usage:
+
+- Execution time has a minimum of 5 minutes
+- Each organization receives **1,550 free hours** of usage per month
+- Additional usage beyond 1,550 hours is billed at **$0.05 per hour, per container**
+- If files are included in the request, execution time is billed even if the tool is not invoked, due to files being preloaded onto the container
+
+Code execution usage is tracked in the response:
+
+```shiki
+"usage": {
+  "input_tokens": 105,
+  "output_tokens": 239,
+  "server_tool_use": {
+    "code_execution_requests": 1
+  }
+}
+```
 
 ## Upgrade to latest tool version
 
@@ -580,24 +601,17 @@ By upgrading to `code-execution-2025-08-25`, you get access to file manipulation
 
 ### Upgrade steps
 
-To upgrade, you need to make the following changes in your API requests:
+To upgrade, update the tool type in your API requests:
 
-1. **Update the beta header**:
+```shiki
+- "type": "code_execution_20250522"
++ "type": "code_execution_20250825"
+```
 
-   ```shiki
-   - "anthropic-beta": "code-execution-2025-05-22"
-   + "anthropic-beta": "code-execution-2025-08-25"
-   ```
-2. **Update the tool type**:
+**Review response handling** (if parsing responses programmatically):
 
-   ```shiki
-   - "type": "code_execution_20250522"
-   + "type": "code_execution_20250825"
-   ```
-3. **Review response handling** (if parsing responses programmatically):
-
-   - The previous blocks for Python execution responses will no longer be sent
-   - Instead, new response types for Bash and file operations will be sent (see Response Format section)
+- The previous blocks for Python execution responses will no longer be sent
+- Instead, new response types for Bash and file operations will be sent (see Response Format section)
 
 ## Programmatic tool calling
 
@@ -607,9 +621,8 @@ Python
 
 ```shiki
 # Enable programmatic calling for your tools
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-4-6",
-    betas=["advanced-tool-use-2025-11-20"],
     max_tokens=4096,
     messages=[
         {"role": "user", "content": "Get weather for 5 cities and find the warmest"}

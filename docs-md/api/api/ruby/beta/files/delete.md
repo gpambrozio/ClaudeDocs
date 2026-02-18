@@ -98,7 +98,25 @@ deleted_file = anthropic.beta.files.delete("file_id")
 puts(deleted_file)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

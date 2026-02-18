@@ -127,7 +127,29 @@ func main() {
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
+  "type": "model"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "claude-opus-4-6",
+  "created_at": "2026-02-04T00:00:00Z",
+  "display_name": "Claude Opus 4.6",
+  "type": "model"
+}
+```
 
 ---
 

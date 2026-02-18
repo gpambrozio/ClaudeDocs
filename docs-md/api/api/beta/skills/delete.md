@@ -91,14 +91,32 @@ Delete Skill
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/skills/$SKILL_ID \
+curl https://api.anthropic.com/v1/skills/$SKILL_ID?beta=true \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
 
 ---
 

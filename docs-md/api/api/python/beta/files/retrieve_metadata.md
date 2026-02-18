@@ -123,7 +123,35 @@ file_metadata = client.beta.files.retrieve_metadata(
 print(file_metadata.id)
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
+}
+```
 
 ---
 

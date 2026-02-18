@@ -48,7 +48,7 @@ response=$(curl -N https://api.anthropic.com/v1/messages \
   --header "content-type: application/json" \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --data '{
-    "model": "claude-sonnet-4-5",
+    "model": "claude-sonnet-4-6",
     "messages": [{"role": "user", "content": "Hello"}],
     "max_tokens": 256,
     "stream": true

@@ -46,6 +46,211 @@ media\_type: Literal["application/pdf"]
 
 type: Literal["base64"]
 
+class BashCodeExecutionOutputBlock: …
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+class BashCodeExecutionOutputBlockParam: …
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+class BashCodeExecutionResultBlockParam: …
+
+content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlockParam: …
+
+content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+class BashCodeExecutionToolResultErrorParam: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
 class CacheControlEphemeral: …
 
 type: Literal["ephemeral"]
@@ -195,6 +400,10 @@ type: Literal["web\_search\_result\_location"]
 
 url: str
 
+class CitationsConfig: …
+
+enabled: bool
+
 class CitationsConfigParam: …
 
 enabled: Optional[bool]
@@ -311,7 +520,506 @@ type: Literal["web\_search\_result\_location"]
 
 url: str
 
+class CodeExecutionOutputBlock: …
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+class CodeExecutionOutputBlockParam: …
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class CodeExecutionResultBlockParam: …
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class CodeExecutionTool20250522: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250522"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250825"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+[CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+class CodeExecutionToolResultBlockParam: …
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlockParam: …
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+[CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlockParam: …
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+class CodeExecutionToolResultErrorParam: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class Container: …
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
+class ContainerUploadBlockParam: …
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 [ContentBlock](api/messages.md)
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -423,6 +1131,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -433,13 +1167,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -481,7 +1283,337 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
-Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 7 more]
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
+Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 13 more]
 
 Regular text content.
 
@@ -1063,6 +2195,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class ToolResultBlockParam: …
 
 tool\_use\_id: str
@@ -1631,6 +2789,37 @@ context: Optional[str]
 
 title: Optional[str]
 
+class ToolReferenceBlockParam: …
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 is\_error: Optional[bool]
 
 class ServerToolUseBlockParam: …
@@ -1639,7 +2828,23 @@ id: str
 
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
@@ -1665,6 +2870,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class WebSearchToolResultBlockParam: …
 
@@ -1707,6 +2938,721 @@ type: Literal["web\_search\_tool\_result\_error"]
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+class WebFetchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlockParam: …
+
+content: [DocumentBlockParam](api/messages.md)
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+class ContentBlockSource: …
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+
+Accepts one of the following:
+
+str
+
+List[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+Accepts one of the following:
+
+class CitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class CitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class CitationContentBlockLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+start\_block\_index: int
+
+type: Literal["content\_block\_location"]
+
+class CitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class CitationSearchResultLocationParam: …
+
+cited\_text: str
+
+end\_block\_index: int
+
+search\_result\_index: int
+
+source: str
+
+start\_block\_index: int
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+class ImageBlockParam: …
+
+source: Source
+
+Accepts one of the following:
+
+class Base64ImageSource: …
+
+data: str
+
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: Literal["base64"]
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["content"]
+
+class URLPDFSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["document"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+enabled: Optional[bool]
+
+context: Optional[str]
+
+title: Optional[str]
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+class CodeExecutionToolResultBlockParam: …
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlockParam: …
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class BashCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlockParam: …
+
+content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class TextEditorCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+error\_message: Optional[str]
+
+class TextEditorCodeExecutionViewResultBlockParam: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+class TextEditorCodeExecutionCreateResultBlockParam: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class ToolSearchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlockParam: …
+
+tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class ContainerUploadBlockParam: …
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: str
+
+type: Literal["container\_upload"]
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -2065,6 +4011,46 @@ Accepts one of the following:
 
 "1h"
 
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class DocumentBlock: …
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
 class DocumentBlockParam: …
 
 source: Source
@@ -2298,6 +4284,42 @@ context: Optional[str]
 
 title: Optional[str]
 
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
 class ImageBlockParam: …
 
 source: Source
@@ -2367,6 +4389,57 @@ The JSON schema of the format
 
 type: Literal["json\_schema"]
 
+class MemoryTool20250818: …
+
+name: Literal["memory"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["memory\_20250818"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class Message: …
 
 id: str
@@ -2374,6 +4447,18 @@ id: str
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
 
 content: List[[ContentBlock](api/messages.md)]
 
@@ -2514,6 +4599,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -2524,13 +4635,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -2572,6 +4751,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -2580,13 +5089,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -2613,6 +5123,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -2791,6 +5305,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -2807,7 +5325,19 @@ Accepts one of the following:
 
 "batch"
 
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 [MessageCountTokensTool](api/messages.md)
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
@@ -2835,6 +5365,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -2858,6 +5396,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 description: Optional[str]
 
 Description of what this tool does.
@@ -2867,6 +5409,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 eager\_input\_streaming: Optional[bool]
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -2884,6 +5428,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -2906,6 +5458,212 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250522"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250825"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120: …
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260120"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818: …
+
+name: Literal["memory"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["memory\_20250818"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -2921,6 +5679,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -2943,6 +5709,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -2958,6 +5730,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -2980,6 +5760,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -2995,6 +5781,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -3017,6 +5811,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 max\_characters: Optional[int]
 
@@ -3035,6 +5835,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 allowed\_domains: Optional[List[str]]
 
@@ -3067,6 +5875,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
@@ -3097,6 +5909,341 @@ timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20250910"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209: …
+
+name: Literal["web\_search"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_search\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Optional[List[str]]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: Optional[WebSearchTool20260209UserLocation]
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119: …
+
+name: Literal["tool\_search\_tool\_bm25"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119: …
+
+name: Literal["tool\_search\_tool\_regex"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class MessageDeltaUsage: …
 
 cache\_creation\_input\_tokens: Optional[int]
@@ -3119,19 +6266,23 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
 
 class MessageParam: …
 
-content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 8 more]]]
+content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]]
 
 Accepts one of the following:
 
 str
 
-List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 8 more]]
+List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]
 
 Accepts one of the following:
 
@@ -3711,6 +6862,32 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class ToolResultBlockParam: …
 
 tool\_use\_id: str
@@ -4279,6 +7456,37 @@ context: Optional[str]
 
 title: Optional[str]
 
+class ToolReferenceBlockParam: …
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 is\_error: Optional[bool]
 
 class ServerToolUseBlockParam: …
@@ -4287,7 +7495,23 @@ id: str
 
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
@@ -4313,6 +7537,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class WebSearchToolResultBlockParam: …
 
@@ -4379,6 +7629,721 @@ Accepts one of the following:
 
 "1h"
 
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+class WebFetchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlockParam: …
+
+content: [DocumentBlockParam](api/messages.md)
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+class ContentBlockSource: …
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+
+Accepts one of the following:
+
+str
+
+List[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+Accepts one of the following:
+
+class CitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class CitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class CitationContentBlockLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+start\_block\_index: int
+
+type: Literal["content\_block\_location"]
+
+class CitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class CitationSearchResultLocationParam: …
+
+cited\_text: str
+
+end\_block\_index: int
+
+search\_result\_index: int
+
+source: str
+
+start\_block\_index: int
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+class ImageBlockParam: …
+
+source: Source
+
+Accepts one of the following:
+
+class Base64ImageSource: …
+
+data: str
+
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: Literal["base64"]
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["content"]
+
+class URLPDFSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["document"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+enabled: Optional[bool]
+
+context: Optional[str]
+
+title: Optional[str]
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+class CodeExecutionToolResultBlockParam: …
+
+content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlockParam: …
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlockParam: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class BashCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlockParam: …
+
+content: List[[BashCodeExecutionOutputBlockParam](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class TextEditorCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+error\_message: Optional[str]
+
+class TextEditorCodeExecutionViewResultBlockParam: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+class TextEditorCodeExecutionCreateResultBlockParam: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class ToolSearchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlockParam: …
+
+tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class ContainerUploadBlockParam: …
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 role: Literal["user", "assistant"]
 
 Accepts one of the following:
@@ -4403,7 +8368,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength256
 
-Union[Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more], str]
+Union[Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more], str]
 
 The model that will complete your prompt.
 
@@ -4411,13 +8376,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -4444,6 +8410,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -4795,6 +8765,8 @@ class RawContentBlockStartEvent: …
 
 content\_block: ContentBlock
 
+Response model for a file uploaded to the container.
+
 Accepts one of the following:
 
 class TextBlock: …
@@ -4905,6 +8877,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -4915,13 +8913,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -4963,6 +9029,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 index: int
 
 type: Literal["content\_block\_start"]
@@ -4976,6 +9372,18 @@ type: Literal["content\_block\_stop"]
 class RawMessageDeltaEvent: …
 
 delta: Delta
+
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
 
 stop\_reason: Optional[StopReason]
 
@@ -5029,6 +9437,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -5042,6 +9454,18 @@ id: str
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
 
 content: List[[ContentBlock](api/messages.md)]
 
@@ -5182,6 +9606,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -5192,13 +9642,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5240,6 +9758,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5248,13 +10096,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -5281,6 +10130,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -5459,6 +10312,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -5474,6 +10331,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["message\_start"]
 
@@ -5495,6 +10362,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
+
 content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
@@ -5634,6 +10513,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -5644,13 +10549,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -5692,6 +10665,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -5700,13 +11003,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -5733,6 +11037,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -5911,6 +11219,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -5927,11 +11239,33 @@ Accepts one of the following:
 
 "batch"
 
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 type: Literal["message\_start"]
 
 class RawMessageDeltaEvent: …
 
 delta: Delta
+
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
 
 stop\_reason: Optional[StopReason]
 
@@ -5985,6 +11319,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -5996,6 +11334,8 @@ type: Literal["message\_stop"]
 class RawContentBlockStartEvent: …
 
 content\_block: ContentBlock
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -6107,6 +11447,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -6117,13 +11483,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -6164,6 +11598,336 @@ url: str
 tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
+
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
 
 index: int
 
@@ -6443,7 +12207,19 @@ citations: Optional[CitationsConfigParam]
 
 enabled: Optional[bool]
 
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
 class ServerToolUsage: …
+
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
 
 web\_search\_requests: int
 
@@ -6453,9 +12229,51 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
@@ -6465,7 +12283,23 @@ id: str
 
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
@@ -6491,6 +12325,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class SignatureDelta: …
 
@@ -6867,6 +12727,311 @@ text: str
 
 type: Literal["text\_delta"]
 
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionCreateResultBlockParam: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+error\_message: Optional[str]
+
+class TextEditorCodeExecutionViewResultBlockParam: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+class TextEditorCodeExecutionCreateResultBlockParam: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam: …
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+class TextEditorCodeExecutionToolResultErrorParam: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+error\_message: Optional[str]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionViewResultBlockParam: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
 class ThinkingBlock: …
 
 signature: str
@@ -6967,6 +13132,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -6990,6 +13163,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 description: Optional[str]
 
 Description of what this tool does.
@@ -6999,6 +13176,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 eager\_input\_streaming: Optional[bool]
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7016,6 +13195,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7038,6 +13225,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7140,6 +13333,43 @@ disable\_parallel\_tool\_use: Optional[bool]
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+class ToolReferenceBlock: …
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+class ToolReferenceBlockParam: …
+
+Tool reference block that can be included in tool\_result content.
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
 
 class ToolResultBlockParam: …
 
@@ -7709,17 +13939,13 @@ context: Optional[str]
 
 title: Optional[str]
 
-is\_error: Optional[bool]
+class ToolReferenceBlockParam: …
 
-class ToolTextEditor20250124: …
+Tool reference block that can be included in tool\_result content.
 
-name: Literal["str\_replace\_editor"]
+tool\_name: str
 
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-type: Literal["text\_editor\_20250124"]
+type: Literal["tool\_reference"]
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -7743,6 +13969,374 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+is\_error: Optional[bool]
+
+class ToolSearchToolBm25\_20251119: …
+
+name: Literal["tool\_search\_tool\_bm25"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119: …
+
+name: Literal["tool\_search\_tool\_regex"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ToolSearchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlockParam: …
+
+tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+class ToolSearchToolResultErrorParam: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+class ToolSearchToolSearchResultBlockParam: …
+
+tool\_references: List[[ToolReferenceBlockParam](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+class ToolTextEditor20250124: …
+
+name: Literal["str\_replace\_editor"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["text\_editor\_20250124"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7758,6 +14352,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7780,6 +14382,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7795,6 +14403,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7818,6 +14434,12 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
+
 max\_characters: Optional[int]
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7827,6 +14449,8 @@ strict: Optional[bool]
 When true, guarantees schema validation on tool names and inputs
 
 [ToolUnion](api/messages.md)
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Accepts one of the following:
 
@@ -7854,6 +14478,14 @@ maxLength128
 
 minLength1
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7877,6 +14509,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 description: Optional[str]
 
 Description of what this tool does.
@@ -7886,6 +14522,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 eager\_input\_streaming: Optional[bool]
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7903,6 +14541,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7925,6 +14571,212 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250522"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825: …
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20250825"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120: …
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260120"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818: …
+
+name: Literal["memory"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["memory\_20250818"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7940,6 +14792,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7962,6 +14822,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -7977,6 +14843,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -7999,6 +14873,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 strict: Optional[bool]
 
@@ -8014,6 +14894,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 cache\_control: Optional[CacheControlEphemeral]
 
 Create a cache control breakpoint at this content block.
@@ -8036,6 +14924,12 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+input\_examples: Optional[List[Dict[str, object]]]
 
 max\_characters: Optional[int]
 
@@ -8054,6 +14948,14 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
 
 allowed\_domains: Optional[List[str]]
 
@@ -8086,6 +14988,10 @@ Accepts one of the following:
 
 "1h"
 
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 max\_uses: Optional[int]
 
 Maximum number of times the tool can be used in the API request.
@@ -8116,9 +15022,370 @@ timezone: Optional[str]
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20250910"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209: …
+
+name: Literal["web\_search"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_search\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Optional[List[str]]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: Optional[WebSearchTool20260209UserLocation]
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119: …
+
+name: Literal["tool\_search\_tool\_bm25"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"
+
+"tool\_search\_tool\_bm25"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119: …
+
+name: Literal["tool\_search\_tool\_regex"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"
+
+"tool\_search\_tool\_regex"
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolUseBlock: …
 
 id: str
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 input: Dict[str, object]
 
@@ -8158,6 +15425,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 class URLImageSource: …
 
@@ -8209,6 +15502,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -8224,6 +15521,880 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+class WebFetchBlockParam: …
+
+content: [DocumentBlockParam](api/messages.md)
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+class ContentBlockSource: …
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+
+Accepts one of the following:
+
+str
+
+List[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+Accepts one of the following:
+
+class CitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class CitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class CitationContentBlockLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+start\_block\_index: int
+
+type: Literal["content\_block\_location"]
+
+class CitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class CitationSearchResultLocationParam: …
+
+cited\_text: str
+
+end\_block\_index: int
+
+search\_result\_index: int
+
+source: str
+
+start\_block\_index: int
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+class ImageBlockParam: …
+
+source: Source
+
+Accepts one of the following:
+
+class Base64ImageSource: …
+
+data: str
+
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: Literal["base64"]
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["content"]
+
+class URLPDFSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["document"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+enabled: Optional[bool]
+
+context: Optional[str]
+
+title: Optional[str]
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+class WebFetchTool20250910: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20250910"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class WebFetchToolResultBlockParam: …
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlockParam: …
+
+content: [DocumentBlockParam](api/messages.md)
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+class ContentBlockSource: …
+
+content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
+
+Accepts one of the following:
+
+str
+
+List[[ContentBlockSourceContent](api/messages.md)]
+
+Accepts one of the following:
+
+class TextBlockParam: …
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+Accepts one of the following:
+
+class CitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class CitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class CitationContentBlockLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+start\_block\_index: int
+
+type: Literal["content\_block\_location"]
+
+class CitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class CitationSearchResultLocationParam: …
+
+cited\_text: str
+
+end\_block\_index: int
+
+search\_result\_index: int
+
+source: str
+
+start\_block\_index: int
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+class ImageBlockParam: …
+
+source: Source
+
+Accepts one of the following:
+
+class Base64ImageSource: …
+
+data: str
+
+media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
+
+Accepts one of the following:
+
+"image/jpeg"
+
+"image/png"
+
+"image/gif"
+
+"image/webp"
+
+type: Literal["base64"]
+
+class URLImageSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["image"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+type: Literal["content"]
+
+class URLPDFSource: …
+
+type: Literal["url"]
+
+url: str
+
+type: Literal["document"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+enabled: Optional[bool]
+
+context: Optional[str]
+
+title: Optional[str]
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchToolResultErrorBlockParam: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 5 more]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
 
 class WebSearchResultBlock: …
 
@@ -8259,6 +16430,14 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
 
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
 allowed\_domains: Optional[List[str]]
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -8289,6 +16468,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
 max\_uses: Optional[int]
 
@@ -8341,6 +16524,32 @@ Accepts one of the following:
 type: Literal["web\_search\_tool\_result\_error"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8482,6 +16691,32 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+caller: Optional[Caller]
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 [WebSearchToolResultBlockParamContent](api/messages.md)
 
@@ -8785,6 +17020,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
+
 content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
@@ -8924,6 +17171,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -8934,13 +17207,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -8982,6 +17323,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -8990,13 +17661,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -9023,6 +17695,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -9201,6 +17877,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -9216,6 +17896,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -9343,6 +18033,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
+
 content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
@@ -9482,6 +18184,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -9492,13 +18220,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -9540,6 +18336,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -9548,13 +18674,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -9581,6 +18708,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -9759,6 +18890,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -9774,6 +18909,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 
@@ -9863,6 +19008,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+container: Optional[Container]
+
+Information about the container used in the request (for the code execution tool)
+
+id: str
+
+Identifier for the container used in this request
+
+expires\_at: datetime
+
+The time at which the container will expire.
+
 content: List[[ContentBlock](api/messages.md)]
 
 Content generated by the model.
@@ -10002,6 +19159,32 @@ class ToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
 name: str
@@ -10012,13 +19195,81 @@ class ServerToolUseBlock: …
 
 id: str
 
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 input: Dict[str, object]
 
-name: Literal["web\_search"]
+name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
+
+Accepts one of the following:
+
+"web\_search"
+
+"web\_fetch"
+
+"code\_execution"
+
+"bash\_code\_execution"
+
+"text\_editor\_code\_execution"
+
+"tool\_search\_tool\_regex"
+
+"tool\_search\_tool\_bm25"
 
 type: Literal["server\_tool\_use"]
 
 class WebSearchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
@@ -10060,6 +19311,336 @@ tool\_use\_id: str
 
 type: Literal["web\_search\_tool\_result"]
 
+class WebFetchToolResultBlock: …
+
+caller: Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller: …
+
+Tool invocation directly from the model.
+
+type: Literal["direct"]
+
+class ServerToolCaller: …
+
+Tool invocation generated by a server-side tool.
+
+tool\_id: str
+
+type: Literal["code\_execution\_20250825"]
+
+class CallerServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
+content: Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock: …
+
+error\_code: [WebFetchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"url\_too\_long"
+
+"url\_not\_allowed"
+
+"url\_not\_accessible"
+
+"unsupported\_content\_type"
+
+"too\_many\_requests"
+
+"max\_uses\_exceeded"
+
+"unavailable"
+
+type: Literal["web\_fetch\_tool\_result\_error"]
+
+class WebFetchBlock: …
+
+content: [DocumentBlock](api/messages.md)
+
+citations: Optional[CitationsConfig]
+
+Citation configuration for the document
+
+enabled: bool
+
+source: Source
+
+Accepts one of the following:
+
+class Base64PDFSource: …
+
+data: str
+
+media\_type: Literal["application/pdf"]
+
+type: Literal["base64"]
+
+class PlainTextSource: …
+
+data: str
+
+media\_type: Literal["text/plain"]
+
+type: Literal["text"]
+
+title: Optional[str]
+
+The title of the document
+
+type: Literal["document"]
+
+retrieved\_at: Optional[str]
+
+ISO 8601 timestamp when the content was retrieved
+
+type: Literal["web\_fetch\_result"]
+
+url: str
+
+Fetched content URL
+
+tool\_use\_id: str
+
+type: Literal["web\_fetch\_tool\_result"]
+
+class CodeExecutionToolResultBlock: …
+
+content: [CodeExecutionToolResultBlockContent](api/messages.md)
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError: …
+
+error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+type: Literal["code\_execution\_tool\_result\_error"]
+
+class CodeExecutionResultBlock: …
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["code\_execution\_result"]
+
+class EncryptedCodeExecutionResultBlock: …
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+content: List[[CodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["code\_execution\_output"]
+
+encrypted\_stdout: str
+
+return\_code: int
+
+stderr: str
+
+type: Literal["encrypted\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["code\_execution\_tool\_result"]
+
+class BashCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError: …
+
+error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"output\_file\_too\_large"
+
+type: Literal["bash\_code\_execution\_tool\_result\_error"]
+
+class BashCodeExecutionResultBlock: …
+
+content: List[[BashCodeExecutionOutputBlock](api/messages.md)]
+
+file\_id: str
+
+type: Literal["bash\_code\_execution\_output"]
+
+return\_code: int
+
+stderr: str
+
+stdout: str
+
+type: Literal["bash\_code\_execution\_result"]
+
+tool\_use\_id: str
+
+type: Literal["bash\_code\_execution\_tool\_result"]
+
+class TextEditorCodeExecutionToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError: …
+
+error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+"file\_not\_found"
+
+error\_message: Optional[str]
+
+type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+
+class TextEditorCodeExecutionViewResultBlock: …
+
+content: str
+
+file\_type: Literal["text", "image", "pdf"]
+
+Accepts one of the following:
+
+"text"
+
+"image"
+
+"pdf"
+
+num\_lines: Optional[int]
+
+start\_line: Optional[int]
+
+total\_lines: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_view\_result"]
+
+class TextEditorCodeExecutionCreateResultBlock: …
+
+is\_file\_update: bool
+
+type: Literal["text\_editor\_code\_execution\_create\_result"]
+
+class TextEditorCodeExecutionStrReplaceResultBlock: …
+
+lines: Optional[List[str]]
+
+new\_lines: Optional[int]
+
+new\_start: Optional[int]
+
+old\_lines: Optional[int]
+
+old\_start: Optional[int]
+
+type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+
+tool\_use\_id: str
+
+type: Literal["text\_editor\_code\_execution\_tool\_result"]
+
+class ToolSearchToolResultBlock: …
+
+content: Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError: …
+
+error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"too\_many\_requests"
+
+"execution\_time\_exceeded"
+
+error\_message: Optional[str]
+
+type: Literal["tool\_search\_tool\_result\_error"]
+
+class ToolSearchToolSearchResultBlock: …
+
+tool\_references: List[[ToolReferenceBlock](api/messages.md)]
+
+tool\_name: str
+
+type: Literal["tool\_reference"]
+
+type: Literal["tool\_search\_tool\_search\_result"]
+
+tool\_use\_id: str
+
+type: Literal["tool\_search\_tool\_result"]
+
+class ContainerUploadBlock: …
+
+Response model for a file uploaded to the container.
+
+file\_id: str
+
+type: Literal["container\_upload"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -10068,13 +19649,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-opus-4-5-20251101", "claude-opus-4-5", 18 more]
+Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-opus-4-5-20251101", 19 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-sonnet-4-6` - Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
 - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
 - `claude-3-7-sonnet-latest` - Deprecated: Will reach end-of-life on February 19th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
@@ -10101,6 +19683,10 @@ Accepts one of the following:
 "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"
 
@@ -10279,6 +19865,10 @@ server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
 
+web\_fetch\_requests: int
+
+The number of web fetch tool requests.
+
 web\_search\_requests: int
 
 The number of web search tool requests.
@@ -10294,6 +19884,16 @@ Accepts one of the following:
 "priority"
 
 "batch"
+
+speed: Optional[Literal["standard", "fast"]]
+
+The inference speed mode used for this request.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
 
 type: Literal["succeeded"]
 

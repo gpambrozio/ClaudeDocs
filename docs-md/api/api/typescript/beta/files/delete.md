@@ -100,7 +100,25 @@ const deletedFile = await client.beta.files.delete('file_id');
 console.log(deletedFile.id);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

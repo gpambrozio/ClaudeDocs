@@ -101,7 +101,7 @@ Ask AI
     anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
     custom_instructions: "Follow our coding standards"
     max_turns: "10"
-    model: "claude-sonnet-4-5-20250929"
+    model: "claude-sonnet-4-6"
 ```
 
 **GA version (v1.0):**
@@ -120,7 +120,7 @@ Ask AI
     claude_args: |
       --append-system-prompt "Follow our coding standards"
       --max-turns 10
-      --model claude-sonnet-4-5-20250929
+      --model claude-sonnet-4-6
 ```
 
 The action now automatically detects whether to run in interactive mode (responds to `@claude` mentions) or automation mode (runs immediately with a prompt) based on your configuration.
@@ -527,10 +527,10 @@ jobs:
         with:
           github_token: ${{ steps.app-token.outputs.token }}
           use_bedrock: "true"
-          claude_args: '--model us.anthropic.claude-sonnet-4-5-20250929-v1:0 --max-turns 10'
+          claude_args: '--model us.anthropic.claude-sonnet-4-6 --max-turns 10'
 ```
 
-The model ID format for Bedrock includes the region prefix (e.g., `us.anthropic.claude...`) and version suffix.
+The model ID format for Bedrock includes a region prefix (for example, `us.anthropic.claude-sonnet-4-6`).
 
 Google Vertex AI workflow
 
@@ -655,13 +655,13 @@ Copy
 Ask AI
 
 ```shiki
-claude_args: "--max-turns 5 --model claude-sonnet-4-5-20250929 --mcp-config /path/to/config.json"
+claude_args: "--max-turns 5 --model claude-sonnet-4-6 --mcp-config /path/to/config.json"
 ```
 
 Common arguments:
 
 - `--max-turns`: Maximum conversation turns (default: 10)
-- `--model`: Model to use (for example, `claude-sonnet-4-5-20250929`)
+- `--model`: Model to use (for example, `claude-sonnet-4-6`)
 - `--mcp-config`: Path to MCP configuration
 - `--allowed-tools`: Comma-separated list of allowed tools
 - `--debug`: Enable debug output
