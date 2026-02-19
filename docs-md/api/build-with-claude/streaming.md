@@ -6,7 +6,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 ## Streaming with SDKs
 
-Our [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
+The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 Python
 
@@ -26,7 +26,7 @@ with client.messages.stream(
 
 ## Get the final message without handling events
 
-If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object — identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
+If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
 Python
 
@@ -66,7 +66,7 @@ Event streams may also include any number of `ping` events.
 
 ### Error events
 
-We may occasionally send [errors](api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
+The API may occasionally send [errors](api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
 Example error
 
@@ -77,7 +77,7 @@ data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overlo
 
 ### Other events
 
-In accordance with our [versioning policy](api/versioning.md), we may add new event types, and your code should handle unknown event types gracefully.
+In accordance with the [versioning policy](api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
 
 ## Content block delta types
 
@@ -98,7 +98,7 @@ data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", 
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are *partial JSON strings*, whereas the final `tool_use.input` is always an *object*.
 
-You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using our [SDKs](api/client-sdks.md), which provide helpers to access parsed incremental values.
+You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](api/client-sdks.md), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
 
@@ -109,7 +109,7 @@ event: content_block_delta
 data: {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_delta","partial_json": "{\"location\": \"San Fra"}}}
 ```
 
-Note: Our current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, we emit them as multiple `content_block_delta` events with chunked partial json so that the format can automatically support finer granularity in future models.
+Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial json so that the format can automatically support finer granularity in future models.
 
 ### Thinking delta
 
@@ -137,7 +137,7 @@ data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_d
 
 ## Full HTTP Stream response
 
-We strongly recommend that you use our [client SDKs](api/client-sdks.md) when using streaming mode. However, if you are building a direct API integration, you will need to handle these events yourself.
+Use the [client SDKs](api/client-sdks.md) when using streaming mode. However, if you are building a direct API integration, you will need to handle these events yourself.
 
 A stream response is comprised of:
 
@@ -201,7 +201,7 @@ data: {"type": "message_stop"}
 
 Tool use supports [fine-grained streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) for parameter values. Enable it per tool with `eager_input_streaming`.
 
-In this request, we ask Claude to use a tool to tell us the weather.
+This request asks Claude to use a tool to report the weather.
 
 Shell
 
@@ -336,7 +336,7 @@ data: {"type":"message_stop"}
 
 ### Streaming request with extended thinking
 
-In this request, we enable extended thinking with streaming to see Claude's step-by-step reasoning.
+This request enables extended thinking with streaming to see Claude's step-by-step reasoning.
 
 Shell
 
@@ -408,7 +408,7 @@ data: {"type": "message_stop"}
 
 ### Streaming request with web search tool use
 
-In this request, we ask Claude to search the web for current weather information.
+This request asks Claude to search the web for current weather information.
 
 Shell
 

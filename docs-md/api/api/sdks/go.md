@@ -391,7 +391,7 @@ client.Messages.New(
 
 ## Long requests
 
-Anthropic highly encourages using the streaming Messages API for longer running requests.
+Consider using the streaming Messages API for longer running requests.
 
 Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which
 can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.

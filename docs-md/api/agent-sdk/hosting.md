@@ -4,7 +4,7 @@ Copy page
 
 The Claude Agent SDK differs from traditional stateless LLM APIs in that it maintains conversational state and executes commands in a persistent environment. This guide covers the architecture, hosting considerations, and best practices for deploying SDK-based agents in production.
 
-For security hardening beyond basic sandboxing—including network controls, credential management, and isolation options—see [Secure Deployment](agent-sdk/secure-deployment.md).
+For security hardening beyond basic sandboxing (including network controls, credential management, and isolation options), see [Secure Deployment](agent-sdk/secure-deployment.md).
 
 ## Hosting Requirements
 
@@ -101,7 +101,7 @@ Best for agents that must collaborate closely together. This is likely the least
 
 - **Simulations**: Agents that interact with each other in simulations such as video games.
 
-# FAQ
+## FAQ
 
 ### How do I communicate with my sandboxes?
 
@@ -109,7 +109,7 @@ When hosting in containers, expose ports to communicate with your SDK instances.
 
 ### What is the cost of hosting a container?
 
-We have found that the dominant cost of serving agents is the tokens, containers vary based on what you provision but a minimum cost is roughly 5 cents per hour running.
+The dominant cost of serving agents is the tokens; containers vary based on what you provision, but a minimum cost is roughly 5 cents per hour running.
 
 ### When should I shut down idle containers vs. keeping them warm?
 
@@ -126,7 +126,7 @@ Since containers are just servers the same logging infrastructure you use for th
 
 ### How long can an agent session run before timing out?
 
-An agent session will not timeout, but we recommend setting a 'maxTurns' property to prevent Claude from getting stuck in a loop.
+An agent session will not timeout, but consider setting a 'maxTurns' property to prevent Claude from getting stuck in a loop.
 
 ## Next Steps
 

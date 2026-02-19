@@ -2,9 +2,9 @@
 
 Copy page
 
-> Visit our [content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter) to see an example content moderation implementation using Claude.
+> Visit the [content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter) to see an example content moderation implementation using Claude.
 
-This guide is focused on moderating user-generated content within your application. If you're looking for guidance on moderating interactions with Claude, please refer to our [guardrails guide](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md).
+This guide is focused on moderating user-generated content within your application. If you're looking for guidance on moderating interactions with Claude, refer to the [guardrails guide](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md).
 
 ## Before building with Claude
 
@@ -26,7 +26,7 @@ Here are some key indicators that you should use an LLM like Claude instead of a
 
 ### You require multimodal support
 
-Anthropic has trained all Claude models to be honest, helpful and harmless. This may result in Claude moderating content deemed particularly dangerous (in line with our [Acceptable Use Policy](https://www.anthropic.com/legal/aup)), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content may find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. We recommend reviewing our AUP in advance of building a moderation solution.
+Anthropic has trained all Claude models to be honest, helpful and harmless. This may result in Claude moderating content deemed particularly dangerous (in line with the [Acceptable Use Policy](https://www.anthropic.com/legal/aup)), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content may find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. Consider reviewing the AUP in advance of building a moderation solution.
 
 ### Generate examples of content to moderate
 
@@ -171,13 +171,13 @@ for comment in user_comments:
         print("No issues detected.")
 ```
 
-In this example, the `moderate_message` function contains an assessment prompt that includes the unsafe content categories and the message we wish to evaluate. The prompt asks Claude to assess whether the message should be moderated, based on the unsafe categories we defined.
+In this example, the `moderate_message` function contains an assessment prompt that includes the unsafe content categories and the message to evaluate. The prompt asks Claude to assess whether the message should be moderated, based on the unsafe categories defined above.
 
 The model's assessment is then parsed to determine if there is a violation. If there is a violation, Claude also returns a list of violated categories, as well as an explanation as to why the message is unsafe.
 
 ### Evaluate your prompt
 
-Content moderation is a classification problem. Thus, you can use the same techniques outlined in our [classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide) to determine the accuracy of your content moderation system.
+Content moderation is a classification problem. Thus, you can use the same techniques outlined in the [classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide) to determine the accuracy of your content moderation system.
 
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
 
@@ -448,7 +448,7 @@ Keep in mind that finding the optimal batch size for your specific needs may req
 
 View a fully implemented code-based example of how to use Claude for content moderation.](https://platform.claude.com/cookbook/misc-building-moderation-filter)[Guardrails guide
 
-Explore our guardrails guide for techniques to moderate interactions with Claude.](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
+Explore the guardrails guide for techniques to moderate interactions with Claude.](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md)
 
 Was this page helpful?
 

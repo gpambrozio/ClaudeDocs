@@ -10,7 +10,7 @@ Please use [this form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback 
 
 This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data.
+Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
 To minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.
 
@@ -59,7 +59,7 @@ This dynamic filtering is particularly useful for:
 
 Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to be enabled. The web fetch tool (with and without dynamic filtering) is available on the Claude API and Microsoft Azure.
 
-To enable dynamic filtering, use the `web_fetch_20260209` tool version with the `code-execution-web-tools-2026-02-09` beta header:
+To enable dynamic filtering, use the `web_fetch_20260209` tool version:
 
 Shell
 
@@ -67,7 +67,6 @@ Shell
 curl https://api.anthropic.com/v1/messages \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: code-execution-web-tools-2026-02-09" \
     --header "content-type: application/json" \
     --data '{
         "model": "claude-opus-4-6",

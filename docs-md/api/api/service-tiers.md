@@ -44,7 +44,7 @@ Anthropic counts usage against Priority Tier capacity as follows:
 
 Otherwise, requests proceed at standard tier.
 
-These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity. Multipliers stack — a long-context request with US-only inference draws down input tokens at 2.2 tokens per token (2 × 1.1).
+These burndown rates reflect the relative pricing of each token type. For example, US-only inference is priced at 1.1x, so each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your Priority Tier capacity. Multipliers stack: a long-context request with US-only inference draws down input tokens at 2.2 tokens per token (2 × 1.1).
 
 Requests assigned Priority Tier pull from both the Priority Tier capacity and the regular rate limits.
 If servicing the request would exceed the rate limits, the request is declined.
@@ -128,7 +128,7 @@ Priority Tier is supported by:
 - Claude Haiku 4.5
 - Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md))
 
-Check the [model overview page](about-claude/models/overview.md) for more details on our models.
+Check the [model overview page](about-claude/models/overview.md) for more details on available models.
 
 ### How to access Priority Tier
 

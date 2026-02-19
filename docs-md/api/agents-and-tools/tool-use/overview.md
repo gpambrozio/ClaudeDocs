@@ -4,13 +4,13 @@ Copy page
 
 Claude is capable of interacting with tools and functions, allowing you to extend Claude's capabilities to perform a wider variety of tasks.
 
-Learn everything you need to master tool use with Claude as part of our new [courses](https://anthropic.skilljar.com/)! Please
+Learn everything you need to master tool use with Claude as part of the new [courses](https://anthropic.skilljar.com/)! Please
 continue to share your ideas and suggestions using this
 [form](https://forms.gle/BFnYc6iCkWoRzFgk7).
 
 **Guarantee schema conformance with strict tool use**
 
-[Structured Outputs](build-with-claude/structured-outputs.md) provides guaranteed schema validation for tool inputs. Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly—no more type mismatches or missing fields.
+[Structured Outputs](build-with-claude/structured-outputs.md) provides guaranteed schema validation for tool inputs. Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly, eliminating type mismatches or missing fields.
 
 Perfect for production agents where invalid tool parameters would cause failures. [Learn when to use strict tool use →](build-with-claude/structured-outputs.md)
 
@@ -239,7 +239,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-Refer to our [models overview table](about-claude/models/overview.md) for current per-model prices.
+Refer to the [models overview table](about-claude/models/overview.md) for current per-model prices.
 
 When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
 
@@ -247,7 +247,7 @@ When you send a tool use prompt, just like any other API request, the response w
 
 ## Next Steps
 
-Explore our repository of ready-to-implement tool use code examples in our cookbooks:
+Explore the repository of ready-to-implement tool use code examples in the cookbooks:
 
 [Calculator Tool
 

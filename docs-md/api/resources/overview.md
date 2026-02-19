@@ -28,7 +28,7 @@ Learning resources
 
 [Quickstarts
 
-Deployable applications built with our API.](https://github.com/anthropics/anthropic-quickstarts)[Courses
+Deployable applications built with the API.](https://github.com/anthropics/anthropic-quickstarts)[Courses
 
 Step by step lessons on building with Claude.](https://anthropic.skilljar.com/)[Cookbook
 

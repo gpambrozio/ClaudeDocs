@@ -8,14 +8,14 @@ See [Extended thinking](build-with-claude/extended-thinking.md) for guidance on 
 
 ## Before diving in
 
-This guide presumes that you have already decided to use extended thinking mode and have reviewed our [extended thinking implementation guide](build-with-claude/extended-thinking.md).
+This guide presumes that you have already decided to use extended thinking mode and have reviewed the [extended thinking implementation guide](build-with-claude/extended-thinking.md).
 
 ### Technical considerations for extended thinking
 
-- Thinking tokens have a minimum budget of 1024 tokens. We recommend that you start with the minimum thinking budget and incrementally increase to adjust based on your needs and task complexity.
-- For workloads where the optimal thinking budget is above 32K, we recommend that you use [batch processing](build-with-claude/batch-processing.md) to avoid networking issues. Requests pushing the model to think above 32K tokens causes long running requests that might run up against system timeouts and open connection limits.
+- Thinking tokens have a minimum budget of 1024 tokens. Start with the minimum thinking budget and incrementally increase to adjust based on your needs and task complexity.
+- For workloads where the optimal thinking budget is above 32K, use [batch processing](build-with-claude/batch-processing.md) to avoid networking issues. Requests pushing the model to think above 32K tokens causes long running requests that might run up against system timeouts and open connection limits.
 - Extended thinking performs best in English, though final outputs can be in [any language Claude supports](build-with-claude/multilingual-support.md).
-- If you need thinking below the minimum budget, we recommend using standard mode, with thinking turned off, with traditional chain-of-thought prompting with XML tags (like `<thinking>`). See [chain of thought prompting](build-with-claude/prompt-engineering/chain-of-thought.md).
+- If you need thinking below the minimum budget, use standard mode, with thinking turned off, with traditional chain-of-thought prompting with XML tags (like `<thinking>`). See [chain of thought prompting](build-with-claude/prompt-engineering/chain-of-thought.md).
 
 ## Prompting techniques for extended thinking
 
@@ -47,7 +47,7 @@ Try different methods if your first approach doesn't work.
 
 [Try in Console](/workbench/new?user=Please+think+about+this+math+problem+thoroughly+and+in+great+detail.+%0AConsider+multiple+approaches+and+show+your+complete+reasoning.%0ATry+different+methods+if+your+first+approach+doesn%27t+work.&thinking.budget_tokens=16000)
 
-That said, Claude can still effectively follow complex structured execution steps when needed. The model can handle even longer lists with more complex instructions than previous versions. We recommend that you start with more generalized instructions, then read Claude's thinking output and iterate to provide more specific instructions to steer its thinking from there.
+That said, Claude can still effectively follow complex structured execution steps when needed. The model can handle even longer lists with more complex instructions than previous versions. Start with more generalized instructions, then read Claude's thinking output and iterate to provide more specific instructions to steer its thinking from there.
 
 ### Multishot prompting with extended thinking
 
@@ -97,9 +97,9 @@ To maximize instruction following:
 
 You can use Claude's thinking output to debug Claude's logic, although this method is not always perfectly reliable.
 
-To make the best use of this methodology, we recommend the following tips:
+To make the best use of this methodology, consider the following tips:
 
-- We don't recommend passing Claude's extended thinking back in the user text block, as this doesn't improve performance and may actually degrade results.
+- Avoid passing Claude's extended thinking back in the user text block, as this doesn't improve performance and may actually degrade results.
 - Prefilling extended thinking is explicitly not allowed, and manually changing the model's output text that follows its thinking block is likely going to degrade results due to model confusion.
 
 When extended thinking is turned off, standard `assistant` response text prefill is still allowed.
@@ -115,7 +115,7 @@ For use cases such as detailed content generation where you may want to generate
 - Increase both the maximum extended thinking length AND explicitly ask for longer outputs
 - For very long outputs (20,000+ words), request a detailed outline with word counts down to the paragraph level. Then ask Claude to index its paragraphs to the outline and maintain the specified word counts
 
-We do not recommend that you push Claude to output more tokens for outputting tokens' sake. Rather, we encourage you to start with a small thinking budget and increase as needed to find the optimal settings for your use case.
+Avoid pushing Claude to output more tokens for outputting tokens' sake. Rather, start with a small thinking budget and increase as needed to find the optimal settings for your use case.
 
 Here are example use cases where Claude excels due to longer extended thinking:
 
@@ -153,7 +153,7 @@ And fix any issues you find.
 
 [Extended thinking cookbook
 
-Explore practical examples of extended thinking in our cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking guide
+Explore practical examples of extended thinking in the cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking guide
 
 See complete technical documentation for implementing extended thinking.](build-with-claude/extended-thinking.md)
 

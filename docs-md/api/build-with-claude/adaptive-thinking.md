@@ -6,7 +6,7 @@ Adaptive thinking is the recommended way to use [extended thinking](build-with-c
 
 Adaptive thinking can drive better performance than extended thinking with a fixed `budget_tokens` for many workloads, especially bimodal tasks and long-horizon agentic workflows. No beta header is required.
 
-For workloads where predictable latency and token usage matter — or where you need precise control over thinking costs — extended thinking with `budget_tokens` continues to be fully supported. We recommend testing both modes on your specific workloads to determine which works best.
+For workloads where predictable latency and token usage matter, or where you need precise control over thinking costs, extended thinking with `budget_tokens` continues to be fully supported. Consider testing both modes on your specific workloads to determine which works best.
 
 ## Supported models
 
@@ -58,7 +58,7 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 
 | Effort level | Thinking behavior |
 | --- | --- |
-| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only — requests using `max` on other models will return an error. |
+| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only. Requests using `max` on other models will return an error. |
 | `high` (default) | Claude always thinks. Provides deep reasoning on complex tasks. |
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
@@ -118,7 +118,7 @@ with client.messages.stream(
 | Mode | Config | Availability | When to use |
 | --- | --- | --- | --- |
 | **Adaptive** | `thinking: {type: "adaptive"}` | Opus 4.6, Sonnet 4.6 | Claude determines when and how much to use extended thinking. Use `effort` to guide. |
-| **Manual** | `thinking: {type: "enabled", budget_tokens: N}` | All models. Deprecated on Opus 4.6 and Sonnet 4.6 — consider adaptive mode instead. | When you need precise control over thinking token spend. |
+| **Manual** | `thinking: {type: "enabled", budget_tokens: N}` | All models. Deprecated on Opus 4.6 and Sonnet 4.6 (consider adaptive mode instead). | When you need precise control over thinking token spend. |
 | **Disabled** | Omit `thinking` parameter | All models | When you don't need extended thinking and want the lowest latency. |
 
 Adaptive thinking is available on Opus 4.6 and Sonnet 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On both Opus 4.6 and Sonnet 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated.
@@ -176,7 +176,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#fd8e9c91988ebd9c9389958f928d949ed39e9290).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#592a38353c2a1938372d312b3629303a773a3634).
 
 ### Thinking encryption
 
@@ -258,7 +258,7 @@ The billed output token count will **not** match the visible token count in the 
 
 The extended thinking page covers several topics in more detail with mode-specific code examples:
 
-- **[Tool use with thinking](build-with-claude/extended-thinking.md)**: The same rules apply for adaptive thinking — preserve thinking blocks between tool calls and be aware of `tool_choice` limitations when thinking is active.
+- **[Tool use with thinking](build-with-claude/extended-thinking.md)**: The same rules apply for adaptive thinking: preserve thinking blocks between tool calls and be aware of `tool_choice` limitations when thinking is active.
 - **[Prompt caching](build-with-claude/extended-thinking.md)**: With adaptive thinking, consecutive requests using the same thinking mode preserve cache breakpoints. Switching between `adaptive` and `enabled`/`disabled` modes breaks cache breakpoints for messages (system prompts and tool definitions remain cached).
 - **[Context windows](build-with-claude/extended-thinking.md)**: How thinking tokens interact with `max_tokens` and context window limits.
 

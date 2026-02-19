@@ -128,13 +128,13 @@ For more information on the Voyage HTTP API, see [the Voyage documentation](http
 
 ### AWS Marketplace
 
-Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available [here](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
+Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
 
 ## Quickstart example
 
-Now that we know how to get embeddings, let's see a brief example.
+The following brief example shows how to use embeddings.
 
-Suppose we have a small corpus of six documents to retrieve from
+Suppose you have a small corpus of six documents to retrieve from
 
 ```shiki
 documents = [
@@ -147,7 +147,7 @@ documents = [
 ]
 ```
 
-We will first use Voyage to convert each of them into an embedding vector
+First, use Voyage to convert each document into an embedding vector
 
 ```shiki
 import voyageai
@@ -158,13 +158,13 @@ vo = voyageai.Client()
 doc_embds = vo.embed(documents, model="voyage-3.5", input_type="document").embeddings
 ```
 
-The embeddings will allow us to do semantic search / retrieval in the vector space. Given an example query,
+The embeddings allow you to do semantic search / retrieval in the vector space. Given an example query,
 
 ```shiki
 query = "When is Apple's conference call scheduled?"
 ```
 
-we convert it into an embedding, and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
+Next, convert it into an embedding and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
 
 ```shiki
 import numpy as np
@@ -181,7 +181,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that we use `input_type="document"` and `input_type="query"` for embedding the document and query, respectively. More specification can be found [here](build-with-claude/embeddings.md).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](build-with-claude/embeddings.md).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
@@ -189,7 +189,7 @@ The output would be the 5th document, which is indeed the most relevant to the q
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
-If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out our [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
+If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
 ## FAQ
 

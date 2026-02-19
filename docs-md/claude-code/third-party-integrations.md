@@ -178,6 +178,10 @@ If you have a custom development environment, we find that creating a “one cli
 
 Encourage new users to try Claude Code for codebase Q&A, or on smaller bug fixes or feature requests. Ask Claude Code to make a plan. Check Claude’s suggestions and give feedback if it’s off-track. Over time, as users understand this new paradigm better, then they’ll be more effective at letting Claude Code run more agentically.
 
+### [​](#pin-model-versions-for-cloud-providers) Pin model versions for cloud providers
+
+If you deploy through [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), or [Foundry](microsoft-foundry.md), pin specific model versions using `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, Claude Code aliases resolve to the latest version, which can break users when Anthropic releases a new model that isn’t yet enabled in your account. See [Model configuration](model-config.md) for details.
+
 ### [​](#configure-security-policies) Configure security policies
 
 Security teams can configure managed permissions for what Claude Code is and is not allowed to do, which cannot be overwritten by local configuration. [Learn more](security.md).

@@ -7,6 +7,8 @@ Before configuring Claude Code with Bedrock, ensure you have:
 - AWS CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)
 - Appropriate IAM permissions
 
+If you are deploying Claude Code to multiple users, [pin your model versions](#4-pin-model-versions) to prevent breakage when Anthropic releases new models.
+
 ## [​](#setup) Setup
 
 ### [​](#1-submit-use-case-details) 1. Submit use case details
@@ -156,18 +158,33 @@ When enabling Bedrock for Claude Code, keep the following in mind:
 - When using Bedrock, the `/login` and `/logout` commands are disabled since authentication is handled through AWS credentials.
 - You can use settings files for environment variables like `AWS_PROFILE` that you don’t want to leak to other processes. See [Settings](settings.md) for more information.
 
-### [​](#4-model-configuration) 4. Model configuration
+### [​](#4-pin-model-versions) 4. Pin model versions
 
-Claude Code uses these default models for Bedrock:
+Pin specific model versions for every deployment. If you use model aliases (`sonnet`, `opus`, `haiku`) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Bedrock account, breaking existing users when Anthropic releases updates.
+
+Set these environment variables to specific Bedrock model IDs:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'
+export ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'
+export ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'
+```
+
+These variables use cross-region inference profile IDs (with the `us.` prefix). If you use a different region prefix or application inference profiles, adjust accordingly. For current and legacy model IDs, see [Models overview](about-claude/models/overview.md). See [Model configuration](model-config.md) for the full list of environment variables.
+Claude Code uses these default models when no pinning variables are set:
 
 | Model type | Default value |
 | --- | --- |
 | Primary model | `global.anthropic.claude-sonnet-4-6` |
 | Small/fast model | `us.anthropic.claude-haiku-4-5-20251001-v1:0` |
 
-For Bedrock users, Claude Code won’t automatically upgrade from Haiku 3.5 to Haiku 4.5. To manually switch to a newer Haiku model, set the `ANTHROPIC_DEFAULT_HAIKU_MODEL` environment variable to the full model name (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`).
-
-To customize models, use one of these methods:
+To customize models further, use one of these methods:
 
 Report incorrect code
 
@@ -238,7 +255,7 @@ Ask AI
 For more restrictive permissions, you can limit the Resource to specific inference profile ARNs.
 For details, see [Bedrock IAM documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html).
 
-We recommend creating a dedicated AWS account for Claude Code to simplify cost tracking and access control.
+Create a dedicated AWS account for Claude Code to simplify cost tracking and access control.
 
 ## [​](#aws-guardrails) AWS Guardrails
 

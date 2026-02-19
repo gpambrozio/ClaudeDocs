@@ -4,9 +4,9 @@ Copy page
 
 The memory tool enables Claude to store and retrieve information across conversations through a memory file directory. Claude can create, read, update, and delete files that persist between sessions, allowing it to build knowledge over time without keeping everything in the context window.
 
-The memory tool operates client-side—you control where and how the data is stored through your own infrastructure.
+The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
 
-Please reach out through our [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+Please reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 
 This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
@@ -113,7 +113,7 @@ To use the memory tool:
 1. Add the memory tool to your request
 2. Implement client-side handlers for memory operations
 
-To handle memory tool operations in your application, you need to implement handlers for each memory command. Our SDKs provide memory tool helpers that handle the tool interface—you can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
+To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
 
 For working examples, see:
 
@@ -328,7 +328,7 @@ Renames the directory.
 
 ## Prompting guidance
 
-We automatically include this instruction to the system prompt when the memory tool is included:
+This instruction is automatically included in the system prompt when the memory tool is enabled:
 
 ```inline-block
 IMPORTANT: ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE.

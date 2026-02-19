@@ -65,9 +65,9 @@ You can chain prompts to have Claude review its own work! This catches errors an
 
 Get inspired by a curated selection of prompts for various tasks and use cases.](resources/prompt-library/library.md)[GitHub prompting tutorial
 
-An example-filled tutorial that covers the prompt engineering concepts found in our docs.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Google Sheets prompting tutorial
+An example-filled tutorial that covers the prompt engineering concepts found in the docs.](https://github.com/anthropics/prompt-eng-interactive-tutorial)[Google Sheets prompting tutorial
 
-A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
+A lighter weight version of the prompt engineering tutorial via an interactive spreadsheet.](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8)
 
 Was this page helpful?
 
