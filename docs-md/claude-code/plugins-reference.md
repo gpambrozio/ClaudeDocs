@@ -465,6 +465,7 @@ enterprise-plugin/
 ├── hooks/                    # Hook configurations
 │   ├── hooks.json           # Main hook config
 │   └── security-hooks.json  # Additional hooks
+├── settings.json            # Default settings for the plugin
 ├── .mcp.json                # MCP server definitions
 ├── .lsp.json                # LSP server configurations
 ├── scripts/                 # Hook and utility scripts
@@ -488,6 +489,7 @@ The `.claude-plugin/` directory contains the `plugin.json` file. All other direc
 | **Hooks** | `hooks/hooks.json` | Hook configuration |
 | **MCP servers** | `.mcp.json` | MCP server definitions |
 | **LSP servers** | `.lsp.json` | Language server configurations |
+| **Settings** | `settings.json` | Default configuration applied when the plugin is enabled. Only [`agent`](sub-agents.md) settings are currently supported |
 
 ---
 

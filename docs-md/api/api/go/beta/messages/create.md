@@ -2423,6 +2423,10 @@ Body param: The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+CacheControl param.Field[[BetaCacheControlEphemeral](api/beta.md)]optional
+
+Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
 Container param.Field[[BetaMessageNewParamsContainerUnion](api/beta/messages/create.md)]optional
 
 Body param: Container identifier for reuse across requests.
@@ -2756,6 +2760,8 @@ const BetaToolAllowedCallerDirect BetaToolAllowedCaller = "direct"
 
 const BetaToolAllowedCallerCodeExecution20250825 BetaToolAllowedCaller = "code\_execution\_20250825"
 
+const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2819,6 +2825,8 @@ const BetaToolBash20241022AllowedCallerDirect BetaToolBash20241022AllowedCaller 
 
 const BetaToolBash20241022AllowedCallerCodeExecution20250825 BetaToolBash20241022AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2869,6 +2877,8 @@ Accepts one of the following:
 const BetaToolBash20250124AllowedCallerDirect BetaToolBash20250124AllowedCaller = "direct"
 
 const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash20250124AllowedCaller = "code\_execution\_20250825"
+
+const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -2921,6 +2931,8 @@ const BetaCodeExecutionTool20250522AllowedCallerDirect BetaCodeExecutionTool2025
 
 const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20250825"
 
+const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2969,6 +2981,8 @@ Accepts one of the following:
 const BetaCodeExecutionTool20250825AllowedCallerDirect BetaCodeExecutionTool20250825AllowedCaller = "direct"
 
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
+
+const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -3020,6 +3034,8 @@ Accepts one of the following:
 const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool20260120AllowedCaller = "direct"
 
 const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
+
+const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -3078,6 +3094,8 @@ const BetaToolComputerUse20241022AllowedCallerDirect BetaToolComputerUse20241022
 
 const BetaToolComputerUse20241022AllowedCallerCodeExecution20250825 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3132,6 +3150,8 @@ Accepts one of the following:
 const BetaMemoryTool20250818AllowedCallerDirect BetaMemoryTool20250818AllowedCaller = "direct"
 
 const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20250825"
+
+const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -3192,6 +3212,8 @@ const BetaToolComputerUse20250124AllowedCallerDirect BetaToolComputerUse20250124
 
 const BetaToolComputerUse20250124AllowedCallerCodeExecution20250825 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3246,6 +3268,8 @@ Accepts one of the following:
 const BetaToolTextEditor20241022AllowedCallerDirect BetaToolTextEditor20241022AllowedCaller = "direct"
 
 const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20250825"
+
+const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -3306,6 +3330,8 @@ const BetaToolComputerUse20251124AllowedCallerDirect BetaToolComputerUse20251124
 
 const BetaToolComputerUse20251124AllowedCallerCodeExecution20250825 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3365,6 +3391,8 @@ const BetaToolTextEditor20250124AllowedCallerDirect BetaToolTextEditor20250124Al
 
 const BetaToolTextEditor20250124AllowedCallerCodeExecution20250825 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3416,6 +3444,8 @@ const BetaToolTextEditor20250429AllowedCallerDirect BetaToolTextEditor20250429Al
 
 const BetaToolTextEditor20250429AllowedCallerCodeExecution20250825 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3466,6 +3496,8 @@ Accepts one of the following:
 const BetaToolTextEditor20250728AllowedCallerDirect BetaToolTextEditor20250728AllowedCaller = "direct"
 
 const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20250825"
+
+const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
@@ -3521,6 +3553,8 @@ Accepts one of the following:
 const BetaWebSearchTool20250305AllowedCallerDirect BetaWebSearchTool20250305AllowedCaller = "direct"
 
 const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20250825"
+
+const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
 
 AllowedDomains []stringoptional
 
@@ -3605,6 +3639,8 @@ const BetaWebFetchTool20250910AllowedCallerDirect BetaWebFetchTool20250910Allowe
 
 const BetaWebFetchTool20250910AllowedCallerCodeExecution20250825 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20250825"
 
+const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
+
 AllowedDomains []stringoptional
 
 List of domains to allow fetching from
@@ -3675,6 +3711,8 @@ Accepts one of the following:
 const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209AllowedCaller = "direct"
 
 const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
 
 AllowedDomains []stringoptional
 
@@ -3759,6 +3797,8 @@ const BetaWebFetchTool20260209AllowedCallerDirect BetaWebFetchTool20260209Allowe
 
 const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
 
+const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
+
 AllowedDomains []stringoptional
 
 List of domains to allow fetching from
@@ -3836,6 +3876,8 @@ const BetaToolSearchToolBm25\_20251119AllowedCallerDirect BetaToolSearchToolBm25
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20250825"
 
+const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3890,6 +3932,8 @@ Accepts one of the following:
 const BetaToolSearchToolRegex20251119AllowedCallerDirect BetaToolSearchToolRegex20251119AllowedCaller = "direct"
 
 const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20250825"
+
+const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
 

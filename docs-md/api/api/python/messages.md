@@ -574,13 +574,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250522"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -623,13 +625,68 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250825"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120: …
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: Literal["code\_execution"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["code\_execution\_20260120"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -1151,7 +1208,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1187,7 +1244,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1237,7 +1294,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1249,7 +1306,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -1305,7 +1362,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2215,7 +2272,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2891,7 +2948,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2917,7 +2974,7 @@ page\_age: Optional[str]
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -2982,7 +3039,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -3310,7 +3367,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -4399,13 +4456,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["memory\_20250818"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -4619,7 +4678,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -4655,7 +4714,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -4705,7 +4764,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -4717,7 +4776,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -4773,7 +4832,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -5325,16 +5384,6 @@ Accepts one of the following:
 
 "batch"
 
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
-
 [MessageCountTokensTool](api/messages.md)
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
@@ -5365,13 +5414,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5428,13 +5479,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5479,13 +5532,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250522"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5528,13 +5583,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250825"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5579,13 +5636,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20260120"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5628,13 +5687,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["memory\_20250818"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5679,13 +5740,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5730,13 +5793,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5781,13 +5846,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -5836,13 +5903,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -5919,13 +5988,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20250910"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -5990,13 +6061,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -6041,7 +6114,7 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[WebSearchTool20260209UserLocation]
+user\_location: Optional[UserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6073,13 +6146,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -6150,13 +6225,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -6205,13 +6282,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -6882,7 +6961,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -7558,7 +7637,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -7584,7 +7663,7 @@ page\_age: Optional[str]
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -7649,7 +7728,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -7977,7 +8056,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -8897,7 +8976,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -8933,7 +9012,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -8983,7 +9062,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -8995,7 +9074,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -9051,7 +9130,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -9626,7 +9705,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -9662,7 +9741,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -9712,7 +9791,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -9724,7 +9803,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -9780,7 +9859,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -10331,16 +10410,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["message\_start"]
 
@@ -10533,7 +10602,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -10569,7 +10638,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -10619,7 +10688,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -10631,7 +10700,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -10687,7 +10756,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -11238,16 +11307,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["message\_start"]
 
@@ -11467,7 +11526,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -11503,7 +11562,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -11553,7 +11612,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -11565,7 +11624,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -11621,7 +11680,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -12215,6 +12274,12 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
+class ServerToolCaller20260120: …
+
+tool\_id: str
+
+type: Literal["code\_execution\_20260120"]
+
 class ServerToolUsage: …
 
 web\_fetch\_requests: int
@@ -12249,7 +12314,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -12346,7 +12411,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -13132,13 +13197,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -13195,13 +13262,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -13988,13 +14057,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14043,13 +14114,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14301,13 +14374,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14352,13 +14427,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14403,13 +14480,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14478,13 +14557,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14541,13 +14622,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14592,13 +14675,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250522"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14641,13 +14726,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250825"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14692,13 +14779,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20260120"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14741,13 +14830,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["memory\_20250818"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14792,13 +14883,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14843,13 +14936,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14894,13 +14989,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -14949,13 +15046,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -15032,13 +15131,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20250910"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -15103,13 +15204,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -15154,7 +15257,7 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: Optional[WebSearchTool20260209UserLocation]
+user\_location: Optional[UserLocation]
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -15186,13 +15289,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -15263,13 +15368,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -15318,13 +15425,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[CacheControlEphemeral]
 
@@ -15381,7 +15490,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -15446,7 +15555,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -15522,15 +15631,25 @@ Accepts one of the following:
 
 "batch"
 
-speed: Optional[Literal["standard", "fast"]]
+class UserLocation: …
 
-The inference speed mode used for this request.
+type: Literal["approximate"]
 
-Accepts one of the following:
+city: Optional[str]
 
-"standard"
+The city of the user.
 
-"fast"
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class WebFetchBlock: …
 
@@ -15833,13 +15952,88 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20250910"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains: Optional[List[str]]
+
+List of domains to allow fetching from
+
+blocked\_domains: Optional[List[str]]
+
+List of domains to block fetching from
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[CitationsConfigParam]
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: Optional[bool]
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Optional[int]
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchTool20260209: …
+
+name: Literal["web\_fetch"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_fetch\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -15916,7 +16110,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -16322,7 +16516,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -16430,13 +16624,100 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains: Optional[List[str]]
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: Optional[List[str]]
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: Optional[bool]
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: Optional[int]
+
+Maximum number of times the tool can be used in the API request.
+
+strict: Optional[bool]
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: Optional[UserLocation]
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: Literal["approximate"]
+
+city: Optional[str]
+
+The city of the user.
+
+country: Optional[str]
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: Optional[str]
+
+The region of the user.
+
+timezone: Optional[str]
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebSearchTool20260209: …
+
+name: Literal["web\_search"]
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: Literal["web\_search\_20260209"]
+
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -16505,7 +16786,7 @@ The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16545,7 +16826,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -16557,7 +16838,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16597,7 +16878,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16647,7 +16928,7 @@ page\_age: Optional[str]
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16712,7 +16993,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -16736,7 +17017,7 @@ page\_age: Optional[str]
 
 class WebSearchToolRequestError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16756,7 +17037,7 @@ type: Literal["web\_search\_tool\_result\_error"]
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16773,6 +17054,22 @@ Accepts one of the following:
 "request\_too\_large"
 
 type: Literal["web\_search\_tool\_result\_error"]
+
+Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
 
 #### MessagesBatches
 
@@ -17191,7 +17488,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -17227,7 +17524,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -17277,7 +17574,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -17289,7 +17586,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -17345,7 +17642,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -17896,16 +18193,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 
@@ -18204,7 +18491,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -18240,7 +18527,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -18290,7 +18577,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -18302,7 +18589,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -18358,7 +18645,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -18909,16 +19196,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 
@@ -19179,7 +19456,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -19215,7 +19492,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -19265,7 +19542,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -19277,7 +19554,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -19333,7 +19610,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -19884,16 +20161,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 

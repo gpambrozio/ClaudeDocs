@@ -705,7 +705,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-ToolUseBlockParamCallerCodeExecution20260120Resp
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1379,7 +1379,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-ServerToolUseBlockParamCallerCodeExecution20260120Resp
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1405,21 +1405,21 @@ PageAge stringoptional
 
 type WebSearchToolRequestError struct{…}
 
-ErrorCode WebSearchToolRequestErrorErrorCode
+ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
-const WebSearchToolRequestErrorErrorCodeInvalidToolInput WebSearchToolRequestErrorErrorCode = "invalid\_tool\_input"
+const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
-const WebSearchToolRequestErrorErrorCodeUnavailable WebSearchToolRequestErrorErrorCode = "unavailable"
+const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
 
-const WebSearchToolRequestErrorErrorCodeMaxUsesExceeded WebSearchToolRequestErrorErrorCode = "max\_uses\_exceeded"
+const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
 
-const WebSearchToolRequestErrorErrorCodeTooManyRequests WebSearchToolRequestErrorErrorCode = "too\_many\_requests"
+const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
 
-const WebSearchToolRequestErrorErrorCodeQueryTooLong WebSearchToolRequestErrorErrorCode = "query\_too\_long"
+const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
 
-const WebSearchToolRequestErrorErrorCodeRequestTooLarge WebSearchToolRequestErrorErrorCode = "request\_too\_large"
+const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -1470,7 +1470,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-WebSearchToolResultBlockParamCallerCodeExecution20260120Resp
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1798,7 +1798,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-WebFetchToolResultBlockParamCallerCodeExecution20260120Resp
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -2279,6 +2279,29 @@ Our previous most fast and cost-effective
 
 string
 
+CacheControl [CacheControlEphemeral](api/messages.md)optional
+
+Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
+Type Ephemeral
+
+TTL CacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+
+const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
 Container stringoptional
 
 Container identifier for reuse across requests.
@@ -2338,16 +2361,6 @@ Accepts one of the following:
 const MessageBatchNewParamsRequestParamsServiceTierAuto MessageBatchNewParamsRequestParamsServiceTier = "auto"
 
 const MessageBatchNewParamsRequestParamsServiceTierStandardOnly MessageBatchNewParamsRequestParamsServiceTier = "standard\_only"
-
-Speed stringoptional
-
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-Accepts one of the following:
-
-const MessageBatchNewParamsRequestParamsSpeedStandard MessageBatchNewParamsRequestParamsSpeed = "standard"
-
-const MessageBatchNewParamsRequestParamsSpeedFast MessageBatchNewParamsRequestParamsSpeed = "fast"
 
 StopSequences []stringoptional
 
@@ -2668,6 +2681,8 @@ const ToolAllowedCallerDirect ToolAllowedCaller = "direct"
 
 const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code\_execution\_20250825"
 
+const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2731,6 +2746,8 @@ const ToolBash20250124AllowedCallerDirect ToolBash20250124AllowedCaller = "direc
 
 const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124AllowedCaller = "code\_execution\_20250825"
 
+const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2782,6 +2799,8 @@ const CodeExecutionTool20250522AllowedCallerDirect CodeExecutionTool20250522Allo
 
 const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20250825"
 
+const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2831,6 +2850,8 @@ const CodeExecutionTool20250825AllowedCallerDirect CodeExecutionTool20250825Allo
 
 const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
 
+const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -2862,7 +2883,9 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnionCodeExecutionTool20260120
+type CodeExecutionTool20260120 struct{…}
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 Name CodeExecution
 
@@ -2876,9 +2899,11 @@ AllowedCallers []stringoptional
 
 Accepts one of the following:
 
-const ToolUnionCodeExecutionTool20260120AllowedCallerDirect ToolUnionCodeExecutionTool20260120AllowedCaller = "direct"
+const CodeExecutionTool20260120AllowedCallerDirect CodeExecutionTool20260120AllowedCaller = "direct"
 
-const ToolUnionCodeExecutionTool20260120AllowedCallerCodeExecution20250825 ToolUnionCodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
+const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
+
+const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
@@ -2928,6 +2953,8 @@ Accepts one of the following:
 const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "direct"
 
 const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code\_execution\_20250825"
+
+const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
@@ -2980,6 +3007,8 @@ const ToolTextEditor20250124AllowedCallerDirect ToolTextEditor20250124AllowedCal
 
 const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor20250124AllowedCaller = "code\_execution\_20250825"
 
+const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3031,6 +3060,8 @@ const ToolTextEditor20250429AllowedCallerDirect ToolTextEditor20250429AllowedCal
 
 const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor20250429AllowedCaller = "code\_execution\_20250825"
 
+const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3081,6 +3112,8 @@ Accepts one of the following:
 const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCaller = "direct"
 
 const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code\_execution\_20250825"
+
+const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
@@ -3137,6 +3170,8 @@ const WebSearchTool20250305AllowedCallerDirect WebSearchTool20250305AllowedCalle
 
 const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code\_execution\_20250825"
 
+const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
+
 AllowedDomains []stringoptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -3180,7 +3215,7 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation WebSearchTool20250305UserLocationoptional
+UserLocation [UserLocation](api/messages.md)optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3219,6 +3254,8 @@ Accepts one of the following:
 const WebFetchTool20250910AllowedCallerDirect WebFetchTool20250910AllowedCaller = "direct"
 
 const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool20250910AllowedCaller = "code\_execution\_20250825"
+
+const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
 AllowedDomains []stringoptional
 
@@ -3273,7 +3310,7 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnionWebSearchTool20260209
+type WebSearchTool20260209 struct{…}
 
 Name WebSearch
 
@@ -3287,9 +3324,11 @@ AllowedCallers []stringoptional
 
 Accepts one of the following:
 
-const ToolUnionWebSearchTool20260209AllowedCallerDirect ToolUnionWebSearchTool20260209AllowedCaller = "direct"
+const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCaller = "direct"
 
-const ToolUnionWebSearchTool20260209AllowedCallerCodeExecution20250825 ToolUnionWebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
 
 AllowedDomains []stringoptional
 
@@ -3334,7 +3373,7 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation ToolUnionWebSearchTool20260209UserLocationoptional
+UserLocation [UserLocation](api/messages.md)optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3356,7 +3395,7 @@ Timezone stringoptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-ToolUnionWebFetchTool20260209
+type WebFetchTool20260209 struct{…}
 
 Name WebFetch
 
@@ -3370,9 +3409,11 @@ AllowedCallers []stringoptional
 
 Accepts one of the following:
 
-const ToolUnionWebFetchTool20260209AllowedCallerDirect ToolUnionWebFetchTool20260209AllowedCaller = "direct"
+const WebFetchTool20260209AllowedCallerDirect WebFetchTool20260209AllowedCaller = "direct"
 
-const ToolUnionWebFetchTool20260209AllowedCallerCodeExecution20250825 ToolUnionWebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
+const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
+
+const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
 AllowedDomains []stringoptional
 
@@ -3451,6 +3492,8 @@ const ToolSearchToolBm25\_20251119AllowedCallerDirect ToolSearchToolBm25\_202511
 
 const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20250825"
 
+const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
+
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 
 Create a cache control breakpoint at this content block.
@@ -3505,6 +3548,8 @@ Accepts one of the following:
 const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119AllowedCaller = "direct"
 
 const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20250825"
+
+const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
 
 CacheControl [CacheControlEphemeral](api/messages.md)optional
 

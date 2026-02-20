@@ -580,6 +580,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -628,6 +630,61 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonValue; name "code\_execution"constant"code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -1141,7 +1198,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1177,7 +1234,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1227,7 +1284,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1239,7 +1296,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -1295,7 +1352,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -2203,7 +2260,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -2879,7 +2936,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -2905,7 +2962,7 @@ Optional<String> pageAge
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -2970,7 +3027,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -3298,7 +3355,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -4393,6 +4450,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -4605,7 +4664,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -4641,7 +4700,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -4691,7 +4750,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -4703,7 +4762,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -4759,7 +4818,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -5278,16 +5337,6 @@ PRIORITY("priority")
 
 BATCH("batch")
 
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
-
 class MessageCountTokensTool: A class that can be one of several variants.union
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
@@ -5323,6 +5372,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -5387,6 +5438,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -5438,6 +5491,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -5487,6 +5542,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -5518,7 +5575,9 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
 
@@ -5535,6 +5594,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -5584,6 +5645,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -5636,6 +5699,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -5687,6 +5752,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -5737,6 +5804,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -5793,6 +5862,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -5836,7 +5907,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5875,6 +5946,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -5929,7 +6002,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20260209
+class WebSearchTool20260209:
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
@@ -5946,6 +6019,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -5990,7 +6065,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6012,7 +6087,7 @@ Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20260209
+class WebFetchTool20260209:
 
 JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
@@ -6029,6 +6104,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -6107,6 +6184,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -6161,6 +6240,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -6831,7 +6912,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -7507,7 +7588,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -7533,7 +7614,7 @@ Optional<String> pageAge
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -7598,7 +7679,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -7926,7 +8007,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -8715,7 +8796,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -8751,7 +8832,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -8801,7 +8882,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -8813,7 +8894,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -8869,7 +8950,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -9444,7 +9525,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -9480,7 +9561,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -9530,7 +9611,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -9542,7 +9623,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -9598,7 +9679,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -10116,16 +10197,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "message\_start"constant"message\_start"constant
 
@@ -10316,7 +10387,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -10352,7 +10423,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -10402,7 +10473,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -10414,7 +10485,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -10470,7 +10541,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -10988,16 +11059,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "message\_start"constant"message\_start"constant
 
@@ -11217,7 +11278,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -11253,7 +11314,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -11303,7 +11364,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -11315,7 +11376,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -11371,7 +11432,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -11965,6 +12026,12 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
+class ServerToolCaller20260120:
+
+String toolId
+
+JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
 class ServerToolUsage:
 
 long webFetchRequests
@@ -11999,7 +12066,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -12096,7 +12163,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -12880,6 +12947,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -12942,6 +13011,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -13734,6 +13805,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -13788,6 +13861,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -14045,6 +14120,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14096,6 +14173,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14146,6 +14225,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -14220,6 +14301,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14283,6 +14366,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14334,6 +14419,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14383,6 +14470,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14414,7 +14503,9 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
 
@@ -14431,6 +14522,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -14480,6 +14573,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -14532,6 +14627,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14583,6 +14680,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -14633,6 +14732,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -14689,6 +14790,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -14732,7 +14835,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -14771,6 +14874,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -14825,7 +14930,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20260209
+class WebSearchTool20260209:
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
@@ -14842,6 +14947,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -14886,7 +14993,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -14908,7 +15015,7 @@ Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20260209
+class WebFetchTool20260209:
 
 JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
@@ -14925,6 +15032,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -15003,6 +15112,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -15057,6 +15168,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -15113,7 +15226,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -15178,7 +15291,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -15254,15 +15367,25 @@ PRIORITY("priority")
 
 BATCH("batch")
 
-Optional<Speed> speed
+class UserLocation:
 
-The inference speed mode used for this request.
+JsonValue; type "approximate"constant"approximate"constant
 
-Accepts one of the following:
+Optional<String> city
 
-STANDARD("standard")
+The city of the user.
 
-FAST("fast")
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class WebFetchBlock:
 
@@ -15573,6 +15696,81 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[CitationsConfigParam](api/messages.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchTool20260209:
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -15648,7 +15846,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -16054,7 +16252,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -16168,6 +16366,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -16211,7 +16411,92 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonValue; type "approximate"constant"approximate"constant
+
+Optional<String> city
+
+The city of the user.
+
+Optional<String> country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+Optional<String> region
+
+The region of the user.
+
+Optional<String> timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebSearchTool20260209:
+
+JsonValue; name "web\_search"constant"web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<List<String>> allowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+Optional<List<String>> blockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -16235,7 +16520,7 @@ The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16275,7 +16560,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -16287,7 +16572,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16325,7 +16610,7 @@ class WebSearchToolResultBlockContent: A class that can be one of several varian
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16375,7 +16660,7 @@ Optional<String> pageAge
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16440,7 +16725,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -16462,7 +16747,7 @@ Optional<String> pageAge
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16482,7 +16767,7 @@ JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_re
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -16499,6 +16784,20 @@ QUERY\_TOO\_LONG("query\_too\_long")
 REQUEST\_TOO\_LARGE("request\_too\_large")
 
 JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+
+enum WebSearchToolResultErrorCode:
+
+INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+
+UNAVAILABLE("unavailable")
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+QUERY\_TOO\_LONG("query\_too\_long")
+
+REQUEST\_TOO\_LARGE("request\_too\_large")
 
 #### MessagesBatches
 
@@ -16917,7 +17216,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -16953,7 +17252,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17003,7 +17302,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17015,7 +17314,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -17071,7 +17370,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17589,16 +17888,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -17895,7 +18184,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17931,7 +18220,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17981,7 +18270,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -17993,7 +18282,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -18049,7 +18338,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -18567,16 +18856,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 
@@ -18837,7 +19116,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -18873,7 +19152,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -18923,7 +19202,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -18935,7 +19214,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -18991,7 +19270,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -19509,16 +19788,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 

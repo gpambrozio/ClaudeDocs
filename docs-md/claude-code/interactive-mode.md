@@ -13,6 +13,7 @@ See [Terminal configuration](terminal-config.md) for details.
 | Shortcut | Description | Context |
 | --- | --- | --- |
 | `Ctrl+C` | Cancel current input or generation | Standard interrupt |
+| `Ctrl+F` | Kill all background agents. Press twice within 3 seconds to confirm | Background agent control |
 | `Ctrl+D` | Exit Claude Code session | EOF signal |
 | `Ctrl+G` | Open in default text editor | Edit your prompt or custom response in your default text editor |
 | `Ctrl+L` | Clear terminal screen | Keeps conversation history |

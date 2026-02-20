@@ -570,13 +570,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -619,13 +621,68 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+name: "code\_execution"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "code\_execution\_20260120"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -1127,7 +1184,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1147,7 +1204,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -1163,7 +1220,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1183,7 +1240,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -1213,7 +1270,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1233,7 +1290,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -1245,7 +1302,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -1281,7 +1338,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1301,7 +1358,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -2191,7 +2248,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -2211,7 +2268,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -2867,7 +2924,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -2887,7 +2944,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -2913,7 +2970,7 @@ page\_age: optional string
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -2958,7 +3015,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -2978,7 +3035,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -3286,7 +3343,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3306,7 +3363,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -4395,13 +4452,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -4595,7 +4654,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4615,7 +4674,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -4631,7 +4690,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4651,7 +4710,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -4681,7 +4740,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4701,7 +4760,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -4713,7 +4772,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -4749,7 +4808,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4769,7 +4828,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -5230,7 +5289,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -5298,16 +5357,6 @@ Accepts one of the following:
 
 "batch"
 
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
-
 MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  or [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  or [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  or 12 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
@@ -5338,13 +5387,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5401,13 +5452,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5452,13 +5505,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5501,13 +5556,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5552,13 +5609,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20260120"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5601,13 +5660,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5652,13 +5713,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5703,13 +5766,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5754,13 +5819,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5809,13 +5876,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -5860,7 +5929,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -5892,13 +5961,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -5963,13 +6034,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -6014,7 +6087,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -6046,13 +6119,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -6123,13 +6198,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -6178,13 +6255,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -6835,7 +6914,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -6855,7 +6934,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -7511,7 +7590,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -7531,7 +7610,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -7557,7 +7636,7 @@ page\_age: optional string
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -7602,7 +7681,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -7622,7 +7701,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -7930,7 +8009,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -7950,7 +8029,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -8827,7 +8906,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -8847,7 +8926,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -8863,7 +8942,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -8883,7 +8962,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -8913,7 +8992,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -8933,7 +9012,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -8945,7 +9024,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -8981,7 +9060,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9001,7 +9080,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -9556,7 +9635,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9576,7 +9655,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -9592,7 +9671,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9612,7 +9691,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -9642,7 +9721,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9662,7 +9741,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -9674,7 +9753,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -9710,7 +9789,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -9730,7 +9809,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -10191,7 +10270,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -10258,16 +10337,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: "message\_start"
 
@@ -10440,7 +10509,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10460,7 +10529,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -10476,7 +10545,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10496,7 +10565,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -10526,7 +10595,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10546,7 +10615,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -10558,7 +10627,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -10594,7 +10663,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -10614,7 +10683,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -11075,7 +11144,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -11142,16 +11211,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: "message\_start"
 
@@ -11351,7 +11410,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11371,7 +11430,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -11387,7 +11446,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11407,7 +11466,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -11437,7 +11496,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11457,7 +11516,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -11469,7 +11528,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -11505,7 +11564,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -11525,7 +11584,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -12119,6 +12178,12 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
+ServerToolCaller20260120 = object { tool\_id, type }
+
+tool\_id: string
+
+type: "code\_execution\_20260120"
+
 ServerToolUsage = object { web\_fetch\_requests, web\_search\_requests }
 
 web\_fetch\_requests: number
@@ -12133,7 +12198,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -12153,7 +12218,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -12230,7 +12295,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -12250,7 +12315,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -13036,13 +13101,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -13099,13 +13166,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -13892,13 +13961,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -13947,13 +14018,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14205,13 +14278,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14256,13 +14331,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14307,13 +14384,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14382,13 +14461,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14445,13 +14526,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14496,13 +14579,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250522"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14545,13 +14630,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250825"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14596,13 +14683,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20260120"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14645,13 +14734,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "memory\_20250818"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14696,13 +14787,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14747,13 +14840,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14798,13 +14893,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -14853,13 +14950,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -14904,7 +15003,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -14936,13 +15035,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -15007,13 +15108,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -15058,7 +15161,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -15090,13 +15193,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20260209"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -15167,13 +15272,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -15222,13 +15329,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -15265,7 +15374,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -15285,7 +15394,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -15330,7 +15439,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -15350,7 +15459,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -15368,7 +15477,7 @@ type: "url"
 
 url: string
 
-Usage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+Usage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -15426,15 +15535,25 @@ Accepts one of the following:
 
 "batch"
 
-speed: "standard" or "fast"
+UserLocation = object { type, city, country, 2 more }
 
-The inference speed mode used for this request.
+type: "approximate"
 
-Accepts one of the following:
+city: optional string
 
-"standard"
+The city of the user.
 
-"fast"
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 WebFetchBlock = object { content, retrieved\_at, type, url }
 
@@ -15737,13 +15856,88 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20250910"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
+
+List of domains to allow fetching from
+
+blocked\_domains: optional array of string
+
+List of domains to block fetching from
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations: optional [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: optional boolean
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: optional number
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -15800,7 +15994,7 @@ When true, guarantees schema validation on tool names and inputs
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -15820,7 +16014,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -16206,7 +16400,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -16226,7 +16420,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -16334,13 +16528,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
 
-allowed\_callers: optional array of "direct" or "code\_execution\_20250825"
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: optional array of string
 
@@ -16385,7 +16581,92 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: optional object { type, city, country, 2 more }
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+type: "approximate"
+
+city: optional string
+
+The city of the user.
+
+country: optional string
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+region: optional string
+
+The region of the user.
+
+timezone: optional string
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+
+name: "web\_search"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_search\_20260209"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains: optional array of string
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+blocked\_domains: optional array of string
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+user\_location: optional [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -16409,7 +16690,7 @@ The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16429,7 +16710,7 @@ type: "web\_search\_tool\_result\_error"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -16449,7 +16730,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -16461,7 +16742,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16501,7 +16782,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16551,7 +16832,7 @@ page\_age: optional string
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16596,7 +16877,7 @@ Accepts one of the following:
 
 "1h"
 
-caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -16616,7 +16897,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -16640,7 +16921,7 @@ page\_age: optional string
 
 WebSearchToolRequestError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16660,7 +16941,7 @@ type: "web\_search\_tool\_result\_error"
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -16677,6 +16958,22 @@ Accepts one of the following:
 "request\_too\_large"
 
 type: "web\_search\_tool\_result\_error"
+
+WebSearchToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+
+Accepts one of the following:
+
+"invalid\_tool\_input"
+
+"unavailable"
+
+"max\_uses\_exceeded"
+
+"too\_many\_requests"
+
+"query\_too\_long"
+
+"request\_too\_large"
 
 #### MessagesBatches
 
@@ -17063,7 +17360,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17083,7 +17380,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -17099,7 +17396,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17119,7 +17416,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -17149,7 +17446,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17169,7 +17466,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -17181,7 +17478,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -17217,7 +17514,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -17237,7 +17534,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -17698,7 +17995,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -17765,16 +18062,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: "succeeded"
 
@@ -18053,7 +18340,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -18073,7 +18360,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -18089,7 +18376,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -18109,7 +18396,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -18139,7 +18426,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -18159,7 +18446,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -18171,7 +18458,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -18207,7 +18494,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -18227,7 +18514,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -18688,7 +18975,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -18755,16 +19042,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: "succeeded"
 
@@ -19005,7 +19282,7 @@ ToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19025,7 +19302,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -19041,7 +19318,7 @@ ServerToolUseBlock = object { id, caller, input, 2 more }
 
 id: string
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19061,7 +19338,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -19091,7 +19368,7 @@ type: "server\_tool\_use"
 
 WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19111,7 +19388,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -19123,7 +19400,7 @@ Accepts one of the following:
 
 WebSearchToolResultError = object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -19159,7 +19436,7 @@ type: "web\_search\_tool\_result"
 
 WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or object { tool\_id, type }
+caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -19179,7 +19456,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-CodeExecution20260120 = object { tool\_id, type }
+ServerToolCaller20260120 = object { tool\_id, type }
 
 tool\_id: string
 
@@ -19640,7 +19917,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -19707,16 +19984,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: "succeeded"
 

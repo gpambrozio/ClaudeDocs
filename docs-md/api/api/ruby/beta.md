@@ -932,13 +932,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250522
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -981,13 +983,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250825
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -1032,13 +1036,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20260120
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -5639,13 +5645,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :memory\_20250818
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -15724,13 +15732,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -15787,13 +15797,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -15838,13 +15850,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -15995,13 +16009,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -16058,13 +16074,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -16121,13 +16139,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20251124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -16842,13 +16862,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_bm25
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -16897,13 +16919,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_regex
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17143,13 +17167,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17194,13 +17220,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17245,13 +17273,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17296,13 +17326,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17371,13 +17403,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17434,13 +17468,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17485,13 +17521,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17536,13 +17574,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250522
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17585,13 +17625,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250825
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17636,13 +17678,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20260120
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17693,13 +17737,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17748,13 +17794,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :memory\_20250818
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17807,13 +17855,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17862,13 +17912,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20241022
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17921,13 +17973,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :computer\_20251124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -17980,13 +18034,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -18031,13 +18087,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -18082,13 +18140,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -18137,13 +18197,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -18220,13 +18282,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20250910
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -18291,13 +18355,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -18374,13 +18440,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -18451,13 +18519,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_bm25
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -18506,13 +18576,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_regex
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -19201,13 +19273,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20250910
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -19272,13 +19346,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -19881,13 +19957,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -19964,13 +20042,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 

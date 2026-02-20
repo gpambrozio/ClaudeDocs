@@ -917,6 +917,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Set the maximum number of output tokens for most requests. Default: 32,000. Maximum: 64,000. Increasing this value reduces the effective context window available before [auto-compaction](costs.md) triggers. |  |
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic OpenTelemetry headers in milliseconds (default: 1740000 / 29 minutes). See [Dynamic headers](monitoring-usage.md) |  |
 | `CLAUDE_CODE_PLAN_MODE_REQUIRED` | Auto-set to `true` on [agent team](agent-teams.md) teammates that require plan approval. Read-only: set by Claude Code when spawning teammates. See [require plan approval](agent-teams.md) |  |
+| `CLAUDE_CODE_SIMPLE` | Set to `1` to run with a minimal system prompt and only the Bash, file read, and file edit tools. Disables MCP tools, attachments, hooks, and CLAUDE.md files |  |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |  |
 | `CLAUDE_CODE_SHELL_PREFIX` | Command prefix to wrap all bash commands (for example, for logging or auditing). Example: `/path/to/logger.sh` will execute `/path/to/logger.sh <command>` |  |
 | `CLAUDE_CODE_SKIP_BEDROCK_AUTH` | Skip AWS authentication for Bedrock (for example, when using an LLM gateway) |  |

@@ -225,7 +225,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -261,7 +261,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -311,7 +311,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -323,7 +323,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -379,7 +379,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -897,16 +897,6 @@ STANDARD("standard")
 PRIORITY("priority")
 
 BATCH("batch")
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 JsonValue; type "succeeded"constant"succeeded"constant
 

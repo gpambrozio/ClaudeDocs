@@ -421,7 +421,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -457,7 +457,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ServerToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -507,7 +507,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebSearchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -519,21 +519,21 @@ Accepts one of the following:
 
 type WebSearchToolResultError struct{…}
 
-ErrorCode WebSearchToolResultErrorErrorCode
+ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
-const WebSearchToolResultErrorErrorCodeInvalidToolInput WebSearchToolResultErrorErrorCode = "invalid\_tool\_input"
+const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
-const WebSearchToolResultErrorErrorCodeUnavailable WebSearchToolResultErrorErrorCode = "unavailable"
+const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
 
-const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorErrorCode = "max\_uses\_exceeded"
+const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
 
-const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
+const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
 
-const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
 
-const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -575,7 +575,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebFetchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1103,16 +1103,6 @@ const UsageServiceTierStandard UsageServiceTier = "standard"
 const UsageServiceTierPriority UsageServiceTier = "priority"
 
 const UsageServiceTierBatch UsageServiceTier = "batch"
-
-Speed UsageSpeed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-const UsageSpeedStandard UsageSpeed = "standard"
-
-const UsageSpeedFast UsageSpeed = "fast"
 
 Type Succeeded
 
@@ -1411,7 +1401,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1447,7 +1437,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ServerToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1497,7 +1487,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebSearchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -1509,21 +1499,21 @@ Accepts one of the following:
 
 type WebSearchToolResultError struct{…}
 
-ErrorCode WebSearchToolResultErrorErrorCode
+ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
-const WebSearchToolResultErrorErrorCodeInvalidToolInput WebSearchToolResultErrorErrorCode = "invalid\_tool\_input"
+const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
-const WebSearchToolResultErrorErrorCodeUnavailable WebSearchToolResultErrorErrorCode = "unavailable"
+const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
 
-const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorErrorCode = "max\_uses\_exceeded"
+const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
 
-const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
+const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
 
-const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
 
-const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -1565,7 +1555,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebFetchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -2093,16 +2083,6 @@ const UsageServiceTierStandard UsageServiceTier = "standard"
 const UsageServiceTierPriority UsageServiceTier = "priority"
 
 const UsageServiceTierBatch UsageServiceTier = "batch"
-
-Speed UsageSpeed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-const UsageSpeedStandard UsageSpeed = "standard"
-
-const UsageSpeedFast UsageSpeed = "fast"
 
 Type Succeeded
 
@@ -2363,7 +2343,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -2399,7 +2379,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type ServerToolUseBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -2449,7 +2429,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebSearchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -2461,21 +2441,21 @@ Accepts one of the following:
 
 type WebSearchToolResultError struct{…}
 
-ErrorCode WebSearchToolResultErrorErrorCode
+ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
-const WebSearchToolResultErrorErrorCodeInvalidToolInput WebSearchToolResultErrorErrorCode = "invalid\_tool\_input"
+const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
-const WebSearchToolResultErrorErrorCodeUnavailable WebSearchToolResultErrorErrorCode = "unavailable"
+const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
 
-const WebSearchToolResultErrorErrorCodeMaxUsesExceeded WebSearchToolResultErrorErrorCode = "max\_uses\_exceeded"
+const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
 
-const WebSearchToolResultErrorErrorCodeTooManyRequests WebSearchToolResultErrorErrorCode = "too\_many\_requests"
+const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
 
-const WebSearchToolResultErrorErrorCodeQueryTooLong WebSearchToolResultErrorErrorCode = "query\_too\_long"
+const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
 
-const WebSearchToolResultErrorErrorCodeRequestTooLarge WebSearchToolResultErrorErrorCode = "request\_too\_large"
+const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
 
 Type WebSearchToolResultError
 
@@ -2517,7 +2497,7 @@ ToolID string
 
 Type CodeExecution20250825
 
-type WebFetchToolResultBlockCallerCodeExecution20260120 struct{…}
+type ServerToolCaller20260120 struct{…}
 
 ToolID string
 
@@ -3045,16 +3025,6 @@ const UsageServiceTierStandard UsageServiceTier = "standard"
 const UsageServiceTierPriority UsageServiceTier = "priority"
 
 const UsageServiceTierBatch UsageServiceTier = "batch"
-
-Speed UsageSpeed
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-const UsageSpeedStandard UsageSpeed = "standard"
-
-const UsageSpeedFast UsageSpeed = "fast"
 
 Type Succeeded
 

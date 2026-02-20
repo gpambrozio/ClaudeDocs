@@ -665,7 +665,7 @@ Accepts one of the following:
 
 :"1h"
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -685,7 +685,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -1341,7 +1341,7 @@ Accepts one of the following:
 
 :"1h"
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1361,7 +1361,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -1387,7 +1387,7 @@ page\_age: String
 
 class WebSearchToolRequestError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -1432,7 +1432,7 @@ Accepts one of the following:
 
 :"1h"
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1452,7 +1452,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -1760,7 +1760,7 @@ Accepts one of the following:
 
 :"1h"
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -1780,7 +1780,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -2261,6 +2261,29 @@ Our previous most fast and cost-effective
 
 String
 
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
 container: String
 
 Container identifier for reuse across requests.
@@ -2320,16 +2343,6 @@ Accepts one of the following:
 :auto
 
 :standard\_only
-
-speed: :standard | :fast
-
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-Accepts one of the following:
-
-:standard
-
-:fast
 
 stop\_sequences: Array[String]
 
@@ -2644,13 +2657,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2707,13 +2722,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :bash\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2758,13 +2775,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250522
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2807,13 +2826,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20250825
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2858,13 +2879,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :code\_execution\_20260120
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2907,13 +2930,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :memory\_20250818
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2958,13 +2983,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250124
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -3009,13 +3036,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250429
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -3060,13 +3089,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :text\_editor\_20250728
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -3115,13 +3146,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20250305
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -3166,7 +3199,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: { type, city, country, 2 more}
+user\_location: [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3198,13 +3231,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20250910
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -3269,13 +3304,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_search\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -3320,7 +3357,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-user\_location: { type, city, country, 2 more}
+user\_location: [UserLocation](api/messages.md) { type, city, country, 2 more }
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3352,13 +3389,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :web\_fetch\_20260209
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 allowed\_domains: Array[String]
 
@@ -3429,13 +3468,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_bm25
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -3484,13 +3525,15 @@ Accepts one of the following:
 
 :tool\_search\_tool\_regex
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825]
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
 Accepts one of the following:
 
 :direct
 
 :code\_execution\_20250825
+
+:code\_execution\_20260120
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -3706,7 +3749,7 @@ class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3726,7 +3769,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -3742,7 +3785,7 @@ class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3762,7 +3805,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -3792,7 +3835,7 @@ type: :server\_tool\_use
 
 class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3812,7 +3855,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -3824,7 +3867,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -3860,7 +3903,7 @@ type: :web\_search\_tool\_result
 
 class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -3880,7 +3923,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -4341,7 +4384,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -4408,16 +4451,6 @@ Accepts one of the following:
 :priority
 
 :batch
-
-speed: :standard | :fast
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-:standard
-
-:fast
 
 RawMessageStreamEvent = [RawMessageStartEvent](api/messages.md) { message, type }  | [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  | [RawMessageStopEvent](api/messages.md) { type }  | 3 more
 
@@ -4584,7 +4617,7 @@ class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4604,7 +4637,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -4620,7 +4653,7 @@ class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4640,7 +4673,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -4670,7 +4703,7 @@ type: :server\_tool\_use
 
 class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4690,7 +4723,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -4702,7 +4735,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -4738,7 +4771,7 @@ type: :web\_search\_tool\_result
 
 class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -4758,7 +4791,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -5219,7 +5252,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 Billing and rate-limit usage.
 
@@ -5286,16 +5319,6 @@ Accepts one of the following:
 :priority
 
 :batch
-
-speed: :standard | :fast
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-:standard
-
-:fast
 
 type: :message\_start
 
@@ -5495,7 +5518,7 @@ class ToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5515,7 +5538,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -5531,7 +5554,7 @@ class ServerToolUseBlock { id, caller\_, input, 2 more }
 
 id: String
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5551,7 +5574,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -5581,7 +5604,7 @@ type: :server\_tool\_use
 
 class WebSearchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5601,7 +5624,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -5613,7 +5636,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
-error\_code: :invalid\_tool\_input | :unavailable | :max\_uses\_exceeded | 3 more
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -5649,7 +5672,7 @@ type: :web\_search\_tool\_result
 
 class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
 
-caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | { tool\_id, type}
+caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messages.md) { tool\_id, type }  | [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
@@ -5669,7 +5692,7 @@ tool\_id: String
 
 type: :code\_execution\_20250825
 
-class CodeExecution20260120 { tool\_id, type }
+class ServerToolCaller20260120 { tool\_id, type }
 
 tool\_id: String
 
@@ -6168,8 +6191,7 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard",
-    "speed": "standard"
+    "service_tier": "standard"
   }
 }
 ```
@@ -6221,8 +6243,7 @@ Response 200
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard",
-    "speed": "standard"
+    "service_tier": "standard"
   }
 }
 ```

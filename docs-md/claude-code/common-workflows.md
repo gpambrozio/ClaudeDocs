@@ -969,41 +969,118 @@ How it works:
 
 ## [​](#run-parallel-claude-code-sessions-with-git-worktrees) Run parallel Claude Code sessions with Git worktrees
 
-Suppose you need to work on multiple tasks simultaneously with complete code isolation between Claude Code instances.
+When working on multiple tasks at once, you need each Claude session to have its own copy of the codebase so changes don’t collide. Git worktrees solve this by creating separate working directories that each have their own files and branch, while sharing the same repository history and remote connections. This means you can have Claude working on a feature in one worktree while fixing a bug in another, without either session interfering with the other.
+Use the `--worktree` flag to create an isolated worktree and start Claude in it. The value you pass becomes the worktree directory name and branch name:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+# Start Claude in a worktree named "feature-auth"
+# Creates .claude/worktrees/feature-auth/ with a new branch
+claude -w feature-auth
+
+# Start another session in a separate worktree
+claude -w bugfix-123
+```
+
+If you omit the name, Claude generates a random one automatically:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+# Auto-generates a name like "bright-running-fox"
+claude -w
+```
+
+Worktrees are created at `<repo>/.claude/worktrees/<name>` and branch from the default remote branch. The worktree branch is named `worktree-<name>`.
+You can also ask Claude to “work in a worktree” or “start a worktree” during a session, and it will create one automatically.
+
+### [​](#worktree-cleanup) Worktree cleanup
+
+When you exit a worktree session, Claude handles cleanup based on whether you made changes:
+
+- **No changes**: the worktree and its branch are removed automatically
+- **Changes or commits exist**: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch so you can return later. Removing deletes the worktree directory and its branch, discarding all uncommitted changes and commits
+
+To clean up worktrees outside of a Claude session, use [manual worktree management](#manage-worktrees-manually).
+
+Add `.claude/worktrees/` to your `.gitignore` to prevent worktree contents from appearing as untracked files in your main repository.
+
+### [​](#manage-worktrees-manually) Manage worktrees manually
+
+For more control over worktree location and branch configuration, create worktrees with Git directly. This is useful when you need to check out a specific existing branch or place the worktree outside the repository.
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+# Create a worktree with a new branch
+git worktree add ../project-feature-a -b feature-a
+
+# Create a worktree with an existing branch
+git worktree add ../project-bugfix bugfix-123
+
+# Start Claude in the worktree
+cd ../project-feature-a && claude
+
+# Clean up when done
+git worktree list
+git worktree remove ../project-feature-a
+```
+
+Learn more in the [official Git worktree documentation](https://git-scm.com/docs/git-worktree).
+
+Remember to initialize your development environment in each new worktree according to your project’s setup. Depending on your stack, this might include running dependency installation (`npm install`, `yarn`), setting up virtual environments, or following your project’s standard setup process.
+
+For automated coordination of parallel sessions with shared tasks and messaging, see [agent teams](agent-teams.md).
+
+---
+
+## [​](#get-notified-when-claude-needs-your-attention) Get notified when Claude needs your attention
+
+When you kick off a long-running task and switch to another window, you can set up desktop notifications so you know when Claude finishes or needs your input. This uses the `Notification` [hook event](hooks-guide.md), which fires whenever Claude is waiting for permission, idle and ready for a new prompt, or completing authentication.
 
 1
 
-Understand Git worktrees
+Open the hooks menu
 
-Git worktrees allow you to check out multiple branches from the same
-repository into separate directories. Each worktree has its own working
-directory with isolated files, while sharing the same Git history. Learn
-more in the [official Git worktree
-documentation](https://git-scm.com/docs/git-worktree).
+Type `/hooks` and select `Notification` from the list of events.
 
 2
 
-Create a new worktree
+Configure the matcher
 
-Report incorrect code
+Select `+ Match all (no filter)` to fire on all notification types. To notify only for specific events, select `+ Add new matcher…` and enter one of these values:
 
-Copy
-
-Ask AI
-
-```shiki
-# Create a new worktree with a new branch 
-git worktree add ../project-feature-a -b feature-a
-
-# Or create a worktree with an existing branch
-git worktree add ../project-bugfix bugfix-123
-```
-
-This creates a new directory with a separate working copy of your repository.
+| Matcher | Fires when |
+| --- | --- |
+| `permission_prompt` | Claude needs you to approve a tool use |
+| `idle_prompt` | Claude is done and waiting for your next prompt |
+| `auth_success` | Authentication completes |
+| `elicitation_dialog` | Claude is asking you a question |
 
 3
 
-Run Claude Code in each worktree
+Add your notification command
+
+Select `+ Add new hook…` and enter the command for your OS:
+
+- macOS
+- Linux
+- Windows (PowerShell)
+
+Uses [`osascript`](https://ss64.com/mac/osascript.html) to trigger a native macOS notification through AppleScript:
 
 Report incorrect code
 
@@ -1012,59 +1089,40 @@ Copy
 Ask AI
 
 ```shiki
-# Navigate to your worktree 
-cd ../project-feature-a
+osascript -e 'display notification "Claude Code needs your attention" with title "Claude Code"'
+```
 
-# Run Claude Code in this isolated environment
-claude
+Uses `notify-send`, which is pre-installed on most Linux desktops with a notification daemon:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+notify-send 'Claude Code' 'Claude Code needs your attention'
+```
+
+Uses PowerShell to show a native message box through .NET’s Windows Forms:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+powershell.exe -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')"
 ```
 
 4
 
-Run Claude in another worktree
+Save to user settings
 
-Report incorrect code
+Select `User settings` to apply the notification across all your projects.
 
-Copy
-
-Ask AI
-
-```shiki
-cd ../project-bugfix
-claude
-```
-
-5
-
-Manage your worktrees
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-# List all worktrees
-git worktree list
-
-# Remove a worktree when done
-git worktree remove ../project-feature-a
-```
-
-Tips:
-
-- Each worktree has its own independent file state, making it perfect for parallel Claude Code sessions
-- Changes made in one worktree won’t affect others, preventing Claude instances from interfering with each other
-- All worktrees share the same Git history and remote connections
-- For long-running tasks, you can have Claude working in one worktree while you continue development in another
-- Use descriptive directory names to easily identify which task each worktree is for
-- Remember to initialize your development environment in each new worktree according to your project’s setup. Depending on your stack, this might include:
-  - JavaScript projects: Running dependency installation (`npm install`, `yarn`)
-  - Python projects: Setting up virtual environments or installing with package managers
-  - Other languages: Following your project’s standard setup process
-
-For automated coordination of parallel sessions with shared tasks and messaging, see [agent teams](agent-teams.md).
+For the full walkthrough with JSON configuration examples, see [Automate workflows with hooks](hooks-guide.md). For the complete event schema and notification types, see the [Notification reference](hooks.md).
 
 ---
 

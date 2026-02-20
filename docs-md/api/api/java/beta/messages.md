@@ -674,6 +674,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -722,6 +724,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -773,6 +777,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -5284,6 +5290,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -15326,6 +15334,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -15389,6 +15399,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -15439,6 +15451,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -15595,6 +15609,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -15658,6 +15674,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -15720,6 +15738,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -16442,6 +16462,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -16496,6 +16518,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -16743,6 +16767,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -16793,6 +16819,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -16845,6 +16873,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -16895,6 +16925,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -16969,6 +17001,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17032,6 +17066,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17082,6 +17118,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17134,6 +17172,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17182,6 +17222,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17233,6 +17275,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17291,6 +17335,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17345,6 +17391,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17405,6 +17453,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17459,6 +17509,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17519,6 +17571,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17578,6 +17632,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17629,6 +17685,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -17679,6 +17737,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -17734,6 +17794,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -17818,6 +17880,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -17888,6 +17952,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -17972,6 +18038,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -18049,6 +18117,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -18103,6 +18173,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
 
@@ -18799,6 +18871,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 List of domains to allow fetching from
@@ -18869,6 +18943,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -19477,6 +19553,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -19559,6 +19637,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 

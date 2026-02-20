@@ -6,7 +6,7 @@ This guide covers the core architecture, built-in capabilities, and [tips for wo
 ## [​](#the-agentic-loop) The agentic loop
 
 When you give Claude a task, it works through three phases: **gather context**, **take action**, and **verify results**. These phases blend together. Claude uses tools throughout, whether searching files to understand your code, editing to make changes, or running tests to check its work.
-![The agentic loop: Your prompt leads to Claude gathering context, taking action, verifying results, and repeating until task complete. You can interrupt at any point.](https://mintcdn.com/claude-code/ELkJZG54dIaeldDC/images/agentic-loop.svg?fit=max&auto=format&n=ELkJZG54dIaeldDC&q=85&s=e30acfc80d6ff01ec877dd19c7af58b2)
+![The agentic loop: Your prompt leads to Claude gathering context, taking action, verifying results, and repeating until task complete. You can interrupt at any point.](https://mintcdn.com/claude-code/TBPmHzr19mDCuhZi/images/agentic-loop.svg?fit=max&auto=format&n=TBPmHzr19mDCuhZi&q=85&s=9d9cdb2102f397a0f57450ca5ca2a969)
 The loop adapts to what you ask. A question about your codebase might only need context gathering. A bug fix cycles through all three phases repeatedly. A refactor might involve extensive verification. Claude decides what each step requires based on what it learned from the previous step, chaining dozens of actions together and course-correcting along the way.
 You’re part of this loop too. You can interrupt at any point to steer Claude in a different direction, provide additional context, or ask it to try a different approach. Claude works autonomously but stays responsive to your input.
 The agentic loop is powered by two components: [models](#models) that reason and [tools](#tools) that act. Claude Code serves as the **agentic harness** around Claude: it provides the tools, context management, and execution environment that turn a language model into a capable coding agent.
@@ -70,7 +70,7 @@ Since sessions are tied to directories, you can run parallel Claude sessions by 
 ### [​](#resume-or-fork-sessions) Resume or fork sessions
 
 When you resume a session with `claude --continue` or `claude --resume`, you pick up where you left off using the same session ID. New messages append to the existing conversation. Your full conversation history is restored, but session-scoped permissions are not. You’ll need to re-approve those.
-![Session continuity: resume continues the same session, fork creates a new branch with a new ID.](https://mintcdn.com/claude-code/ELkJZG54dIaeldDC/images/session-continuity.svg?fit=max&auto=format&n=ELkJZG54dIaeldDC&q=85&s=f671b603cc856119c95475b9084ebfef)
+![Session continuity: resume continues the same session, fork creates a new branch with a new ID.](https://mintcdn.com/claude-code/TBPmHzr19mDCuhZi/images/session-continuity.svg?fit=max&auto=format&n=TBPmHzr19mDCuhZi&q=85&s=808da1b213c731bf98874c75981d688b)
 To branch off and try a different approach without affecting the original session, use the `--fork-session` flag:
 
 Report incorrect code

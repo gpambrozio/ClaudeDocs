@@ -707,7 +707,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1383,7 +1383,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1409,7 +1409,7 @@ Optional<String> pageAge
 
 class WebSearchToolRequestError:
 
-ErrorCode errorCode
+[WebSearchToolResultErrorCode](api/messages.md) errorCode
 
 Accepts one of the following:
 
@@ -1474,7 +1474,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -1802,7 +1802,7 @@ String toolId
 
 JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
 
-class CodeExecution20260120:
+class ServerToolCaller20260120:
 
 String toolId
 
@@ -2273,6 +2273,29 @@ CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
 Our previous most fast and cost-effective
 
+Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+
+Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
 Optional<String> container
 
 Container identifier for reuse across requests.
@@ -2332,16 +2355,6 @@ Accepts one of the following:
 AUTO("auto")
 
 STANDARD\_ONLY("standard\_only")
-
-Optional<Speed> speed
-
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
 
 Optional<List<String>> stopSequences
 
@@ -2664,6 +2677,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2727,6 +2742,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2778,6 +2795,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2827,6 +2846,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2858,7 +2879,9 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 JsonValue; name "code\_execution"constant"code\_execution"constant
 
@@ -2875,6 +2898,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -2924,6 +2949,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -2976,6 +3003,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -3027,6 +3056,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -3077,6 +3108,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
@@ -3133,6 +3166,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<List<String>> allowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -3176,7 +3211,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3215,6 +3250,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -3269,7 +3306,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20260209
+class WebSearchTool20260209:
 
 JsonValue; name "web\_search"constant"web\_search"constant
 
@@ -3286,6 +3323,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -3330,7 +3369,7 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
-Optional<UserLocation> userLocation
+Optional<[UserLocation](api/messages.md)> userLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3352,7 +3391,7 @@ Optional<String> timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20260209
+class WebFetchTool20260209:
 
 JsonValue; name "web\_fetch"constant"web\_fetch"constant
 
@@ -3369,6 +3408,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<List<String>> allowedDomains
 
@@ -3447,6 +3488,8 @@ DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
 
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 
 Create a cache control breakpoint at this content block.
@@ -3501,6 +3544,8 @@ Accepts one of the following:
 DIRECT("direct")
 
 CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
 
 Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
 

@@ -2568,6 +2568,29 @@ Our previous most fast and cost-effective
 
 str
 
+cache\_control: Optional[BetaCacheControlEphemeralParam]
+
+Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 container: Optional[RequestParamsContainer]
 
 Container identifier for reuse across requests.
@@ -3123,13 +3146,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3186,13 +3211,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20241022"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3237,13 +3264,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["bash\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3288,13 +3317,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250522"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3337,13 +3368,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20250825"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3388,13 +3421,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["code\_execution\_20260120"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3445,13 +3480,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["computer\_20241022"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3500,13 +3537,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["memory\_20250818"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3559,13 +3598,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["computer\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3614,13 +3655,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20241022"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3673,13 +3716,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["computer\_20251124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3732,13 +3777,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250124"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3783,13 +3830,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250429"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3834,13 +3883,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["text\_editor\_20250728"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -3889,13 +3940,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20250305"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -3972,13 +4025,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20250910"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4043,13 +4098,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_search\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4126,13 +4183,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["web\_fetch\_20260209"]
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains: Optional[List[str]]
 
@@ -4203,13 +4262,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 
@@ -4258,13 +4319,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825"]]]
+allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control: Optional[BetaCacheControlEphemeral]
 

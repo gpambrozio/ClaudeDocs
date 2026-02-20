@@ -6,7 +6,7 @@ TypeScript
 
 # Count tokens in a Message
 
-client.beta.messages.countTokens(MessageCountTokensParams { messages, model, context\_management, 9 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
+client.beta.messages.countTokens(MessageCountTokensParams { messages, model, cache\_control, 10 more } params, RequestOptionsoptions?): [BetaMessageTokensCount](api/beta.md) { context\_management, input\_tokens }
 
 POST/v1/messages/count\_tokens
 
@@ -18,7 +18,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-params: MessageCountTokensParams { messages, model, context\_management, 9 more }
+params: MessageCountTokensParams { messages, model, cache\_control, 10 more }
 
 messages: Array<[BetaMessageParam](api/beta.md) { content, role } >
 
@@ -2501,6 +2501,29 @@ Our previous most fast and cost-effective
 
 (string & {})
 
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
 context\_management?: [BetaContextManagementConfig](api/beta.md) { edits }  | null
 
 Body param: Context management configuration.
@@ -2966,13 +2989,15 @@ maxLength128
 
 minLength1
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3029,13 +3054,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3080,13 +3107,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "bash\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3131,13 +3160,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250522"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3180,13 +3211,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20250825"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3231,13 +3264,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "code\_execution\_20260120"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3288,13 +3323,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "computer\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3343,13 +3380,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "memory\_20250818"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3402,13 +3441,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "computer\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3457,13 +3498,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20241022"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3516,13 +3559,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "computer\_20251124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3575,13 +3620,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250124"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3626,13 +3673,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250429"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3677,13 +3726,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "text\_editor\_20250728"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -3732,13 +3783,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20250305"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains?: Array<string> | null
 
@@ -3815,13 +3868,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20250910"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains?: Array<string> | null
 
@@ -3886,13 +3941,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_search\_20260209"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains?: Array<string> | null
 
@@ -3969,13 +4026,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "web\_fetch\_20260209"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 allowed\_domains?: Array<string> | null
 
@@ -4046,13 +4105,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_bm25"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 
@@ -4101,13 +4162,15 @@ Accepts one of the following:
 
 "tool\_search\_tool\_regex"
 
-allowed\_callers?: Array<"direct" | "code\_execution\_20250825">
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
 Accepts one of the following:
 
 "direct"
 
 "code\_execution\_20250825"
+
+"code\_execution\_20260120"
 
 cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
 

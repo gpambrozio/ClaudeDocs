@@ -283,7 +283,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#ddaebcb1b8ae9dbcb3a9b5afb2adb4bef3beb2b0) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#295a48454c5a6948475d415b4659404a074a4644) if you need higher limits for your use case
 
 Was this page helpful?
 

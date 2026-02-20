@@ -6,6 +6,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### February 19, 2026
+
+- We've launched **automatic caching** for the Messages API. Add a single `cache_control` field to your request body and the system automatically caches the last cacheable block, moving the cache point forward as conversations grow. No manual breakpoint management required. Works alongside existing block-level cache control for fine-grained optimization. Available on the Claude API and Azure AI Foundry (preview). Learn more in our [prompt caching documentation](build-with-claude/prompt-caching.md).
+- We've retired the Claude Sonnet 3.7 model (`claude-3-7-sonnet-20250219`) and the Claude Haiku 3.5 model (`claude-3-5-haiku-20241022`). All requests to these models will now return an error. We recommend upgrading to [Claude Sonnet 4.6](about-claude/models/overview.md) and [Claude Haiku 4.5](about-claude/models/overview.md) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+- We announced the deprecation of the Claude Haiku 3 model (`claude-3-haiku-20240307`), with retirement scheduled for April 19, 2026. We recommend migrating to [Claude Haiku 4.5](about-claude/models/overview.md). Read more in [model deprecations](about-claude/model-deprecations.md).
+
 ### February 17, 2026
 
 - We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](build-with-claude/extended-thinking.md) and a [1M token context window](build-with-claude/context-windows.md) (beta). See [Models & Pricing](about-claude/models.md) for details.

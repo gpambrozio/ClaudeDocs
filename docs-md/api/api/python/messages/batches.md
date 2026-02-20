@@ -421,7 +421,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -457,7 +457,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -507,7 +507,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -519,7 +519,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -575,7 +575,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1126,16 +1126,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 
@@ -1434,7 +1424,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1470,7 +1460,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1520,7 +1510,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -1532,7 +1522,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -1588,7 +1578,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2139,16 +2129,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 
@@ -2409,7 +2389,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2445,7 +2425,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2495,7 +2475,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -2507,7 +2487,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError: …
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
+error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
 Accepts one of the following:
 
@@ -2563,7 +2543,7 @@ tool\_id: str
 
 type: Literal["code\_execution\_20250825"]
 
-class CallerServerToolCaller20260120: …
+class ServerToolCaller20260120: …
 
 tool\_id: str
 
@@ -3114,16 +3094,6 @@ Accepts one of the following:
 "priority"
 
 "batch"
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 type: Literal["succeeded"]
 
