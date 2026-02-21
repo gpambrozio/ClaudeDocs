@@ -970,7 +970,7 @@ How it works:
 ## [​](#run-parallel-claude-code-sessions-with-git-worktrees) Run parallel Claude Code sessions with Git worktrees
 
 When working on multiple tasks at once, you need each Claude session to have its own copy of the codebase so changes don’t collide. Git worktrees solve this by creating separate working directories that each have their own files and branch, while sharing the same repository history and remote connections. This means you can have Claude working on a feature in one worktree while fixing a bug in another, without either session interfering with the other.
-Use the `--worktree` flag to create an isolated worktree and start Claude in it. The value you pass becomes the worktree directory name and branch name:
+Use the `--worktree` (`-w`) flag to create an isolated worktree and start Claude in it. The value you pass becomes the worktree directory name and branch name:
 
 Report incorrect code
 
@@ -981,10 +981,10 @@ Ask AI
 ```shiki
 # Start Claude in a worktree named "feature-auth"
 # Creates .claude/worktrees/feature-auth/ with a new branch
-claude -w feature-auth
+claude --worktree feature-auth
 
 # Start another session in a separate worktree
-claude -w bugfix-123
+claude --worktree bugfix-123
 ```
 
 If you omit the name, Claude generates a random one automatically:
@@ -997,7 +997,7 @@ Ask AI
 
 ```shiki
 # Auto-generates a name like "bright-running-fox"
-claude -w
+claude --worktree
 ```
 
 Worktrees are created at `<repo>/.claude/worktrees/<name>` and branch from the default remote branch. The worktree branch is named `worktree-<name>`.

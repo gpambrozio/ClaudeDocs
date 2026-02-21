@@ -14,10 +14,10 @@ Programmatic tool calling is available on the following models:
 
 | Model | Tool Version |
 | --- | --- |
-| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
-| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
+| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20260120` |
+| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20260120` |
+| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20260120` |
+| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20260120` |
 
 Programmatic tool calling is available via the Claude API and Microsoft Foundry.
 
@@ -43,7 +43,7 @@ curl https://api.anthropic.com/v1/messages \
         ],
         "tools": [
             {
-                "type": "code_execution_20250825",
+                "type": "code_execution_20260120",
                 "name": "code_execution"
             },
             {
@@ -59,7 +59,7 @@ curl https://api.anthropic.com/v1/messages \
                     },
                     "required": ["sql"]
                 },
-                "allowed_callers": ["code_execution_20250825"]
+                "allowed_callers": ["code_execution_20260120"]
             }
         ]
     }'
@@ -96,17 +96,17 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
   "name": "query_database",
   "description": "Execute a SQL query against the database",
   "input_schema": {...},
-  "allowed_callers": ["code_execution_20250825"]
+  "allowed_callers": ["code_execution_20260120"]
 }
 ```
 
 **Possible values:**
 
 - `["direct"]` - Only Claude can call this tool directly (default if omitted)
-- `["code_execution_20250825"]` - Only callable from within code execution
-- `["direct", "code_execution_20250825"]` - Callable both directly and from code execution
+- `["code_execution_20260120"]` - Only callable from within code execution
+- `["direct", "code_execution_20260120"]` - Callable both directly and from code execution
 
-Choose either `["direct"]` or `["code_execution_20250825"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
+Choose either `["direct"]` or `["code_execution_20260120"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.
 
 ### The `caller` field in responses
 
@@ -133,7 +133,7 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "name": "query_database",
   "input": {"sql": "<sql>"},
   "caller": {
-    "type": "code_execution_20250825",
+    "type": "code_execution_20260120",
     "tool_id": "srvtoolu_abc123"
   }
 }
@@ -175,12 +175,12 @@ response = client.messages.create(
         }
     ],
     tools=[
-        {"type": "code_execution_20250825", "name": "code_execution"},
+        {"type": "code_execution_20260120", "name": "code_execution"},
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
             "input_schema": {...},
-            "allowed_callers": ["code_execution_20250825"],
+            "allowed_callers": ["code_execution_20260120"],
         },
     ],
 )
@@ -212,7 +212,7 @@ Claude writes code that calls your tool. The API pauses and returns:
       "name": "query_database",
       "input": {"sql": "<sql>"},
       "caller": {
-        "type": "code_execution_20250825",
+        "type": "code_execution_20260120",
         "tool_id": "srvtoolu_abc123"
       }
     }
@@ -260,7 +260,7 @@ response = client.messages.create(
                     "name": "query_database",
                     "input": {"sql": "<sql>"},
                     "caller": {
-                        "type": "code_execution_20250825",
+                        "type": "code_execution_20260120",
                         "tool_id": "srvtoolu_abc123",
                     },
                 },
@@ -387,7 +387,7 @@ When code execution calls a tool:
   "name": "query_database",
   "input": {"sql": "<sql>"},
   "caller": {
-    "type": "code_execution_20250825",
+    "type": "code_execution_20260120",
     "tool_id": "srvtoolu_xyz789"
   }
 }
@@ -489,8 +489,6 @@ Claude's code will receive this error and can handle it appropriately.
 
 The following tools cannot currently be called programmatically, but support may be added in future releases:
 
-- Web search
-- Web fetch
 - Tools provided by an [MCP connector](agents-and-tools/mcp-connector.md)
 
 ### Message formatting restrictions
@@ -582,7 +580,7 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 **"Tool not allowed" error**
 
-- Verify your tool definition includes `"allowed_callers": ["code_execution_20250825"]`
+- Verify your tool definition includes `"allowed_callers": ["code_execution_20260120"]`
 
 **Container expiration**
 

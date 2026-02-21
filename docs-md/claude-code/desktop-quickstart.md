@@ -1,9 +1,9 @@
 # Get started with the desktop app
 
-The desktop app gives you Claude Code with a graphical interface: visual diff review, parallel sessions with Git worktree isolation, file attachments, and the ability to run long-running tasks remotely. Work with local files, connect to remote machines over SSH, or run sessions in the cloud. No terminal required.
-If you’re already set up, see [Use Claude Code Desktop](desktop.md) for the full reference.
+The desktop app gives you Claude Code with a graphical interface: visual diff review, live app preview, GitHub PR monitoring with auto-merge, parallel sessions with Git worktree isolation, and the ability to run tasks remotely. No terminal required.
+This page walks through installing the app and starting your first session. If you’re already set up, see [Use Claude Code Desktop](desktop.md) for the full reference.
 
-![The Claude Code Desktop interface showing the Code tab selected, with a prompt box, permission mode selector set to Ask, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-light.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=9a36a7a27b9f4c6f2e1c83bdb34f69ce)![The Claude Code Desktop interface in dark mode showing the Code tab selected, with a prompt box, permission mode selector set to Ask, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-dark.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=5463defe81c459fb9b1f91f6a958cfb8)
+![The Claude Code Desktop interface showing the Code tab selected, with a prompt box, permission mode selector set to Ask permissions, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-light.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=9a36a7a27b9f4c6f2e1c83bdb34f69ce)![The Claude Code Desktop interface in dark mode showing the Code tab selected, with a prompt box, permission mode selector set to Ask permissions, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-dark.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=5463defe81c459fb9b1f91f6a958cfb8)
 
 The desktop app has three tabs:
 
@@ -29,7 +29,7 @@ Universal build for Intel and Apple Silicon](https://claude.ai/api/desktop/darwi
 
 For x64 processors](https://claude.ai/api/desktop/win32/x64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs)
 
-For Windows ARM64, [download here](https://claude.ai/api/desktop/win32/arm64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs). Local sessions are not available on ARM64 devices, so use remote sessions instead. See [ARM64 limitations](desktop.md) for details.Linux is not currently supported.
+For Windows ARM64, [download here](https://claude.ai/api/desktop/win32/arm64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs).Linux is not currently supported.
 
 2
 
@@ -43,6 +43,8 @@ Open the Code tab
 
 Click the **Code** tab at the top center. If clicking Code prompts you to upgrade, you need to [subscribe to a paid plan](https://claude.com/pricing) first. If it prompts you to sign in online, complete the sign-in and restart the app. If you see a 403 error, see [authentication troubleshooting](desktop.md).
 
+The desktop app includes Claude Code. You don’t need to install Node.js or the CLI separately. To use `claude` from the terminal, install the CLI separately. See [Get started with the CLI](quickstart.md).
+
 ## [​](#start-your-first-session) Start your first session
 
 With the Code tab open, choose a project and give Claude something to do.
@@ -53,18 +55,18 @@ Choose an environment and folder
 
 Select **Local** to run Claude on your machine using your files directly. Click **Select folder** and choose your project directory.
 
-Start with a small project you know well. It’s the fastest way to see what Claude Code can do. Session isolation requires [Git](https://git-scm.com/downloads); without Git, all sessions in the same folder edit the same files.
+Start with a small project you know well. It’s the fastest way to see what Claude Code can do. On Windows, [Git](https://git-scm.com/downloads/win) must be installed for local sessions to work. Most Macs include Git by default.
 
 You can also select:
 
 - **Remote**: Run sessions on Anthropic’s cloud infrastructure that continue even if you close the app. Remote sessions use the same infrastructure as [Claude Code on the web](claude-code-on-the-web.md).
-- **SSH**: Connect to a remote machine over SSH (your own servers, cloud VMs, or dev containers). Claude runs on the remote machine with access to its files and tools.
+- **SSH**: Connect to a remote machine over SSH (your own servers, cloud VMs, or dev containers). Claude Code must be installed on the remote machine.
 
 2
 
 Choose a model
 
-Select a model from the dropdown next to the send button. See [models](overview.md) for a comparison of Opus, Sonnet, and Haiku. You cannot change the model after the session starts.
+Select a model from the dropdown next to the send button. See [models](model-config.md) for a comparison of Opus, Sonnet, and Haiku. You cannot change the model after the session starts.
 
 3
 
@@ -82,7 +84,7 @@ A [session](desktop.md) is a conversation with Claude about your code. Each sess
 
 Review and accept changes
 
-By default, the Code tab starts in [Ask mode](desktop.md), where Claude proposes changes and waits for your approval before applying them. You’ll see:
+By default, the Code tab starts in [Ask permissions mode](desktop.md), where Claude proposes changes and waits for your approval before applying them. You’ll see:
 
 1. A [diff view](desktop.md) showing exactly what will change in each file
 2. Accept/Reject buttons to approve or decline each change
@@ -96,10 +98,12 @@ You’ve made your first edit. For the full reference on everything Desktop can 
 **Interrupt and steer.** You can interrupt Claude at any point. If it’s going down the wrong path, click the stop button or type your correction and press **Enter**. Claude stops what it’s doing and adjusts based on your input. You don’t have to wait for it to finish or start over.
 **Give Claude more context.** Type `@filename` in the prompt box to pull a specific file into the conversation, attach images and PDFs using the attachment button, or drag and drop files directly into the prompt. The more context Claude has, the better the results. See [Add files and context](desktop.md).
 **Use skills for repeatable tasks.** Type `/` or click **+** → **Slash commands** to browse [built-in commands](interactive-mode.md), [custom skills](skills.md), and plugin skills. Skills are reusable prompts you can invoke whenever you need them, like code review checklists or deployment steps.
-**Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises.
-**Adjust how much control you have.** Your [permission mode](desktop.md) controls the balance. Ask mode (default) requires approval before every edit. Code mode auto-accepts file edits for faster iteration. Plan mode lets Claude map out an approach without touching any files, which is useful before a large refactor.
+**Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.
+**Adjust how much control you have.** Your [permission mode](desktop.md) controls the balance. Ask permissions (default) requires approval before every edit. Auto accept edits auto-accepts file edits for faster iteration. Plan mode lets Claude map out an approach without touching any files, which is useful before a large refactor.
 **Add plugins for more capabilities.** Click the **+** button next to the prompt box and select **Plugins** to browse and install [plugins](desktop.md) that add skills, agents, MCP servers, and more.
-**Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in VS Code](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.
+**Preview your app.** Click the **Preview** dropdown to run your dev server directly in the desktop. Claude can view the running app, test endpoints, inspect logs, and iterate on what it sees. See [Preview your app](desktop.md).
+**Track your pull request.** After opening a PR, Claude Code monitors CI check results and can automatically fix failures or merge the PR once all checks pass. See [Monitor pull request status](desktop.md).
+**Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in your IDE](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.
 
 ## [​](#coming-from-the-cli) Coming from the CLI?
 

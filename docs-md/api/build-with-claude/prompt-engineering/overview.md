@@ -12,7 +12,7 @@ This guide assumes that you have:
 2. Some ways to empirically test against those criteria
 3. A first draft prompt you want to improve
 
-If not, we highly suggest you spend time establishing that first. Check out [Define your success criteria](test-and-evaluate/define-success.md) and [Create strong empirical evaluations](test-and-evaluate/develop-tests.md) for tips and guidance.
+If not, we highly suggest you spend time establishing that first. Check out [Define success criteria and build evaluations](test-and-evaluate/develop-tests.md) for tips and guidance.
 
 [Prompt generator
 

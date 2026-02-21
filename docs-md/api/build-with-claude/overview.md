@@ -2,6 +2,16 @@
 
 Copy page
 
+Claude's API surface is organized into five areas:
+
+- **Model capabilities:** Control how Claude reasons and formats responses.
+- **Tools:** Let Claude take actions on the web or in your environment.
+- **Tool infrastructure:** Handles discovery and orchestration at scale.
+- **Context management:** Keeps long-running sessions efficient.
+- **Files and assets:** Manage the documents and data you provide to Claude.
+
+If you're new, start with [model capabilities](#model-capabilities) and [tools](#tools). Return to the other sections when you're ready to optimize cost, latency, or scale.
+
 ## Model capabilities
 
 Ways to steer Claude and Claude's direct outputs, including response format, reasoning depth, and input modalities.
@@ -10,7 +20,7 @@ Ways to steer Claude and Claude's direct outputs, including response format, rea
 | --- | --- | --- |
 | [1M token context window](build-with-claude/context-windows.md) | An extended context window that allows you to process much larger documents, maintain longer conversations, and work with more extensive codebases. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Adaptive thinking](build-with-claude/adaptive-thinking.md) | Let Claude dynamically decide when and how much to think. The recommended thinking mode for Opus 4.6. Use the effort parameter to control thinking depth. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
-| [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls costs 50% less than standard API calls. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI |
+| [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls cost 50% less than standard API calls. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI |
 | [Citations](build-with-claude/citations.md) | Ground Claude's responses in source documents. With Citations, Claude can provide detailed references to the exact sentences and passages it uses to generate responses, leading to more verifiable, trustworthy outputs. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Data residency](build-with-claude/data-residency.md) | Control where model inference runs using geographic controls. Specify `"global"` or `"us"` routing per request via the `inference_geo` parameter. | Claude API |
 | [Effort](build-with-claude/effort.md) | Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency. Supported on Opus 4.6 and Opus 4.5. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
@@ -65,7 +75,7 @@ Infrastructure for controlling and optimizing Claude's context window.
 | [Prompt caching (1hr)](build-with-claude/prompt-caching.md) | Extended 1-hour cache duration for less frequently accessed but important context, complementing the standard 5-minute cache. | Claude API  Microsoft Foundry (Beta) |
 | [Token counting](api/messages-count-tokens.md) | Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 
-## Files & assets
+## Files and assets
 
 Manage files and assets for use with Claude.
 

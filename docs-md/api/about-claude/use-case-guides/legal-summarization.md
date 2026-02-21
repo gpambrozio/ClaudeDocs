@@ -53,7 +53,7 @@ Evaluating the quality of summaries is a notoriously challenging task. Unlike ma
 
 ### Bias and fairness
 
-See our guide on [establishing success criteria](test-and-evaluate/define-success.md) for more information.
+See our guide on [establishing success criteria](test-and-evaluate/develop-tests.md) for more information.
 
 ---
 

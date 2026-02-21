@@ -317,7 +317,7 @@ When creating pull requests, Claude generates descriptions based on the actual c
 
 ### [​](#use-git-worktrees-for-parallel-tasks) Use git worktrees for parallel tasks
 
-Use the `--worktree` flag to start Claude in an isolated worktree with its own files and branch:
+Use the `--worktree` (`-w`) flag to start Claude in an isolated worktree with its own files and branch:
 
 Report incorrect code
 
@@ -326,7 +326,7 @@ Copy
 Ask AI
 
 ```shiki
-claude -w feature-auth
+claude --worktree feature-auth
 ```
 
 Each worktree maintains independent file state while sharing git history. This prevents Claude instances from interfering with each other when working on different tasks. For more details, see [Run parallel sessions with Git worktrees](common-workflows.md).

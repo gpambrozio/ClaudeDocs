@@ -29,7 +29,7 @@ Java
 
    Set your API key
 
-   Get your API key at the [Claude Console](/settings/keys) and set it as an environment variable:
+   Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
    ```shiki
    export ANTHROPIC_API_KEY='your-api-key-here'
@@ -81,17 +81,21 @@ Java
 
 ## Next steps
 
-Now that you have made your first Claude API request, it's time to explore what else is possible:
+You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
 
-[Working with Messages
+[Working with the Messages API
 
-Learn common patterns for the Messages API.](build-with-claude/working-with-messages.md)[Features Overview
+Learn multi-turn conversations, system prompts, stop reasons, and other core patterns.](build-with-claude/working-with-messages.md)
 
-Explore Claude's advanced features and capabilities.](api/overview.md)[Client SDKs
+Once you're comfortable with the basics, explore further:
 
-Discover Anthropic client libraries.](api/client-sdks.md)[Claude Cookbook
+[Models overview
 
-Learn with interactive Jupyter notebooks.](https://platform.claude.com/cookbooks)
+Compare Claude models by capability and cost.](about-claude/models/overview.md)[Features overview
+
+Browse all Claude capabilities: tools, context management, structured outputs, and more.](build-with-claude/overview.md)[Client SDKs
+
+Reference documentation for Python, TypeScript, Java, and other client libraries.](api/client-sdks.md)
 
 Was this page helpful?
 

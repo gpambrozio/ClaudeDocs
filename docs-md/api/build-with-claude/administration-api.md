@@ -94,29 +94,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invit
 
 ### Workspaces
 
-For a comprehensive guide to workspaces, see [Workspaces](build-with-claude/workspaces.md).
-
-Create and manage [workspaces](api/admin-api/workspaces/get-workspace.md) ([console](/settings/workspaces)) to organize your resources:
-
-Shell
-
-```shiki
-# Create workspace
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  --data '{"name": "Production"}'
-
-# List workspaces
-curl "https://api.anthropic.com/v1/organizations/workspaces?limit=10&include_archived=false" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-
-# Archive workspace
-curl --request POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/archive" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
-```
+For a comprehensive guide to workspaces, including Console and API examples, see [Workspaces](build-with-claude/workspaces.md).
 
 ### Workspace Members
 
@@ -199,22 +177,13 @@ This endpoint is useful for programmatically determining which organization an A
 
 For complete parameter details and response schemas, see the [Organization Info API reference](api/admin-api/organization/get-me.md).
 
-## Accessing usage and cost reports
+## Usage and cost reports
 
-To access usage and cost reports for your organization, use the Usage and Cost API endpoints:
+Track your organization's usage and costs with the [Usage and Cost API](build-with-claude/usage-cost-api.md).
 
-- The [**Usage endpoint**](build-with-claude/usage-cost-api.md) (`/v1/organizations/usage_report/messages`) provides detailed usage data, including token counts and request metrics, grouped by various dimensions such as workspace, user, and model.
-- The [**Cost endpoint**](build-with-claude/usage-cost-api.md) (`/v1/organizations/cost_report`) provides cost data associated with your organization's usage, allowing you to track expenses and allocate costs by workspace or description.
+## Claude Code analytics
 
-These endpoints provide detailed insights into your organization's usage and associated costs.
-
-## Accessing Claude Code analytics
-
-For organizations using Claude Code, the [**Claude Code Analytics API**](build-with-claude/claude-code-analytics-api.md) provides detailed productivity metrics and usage insights:
-
-- The [**Claude Code Analytics endpoint**](build-with-claude/claude-code-analytics-api.md) (`/v1/organizations/usage_report/claude_code`) provides daily aggregated metrics for Claude Code usage, including sessions, lines of code, commits, pull requests, tool usage statistics, and cost data broken down by user and model.
-
-This API enables you to track developer productivity, analyze Claude Code adoption, and build custom dashboards for your organization.
+Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](build-with-claude/claude-code-analytics-api.md).
 
 ## Best practices
 
@@ -238,17 +207,7 @@ To effectively use the Admin API:
 
 ### How long do organization invites last?
 
-### Are there limits on workspaces?
-
-### What's the Default Workspace?
-
-### How do organization roles affect Workspace access?
-
-### Which roles can be assigned in workspaces?
-
-### Can organization admin or billing members' workspace roles be changed?
-
-### What happens to workspace access when organization roles change?
+For workspace-specific questions, see the [Workspaces FAQ](build-with-claude/workspaces.md).
 
 Was this page helpful?
 

@@ -260,6 +260,8 @@ See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete prici
 
 The bash tool is most powerful when combined with the [text editor](agents-and-tools/tool-use/text-editor-tool.md) and other tools.
 
+If you're also using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
+
 ## Next steps
 
 [Tool use overview
