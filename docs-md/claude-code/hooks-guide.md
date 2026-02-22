@@ -366,6 +366,8 @@ Hook events fire at specific lifecycle points in Claude Code. When an event fire
 | `TeammateIdle` | When an [agent team](agent-teams.md) teammate is about to go idle |
 | `TaskCompleted` | When a task is being marked as completed |
 | `ConfigChange` | When a configuration file changes during a session |
+| `WorktreeCreate` | When a worktree is being created via `--worktree` or `isolation: "worktree"`. Replaces default git behavior |
+| `WorktreeRemove` | When a worktree is being removed, either at session exit or when a subagent finishes |
 | `PreCompact` | Before context compaction |
 | `SessionEnd` | When a session terminates |
 
@@ -397,7 +399,7 @@ Ask AI
 }
 ```
 
-Your script can parse that JSON and act on any of those fields. `UserPromptSubmit` hooks get the `prompt` text instead, `SessionStart` hooks get the `source` (startup, resume, compact), and so on. See [Common input fields](hooks.md) in the reference for shared fields, and each event’s section for event-specific schemas.
+Your script can parse that JSON and act on any of those fields. `UserPromptSubmit` hooks get the `prompt` text instead, `SessionStart` hooks get the `source` (startup, resume, clear, compact), and so on. See [Common input fields](hooks.md) in the reference for shared fields, and each event’s section for event-specific schemas.
 
 #### [​](#hook-output) Hook output
 
@@ -497,8 +499,9 @@ Each event type matches on a specific field. Matchers support exact strings and 
 | `Notification` | notification type | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog` |
 | `SubagentStart` | agent type | `Bash`, `Explore`, `Plan`, or custom agent names |
 | `PreCompact` | what triggered compaction | `manual`, `auto` |
-| `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCompleted` | no matcher support | always fires on every occurrence |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
+| `ConfigChange` | configuration source | `user_settings`, `project_settings`, `local_settings`, `policy_settings`, `skills` |
+| `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCompleted`, `WorktreeCreate`, `WorktreeRemove` | no matcher support | always fires on every occurrence |
 
 A few more examples showing matchers on different event types:
 

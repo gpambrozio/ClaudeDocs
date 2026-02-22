@@ -157,6 +157,7 @@ The `/agents` command provides an interactive interface for managing subagents. 
 - See which subagents are active when duplicates exist
 
 This is the recommended way to create and manage subagents. For manual creation or automation, you can also add subagent files directly.
+To list all configured subagents from the command line without starting an interactive session, run `claude agents`. This shows agents grouped by source and indicates which are overridden by higher-priority definitions.
 
 ### [​](#choose-the-subagent-scope) Choose the subagent scope
 

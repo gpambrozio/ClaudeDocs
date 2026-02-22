@@ -1003,6 +1003,10 @@ claude --worktree
 Worktrees are created at `<repo>/.claude/worktrees/<name>` and branch from the default remote branch. The worktree branch is named `worktree-<name>`.
 You can also ask Claude to “work in a worktree” or “start a worktree” during a session, and it will create one automatically.
 
+### [​](#subagent-worktrees) Subagent worktrees
+
+Subagents can also use worktree isolation to work in parallel without conflicts. Ask Claude to “use worktrees for your agents” or configure it in a [custom subagent](sub-agents.md) by adding `isolation: worktree` to the agent’s frontmatter. Each subagent gets its own worktree that is automatically cleaned up when the subagent finishes without changes.
+
 ### [​](#worktree-cleanup) Worktree cleanup
 
 When you exit a worktree session, Claude handles cleanup based on whether you made changes:
@@ -1043,6 +1047,9 @@ Learn more in the [official Git worktree documentation](https://git-scm.com/docs
 
 Remember to initialize your development environment in each new worktree according to your project’s setup. Depending on your stack, this might include running dependency installation (`npm install`, `yarn`), setting up virtual environments, or following your project’s standard setup process.
 
+### [​](#non-git-version-control) Non-git version control
+
+Worktree isolation works with git by default. For other version control systems like SVN, Perforce, or Mercurial, configure [WorktreeCreate and WorktreeRemove hooks](hooks.md) to provide custom worktree creation and cleanup logic. When configured, these hooks replace the default git behavior when you use `--worktree`.
 For automated coordination of parallel sessions with shared tasks and messaging, see [agent teams](agent-teams.md).
 
 ---
