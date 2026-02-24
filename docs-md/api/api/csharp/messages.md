@@ -46,6 +46,209 @@ JsonElement MediaType "application/pdf"constant
 
 JsonElement Type "base64"constant
 
+class BashCodeExecutionOutputBlock:
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+class BashCodeExecutionOutputBlockParam:
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+class BashCodeExecutionResultBlockParam:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+enum BashCodeExecutionToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+class BashCodeExecutionToolResultErrorParam:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
 class CacheControlEphemeral:
 
 JsonElement Type "ephemeral"constant
@@ -195,6 +398,10 @@ JsonElement Type "web\_search\_result\_location"constant
 
 required string Url
 
+class CitationsConfig:
+
+required Boolean Enabled
+
 class CitationsConfigParam:
 
 Boolean Enabled
@@ -311,7 +518,557 @@ JsonElement Type "web\_search\_result\_location"constant
 
 required string Url
 
+class CodeExecutionOutputBlock:
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+class CodeExecutionOutputBlockParam:
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class CodeExecutionResultBlockParam:
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class CodeExecutionTool20250522:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250522"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250825"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20260120"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class CodeExecutionToolResultBlockContent: A class that can be one of several variants.union
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+class CodeExecutionToolResultBlockParam:
+
+required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class CodeExecutionToolResultBlockParamContent: A class that can be one of several variants.union
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+class CodeExecutionToolResultErrorParam:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+enum CodeExecutionToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+class CodeExecutionToolResultErrorParam:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class Container:
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
 class ContentBlock: A class that can be one of several variants.union
+
+Response model for a file uploaded to the container.
 
 class TextBlock:
 
@@ -421,6 +1178,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -431,13 +1214,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -445,7 +1296,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -478,6 +1329,336 @@ required string Url
 required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
+
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
 
 class ContentBlockParam: A class that can be one of several variants.union
 
@@ -1059,6 +2240,32 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class ToolResultBlockParam:
 
 required string ToolUseID
@@ -1627,6 +2834,37 @@ string? Context
 
 string? Title
 
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
 Boolean IsError
 
 class ServerToolUseBlockParam:
@@ -1635,7 +2873,23 @@ required string ID
 
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
@@ -1662,6 +2916,32 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
@@ -1682,7 +2962,7 @@ string? PageAge
 
 class WebSearchToolRequestError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -1703,6 +2983,721 @@ JsonElement Type "web\_search\_tool\_result\_error"constant
 required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+class WebFetchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+required [DocumentBlockParam](api/messages.md) Content
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+class ContentBlockSource:
+
+required Content Content
+
+Accepts one of the following:
+
+string
+
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+class CitationPageLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndBlockIndex
+
+required Long StartBlockIndex
+
+JsonElement Type "content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+required string CitedText
+
+required string EncryptedIndex
+
+required string? Title
+
+JsonElement Type "web\_search\_result\_location"constant
+
+required string Url
+
+class CitationSearchResultLocationParam:
+
+required string CitedText
+
+required Long EndBlockIndex
+
+required Long SearchResultIndex
+
+required string Source
+
+required Long StartBlockIndex
+
+required string? Title
+
+JsonElement Type "search\_result\_location"constant
+
+class ImageBlockParam:
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+required string Data
+
+required MediaType MediaType
+
+Accepts one of the following:
+
+"image/jpeg"ImageJpeg
+
+"image/png"ImagePng
+
+"image/gif"ImageGif
+
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "content"constant
+
+class UrlPdfSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "document"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Boolean Enabled
+
+string? Context
+
+string? Title
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+class CodeExecutionToolResultBlockParam:
+
+required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class BashCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+string? ErrorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+Long? NumLines
+
+Long? StartLine
+
+Long? TotalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+IReadOnlyList<string>? Lines
+
+Long? NewLines
+
+Long? NewStart
+
+Long? OldLines
+
+Long? OldStart
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class ToolSearchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
@@ -2059,6 +4054,46 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class DocumentBlock:
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
 class DocumentBlockParam:
 
 required Source Source
@@ -2292,6 +4327,42 @@ string? Context
 
 string? Title
 
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
 class ImageBlockParam:
 
 required Source Source
@@ -2361,6 +4432,59 @@ The JSON schema of the format
 
 JsonElement Type "json\_schema"constant
 
+class MemoryTool20250818:
+
+JsonElement Name "memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "memory\_20250818"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class Message:
 
 required string ID
@@ -2368,6 +4492,18 @@ required string ID
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
 
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
@@ -2508,6 +4644,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -2518,13 +4680,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -2532,7 +4762,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -2566,6 +4796,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -2577,6 +5137,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -2753,6 +5317,10 @@ required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
+
 required Long WebSearchRequests
 
 The number of web search tool requests.
@@ -2770,6 +5338,8 @@ Accepts one of the following:
 "batch"Batch
 
 class MessageCountTokensTool: A class that can be one of several variants.union
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 class Tool:
 
@@ -2795,6 +5365,16 @@ maxLength128
 
 minLength1
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2818,6 +5398,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 string Description
 
 Description of what this tool does.
@@ -2827,6 +5411,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Boolean? EagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -2844,6 +5430,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "bash\_20250124"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2866,6 +5462,220 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250522"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250825"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20260120"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818:
+
+JsonElement Name "memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "memory\_20250818"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -2881,6 +5691,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250124"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2903,6 +5723,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -2918,6 +5744,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250429"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2940,6 +5776,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -2955,6 +5797,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250728"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -2977,6 +5829,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Long? MaxCharacters
 
@@ -2995,6 +5853,16 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "web\_search\_20250305"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -3027,6 +5895,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
@@ -3035,7 +5907,7 @@ Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation? UserLocation
+[UserLocation](api/messages.md)? UserLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -3056,6 +5928,351 @@ The region of the user.
 string? Timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20250910:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20250910"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209:
+
+JsonElement Name "web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_search\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+IReadOnlyList<string>? BlockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+[UserLocation](api/messages.md)? UserLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonElement Type "approximate"constant
+
+string? City
+
+The city of the user.
+
+string? Country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+string? Region
+
+The region of the user.
+
+string? Timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119:
+
+JsonElement Name "tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonElement Name "tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
 
 class MessageDeltaUsage:
 
@@ -3078,6 +6295,10 @@ The cumulative number of output tokens which were used.
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 
@@ -3671,6 +6892,32 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class ToolResultBlockParam:
 
 required string ToolUseID
@@ -4239,6 +7486,37 @@ string? Context
 
 string? Title
 
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
 Boolean IsError
 
 class ServerToolUseBlockParam:
@@ -4247,7 +7525,23 @@ required string ID
 
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
@@ -4274,6 +7568,32 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
@@ -4294,7 +7614,7 @@ string? PageAge
 
 class WebSearchToolRequestError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -4315,6 +7635,721 @@ JsonElement Type "web\_search\_tool\_result\_error"constant
 required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+class WebFetchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+required [DocumentBlockParam](api/messages.md) Content
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+class ContentBlockSource:
+
+required Content Content
+
+Accepts one of the following:
+
+string
+
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+class CitationPageLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndBlockIndex
+
+required Long StartBlockIndex
+
+JsonElement Type "content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+required string CitedText
+
+required string EncryptedIndex
+
+required string? Title
+
+JsonElement Type "web\_search\_result\_location"constant
+
+required string Url
+
+class CitationSearchResultLocationParam:
+
+required string CitedText
+
+required Long EndBlockIndex
+
+required Long SearchResultIndex
+
+required string Source
+
+required Long StartBlockIndex
+
+required string? Title
+
+JsonElement Type "search\_result\_location"constant
+
+class ImageBlockParam:
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+required string Data
+
+required MediaType MediaType
+
+Accepts one of the following:
+
+"image/jpeg"ImageJpeg
+
+"image/png"ImagePng
+
+"image/gif"ImageGif
+
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "content"constant
+
+class UrlPdfSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "document"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Boolean Enabled
+
+string? Context
+
+string? Title
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+class CodeExecutionToolResultBlockParam:
+
+required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultErrorParam:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlockParam:
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlockParam:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class BashCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultErrorParam:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlockParam:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlockParam](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+string? ErrorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+Long? NumLines
+
+Long? StartLine
+
+Long? TotalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+IReadOnlyList<string>? Lines
+
+Long? NewLines
+
+Long? NewStart
+
+Long? OldLines
+
+Long? OldStart
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class ToolSearchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class ContainerUploadBlockParam:
+
+A content block that represents a file to be uploaded to the container
+Files uploaded via this block will be available in the container's input directory.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
@@ -4629,6 +8664,8 @@ class RawContentBlockStartEvent:
 
 required ContentBlock ContentBlock
 
+Response model for a file uploaded to the container.
+
 Accepts one of the following:
 
 class TextBlock:
@@ -4739,6 +8776,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -4749,13 +8812,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -4763,7 +8894,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -4797,6 +8928,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required Long Index
 
 JsonElement Type "content\_block\_start"constant
@@ -4810,6 +9271,18 @@ JsonElement Type "content\_block\_stop"constant
 class RawMessageDeltaEvent:
 
 required Delta Delta
+
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
 
 required [StopReason](api/messages.md)? StopReason
 
@@ -4863,6 +9336,10 @@ required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
+
 required Long WebSearchRequests
 
 The number of web search tool requests.
@@ -4876,6 +9353,18 @@ required string ID
 Unique object identifier.
 
 The format and length of IDs may change over time.
+
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
 
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
@@ -5016,6 +9505,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -5026,13 +9541,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -5040,7 +9623,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -5074,6 +9657,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -5085,6 +9998,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -5260,6 +10177,10 @@ The number of output tokens which were used.
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 
@@ -5295,6 +10216,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
+
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
@@ -5434,6 +10367,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -5444,13 +10403,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -5458,7 +10485,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -5492,6 +10519,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -5503,6 +10860,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -5679,6 +11040,10 @@ required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
+
 required Long WebSearchRequests
 
 The number of web search tool requests.
@@ -5700,6 +11065,18 @@ JsonElement Type "message\_start"constant
 class RawMessageDeltaEvent:
 
 required Delta Delta
+
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
 
 required [StopReason](api/messages.md)? StopReason
 
@@ -5753,6 +11130,10 @@ required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
+
 required Long WebSearchRequests
 
 The number of web search tool requests.
@@ -5764,6 +11145,8 @@ JsonElement Type "message\_stop"constant
 class RawContentBlockStartEvent:
 
 required ContentBlock ContentBlock
+
+Response model for a file uploaded to the container.
 
 Accepts one of the following:
 
@@ -5875,6 +11258,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -5885,13 +11294,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -5899,7 +11376,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -5932,6 +11409,336 @@ required string Url
 required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
+
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
 
 required Long Index
 
@@ -6211,7 +12018,25 @@ Accepts one of the following:
 
 Boolean Enabled
 
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class ServerToolUsage:
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 
@@ -6221,9 +12046,51 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
@@ -6233,7 +12100,23 @@ required string ID
 
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
@@ -6259,6 +12142,32 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 class SignatureDelta:
 
@@ -6629,6 +12538,309 @@ required string Text
 
 JsonElement Type "text\_delta"constant
 
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+IReadOnlyList<string>? Lines
+
+Long? NewLines
+
+Long? NewStart
+
+Long? OldLines
+
+Long? OldStart
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+string? ErrorMessage
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+Long? NumLines
+
+Long? StartLine
+
+Long? TotalLines
+
+class TextEditorCodeExecutionCreateResultBlockParam:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlockParam:
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+IReadOnlyList<string>? Lines
+
+Long? NewLines
+
+Long? NewStart
+
+Long? OldLines
+
+Long? OldStart
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+enum TextEditorCodeExecutionToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+class TextEditorCodeExecutionToolResultErrorParam:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+string? ErrorMessage
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionViewResultBlockParam:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+Long? NumLines
+
+Long? StartLine
+
+Long? TotalLines
+
 class ThinkingBlock:
 
 required string Signature
@@ -6727,6 +12939,16 @@ maxLength128
 
 minLength1
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -6750,6 +12972,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 string Description
 
 Description of what this tool does.
@@ -6759,6 +12985,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Boolean? EagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -6776,6 +13004,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "bash\_20250124"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -6798,6 +13036,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -6898,6 +13142,43 @@ Boolean DisableParallelToolUse
 Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+class ToolReferenceBlock:
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+class ToolReferenceBlockParam:
+
+Tool reference block that can be included in tool\_result content.
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
 
 class ToolResultBlockParam:
 
@@ -7467,17 +13748,13 @@ string? Context
 
 string? Title
 
-Boolean IsError
+class ToolReferenceBlockParam:
 
-class ToolTextEditor20250124:
+Tool reference block that can be included in tool\_result content.
 
-JsonElement Name "str\_replace\_editor"constant
+required string ToolName
 
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-JsonElement Type "text\_editor\_20250124"constant
+JsonElement Type "tool\_reference"constant
 
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
@@ -7501,6 +13778,378 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean IsError
+
+class ToolSearchToolBm25\_20251119:
+
+JsonElement Name "tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonElement Name "tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ToolSearchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultErrorParam:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+enum ToolSearchToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+class ToolSearchToolResultErrorParam:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+class ToolSearchToolSearchResultBlockParam:
+
+required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+class ToolTextEditor20250124:
+
+JsonElement Name "str\_replace\_editor"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "text\_editor\_20250124"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7516,6 +14165,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250429"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7538,6 +14197,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7553,6 +14218,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250728"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7576,6 +14251,12 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+
 Long? MaxCharacters
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
@@ -7585,6 +14266,8 @@ Boolean Strict
 When true, guarantees schema validation on tool names and inputs
 
 class ToolUnion: A class that can be one of several variants.union
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
 class Tool:
 
@@ -7610,6 +14293,16 @@ maxLength128
 
 minLength1
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7633,6 +14326,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 string Description
 
 Description of what this tool does.
@@ -7642,6 +14339,8 @@ Tool descriptions should be as detailed as possible. The more information that t
 Boolean? EagerInputStreaming
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7659,6 +14358,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "bash\_20250124"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7681,6 +14390,220 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250522:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250522"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20250825:
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20250825"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class CodeExecutionTool20260120:
+
+Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+JsonElement Name "code\_execution"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "code\_execution\_20260120"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class MemoryTool20250818:
+
+JsonElement Name "memory"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "memory\_20250818"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7696,6 +14619,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250124"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7718,6 +14651,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7733,6 +14672,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250429"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7755,6 +14704,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Boolean Strict
 
@@ -7770,6 +14725,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "text\_editor\_20250728"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 [CacheControlEphemeral](api/messages.md)? CacheControl
 
 Create a cache control breakpoint at this content block.
@@ -7792,6 +14757,12 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples
 
 Long? MaxCharacters
 
@@ -7810,6 +14781,16 @@ Name of the tool.
 This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "web\_search\_20250305"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
 
 IReadOnlyList<string>? AllowedDomains
 
@@ -7842,6 +14823,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
@@ -7850,7 +14835,7 @@ Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation? UserLocation
+[UserLocation](api/messages.md)? UserLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -7872,9 +14857,380 @@ string? Timezone
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+class WebFetchTool20250910:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20250910"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebSearchTool20260209:
+
+JsonElement Name "web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_search\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+IReadOnlyList<string>? BlockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+[UserLocation](api/messages.md)? UserLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonElement Type "approximate"constant
+
+string? City
+
+The city of the user.
+
+string? Country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+string? Region
+
+The region of the user.
+
+string? Timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchTool20260209:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolBm25\_20251119:
+
+JsonElement Name "tool\_search\_tool\_bm25"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class ToolSearchToolRegex20251119:
+
+JsonElement Name "tool\_search\_tool\_regex"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+required Type Type
+
+Accepts one of the following:
+
+"tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class ToolUseBlock:
 
 required string ID
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required IReadOnlyDictionary<string, JsonElement> Input
 
@@ -7914,6 +15270,32 @@ Accepts one of the following:
 "5m"Ttl5m
 
 "1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 class UrlImageSource:
 
@@ -7965,6 +15347,10 @@ required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
 
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
+
 required Long WebSearchRequests
 
 The number of web search tool requests.
@@ -7980,6 +15366,963 @@ Accepts one of the following:
 "priority"Priority
 
 "batch"Batch
+
+class UserLocation:
+
+JsonElement Type "approximate"constant
+
+string? City
+
+The city of the user.
+
+string? Country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+string? Region
+
+The region of the user.
+
+string? Timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+class WebFetchBlockParam:
+
+required [DocumentBlockParam](api/messages.md) Content
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+class ContentBlockSource:
+
+required Content Content
+
+Accepts one of the following:
+
+string
+
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+class CitationPageLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndBlockIndex
+
+required Long StartBlockIndex
+
+JsonElement Type "content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+required string CitedText
+
+required string EncryptedIndex
+
+required string? Title
+
+JsonElement Type "web\_search\_result\_location"constant
+
+required string Url
+
+class CitationSearchResultLocationParam:
+
+required string CitedText
+
+required Long EndBlockIndex
+
+required Long SearchResultIndex
+
+required string Source
+
+required Long StartBlockIndex
+
+required string? Title
+
+JsonElement Type "search\_result\_location"constant
+
+class ImageBlockParam:
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+required string Data
+
+required MediaType MediaType
+
+Accepts one of the following:
+
+"image/jpeg"ImageJpeg
+
+"image/png"ImagePng
+
+"image/gif"ImageGif
+
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "content"constant
+
+class UrlPdfSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "document"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Boolean Enabled
+
+string? Context
+
+string? Title
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+class WebFetchTool20250910:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20250910"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchTool20260209:
+
+JsonElement Name "web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_fetch\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+List of domains to allow fetching from
+
+IReadOnlyList<string>? BlockedDomains
+
+List of domains to block fetching from
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Boolean Enabled
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class WebFetchToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlockParam:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlockParam:
+
+required [DocumentBlockParam](api/messages.md) Content
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+class ContentBlockSource:
+
+required Content Content
+
+Accepts one of the following:
+
+string
+
+IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
+
+Accepts one of the following:
+
+class TextBlockParam:
+
+required string Text
+
+JsonElement Type "text"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+Accepts one of the following:
+
+class CitationCharLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+class CitationPageLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndBlockIndex
+
+required Long StartBlockIndex
+
+JsonElement Type "content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+required string CitedText
+
+required string EncryptedIndex
+
+required string? Title
+
+JsonElement Type "web\_search\_result\_location"constant
+
+required string Url
+
+class CitationSearchResultLocationParam:
+
+required string CitedText
+
+required Long EndBlockIndex
+
+required Long SearchResultIndex
+
+required string Source
+
+required Long StartBlockIndex
+
+required string? Title
+
+JsonElement Type "search\_result\_location"constant
+
+class ImageBlockParam:
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64ImageSource:
+
+required string Data
+
+required MediaType MediaType
+
+Accepts one of the following:
+
+"image/jpeg"ImageJpeg
+
+"image/png"ImagePng
+
+"image/gif"ImageGif
+
+"image/webp"ImageWebP
+
+JsonElement Type "base64"constant
+
+class UrlImageSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "image"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+JsonElement Type "content"constant
+
+class UrlPdfSource:
+
+JsonElement Type "url"constant
+
+required string Url
+
+JsonElement Type "document"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[CitationsConfigParam](api/messages.md)? Citations
+
+Boolean Enabled
+
+string? Context
+
+string? Title
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchToolResultErrorBlockParam:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+enum WebFetchToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
 
 class WebSearchResultBlock:
 
@@ -8015,6 +16358,16 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 JsonElement Type "web\_search\_20250305"constant
 
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
 IReadOnlyList<string>? AllowedDomains
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -8046,6 +16399,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
 Long? MaxUses
 
 Maximum number of times the tool can be used in the API request.
@@ -8054,7 +16411,92 @@ Boolean Strict
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation? UserLocation
+[UserLocation](api/messages.md)? UserLocation
+
+Parameters for the user's location. Used to provide more relevant search results.
+
+JsonElement Type "approximate"constant
+
+string? City
+
+The city of the user.
+
+string? Country
+
+The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+string? Region
+
+The region of the user.
+
+string? Timezone
+
+The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+class WebSearchTool20260209:
+
+JsonElement Name "web\_search"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "web\_search\_20260209"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+IReadOnlyList<string>? AllowedDomains
+
+If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+IReadOnlyList<string>? BlockedDomains
+
+If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
+[UserLocation](api/messages.md)? UserLocation
 
 Parameters for the user's location. Used to provide more relevant search results.
 
@@ -8078,7 +16520,7 @@ The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 class WebSearchToolRequestError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8098,13 +16540,39 @@ JsonElement Type "web\_search\_tool\_result\_error"constant
 
 class WebSearchToolResultBlock:
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
 Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8142,7 +16610,7 @@ class WebSearchToolResultBlockContent: A class that can be one of several varian
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8192,7 +16660,7 @@ string? PageAge
 
 class WebSearchToolRequestError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8237,6 +16705,32 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 class WebSearchToolResultBlockParamContent: A class that can be one of several variants.union
 
 IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
@@ -8253,7 +16747,7 @@ string? PageAge
 
 class WebSearchToolRequestError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8273,7 +16767,7 @@ JsonElement Type "web\_search\_tool\_result\_error"constant
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8290,6 +16784,20 @@ Accepts one of the following:
 "request\_too\_large"RequestTooLarge
 
 JsonElement Type "web\_search\_tool\_result\_error"constant
+
+enum WebSearchToolResultErrorCode:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"too\_many\_requests"TooManyRequests
+
+"query\_too\_long"QueryTooLong
+
+"request\_too\_large"RequestTooLarge
 
 #### MessagesBatches
 
@@ -8537,6 +17045,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
+
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
@@ -8676,6 +17196,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -8686,13 +17232,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -8700,7 +17314,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -8734,6 +17348,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -8745,6 +17689,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -8920,6 +17868,10 @@ The number of output tokens which were used.
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 
@@ -9061,6 +18013,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
+
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
@@ -9200,6 +18164,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -9210,13 +18200,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -9224,7 +18282,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -9258,6 +18316,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -9269,6 +18657,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -9444,6 +18836,10 @@ The number of output tokens which were used.
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 
@@ -9549,6 +18945,18 @@ Unique object identifier.
 
 The format and length of IDs may change over time.
 
+required [Container](api/messages.md)? Container
+
+Information about the container used in the request (for the code execution tool)
+
+required string ID
+
+Identifier for the container used in this request
+
+required DateTimeOffset ExpiresAt
+
+The time at which the container will expire.
+
 required IReadOnlyList<[ContentBlock](api/messages.md)> Content
 
 Content generated by the model.
@@ -9688,6 +19096,32 @@ class ToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
 required string Name
@@ -9698,13 +19132,81 @@ class ServerToolUseBlock:
 
 required string ID
 
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
 required IReadOnlyDictionary<string, JsonElement> Input
 
-JsonElement Name "web\_search"constant
+required Name Name
+
+Accepts one of the following:
+
+"web\_search"WebSearch
+
+"web\_fetch"WebFetch
+
+"code\_execution"CodeExecution
+
+"bash\_code\_execution"BashCodeExecution
+
+"text\_editor\_code\_execution"TextEditorCodeExecution
+
+"tool\_search\_tool\_regex"ToolSearchToolRegex
+
+"tool\_search\_tool\_bm25"ToolSearchToolBm25
 
 JsonElement Type "server\_tool\_use"constant
 
 class WebSearchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
@@ -9712,7 +19214,7 @@ Accepts one of the following:
 
 class WebSearchToolResultError:
 
-required ErrorCode ErrorCode
+required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
 Accepts one of the following:
 
@@ -9746,6 +19248,336 @@ required string ToolUseID
 
 JsonElement Type "web\_search\_tool\_result"constant
 
+class WebFetchToolResultBlock:
+
+required Caller Caller
+
+Tool invocation directly from the model.
+
+Accepts one of the following:
+
+class DirectCaller:
+
+Tool invocation directly from the model.
+
+JsonElement Type "direct"constant
+
+class ServerToolCaller:
+
+Tool invocation generated by a server-side tool.
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20250825"constant
+
+class ServerToolCaller20260120:
+
+required string ToolID
+
+JsonElement Type "code\_execution\_20260120"constant
+
+required Content Content
+
+Accepts one of the following:
+
+class WebFetchToolResultErrorBlock:
+
+required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"url\_too\_long"UrlTooLong
+
+"url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_accessible"UrlNotAccessible
+
+"unsupported\_content\_type"UnsupportedContentType
+
+"too\_many\_requests"TooManyRequests
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"unavailable"Unavailable
+
+JsonElement Type "web\_fetch\_tool\_result\_error"constant
+
+class WebFetchBlock:
+
+required [DocumentBlock](api/messages.md) Content
+
+required [CitationsConfig](api/messages.md)? Citations
+
+Citation configuration for the document
+
+required Boolean Enabled
+
+required Source Source
+
+Accepts one of the following:
+
+class Base64PdfSource:
+
+required string Data
+
+JsonElement MediaType "application/pdf"constant
+
+JsonElement Type "base64"constant
+
+class PlainTextSource:
+
+required string Data
+
+JsonElement MediaType "text/plain"constant
+
+JsonElement Type "text"constant
+
+required string? Title
+
+The title of the document
+
+JsonElement Type "document"constant
+
+required string? RetrievedAt
+
+ISO 8601 timestamp when the content was retrieved
+
+JsonElement Type "web\_fetch\_result"constant
+
+required string Url
+
+Fetched content URL
+
+required string ToolUseID
+
+JsonElement Type "web\_fetch\_tool\_result"constant
+
+class CodeExecutionToolResultBlock:
+
+required [CodeExecutionToolResultBlockContent](api/messages.md) Content
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+Accepts one of the following:
+
+class CodeExecutionToolResultError:
+
+required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "code\_execution\_tool\_result\_error"constant
+
+class CodeExecutionResultBlock:
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "code\_execution\_result"constant
+
+class EncryptedCodeExecutionResultBlock:
+
+Code execution result with encrypted stdout for PFC + web\_search results.
+
+required IReadOnlyList<[CodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "code\_execution\_output"constant
+
+required string EncryptedStdout
+
+required Long ReturnCode
+
+required string Stderr
+
+JsonElement Type "encrypted\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "code\_execution\_tool\_result"constant
+
+class BashCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BashCodeExecutionToolResultError:
+
+required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"output\_file\_too\_large"OutputFileTooLarge
+
+JsonElement Type "bash\_code\_execution\_tool\_result\_error"constant
+
+class BashCodeExecutionResultBlock:
+
+required IReadOnlyList<[BashCodeExecutionOutputBlock](api/messages.md)> Content
+
+required string FileID
+
+JsonElement Type "bash\_code\_execution\_output"constant
+
+required Long ReturnCode
+
+required string Stderr
+
+required string Stdout
+
+JsonElement Type "bash\_code\_execution\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "bash\_code\_execution\_tool\_result"constant
+
+class TextEditorCodeExecutionToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class TextEditorCodeExecutionToolResultError:
+
+required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+"file\_not\_found"FileNotFound
+
+required string? ErrorMessage
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result\_error"constant
+
+class TextEditorCodeExecutionViewResultBlock:
+
+required string Content
+
+required FileType FileType
+
+Accepts one of the following:
+
+"text"Text
+
+"image"Image
+
+"pdf"Pdf
+
+required Long? NumLines
+
+required Long? StartLine
+
+required Long? TotalLines
+
+JsonElement Type "text\_editor\_code\_execution\_view\_result"constant
+
+class TextEditorCodeExecutionCreateResultBlock:
+
+required Boolean IsFileUpdate
+
+JsonElement Type "text\_editor\_code\_execution\_create\_result"constant
+
+class TextEditorCodeExecutionStrReplaceResultBlock:
+
+required IReadOnlyList<string>? Lines
+
+required Long? NewLines
+
+required Long? NewStart
+
+required Long? OldLines
+
+required Long? OldStart
+
+JsonElement Type "text\_editor\_code\_execution\_str\_replace\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "text\_editor\_code\_execution\_tool\_result"constant
+
+class ToolSearchToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class ToolSearchToolResultError:
+
+required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
+
+Accepts one of the following:
+
+"invalid\_tool\_input"InvalidToolInput
+
+"unavailable"Unavailable
+
+"too\_many\_requests"TooManyRequests
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+required string? ErrorMessage
+
+JsonElement Type "tool\_search\_tool\_result\_error"constant
+
+class ToolSearchToolSearchResultBlock:
+
+required IReadOnlyList<[ToolReferenceBlock](api/messages.md)> ToolReferences
+
+required string ToolName
+
+JsonElement Type "tool\_reference"constant
+
+JsonElement Type "tool\_search\_tool\_search\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "tool\_search\_tool\_result"constant
+
+class ContainerUploadBlock:
+
+Response model for a file uploaded to the container.
+
+required string FileID
+
+JsonElement Type "container\_upload"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -9757,6 +19589,10 @@ Accepts one of the following:
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Frontier intelligence at scale — built for coding, agents, and enterprise workflows
 
 "claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
 
@@ -9932,6 +19768,10 @@ The number of output tokens which were used.
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
+
+required Long WebFetchRequests
+
+The number of web fetch tool requests.
 
 required Long WebSearchRequests
 

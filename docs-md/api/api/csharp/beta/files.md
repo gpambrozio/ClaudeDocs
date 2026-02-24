@@ -6,6 +6,12 @@ C#
 
 # Files
 
+##### [Upload File](api/beta/files/upload.md)
+
+[FileMetadata](api/beta.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/files
+
 ##### [List Files](api/beta/files/list.md)
 
 [FileListPageResponse](api/beta.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)

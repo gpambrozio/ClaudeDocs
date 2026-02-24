@@ -104,7 +104,25 @@ var version = await client.Beta.Skills.Versions.Delete(parameters);
 Console.WriteLine(version);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
+```
 
 ---
 

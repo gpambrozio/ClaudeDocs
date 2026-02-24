@@ -53,8 +53,8 @@ Minimize the number of tokens in both your input prompt and the expected output,
 
 Here are some tips to help you optimize your prompts and outputs:
 
-- **Be clear but concise**: Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [claude lacks context](build-with-claude/prompt-engineering/be-clear-and-direct.md) on your use case and may not make the intended leaps of logic if instructions are unclear.
-- **Ask for shorter responses:**: Ask Claude directly to be concise. The Claude 3 family of models has improved steerability over previous generations. If Claude is outputting unwanted length, ask Claude to [curb its chattiness](build-with-claude/prompt-engineering/be-clear-and-direct.md).
+- **Be clear but concise**: Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [claude lacks context](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) on your use case and may not make the intended leaps of logic if instructions are unclear.
+- **Ask for shorter responses:**: Ask Claude directly to be concise. The Claude 3 family of models has improved steerability over previous generations. If Claude is outputting unwanted length, ask Claude to [curb its chattiness](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
   Due to how LLMs count [tokens](about-claude/glossary.md) instead of words, asking for an exact word count or a word count limit is not as effective a strategy as asking for paragraph or sentence count limits.
 - **Set appropriate output limits**: Use the `max_tokens` parameter to set a hard limit on the maximum length of the generated response. This prevents Claude from generating overly long outputs.

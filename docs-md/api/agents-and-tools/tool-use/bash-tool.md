@@ -2,7 +2,7 @@
 
 Copy page
 
-The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation.
+The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
 
 ## Overview
 
@@ -235,6 +235,15 @@ See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete prici
 - Running tests: `pytest && coverage report`
 - Building projects: `npm install && npm run build`
 - Git operations: `git status && git add . && git commit -m "message"`
+
+#### Git-based checkpointing
+
+Git serves as a structured recovery mechanism in long-running agent workflows, not just a way to save changes:
+
+- **Capture a baseline:** Before any agent work begins, commit the current state. This is the known-good starting point.
+- **Commit per feature:** Each completed feature gets its own commit. These serve as rollback points if something goes wrong later.
+- **Reconstruct state at session start:** Read `git log` alongside a progress file to understand what has already been done and what comes next.
+- **Revert on failure:** If work goes sideways, `git checkout` reverts to the last good commit instead of trying to debug a broken state.
 
 ### File operations
 

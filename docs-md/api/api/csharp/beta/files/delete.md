@@ -90,7 +90,25 @@ var deletedFile = await client.Beta.Files.Delete(parameters);
 Console.WriteLine(deletedFile);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "type": "file_deleted"
+}
+```
 
 ---
 

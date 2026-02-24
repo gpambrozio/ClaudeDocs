@@ -15,7 +15,7 @@ Ensure your prompt includes at least 1-2 dynamic variables using the double brac
 
 ## Generating Prompts
 
-The Console offers a built-in [prompt generator](build-with-claude/prompt-engineering/prompt-generator.md) powered by Claude Opus 4.1:
+The Console offers a built-in [prompt generator](build-with-claude/prompt-engineering/prompting-tools.md) powered by Claude Opus 4.1:
 
 1. 1
 

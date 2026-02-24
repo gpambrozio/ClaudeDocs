@@ -1,30 +1,28 @@
-# Get a Model
+# Upload File
 
 Copy page
 
 C#
 
-# Get a Model
+# Upload File
 
-[ModelInfo](api/models.md) Models.Retrieve(ModelRetrieveParamsparameters, CancellationTokencancellationToken = default)
+[FileMetadata](api/beta.md) Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)
 
-GET/v1/models/{model\_id}
+POST/v1/files
 
-Get a specific model.
-
-The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
+Upload File
 
 ##### ParametersExpand Collapse
 
-ModelRetrieveParams parameters
+FileUploadParams parameters
 
-required string modelID
+required string file
 
-Model identifier or alias.
+Body param: The file to upload
 
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
-Optional header to specify the beta version(s) you want to use.
+Header param: Optional header to specify the beta version(s) you want to use.
 
 "message-batches-2024-09-24"MessageBatches2024\_09\_24
 
@@ -68,46 +66,63 @@ Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-class ModelInfo:
+class FileMetadata:
 
 required string ID
 
-Unique model identifier.
+Unique object identifier.
+
+The format and length of IDs may change over time.
 
 required DateTimeOffset CreatedAt
 
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+RFC 3339 datetime string representing when the file was created.
 
-required string DisplayName
+required string Filename
 
-A human-readable name for the model.
+Original filename of the uploaded file.
 
-JsonElement Type "model"constant
+required string MimeType
+
+MIME type of the file.
+
+required Long SizeBytes
+
+Size of the file in bytes.
+
+JsonElement Type "file"constant
 
 Object type.
 
-For Models, this is always `"model"`.
+For files, this is always `"file"`.
 
-Get a Model
+Boolean Downloadable
+
+Whether the file can be downloaded.
+
+Upload File
 
 C#
 
 ```shiki
-ModelRetrieveParams parameters = new() { ModelID = "model_id" };
+FileUploadParams parameters = new() { File = Encoding.UTF8.GetBytes("text") };
 
-var modelInfo = await client.Models.Retrieve(parameters);
+var fileMetadata = await client.Beta.Files.Upload(parameters);
 
-Console.WriteLine(modelInfo);
+Console.WriteLine(fileMetadata);
 ```
 
 Response 200
 
 ```shiki
 {
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
 }
 ```
 
@@ -117,10 +132,13 @@ Response 200
 
 ```shiki
 {
-  "id": "claude-opus-4-6",
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "type": "model"
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "x",
+  "mime_type": "x",
+  "size_bytes": 0,
+  "type": "file",
+  "downloadable": true
 }
 ```
 

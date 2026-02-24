@@ -29,22 +29,22 @@ The `/terminal-setup` command is only visible in terminals that require manual c
 
 ### [​](#notification-setup) Notification setup
 
-Never miss when Claude completes a task with proper notification configuration:
+When Claude finishes working and is waiting for your input, it fires a notification event. You can surface this event as a desktop notification through your terminal or run custom logic with [notification hooks](hooks.md).
 
-#### [​](#iterm-2-system-notifications) iTerm 2 system notifications
+#### [​](#terminal-notifications) Terminal notifications
 
-For iTerm 2 alerts when tasks complete:
+Kitty and Ghostty support desktop notifications without additional configuration. iTerm 2 requires setup:
 
-1. Open iTerm 2 Preferences
-2. Navigate to Profiles → Terminal
-3. Enable “Silence bell” and Filter Alerts → “Send escape sequence-generated alerts”
-4. Set your preferred notification delay
+1. Open iTerm 2 Settings → Profiles → Terminal
+2. Enable “Notification Center Alerts”
+3. Click “Filter Alerts” and check “Send escape sequence-generated alerts”
 
-Note that these notifications are specific to iTerm 2 and not available in the default macOS Terminal.
+If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.
+Other terminals, including the default macOS Terminal, do not support native notifications. Use [notification hooks](hooks.md) instead.
 
-#### [​](#custom-notification-hooks) Custom notification hooks
+#### [​](#notification-hooks) Notification hooks
 
-For advanced notification handling, you can create [notification hooks](hooks.md) to run your own logic.
+To add custom behavior when notifications fire, such as playing a sound or sending a message, configure a [notification hook](hooks.md). Hooks run alongside terminal notifications, not as a replacement.
 
 ### [​](#handling-large-inputs) Handling large inputs
 

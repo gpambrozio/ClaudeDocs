@@ -103,7 +103,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#4033212c253300212e3428322f3029236e232f2d).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#7a091b161f093a1b140e1208150a131954191517).
 
 ### Streaming thinking
 
@@ -571,7 +571,7 @@ The billed output token count will **not** match the visible token count in the 
 
 - **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning like math, coding, and analysis.
 - **Context handling:** You do not need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they are not included when calculating context usage.
-- **Prompt engineering:** Review the [extended thinking prompting tips](build-with-claude/prompt-engineering/extended-thinking-tips.md) if you want to maximize Claude's thinking capabilities.
+- **Prompt engineering:** Review our [extended thinking prompting tips](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) if you want to maximize Claude's thinking capabilities.
 
 ## Next steps
 
@@ -579,7 +579,7 @@ The billed output token count will **not** match the visible token count in the 
 
 Explore practical examples of thinking in the cookbook.](https://platform.claude.com/cookbook/extended-thinking-extended-thinking)[Extended thinking prompting tips
 
-Learn prompt engineering best practices for extended thinking.](build-with-claude/prompt-engineering/extended-thinking-tips.md)
+Learn prompt engineering best practices for extended thinking.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 
 Was this page helpful?
 

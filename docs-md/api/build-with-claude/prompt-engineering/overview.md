@@ -2,8 +2,6 @@
 
 Copy page
 
-While these tips apply broadly to all Claude models, you can find prompting tips specific to extended thinking models [here](build-with-claude/prompt-engineering/extended-thinking-tips.md).
-
 ## Before prompt engineering
 
 This guide assumes that you have:
@@ -16,7 +14,9 @@ If not, we highly suggest you spend time establishing that first. Check out [Def
 
 [Prompt generator
 
-Don't have a first draft prompt? Try the prompt generator in the Claude Console!](/dashboard)
+Don't have a first draft prompt? Try the prompt generator in the Claude Console!](/dashboard)[Prompting best practices
+
+For model-specific tuning guidance for Claude's latest models, start here.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 
 ---
 
@@ -25,22 +25,13 @@ Don't have a first draft prompt? Try the prompt generator in the Claude Console!
 This guide focuses on success criteria that are controllable through prompt engineering.
 Not every success criteria or failing eval is best solved by prompt engineering. For example, latency and cost can be sometimes more easily improved by selecting a different model.
 
-### Prompting vs. finetuning
-
 ---
 
 ## How to prompt engineer
 
-The prompt engineering pages in this section have been organized from most broadly effective techniques to more specialized techniques. When troubleshooting performance, we suggest you try these techniques in order, although the actual impact of each technique will depend on your use case.
+All prompting techniques — from clarity and examples to XML structuring, role prompting, thinking, and prompt chaining — are covered in [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md). That's the living reference; start there.
 
-1. [Prompt generator](build-with-claude/prompt-engineering/prompt-generator.md)
-2. [Be clear and direct](build-with-claude/prompt-engineering/be-clear-and-direct.md)
-3. [Use examples (multishot)](build-with-claude/prompt-engineering/multishot-prompting.md)
-4. [Let Claude think (chain of thought)](build-with-claude/prompt-engineering/chain-of-thought.md)
-5. [Use XML tags](build-with-claude/prompt-engineering/use-xml-tags.md)
-6. [Give Claude a role (system prompts)](build-with-claude/prompt-engineering/system-prompts.md)
-7. [Chain complex prompts](build-with-claude/prompt-engineering/chain-prompts.md)
-8. [Long context tips](build-with-claude/prompt-engineering/long-context-tips.md)
+The [Claude Console](/dashboard) also offers [prompting tools](build-with-claude/prompt-engineering/prompting-tools.md)—prompt generator, templates and variables, and prompt improver—to help you build and refine prompts quickly.
 
 ---
 

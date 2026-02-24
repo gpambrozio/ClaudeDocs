@@ -94,7 +94,25 @@ var skill = await client.Beta.Skills.Delete(parameters);
 Console.WriteLine(skill);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
+```
 
 ---
 

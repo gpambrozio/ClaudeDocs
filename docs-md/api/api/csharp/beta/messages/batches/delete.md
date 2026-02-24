@@ -94,7 +94,25 @@ var betaDeletedMessageBatch = await client.Beta.Messages.Batches.Delete(paramete
 Console.WriteLine(betaDeletedMessageBatch);
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
 
 ---
 

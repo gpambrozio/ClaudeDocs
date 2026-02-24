@@ -144,7 +144,49 @@ await foreach (var item in page.Paginate())
 }
 ```
 
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "x",
+      "mime_type": "x",
+      "size_bytes": 0,
+      "type": "file",
+      "downloadable": true
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "x",
+      "mime_type": "x",
+      "size_bytes": 0,
+      "type": "file",
+      "downloadable": true
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
 
 ---
 
