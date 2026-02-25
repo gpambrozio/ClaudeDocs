@@ -7,6 +7,7 @@ This quickstart guide will have you using AI-powered coding assistance in just a
 Make sure you have:
 
 - A terminal or command prompt open
+  - If you’ve never used the terminal before, check out the [terminal guide](terminal-guide.md)
 - A code project to work with
 - A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
 
@@ -55,6 +56,8 @@ Ask AI
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
+
+**Windows requires [Git for Windows](https://git-scm.com/downloads/win).** Install it first if you don’t have it.
 
 Native installations automatically update in the background to keep you on the latest version.
 

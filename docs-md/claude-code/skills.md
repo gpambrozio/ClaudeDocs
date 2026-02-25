@@ -92,7 +92,7 @@ Where you store a skill determines who can use it:
 
 | Location | Path | Applies to |
 | --- | --- | --- |
-| Enterprise | See [managed settings](permissions.md) | All users in your organization |
+| Enterprise | See [managed settings](settings.md) | All users in your organization |
 | Personal | `~/.claude/skills/<skill-name>/SKILL.md` | All your projects |
 | Project | `.claude/skills/<skill-name>/SKILL.md` | This project only |
 | Plugin | `<plugin>/skills/<skill-name>/SKILL.md` | Where plugin is enabled |
@@ -541,7 +541,7 @@ Skills can be distributed at different scopes depending on your audience:
 
 - **Project skills**: Commit `.claude/skills/` to version control
 - **Plugins**: Create a `skills/` directory in your [plugin](plugins.md)
-- **Managed**: Deploy organization-wide through [managed settings](permissions.md)
+- **Managed**: Deploy organization-wide through [managed settings](settings.md)
 
 ### [​](#generate-visual-output) Generate visual output
 

@@ -132,14 +132,14 @@ Read and Edit rules both follow the [gitignore](https://git-scm.com/docs/gitigno
 | --- | --- | --- | --- |
 | `//path` | **Absolute** path from filesystem root | `Read(//Users/alice/secrets/**)` | `/Users/alice/secrets/**` |
 | `~/path` | Path from **home** directory | `Read(~/Documents/*.pdf)` | `/Users/alice/Documents/*.pdf` |
-| `/path` | Path **relative to settings file** | `Edit(/src/**/*.ts)` | `<settings file path>/src/**/*.ts` |
+| `/path` | Path **relative to project root** | `Edit(/src/**/*.ts)` | `<project root>/src/**/*.ts` |
 | `path` or `./path` | Path **relative to current directory** | `Read(*.env)` | `<cwd>/*.env` |
 
-A pattern like `/Users/alice/file` is NOT an absolute path. It’s relative to your settings file. Use `//Users/alice/file` for absolute paths.
+A pattern like `/Users/alice/file` is NOT an absolute path. It’s relative to the project root. Use `//Users/alice/file` for absolute paths.
 
 Examples:
 
-- `Edit(/docs/**)`: edits in `<project>/docs/` (NOT `/docs/`)
+- `Edit(/docs/**)`: edits in `<project>/docs/` (NOT `/docs/` and NOT `<project>/.claude/docs/`)
 - `Read(~/.zshrc)`: reads your home directory’s `.zshrc`
 - `Edit(//tmp/scratch.txt)`: edits the absolute path `/tmp/scratch.txt`
 - `Read(src/**)`: reads from `<current-directory>/src/`
@@ -210,14 +210,7 @@ Use both for defense-in-depth:
 
 ## [​](#managed-settings) Managed settings
 
-For organizations that need centralized control over Claude Code configuration, administrators can deploy `managed-settings.json` files to system directories. These policy files follow the same format as regular settings files and cannot be overridden by user or project settings. For organizations without device management infrastructure, [server-managed settings](server-managed-settings.md) provide an alternative that delivers configurations from Anthropic’s servers.
-**Managed settings file locations**:
-
-- **macOS**: `/Library/Application Support/ClaudeCode/managed-settings.json`
-- **Linux and WSL**: `/etc/claude-code/managed-settings.json`
-- **Windows**: `C:\Program Files\ClaudeCode\managed-settings.json`
-
-These are system-wide paths (not user home directories like `~/Library/...`) that require administrator privileges. They are designed to be deployed by IT administrators.
+For organizations that need centralized control over Claude Code configuration, administrators can deploy managed settings that cannot be overridden by user or project settings. These policy settings follow the same format as regular settings files and can be delivered through MDM/OS-level policies, managed settings files, or [server-managed settings](server-managed-settings.md). See [settings files](settings.md) for delivery mechanisms and file locations.
 
 ### [​](#managed-only-settings) Managed-only settings
 
@@ -228,7 +221,11 @@ Some settings are only effective in managed settings:
 | `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode and the `--dangerously-skip-permissions` flag |
 | `allowManagedPermissionRulesOnly` | When `true`, prevents user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply |
 | `allowManagedHooksOnly` | When `true`, prevents loading of user, project, and plugin hooks. Only managed hooks and SDK hooks are allowed |
+| `allowManagedMcpServersOnly` | When `true`, only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. See [Managed MCP configuration](mcp.md) |
+| `blockedMarketplaces` | Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [managed marketplace restrictions](plugin-marketplaces.md) |
+| `sandbox.network.allowManagedDomainsOnly` | When `true`, only `allowedDomains` and `WebFetch(domain:...)` allow rules from managed settings are respected. Denied domains still merge from all sources |
 | `strictKnownMarketplaces` | Controls which plugin marketplaces users can add. See [managed marketplace restrictions](plugin-marketplaces.md) |
+| `allow_remote_sessions` | When `true`, allows users to start [Remote Control](remote-control.md) and [web sessions](claude-code-on-the-web.md). Defaults to `true`. Set to `false` to prevent remote session access |
 
 ## [​](#settings-precedence) Settings precedence
 

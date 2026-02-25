@@ -263,7 +263,7 @@ When you install a plugin, you choose a **scope** that determines where the plug
 | `user` | `~/.claude/settings.json` | Personal plugins available across all projects (default) |
 | `project` | `.claude/settings.json` | Team plugins shared via version control |
 | `local` | `.claude/settings.local.json` | Project-specific plugins, gitignored |
-| `managed` | `managed-settings.json` | Managed plugins (read-only, update only) |
+| `managed` | [Managed settings](settings.md) | Managed plugins (read-only, update only) |
 
 Plugins use the same scope system as other Claude Code configurations. For installation instructions and scope flags, see [Install plugins](discover-plugins.md). For a complete explanation of scopes, see [Configuration scopes](settings.md).
 

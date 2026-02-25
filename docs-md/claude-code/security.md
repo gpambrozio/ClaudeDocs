@@ -90,6 +90,7 @@ When using [Claude Code on the web](claude-code-on-the-web.md), additional secur
 - **Automatic cleanup**: Cloud environments are automatically terminated after session completion
 
 For more details on cloud execution, see [Claude Code on the web](claude-code-on-the-web.md).
+[Remote Control](remote-control.md) sessions work differently: the web interface connects to a Claude Code process running on your local machine. All code execution and file access stays local, and the same data that flows during any local Claude Code session travels through the Anthropic API over TLS. No cloud VMs or sandboxing are involved. The connection uses multiple short-lived, narrowly scoped credentials, each limited to a specific purpose and expiring independently, to limit the blast radius of any single compromised credential.
 
 ## [​](#security-best-practices) Security best practices
 
@@ -102,7 +103,7 @@ For more details on cloud execution, see [Claude Code on the web](claude-code-on
 
 ### [​](#team-security) Team security
 
-- Use [managed settings](permissions.md) to enforce organizational standards
+- Use [managed settings](settings.md) to enforce organizational standards
 - Share approved permission configurations through version control
 - Train team members on security best practices
 - Monitor Claude Code usage through [OpenTelemetry metrics](monitoring-usage.md)

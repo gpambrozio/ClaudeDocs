@@ -360,7 +360,7 @@ Managed settings override project and user settings and apply when Desktop spawn
 
 | Key | Description |
 | --- | --- |
-| `disableBypassPermissionsMode` | set to `"disable"` to prevent users from enabling Bypass permissions mode. See [permissions](permissions.md). |
+| `disableBypassPermissionsMode` | set to `"disable"` to prevent users from enabling Bypass permissions mode. See [managed settings](permissions.md). |
 
 For the complete list of managed-only settings including `allowManagedPermissionRulesOnly` and `allowManagedHooksOnly`, see [managed-only settings](permissions.md).
 Remote managed settings uploaded through the admin console currently apply to CLI and IDE sessions only. For Desktop-specific restrictions, use the admin console controls above.

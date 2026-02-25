@@ -10,7 +10,7 @@ Claude Code uses a **scope system** to determine where configurations apply and 
 
 | Scope | Location | Who it affects | Shared with team? |
 | --- | --- | --- | --- |
-| **Managed** | System-level `managed-settings.json` | All users on the machine | Yes (deployed by IT) |
+| **Managed** | Server-managed settings, plist / registry, or system-level `managed-settings.json` | All users on the machine | Yes (deployed by IT) |
 | **User** | `~/.claude/` directory | You, across all projects | No |
 | **Project** | `.claude/` in repository | All collaborators on this repository | Yes (committed to git) |
 | **Local** | `.claude/*.local.*` files | You, in this repository only | No (gitignored) |
@@ -77,14 +77,16 @@ Code through hierarchical settings:
 - **Project settings** are saved in your project directory:
   - `.claude/settings.json` for settings that are checked into source control and shared with your team
   - `.claude/settings.local.json` for settings that are not checked in, useful for personal preferences and experimentation. Claude Code will configure git to ignore `.claude/settings.local.json` when it is created.
-- **Managed settings**: For organizations that need centralized control, Claude Code supports `managed-settings.json` and `managed-mcp.json` files that can be deployed to system directories:
-  - macOS: `/Library/Application Support/ClaudeCode/`
-  - Linux and WSL: `/etc/claude-code/`
-  - Windows: `C:\Program Files\ClaudeCode\`
-
-  These are system-wide paths (not user home directories like `~/Library/...`) that require administrator privileges. They are designed to be deployed by IT administrators.
-
-  See [Managed settings](permissions.md) and [Managed MCP configuration](mcp.md) for details. For organizations without device management infrastructure, see [server-managed settings](server-managed-settings.md).
+- **Managed settings**: For organizations that need centralized control, Claude Code supports multiple delivery mechanisms for managed settings. All use the same JSON format and cannot be overridden by user or project settings:
+  - **Server-managed settings**: delivered from Anthropic’s servers via the Claude.ai admin console. See [server-managed settings](server-managed-settings.md).
+  - **MDM/OS-level policies**: delivered through native device management on macOS and Windows:
+    - macOS: `com.anthropic.claudecode` managed preferences domain (deployed via configuration profiles in Jamf, Kandji, or other MDM tools)
+    - Windows: `HKLM\SOFTWARE\Policies\ClaudeCode` registry key with a `Settings` value (REG\_SZ or REG\_EXPAND\_SZ) containing JSON (deployed via Group Policy or Intune)
+    - Windows (user-level): `HKCU\SOFTWARE\Policies\ClaudeCode` (lowest policy priority, only used when no admin-level source exists)
+  - **File-based**: `managed-settings.json` and `managed-mcp.json` deployed to system directories:
+    - macOS: `/Library/Application Support/ClaudeCode/`
+    - Linux and WSL: `/etc/claude-code/`
+    - Windows: `C:\Program Files\ClaudeCode\`See [managed settings](permissions.md) and [Managed MCP configuration](mcp.md) for details.
 
   Managed deployments can also restrict **plugin marketplace additions** using
   `strictKnownMarketplaces`. For more information, see [Managed marketplace restrictions](plugin-marketplaces.md).
@@ -147,6 +149,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `disableAllHooks` | Disable all [hooks](hooks.md) and any custom [status line](statusline.md) | `true` |
 | `allowManagedHooksOnly` | (Managed settings only) Prevent loading of user, project, and plugin hooks. Only allows managed hooks and SDK hooks. See [Hook configuration](#hook-configuration) | `true` |
 | `allowManagedPermissionRulesOnly` | (Managed settings only) Prevent user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply. See [Managed-only settings](permissions.md) | `true` |
+| `allowManagedMcpServersOnly` | (Managed settings only) Only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. Users can still add MCP servers, but only the admin-defined allowlist applies. See [Managed MCP configuration](mcp.md) | `true` |
 | `model` | Override the default model to use for Claude Code | `"claude-sonnet-4-6"` |
 | `availableModels` | Restrict which models users can select via `/model`, `--model`, Config tool, or `ANTHROPIC_MODEL`. Does not affect the Default option. See [Restrict model selection](model-config.md) | `["sonnet", "haiku"]` |
 | `otelHeadersHelper` | Script to generate dynamic OpenTelemetry headers. Runs at startup and periodically (see [Dynamic headers](monitoring-usage.md)) | `/bin/generate_otel_headers.sh` |
@@ -162,6 +165,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `allowedMcpServers` | When set in managed-settings.json, allowlist of MCP servers users can configure. Undefined = no restrictions, empty array = lockdown. Applies to all scopes. Denylist takes precedence. See [Managed MCP configuration](mcp.md) | `[{ "serverName": "github" }]` |
 | `deniedMcpServers` | When set in managed-settings.json, denylist of MCP servers that are explicitly blocked. Applies to all scopes including managed servers. Denylist takes precedence over allowlist. See [Managed MCP configuration](mcp.md) | `[{ "serverName": "filesystem" }]` |
 | `strictKnownMarketplaces` | When set in managed-settings.json, allowlist of plugin marketplaces users can add. Undefined = no restrictions, empty array = lockdown. Applies to marketplace additions only. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "acme-corp/plugins" }]` |
+| `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
 | `awsAuthRefresh` | Custom script that modifies the `.aws` directory (see [advanced credential configuration](amazon-bedrock.md)) | `aws sso login --profile myprofile` |
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `alwaysThinkingEnabled` | Enable [extended thinking](common-workflows.md) by default for all sessions. Typically configured via the `/config` command rather than editing directly | `true` |
@@ -216,6 +220,7 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 | `network.allowAllUnixSockets` | Allow all Unix socket connections in sandbox. Default: false | `true` |
 | `network.allowLocalBinding` | Allow binding to localhost ports (macOS only). Default: false | `true` |
 | `network.allowedDomains` | Array of domains to allow for outbound network traffic. Supports wildcards (e.g., `*.example.com`). | `["github.com", "*.npmjs.org"]` |
+| `network.allowManagedDomainsOnly` | (Managed settings only) Only `allowedDomains` and `WebFetch(domain:...)` allow rules from managed settings are respected. Domains from user, project, and local settings are ignored. Denied domains are still respected from all sources. Default: false | `true` |
 | `network.httpProxyPort` | HTTP proxy port used if you wish to bring your own proxy. If not specified, Claude will run its own proxy. | `8080` |
 | `network.socksProxyPort` | SOCKS5 proxy port used if you wish to bring your own proxy. If not specified, Claude will run its own proxy. | `8081` |
 | `enableWeakerNestedSandbox` | Enable weaker sandbox for unprivileged Docker environments (Linux and WSL2 only). **Reduces security.** Default: false | `true` |
@@ -400,9 +405,10 @@ Ask AI
 
 Settings apply in order of precedence. From highest to lowest:
 
-1. **Managed settings** ([`managed-settings.json`](permissions.md) or [server-managed settings](server-managed-settings.md))
-   - Policies deployed by IT/DevOps to system directories, or delivered from Anthropic’s servers for Claude for Enterprise customers
+1. **Managed settings** ([server-managed](server-managed-settings.md), [MDM/OS-level policies](#configuration-scopes), or [managed settings](settings.md))
+   - Policies deployed by IT through server delivery, MDM configuration profiles, registry policies, or managed settings files
    - Cannot be overridden by user or project settings
+   - Within the managed tier, precedence is: server-managed > MDM/OS-level policies > `managed-settings.json` > HKCU registry (Windows only). Only one managed source is used; sources do not merge.
 2. **Command line arguments**
    - Temporary overrides for a specific session
 3. **Local project settings** (`.claude/settings.local.json`)
@@ -414,6 +420,10 @@ Settings apply in order of precedence. From highest to lowest:
 
 This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience.
 For example, if your user settings allow `Bash(npm run *)` but a project’s shared settings deny it, the project setting takes precedence and the command is blocked.
+
+### [​](#verify-active-settings) Verify active settings
+
+Run `/status` inside Claude Code to see which settings sources are active and where they come from. The output shows each configuration layer (managed, user, project) along with its origin, such as `Enterprise managed settings (remote)`, `Enterprise managed settings (plist)`, `Enterprise managed settings (HKLM)`, or `Enterprise managed settings (file)`. If a settings file contains errors, `/status` reports the issue so you can fix it.
 
 ### [​](#key-points-about-the-configuration-system) Key points about the configuration system
 
@@ -566,7 +576,7 @@ Ask AI
 
 #### [​](#strictknownmarketplaces) `strictKnownMarketplaces`
 
-**Managed settings only**: Controls which plugin marketplaces users are allowed to add. This setting can only be configured in [`managed-settings.json`](permissions.md) and provides administrators with strict control over marketplace sources.
+**Managed settings only**: Controls which plugin marketplaces users are allowed to add. This setting can only be configured in [managed settings](settings.md) and provides administrators with strict control over marketplace sources.
 **Managed settings file locations**:
 
 - **macOS**: `/Library/Application Support/ClaudeCode/managed-settings.json`
@@ -890,6 +900,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `BASH_MAX_TIMEOUT_MS` | Maximum timeout the model can set for long-running bash commands |  |
 | `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` | Set the percentage of context capacity (1-100) at which auto-compaction triggers. By default, auto-compaction triggers at approximately 95% capacity. Use lower values like `50` to compact earlier. Values above the default threshold have no effect. Applies to both main conversations and subagents. This percentage aligns with the `context_window.used_percentage` field available in [status line](statusline.md) |  |
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Return to the original working directory after each Bash command |  |
+| `CLAUDE_CODE_ACCOUNT_UUID` | Account UUID for the authenticated user. Used by SDK callers to provide account information synchronously, avoiding a race condition where early telemetry events lack account metadata. Requires `CLAUDE_CODE_USER_EMAIL` and `CLAUDE_CODE_ORGANIZATION_UUID` to also be set |  |
 | `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD` | Set to `1` to load CLAUDE.md files from directories specified with `--add-dir`. By default, additional directories do not load memory files | `1` |
 | `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` | Interval in milliseconds at which credentials should be refreshed (when using `apiKeyHelper`) |  |
 | `CLAUDE_CODE_CLIENT_CERT` | Path to client certificate file for mTLS authentication |  |
@@ -912,8 +923,10 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_HIDE_ACCOUNT_INFO` | Set to `1` to hide your email address and organization name from the Claude Code UI. Useful when streaming or recording |  |
 | `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL` | Skip auto-installation of IDE extensions |  |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Set the maximum number of output tokens for most requests. Default: 32,000. Maximum: 64,000. Increasing this value reduces the effective context window available before [auto-compaction](costs.md) triggers. |  |
+| `CLAUDE_CODE_ORGANIZATION_UUID` | Organization UUID for the authenticated user. Used by SDK callers to provide account information synchronously. Requires `CLAUDE_CODE_ACCOUNT_UUID` and `CLAUDE_CODE_USER_EMAIL` to also be set |  |
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic OpenTelemetry headers in milliseconds (default: 1740000 / 29 minutes). See [Dynamic headers](monitoring-usage.md) |  |
 | `CLAUDE_CODE_PLAN_MODE_REQUIRED` | Auto-set to `true` on [agent team](agent-teams.md) teammates that require plan approval. Read-only: set by Claude Code when spawning teammates. See [require plan approval](agent-teams.md) |  |
+| `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS` | Timeout in milliseconds for git operations when installing or updating plugins (default: 120000). Increase this value for large repositories or slow network connections. See [Git operations time out](plugin-marketplaces.md) |  |
 | `CLAUDE_CODE_PROXY_RESOLVES_HOSTS` | Set to `true` to allow the proxy to perform DNS resolution instead of the caller. Opt-in for environments where the proxy should handle hostname resolution |  |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |  |
 | `CLAUDE_CODE_SHELL_PREFIX` | Command prefix to wrap all bash commands (for example, for logging or auditing). Example: `/path/to/logger.sh` will execute `/path/to/logger.sh <command>` |  |
@@ -925,6 +938,7 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_TASK_LIST_ID` | Share a task list across sessions. Set the same ID in multiple Claude Code instances to coordinate on a shared task list. See [Task list](interactive-mode.md) |  |
 | `CLAUDE_CODE_TEAM_NAME` | Name of the agent team this teammate belongs to. Set automatically on [agent team](agent-teams.md) members |  |
 | `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |  |
+| `CLAUDE_CODE_USER_EMAIL` | Email address for the authenticated user. Used by SDK callers to provide account information synchronously. Requires `CLAUDE_CODE_ACCOUNT_UUID` and `CLAUDE_CODE_ORGANIZATION_UUID` to also be set |  |
 | `CLAUDE_CODE_USE_BEDROCK` | Use [Bedrock](amazon-bedrock.md) |  |
 | `CLAUDE_CODE_USE_FOUNDRY` | Use [Microsoft Foundry](microsoft-foundry.md) |  |
 | `CLAUDE_CODE_USE_VERTEX` | Use [Vertex](google-vertex-ai.md) |  |

@@ -1,8 +1,26 @@
-## [​](#authentication-methods) Authentication methods
+# Authentication
 
-Setting up Claude Code requires access to Anthropic models. For teams, you can set up Claude Code access in one of these ways:
+Claude Code supports multiple authentication methods depending on your setup. Individual users can log in with a Claude.ai account, while teams can use Claude for Teams or Enterprise, the Claude Console, or a cloud provider like Amazon Bedrock, Google Vertex AI, or Microsoft Foundry.
 
-- [Claude for Teams or Enterprise](#claude-for-teams-or-enterprise) (recommended)
+## [​](#log-in-to-claude-code) Log in to Claude Code
+
+After [installing Claude Code](setup.md), run `claude` in your terminal. On first launch, Claude Code opens a browser window for you to log in.
+If the browser doesn’t open automatically, press `c` to copy the login URL to your clipboard, then paste it into your browser.
+You can authenticate with any of these account types:
+
+- **Claude Pro or Max subscription**: log in with your Claude.ai account. Subscribe at [claude.com/pricing](https://claude.com/pricing).
+- **Claude for Teams or Enterprise**: log in with the Claude.ai account your team admin invited you to.
+- **Claude Console**: log in with your Console credentials. Your admin must have [invited you](#claude-console-authentication) first.
+- **Cloud providers**: if your organization uses [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md), set the required environment variables before running `claude`. No browser login is needed.
+
+To log out and re-authenticate, type `/logout` at the Claude Code prompt.
+If you’re having trouble logging in, see [authentication troubleshooting](troubleshooting.md).
+
+## [​](#set-up-team-authentication) Set up team authentication
+
+For teams and organizations, you can configure Claude Code access in one of these ways:
+
+- [Claude for Teams or Enterprise](#claude-for-teams-or-enterprise), recommended for most teams
 - [Claude Console](#claude-console-authentication)
 - [Amazon Bedrock](amazon-bedrock.md)
 - [Google Vertex AI](google-vertex-ai.md)
@@ -49,7 +67,7 @@ Add users
 
 You can add users through either method:
 
-- Bulk invite users from within the Console (Console -> Settings -> Members -> Invite)
+- Bulk invite users from within the Console: Settings -> Members -> Invite
 - [Set up SSO](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso)
 
 3
@@ -74,7 +92,7 @@ Each invited user needs to:
 
 ### [​](#cloud-provider-authentication) Cloud provider authentication
 
-For teams using Amazon Bedrock, Google Vertex AI, or Microsoft Azure:
+For teams using Amazon Bedrock, Google Vertex AI, or Microsoft Foundry:
 
 1
 
@@ -98,16 +116,10 @@ Users can [install Claude Code](setup.md).
 
 Claude Code securely manages your authentication credentials:
 
-- **Storage location**: on macOS, API keys, OAuth tokens, and other credentials are stored in the encrypted macOS Keychain.
+- **Storage location**: on macOS, credentials are stored in the encrypted macOS Keychain.
 - **Supported authentication types**: Claude.ai credentials, Claude API credentials, Azure Auth, Bedrock Auth, and Vertex Auth.
 - **Custom credential scripts**: the [`apiKeyHelper`](settings.md) setting can be configured to run a shell script that returns an API key.
 - **Refresh intervals**: by default, `apiKeyHelper` is called after 5 minutes or on HTTP 401 response. Set `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` environment variable for custom refresh intervals.
-
-## [​](#see-also) See also
-
-- [Permissions](permissions.md): configure what Claude Code can access and do
-- [Settings](settings.md): complete configuration reference
-- [Security](security.md): security safeguards and best practices
 
 ---
 
