@@ -78,21 +78,21 @@ JSON
 
 ```shiki
 {
-    "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
-    "type": "message",
-    "role": "assistant",
-    "content": [
-        {
-            "type": "text",
-            "text": "Sure, I'd be happy to provide..."
-        }
-    ],
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 30,
-      "output_tokens": 309
+  "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "Sure, I'd be happy to provide..."
     }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 30,
+    "output_tokens": 309
+  }
 }
 ```
 

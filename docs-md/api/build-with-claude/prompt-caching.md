@@ -142,9 +142,9 @@ With automatic caching, the cache point moves forward automatically as conversat
 
 | Request | Content | Cache behavior |
 | --- | --- | --- |
-| Request 1 | System + User  + Asst  + **User**  ◀ cache | Everything written to cache |
-| Request 2 | System + User  + Asst  + User  + Asst  + **User**  ◀ cache | System through User  read from cache; Asst  + User  written to cache |
-| Request 3 | System + User  + Asst  + User  + Asst  + User  + Asst  + **User**  ◀ cache | System through User  read from cache; Asst  + User  written to cache |
+| Request 1 | System   + User(1) + Asst(1)   + **User(2)** ◀ cache | Everything written to cache |
+| Request 2 | System   + User(1) + Asst(1)   + User(2) + Asst(2)   + **User(3)** ◀ cache | System through User(2) read from cache;   Asst(2) + User(3) written to cache |
+| Request 3 | System   + User(1) + Asst(1)   + User(2) + Asst(2)   + User(3) + Asst(3)   + **User(4)** ◀ cache | System through User(3) read from cache;   Asst(3) + User(4) written to cache |
 
 The cache breakpoint automatically moves to the last cacheable block in each request, so you don't need to update any `cache_control` markers as the conversation grows.
 
@@ -435,8 +435,8 @@ To use the extended cache, include `ttl` in the `cache_control` definition like 
 
 ```shiki
 "cache_control": {
-    "type": "ephemeral",
-    "ttl": "5m" | "1h"
+  "type": "ephemeral",
+  "ttl": "1h"
 }
 ```
 
@@ -444,17 +444,17 @@ The response will include detailed cache information like the following:
 
 ```shiki
 {
-    "usage": {
-        "input_tokens": ...,
-        "cache_read_input_tokens": ...,
-        "cache_creation_input_tokens": ...,
-        "output_tokens": ...,
+  "usage": {
+    "input_tokens": 2048,
+    "cache_read_input_tokens": 1800,
+    "cache_creation_input_tokens": 248,
+    "output_tokens": 503,
 
-        "cache_creation": {
-            "ephemeral_5m_input_tokens": 456,
-            "ephemeral_1h_input_tokens": 100,
-        }
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 456,
+      "ephemeral_1h_input_tokens": 100
     }
+  }
 }
 ```
 

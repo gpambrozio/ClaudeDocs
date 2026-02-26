@@ -159,7 +159,7 @@ Shows directory contents or file contents with optional line ranges:
 {
   "command": "view",
   "path": "/memories",
-  "view_range": [1, 10]  // Optional: view specific lines
+  "view_range": [1, 10] // Optional: view specific lines
 }
 ```
 

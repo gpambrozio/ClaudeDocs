@@ -296,18 +296,18 @@ Compaction works well with [prompt caching](build-with-claude/prompt-caching.md)
 
 ```shiki
 {
-    "role": "assistant",
-    "content": [
-        {
-            "type": "compaction",
-            "content": "[summary text]",
-            "cache_control": {"type": "ephemeral"}
-        },
-        {
-            "type": "text",
-            "text": "Based on our conversation..."
-        }
-    ]
+  "role": "assistant",
+  "content": [
+    {
+      "type": "compaction",
+      "content": "[summary text]",
+      "cache_control": { "type": "ephemeral" }
+    },
+    {
+      "type": "text",
+      "text": "Based on our conversation..."
+    }
+  ]
 }
 ```
 

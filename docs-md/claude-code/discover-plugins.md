@@ -447,6 +447,27 @@ This is useful when you want to manage Claude Code updates manually but still re
 ## [​](#configure-team-marketplaces) Configure team marketplaces
 
 Team admins can set up automatic marketplace installation for projects by adding marketplace configuration to `.claude/settings.json`. When team members trust the repository folder, Claude Code prompts them to install these marketplaces and plugins.
+Add `extraKnownMarketplaces` to your project’s `.claude/settings.json`:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "extraKnownMarketplaces": {
+    "my-team-tools": {
+      "source": {
+        "source": "github",
+        "repo": "your-org/claude-plugins"
+      }
+    }
+  }
+}
+```
+
 For full configuration options including `extraKnownMarketplaces` and `enabledPlugins`, see [Plugin settings](settings.md).
 
 ## [​](#troubleshooting) Troubleshooting

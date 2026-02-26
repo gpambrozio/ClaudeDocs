@@ -117,9 +117,7 @@ async function runWithPlugin() {
   for await (const message of query({
     prompt: "What custom commands do you have available?",
     options: {
-      plugins: [
-        { type: "local", path: pluginPath }
-      ],
+      plugins: [{ type: "local", path: pluginPath }],
       maxTurns: 3
     }
   })) {
@@ -169,9 +167,7 @@ For detailed information on creating plugins, see:
 Load plugins during development without installing them globally:
 
 ```shiki
-plugins: [
-  { type: "local", path: "./dev-plugins/my-plugin" }
-];
+plugins: [{ type: "local", path: "./dev-plugins/my-plugin" }];
 ```
 
 ### Project-specific extensions
@@ -179,9 +175,7 @@ plugins: [
 Include plugins in your project repository for team-wide consistency:
 
 ```shiki
-plugins: [
-  { type: "local", path: "./project-plugins/team-workflows" }
-];
+plugins: [{ type: "local", path: "./project-plugins/team-workflows" }];
 ```
 
 ### Multiple plugin sources

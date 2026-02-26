@@ -336,7 +336,9 @@ For multi-select questions, join multiple labels with `", "`. For free-text inpu
 
 ```shiki
 {
-  "questions": [...],
+  "questions": [
+    // ...
+  ],
   "answers": {
     "How should I format the output?": "Summary",
     "Which sections should I include?": "Introduction, Conclusion"

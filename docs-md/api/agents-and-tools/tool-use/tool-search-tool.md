@@ -290,9 +290,7 @@ JSON
 {
   "type": "tool_result",
   "tool_use_id": "toolu_your_tool_id",
-  "content": [
-    { "type": "tool_reference", "tool_name": "discovered_tool_name" }
-  ]
+  "content": [{ "type": "tool_reference", "tool_name": "discovered_tool_name" }]
 }
 ```
 

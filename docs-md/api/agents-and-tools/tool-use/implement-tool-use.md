@@ -516,7 +516,7 @@ JSON
       "type": "tool_use",
       "id": "toolu_01A09q90qw90lq917835lq9",
       "name": "get_weather",
-      "input": {"location": "San Francisco, CA"}
+      "input": { "location": "San Francisco, CA" }
     }
   ]
 }
@@ -586,19 +586,25 @@ When you receive a tool use response for a client tool, you should:
 For example, this will cause a 400 error:
 
 ```shiki
-{"role": "user", "content": [
-  {"type": "text", "text": "Here are the results:"},  // ❌ Text before tool_result
-  {"type": "tool_result", "tool_use_id": "toolu_01", ...}
-]}
+{
+  "role": "user",
+  "content": [
+    { "type": "text", "text": "Here are the results:" }, // ❌ Text before tool_result
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ }
+  ]
+}
 ```
 
 This is correct:
 
 ```shiki
-{"role": "user", "content": [
-  {"type": "tool_result", "tool_use_id": "toolu_01", ...},
-  {"type": "text", "text": "What should I do next?"}  // ✅ Text after tool_result
-]}
+{
+  "role": "user",
+  "content": [
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ },
+    { "type": "text", "text": "What should I do next?" } // ✅ Text after tool_result
+  ]
+}
 ```
 
 If you receive an error like "tool\_use ids were found without tool\_result blocks immediately after", check that your tool results are formatted correctly.

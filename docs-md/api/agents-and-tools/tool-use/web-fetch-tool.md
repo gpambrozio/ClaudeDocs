@@ -213,7 +213,7 @@ Here's an example response structure:
             "data": "Full text content of the article..."
           },
           "title": "Article Title",
-          "citations": {"enabled": true}
+          "citations": { "enabled": true }
         },
         "retrieved_at": "2025-08-25T10:30:00Z"
       }
@@ -276,7 +276,7 @@ For PDF documents, the content will be returned as base64-encoded data:
         "media_type": "application/pdf",
         "data": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmo..."
       },
-      "citations": {"enabled": true}
+      "citations": { "enabled": true }
     },
     "retrieved_at": "2025-08-25T10:30:02Z"
   }

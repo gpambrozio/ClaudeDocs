@@ -171,7 +171,7 @@ curl https://api.anthropic.com/v1/messages \
     --data '{
         "model": "claude-opus-4-6",
         "max_tokens": 1024,
-        "messages": [...],
+        "messages": [/* ... */],
         "thinking": {
             "type": "enabled",
             "budget_tokens": 10000
@@ -200,8 +200,9 @@ The `clear_thinking_20251015` strategy supports the following configuration:
 
 **Example configurations:**
 
+Keep thinking blocks from the last 3 assistant turns:
+
 ```shiki
-// Keep thinking blocks from the last 3 assistant turns
 {
   "type": "clear_thinking_20251015",
   "keep": {
@@ -209,8 +210,11 @@ The `clear_thinking_20251015` strategy supports the following configuration:
     "value": 3
   }
 }
+```
 
-// Keep all thinking blocks (maximizes cache hits)
+Keep all thinking blocks (maximizes cache hits):
+
+```shiki
 {
   "type": "clear_thinking_20251015",
   "keep": "all"
@@ -267,27 +271,31 @@ Response
 
 ```shiki
 {
-    "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-    "type": "message",
-    "role": "assistant",
-    "content": [...],
-    "usage": {...},
-    "context_management": {
-        "applied_edits": [
-            // When using `clear_thinking_20251015`
-            {
-                "type": "clear_thinking_20251015",
-                "cleared_thinking_turns": 3,
-                "cleared_input_tokens": 15000
-            },
-            // When using `clear_tool_uses_20250919`
-            {
-                "type": "clear_tool_uses_20250919",
-                "cleared_tool_uses": 8,
-                "cleared_input_tokens": 50000
-            }
-        ]
-    }
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    // ...
+  ],
+  "usage": {
+    // ...
+  },
+  "context_management": {
+    "applied_edits": [
+      // When using `clear_thinking_20251015`
+      {
+        "type": "clear_thinking_20251015",
+        "cleared_thinking_turns": 3,
+        "cleared_input_tokens": 15000
+      },
+      // When using `clear_tool_uses_20250919`
+      {
+        "type": "clear_tool_uses_20250919",
+        "cleared_tool_uses": 8,
+        "cleared_input_tokens": 50000
+      }
+    ]
+  }
 }
 ```
 
@@ -297,17 +305,19 @@ Streaming Response
 
 ```shiki
 {
-    "type": "message_delta",
-    "delta": {
-        "stop_reason": "end_turn",
-        "stop_sequence": null
-    },
-    "usage": {
-        "output_tokens": 1024
-    },
-    "context_management": {
-        "applied_edits": [...]
-    }
+  "type": "message_delta",
+  "delta": {
+    "stop_reason": "end_turn",
+    "stop_sequence": null
+  },
+  "usage": {
+    "output_tokens": 1024
+  },
+  "context_management": {
+    "applied_edits": [
+      // ...
+    ]
+  }
 }
 ```
 
@@ -354,10 +364,10 @@ Response
 
 ```shiki
 {
-    "input_tokens": 25000,
-    "context_management": {
-        "original_input_tokens": 70000
-    }
+  "input_tokens": 25000,
+  "context_management": {
+    "original_input_tokens": 70000
+  }
 }
 ```
 
@@ -450,10 +460,16 @@ As the conversation grows, the message history accumulates:
 [
   { "role": "user", "content": "Analyze all files and write a report..." },
   { "role": "assistant", "content": "I'll help. Let me start by reading..." },
-  { "role": "user", "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }] },
+  {
+    "role": "user",
+    "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }]
+  },
   { "role": "assistant", "content": "Based on file1.txt, I see..." },
-  { "role": "user", "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }] },
-  { "role": "assistant", "content": "After analyzing file2.txt..." },
+  {
+    "role": "user",
+    "content": [{ "type": "tool_result", "tool_use_id": "...", "content": "..." }]
+  },
+  { "role": "assistant", "content": "After analyzing file2.txt..." }
   // ... 50 more exchanges like this ...
 ]
 ```

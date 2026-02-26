@@ -151,7 +151,7 @@ For PDFs and text files, use the `document` content block:
   },
   "title": "Document Title", // Optional
   "context": "Context about the document", // Optional
-  "citations": {"enabled": true} // Optional, enables citations
+  "citations": { "enabled": true } // Optional, enables citations
 }
 ```
 
@@ -283,7 +283,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#f380929f9680b3929d879b819c839a90dd909c9e) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#cfbcaea3aabc8faea1bba7bda0bfa6ace1aca0a2) if you need higher limits for your use case
 
 Was this page helpful?
 

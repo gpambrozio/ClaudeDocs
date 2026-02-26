@@ -99,7 +99,9 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 {
   "name": "query_database",
   "description": "Execute a SQL query against the database",
-  "input_schema": {...},
+  "input_schema": {
+    // ...
+  },
   "allowed_callers": ["code_execution_20260120"]
 }
 ```
@@ -123,8 +125,8 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
-  "caller": {"type": "direct"}
+  "input": { "sql": "<sql>" },
+  "caller": { "type": "direct" }
 }
 ```
 
@@ -135,7 +137,7 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   "type": "tool_use",
   "id": "toolu_xyz789",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
     "type": "code_execution_20260120",
     "tool_id": "srvtoolu_abc123"
@@ -183,7 +185,9 @@ response = client.messages.create(
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {...},
+            "input_schema": {
+                # ...
+            },
             "allowed_callers": ["code_execution_20260120"],
         },
     ],
@@ -214,7 +218,7 @@ Claude writes code that calls your tool. The API pauses and returns:
       "type": "tool_use",
       "id": "toolu_def456",
       "name": "query_database",
-      "input": {"sql": "<sql>"},
+      "input": { "sql": "<sql>" },
       "caller": {
         "type": "code_execution_20260120",
         "tool_id": "srvtoolu_abc123"
@@ -389,7 +393,7 @@ When code execution calls a tool:
   "type": "tool_use",
   "id": "toolu_abc123",
   "name": "query_database",
-  "input": {"sql": "<sql>"},
+  "input": { "sql": "<sql>" },
   "caller": {
     "type": "code_execution_20260120",
     "tool_id": "srvtoolu_xyz789"
@@ -501,21 +505,33 @@ When responding to programmatic tool calls, there are strict formatting requirem
 
 **Tool result only responses**: If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.
 
+Invalid - Cannot include text when responding to programmatic tool calls:
+
 ```shiki
-// ❌ INVALID - Cannot include text when responding to programmatic tool calls
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"},
-    {"type": "text", "text": "What should I do next?"}  // This will cause an error
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    },
+    { "type": "text", "text": "What should I do next?" }
   ]
 }
+```
 
-// ✅ VALID - Only tool results when responding to programmatic tool calls
+Valid - Only tool results when responding to programmatic tool calls:
+
+```shiki
 {
   "role": "user",
   "content": [
-    {"type": "tool_result", "tool_use_id": "toolu_01", "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"}
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01",
+      "content": "[{\"customer_id\": \"C1\", \"revenue\": 45000}]"
+    }
   ]
 }
 ```
