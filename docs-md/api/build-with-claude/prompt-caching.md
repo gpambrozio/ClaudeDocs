@@ -253,7 +253,8 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 The minimum cacheable prompt length is:
 
 - 4096 tokens for Claude Opus 4.6, Claude Opus 4.5
-- 1024 tokens for Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
+- 2048 tokens for Claude Sonnet 4.6
+- 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
 - 4096 tokens for Claude Haiku 4.5
 - 2048 tokens for Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md)) and Claude Haiku 3
 

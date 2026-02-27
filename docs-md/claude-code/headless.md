@@ -211,15 +211,10 @@ claude -p "Continue that review" --resume "$session_id"
 
 ## [​](#next-steps) Next steps
 
-[## Agent SDK quickstart
-
-Build your first agent with Python or TypeScript](agent-sdk/quickstart.md)[## CLI reference
-
-Explore all CLI flags and options](cli-reference.md)[## GitHub Actions
-
-Use the Agent SDK in GitHub workflows](github-actions.md)[## GitLab CI/CD
-
-Use the Agent SDK in GitLab pipelines](gitlab-ci-cd.md)
+- [Agent SDK quickstart](agent-sdk/quickstart.md): build your first agent with Python or TypeScript
+- [CLI reference](cli-reference.md): all CLI flags and options
+- [GitHub Actions](github-actions.md): use the Agent SDK in GitHub workflows
+- [GitLab CI/CD](gitlab-ci-cd.md): use the Agent SDK in GitLab pipelines
 
 ---
 

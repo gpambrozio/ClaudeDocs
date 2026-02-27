@@ -13,7 +13,7 @@ Claude Code on the web lets developers kick off Claude Code from the Claude app.
 - **Backend changes**: Where Claude Code can write tests and then write code to pass those tests
 
 Claude Code is also available on the Claude app for [iOS](https://apps.apple.com/us/app/claude-by-anthropic/id6473753684) and [Android](https://play.google.com/store/apps/details?id=com.anthropic.claude) for kicking off tasks on the go and monitoring work in progress.
-You can move between local and remote development: [send tasks from your terminal to run on the web](#from-terminal-to-web) with the `&` prefix, or [teleport web sessions back to your terminal](#from-web-to-terminal) to continue locally. To use the web interface while running Claude Code on your own machine instead of cloud infrastructure, see [Remote Control](remote-control.md).
+You can [kick off new tasks on the web from your terminal](#from-terminal-to-web) with `--remote`, or [teleport web sessions back to your terminal](#from-web-to-terminal) to continue locally. To use the web interface while running Claude Code on your own machine instead of cloud infrastructure, see [Remote Control](remote-control.md).
 
 ## [​](#who-can-use-claude-code-on-the-web) Who can use Claude Code on the web?
 
@@ -58,26 +58,13 @@ This lets you refine changes through multiple rounds of feedback without creatin
 
 ## [​](#moving-tasks-between-web-and-terminal) Moving tasks between web and terminal
 
-You can start tasks on the web and continue them in your terminal, or send tasks from your terminal to run on the web. Web sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude iOS app.
+You can start new tasks on the web from your terminal, or pull web sessions into your terminal to continue locally. Web sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude mobile app.
 
-Session handoff is one-way: you can pull web sessions into your terminal, but you can’t push an existing terminal session to the web. The [`&` prefix](#from-terminal-to-web) creates a *new* web session with your current conversation context.
+Session handoff is one-way: you can pull web sessions into your terminal, but you can’t push an existing terminal session to the web. The `--remote` flag creates a *new* web session for your current repository.
 
 ### [​](#from-terminal-to-web) From terminal to web
 
-Start a message with `&` inside Claude Code to send a task to run on the web:
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-& Fix the authentication bug in src/auth/login.ts
-```
-
-This creates a new web session on claude.ai with your current conversation context. The task runs in the cloud while you continue working locally. Use `/tasks` to check progress, or open the session on claude.ai or the Claude iOS app to interact directly. From there you can steer Claude, provide feedback, or answer questions just like any other conversation.
-You can also start a web session directly from the command line:
+Start a web session from the command line with the `--remote` flag:
 
 Report incorrect code
 
@@ -89,9 +76,11 @@ Ask AI
 claude --remote "Fix the authentication bug in src/auth/login.ts"
 ```
 
-#### [​](#tips-for-background-tasks) Tips for background tasks
+This creates a new web session on claude.ai. The task runs in the cloud while you continue working locally. Use `/tasks` to check progress, or open the session on claude.ai or the Claude mobile app to interact directly. From there you can steer Claude, provide feedback, or answer questions just like any other conversation.
 
-**Plan locally, execute remotely**: For complex tasks, start Claude in plan mode to collaborate on the approach before sending work to the web:
+#### [​](#tips-for-remote-tasks) Tips for remote tasks
+
+**Plan locally, execute remotely**: For complex tasks, start Claude in plan mode to collaborate on the approach, then send work to the web:
 
 Report incorrect code
 
@@ -103,7 +92,7 @@ Ask AI
 claude --permission-mode plan
 ```
 
-In plan mode, Claude can only read files and explore the codebase. Once you’re satisfied with the plan, send it to the web for autonomous execution:
+In plan mode, Claude can only read files and explore the codebase. Once you’re satisfied with the plan, start a remote session for autonomous execution:
 
 Report incorrect code
 
@@ -112,11 +101,11 @@ Copy
 Ask AI
 
 ```shiki
-& Execute the migration plan we discussed
+claude --remote "Execute the migration plan in docs/migration-plan.md"
 ```
 
 This pattern gives you control over the strategy while letting Claude execute autonomously in the cloud.
-**Run tasks in parallel**: Each `&` command creates its own web session that runs independently. You can kick off multiple tasks and they’ll all run simultaneously in separate sessions:
+**Run tasks in parallel**: Each `--remote` command creates its own web session that runs independently. You can kick off multiple tasks and they’ll all run simultaneously in separate sessions:
 
 Report incorrect code
 
@@ -125,9 +114,9 @@ Copy
 Ask AI
 
 ```shiki
-& Fix the flaky test in auth.spec.ts
-& Update the API documentation
-& Refactor the logger to use structured output
+claude --remote "Fix the flaky test in auth.spec.ts"
+claude --remote "Update the API documentation"
+claude --remote "Refactor the logger to use structured output"
 ```
 
 Monitor all sessions with `/tasks`. When a session completes, you can create a PR from the web interface or [teleport](#from-web-to-terminal) the session to your terminal to continue working.
@@ -244,7 +233,7 @@ Claude operates entirely through the terminal and CLI tools available in the env
 
 **To add a new environment:** Select the current environment to open the environment selector, and then select “Add environment”. This will open a dialog where you can specify the environment name, network access level, and any environment variables you want to set.
 **To update an existing environment:** Select the current environment, to the right of the environment name, and select the settings button. This will open a dialog where you can update the environment name, network access, and environment variables.
-**To select your default environment from the terminal:** If you have multiple environments configured, run `/remote-env` to choose which one to use when starting web sessions from your terminal with `&` or `--remote`. With a single environment, this command shows your current configuration.
+**To select your default environment from the terminal:** If you have multiple environments configured, run `/remote-env` to choose which one to use when starting web sessions from your terminal with `--remote`. With a single environment, this command shows your current configuration.
 
 Environment variables must be specified as key-value pairs, in [`.env` format](https://www.dotenv.org/). For example:
 

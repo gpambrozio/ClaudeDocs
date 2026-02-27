@@ -584,7 +584,7 @@ Run the visualization script from your project root:
 
 ```bash
 python ~/.claude/skills/codebase-visualizer/scripts/visualize.py .
-```
+```text
 
 This creates `codebase-map.html` in the current directory and opens it in your default browser.
 

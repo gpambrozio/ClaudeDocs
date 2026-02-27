@@ -1,6 +1,6 @@
 # Quickstart
 
-This quickstart guide will have you using AI-powered coding assistance in just a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
+This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
 ## [​](#before-you-begin) Before you begin
 
@@ -216,7 +216,7 @@ Ask AI
 can Claude Code work with Docker?
 ```
 
-Claude Code reads your files as needed - you don’t have to manually add context. Claude also has access to its own documentation and can answer questions about its features and capabilities.
+Claude Code reads your project files as needed. You don’t have to manually add context.
 
 ## [​](#step-5-make-your-first-code-change) Step 5: Make your first code change
 
@@ -382,7 +382,7 @@ Ask AI
 review my changes and suggest improvements
 ```
 
-**Remember**: Claude Code is your AI pair programmer. Talk to it like you would a helpful colleague - describe what you want to achieve, and it will help you get there.
+Talk to Claude like you would a helpful colleague. Describe what you want to achieve, and it will help you get there.
 
 ## [​](#essential-commands) Essential commands
 

@@ -1259,7 +1259,7 @@ HookCallback = Callable[[HookInput, str | None, HookContext], Awaitable[HookJSON
 
 Parameters:
 
-- `input`: Strongly-typed hook input with discriminated unions based on `hook_event_name` (see [Hook input types](#pretoolusehookinput))
+- `input`: Strongly-typed hook input with discriminated unions based on `hook_event_name` (see [`HookInput`](#hook-input))
 - `tool_use_id`: Optional tool use identifier (for tool-related hooks)
 - `context`: Hook context with additional information
 

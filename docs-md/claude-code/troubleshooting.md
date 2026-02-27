@@ -1168,7 +1168,7 @@ Ask AI
 function example() {
   return "hello";
 }
-```
+```text
 ```
 
 Instead of properly tagged blocks like:
@@ -1184,7 +1184,7 @@ Ask AI
 function example() {
   return "hello";
 }
-```
+```text
 ```
 
 **Solutions:**

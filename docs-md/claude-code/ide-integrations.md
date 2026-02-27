@@ -6,6 +6,8 @@ With the extension, you can review and edit Claude’s plans before accepting th
 
 ## [​](#prerequisites) Prerequisites
 
+Before installing, make sure you have:
+
 - VS Code 1.98.0 or higher
 - An Anthropic account (you’ll sign in when you first open the extension). If you’re using a third-party provider like Amazon Bedrock or Google Vertex AI, see [Use third-party providers](#use-third-party-providers) instead.
 
@@ -33,7 +35,7 @@ Open the Claude Code panel
 Throughout VS Code, the Spark icon indicates Claude Code: ![Spark icon](https://mintcdn.com/claude-code/mfM-EyoZGnQv8JTc/images/vs-code-spark-icon.svg?fit=max&auto=format&n=mfM-EyoZGnQv8JTc&q=85&s=a734d84e785140016672f08e0abb236c)The quickest way to open Claude is to click the Spark icon in the **Editor Toolbar** (top-right corner of the editor). The icon only appears when you have a file open.![VS Code editor showing the Spark icon in the Editor Toolbar](https://mintcdn.com/claude-code/mfM-EyoZGnQv8JTc/images/vs-code-editor-icon.png?fit=max&auto=format&n=mfM-EyoZGnQv8JTc&q=85&s=eb4540325d94664c51776dbbfec4cf02)Other ways to open Claude Code:
 
 - **Command Palette**: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux), type “Claude Code”, and select an option like “Open in New Tab”
-- **Status Bar**: Click **✱ Claude Code** in the bottom-right corner of the window. This works even when no file is open.
+- **Status Bar**: click **✱ Claude Code** in the bottom-right corner of the window. This works even when no file is open.
 
 When you first open the panel, a **Learn Claude Code** checklist appears. Work through each item by clicking **Show me**, or dismiss it with the X. To reopen it later, uncheck **Hide Onboarding** in VS Code settings under Extensions → Claude Code.You can drag the Claude panel to reposition it anywhere in VS Code. See [Customize your workflow](#customize-your-workflow) for details.
 
@@ -61,11 +63,11 @@ Run “Claude Code: Open Walkthrough” from the Command Palette for a guided to
 
 The prompt box supports several features:
 
-- **Permission modes**: Click the mode indicator at the bottom of the prompt box to switch modes. In normal mode, Claude asks permission before each action. In Plan mode, Claude describes what it will do and waits for approval before making changes. In auto-accept mode, Claude makes edits without asking. Set the default in VS Code settings under `claudeCode.initialPermissionMode`.
-- **Command menu**: Click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, and viewing plan usage (`/usage`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
-- **Context indicator**: The prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run `/compact` manually.
-- **Extended thinking**: Lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). See [Extended thinking](common-workflows.md) for details.
-- **Multi-line input**: Press `Shift+Enter` to add a new line without sending. This also works in the “Other” free-text input of question dialogs.
+- **Permission modes**: click the mode indicator at the bottom of the prompt box to switch modes. In normal mode, Claude asks permission before each action. In Plan mode, Claude describes what it will do and waits for approval before making changes. In auto-accept mode, Claude makes edits without asking. Set the default in VS Code settings under `claudeCode.initialPermissionMode`.
+- **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, and viewing plan usage (`/usage`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
+- **Context indicator**: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run `/compact` manually.
+- **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). See [Extended thinking](common-workflows.md) for details.
+- **Multi-line input**: press `Shift+Enter` to add a new line without sending. This also works in the “Other” free-text input of question dialogs.
 
 ### [​](#reference-files-and-folders) Reference files and folders
 
@@ -122,9 +124,9 @@ Once you’re up and running, you can reposition the Claude panel, run multiple 
 
 You can drag the Claude panel to reposition it anywhere in VS Code. Grab the panel’s tab or title bar and drag it to:
 
-- **Secondary sidebar**: The right side of the window. Keeps Claude visible while you code.
-- **Primary sidebar**: The left sidebar with icons for Explorer, Search, etc.
-- **Editor area**: Opens Claude as a tab alongside your files. Useful for side tasks.
+- **Secondary sidebar**: the right side of the window. Keeps Claude visible while you code.
+- **Primary sidebar**: the left sidebar with icons for Explorer, Search, etc.
+- **Editor area**: opens Claude as a tab alongside your files. Useful for side tasks.
 
 Use the sidebar for your main Claude session and open additional tabs for side tasks. Claude remembers your preferred location. Note that the Spark icon only appears in the Activity Bar when the Claude panel is docked to the left. Since Claude defaults to the right side, use the Editor Toolbar icon to open Claude.
 
@@ -154,9 +156,9 @@ In the Plugins tab:
 
 When you install a plugin, choose the installation scope:
 
-- **Install for you**: Available in all your projects (user scope)
-- **Install for this project**: Shared with project collaborators (project scope)
-- **Install locally**: Only for you, only in this repository (local scope)
+- **Install for you**: available in all your projects (user scope)
+- **Install for this project**: shared with project collaborators (project scope)
+- **Install locally**: only for you, only in this repository (local scope)
 
 ### [​](#manage-marketplaces) Manage marketplaces
 
@@ -214,8 +216,8 @@ These are VS Code commands for controlling the extension. Not all built-in Claud
 
 The extension has two types of settings:
 
-- **Extension settings** in VS Code: Control the extension’s behavior within VS Code. Open with `Cmd+,` (Mac) or `Ctrl+,` (Windows/Linux), then go to Extensions → Claude Code. You can also type `/` and select **General Config** to open settings.
-- **Claude Code settings** in `~/.claude/settings.json`: Shared between the extension and CLI. Use for allowed commands, environment variables, hooks, and MCP servers. See [Settings](settings.md) for details.
+- **Extension settings** in VS Code: control the extension’s behavior within VS Code. Open with `Cmd+,` (Mac) or `Ctrl+,` (Windows/Linux), then go to Extensions → Claude Code. You can also type `/` and select **General Config** to open settings.
+- **Claude Code settings** in `~/.claude/settings.json`: shared between the extension and CLI. Use for allowed commands, environment variables, hooks, and MCP servers. See [Settings](settings.md) for details.
 
 Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to your `settings.json` to get autocomplete and inline validation for all available settings directly in VS Code.
 

@@ -907,9 +907,11 @@ All environment variables can also be configured in [`settings.json`](#available
 | `CLAUDE_CODE_CLIENT_KEY` | Path to client private key file for mTLS authentication |  |
 | `CLAUDE_CODE_CLIENT_KEY_PASSPHRASE` | Passphrase for encrypted CLAUDE\_CODE\_CLIENT\_KEY (optional) |  |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Set to `1` to disable [1M context window](model-config.md) support. When set, 1M model variants are unavailable in the model picker. Useful for enterprise environments with compliance requirements |  |
+| `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` | Set to `1` to disable [adaptive reasoning](model-config.md) for Opus 4.6 and Sonnet 4.6. When disabled, these models fall back to the fixed thinking budget controlled by `MAX_THINKING_TOKENS` |  |
 | `CLAUDE_CODE_DISABLE_AUTO_MEMORY` | Set to `1` to disable [auto memory](memory.md). Set to `0` to force auto memory on during the gradual rollout. When disabled, Claude does not create or load auto memory files |  |
 | `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to disable all background task functionality, including the `run_in_background` parameter on Bash and subagent tools, auto-backgrounding, and the Ctrl+B shortcut |  |
 | `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to disable Anthropic API-specific `anthropic-beta` headers. Use this if experiencing issues like “Unexpected value(s) for the `anthropic-beta` header” when using an LLM gateway with third-party providers |  |
+| `CLAUDE_CODE_DISABLE_FAST_MODE` | Set to `1` to disable [fast mode](fast-mode.md) |  |
 | `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` | Set to `1` to disable the “How is Claude doing?” session quality surveys. Also disabled when using third-party providers or when telemetry is disabled. See [Session quality surveys](data-usage.md) |  |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |  |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |  |

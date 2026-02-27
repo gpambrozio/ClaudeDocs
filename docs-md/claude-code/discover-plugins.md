@@ -36,7 +36,12 @@ Ask AI
 /plugin install plugin-name@claude-plugins-official
 ```
 
-The official marketplace is maintained by Anthropic. To distribute your own plugins, [create your own marketplace](plugin-marketplaces.md) and share it with users.
+The official marketplace is maintained by Anthropic. To submit a plugin to the official marketplace, use one of the in-app submission forms:
+
+- **Claude.ai**: [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit)
+- **Console**: [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit)
+
+To distribute plugins independently, [create your own marketplace](plugin-marketplaces.md) and share it with users.
 
 The official marketplace includes several categories of plugins:
 
