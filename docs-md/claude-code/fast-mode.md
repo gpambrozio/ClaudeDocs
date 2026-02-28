@@ -11,7 +11,7 @@ What to know:
 - Available to all Claude Code users on subscription plans (Pro/Max/Team/Enterprise) and Claude Console.
 - For Claude Code users on subscription plans (Pro/Max/Team/Enterprise), fast mode is available via extra usage only and not included in the subscription rate limits.
 
-This page covers how to [toggle fast mode](#toggle-fast-mode), its [cost tradeoff](#understand-the-cost-tradeoff), [when to use it](#decide-when-to-use-fast-mode), [requirements](#requirements), and [rate limit behavior](#handle-rate-limits).
+This page covers how to [toggle fast mode](#toggle-fast-mode), its [cost tradeoff](#understand-the-cost-tradeoff), [when to use it](#decide-when-to-use-fast-mode), [requirements](#requirements), [per-session opt-in](#require-per-session-opt-in), and [rate limit behavior](#handle-rate-limits).
 
 ## [​](#toggle-fast-mode) Toggle fast mode
 
@@ -20,7 +20,8 @@ Toggle fast mode in either of these ways:
 - Type `/fast` and press Tab to toggle on or off
 - Set `"fastMode": true` in your [user settings file](settings.md)
 
-Fast mode persists across sessions. For the best cost efficiency, enable fast mode at the start of a session rather than switching mid-conversation. See [understand the cost tradeoff](#understand-the-cost-tradeoff) for details.
+By default, fast mode persists across sessions. Administrators can configure fast mode to reset each session. See [require per-session opt-in](#require-per-session-opt-in) for details.
+For the best cost efficiency, enable fast mode at the start of a session rather than switching mid-conversation. See [understand the cost tradeoff](#understand-the-cost-tradeoff) for details.
 When you enable fast mode:
 
 - If you’re on a different model, Claude Code automatically switches to Opus 4.6
@@ -88,6 +89,24 @@ Admins can enable fast mode in:
 - **Claude AI** (Teams and Enterprise): [Admin Settings > Claude Code](https://claude.ai/admin-settings/claude-code)
 
 Another option to disable fast mode entirely is to set `CLAUDE_CODE_DISABLE_FAST_MODE=1`. See [Environment variables](settings.md).
+
+### [​](#require-per-session-opt-in) Require per-session opt-in
+
+By default, fast mode persists across sessions: if a user enables fast mode, it stays on in future sessions. Administrators on [Teams](https://claude.com/pricing#team-&-enterprise) or [Enterprise](https://anthropic.com/contact-sales) plans can prevent this by setting `fastModePerSessionOptIn` to `true` in [managed settings](settings.md) or [server-managed settings](server-managed-settings.md). This causes each session to start with fast mode off, requiring users to explicitly enable it with `/fast`.
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "fastModePerSessionOptIn": true
+}
+```
+
+This is useful for controlling costs in organizations where users run multiple concurrent sessions. Users can still enable fast mode with `/fast` when they need speed, but it resets at the start of each new session. The user’s fast mode preference is still saved, so removing this setting restores the default persistent behavior.
 
 ## [​](#handle-rate-limits) Handle rate limits
 

@@ -411,10 +411,10 @@ For example, given this schema:
 {
   "type": "object",
   "properties": {
-    "notes": {"type": "string"},
-    "name": {"type": "string"},
-    "email": {"type": "string"},
-    "age": {"type": "integer"}
+    "notes": { "type": "string" },
+    "name": { "type": "string" },
+    "email": { "type": "string" },
+    "age": { "type": "integer" }
   },
   "required": ["name", "email"],
   "additionalProperties": false

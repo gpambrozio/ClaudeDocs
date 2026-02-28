@@ -23,7 +23,7 @@ function query({
 }: {
   prompt: string | AsyncIterable<SDKUserMessage>;
   options?: Options;
-}): Query
+}): Query;
 ```
 
 #### Parameters
@@ -48,7 +48,7 @@ function tool<Schema extends AnyZodRawShape>(
   inputSchema: Schema,
   handler: (args: InferShape<Schema>, extra: unknown) => Promise<CallToolResult>,
   extras?: { annotations?: ToolAnnotations }
-): SdkMcpToolDefinition<Schema>
+): SdkMcpToolDefinition<Schema>;
 ```
 
 #### Parameters
@@ -70,7 +70,7 @@ function createSdkMcpServer(options: {
   name: string;
   version?: string;
   tools?: Array<SdkMcpToolDefinition<any>>;
-}): McpSdkServerConfigWithInstance
+}): McpSdkServerConfigWithInstance;
 ```
 
 #### Parameters
@@ -86,7 +86,7 @@ function createSdkMcpServer(options: {
 Discovers and lists past sessions with light metadata. Filter by project directory or list sessions across all projects.
 
 ```shiki
-function listSessions(options?: ListSessionsOptions): Promise<SDKSessionInfo[]>
+function listSessions(options?: ListSessionsOptions): Promise<SDKSessionInfo[]>;
 ```
 
 #### Parameters
@@ -240,7 +240,7 @@ type SDKControlInitializeResponse = {
   available_output_styles: string[];
   models: ModelInfo[];
   account: AccountInfo;
-}
+};
 ```
 
 ### `AgentDefinition`
@@ -258,7 +258,7 @@ type AgentDefinition = {
   skills?: string[];
   maxTurns?: number;
   criticalSystemReminder_EXPERIMENTAL?: string;
-}
+};
 ```
 
 | Field | Required | Description |
@@ -349,8 +349,12 @@ const result = query({
   prompt: "Review this PR",
   options: {
     // settingSources: [] is the default, no need to specify
-    agents: { /* ... */ },
-    mcpServers: { /* ... */ },
+    agents: {
+      /* ... */
+    },
+    mcpServers: {
+      /* ... */
+    },
     allowedTools: ["Read", "Grep", "Glob"]
   }
 });
@@ -391,7 +395,7 @@ type PermissionMode =
   | "acceptEdits" // Auto-accept file edits
   | "bypassPermissions" // Bypass all permission checks
   | "plan" // Planning mode - no execution
-  | "dontAsk" // Don't prompt for permissions, deny if not pre-approved
+  | "dontAsk"; // Don't prompt for permissions, deny if not pre-approved
 ```
 
 ### `CanUseTool`
@@ -439,7 +443,7 @@ type PermissionResult =
       message: string;
       interrupt?: boolean;
       toolUseID?: string;
-    }
+    };
 ```
 
 ### `McpServerConfig`
@@ -462,7 +466,7 @@ type McpStdioServerConfig = {
   command: string;
   args?: string[];
   env?: Record<string, string>;
-}
+};
 ```
 
 #### `McpSSEServerConfig`
@@ -472,7 +476,7 @@ type McpSSEServerConfig = {
   type: "sse";
   url: string;
   headers?: Record<string, string>;
-}
+};
 ```
 
 #### `McpHttpServerConfig`
@@ -482,7 +486,7 @@ type McpHttpServerConfig = {
   type: "http";
   url: string;
   headers?: Record<string, string>;
-}
+};
 ```
 
 #### `McpSdkServerConfigWithInstance`
@@ -492,7 +496,7 @@ type McpSdkServerConfigWithInstance = {
   type: "sdk";
   name: string;
   instance: McpServer;
-}
+};
 ```
 
 #### `McpClaudeAIProxyServerConfig`
@@ -502,7 +506,7 @@ type McpClaudeAIProxyServerConfig = {
   type: "claudeai-proxy";
   url: string;
   id: string;
-}
+};
 ```
 
 ### `SdkPluginConfig`
@@ -513,7 +517,7 @@ Configuration for loading plugins in the SDK.
 type SdkPluginConfig = {
   type: "local";
   path: string;
-}
+};
 ```
 
 | Field | Type | Description |
@@ -594,7 +598,7 @@ type SDKUserMessage = {
   parent_tool_use_id: string | null;
   isSynthetic?: boolean;
   tool_use_result?: unknown;
-}
+};
 ```
 
 ### `SDKUserMessageReplay`
@@ -611,7 +615,7 @@ type SDKUserMessageReplay = {
   isSynthetic?: boolean;
   tool_use_result?: unknown;
   isReplay: true;
-}
+};
 ```
 
 ### `SDKResultMessage`
@@ -656,7 +660,7 @@ type SDKResultMessage =
       modelUsage: { [modelName: string]: ModelUsage };
       permission_denials: SDKPermissionDenial[];
       errors: string[];
-    }
+    };
 ```
 
 ### `SDKSystemMessage`
@@ -685,7 +689,7 @@ type SDKSystemMessage = {
   output_style: string;
   skills: string[];
   plugins: { name: string; path: string }[];
-}
+};
 ```
 
 ### `SDKPartialAssistantMessage`
@@ -699,7 +703,7 @@ type SDKPartialAssistantMessage = {
   parent_tool_use_id: string | null;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKCompactBoundaryMessage`
@@ -716,7 +720,7 @@ type SDKCompactBoundaryMessage = {
     trigger: "manual" | "auto";
     pre_tokens: number;
   };
-}
+};
 ```
 
 ### `SDKPermissionDenial`
@@ -728,7 +732,7 @@ type SDKPermissionDenial = {
   tool_name: string;
   tool_use_id: string;
   tool_input: Record<string, unknown>;
-}
+};
 ```
 
 ## Hook Types
@@ -821,7 +825,7 @@ type BaseHookInput = {
   transcript_path: string;
   cwd: string;
   permission_mode?: string;
-}
+};
 ```
 
 #### `PreToolUseHookInput`
@@ -832,7 +836,7 @@ type PreToolUseHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   tool_use_id: string;
-}
+};
 ```
 
 #### `PostToolUseHookInput`
@@ -844,7 +848,7 @@ type PostToolUseHookInput = BaseHookInput & {
   tool_input: unknown;
   tool_response: unknown;
   tool_use_id: string;
-}
+};
 ```
 
 #### `PostToolUseFailureHookInput`
@@ -857,7 +861,7 @@ type PostToolUseFailureHookInput = BaseHookInput & {
   tool_use_id: string;
   error: string;
   is_interrupt?: boolean;
-}
+};
 ```
 
 #### `NotificationHookInput`
@@ -868,7 +872,7 @@ type NotificationHookInput = BaseHookInput & {
   message: string;
   title?: string;
   notification_type: string;
-}
+};
 ```
 
 #### `UserPromptSubmitHookInput`
@@ -877,7 +881,7 @@ type NotificationHookInput = BaseHookInput & {
 type UserPromptSubmitHookInput = BaseHookInput & {
   hook_event_name: "UserPromptSubmit";
   prompt: string;
-}
+};
 ```
 
 #### `SessionStartHookInput`
@@ -888,7 +892,7 @@ type SessionStartHookInput = BaseHookInput & {
   source: "startup" | "resume" | "clear" | "compact";
   agent_type?: string;
   model?: string;
-}
+};
 ```
 
 #### `SessionEndHookInput`
@@ -897,7 +901,7 @@ type SessionStartHookInput = BaseHookInput & {
 type SessionEndHookInput = BaseHookInput & {
   hook_event_name: "SessionEnd";
   reason: ExitReason; // String from EXIT_REASONS array
-}
+};
 ```
 
 #### `StopHookInput`
@@ -907,7 +911,7 @@ type StopHookInput = BaseHookInput & {
   hook_event_name: "Stop";
   stop_hook_active: boolean;
   last_assistant_message?: string;
-}
+};
 ```
 
 #### `SubagentStartHookInput`
@@ -917,7 +921,7 @@ type SubagentStartHookInput = BaseHookInput & {
   hook_event_name: "SubagentStart";
   agent_id: string;
   agent_type: string;
-}
+};
 ```
 
 #### `SubagentStopHookInput`
@@ -930,7 +934,7 @@ type SubagentStopHookInput = BaseHookInput & {
   agent_transcript_path: string;
   agent_type: string;
   last_assistant_message?: string;
-}
+};
 ```
 
 #### `PreCompactHookInput`
@@ -940,7 +944,7 @@ type PreCompactHookInput = BaseHookInput & {
   hook_event_name: "PreCompact";
   trigger: "manual" | "auto";
   custom_instructions: string | null;
-}
+};
 ```
 
 #### `PermissionRequestHookInput`
@@ -951,7 +955,7 @@ type PermissionRequestHookInput = BaseHookInput & {
   tool_name: string;
   tool_input: unknown;
   permission_suggestions?: PermissionUpdate[];
-}
+};
 ```
 
 #### `SetupHookInput`
@@ -960,7 +964,7 @@ type PermissionRequestHookInput = BaseHookInput & {
 type SetupHookInput = BaseHookInput & {
   hook_event_name: "Setup";
   trigger: "init" | "maintenance";
-}
+};
 ```
 
 #### `TeammateIdleHookInput`
@@ -970,7 +974,7 @@ type TeammateIdleHookInput = BaseHookInput & {
   hook_event_name: "TeammateIdle";
   teammate_name: string;
   team_name: string;
-}
+};
 ```
 
 #### `TaskCompletedHookInput`
@@ -983,7 +987,7 @@ type TaskCompletedHookInput = BaseHookInput & {
   task_description?: string;
   teammate_name?: string;
   team_name?: string;
-}
+};
 ```
 
 #### `ConfigChangeHookInput`
@@ -991,9 +995,14 @@ type TaskCompletedHookInput = BaseHookInput & {
 ```shiki
 type ConfigChangeHookInput = BaseHookInput & {
   hook_event_name: "ConfigChange";
-  source: "user_settings" | "project_settings" | "local_settings" | "policy_settings" | "skills";
+  source:
+    | "user_settings"
+    | "project_settings"
+    | "local_settings"
+    | "policy_settings"
+    | "skills";
   file_path?: string;
-}
+};
 ```
 
 #### `WorktreeCreateHookInput`
@@ -1002,7 +1011,7 @@ type ConfigChangeHookInput = BaseHookInput & {
 type WorktreeCreateHookInput = BaseHookInput & {
   hook_event_name: "WorktreeCreate";
   name: string;
-}
+};
 ```
 
 #### `WorktreeRemoveHookInput`
@@ -1011,7 +1020,7 @@ type WorktreeCreateHookInput = BaseHookInput & {
 type WorktreeRemoveHookInput = BaseHookInput & {
   hook_event_name: "WorktreeRemove";
   worktree_path: string;
-}
+};
 ```
 
 ### `HookJSONOutput`
@@ -1028,7 +1037,7 @@ type HookJSONOutput = AsyncHookJSONOutput | SyncHookJSONOutput;
 type AsyncHookJSONOutput = {
   async: true;
   asyncTimeout?: number;
-}
+};
 ```
 
 #### `SyncHookJSONOutput`
@@ -1080,17 +1089,19 @@ type SyncHookJSONOutput = {
       }
     | {
         hookEventName: "PermissionRequest";
-        decision: {
-          behavior: "allow";
-          updatedInput?: Record<string, unknown>;
-          updatedPermissions?: PermissionUpdate[];
-        } | {
-          behavior: "deny";
-          message?: string;
-          interrupt?: boolean;
-        };
+        decision:
+          | {
+              behavior: "allow";
+              updatedInput?: Record<string, unknown>;
+              updatedPermissions?: PermissionUpdate[];
+            }
+          | {
+              behavior: "deny";
+              message?: string;
+              interrupt?: boolean;
+            };
       };
-}
+};
 ```
 
 ## Tool Input Types
@@ -1146,7 +1157,7 @@ type AgentInput = {
   team_name?: string;
   mode?: "acceptEdits" | "bypassPermissions" | "default" | "dontAsk" | "plan";
   isolation?: "worktree";
-}
+};
 ```
 
 Launches a new agent to handle complex, multi-step tasks autonomously.
@@ -1163,7 +1174,7 @@ type AskUserQuestionInput = {
     options: Array<{ label: string; description: string }>;
     multiSelect: boolean;
   }>;
-}
+};
 ```
 
 Asks the user clarifying questions during execution. See [Handle approvals and user input](agent-sdk/user-input.md) for usage details.
@@ -1179,7 +1190,7 @@ type BashInput = {
   description?: string;
   run_in_background?: boolean;
   dangerouslyDisableSandbox?: boolean;
-}
+};
 ```
 
 Executes bash commands in a persistent shell session with optional timeout and background execution.
@@ -1193,7 +1204,7 @@ type TaskOutputInput = {
   task_id: string;
   block: boolean;
   timeout: number;
-}
+};
 ```
 
 Retrieves output from a running or completed background task.
@@ -1208,7 +1219,7 @@ type FileEditInput = {
   old_string: string;
   new_string: string;
   replace_all?: boolean;
-}
+};
 ```
 
 Performs exact string replacements in files.
@@ -1223,7 +1234,7 @@ type FileReadInput = {
   offset?: number;
   limit?: number;
   pages?: string;
-}
+};
 ```
 
 Reads files from the local filesystem, including text, images, PDFs, and Jupyter notebooks. Use `pages` for PDF page ranges (for example, `"1-5"`).
@@ -1236,7 +1247,7 @@ Reads files from the local filesystem, including text, images, PDFs, and Jupyter
 type FileWriteInput = {
   file_path: string;
   content: string;
-}
+};
 ```
 
 Writes a file to the local filesystem, overwriting if it exists.
@@ -1249,7 +1260,7 @@ Writes a file to the local filesystem, overwriting if it exists.
 type GlobInput = {
   pattern: string;
   path?: string;
-}
+};
 ```
 
 Fast file pattern matching that works with any codebase size.
@@ -1274,7 +1285,7 @@ type GrepInput = {
   head_limit?: number;
   offset?: number;
   multiline?: boolean;
-}
+};
 ```
 
 Powerful search tool built on ripgrep with regex support.
@@ -1287,7 +1298,7 @@ Powerful search tool built on ripgrep with regex support.
 type TaskStopInput = {
   task_id?: string;
   shell_id?: string; // Deprecated: use task_id
-}
+};
 ```
 
 Stops a running background task or shell by ID.
@@ -1303,7 +1314,7 @@ type NotebookEditInput = {
   new_source: string;
   cell_type?: "code" | "markdown";
   edit_mode?: "replace" | "insert" | "delete";
-}
+};
 ```
 
 Edits cells in Jupyter notebook files.
@@ -1316,7 +1327,7 @@ Edits cells in Jupyter notebook files.
 type WebFetchInput = {
   url: string;
   prompt: string;
-}
+};
 ```
 
 Fetches content from a URL and processes it with an AI model.
@@ -1330,7 +1341,7 @@ type WebSearchInput = {
   query: string;
   allowed_domains?: string[];
   blocked_domains?: string[];
-}
+};
 ```
 
 Searches the web and returns formatted results.
@@ -1346,7 +1357,7 @@ type TodoWriteInput = {
     status: "pending" | "in_progress" | "completed";
     activeForm: string;
   }>;
-}
+};
 ```
 
 Creates and manages a structured task list for tracking progress.
@@ -1361,7 +1372,7 @@ type ExitPlanModeInput = {
     tool: "Bash";
     prompt: string;
   }>;
-}
+};
 ```
 
 Exits planning mode. Optionally specifies prompt-based permissions needed to implement the plan.
@@ -1373,7 +1384,7 @@ Exits planning mode. Optionally specifies prompt-based permissions needed to imp
 ```shiki
 type ListMcpResourcesInput = {
   server?: string;
-}
+};
 ```
 
 Lists available MCP resources from connected servers.
@@ -1386,7 +1397,7 @@ Lists available MCP resources from connected servers.
 type ReadMcpResourceInput = {
   server: string;
   uri: string;
-}
+};
 ```
 
 Reads a specific MCP resource from a server.
@@ -1399,7 +1410,7 @@ Reads a specific MCP resource from a server.
 type ConfigInput = {
   setting: string;
   value?: string | boolean | number;
-}
+};
 ```
 
 Gets or sets a configuration value.
@@ -1411,7 +1422,7 @@ Gets or sets a configuration value.
 ```shiki
 type EnterWorktreeInput = {
   name?: string;
-}
+};
 ```
 
 Creates and enters a temporary git worktree for isolated work.
@@ -1506,7 +1517,7 @@ type AskUserQuestionOutput = {
     multiSelect: boolean;
   }>;
   answers: Record<string, string>;
-}
+};
 ```
 
 Returns the questions asked and the user's answers.
@@ -1529,7 +1540,7 @@ type BashOutput = {
   structuredContent?: unknown[];
   persistedOutputPath?: string;
   persistedOutputSize?: number;
-}
+};
 ```
 
 Returns command output with stdout/stderr split. Background commands include a `backgroundTaskId`.
@@ -1561,7 +1572,7 @@ type FileEditOutput = {
     changes: number;
     patch: string;
   };
-}
+};
 ```
 
 Returns the structured diff of the edit operation.
@@ -1649,7 +1660,7 @@ type FileWriteOutput = {
     changes: number;
     patch: string;
   };
-}
+};
 ```
 
 Returns the write result with structured diff information.
@@ -1664,7 +1675,7 @@ type GlobOutput = {
   numFiles: number;
   filenames: string[];
   truncated: boolean;
-}
+};
 ```
 
 Returns file paths matching the glob pattern, sorted by modification time.
@@ -1683,7 +1694,7 @@ type GrepOutput = {
   numMatches?: number;
   appliedLimit?: number;
   appliedOffset?: number;
-}
+};
 ```
 
 Returns search results. The shape varies by `mode`: file list, content with matches, or match counts.
@@ -1698,7 +1709,7 @@ type TaskStopOutput = {
   task_id: string;
   task_type: string;
   command?: string;
-}
+};
 ```
 
 Returns confirmation after stopping the background task.
@@ -1718,7 +1729,7 @@ type NotebookEditOutput = {
   notebook_path: string;
   original_file: string;
   updated_file: string;
-}
+};
 ```
 
 Returns the result of the notebook edit with original and updated file contents.
@@ -1735,7 +1746,7 @@ type WebFetchOutput = {
   result: string;
   durationMs: number;
   url: string;
-}
+};
 ```
 
 Returns the fetched content with HTTP status and metadata.
@@ -1755,7 +1766,7 @@ type WebSearchOutput = {
     | string
   >;
   durationSeconds: number;
-}
+};
 ```
 
 Returns search results from the web.
@@ -1776,7 +1787,7 @@ type TodoWriteOutput = {
     status: "pending" | "in_progress" | "completed";
     activeForm: string;
   }>;
-}
+};
 ```
 
 Returns the previous and updated task lists.
@@ -1793,7 +1804,7 @@ type ExitPlanModeOutput = {
   hasTaskTool?: boolean;
   awaitingLeaderApproval?: boolean;
   requestId?: string;
-}
+};
 ```
 
 Returns the plan state after exiting plan mode.
@@ -1825,7 +1836,7 @@ type ReadMcpResourceOutput = {
     mimeType?: string;
     text?: string;
   }>;
-}
+};
 ```
 
 Returns the contents of the requested MCP resource.
@@ -1843,7 +1854,7 @@ type ConfigOutput = {
   previousValue?: unknown;
   newValue?: unknown;
   error?: string;
-}
+};
 ```
 
 Returns the result of a configuration get or set operation.
@@ -1857,7 +1868,7 @@ type EnterWorktreeOutput = {
   worktreePath: string;
   worktreeBranch?: string;
   message: string;
-}
+};
 ```
 
 Returns information about the created git worktree.
@@ -1902,7 +1913,7 @@ type PermissionUpdate =
       type: "removeDirectories";
       directories: string[];
       destination: PermissionUpdateDestination;
-    }
+    };
 ```
 
 ### `PermissionBehavior`
@@ -1919,7 +1930,7 @@ type PermissionUpdateDestination =
   | "projectSettings" // Per-directory project settings
   | "localSettings" // Gitignored local settings
   | "session" // Current session only
-  | "cliArg" // CLI argument
+  | "cliArg"; // CLI argument
 ```
 
 ### `PermissionRuleValue`
@@ -1928,7 +1939,7 @@ type PermissionUpdateDestination =
 type PermissionRuleValue = {
   toolName: string;
   ruleContent?: string;
-}
+};
 ```
 
 ## Other Types
@@ -1960,7 +1971,7 @@ type SlashCommand = {
   name: string;
   description: string;
   argumentHint: string;
-}
+};
 ```
 
 ### `ModelInfo`
@@ -1975,7 +1986,7 @@ type ModelInfo = {
   supportsEffort?: boolean;
   supportedEffortLevels?: ("low" | "medium" | "high" | "max")[];
   supportsAdaptiveThinking?: boolean;
-}
+};
 ```
 
 ### `McpServerStatus`
@@ -2002,7 +2013,7 @@ type McpServerStatus = {
       openWorld?: boolean;
     };
   }[];
-}
+};
 ```
 
 ### `McpServerStatusConfig`
@@ -2031,7 +2042,7 @@ type AccountInfo = {
   subscriptionType?: string;
   tokenSource?: string;
   apiKeySource?: string;
-}
+};
 ```
 
 ### `ModelUsage`
@@ -2048,7 +2059,7 @@ type ModelUsage = {
   costUSD: number;
   contextWindow: number;
   maxOutputTokens: number;
-}
+};
 ```
 
 ### `ConfigScope`
@@ -2064,7 +2075,7 @@ A version of [`Usage`](#usage) with all nullable fields made non-nullable.
 ```shiki
 type NonNullableUsage = {
   [K in keyof Usage]: NonNullable<Usage[K]>;
-}
+};
 ```
 
 ### `Usage`
@@ -2077,7 +2088,7 @@ type Usage = {
   output_tokens: number | null;
   cache_creation_input_tokens?: number | null;
   cache_read_input_tokens?: number | null;
-}
+};
 ```
 
 ### `CallToolResult`
@@ -2091,7 +2102,7 @@ type CallToolResult = {
     // Additional fields vary by type
   }>;
   isError?: boolean;
-}
+};
 ```
 
 ### `ThinkingConfig`
@@ -2102,7 +2113,7 @@ Controls Claude's thinking/reasoning behavior. Takes precedence over the depreca
 type ThinkingConfig =
   | { type: "adaptive" } // The model determines when and how much to reason (Opus 4.6+)
   | { type: "enabled"; budgetTokens?: number } // Fixed thinking token budget
-  | { type: "disabled" } // No extended thinking
+  | { type: "disabled" }; // No extended thinking
 ```
 
 ### `SpawnedProcess`
@@ -2116,11 +2127,20 @@ interface SpawnedProcess {
   readonly killed: boolean;
   readonly exitCode: number | null;
   kill(signal: NodeJS.Signals): boolean;
-  on(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  on(
+    event: "exit",
+    listener: (code: number | null, signal: NodeJS.Signals | null) => void
+  ): void;
   on(event: "error", listener: (error: Error) => void): void;
-  once(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  once(
+    event: "exit",
+    listener: (code: number | null, signal: NodeJS.Signals | null) => void
+  ): void;
   once(event: "error", listener: (error: Error) => void): void;
-  off(event: "exit", listener: (code: number | null, signal: NodeJS.Signals | null) => void): void;
+  off(
+    event: "exit",
+    listener: (code: number | null, signal: NodeJS.Signals | null) => void
+  ): void;
   off(event: "error", listener: (error: Error) => void): void;
 }
 ```
@@ -2148,7 +2168,7 @@ type McpSetServersResult = {
   added: string[];
   removed: string[];
   errors: Record<string, string>;
-}
+};
 ```
 
 ### `RewindFilesResult`
@@ -2162,7 +2182,7 @@ type RewindFilesResult = {
   filesChanged?: string[];
   insertions?: number;
   deletions?: number;
-}
+};
 ```
 
 ### `SDKStatusMessage`
@@ -2177,7 +2197,7 @@ type SDKStatusMessage = {
   permissionMode?: PermissionMode;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKTaskNotificationMessage`
@@ -2200,7 +2220,7 @@ type SDKTaskNotificationMessage = {
   };
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKToolUseSummaryMessage`
@@ -2214,7 +2234,7 @@ type SDKToolUseSummaryMessage = {
   preceding_tool_use_ids: string[];
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKHookStartedMessage`
@@ -2230,7 +2250,7 @@ type SDKHookStartedMessage = {
   hook_event: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKHookProgressMessage`
@@ -2249,7 +2269,7 @@ type SDKHookProgressMessage = {
   output: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKHookResponseMessage`
@@ -2270,7 +2290,7 @@ type SDKHookResponseMessage = {
   outcome: "success" | "error" | "cancelled";
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKToolProgressMessage`
@@ -2287,7 +2307,7 @@ type SDKToolProgressMessage = {
   task_id?: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKAuthStatusMessage`
@@ -2302,7 +2322,7 @@ type SDKAuthStatusMessage = {
   error?: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKTaskStartedMessage`
@@ -2319,7 +2339,7 @@ type SDKTaskStartedMessage = {
   task_type?: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKTaskProgressMessage`
@@ -2341,7 +2361,7 @@ type SDKTaskProgressMessage = {
   last_tool_name?: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKFilesPersistedEvent`
@@ -2357,7 +2377,7 @@ type SDKFilesPersistedEvent = {
   processed_at: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKRateLimitEvent`
@@ -2374,7 +2394,7 @@ type SDKRateLimitEvent = {
   };
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `SDKPromptSuggestionMessage`
@@ -2387,7 +2407,7 @@ type SDKPromptSuggestionMessage = {
   suggestion: string;
   uuid: UUID;
   session_id: string;
-}
+};
 ```
 
 ### `AbortError`
@@ -2415,7 +2435,7 @@ type SandboxSettings = {
   ignoreViolations?: Record<string, string[]>;
   enableWeakerNestedSandbox?: boolean;
   ripgrep?: { command: string; args?: string[] };
-}
+};
 ```
 
 | Property | Type | Default | Description |
@@ -2466,7 +2486,7 @@ type SandboxNetworkConfig = {
   allowAllUnixSockets?: boolean;
   httpProxyPort?: number;
   socksProxyPort?: number;
-}
+};
 ```
 
 | Property | Type | Default | Description |
@@ -2488,7 +2508,7 @@ type SandboxFilesystemConfig = {
   allowWrite?: string[];
   denyWrite?: string[];
   denyRead?: string[];
-}
+};
 ```
 
 | Property | Type | Default | Description |
@@ -2526,7 +2546,10 @@ for await (const message of query({
         if (isCommandAuthorized(input.command)) {
           return { behavior: "allow" as const, updatedInput: input };
         }
-        return { behavior: "deny" as const, message: "Command not authorized for unsandboxed execution" };
+        return {
+          behavior: "deny" as const,
+          message: "Command not authorized for unsandboxed execution"
+        };
       }
       return { behavior: "allow" as const, updatedInput: input };
     }

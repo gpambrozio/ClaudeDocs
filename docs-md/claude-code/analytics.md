@@ -24,7 +24,7 @@ Contribution metrics are in public beta and available on Claude for Teams and Cl
 Usage and adoption data is available for all Claude for Teams and Claude for Enterprise accounts. Contribution metrics require additional setup to connect your GitHub organization.
 You need the Owner role to configure analytics settings. A GitHub admin must install the GitHub app.
 
-Contribution metrics are not available for organizations with [Zero Data Retention](data-usage.md) enabled. The analytics dashboard will show usage metrics only.
+Contribution metrics are not available for organizations with [Zero Data Retention](zero-data-retention.md) enabled. The analytics dashboard will show usage metrics only.
 
 1
 
