@@ -274,7 +274,9 @@ disallowedTools: Write, Edit
 
 #### [​](#restrict-which-subagents-can-be-spawned) Restrict which subagents can be spawned
 
-When an agent runs as the main thread with `claude --agent`, it can spawn subagents using the Task tool. To restrict which subagent types it can spawn, use `Task(agent_type)` syntax in the `tools` field:
+When an agent runs as the main thread with `claude --agent`, it can spawn subagents using the Agent tool. To restrict which subagent types it can spawn, use `Agent(agent_type)` syntax in the `tools` field.
+
+In version 2.1.63, the Task tool was renamed to Agent. Existing `Task(...)` references in settings and agent definitions still work as aliases.
 
 Report incorrect code
 
@@ -286,12 +288,12 @@ Ask AI
 ---
 name: coordinator
 description: Coordinates work across specialized agents
-tools: Task(worker, researcher), Read, Bash
+tools: Agent(worker, researcher), Read, Bash
 ---
 ```
 
 This is an allowlist: only the `worker` and `researcher` subagents can be spawned. If the agent tries to spawn any other type, the request fails and the agent sees only the allowed types in its prompt. To block specific agents while allowing all others, use [`permissions.deny`](#disable-specific-subagents) instead.
-To allow spawning any subagent without restrictions, use `Task` without parentheses:
+To allow spawning any subagent without restrictions, use `Agent` without parentheses:
 
 Report incorrect code
 
@@ -300,10 +302,10 @@ Copy
 Ask AI
 
 ```shiki
-tools: Task, Read, Bash
+tools: Agent, Read, Bash
 ```
 
-If `Task` is omitted from the `tools` list entirely, the agent cannot spawn any subagents. This restriction only applies to agents running as the main thread with `claude --agent`. Subagents cannot spawn other subagents, so `Task(agent_type)` has no effect in subagent definitions.
+If `Agent` is omitted from the `tools` list entirely, the agent cannot spawn any subagents. This restriction only applies to agents running as the main thread with `claude --agent`. Subagents cannot spawn other subagents, so `Agent(agent_type)` has no effect in subagent definitions.
 
 #### [​](#permission-modes) Permission modes
 
@@ -455,7 +457,7 @@ See [Hook input](hooks.md) for the complete input schema and [exit codes](hooks.
 
 #### [​](#disable-specific-subagents) Disable specific subagents
 
-You can prevent Claude from using specific subagents by adding them to the `deny` array in your [settings](settings.md). Use the format `Task(subagent-name)` where `subagent-name` matches the subagent’s name field.
+You can prevent Claude from using specific subagents by adding them to the `deny` array in your [settings](settings.md). Use the format `Agent(subagent-name)` where `subagent-name` matches the subagent’s name field.
 
 Report incorrect code
 
@@ -466,7 +468,7 @@ Ask AI
 ```shiki
 {
   "permissions": {
-    "deny": ["Task(Explore)", "Task(my-custom-agent)"]
+    "deny": ["Agent(Explore)", "Agent(my-custom-agent)"]
   }
 }
 ```
@@ -480,7 +482,7 @@ Copy
 Ask AI
 
 ```shiki
-claude --disallowedTools "Task(Explore)"
+claude --disallowedTools "Agent(Explore)"
 ```
 
 See [Permissions documentation](permissions.md) for more details on permission rules.

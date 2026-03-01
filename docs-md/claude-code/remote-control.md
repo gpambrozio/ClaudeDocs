@@ -1,6 +1,6 @@
 # Continue local sessions from any device with Remote Control
 
-Remote Control is available as a research preview on Max plans and will be rolling out to Pro plans soon. It is not available on Team or Enterprise plans.
+Remote Control is available as a research preview on Max and Pro plans. It is not available on Team or Enterprise plans.
 
 Remote Control connects [claude.ai/code](https://claude.ai/code) or the Claude app for [iOS](https://apps.apple.com/us/app/claude-by-anthropic/id6473753684) and [Android](https://play.google.com/store/apps/details?id=com.anthropic.claude) to a Claude Code session running on your machine. Start a task at your desk, then pick it up from your phone on the couch or a browser on another computer.
 When you start a Remote Control session on your machine, Claude keeps running locally the entire time, so nothing moves to the cloud. With Remote Control you can:

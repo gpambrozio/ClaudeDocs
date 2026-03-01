@@ -197,6 +197,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
   initializationResult(): Promise<SDKControlInitializeResponse>;
   supportedCommands(): Promise<SlashCommand[]>;
   supportedModels(): Promise<ModelInfo[]>;
+  supportedAgents(): Promise<AgentInfo[]>;
   mcpServerStatus(): Promise<McpServerStatus[]>;
   accountInfo(): Promise<AccountInfo>;
   reconnectMcpServer(serverName: string): Promise<void>;
@@ -220,6 +221,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `initializationResult()` | Returns the full initialization result including supported commands, models, account info, and output style configuration |
 | `supportedCommands()` | Returns available slash commands |
 | `supportedModels()` | Returns available models with display info |
+| `supportedAgents()` | Returns available subagents |
 | `mcpServerStatus()` | Returns status of connected MCP servers |
 | `accountInfo()` | Returns account information |
 | `reconnectMcpServer(serverName)` | Reconnect an MCP server by name |
@@ -236,6 +238,7 @@ Return type of `initializationResult()`. Contains session initialization data.
 ```shiki
 type SDKControlInitializeResponse = {
   commands: SlashCommand[];
+  agents: AgentInfo[];
   output_style: string;
   available_output_styles: string[];
   models: ModelInfo[];
@@ -1988,6 +1991,24 @@ type ModelInfo = {
   supportsAdaptiveThinking?: boolean;
 };
 ```
+
+### `AgentInfo`
+
+Information about an available subagent that can be invoked via the Task tool.
+
+```shiki
+type AgentInfo = {
+  name: string;
+  description: string;
+  model?: string;
+}
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `name` | `string` | Agent type identifier (e.g., `"Explore"`, `"general-purpose"`) |
+| `description` | `string` | Description of when to use this agent |
+| `model` | `string | undefined` | Model alias this agent uses. If omitted, inherits the parent's model |
 
 ### `McpServerStatus`
 

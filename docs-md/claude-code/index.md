@@ -162,7 +162,7 @@ The [Model Context Protocol (MCP)](mcp.md) is an open standard for connecting AI
 
 Customize with instructions, skills, and hooks
 
-[`CLAUDE.md`](claude-md.md) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists.Create [custom slash commands](skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.[Hooks](hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+[`CLAUDE.md`](memory.md) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. Claude also builds [auto memory](memory.md) as it works, saving learnings like build commands and debugging insights across sessions without you writing anything.Create [custom commands](skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.[Hooks](hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
 
 Run agent teams and build custom agents
 
@@ -219,7 +219,8 @@ Beyond the [Terminal](quickstart.md), [VS Code](vs-code.md), [JetBrains](jetbrai
 Once you’ve installed Claude Code, these guides help you go deeper.
 
 - [Quickstart](quickstart.md): walk through your first real task, from exploring a codebase to committing a fix
-- Level up with [best practices](best-practices.md) and [common workflows](common-workflows.md)
+- [Store instructions and memories](memory.md): give Claude persistent instructions with CLAUDE.md files and auto memory
+- [Common workflows](common-workflows.md) and [best practices](best-practices.md): patterns for getting the most out of Claude Code
 - [Settings](settings.md): customize Claude Code for your workflow
 - [Troubleshooting](troubleshooting.md): solutions for common issues
 - [code.claude.com](https://code.claude.com/): demos, pricing, and product details

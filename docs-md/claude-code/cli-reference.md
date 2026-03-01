@@ -37,7 +37,7 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--continue`, `-c` | Load the most recent conversation in the current directory | `claude --continue` |
 | `--dangerously-skip-permissions` | Skip all permission prompts (use with caution) | `claude --dangerously-skip-permissions` |
 | `--debug` | Enable debug mode with optional category filtering (for example, `"api,hooks"` or `"!statsig,!file"`) | `claude --debug "api,mcp"` |
-| `--disable-slash-commands` | Disable all skills and slash commands for this session | `claude --disable-slash-commands` |
+| `--disable-slash-commands` | Disable all skills and commands for this session | `claude --disable-slash-commands` |
 | `--disallowedTools` | Tools that are removed from the model’s context and cannot be used | `"Bash(git log *)" "Bash(git diff *)" "Edit"` |
 | `--fallback-model` | Enable automatic fallback to specified model when default model is overloaded (print mode only) | `claude -p --fallback-model sonnet "query"` |
 | `--fork-session` | When resuming, create a new session ID instead of reusing the original (use with `--resume` or `--continue`) | `claude --resume abc123 --fork-session` |
@@ -86,7 +86,7 @@ The `--agents` flag accepts a JSON object that defines one or more custom subage
 | --- | --- | --- |
 | `description` | Yes | Natural language description of when the subagent should be invoked |
 | `prompt` | Yes | The system prompt that guides the subagent’s behavior |
-| `tools` | No | Array of specific tools the subagent can use, for example `["Read", "Edit", "Bash"]`. If omitted, inherits all tools. Supports [`Task(agent_type)`](sub-agents.md) syntax |
+| `tools` | No | Array of specific tools the subagent can use, for example `["Read", "Edit", "Bash"]`. If omitted, inherits all tools. Supports [`Agent(agent_type)`](sub-agents.md) syntax |
 | `disallowedTools` | No | Array of tool names to explicitly deny for this subagent |
 | `model` | No | Model alias to use: `sonnet`, `opus`, `haiku`, or `inherit`. If omitted, defaults to `inherit` |
 | `skills` | No | Array of [skill](skills.md) names to preload into the subagent’s context |
