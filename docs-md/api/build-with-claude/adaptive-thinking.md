@@ -21,7 +21,7 @@ Older models (Sonnet 4.5, Opus 4.5, etc.) do not support adaptive thinking and r
 
 ## How adaptive thinking works
 
-In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default effort level (`high`), Claude will almost always think. At lower effort levels, Claude may skip thinking for simpler problems.
+In adaptive mode, thinking is optional for the model. Claude evaluates the complexity of each request and determines whether and how much to use extended thinking. At the default effort level (`high`), Claude almost always thinks. At lower effort levels, Claude may skip thinking for simpler problems.
 
 Adaptive thinking also automatically enables [interleaved thinking](build-with-claude/extended-thinking.md). This means Claude can think between tool calls, making it especially effective for agentic workflows.
 
@@ -58,7 +58,7 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 
 | Effort level | Thinking behavior |
 | --- | --- |
-| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only. Requests using `max` on other models will return an error. |
+| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only. Requests using `max` on other models return an error. |
 | `high` (default) | Claude always thinks. Provides deep reasoning on complex tasks. |
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
@@ -176,7 +176,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#790a18151c0a3918170d110b1609101a571a1614).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#34475558514774555a405c465b445d571a575b59).
 
 ### Thinking encryption
 

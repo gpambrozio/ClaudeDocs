@@ -21,7 +21,7 @@ For complete pricing and specs, see the [models overview](about-claude/models/ov
 
 ### Adaptive thinking mode
 
-[Adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) is the recommended thinking mode for Opus 4.6 and Sonnet 4.6. Claude dynamically decides when and how much to think. At the default effort level (`high`), Claude will almost always think. At lower effort levels, it may skip thinking for simpler problems.
+[Adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) is the recommended thinking mode for Opus 4.6 and Sonnet 4.6. Claude dynamically decides when and how much to think. At the default effort level (`high`), Claude almost always thinks. At lower effort levels, it may skip thinking for simpler problems.
 
 `thinking: {type: "enabled"}` and `budget_tokens` are **deprecated** on Opus 4.6 and Sonnet 4.6. They remain functional but will be removed in a future model release. Use adaptive thinking and the [effort parameter](build-with-claude/effort.md) to control thinking depth instead. Adaptive thinking also automatically enables interleaved thinking.
 

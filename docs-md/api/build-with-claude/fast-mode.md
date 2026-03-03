@@ -4,7 +4,7 @@ Copy page
 
 Fast mode provides significantly faster output token generation for Claude Opus 4.6. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
 
-Fast mode is currently in research preview. [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while we gather feedback.
+Fast mode is in research preview. [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
 
 This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
@@ -161,11 +161,11 @@ message = create_message_with_fast_fallback(
 
 ## Considerations
 
-- **Prompt caching**: Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-- **Supported models**: Fast mode is currently supported on Opus 4.6 only. Sending `speed: "fast"` with an unsupported model returns an error.
-- **TTFT**: Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
-- **Batch API**: Fast mode is not available with the [Batch API](build-with-claude/batch-processing.md).
-- **Priority Tier**: Fast mode is not available with [Priority Tier](api/service-tiers.md).
+- **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
+- **Supported models:** Fast mode is currently supported on Opus 4.6 only. Sending `speed: "fast"` with an unsupported model returns an error.
+- **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
+- **Batch API:** Fast mode is not available with the [Batch API](build-with-claude/batch-processing.md).
+- **Priority Tier:** Fast mode is not available with [Priority Tier](api/service-tiers.md).
 
 ## Next steps
 

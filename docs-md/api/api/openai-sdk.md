@@ -17,7 +17,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 1. Use an official OpenAI SDK
 2. Change the following
    - Update your base URL to point to the Claude API
-   - Replace your API key with an [Claude API key](/settings/keys)
+   - Replace your API key with a [Claude API key](/settings/keys)
    - Update your model name to use a [Claude model](about-claude/models/overview.md)
 3. Review the documentation below for what features are supported
 
@@ -34,7 +34,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-opus-4-6",  # Anthropic model name
+    model="claude-opus-4-6",  # Claude model name
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who are you?"},
@@ -61,13 +61,13 @@ Most unsupported fields are silently ignored rather than producing errors. These
 
 If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider using the [prompt improver in the Claude Console](/dashboard) as a good starting point.
 
-### System / Developer message hoisting
+### System / developer message hoisting
 
 Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API parameters, but one distinct difference is the handling of system / developer prompts. These two prompts can be put throughout a chat conversation via OpenAI. Since Anthropic only supports an initial system message, the API takes all system/developer messages and concatenates them together with a single newline (`\n`) in between them. This full string is then supplied as a single system message at the start of the messages.
 
 ### Extended thinking support
 
-You can enable [extended thinking](build-with-claude/extended-thinking.md) capabilities by adding the `thinking` parameter. While this will improve Claude's reasoning for complex tasks, the OpenAI SDK won't return Claude's detailed thought process. For full extended thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
+You can enable [extended thinking](build-with-claude/extended-thinking.md) capabilities by adding the `thinking` parameter. While this improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full extended thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
 Python
 
@@ -83,7 +83,7 @@ response = client.chat.completions.create(
 
 Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v1/messages` endpoint.
 
-## Detailed OpenAI Compatible API Support
+## Detailed OpenAI compatible API support
 
 ### Request fields
 

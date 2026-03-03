@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 These features can be used independently or together in the same request.
 
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs remain in public beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in public beta on Microsoft Foundry.
 
 Prompts and responses using structured outputs are processed with [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). However, the JSON schema itself is temporarily cached for up to 24 hours for optimization purposes. No prompt or response data is retained.
 
@@ -103,7 +103,7 @@ curl https://api.anthropic.com/v1/messages \
 
    Parse the response
 
-   Claude's response will be valid JSON matching your schema, returned in `response.content[0].text`.
+   Claude's response is valid JSON matching your schema, returned in `response.content[0].text`.
 
 ### Working with JSON outputs in SDKs
 
@@ -374,9 +374,9 @@ response = client.messages.create(
 
 Structured outputs use constrained sampling with compiled grammar artifacts. This introduces some performance characteristics to be aware of:
 
-- **First request latency**: The first time you use a specific schema, there will be additional latency while the grammar is compiled
-- **Automatic caching**: Compiled grammars are cached for 24 hours from last use, making subsequent requests much faster
-- **Cache invalidation**: The cache is invalidated if you change:
+- **First request latency:** The first time you use a specific schema, there is additional latency while the grammar compiles
+- **Automatic caching:** Compiled grammars are cached for 24 hours from last use, making subsequent requests much faster
+- **Cache invalidation:** The cache is invalidated if you change:
   - The JSON schema structure
   - The set of tools in your request (when using both structured outputs and tool use)
   - Changing only `name` or `description` fields does not invalidate the cache
@@ -385,7 +385,7 @@ Structured outputs use constrained sampling with compiled grammar artifacts. Thi
 
 When using structured outputs, Claude automatically receives an additional system prompt explaining the expected output format. This means:
 
-- Your input token count will be slightly higher
+- Your input token count is slightly higher
 - The injected prompt costs you tokens like any other system prompt
 - Changing the `output_config.format` parameter will invalidate any [prompt cache](build-with-claude/prompt-caching.md) for that conversation thread
 
@@ -449,7 +449,7 @@ While structured outputs guarantee schema compliance in most cases, there are sc
 
 Claude maintains its safety and helpfulness properties even when using structured outputs. If Claude refuses a request for safety reasons:
 
-- The response will have `stop_reason: "refusal"`
+- The response has `stop_reason: "refusal"`
 - You'll receive a 200 status code
 - You'll be billed for the tokens generated
 - The output may not match your schema because the refusal message takes precedence over schema constraints
@@ -458,7 +458,7 @@ Claude maintains its safety and helpfulness properties even when using structure
 
 If the response is cut off due to reaching the `max_tokens` limit:
 
-- The response will have `stop_reason: "max_tokens"`
+- The response has `stop_reason: "max_tokens"`
 - The output may be incomplete and not match your schema
 - Retry with a higher `max_tokens` value to get the complete structured output
 

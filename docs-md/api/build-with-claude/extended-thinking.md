@@ -103,7 +103,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#85f6e4e9e0f6c5e4ebf1edf7eaf5ece6abe6eae8).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#f88b99949d8bb899968c908a9788919bd69b9795).
 
 ### Streaming thinking
 
@@ -111,7 +111,7 @@ You can stream extended thinking responses using [server-sent events (SSE)](http
 
 When streaming is enabled for extended thinking, you receive thinking content via `thinking_delta` events.
 
-For more documention on streaming via the Messages API, see [Streaming Messages](build-with-claude/streaming.md).
+For more documentation on streaming via the Messages API, see [Streaming Messages](build-with-claude/streaming.md).
 
 Here's how to handle streaming with thinking:
 

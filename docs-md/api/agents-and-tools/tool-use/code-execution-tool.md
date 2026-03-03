@@ -8,7 +8,7 @@ Claude can analyze data, create visualizations, perform complex calculations, ru
 
 Code execution is a core primitive for building high-performance agents. It enables dynamic filtering in web search and web fetch tools, allowing Claude to process results before they reach the context window—improving accuracy while reducing token consumption.
 
-Please reach out through our [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
 
 This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
 

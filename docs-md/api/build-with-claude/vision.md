@@ -18,19 +18,19 @@ Use Claude’s vision capabilities via:
 
 ## Before you upload
 
-### Basics and Limits
+### Basics and limits
 
 You can include multiple images in a single request (up to 20 for [claude.ai](https://claude.ai/) and 100 for API requests). Claude will analyze all provided images when formulating its response. This can be helpful for comparing or contrasting images.
 
-If you submit an image larger than 8000x8000 px, it will be rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
+If you submit an image larger than 8000x8000 px, it is rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
 
 While the API supports 100 images per request, there is a [32MB request size limit](api/overview.md) for standard endpoints.
 
 ### Evaluate image size
 
-For optimal performance, resize images before uploading if they are too large. If your image’s long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it will first be scaled down, preserving aspect ratio, until it’s within the size limits.
+For optimal performance, resize images before uploading if they are too large. If your image's long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it is first scaled down, preserving aspect ratio, until it's within the size limits.
 
-If your input image is too large and needs to be resized, it will increase latency of [time-to-first-token](about-claude/glossary.md), without giving you any additional model performance. Very small images under 200 pixels on any given edge may degrade performance.
+If your input image is too large and needs to be resized, it increases latency of [time-to-first-token](about-claude/glossary.md), without giving you any additional model performance. Very small images under 200 pixels on any given edge may degrade performance.
 
 To improve [time-to-first-token](about-claude/glossary.md), consider
 resizing images to no more than 1.15 megapixels (and within 1568 pixels in
@@ -95,11 +95,11 @@ Shell
 
 ```shiki
     # For URL-based images, you can use the URL directly in your JSON request
-    
+
     # For base64-encoded images, you need to first encode the image
     # Example of how to encode an image to base64 in bash:
     BASE64_IMAGE_DATA=$(curl -s "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg" | base64)
-    
+
     # The encoded data can now be used in your API calls
 ```
 

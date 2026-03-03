@@ -81,7 +81,7 @@ Chunk 2: ' new features comparison'
 ```
 
 Because fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.
-Particularly, if the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You will generally have to write specific support to handle when `max_tokens` is reached.
+Particularly, if the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You generally have to write specific support to handle when `max_tokens` is reached.
 
 ## Handling invalid JSON in tool responses
 

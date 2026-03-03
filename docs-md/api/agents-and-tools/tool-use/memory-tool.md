@@ -8,7 +8,7 @@ This is the key primitive for just-in-time context retrieval: rather than loadin
 
 The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
 
-Please reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 
 This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 

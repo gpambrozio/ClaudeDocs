@@ -14,7 +14,7 @@ This is ideal for:
 - Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the 200K context window
 
-Compaction is currently in beta. Include the [beta header](api/beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
+Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
 
 Compaction is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements.
 

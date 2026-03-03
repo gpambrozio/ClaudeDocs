@@ -6,14 +6,14 @@ The tool search tool enables Claude to work with hundreds or thousands of tools 
 
 This approach solves two problems that compound quickly as tool libraries scale:
 
-- **Context bloat**: Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
-- **Tool selection accuracy**: Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
+- **Context bloat:** Tool definitions eat into your context budget fast. A typical multi-server setup (GitHub, Slack, Sentry, Grafana, Splunk) can consume ~55K tokens in definitions before Claude does any actual work. Tool search typically reduces this by over 85%, loading only the 3–5 tools Claude actually needs for a given request.
+- **Tool selection accuracy:** Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
 
 For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 
 Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
-Please reach out through our [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA) to share your feedback on this feature.
+Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 
 Server-side tool search is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy. [Custom client-side tool search implementations](#custom-tool-search-implementation) use the standard Messages API and are ZDR-eligible.
 
@@ -218,10 +218,10 @@ JSON
 
 ### Understanding the response
 
-- **`server_tool_use`**: Indicates Claude is invoking the tool search tool
-- **`tool_search_tool_result`**: Contains the search results with a nested `tool_search_tool_search_result` object
-- **`tool_references`**: Array of `tool_reference` objects pointing to discovered tools
-- **`tool_use`**: Claude invoking the discovered tool
+- **`server_tool_use`:** Indicates Claude is invoking the tool search tool
+- **`tool_search_tool_result`:** Contains the search results with a nested `tool_search_tool_search_result` object
+- **`tool_references`:** Array of `tool_reference` objects pointing to discovered tools
+- **`tool_use`:** Claude invoking the discovered tool
 
 The `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.
 
@@ -465,10 +465,10 @@ You can include the tool search tool in the [Messages Batches API](build-with-cl
 
 ### Limits
 
-- **Maximum tools**: 10,000 tools in your catalog
-- **Search results**: Returns 3-5 most relevant tools per search
-- **Pattern length**: Maximum 200 characters for regex patterns
-- **Model support**: Sonnet 4.0+, Opus 4.0+ only (no Haiku)
+- **Maximum tools:** 10,000 tools in your catalog
+- **Search results:** Returns 3-5 most relevant tools per search
+- **Pattern length:** Maximum 200 characters for regex patterns
+- **Model support:** Sonnet 4.0+, Opus 4.0+ only (no Haiku)
 
 ### When to use tool search
 

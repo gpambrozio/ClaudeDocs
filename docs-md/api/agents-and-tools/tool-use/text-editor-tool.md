@@ -19,10 +19,10 @@ Older tool versions are not guaranteed to be backwards-compatible with newer mod
 
 Some examples of when to use the text editor tool are:
 
-- **Code debugging**: Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
-- **Code refactoring**: Let Claude improve your code structure, readability, and performance through targeted edits.
-- **Documentation generation**: Ask Claude to add docstrings, comments, or README files to your codebase.
-- **Test creation**: Have Claude create unit tests for your code based on its understanding of the implementation.
+- **Code debugging:** Have Claude identify and fix bugs in your code, from syntax errors to logic issues.
+- **Code refactoring:** Let Claude improve your code structure, readability, and performance through targeted edits.
+- **Documentation generation:** Ask Claude to add docstrings, comments, or README files to your codebase.
+- **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
 ## Use the text editor tool
 
@@ -213,7 +213,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-Claude will use the text editor tool first to view the file:
+Claude uses the text editor tool first to view the file:
 
 ```shiki
 {
@@ -298,7 +298,7 @@ curl https://api.anthropic.com/v1/messages \
 
 In the example above, the `view` tool result includes file contents with line numbers prepended to each line (e.g., "1: def is\_prime(n):"). Line numbers are not required, but they are essential for successfully using the `view_range` parameter to examine specific sections of files and the `insert_line` parameter to add content at precise locations.
 
-Claude will identify the syntax error and use the `str_replace` command to fix it:
+Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
 ```shiki
 {
@@ -371,7 +371,7 @@ response = client.messages.create(
 )
 ```
 
-Finally, Claude will provide a complete explanation of the fix:
+Finally, Claude provides a complete explanation of the fix:
 
 ```shiki
 {
@@ -396,8 +396,8 @@ The text editor tool is implemented as a schema-less tool. When using this tool,
 
 The tool type depends on the model version:
 
-- **Claude 4**: `type: "text_editor_20250728"`
-- **Claude Sonnet 3.7**: `type: "text_editor_20250124"`
+- **Claude 4:** `type: "text_editor_20250728"`
+- **Claude Sonnet 3.7:** `type: "text_editor_20250124"`
 
 1. 1
 
@@ -468,10 +468,10 @@ The tool type depends on the model version:
 
 When implementing the text editor tool, keep in mind:
 
-1. **Security**: The tool has access to your local filesystem, so implement proper security measures.
-2. **Backup**: Always create backups before allowing edits to important files.
-3. **Validation**: Validate all inputs to prevent unintended changes.
-4. **Unique matching**: Make sure replacements match exactly one location to avoid unintended edits.
+1. **Security:** The tool has access to your local filesystem, so implement proper security measures.
+2. **Backup:** Always create backups before allowing edits to important files.
+3. **Validation:** Validate all inputs to prevent unintended changes.
+4. **Unique matching:** Make sure replacements match exactly one location to avoid unintended edits.
 
 ### Handle errors
 

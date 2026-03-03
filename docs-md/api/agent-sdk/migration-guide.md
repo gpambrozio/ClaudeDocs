@@ -53,7 +53,7 @@ Before:
 ```shiki
 {
   "dependencies": {
-    "@anthropic-ai/claude-code": "^1.0.0"
+    "@anthropic-ai/claude-code": "^0.0.42"
   }
 }
 ```
@@ -63,7 +63,7 @@ After:
 ```shiki
 {
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.1.0"
+    "@anthropic-ai/claude-agent-sdk": "^0.2.0"
   }
 }
 ```
@@ -102,7 +102,7 @@ Change `ClaudeCodeOptions` to `ClaudeAgentOptions`:
 
 ```shiki
 # Before
-from claude_agent_sdk import query, ClaudeCodeOptions
+from claude_code_sdk import query, ClaudeCodeOptions
 
 options = ClaudeCodeOptions(model="claude-opus-4-6")
 
@@ -127,12 +127,12 @@ To improve isolation and explicit configuration, Claude Agent SDK v0.1.0 introdu
 **Migration:**
 
 ```shiki
-# BEFORE (v0.0.x)
-from claude_agent_sdk import query, ClaudeCodeOptions
+# BEFORE (claude-code-sdk)
+from claude_code_sdk import query, ClaudeCodeOptions
 
 options = ClaudeCodeOptions(model="claude-opus-4-6", permission_mode="acceptEdits")
 
-# AFTER (v0.1.0)
+# AFTER (claude-agent-sdk)
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 options = ClaudeAgentOptions(model="claude-opus-4-6", permission_mode="acceptEdits")

@@ -189,7 +189,7 @@ model = "claude-sonnet-4-6"  # After
 
    - **Controlling output formatting** (forcing JSON/YAML output): Use [structured outputs](build-with-claude/structured-outputs.md) or tools with enum fields for classification tasks.
    - **Eliminating preambles** (removing "Here is..." phrases): Add direct instructions in the system prompt: "Respond directly without preamble. Do not start with phrases like 'Here is...', 'Based on...', etc."
-   - **Avoiding bad refusals**: Claude is much better at appropriate refusals now. Clear prompting in the user message without prefill should be sufficient.
+   - **Avoiding bad refusals:** Claude is much better at appropriate refusals now. Clear prompting in the user message without prefill should be sufficient.
    - **Continuations** (resuming interrupted responses): Move the continuation to the user message: "Your previous response was interrupted and ended with `[previous_response]`. Continue from where you left off."
    - **Context hydration / role consistency** (refreshing context in long conversations): Inject what were previously prefilled-assistant reminders into the user turn instead.
 2. **Tool parameter JSON escaping may differ**
@@ -441,7 +441,7 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 
 ---
 
-## Need help?
+## Get help
 
 - Check the [API documentation](api/overview.md) for detailed specifications
 - Review [model capabilities](about-claude/models/overview.md) for performance comparisons

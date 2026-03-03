@@ -6,7 +6,7 @@ Claude is capable of providing detailed citations when answering questions about
 
 All [active models](about-claude/models/overview.md) support citations, with the exception of Haiku 3.
 
-Please share your feedback and suggestions about the citations feature using this [form](https://forms.gle/9n9hSrKnKe3rpowH9).
+Share your feedback and suggestions about the citations feature using this [form](https://forms.gle/9n9hSrKnKe3rpowH9).
 
 Here's an example of how to use citations with the Messages API:
 
@@ -80,9 +80,9 @@ Integrate citations with Claude in these steps:
 
    - Responses may now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
    - Citations reference specific locations in source documents. The format of these citations are dependent on the type of document being cited from.
-     - **For PDFs:** citations will include the page number range (1-indexed).
-     - **For plain text documents:** Citations will include the character index range (0-indexed).
-     - **For custom content documents:** Citations will include the content block index range (0-indexed) corresponding to the original content list provided.
+     - **For PDFs:** Citations include the page number range (1-indexed).
+     - **For plain text documents:** Citations include the character index range (0-indexed).
+     - **For custom content documents:** Citations include the content block index range (0-indexed) corresponding to the original content list provided.
    - Document indices are provided to indicate the reference source and are 0-indexed according to the list of all documents in your original request.
 
 **Automatic chunking vs custom content**

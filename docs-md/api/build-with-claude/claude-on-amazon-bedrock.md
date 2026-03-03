@@ -2,7 +2,7 @@
 
 Copy page
 
-Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDK's. This guide will walk you through the process of completing an API call to Claude on Bedrock in either Python or TypeScript.
+Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through the process of completing an API call to Claude on Bedrock in either Python or TypeScript.
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
@@ -166,7 +166,7 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 
 For all currently supported features on Bedrock, see [API features overview](api/overview.md).
 
-### PDF Support on Bedrock
+### PDF support on Bedrock
 
 PDF support is available on Amazon Bedrock through both the Converse API and InvokeModel API. For detailed information about PDF processing capabilities and limitations, see the [PDF support documentation](build-with-claude/pdf-support.md).
 
@@ -182,14 +182,14 @@ For more details on the two document processing modes and their limitations, ref
 
 Claude Opus 4.6, Sonnet 4.5, and Sonnet 4 support the [1M token context window](build-with-claude/context-windows.md) on Amazon Bedrock.
 
-The 1M token context window is currently in beta. To use the extended context window, include the `context-1m-2025-08-07` beta header in your [Bedrock API requests](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages-request-response.html).
+The 1M token context window is in beta. To use the extended context window, include the `context-1m-2025-08-07` beta header in your [Bedrock API requests](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages-request-response.html).
 
 ## Global vs regional endpoints
 
 Starting with **Claude Sonnet 4.5 and all future models**, Amazon Bedrock offers two endpoint types:
 
-- **Global endpoints**: Dynamic routing for maximum availability
-- **Regional endpoints**: Guaranteed data routing through specific geographic regions
+- **Global endpoints:** Dynamic routing for maximum availability
+- **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
 Regional endpoints include a 10% pricing premium over global endpoints.
 
