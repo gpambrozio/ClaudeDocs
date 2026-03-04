@@ -410,7 +410,6 @@ import {
 Convert MCP tools for use with the SDK's [tool runner](agents-and-tools/tool-use/implement-tool-use.md), which handles tool execution automatically:
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
 import { mcpTools } from "@anthropic-ai/sdk/helpers/beta/mcp";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";

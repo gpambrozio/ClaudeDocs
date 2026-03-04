@@ -31,18 +31,12 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 with client.messages.stream(
     max_tokens=128000,
     messages=[{"role": "user", "content": "Write a detailed analysis..."}],
     model="claude-opus-4-6",
 ) as stream:
     message = stream.get_final_message()
-
-print(message.content[0].text)
 ```
 
 The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. No event handling code is needed.

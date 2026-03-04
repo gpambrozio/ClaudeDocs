@@ -82,7 +82,7 @@ The `allowed-tools` frontmatter field in SKILL.md is only supported when using C
 
 When using the SDK, control tool access through the main `allowedTools` option in your query configuration.
 
-To restrict tools for Skills in SDK applications, use the `allowedTools` option:
+To control tool access for Skills in SDK applications, use `allowedTools` to pre-approve specific tools. Without a `canUseTool` callback, anything not in the list is denied:
 
 Import statements from the first example are assumed in the following code snippets.
 
@@ -91,7 +91,7 @@ Python
 ```shiki
 options = ClaudeAgentOptions(
     setting_sources=["user", "project"],  # Load Skills from filesystem
-    allowed_tools=["Skill", "Read", "Grep", "Glob"],  # Restricted toolset
+    allowed_tools=["Skill", "Read", "Grep", "Glob"],
 )
 
 async for message in query(prompt="Analyze the codebase structure", options=options):

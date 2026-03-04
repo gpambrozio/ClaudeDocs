@@ -185,9 +185,7 @@ response = client.messages.create(
         {
             "name": "query_database",
             "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {
-                # ...
-            },
+            "input_schema": {...},
             "allowed_callers": ["code_execution_20260120"],
         },
     ],

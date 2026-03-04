@@ -26,10 +26,12 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 Python
 
 ```shiki
+import os
+
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="ANTHROPIC_API_KEY",  # Your Claude API key
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # Your Claude API key
     base_url="https://api.anthropic.com/v1/",  # the Claude API endpoint
 )
 
@@ -74,7 +76,7 @@ Python
 ```shiki
 response = client.chat.completions.create(
     model="claude-sonnet-4-6",
-    messages=...,
+    messages=[{"role": "user", "content": "Who are you?"}],
     extra_body={"thinking": {"type": "enabled", "budget_tokens": 2000}},
 )
 ```

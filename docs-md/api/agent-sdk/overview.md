@@ -222,7 +222,7 @@ For partners integrating the Claude Agent SDK, use of Claude branding is optiona
 - "Claude Code" or "Claude Code Agent"
 - Claude Code-branded ASCII art or visual elements that mimic Claude Code
 
-Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact our [sales team](https://www.anthropic.com/contact-sales).
+Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
 
 ## License and terms
 

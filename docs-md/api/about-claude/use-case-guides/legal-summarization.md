@@ -138,11 +138,6 @@ Claude can adapt to various summarization styles. You can change the details of 
 Here’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:
 
 ```shiki
-import anthropic
-
-# Initialize the Anthropic client
-client = anthropic.Anthropic()
-
 def summarize_document(
     text, details_to_extract, model="claude-opus-4-6", max_tokens=1000
 ):
@@ -184,7 +179,6 @@ def summarize_document(
     return response.content[0].text
 
 sublease_summary = summarize_document(document_text, details_to_extract)
-print(sublease_summary)
 ```
 
 This code implements a `summarize_document` function that uses Claude to summarize the contents of a sublease agreement. The function accepts a text string and a list of details to extract as inputs. In this example, the code calls the function with the `document_text` and `details_to_extract` variables that were defined in the previous code snippets.
@@ -228,11 +222,6 @@ Legal summarization often involves handling long documents or many related docum
 Here's an example of how to perform meta-summarization:
 
 ```shiki
-import anthropic
-
-# Initialize the Anthropic client
-client = anthropic.Anthropic()
-
 def chunk_text(text, chunk_size=20000):
     return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 
@@ -289,7 +278,6 @@ def summarize_long_document(
     return response.content[0].text
 
 long_summary = summarize_long_document(document_text, details_to_extract)
-print(long_summary)
 ```
 
 The `summarize_long_document` function builds upon the earlier `summarize_document` function by splitting the document into smaller chunks and summarizing each chunk individually.

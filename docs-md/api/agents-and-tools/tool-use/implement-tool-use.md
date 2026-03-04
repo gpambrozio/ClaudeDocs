@@ -659,10 +659,6 @@ Here's how to handle the `pause_turn` stop reason:
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Initial request with web search
 response = client.messages.create(
     model="claude-3-7-sonnet-latest",

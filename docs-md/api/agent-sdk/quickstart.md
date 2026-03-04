@@ -125,7 +125,7 @@ This code has three main parts:
 
 1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](agent-sdk/python.md) or [TypeScript](agent-sdk/typescript.md) SDK reference.
 2. **`prompt`**: what you want Claude to do. Claude figures out which tools to use based on the task.
-3. **`options`**: configuration for the agent. This example uses `allowedTools` to restrict Claude to `Read`, `Edit`, and `Glob`, and `permissionMode: "acceptEdits"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](agent-sdk/python.md) or [TypeScript](agent-sdk/typescript.md).
+3. **`options`**: configuration for the agent. This example uses `allowedTools` to pre-approve `Read`, `Edit`, and `Glob`, and `permissionMode: "acceptEdits"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](agent-sdk/python.md) or [TypeScript](agent-sdk/typescript.md).
 
 The `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude's reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration (tool execution, context management, retries) so you just consume the stream. The loop ends when Claude finishes the task or hits an error.
 
@@ -220,7 +220,8 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | Mode | Behavior | Use case |
 | --- | --- | --- |
 | `acceptEdits` | Auto-approves file edits, asks for other actions | Trusted development workflows |
-| `bypassPermissions` | Runs without prompts | CI/CD pipelines, automation |
+| `dontAsk` (TypeScript only) | Denies anything not in `allowedTools` | Locked-down headless agents |
+| `bypassPermissions` | Runs every tool without prompts | Sandboxed CI, fully trusted environments |
 | `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |
 
 The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](agent-sdk/user-input.md) that collects user input. For more control, see [Permissions](agent-sdk/permissions.md).

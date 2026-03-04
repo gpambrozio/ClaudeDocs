@@ -26,20 +26,21 @@ All [active models](about-claude/models/overview.md) support token counting.
 
 ### Count tokens in basic messages
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.count_tokens(
-    model="claude-opus-4-6",
-    system="You are a scientist",
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-
-print(response.json())
+curl https://api.anthropic.com/v1/messages/count_tokens \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "content-type: application/json" \
+    --header "anthropic-version: 2023-06-01" \
+    --data '{
+      "model": "claude-opus-4-6",
+      "system": "You are a scientist",
+      "messages": [{
+        "role": "user",
+        "content": "Hello, Claude"
+      }]
+    }'
 ```
 
 JSON
@@ -52,35 +53,38 @@ JSON
 
 [Server tool](agents-and-tools/tool-use/overview.md) token counts only apply to the first sampling call.
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.count_tokens(
-    model="claude-opus-4-6",
-    tools=[
+curl https://api.anthropic.com/v1/messages/count_tokens \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "content-type: application/json" \
+    --header "anthropic-version: 2023-06-01" \
+    --data '{
+      "model": "claude-opus-4-6",
+      "tools": [
         {
-            "name": "get_weather",
-            "description": "Get the current weather in a given location",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "location": {
-                        "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA",
-                    }
-                },
-                "required": ["location"],
+          "name": "get_weather",
+          "description": "Get the current weather in a given location",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The city and state, e.g. San Francisco, CA"
+              }
             },
+            "required": ["location"]
+          }
         }
-    ],
-    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
-)
-
-print(response.json())
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "What'\''s the weather like in San Francisco?"
+        }
+      ]
+    }'
 ```
 
 JSON

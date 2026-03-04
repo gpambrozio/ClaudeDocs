@@ -374,10 +374,6 @@ Tool search works with [prompt caching](build-with-claude/prompt-caching.md). Ad
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # First request with tool search
 messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
 
@@ -407,8 +403,13 @@ messages.append({"role": "assistant", "content": response1.content})
 messages.append(
     {
         "role": "user",
-        "content": "What about New York?",
-        "cache_control": {"type": "ephemeral"},
+        "content": [
+            {
+                "type": "text",
+                "text": "What about New York?",
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
     }
 )
 
@@ -431,7 +432,7 @@ response2 = client.messages.create(
     ],
 )
 
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
+print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
 The system automatically expands tool\_reference blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.

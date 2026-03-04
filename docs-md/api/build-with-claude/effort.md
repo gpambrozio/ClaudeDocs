@@ -46,26 +46,24 @@ Sonnet 4.6 defaults to `high` effort. Explicitly set effort when using Sonnet 4.
 
 ## Basic usage
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --data '{
+        "model": "claude-opus-4-6",
+        "max_tokens": 4096,
+        "messages": [{
             "role": "user",
-            "content": "Analyze the trade-offs between microservices and monolithic architectures",
+            "content": "Analyze the trade-offs between microservices and monolithic architectures"
+        }],
+        "output_config": {
+            "effort": "medium"
         }
-    ],
-    output_config={"effort": "medium"},
-)
-
-print(response.content[0].text)
+    }'
 ```
 
 ## When to adjust the effort parameter

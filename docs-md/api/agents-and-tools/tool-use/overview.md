@@ -166,11 +166,6 @@ Then pass these converted tools to Claude:
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-claude_tools = await get_claude_tools(mcp_session)
-
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,

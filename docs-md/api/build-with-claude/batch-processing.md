@@ -169,39 +169,63 @@ The Message Batch's `processing_status` field indicates the stage of processing 
 
 To poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:
 
-Python
+Shell
 
 ```shiki
-import anthropic
-import time
+#!/bin/sh
 
-client = anthropic.Anthropic()
+until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
+          --header "x-api-key: $ANTHROPIC_API_KEY" \
+          --header "anthropic-version: 2023-06-01" \
+          | grep -o '"processing_status":[[:space:]]*"[^"]*"' \
+          | cut -d'"' -f4) == "ended" ]]; do
+    echo "Batch $MESSAGE_BATCH_ID is still processing..."
+    sleep 60
+done
 
-message_batch = None
-while True:
-    message_batch = client.messages.batches.retrieve(MESSAGE_BATCH_ID)
-    if message_batch.processing_status == "ended":
-        break
-
-    print(f"Batch {MESSAGE_BATCH_ID} is still processing...")
-    time.sleep(60)
-print(message_batch)
+echo "Batch $MESSAGE_BATCH_ID has finished processing"
 ```
 
 ### Listing all Message Batches
 
 You can list all Message Batches in your Workspace using the [list endpoint](api/listing-message-batches.md). The API supports pagination, automatically fetching additional pages as needed:
 
-Python
+Shell
 
 ```shiki
-import anthropic
+#!/bin/sh
 
-client = anthropic.Anthropic()
+if ! command -v jq &> /dev/null; then
+    echo "Error: This script requires jq. Please install it first."
+    exit 1
+fi
 
-# Automatically fetches more pages as needed.
-for message_batch in client.messages.batches.list(limit=20):
-    print(message_batch)
+BASE_URL="https://api.anthropic.com/v1/messages/batches"
+
+has_more=true
+after_id=""
+
+while [ "$has_more" = true ]; do
+    # Construct URL with after_id if it exists
+    if [ -n "$after_id" ]; then
+        url="${BASE_URL}?limit=20&after_id=${after_id}"
+    else
+        url="$BASE_URL?limit=20"
+    fi
+
+    response=$(curl -s "$url" \
+              --header "x-api-key: $ANTHROPIC_API_KEY" \
+              --header "anthropic-version: 2023-06-01")
+
+    # Extract values using jq
+    has_more=$(echo "$response" | jq -r '.has_more')
+    after_id=$(echo "$response" | jq -r '.last_id')
+
+    # Process and print each entry in the data array
+    echo "$response" | jq -c '.data[]' | while read -r entry; do
+        echo "$entry" | jq '.'
+    done
+done
 ```
 
 ### Retrieving batch results
@@ -279,17 +303,13 @@ Batch results can be returned in any order, and may not match the ordering of re
 
 You can cancel a Message Batch that is currently processing using the [cancel endpoint](api/canceling-message-batches.md). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described above to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-message_batch = client.messages.batches.cancel(
-    MESSAGE_BATCH_ID,
-)
-print(message_batch)
+#!/bin/sh
+curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01"
 ```
 
 The response will show the batch in a `canceling` state:

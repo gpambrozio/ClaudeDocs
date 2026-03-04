@@ -34,8 +34,6 @@ If you are interested in other runtime environments, please open or upvote an is
 ## Usage
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
 const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
@@ -54,8 +52,6 @@ console.log(message.content);
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
 const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
@@ -85,10 +81,6 @@ console.log(message.usage);
 The SDK provides support for streaming responses using Server Sent Events (SSE).
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
 const stream = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
@@ -107,10 +99,6 @@ If you need to cancel a stream, you can `break` from the loop or call `stream.co
 This library provides several conveniences for streaming messages, for example:
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
-const anthropic = new Anthropic();
-
 async function main() {
   const stream = anthropic.messages
     .stream({
@@ -145,8 +133,6 @@ This SDK provides helpers for making it easy to create and run tools in the Mess
 For more details on tool use, see the [tool use overview](agents-and-tools/tool-use/overview.md).
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
 import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
 
@@ -219,7 +205,6 @@ The Claude API also supports an [`mcp_servers` parameter](agents-and-tools/mcp.m
 For the Claude API's built-in remote MCP server support, see [MCP Connector](agents-and-tools/mcp-connector.md).
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
 import {
   mcpTools,
   mcpMessages,
@@ -287,7 +272,7 @@ This SDK provides support for the [Message Batches API](build-with-claude/batch-
 Message Batches takes an array of requests, where each object has a `custom_id` identifier, and the exact same request `params` as the standard Messages API:
 
 ```shiki
-await anthropic.messages.batches.create({
+await client.messages.batches.create({
   requests: [
     {
       custom_id: "my-first-request",
@@ -314,7 +299,7 @@ await anthropic.messages.batches.create({
 Once a Message Batch has been processed, indicated by `.processing_status === 'ended'`, you can access the results with `.batches.results()`
 
 ```shiki
-const results = await anthropic.messages.batches.results(batch_id);
+const results = await client.messages.batches.results(batch_id);
 for await (const entry of results) {
   if (entry.result.type === "succeeded") {
     console.log(entry.result.message.content);
@@ -376,10 +361,6 @@ or if the API returns a non-success status code (i.e., 4xx or 5xx response),
 a subclass of `APIError` will be thrown:
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
 const message = await client.messages
   .create({
     max_tokens: 1024,
@@ -510,7 +491,7 @@ List methods in the Claude API are paginated.
 You can use the `for await ... of` syntax to iterate through items across all pages:
 
 ```shiki
-async function fetchAllMessageBatches(params) {
+async function fetchAllMessageBatches(params: Record<string, unknown>) {
   const allMessageBatches = [];
   // Automatically fetches more pages as needed.
   for await (const messageBatch of client.messages.batches.list({ limit: 20 })) {
@@ -544,10 +525,6 @@ If you need to, you can override it by setting default headers on a per-request 
 Be aware that doing so may result in incorrect types and other unexpected or undefined behavior in the SDK.
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
-
 const message = await client.messages.create(
   {
     max_tokens: 1024,
@@ -569,8 +546,6 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 Unlike `.asResponse()` this method consumes the body, returning once it is parsed.
 
 ```shiki
-const client = new Anthropic();
-
 const response = await client.messages
   .create({
     max_tokens: 1024,
@@ -633,7 +608,6 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
 import pino from "pino";
 
 const logger = pino();
@@ -713,8 +687,6 @@ const client = new Anthropic({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
 const client = new Anthropic({
   fetchOptions: {
     // `RequestInit` options
@@ -740,7 +712,6 @@ Deno
 Deno
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
 import * as undici from "undici";
 
 const proxyAgent = new undici.ProxyAgent("http://localhost:8888");
@@ -760,9 +731,6 @@ You can access most beta API features through the beta property of the client. T
 For example, to use the [Files API](build-with-claude/files.md):
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
 const response = await client.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,

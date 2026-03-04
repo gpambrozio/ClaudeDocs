@@ -290,11 +290,9 @@ For multi-turn conversations, set a `cache_control` breakpoint on or after the l
 
 For example, to use prompt caching with web search for a multi-turn conversation:
 
+python
+
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # First request with web search and cache breakpoint
 messages = [
     {"role": "user", "content": "What's the current weather in San Francisco today?"}
@@ -326,8 +324,13 @@ messages.append({"role": "assistant", "content": response1.content})
 messages.append(
     {
         "role": "user",
-        "content": "Should I expect rain later this week?",
-        "cache_control": {"type": "ephemeral"},  # Cache up to this point
+        "content": [
+            {
+                "type": "text",
+                "text": "Should I expect rain later this week?",
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
     }
 )
 
@@ -351,7 +354,7 @@ response2 = client.messages.create(
 )
 # The second response will benefit from cached search results
 # while still being able to perform new searches if needed
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
+print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
 ## Streaming

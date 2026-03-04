@@ -116,10 +116,6 @@ asyncio.run(main())
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
-
 stream = client.messages.create(
     max_tokens=1024,
     messages=[
@@ -138,10 +134,6 @@ for event in stream:
 The async client uses the exact same interface:
 
 ```shiki
-from anthropic import AsyncAnthropic
-
-client = AsyncAnthropic()
-
 stream = await client.messages.create(
     max_tokens=1024,
     messages=[
@@ -162,11 +154,6 @@ async for event in stream:
 The SDK also provides streaming helpers that use context managers and provide access to the accumulated text and the final message:
 
 ```shiki
-import asyncio
-from anthropic import AsyncAnthropic
-
-client = AsyncAnthropic()
-
 async def main() -> None:
     async with client.messages.stream(
         max_tokens=1024,
@@ -335,9 +322,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```shiki
 import anthropic
-from anthropic import Anthropic
-
-client = Anthropic()
+# ...
 
 try:
     message = client.messages.create(
@@ -398,8 +383,6 @@ Certain errors are automatically retried 2 times by default, with a short expone
 You can use the `max_retries` option to configure or disable this:
 
 ```shiki
-from anthropic import Anthropic
-
 # Configure the default for all requests:
 client = Anthropic(
     max_retries=0,  # default is 2
@@ -460,10 +443,6 @@ The SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWT
 List methods in the Claude API are paginated. You can use the `for` syntax to iterate through items across all pages:
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
-
 all_batches = []
 # Automatically fetches more pages as needed.
 for batch in client.messages.batches.list(limit=20):
@@ -474,11 +453,6 @@ print(all_batches)
 For async iteration:
 
 ```shiki
-import asyncio
-from anthropic import AsyncAnthropic
-
-client = AsyncAnthropic()
-
 async def main() -> None:
     all_batches = []
     async for batch in client.messages.batches.list(limit=20):
@@ -522,8 +496,6 @@ If you need to, you can override it by setting default headers on the client obj
 Overriding default headers may result in incorrect types and other unexpected or undefined behavior in the SDK.
 
 ```shiki
-from anthropic import Anthropic
-
 # Set default headers for all requests on the client
 client = Anthropic(
     default_headers={"anthropic-version": "My-Custom-Value"},
@@ -565,6 +537,11 @@ data = message.to_dict()
 In responses, you can distinguish between fields that are explicitly `null` versus fields that were not returned (missing):
 
 ```shiki
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+)
 if response.my_field is None:
     if "my_field" not in response.model_fields_set:
         print("field was not in the response")
@@ -579,10 +556,6 @@ if response.my_field is None:
 The "raw" `Response` returned by `httpx` can be accessed via the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
-
 response = client.messages.with_raw_response.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
@@ -704,10 +677,6 @@ You can access most beta API features through the `beta` property of the client.
 For example, to use the [Files API](build-with-claude/files.md):
 
 ```shiki
-from anthropic import Anthropic
-
-client = Anthropic()
-
 response = client.beta.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,

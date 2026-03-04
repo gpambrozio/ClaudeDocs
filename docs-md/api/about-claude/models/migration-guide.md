@@ -232,15 +232,27 @@ Sonnet 4.6 defaults to an effort level of `high`, in contrast to Sonnet 4.5 whic
 
 If you're not using extended thinking on Sonnet 4.5, you can continue without it on Sonnet 4.6. You should explicitly set effort to the level appropriate for your use case. At `low` effort with thinking disabled, you can expect similar or better performance relative to Sonnet 4.5 with no extended thinking.
 
-Python
+Shell
 
 ```shiki
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=8192,
-    output_config={"effort": "low"},
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 8192,
+    "output_config": {
+        "effort": "low"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
 ```
 
 #### If you're using extended thinking
@@ -251,34 +263,64 @@ If you're using extended thinking on Sonnet 4.5, it continues to be supported on
 
 For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=16384,
-    thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "medium"},
-    betas=["interleaved-thinking-2025-05-14"],
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 16384,
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 16384
+    },
+    "output_config": {
+        "effort": "medium"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
 ```
 
 ##### Chat and non-coding use cases
 
 For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=8192,
-    thinking={"type": "enabled", "budget_tokens": 16384},
-    output_config={"effort": "low"},
-    betas=["interleaved-thinking-2025-05-14"],
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 8192,
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 16384
+    },
+    "output_config": {
+        "effort": "low"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
 ```
 
 ##### When to try adaptive thinking
@@ -291,16 +333,30 @@ The migration paths above use extended thinking with `budget_tokens` for predict
 
 When using adaptive thinking, evaluate `medium` and `high` effort on your tasks. The right level depends on your workload's tradeoff between quality, latency, and token usage.
 
-Python
+Shell
 
 ```shiki
-response = client.messages.create(
-    model="claude-sonnet-4-6",
-    max_tokens=64000,
-    thinking={"type": "adaptive"},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "Your prompt here"}],
-)
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 64000,
+    "thinking": {
+        "type": "adaptive"
+    },
+    "output_config": {
+        "effort": "medium"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
 ```
 
 If you see inconsistent behavior or quality regressions with adaptive thinking, switch to extended thinking with `budget_tokens`. This provides more predictable results with a cap on thinking costs.

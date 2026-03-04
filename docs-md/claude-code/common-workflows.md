@@ -842,7 +842,7 @@ Thinking is enabled by default, but you can adjust or disable it.
 
 | Scope | How to configure | Details |
 | --- | --- | --- |
-| **Effort level** | Adjust in `/model` or set [`CLAUDE_CODE_EFFORT_LEVEL`](settings.md) | Control thinking depth for Opus 4.6: low, medium, high (default). See [Adjust effort level](model-config.md) |
+| **Effort level** | Adjust in `/model` or set [`CLAUDE_CODE_EFFORT_LEVEL`](settings.md) | Control thinking depth for Opus 4.6 and Sonnet 4.6: low, medium, high. See [Adjust effort level](model-config.md) |
 | **Toggle shortcut** | Press `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle thinking on/off for the current session (all models). May require [terminal configuration](terminal-config.md) to enable Option key shortcuts |
 | **Global default** | Use `/config` to toggle thinking mode | Sets your default across all projects (all models). Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json` |
 | **Limit token budget** | Set [`MAX_THINKING_TOKENS`](settings.md) environment variable | Limit the thinking budget to a specific number of tokens (ignored on Opus 4.6 unless set to 0). Example: `export MAX_THINKING_TOKENS=10000` |

@@ -32,13 +32,13 @@ TypeScript
 
 TypeScript
 
-Java
-
-Java
-
 C#
 
 C#
+
+Java
+
+Java
 
 ```shiki
 pip install -U "anthropic"
@@ -98,23 +98,20 @@ The `resource` and `base_url` parameters are mutually exclusive. Provide either 
 
 **Example using API key:**
 
-Python
+Shell
 
 ```shiki
-import os
-from anthropic import AnthropicFoundry
-
-client = AnthropicFoundry(
-    api_key=os.environ.get("ANTHROPIC_FOUNDRY_API_KEY"),
-    resource="example-resource",  # your resource name
-)
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello!"}],
-)
-print(message.content)
+curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
+  -H "content-type: application/json" \
+  -H "api-key: YOUR_AZURE_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
 ```
 
 Keep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.
@@ -129,31 +126,24 @@ For enhanced security and centralized access management, you can use Entra ID (f
 
 **Example using Entra ID:**
 
-Python
+Shell
 
 ```shiki
-import os
-from anthropic import AnthropicFoundry
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+# Get Azure Entra ID token
+ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)
 
-# Get Azure Entra ID token using token provider pattern
-token_provider = get_bearer_token_provider(
-    DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
-)
-
-# Create client with Entra ID authentication
-client = AnthropicFoundry(
-    resource="example-resource",  # your resource name
-    azure_ad_token_provider=token_provider,  # Use token provider for Entra ID auth
-)
-
-# Make request
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello!"}],
-)
-print(message.content)
+# Make request with token. Replace {resource} with your resource name
+curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
+  -H "content-type: application/json" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
 ```
 
 Azure Entra ID authentication allows you to manage access using Azure RBAC, integrate with your organization's identity management, and avoid managing API keys manually.

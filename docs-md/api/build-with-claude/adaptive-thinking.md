@@ -63,22 +63,30 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=16000,
-    thinking={"type": "adaptive"},
-    output_config={"effort": "medium"},
-    messages=[{"role": "user", "content": "What is the capital of France?"}],
-)
-
-print(response.content[0].text)
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-opus-4-6",
+    "max_tokens": 16000,
+    "thinking": {
+        "type": "adaptive"
+    },
+    "output_config": {
+        "effort": "medium"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "What is the capital of France?"
+        }
+    ]
+}'
 ```
 
 ## Streaming with adaptive thinking
@@ -176,7 +184,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#34475558514774555a405c465b445d571a575b59).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#c7b4a6aba2b487a6a9b3afb5a8b7aea4e9a4a8aa).
 
 ### Thinking encryption
 

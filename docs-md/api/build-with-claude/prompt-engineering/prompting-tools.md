@@ -154,9 +154,7 @@ Common issues and solutions:
 
 [Start prompt engineering
 
-Learn core techniques with worked examples.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)[Prompt library
-
-Get inspired by a curated selection of prompts for various tasks and use cases.](resources/prompt-library/library.md)[Test your prompts
+Learn core techniques with worked examples.](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)[Test your prompts
 
 Use the evaluation tool to test your improved prompts.](test-and-evaluate/eval-tool.md)[GitHub prompting tutorial
 

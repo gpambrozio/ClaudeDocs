@@ -234,6 +234,13 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 Python
 
 ```shiki
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
 # After receiving a response with a compaction block
 messages.append({"role": "assistant", "content": response.content})
 
@@ -261,10 +268,6 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 with client.beta.messages.stream(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",

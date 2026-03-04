@@ -39,6 +39,14 @@ Example response
 The most common stop reason. Indicates Claude finished its response naturally.
 
 ```shiki
+from anthropic import Anthropic
+
+client = Anthropic()
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
 if response.stop_reason == "end_turn":
     # Process the complete response
     print(response.content[0].text)
@@ -172,8 +180,27 @@ Claude is calling a tool and expects you to execute it.
 For most tool use implementations, we recommend using the [tool runner](agents-and-tools/tool-use/implement-tool-use.md) which automatically handles tool execution, result formatting, and conversation management.
 
 ```shiki
+from anthropic import Anthropic
+
+client = Anthropic()
+weather_tool = {
+    "name": "get_weather",
+    "description": "Get the current weather in a given location",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "location": {"type": "string", "description": "City and state"},
+        },
+        "required": ["location"],
+    },
+}
+
+def execute_tool(name, tool_input):
+    """Execute a tool and return the result."""
+    return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
+
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-sonnet-4-20250514",
     max_tokens=1024,
     tools=[weather_tool],
     messages=[{"role": "user", "content": "What's the weather?"}],
@@ -360,8 +387,17 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Response contains error details
 
 ```shiki
+import anthropic
+from anthropic import Anthropic
+
+client = Anthropic()
+
 try:
-    response = client.messages.create(...)
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello!"}],
+    )
 
     # Handle successful response with stop_reason
     if response.stop_reason == "max_tokens":
@@ -384,7 +420,15 @@ When using streaming, `stop_reason` is:
 - Not provided in any other events
 
 ```shiki
-with client.messages.stream(...) as stream:
+from anthropic import Anthropic
+
+client = Anthropic()
+
+with client.messages.stream(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+) as stream:
     for event in stream:
         if event.type == "message_delta":
             stop_reason = event.delta.stop_reason

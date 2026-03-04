@@ -23,13 +23,13 @@ TypeScript
 
 TypeScript
 
-Java
-
-Java
-
 Go
 
 Go
+
+Java
+
+Java
 
 Ruby
 
@@ -69,27 +69,26 @@ Before running requests you may need to run `gcloud auth application-default log
 
 The following examples show how to generate text from Claude on Vertex AI:
 
-Python
+Shell
 
 ```shiki
-from anthropic import AnthropicVertex
+MODEL_ID=claude-opus-4-6
+LOCATION=global
+PROJECT_ID=MY_PROJECT_ID
 
-project_id = "MY_PROJECT_ID"
-region = "global"
-
-client = AnthropicVertex(project_id=project_id, region=region)
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=100,
-    messages=[
-        {
-            "role": "user",
-            "content": "Hey Claude!",
-        }
-    ],
-)
-print(message)
+curl \
+-X POST \
+-H "Authorization: Bearer $(gcloud auth print-access-token)" \
+-H "Content-Type: application/json" \
+https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:streamRawPredict -d \
+'{
+  "anthropic_version": "vertex-2023-10-16",
+  "messages": [{
+    "role": "user",
+    "content": "Hey Claude!"
+  }],
+  "max_tokens": 100,
+}'
 ```
 
 See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.

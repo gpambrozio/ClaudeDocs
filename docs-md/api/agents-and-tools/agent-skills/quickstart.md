@@ -50,10 +50,6 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -70,8 +66,6 @@ response = client.beta.messages.create(
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
-
-print(response.content)
 ```
 
 Let's break down what each part does:
@@ -92,6 +86,9 @@ The presentation was created in the code execution container and saved as a file
 Python
 
 ```shiki
+from typing import Any
+
+response: Any = None
 # Extract file ID from response
 file_id = None
 for block in response.content:

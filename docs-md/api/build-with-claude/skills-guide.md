@@ -62,25 +62,35 @@ Skills are specified using the `container` parameter in the Messages API. You ca
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {
+          "type": "anthropic",
+          "skill_id": "pptx",
+          "version": "latest"
+        }
+      ]
     },
-    messages=[
-        {"role": "user", "content": "Create a presentation about renewable energy"}
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{
+      "role": "user",
+      "content": "Create a presentation about renewable energy"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 ### Downloading Generated Files
@@ -96,74 +106,74 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 **Example: Creating and downloading an Excel file**
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Step 1: Use a Skill to create a file
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
+RESPONSE=$(curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
+      ]
     },
-    messages=[
-        {
-            "role": "user",
-            "content": "Create an Excel file with a simple budget spreadsheet",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{
+      "role": "user",
+      "content": "Create an Excel file with a simple budget spreadsheet"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }')
 
-# Step 2: Extract file IDs from the response
-def extract_file_ids(response):
-    file_ids = []
-    for item in response.content:
-        if item.type == "bash_code_execution_tool_result":
-            content_item = item.content
-            if content_item.type == "bash_code_execution_result":
-                for file in content_item.content:
-                    if hasattr(file, "file_id"):
-                        file_ids.append(file.file_id)
-    return file_ids
+# Step 2: Extract file_id from response (using jq)
+FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="bash_code_execution_tool_result") | .content | select(.type=="bash_code_execution_result") | .content[] | select(.file_id) | .file_id')
 
-# Step 3: Download the file using Files API
-for file_id in extract_file_ids(response):
-    file_metadata = client.beta.files.retrieve_metadata(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
-    file_content = client.beta.files.download(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
+# Step 3: Get filename from metadata
+FILENAME=$(curl "https://api.anthropic.com/v1/files/$FILE_ID" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" | jq -r '.filename')
 
-    # Step 4: Save to disk
-    file_content.write_to_file(file_metadata.filename)
-    print(f"Downloaded: {file_metadata.filename}")
+# Step 4: Download the file using Files API
+curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  --output "$FILENAME"
+
+echo "Downloaded: $FILENAME"
 ```
 
 **Additional Files API operations:**
 
-Python
+Shell
 
 ```shiki
 # Get file metadata
-file_info = client.beta.files.retrieve_metadata(
-    file_id=file_id, betas=["files-api-2025-04-14"]
-)
-print(f"Filename: {file_info.filename}, Size: {file_info.size_bytes} bytes")
+curl "https://api.anthropic.com/v1/files/$FILE_ID" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14"
 
 # List all files
-files = client.beta.files.list(betas=["files-api-2025-04-14"])
-for file in files.data:
-    print(f"{file.filename} - {file.created_at}")
+curl "https://api.anthropic.com/v1/files" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14"
 
 # Delete a file
-client.beta.files.delete(file_id=file_id, betas=["files-api-2025-04-14"])
+curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14"
 ```
 
 For complete details on the Files API, see the [Files API documentation](api/files-content.md).
@@ -211,52 +221,68 @@ response2 = client.beta.messages.create(
 
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
-Python
+Shell
 
 ```shiki
-messages = [{"role": "user", "content": "Process this large dataset"}]
-max_retries = 10
-
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            }
-        ]
+# Initial request
+RESPONSE=$(curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {
+          "type": "custom",
+          "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+          "version": "latest"
+        }
+      ]
     },
-    messages=messages,
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{
+      "role": "user",
+      "content": "Process this large dataset"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }')
 
-# Handle pause_turn for long operations
-for i in range(max_retries):
-    if response.stop_reason != "pause_turn":
-        break
+# Check stop_reason and handle pause_turn in a loop
+STOP_REASON=$(echo "$RESPONSE" | jq -r '.stop_reason')
+CONTAINER_ID=$(echo "$RESPONSE" | jq -r '.container.id')
 
-    messages.append({"role": "assistant", "content": response.content})
-    response = client.beta.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=4096,
-        betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-        container={
-            "id": response.container.id,
-            "skills": [
-                {
-                    "type": "custom",
-                    "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                    "version": "latest",
-                }
-            ],
-        },
-        messages=messages,
-        tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-    )
+while [ "$STOP_REASON" = "pause_turn" ]; do
+  # Continue with same container
+  RESPONSE=$(curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+    -H "content-type: application/json" \
+    -d "{
+      \"model\": \"claude-opus-4-6\",
+      \"max_tokens\": 4096,
+      \"container\": {
+        \"id\": \"$CONTAINER_ID\",
+        \"skills\": [{
+          \"type\": \"custom\",
+          \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",
+          \"version\": \"latest\"
+        }]
+      },
+      \"messages\": [/* include conversation history */],
+      \"tools\": [{
+        \"type\": \"code_execution_20250825\",
+        \"name\": \"code_execution\"
+      }]
+    }")
+
+  STOP_REASON=$(echo "$RESPONSE" | jq -r '.stop_reason')
+done
 ```
 
 The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.
@@ -265,29 +291,45 @@ The response may include a `pause_turn` stop reason, which indicates that the AP
 
 Combine multiple Skills in a single request to handle complex workflows:
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-            {"type": "anthropic", "skill_id": "pptx", "version": "latest"},
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            },
-        ]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {
+          "type": "anthropic",
+          "skill_id": "xlsx",
+          "version": "latest"
+        },
+        {
+          "type": "anthropic",
+          "skill_id": "pptx",
+          "version": "latest"
+        },
+        {
+          "type": "custom",
+          "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+          "version": "latest"
+        }
+      ]
     },
-    messages=[
-        {"role": "user", "content": "Analyze sales data and create a presentation"}
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{
+      "role": "user",
+      "content": "Analyze sales data and create a presentation"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 ---
@@ -298,49 +340,16 @@ response = client.beta.messages.create(
 
 Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-# Option 1: Using files_from_dir helper (Python only, recommended)
-from anthropic.lib import files_from_dir
-
-skill = client.beta.skills.create(
-    display_title="Financial Analysis",
-    files=files_from_dir("/path/to/financial_analysis_skill"),
-    betas=["skills-2025-10-02"],
-)
-
-# Option 2: Using a zip file
-skill = client.beta.skills.create(
-    display_title="Financial Analysis",
-    files=[("skill.zip", open("financial_analysis_skill.zip", "rb"))],
-    betas=["skills-2025-10-02"],
-)
-
-# Option 3: Using file tuples (filename, file_content, mime_type)
-skill = client.beta.skills.create(
-    display_title="Financial Analysis",
-    files=[
-        (
-            "financial_skill/SKILL.md",
-            open("financial_skill/SKILL.md", "rb"),
-            "text/markdown",
-        ),
-        (
-            "financial_skill/analyze.py",
-            open("financial_skill/analyze.py", "rb"),
-            "text/x-python",
-        ),
-    ],
-    betas=["skills-2025-10-02"],
-)
-
-print(f"Created skill: {skill.id}")
-print(f"Latest version: {skill.latest_version}")
+curl -X POST "https://api.anthropic.com/v1/skills" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02" \
+  -F "display_title=Financial Analysis" \
+  -F "files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md" \
+  -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
 ```
 
 **Requirements:**
@@ -358,17 +367,20 @@ For complete request/response schemas, see the [Create Skill API reference](api/
 
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
-Python
+Shell
 
 ```shiki
 # List all Skills
-skills = client.beta.skills.list(betas=["skills-2025-10-02"])
-
-for skill in skills.data:
-    print(f"{skill.id}: {skill.display_title} (source: {skill.source})")
+curl "https://api.anthropic.com/v1/skills" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
 
 # List only custom Skills
-custom_skills = client.beta.skills.list(source="custom", betas=["skills-2025-10-02"])
+curl "https://api.anthropic.com/v1/skills?source=custom" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
 ```
 
 See the [List Skills API reference](api/skills/list-skills.md) for pagination and filtering options.
@@ -377,41 +389,27 @@ See the [List Skills API reference](api/skills/list-skills.md) for pagination an
 
 Get details about a specific Skill:
 
-Python
+Shell
 
 ```shiki
-skill = client.beta.skills.retrieve(
-    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv", betas=["skills-2025-10-02"]
-)
-
-print(f"Skill: {skill.display_title}")
-print(f"Latest version: {skill.latest_version}")
-print(f"Created: {skill.created_at}")
+curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
 ```
 
 ### Deleting a Skill
 
 To delete a Skill, you must first delete all its versions:
 
-Python
+Shell
 
 ```shiki
-# Step 1: Delete all versions
-versions = client.beta.skills.versions.list(
-    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv", betas=["skills-2025-10-02"]
-)
-
-for version in versions.data:
-    client.beta.skills.versions.delete(
-        skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv",
-        version=version.version,
-        betas=["skills-2025-10-02"],
-    )
-
-# Step 2: Delete the Skill
-client.beta.skills.delete(
-    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv", betas=["skills-2025-10-02"]
-)
+# Delete all versions first, then delete the Skill
+curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02"
 ```
 
 Attempting to delete a Skill with existing versions returns a 400 error.
@@ -432,53 +430,57 @@ Skills support versioning to manage updates safely:
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
-Python
+Shell
 
 ```shiki
 # Create a new version
-from anthropic.lib import files_from_dir
+NEW_VERSION=$(curl -X POST "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02" \
+  -F "files[]=@updated_skill/SKILL.md;filename=updated_skill/SKILL.md")
 
-new_version = client.beta.skills.versions.create(
-    skill_id="skill_01AbCdEfGhIjKlMnOpQrStUv",
-    files=files_from_dir("/path/to/updated_skill"),
-    betas=["skills-2025-10-02"],
-)
+VERSION_NUMBER=$(echo "$NEW_VERSION" | jq -r '.version')
 
 # Use specific version
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": new_version.version,
-            }
-        ]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d "{
+    \"model\": \"claude-opus-4-6\",
+    \"max_tokens\": 4096,
+    \"container\": {
+      \"skills\": [{
+        \"type\": \"custom\",
+        \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",
+        \"version\": \"$VERSION_NUMBER\"
+      }]
     },
-    messages=[{"role": "user", "content": "Use updated Skill"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    \"messages\": [{\"role\": \"user\", \"content\": \"Use updated Skill\"}],
+    \"tools\": [{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]
+  }"
 
 # Use latest version
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {
-                "type": "custom",
-                "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                "version": "latest",
-            }
-        ]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [{
+        "type": "custom",
+        "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+        "version": "latest"
+      }]
     },
-    messages=[{"role": "user", "content": "Use latest Skill version"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{"role": "user", "content": "Use latest Skill version"}],
+    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+  }'
 ```
 
 See the [Create Skill Version API reference](api/skills/create-skill-version.md) for complete details.
@@ -544,37 +546,51 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 
 Combine Excel and custom DCF analysis Skills:
 
-Python
+Shell
 
 ```shiki
 # Create custom DCF analysis Skill
-from anthropic.lib import files_from_dir
+DCF_SKILL=$(curl -X POST "https://api.anthropic.com/v1/skills" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: skills-2025-10-02" \
+  -F "display_title=DCF Analysis" \
+  -F "files[]=@dcf_skill/SKILL.md;filename=dcf_skill/SKILL.md")
 
-dcf_skill = client.beta.skills.create(
-    display_title="DCF Analysis",
-    files=files_from_dir("/path/to/dcf_skill"),
-    betas=["skills-2025-10-02"],
-)
+DCF_SKILL_ID=$(echo "$DCF_SKILL" | jq -r '.id')
 
 # Use with Excel to create financial model
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [
-            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-            {"type": "custom", "skill_id": dcf_skill.id, "version": "latest"},
-        ]
-    },
-    messages=[
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d "{
+    \"model\": \"claude-opus-4-6\",
+    \"max_tokens\": 4096,
+    \"container\": {
+      \"skills\": [
         {
-            "role": "user",
-            "content": "Build a DCF valuation model for a SaaS company with the attached financials",
+          \"type\": \"anthropic\",
+          \"skill_id\": \"xlsx\",
+          \"version\": \"latest\"
+        },
+        {
+          \"type\": \"custom\",
+          \"skill_id\": \"$DCF_SKILL_ID\",
+          \"version\": \"latest\"
         }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+      ]
+    },
+    \"messages\": [{
+      \"role\": \"user\",
+      \"content\": \"Build a DCF valuation model for a SaaS company with the attached financials\"
+    }],
+    \"tools\": [{
+      \"type\": \"code_execution_20250825\",
+      \"name\": \"code_execution\"
+    }]
+  }"
 ```
 
 ---
@@ -653,47 +669,45 @@ container = {
 
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
-Python
+Shell
 
 ```shiki
 # First request creates cache
-response1 = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=[
-        "code-execution-2025-08-25",
-        "skills-2025-10-02",
-        "prompt-caching-2024-07-31",
-    ],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"}
+      ]
     },
-    messages=[{"role": "user", "content": "Analyze sales data"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{"role": "user", "content": "Analyze sales data"}],
+    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+  }'
 
 # Adding/removing Skills breaks cache
-response2 = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=[
-        "code-execution-2025-08-25",
-        "skills-2025-10-02",
-        "prompt-caching-2024-07-31",
-    ],
-    container={
-        "skills": [
-            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-            {
-                "type": "anthropic",
-                "skill_id": "pptx",
-                "version": "latest",
-            },  # Cache miss
-        ]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
+        {"type": "anthropic", "skill_id": "pptx", "version": "latest"}
+      ]
     },
-    messages=[{"role": "user", "content": "Create a presentation"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{"role": "user", "content": "Create a presentation"}],
+    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+  }'
 ```
 
 For best caching performance, keep your Skills list consistent across requests.
@@ -705,6 +719,10 @@ Handle Skill-related errors gracefully:
 Python
 
 ```shiki
+import anthropic
+
+client = anthropic.Anthropic()
+
 try:
     response = client.beta.messages.create(
         model="claude-opus-4-6",

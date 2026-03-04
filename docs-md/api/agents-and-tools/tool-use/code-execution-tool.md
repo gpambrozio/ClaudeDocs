@@ -210,11 +210,6 @@ When Claude creates files during code execution, you can retrieve these files us
 Python
 
 ```shiki
-from anthropic import Anthropic
-
-# Initialize the client
-client = Anthropic()
-
 # Request code execution that creates files
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -511,44 +506,48 @@ This allows you to maintain created files between requests.
 
 ### Example
 
-Python
+Shell
 
 ```shiki
-import os
-from anthropic import Anthropic
-
-# Initialize the client
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-
 # First request: Create a file with a random number
-response1 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --data '{
+        "model": "claude-opus-4-6",
+        "max_tokens": 4096,
+        "messages": [{
             "role": "user",
-            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+            "content": "Write a file with a random number and save it to \"/tmp/number.txt\""
+        }],
+        "tools": [{
+            "type": "code_execution_20250825",
+            "name": "code_execution"
+        }]
+    }' > response1.json
 
-# Extract the container ID from the first response
-container_id = response1.container.id
+# Extract container ID from the response (using jq)
+CONTAINER_ID=$(jq -r '.container.id' response1.json)
 
 # Second request: Reuse the container to read the file
-response2 = client.messages.create(
-    container=container_id,  # Reuse the same container
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
+curl https://api.anthropic.com/v1/messages \
+    --header "x-api-key: $ANTHROPIC_API_KEY" \
+    --header "anthropic-version: 2023-06-01" \
+    --header "content-type: application/json" \
+    --data '{
+        "container": "'$CONTAINER_ID'",
+        "model": "claude-opus-4-6",
+        "max_tokens": 4096,
+        "messages": [{
             "role": "user",
-            "content": "Read the number from '/tmp/number.txt' and calculate its square",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+            "content": "Read the number from \"/tmp/number.txt\" and calculate its square"
+        }],
+        "tools": [{
+            "type": "code_execution_20250825",
+            "name": "code_execution"
+        }]
+    }'
 ```
 
 ## Streaming

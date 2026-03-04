@@ -129,10 +129,6 @@ The citation blocks generated in responses cannot be cached directly, but the so
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Long document content (e.g., technical documentation)
 long_document = (
     "This is a very long document with thousands of words..." + " ... " * 1000

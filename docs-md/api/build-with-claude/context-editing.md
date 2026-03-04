@@ -427,10 +427,6 @@ Add `compaction_control` to your `tool_runner` call:
 Python
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=4096,

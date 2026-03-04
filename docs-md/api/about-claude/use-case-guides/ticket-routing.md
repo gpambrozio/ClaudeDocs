@@ -269,15 +269,6 @@ You may need to assess Claude on other axes depending on what factors that are i
 To assess this, we first have to modify the script we wrote and add a function to compare the predicted intent with the actual intent and calculate the percentage of correct predictions. We also have to add in cost calculation and time measurement functionality.
 
 ```shiki
-import anthropic
-import re
-
-# Create an instance of the Claude API client
-client = anthropic.Anthropic()
-
-# Set the default model
-DEFAULT_MODEL = "claude-haiku-4-5-20251001"
-
 def classify_support_request(request, actual_intent):
     # Define the prompt for the classification task
     classification_prompt = f"""You will be acting as a customer support ticket classification system.

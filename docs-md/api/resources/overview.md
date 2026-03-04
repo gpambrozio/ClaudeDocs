@@ -32,9 +32,7 @@ Deployable applications built with the API.](https://github.com/anthropics/anthr
 
 Step by step lessons on building with Claude.](https://anthropic.skilljar.com/)[Cookbook
 
-Replicable code samples and implementations.](https://platform.claude.com/cookbooks)[Prompt library
-
-Explore optimized prompts for a breadth of business and personal tasks.](resources/prompt-library/library.md)[Use case guides
+Replicable code samples and implementations.](https://platform.claude.com/cookbooks)[Use case guides
 
 In-depth production guides for building common use cases with Claude.](about-claude/use-case-guides/overview.md)[Glossary
 

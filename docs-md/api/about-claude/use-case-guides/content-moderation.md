@@ -182,12 +182,6 @@ Content moderation is a classification problem. Thus, you can use the same techn
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
 
 ```shiki
-import anthropic
-import json
-
-# Initialize the Anthropic client
-client = anthropic.Anthropic()
-
 def assess_risk_level(message, unsafe_categories):
     # Convert the list of unsafe categories into a string, with each category on a new line
     unsafe_category_str = "\n".join(unsafe_categories)
@@ -277,12 +271,6 @@ In complex scenarios, it may be helpful to consider additional strategies to imp
 In addition to listing the unsafe categories in the prompt, further improvements can be made by providing definitions and phrases related to each category.
 
 ```shiki
-import anthropic
-import json
-
-# Initialize the Anthropic client
-client = anthropic.Anthropic()
-
 # Dictionary of categories considered unsafe for content moderation, with their definitions
 unsafe_category_definitions = {
     "Child Exploitation": "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children.",
@@ -373,12 +361,6 @@ Notably, the definition for the `Specialized Advice` category now specifies the 
 To reduce costs in situations where real-time moderation isn't necessary, consider moderating messages in batches. Include multiple messages within the prompt's context, and ask Claude to assess which messages should be moderated.
 
 ```shiki
-import anthropic
-import json
-
-# Initialize the Anthropic client
-client = anthropic.Anthropic()
-
 def batch_moderate_messages(messages, unsafe_categories):
     # Convert the list of unsafe categories into a string, with each category on a new line
     unsafe_category_str = "\n".join(unsafe_categories)

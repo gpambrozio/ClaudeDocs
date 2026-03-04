@@ -324,10 +324,6 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -361,10 +357,6 @@ In this workflow, Claude will:
 Web fetch works with [prompt caching](build-with-claude/prompt-caching.md). To enable prompt caching, add `cache_control` breakpoints in your request. Cached fetch results can be reused across conversation turns.
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # First request with web fetch
 messages = [
     {
@@ -387,8 +379,13 @@ messages.append({"role": "assistant", "content": response1.content})
 messages.append(
     {
         "role": "user",
-        "content": "What methodology does the paper use?",
-        "cache_control": {"type": "ephemeral"},
+        "content": [
+            {
+                "type": "text",
+                "text": "What methodology does the paper use?",
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
     }
 )
 
@@ -400,7 +397,7 @@ response2 = client.messages.create(
 )
 
 # The second response benefits from cached fetch results
-print(f"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}")
+print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
 ```
 
 ## Streaming
