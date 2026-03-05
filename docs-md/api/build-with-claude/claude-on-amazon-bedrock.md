@@ -2,11 +2,9 @@
 
 Copy page
 
-Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through the process of completing an API call to Claude on Bedrock in either Python or TypeScript.
+Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](api/client-sdks.md).
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
-
-The PHP SDK does not currently support Amazon Bedrock. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
 
 ## Install and configure the AWS CLI
 
@@ -43,6 +41,10 @@ Go
 Java
 
 Java
+
+PHP
+
+PHP
 
 Ruby
 
@@ -126,7 +128,7 @@ See the [client SDKs](api/client-sdks.md) for more details, and the [official Be
 
 You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
 
-Bearer token authentication is supported in the C#, Go, and Java SDKs. The Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
+Bearer token authentication is supported in the C#, Go, and Java SDKs. The PHP, Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
 
 The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which is automatically detected by `fromEnv()` credential resolution.
 

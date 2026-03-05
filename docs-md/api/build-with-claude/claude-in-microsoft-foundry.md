@@ -6,7 +6,7 @@ This guide walks you through the process of setting up and making API calls to C
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.
 
-Foundry is supported by the C#, Java, Python, and TypeScript SDKs. The Go, PHP, and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
+Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
 
 ## Preview
 
@@ -39,6 +39,10 @@ C#
 Java
 
 Java
+
+PHP
+
+PHP
 
 ```shiki
 pip install -U "anthropic"
@@ -100,6 +104,32 @@ The `resource` and `base_url` parameters are mutually exclusive. Provide either 
 
 Shell
 
+Shell
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
 ```shiki
 curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
   -H "content-type: application/json" \
@@ -127,6 +157,32 @@ For enhanced security and centralized access management, you can use Entra ID (f
 **Example using Entra ID:**
 
 Shell
+
+Shell
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 ```shiki
 # Get Azure Entra ID token

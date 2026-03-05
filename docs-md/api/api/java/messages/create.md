@@ -4012,87 +4012,59 @@ Most intelligent model for building agents and coding
 
 CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
-Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+Best combination of speed and intelligence
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
-Premium model combining maximum intelligence with practical performance
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
 
 CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_3\_7\_SONNET\_LATEST("claude-3-7-sonnet-latest")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
-High-performance model with early extended thinking
+Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_3\_7\_SONNET\_20250219("claude-3-7-sonnet-20250219")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
-High-performance model with early extended thinking
+High-performance model for agents and coding
 
-CLAUDE\_3\_5\_HAIKU\_LATEST("claude-3-5-haiku-latest")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
-Fastest and most compact model for near-instant responsiveness
+High-performance model for agents and coding
 
-CLAUDE\_3\_5\_HAIKU\_20241022("claude-3-5-haiku-20241022")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
-Our fastest model
+Exceptional model for specialized complex tasks
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
-Hybrid model, capable of near-instant responses and extended thinking
+Exceptional model for specialized complex tasks
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
-Hybrid model, capable of near-instant responses and extended thinking
+Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
-High-performance model with extended thinking
+Powerful model for complex tasks
 
 CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_4\_SONNET\_20250514("claude-4-sonnet-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-Our best model for real-world agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-Our best model for real-world agents and coding
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Our most capable model
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Our most capable model
-
-CLAUDE\_4\_OPUS\_20250514("claude-4-opus-20250514")
-
-Our most capable model
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Our most capable model
-
-CLAUDE\_3\_OPUS\_LATEST("claude-3-opus-latest")
-
-Excels at writing and complex tasks
-
-CLAUDE\_3\_OPUS\_20240229("claude-3-opus-20240229")
-
-Excels at writing and complex tasks
-
 CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
-Our previous most fast and cost-effective
+Fast and cost-effective model
 
 JsonValue; role "assistant"constant"assistant"constant
 
@@ -4868,87 +4840,59 @@ Most intelligent model for building agents and coding
 
 CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
 
-Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+Best combination of speed and intelligence
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
 
-Premium model combining maximum intelligence with practical performance
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
 
 CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
 
 Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_3\_7\_SONNET\_LATEST("claude-3-7-sonnet-latest")
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
 
-High-performance model with early extended thinking
+Premium model combining maximum intelligence with practical performance
 
-CLAUDE\_3\_7\_SONNET\_20250219("claude-3-7-sonnet-20250219")
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
 
-High-performance model with early extended thinking
+High-performance model for agents and coding
 
-CLAUDE\_3\_5\_HAIKU\_LATEST("claude-3-5-haiku-latest")
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
 
-Fastest and most compact model for near-instant responsiveness
+High-performance model for agents and coding
 
-CLAUDE\_3\_5\_HAIKU\_20241022("claude-3-5-haiku-20241022")
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
 
-Our fastest model
+Exceptional model for specialized complex tasks
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
 
-Hybrid model, capable of near-instant responses and extended thinking
+Exceptional model for specialized complex tasks
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
 
-Hybrid model, capable of near-instant responses and extended thinking
+Powerful model for complex tasks
 
-CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
 
-High-performance model with extended thinking
+Powerful model for complex tasks
 
 CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
 
 High-performance model with extended thinking
 
-CLAUDE\_4\_SONNET\_20250514("claude-4-sonnet-20250514")
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
 
 High-performance model with extended thinking
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-Our best model for real-world agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-Our best model for real-world agents and coding
-
-CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
-
-Our most capable model
-
-CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
-
-Our most capable model
-
-CLAUDE\_4\_OPUS\_20250514("claude-4-opus-20250514")
-
-Our most capable model
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Our most capable model
-
-CLAUDE\_3\_OPUS\_LATEST("claude-3-opus-latest")
-
-Excels at writing and complex tasks
-
-CLAUDE\_3\_OPUS\_20240229("claude-3-opus-20240229")
-
-Excels at writing and complex tasks
-
 CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
 
-Our previous most fast and cost-effective
+Fast and cost-effective model
 
 JsonValue; role "assistant"constant"assistant"constant
 

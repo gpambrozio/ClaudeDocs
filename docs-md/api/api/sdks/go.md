@@ -253,42 +253,6 @@ default:
 }
 ```
 
-## Streaming
-
-Use the streaming API for real-time responses:
-
-```shiki
-stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_6,
-	MaxTokens: 1024,
-	Messages: []anthropic.MessageParam{
-		anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
-	},
-})
-
-message := anthropic.Message{}
-for stream.Next() {
-	event := stream.Current()
-	err := message.Accumulate(event)
-	if err != nil {
-		panic(err)
-	}
-
-	switch eventVariant := event.AsAny().(type) {
-	case anthropic.ContentBlockDeltaEvent:
-		switch deltaVariant := eventVariant.Delta.AsAny().(type) {
-		case anthropic.TextDelta:
-			print(deltaVariant.Text)
-		}
-
-	}
-}
-
-if stream.Err() != nil {
-	panic(stream.Err())
-}
-```
-
 ## Error handling
 
 When the API returns a non-success status code, the SDK returns an error with type
@@ -341,22 +305,23 @@ client := anthropic.NewClient(
 )
 
 // Override per-request:
-client.Messages.New(
-	context.TODO(),
-	anthropic.MessageNewParams{
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{{
-			Content: []anthropic.ContentBlockParamUnion{{
-				OfText: &anthropic.TextBlockParam{
-					Text: "What is a quaternion?",
-				},
+// ...
+	client.Messages.New(
+		context.TODO(),
+		anthropic.MessageNewParams{
+			MaxTokens: 1024,
+			Messages: []anthropic.MessageParam{{
+				Content: []anthropic.ContentBlockParamUnion{{
+					OfText: &anthropic.TextBlockParam{
+						Text: "What is a quaternion?",
+					},
+				}},
+				Role: anthropic.MessageParamRoleUser,
 			}},
-			Role: anthropic.MessageParamRoleUser,
-		}},
-		Model: anthropic.ModelClaudeOpus4_6,
-	},
-	option.WithMaxRetries(5),
-)
+			Model: anthropic.ModelClaudeOpus4_6,
+		},
+		option.WithMaxRetries(5),
+	)
 ```
 
 ## Timeouts
@@ -370,23 +335,24 @@ To set a per-retry timeout, use `option.WithRequestTimeout()`.
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
-client.Messages.New(
-	ctx,
-	anthropic.MessageNewParams{
-		MaxTokens: 1024,
-		Messages: []anthropic.MessageParam{{
-			Content: []anthropic.ContentBlockParamUnion{{
-				OfText: &anthropic.TextBlockParam{
-					Text: "What is a quaternion?",
-				},
+// ...
+	client.Messages.New(
+		ctx,
+		anthropic.MessageNewParams{
+			MaxTokens: 1024,
+			Messages: []anthropic.MessageParam{{
+				Content: []anthropic.ContentBlockParamUnion{{
+					OfText: &anthropic.TextBlockParam{
+						Text: "What is a quaternion?",
+					},
+				}},
+				Role: anthropic.MessageParamRoleUser,
 			}},
-			Role: anthropic.MessageParamRoleUser,
-		}},
-		Model: anthropic.ModelClaudeOpus4_6,
-	},
-	// This sets the per-retry timeout
-	option.WithRequestTimeout(20*time.Second),
-)
+			Model: anthropic.ModelClaudeOpus4_6,
+		},
+		// This sets the per-retry timeout
+		option.WithRequestTimeout(20*time.Second),
+	)
 ```
 
 ## Long requests

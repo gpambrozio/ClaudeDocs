@@ -88,7 +88,7 @@ Server-managed settings have the following limitations during the beta period:
 
 ### [​](#settings-precedence) Settings precedence
 
-Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md), and user or project settings cannot override them. When both are present, server-managed settings take precedence and endpoint-managed settings are not used.
+Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments. When both are present, server-managed settings take precedence and endpoint-managed settings are not used.
 
 ### [​](#fetch-and-caching-behavior) Fetch and caching behavior
 

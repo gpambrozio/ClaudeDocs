@@ -76,11 +76,12 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```shiki
 <?php
-
+// ...
 use Anthropic\Core\Exceptions\APIConnectionException;
 use Anthropic\Core\Exceptions\APIStatusException;
 use Anthropic\Core\Exceptions\RateLimitException;
 
+// ...
 try {
   $message = $client->messages->create(
     maxTokens: 1024,
@@ -129,7 +130,7 @@ use Anthropic\Client;
 use Anthropic\RequestOptions;
 
 // Configure the default for all requests:
-$client = new Client(maxRetries: 0);
+$client = new Client(requestOptions: RequestOptions::with(maxRetries: 0));
 
 // Or, configure per-request:
 $result = $client->messages->create(
@@ -179,9 +180,10 @@ The `extra*` parameters of the same name override the documented parameters.
 
 ```shiki
 <?php
-
+// ...
 use Anthropic\RequestOptions;
 
+// ...
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
@@ -204,7 +206,7 @@ To make requests to undocumented endpoints while retaining the benefit of auth, 
 
 ```shiki
 <?php
-
+// ...
 $response = $client->request(
   method: "post",
   path: '/undocumented/endpoint',

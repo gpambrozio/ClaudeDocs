@@ -126,18 +126,17 @@ Citations and prompt caching can be used together effectively.
 
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
-Python
+Shell
 
 ```shiki
-# Long document content (e.g., technical documentation)
-long_document = (
-    "This is a very long document with thousands of words..." + " ... " * 1000
-)  # Minimum cacheable length
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "content-type: application/json" \
+     --data '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "messages": [
         {
             "role": "user",
             "content": [
@@ -146,21 +145,19 @@ response = client.messages.create(
                     "source": {
                         "type": "text",
                         "media_type": "text/plain",
-                        "data": long_document,
+                        "data": "This is a very long document with thousands of words..."
                     },
-                    "citations": {"enabled": True},
-                    "cache_control": {
-                        "type": "ephemeral"
-                    },  # Cache the document content
+                    "citations": {"enabled": true},
+                    "cache_control": {"type": "ephemeral"}
                 },
                 {
                     "type": "text",
-                    "text": "What does this document say about API features?",
-                },
-            ],
+                    "text": "What does this document say about API features?"
+                }
+            ]
         }
-    ],
-)
+    ]
+}'
 ```
 
 In this example:

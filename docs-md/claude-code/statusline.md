@@ -81,7 +81,7 @@ This walkthrough shows what’s happening under the hood by manually creating a 
 
 Running [`/statusline`](#use-the-statusline-command) with a description of what you want configures all of this for you automatically.
 
-These examples use Bash scripts, which work on macOS and Linux. On Windows, you can run Bash scripts through [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/install) or rewrite them in PowerShell.
+These examples use Bash scripts, which work on macOS and Linux. On Windows, see [Windows configuration](#windows-configuration) for PowerShell and Git Bash examples.
 
 ![A status line showing model name, directory, and context percentage](https://mintcdn.com/claude-code/nibzesLaJVh4ydOq/images/statusline-quickstart.png?fit=max&auto=format&n=nibzesLaJVh4ydOq&q=85&s=696445e59ca0059213250651ad23db6b)
 
@@ -189,6 +189,11 @@ Claude Code sends the following JSON fields to your script via stdin:
 | `output_style.name` | Name of the current output style |
 | `vim.mode` | Current vim mode (`NORMAL` or `INSERT`) when [vim mode](interactive-mode.md) is enabled |
 | `agent.name` | Agent name when running with the `--agent` flag or agent settings configured |
+| `worktree.name` | Name of the active worktree. Present only during `--worktree` sessions |
+| `worktree.path` | Absolute path to the worktree directory |
+| `worktree.branch` | Git branch name for the worktree (for example, `"worktree-my-feature"`). Absent for hook-based worktrees |
+| `worktree.original_cwd` | The directory Claude was in before entering the worktree |
+| `worktree.original_branch` | Git branch checked out before entering the worktree. Absent for hook-based worktrees |
 
 Full JSON schema
 
@@ -243,6 +248,13 @@ Ask AI
   },
   "agent": {
     "name": "security-reviewer"
+  },
+  "worktree": {
+    "name": "my-feature",
+    "path": "/path/to/.claude/worktrees/my-feature",
+    "branch": "worktree-my-feature",
+    "original_cwd": "/path/to/project",
+    "original_branch": "main"
   }
 }
 ```
@@ -251,6 +263,7 @@ Ask AI
 
 - `vim`: appears only when vim mode is enabled
 - `agent`: appears only when running with the `--agent` flag or agent settings configured
+- `worktree`: appears only during `--worktree` sessions. When present, `branch` and `original_branch` may also be absent for hook-based worktrees
 
 **Fields that may be `null`**:
 
@@ -549,6 +562,50 @@ else
 fi
 ```
 
+### [​](#windows-configuration) Windows configuration
+
+On Windows, Claude Code runs status line commands through Git Bash. You can invoke PowerShell from that shell:
+
+settings.json
+
+statusline.ps1
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -NoProfile -File C:/Users/username/.claude/statusline.ps1"
+  }
+}
+```
+
+Or run a Bash script directly:
+
+settings.json
+
+statusline.sh
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
+}
+```
+
 ## [​](#tips) Tips
 
 - **Test with mock input**: `echo '{"model":{"display_name":"Opus"},"context_window":{"used_percentage":25}}' | ./statusline.sh`
@@ -565,6 +622,8 @@ Community projects like [ccstatusline](https://github.com/sirmalloc/ccstatusline
 - Check that your script outputs to stdout, not stderr
 - Run your script manually to verify it produces output
 - If `disableAllHooks` is set to `true` in your settings, the status line is also disabled. Remove this setting or set it to `false` to re-enable.
+- Run `claude --debug` to log the exit code and stderr from the first status line invocation in a session
+- Ask Claude to read your settings file and execute the `statusLine` command directly to surface errors
 
 **Status line shows `--` or empty values**
 

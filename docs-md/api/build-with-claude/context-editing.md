@@ -15,7 +15,7 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 | --- | --- | --- | --- |
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python and TypeScript SDKs](api/client-sdks.md) when using [`tool_runner`](agents-and-tools/tool-use/implement-tool-use.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
+| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using [`tool_runner`](agents-and-tools/tool-use/implement-tool-use.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
 
 ## Server-side strategies
 
@@ -170,7 +170,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
         "model": "claude-opus-4-6",
-        "max_tokens": 1024,
+        "max_tokens": 16000,
         "messages": [/* ... */],
         "thinking": {
             "type": "enabled",
@@ -232,7 +232,7 @@ Python
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-6",
-    max_tokens=1024,
+    max_tokens=16000,
     messages=[...],
     thinking={"type": "enabled", "budget_tokens": 10000},
     tools=[...],
@@ -407,7 +407,7 @@ response = client.beta.messages.create(
 
 **Server-side compaction is recommended over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
-Compaction is available in the [Python and TypeScript SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/implement-tool-use.md).
+Compaction is available in the [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/implement-tool-use.md).
 
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](build-with-claude/context-windows.md).
 

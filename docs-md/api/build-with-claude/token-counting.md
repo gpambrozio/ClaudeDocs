@@ -235,7 +235,7 @@ Token counting is **free to use** but subject to requests per minute rate limits
 | 3 | 4,000 |
 | 4 | 8,000 |
 
-Token counting and message creation have separate and independent rate limits -- usage of one does not count against the limits of the other.
+Token counting and message creation have separate and independent rate limits. Usage of one does not count against the limits of the other.
 
 ---
 

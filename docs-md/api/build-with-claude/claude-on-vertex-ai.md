@@ -7,7 +7,7 @@ The Vertex API for accessing Claude is nearly-identical to the [Messages API](ap
 - In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 - In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](api/client-sdks.md). This guide walks you through the process of making a request to Claude on Vertex AI in either Python or TypeScript.
+Vertex is also supported by Anthropic's official [client SDKs](api/client-sdks.md). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
 Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
 
@@ -23,6 +23,10 @@ TypeScript
 
 TypeScript
 
+C#
+
+C#
+
 Go
 
 Go
@@ -30,6 +34,10 @@ Go
 Java
 
 Java
+
+PHP
+
+PHP
 
 Ruby
 
@@ -38,8 +46,6 @@ Ruby
 ```shiki
 pip install -U google-cloud-aiplatform "anthropic[vertex]"
 ```
-
-The PHP SDK does not currently support Google Vertex AI. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
 
 ## Accessing Vertex AI
 

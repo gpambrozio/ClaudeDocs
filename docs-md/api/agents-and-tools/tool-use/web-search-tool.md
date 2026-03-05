@@ -290,7 +290,7 @@ For multi-turn conversations, set a `cache_control` breakpoint on or after the l
 
 For example, to use prompt caching with web search for a multi-turn conversation:
 
-python
+Python
 
 ```shiki
 # First request with web search and cache breakpoint

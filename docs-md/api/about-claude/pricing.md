@@ -25,13 +25,7 @@ The following table shows pricing for all Claude models across different usage t
 | Claude Opus 3 ([deprecated](about-claude/model-deprecations.md)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
 | Claude Haiku 3 | $0.25 / MTok | $0.30 / MTok | $0.50 / MTok | $0.03 / MTok | $1.25 / MTok |
 
-MTok = Million tokens. The "Base Input Tokens" column shows standard input pricing, "Cache Writes" and "Cache Hits" are specific to [prompt caching](build-with-claude/prompt-caching.md), and "Output Tokens" shows output pricing. Prompt caching offers both 5-minute (default) and 1-hour cache durations to optimize costs for different use cases.
-
-The table above reflects the following pricing multipliers for prompt caching:
-
-- 5-minute cache write tokens are 1.25 times the base input tokens price
-- 1-hour cache write tokens are 2 times the base input tokens price
-- Cache read tokens are 0.1 times the base input tokens price
+MTok = Million tokens. The "Base Input Tokens" column shows standard input pricing, "Cache Writes" and "Cache Hits" are specific to [prompt caching](#prompt-caching), and "Output Tokens" shows output pricing. See [prompt caching pricing](#prompt-caching) below for an explanation of the cache columns and pricing multipliers.
 
 ## Third-party platform pricing
 
@@ -58,6 +52,29 @@ For implementation details and code examples:
 - [Google Vertex AI global vs regional endpoints](build-with-claude/claude-on-vertex-ai.md)
 
 ## Feature-specific pricing
+
+### Prompt caching
+
+Prompt caching reduces costs and latency by reusing previously processed portions of your prompt across API calls. Instead of reprocessing the same large system prompt, document, or conversation history on every request, the API reads from cache at a fraction of the standard input price.
+
+There are two ways to enable prompt caching:
+
+- **Automatic caching:** Add a single `cache_control` field at the top level of your request. The system automatically manages cache breakpoints as conversations grow. This is the recommended starting point for most use cases.
+- **Explicit cache breakpoints:** Place `cache_control` directly on individual content blocks for fine-grained control over exactly what gets cached.
+
+Prompt caching uses the following pricing multipliers relative to base input token rates:
+
+| Cache operation | Multiplier | Duration |
+| --- | --- | --- |
+| 5-minute cache write | 1.25x base input price | Cache valid for 5 minutes |
+| 1-hour cache write | 2x base input price | Cache valid for 1 hour |
+| Cache read (hit) | 0.1x base input price | Same duration as the preceding write |
+
+Cache write tokens are charged when content is first stored. Cache read tokens are charged when a subsequent request retrieves the cached content. A cache hit costs 10% of the standard input price, which means caching pays off after just one cache read for the 5-minute duration (1.25x write), or after two cache reads for the 1-hour duration (2x write).
+
+These multipliers stack with other pricing modifiers, including the Batch API discount, long context pricing, and data residency.
+
+For implementation details, supported models, and code examples, see the [prompt caching documentation](build-with-claude/prompt-caching.md).
 
 ### Data residency pricing
 
@@ -352,7 +369,7 @@ When building agents with Claude:
 3. **Batch operations**: Use the Batch API for non-time-sensitive tasks
 4. **Monitor usage patterns**: Track token consumption to identify optimization opportunities
 
-For high-volume agent applications, consider contacting our [enterprise sales team](https://claude.com/contact-sales) for custom pricing arrangements.
+For high-volume agent applications, contact the [enterprise sales team](https://claude.com/contact-sales) for custom pricing arrangements.
 
 ## Additional pricing considerations
 
@@ -368,7 +385,7 @@ Rate limits vary by usage tier and affect how many requests you can make:
 
 For detailed rate limit information, see the [rate limits documentation](api/rate-limits.md).
 
-For higher rate limits or custom pricing arrangements, [contact our sales team](https://claude.com/contact-sales).
+For higher rate limits or custom pricing arrangements, [contact the sales team](https://claude.com/contact-sales).
 
 ### Volume discounts
 
@@ -387,7 +404,7 @@ For enterprise customers with specific needs:
 - Dedicated support
 - Custom terms
 
-Contact our sales team at [sales@anthropic.com](mailto:sales@anthropic.com) or through the [Claude Console](/settings/limits) to discuss enterprise pricing options.
+Contact the sales team at [sales@anthropic.com](mailto:sales@anthropic.com) or through the [Claude Console](/settings/limits) to discuss enterprise pricing options.
 
 ## Billing and payment
 
@@ -408,11 +425,11 @@ New users receive a small amount of free credits to test the API. [Contact sales
 
 **How do discounts stack?**
 
-Batch API and prompt caching discounts can be combined. For example, using both features together provides significant cost savings compared to standard API calls.
+Batch API and prompt caching discounts can be combined. For example, using both features together provides significant cost savings compared to standard API calls. See [prompt caching pricing](#prompt-caching) for how the multipliers interact.
 
 **What payment methods are accepted?**
 
-We accept major credit cards for standard accounts. Enterprise customers can arrange invoicing and other payment methods.
+Major credit cards are accepted for standard accounts. Enterprise customers can arrange invoicing and other payment methods.
 
 For additional questions about pricing, contact [support@anthropic.com](mailto:support@anthropic.com).
 

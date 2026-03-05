@@ -17,7 +17,7 @@ Maven
 Maven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.14.0")
+implementation("com.anthropic:anthropic-java:2.15.0")
 ```
 
 ## Requirements

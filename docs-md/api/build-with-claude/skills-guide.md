@@ -108,6 +108,38 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 Shell
 
+Shell
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+Shell
+
 ```shiki
 # Step 1: Use a Skill to create a file
 RESPONSE=$(curl https://api.anthropic.com/v1/messages \

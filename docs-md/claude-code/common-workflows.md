@@ -532,20 +532,7 @@ For comprehensive coverage, ask Claude to identify edge cases you might have mis
 
 ## [​](#create-pull-requests) Create pull requests
 
-You can create pull requests by asking Claude directly (“create a pr for my changes”) or by using the `/commit-push-pr` skill, which commits, pushes, and opens a PR in one step.
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-> /commit-push-pr
-```
-
-If you have a Slack MCP server configured and specify channels in your CLAUDE.md (for example, “post PR URLs to #team-prs”), the skill automatically posts the PR URL to those channels.
-For more control over the process, guide Claude through it step-by-step or [create your own skill](skills.md):
+You can create pull requests by asking Claude directly (“create a pr for my changes”), or guide Claude through it step-by-step:
 
 1
 
@@ -834,7 +821,7 @@ Tips:
 Additionally, Opus 4.6 introduces adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your [effort level](model-config.md) setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.
 Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.
 
-Phrases like “think”, “think hard”, “ultrathink”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.
+Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.
 
 ### [​](#configure-thinking-mode) Configure thinking mode
 
@@ -843,6 +830,7 @@ Thinking is enabled by default, but you can adjust or disable it.
 | Scope | How to configure | Details |
 | --- | --- | --- |
 | **Effort level** | Adjust in `/model` or set [`CLAUDE_CODE_EFFORT_LEVEL`](settings.md) | Control thinking depth for Opus 4.6 and Sonnet 4.6: low, medium, high. See [Adjust effort level](model-config.md) |
+| **`ultrathink` keyword** | Include “ultrathink” anywhere in your prompt | Sets effort to high for that turn on Opus 4.6 and Sonnet 4.6. Useful for one-off tasks requiring deep reasoning without permanently changing your effort setting |
 | **Toggle shortcut** | Press `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle thinking on/off for the current session (all models). May require [terminal configuration](terminal-config.md) to enable Option key shortcuts |
 | **Global default** | Use `/config` to toggle thinking mode | Sets your default across all projects (all models). Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json` |
 | **Limit token budget** | Set [`MAX_THINKING_TOKENS`](settings.md) environment variable | Limit the thinking budget to a specific number of tokens (ignored on Opus 4.6 unless set to 0). Example: `export MAX_THINKING_TOKENS=10000` |

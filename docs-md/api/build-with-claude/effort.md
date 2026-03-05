@@ -101,7 +101,7 @@ The effort parameter can be used with or without extended thinking enabled. When
 
 ## Best practices
 
-1. **Start with high:** Use lower effort levels to trade off performance for token efficiency.
+1. **Set effort explicitly:** The API defaults to `high`, but the right starting point depends on your model and workload.
 2. **Use low for speed-sensitive or simple tasks:** When latency matters or tasks are straightforward, low effort can significantly reduce response times and costs.
 3. **Test your use case:** The impact of effort levels varies by task type. Evaluate performance on your specific use cases before deploying.
 4. **Consider dynamic effort:** Adjust effort based on task complexity. Simple queries may warrant low effort while agentic coding and complex reasoning benefit from high effort.
