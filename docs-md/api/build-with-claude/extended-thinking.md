@@ -103,7 +103,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#e59684898096a5848b918d978a958c86cb868a88).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#087b69646d7b4869667c607a6778616b266b6765).
 
 ### Streaming thinking
 
@@ -529,7 +529,7 @@ The billed output token count will **not** match the visible token count in the 
 
 - **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning like math, coding, and analysis.
 - **Context handling:** You do not need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they are not included when calculating context usage.
-- **Prompt engineering:** Review our [extended thinking prompting tips](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) if you want to maximize Claude's thinking capabilities.
+- **Prompt engineering:** Review the [extended thinking prompting tips](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) if you want to maximize Claude's thinking capabilities.
 
 ## Next steps
 

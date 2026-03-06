@@ -272,7 +272,7 @@ Claude stopped because it reached the model's context window limit. This allows 
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-6",
-    max_tokens=64000,  # Model's maximum output tokens
+    max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.6 supports 128K with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -501,7 +501,7 @@ def get_max_possible_tokens(client, prompt):
     response = client.messages.create(
         model="claude-opus-4-6",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000,  # Set to model's maximum output tokens
+        max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.6 supports 128K with streaming)
     )
 
     if response.stop_reason == "model_context_window_exceeded":

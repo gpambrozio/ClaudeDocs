@@ -50,7 +50,7 @@ curl https://api.anthropic.com/v1/messages \
       }
     ],
     "stream": true
-  }' | jq '.usage'
+  }'
 ```
 
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.

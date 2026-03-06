@@ -8,7 +8,23 @@ The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filt
 
 Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
 
-This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+The basic web fetch tool (`web_fetch_20250910`) is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md).
+
+While our native web fetch tool is ZDR-eligible, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
+
+The `web_fetch_20260209` version with dynamic filtering is **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
+
+To use `web_fetch_20260209` with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
+
+```shiki
+{
+  "type": "web_fetch_20260209",
+  "name": "web_fetch",
+  "allowed_callers": ["direct"]
+}
+```
+
+This restricts the tool to direct invocation only, bypassing the internal code execution step.
 
 Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
 
@@ -44,7 +60,7 @@ When you add the web fetch tool to your API request:
 3. For PDFs, automatic text extraction is performed.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
-The web fetch tool currently does not support web sites dynamically rendered via JavaScript.
+The web fetch tool currently does not support websites dynamically rendered via JavaScript.
 
 ### Dynamic filtering with Opus 4.6 and Sonnet 4.6
 

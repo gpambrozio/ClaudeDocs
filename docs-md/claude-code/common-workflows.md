@@ -47,7 +47,7 @@ Copy
 Ask AI
 
 ```shiki
-> give me an overview of this codebase
+give me an overview of this codebase
 ```
 
 4
@@ -61,7 +61,7 @@ Copy
 Ask AI
 
 ```shiki
-> explain the main architecture patterns used here
+explain the main architecture patterns used here
 ```
 
 Report incorrect code
@@ -71,7 +71,7 @@ Copy
 Ask AI
 
 ```shiki
-> what are the key data models?
+what are the key data models?
 ```
 
 Report incorrect code
@@ -81,7 +81,7 @@ Copy
 Ask AI
 
 ```shiki
-> how is authentication handled?
+how is authentication handled?
 ```
 
 Tips:
@@ -105,7 +105,7 @@ Copy
 Ask AI
 
 ```shiki
-> find the files that handle user authentication
+find the files that handle user authentication
 ```
 
 2
@@ -119,7 +119,7 @@ Copy
 Ask AI
 
 ```shiki
-> how do these authentication files work together?
+how do these authentication files work together?
 ```
 
 3
@@ -133,7 +133,7 @@ Copy
 Ask AI
 
 ```shiki
-> trace the login process from front-end to database
+trace the login process from front-end to database
 ```
 
 Tips:
@@ -159,7 +159,7 @@ Copy
 Ask AI
 
 ```shiki
-> I'm seeing an error when I run npm test
+I'm seeing an error when I run npm test
 ```
 
 2
@@ -173,7 +173,7 @@ Copy
 Ask AI
 
 ```shiki
-> suggest a few ways to fix the @ts-ignore in user.ts
+suggest a few ways to fix the @ts-ignore in user.ts
 ```
 
 3
@@ -187,7 +187,7 @@ Copy
 Ask AI
 
 ```shiki
-> update user.ts to add the null check you suggested
+update user.ts to add the null check you suggested
 ```
 
 Tips:
@@ -213,7 +213,7 @@ Copy
 Ask AI
 
 ```shiki
-> find deprecated API usage in our codebase
+find deprecated API usage in our codebase
 ```
 
 2
@@ -227,7 +227,7 @@ Copy
 Ask AI
 
 ```shiki
-> suggest how to refactor utils.js to use modern JavaScript features
+suggest how to refactor utils.js to use modern JavaScript features
 ```
 
 3
@@ -241,7 +241,7 @@ Copy
 Ask AI
 
 ```shiki
-> refactor utils.js to use ES2024 features while maintaining the same behavior
+refactor utils.js to use ES2024 features while maintaining the same behavior
 ```
 
 4
@@ -255,7 +255,7 @@ Copy
 Ask AI
 
 ```shiki
-> run tests for the refactored code
+run tests for the refactored code
 ```
 
 Tips:
@@ -281,7 +281,7 @@ Copy
 Ask AI
 
 ```shiki
-> /agents
+/agents
 ```
 
 This shows all available subagents and lets you create new ones.
@@ -299,7 +299,7 @@ Copy
 Ask AI
 
 ```shiki
-> review my recent code changes for security issues
+review my recent code changes for security issues
 ```
 
 Report incorrect code
@@ -309,7 +309,7 @@ Copy
 Ask AI
 
 ```shiki
-> run all tests and fix any failures
+run all tests and fix any failures
 ```
 
 3
@@ -323,7 +323,7 @@ Copy
 Ask AI
 
 ```shiki
-> use the code-reviewer subagent to check the auth module
+use the code-reviewer subagent to check the auth module
 ```
 
 Report incorrect code
@@ -333,7 +333,7 @@ Copy
 Ask AI
 
 ```shiki
-> have the debugger subagent investigate why users can't log in
+have the debugger subagent investigate why users can't log in
 ```
 
 4
@@ -347,7 +347,7 @@ Copy
 Ask AI
 
 ```shiki
-> /agents
+/agents
 ```
 
 Then select “Create New subagent” and follow the prompts to define:
@@ -426,7 +426,7 @@ Copy
 Ask AI
 
 ```shiki
-> I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.
+I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.
 ```
 
 Claude analyzes the current implementation and create a comprehensive plan. Refine with follow-ups:
@@ -438,8 +438,17 @@ Copy
 Ask AI
 
 ```shiki
-> What about backward compatibility?
-> How should we handle database migration?
+What about backward compatibility?
+```
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+How should we handle database migration?
 ```
 
 Press `Ctrl+G` to open the plan in your default text editor, where you can edit it directly before Claude proceeds.
@@ -480,7 +489,7 @@ Copy
 Ask AI
 
 ```shiki
-> find functions in NotificationsService.swift that are not covered by tests
+find functions in NotificationsService.swift that are not covered by tests
 ```
 
 2
@@ -494,7 +503,7 @@ Copy
 Ask AI
 
 ```shiki
-> add tests for the notification service
+add tests for the notification service
 ```
 
 3
@@ -508,7 +517,7 @@ Copy
 Ask AI
 
 ```shiki
-> add test cases for edge conditions in the notification service
+add test cases for edge conditions in the notification service
 ```
 
 4
@@ -522,7 +531,7 @@ Copy
 Ask AI
 
 ```shiki
-> run the new tests and fix any failures
+run the new tests and fix any failures
 ```
 
 Claude can generate tests that follow your project’s existing patterns and conventions. When asking for tests, be specific about what behavior you want to verify. Claude examines your existing test files to match the style, frameworks, and assertion patterns already in use.
@@ -545,7 +554,7 @@ Copy
 Ask AI
 
 ```shiki
-> summarize the changes I've made to the authentication module
+summarize the changes I've made to the authentication module
 ```
 
 2
@@ -559,7 +568,7 @@ Copy
 Ask AI
 
 ```shiki
-> create a pr
+create a pr
 ```
 
 3
@@ -573,7 +582,7 @@ Copy
 Ask AI
 
 ```shiki
-> enhance the PR description with more context about the security improvements
+enhance the PR description with more context about the security improvements
 ```
 
 When you create a PR using `gh pr create`, the session is automatically linked to that PR. You can resume it later with `claude --from-pr <number>`.
@@ -595,7 +604,7 @@ Copy
 Ask AI
 
 ```shiki
-> find functions without proper JSDoc comments in the auth module
+find functions without proper JSDoc comments in the auth module
 ```
 
 2
@@ -609,7 +618,7 @@ Copy
 Ask AI
 
 ```shiki
-> add JSDoc comments to the undocumented functions in auth.js
+add JSDoc comments to the undocumented functions in auth.js
 ```
 
 3
@@ -623,7 +632,7 @@ Copy
 Ask AI
 
 ```shiki
-> improve the generated documentation with more context and examples
+improve the generated documentation with more context and examples
 ```
 
 4
@@ -637,7 +646,7 @@ Copy
 Ask AI
 
 ```shiki
-> check if the documentation follows our project standards
+check if the documentation follows our project standards
 ```
 
 Tips:
@@ -673,7 +682,7 @@ Copy
 Ask AI
 
 ```shiki
-> What does this image show?
+What does this image show?
 ```
 
 Report incorrect code
@@ -683,7 +692,7 @@ Copy
 Ask AI
 
 ```shiki
-> Describe the UI elements in this screenshot
+Describe the UI elements in this screenshot
 ```
 
 Report incorrect code
@@ -693,7 +702,7 @@ Copy
 Ask AI
 
 ```shiki
-> Are there any problematic elements in this diagram?
+Are there any problematic elements in this diagram?
 ```
 
 3
@@ -707,7 +716,7 @@ Copy
 Ask AI
 
 ```shiki
-> Here's a screenshot of the error. What's causing it?
+Here's a screenshot of the error. What's causing it?
 ```
 
 Report incorrect code
@@ -717,7 +726,7 @@ Copy
 Ask AI
 
 ```shiki
-> This is our current database schema. How should we modify it for the new feature?
+This is our current database schema. How should we modify it for the new feature?
 ```
 
 4
@@ -731,7 +740,7 @@ Copy
 Ask AI
 
 ```shiki
-> Generate CSS to match this design mockup
+Generate CSS to match this design mockup
 ```
 
 Report incorrect code
@@ -741,7 +750,7 @@ Copy
 Ask AI
 
 ```shiki
-> What HTML structure would recreate this component?
+What HTML structure would recreate this component?
 ```
 
 Tips:
@@ -769,7 +778,7 @@ Copy
 Ask AI
 
 ```shiki
-> Explain the logic in @src/utils/auth.js
+Explain the logic in @src/utils/auth.js
 ```
 
 This includes the full content of the file in the conversation.
@@ -785,7 +794,7 @@ Copy
 Ask AI
 
 ```shiki
-> What's the structure of @src/components?
+What's the structure of @src/components?
 ```
 
 This provides a directory listing with file information.
@@ -801,7 +810,7 @@ Copy
 Ask AI
 
 ```shiki
-> Show me the data from @github:repos/owner/repo/issues
+Show me the data from @github:repos/owner/repo/issues
 ```
 
 This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](mcp.md) for details.
@@ -876,7 +885,7 @@ Copy
 Ask AI
 
 ```shiki
-> /rename auth-refactor
+/rename auth-refactor
 ```
 
 You can also rename any session from the picker: run `/resume`, navigate to a session, and press `R`.
@@ -906,7 +915,7 @@ Copy
 Ask AI
 
 ```shiki
-> /resume auth-refactor
+/resume auth-refactor
 ```
 
 ### [​](#use-the-session-picker) Use the session picker
@@ -1245,7 +1254,7 @@ Copy
 Ask AI
 
 ```shiki
-> can Claude Code create pull requests?
+can Claude Code create pull requests?
 ```
 
 Report incorrect code
@@ -1255,7 +1264,7 @@ Copy
 Ask AI
 
 ```shiki
-> how does Claude Code handle permissions?
+how does Claude Code handle permissions?
 ```
 
 Report incorrect code
@@ -1265,7 +1274,7 @@ Copy
 Ask AI
 
 ```shiki
-> what skills are available?
+what skills are available?
 ```
 
 Report incorrect code
@@ -1275,7 +1284,7 @@ Copy
 Ask AI
 
 ```shiki
-> how do I use MCP with Claude Code?
+how do I use MCP with Claude Code?
 ```
 
 Report incorrect code
@@ -1285,7 +1294,7 @@ Copy
 Ask AI
 
 ```shiki
-> how do I configure Claude Code for Amazon Bedrock?
+how do I configure Claude Code for Amazon Bedrock?
 ```
 
 Report incorrect code
@@ -1295,7 +1304,7 @@ Copy
 Ask AI
 
 ```shiki
-> what are the limitations of Claude Code?
+what are the limitations of Claude Code?
 ```
 
 Claude provides documentation-based answers to these questions. For executable examples and hands-on demonstrations, refer to the specific workflow sections above.

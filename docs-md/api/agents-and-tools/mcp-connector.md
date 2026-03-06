@@ -8,7 +8,7 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 
 The previous version (`mcp-client-2025-04-04`) is deprecated. See the [deprecated version documentation](#deprecated-version-mcp-client-2025-04-04) below.
 
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
 
 ## Key features
 

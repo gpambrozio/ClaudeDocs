@@ -95,7 +95,7 @@ Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support a 1-million token 
 
 The 1M token context window is in beta for organizations in [usage tier](api/rate-limits.md) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.
 
-This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 To use the 1M token context window, include the `context-1m-2025-08-07` [beta header](api/beta-headers.md) in your API requests:
 

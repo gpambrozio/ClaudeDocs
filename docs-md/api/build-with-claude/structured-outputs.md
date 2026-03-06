@@ -117,7 +117,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 
 - **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
 - **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
-- **Java**: Plain Java classes with automatic schema derivation via `outputFormat(Class<T>)`
+- **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
 - **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
 - **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
 

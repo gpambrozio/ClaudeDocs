@@ -6,7 +6,7 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 The Files API is in beta. Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
 
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
 
 ## Supported models
 
@@ -283,7 +283,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#4a392b262f390a2b243e2238253a232964292527) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#2350424f465063424d574b514c534a400d404c4e) if you need higher limits for your use case
 
 Was this page helpful?
 

@@ -11,7 +11,7 @@ Computer use is in beta and requires a [beta header](api/beta-headers.md):
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
 
 ## Overview
 

@@ -43,7 +43,7 @@ Include 3–5 examples for best results. You can also ask Claude to evaluate you
 
 ### Structure prompts with XML tags
 
-XML tags help Claude parse complex prompts unambiguously, especially when your prompt mixes instructions, context, examples, and variable inputs. Wrapping each type of content in its own tag — e.g. `<instructions>`, `<context>`, `<input>` — reduces misinterpretation.
+XML tags help Claude parse complex prompts unambiguously, especially when your prompt mixes instructions, context, examples, and variable inputs. Wrapping each type of content in its own tag (e.g. `<instructions>`, `<context>`, `<input>`) reduces misinterpretation.
 
 Best practices:
 
@@ -194,7 +194,7 @@ Here are common prefill scenarios and how to migrate away from them:
 
 ### Tool usage
 
-Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them—even if making changes might be what you intended.
+Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended.
 
 For Claude to take action, be more explicit:
 
@@ -317,7 +317,7 @@ client.messages.create(
 
 If you are not using extended thinking, no changes are required. Thinking is off by default when you omit the `thinking` parameter.
 
-- **Prefer general instructions over prescriptive steps.** A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan — Claude's reasoning frequently exceeds what a human would prescribe.
+- **Prefer general instructions over prescriptive steps.** A prompt like "think thoroughly" often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe.
 - **Multishot examples work with thinking.** Use `<thinking>` tags inside your few-shot examples to show Claude the reasoning pattern. It will generalize that style to its own extended thinking blocks.
 - **Manual CoT as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem. Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output.
 - **Ask Claude to self-check.** Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math.
@@ -431,7 +431,7 @@ Use subagents when tasks can run in parallel, require isolated context, or invol
 
 ### Chain complex prompts
 
-With adaptive thinking and subagent orchestration, Claude handles most multi-step reasoning internally. Explicit prompt chaining — breaking a task into sequential API calls — is still useful when you need to inspect intermediate outputs or enforce a specific pipeline structure.
+With adaptive thinking and subagent orchestration, Claude handles most multi-step reasoning internally. Explicit prompt chaining (breaking a task into sequential API calls) is still useful when you need to inspect intermediate outputs or enforce a specific pipeline structure.
 
 The most common chaining pattern is **self-correction**: generate a draft → have Claude review it against criteria → have Claude refine based on the review. Each step is a separate API call so you can log, evaluate, or branch at any point.
 

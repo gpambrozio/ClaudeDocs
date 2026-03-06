@@ -10,7 +10,7 @@ Code execution is a core primitive for building high-performance agents. It enab
 
 Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
 
-This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 

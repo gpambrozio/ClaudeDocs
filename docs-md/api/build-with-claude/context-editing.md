@@ -23,7 +23,7 @@ Context editing is in beta with support for tool result clearing and thinking bl
 
 Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
 
-This feature is in beta and is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Beta features are excluded from ZDR.
+This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
 
 ### Tool result clearing
 

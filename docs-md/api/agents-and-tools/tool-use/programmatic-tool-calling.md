@@ -10,7 +10,7 @@ For a deeper look at the inference and context costs that programmatic tool call
 
 This feature requires the code execution tool to be enabled.
 
-This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 

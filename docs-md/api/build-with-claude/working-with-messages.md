@@ -4,7 +4,7 @@ Copy page
 
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages.md).
 
-This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Basic request and response
 

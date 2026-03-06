@@ -11,7 +11,7 @@ Batch processing is a powerful approach for handling large volumes of requests e
 
 The Message Batches API is Anthropic's first implementation of this pattern.
 
-This feature is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ---
 

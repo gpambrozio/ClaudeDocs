@@ -10,7 +10,7 @@ The memory tool operates client-side: you control where and how the data is stor
 
 Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 
-This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Use cases
 

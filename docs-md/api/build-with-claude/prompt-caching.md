@@ -477,7 +477,7 @@ The 5-minute and 1-hour cache behave the same with respect to latency. You will 
 
 You can use both 1-hour and 5-minute cache controls in the same request, but with an important constraint: Cache entries with longer TTL must appear before shorter TTLs (that is, a 1-hour cache entry must appear before any 5-minute cache entries).
 
-When mixing TTLs, we determine three billing locations in your prompt:
+When mixing TTLs, the API determines three billing locations in your prompt:
 
 1. Position `A`: The token count at the highest cache hit (or 0 if no hits).
 2. Position `B`: The token count at the highest 1-hour `cache_control` block after `A` (or equals `A` if none exist).
@@ -498,9 +498,9 @@ Here are 3 examples. This depicts the input tokens of 3 requests, each of which 
 
 ## Prompt caching examples
 
-To help you get started with prompt caching, we've prepared a [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) with detailed examples and best practices.
+To help you get started with prompt caching, the [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) provides detailed examples and best practices.
 
-Below, we've included several code snippets that showcase various prompt caching patterns. These examples demonstrate how to implement caching in different scenarios, helping you understand the practical applications of this feature:
+The following code snippets showcase various prompt caching patterns. These examples demonstrate how to implement caching in different scenarios, helping you understand the practical applications of this feature:
 
 ### Large context caching example
 

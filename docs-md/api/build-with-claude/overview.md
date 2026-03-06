@@ -38,7 +38,6 @@ Built-in tools that Claude invokes via `tool_use`. Server-side tools are run by 
 | Feature | Description | Availability |
 | --- | --- | --- |
 | [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Claude API  Microsoft Foundry (Beta) |
-| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | Claude API  Microsoft Foundry (Beta) |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | Claude API  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 
@@ -48,6 +47,7 @@ Built-in tools that Claude invokes via `tool_use`. Server-side tools are run by 
 | --- | --- | --- |
 | [Bash](agents-and-tools/tool-use/bash-tool.md) | Execute bash commands and scripts to interact with the system shell and perform command-line operations. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | Control computer interfaces by taking screenshots and issuing mouse and keyboard commands. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
+| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Text editor](agents-and-tools/tool-use/text-editor-tool.md) | Create and edit text files with a built-in text editor interface for file manipulation tasks. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 
 ## Tool infrastructure
@@ -68,7 +68,7 @@ Infrastructure for controlling and optimizing Claude's context window.
 
 | Feature | Description | Availability |
 | --- | --- | --- |
-| [Compaction](build-with-claude/compaction.md) | Server-side context summarization for long-running conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation. Supported on Opus 4.6 and Haiku 4.5. | Claude API (Beta) |
+| [Compaction](build-with-claude/compaction.md) | Server-side context summarization for long-running conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation. Supported on Opus 4.6 and Haiku 4.5. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Context editing](build-with-claude/context-editing.md) | Automatically manage conversation context with configurable strategies. Supports clearing tool results when approaching token limits and managing thinking blocks in extended thinking conversations. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Automatic prompt caching](build-with-claude/prompt-caching.md) | Simplify prompt caching to a single API parameter. The system automatically caches the last cacheable block in your request, moving the cache point forward as conversations grow. | Claude API  Microsoft Foundry (Beta) |
 | [Prompt caching (5m)](build-with-claude/prompt-caching.md) | Provide Claude with more background knowledge and example outputs to reduce costs and latency. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |

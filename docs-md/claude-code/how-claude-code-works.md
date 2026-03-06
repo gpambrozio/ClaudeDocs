@@ -167,15 +167,22 @@ Copy
 Ask AI
 
 ```shiki
-> Fix the login bug
+Fix the login bug
+```
 
 [Claude investigates, tries something]
 
-> That's not quite right. The issue is in the session handling.
+Report incorrect code
 
-[Claude adjusts approach]
+Copy
+
+Ask AI
+
+```shiki
+That's not quite right. The issue is in the session handling.
 ```
 
+[Claude adjusts approach]
 When the first attempt isn’t right, you don’t start over. You iterate.
 
 #### [​](#interrupt-and-steer) Interrupt and steer
@@ -193,12 +200,12 @@ Copy
 Ask AI
 
 ```shiki
-> The checkout flow is broken for users with expired cards.
-> Check src/payments/ for the issue, especially token refresh.
-> Write a failing test first, then fix it.
+The checkout flow is broken for users with expired cards.
+Check src/payments/ for the issue, especially token refresh.
+Write a failing test first, then fix it.
 ```
 
-Vague prompts like “fix the login bug” work, but you’ll spend more time steering. Specific prompts like the above often succeed on the first attempt.
+Vague prompts work, but you’ll spend more time steering. Specific prompts like the one above often succeed on the first attempt.
 
 ### [​](#give-claude-something-to-verify-against) Give Claude something to verify against
 
@@ -211,8 +218,8 @@ Copy
 Ask AI
 
 ```shiki
-> Implement validateEmail. Test cases: 'user@example.com' → true,
-> 'invalid' → false, 'user@.com' → false. Run the tests after.
+Implement validateEmail. Test cases: 'user@example.com' → true,
+'invalid' → false, 'user@.com' → false. Run the tests after.
 ```
 
 For visual work, paste a screenshot of the design and ask Claude to compare its implementation against it.
@@ -228,8 +235,8 @@ Copy
 Ask AI
 
 ```shiki
-> Read src/auth/ and understand how we handle sessions.
-> Then create a plan for adding OAuth support.
+Read src/auth/ and understand how we handle sessions.
+Then create a plan for adding OAuth support.
 ```
 
 Review the plan, refine it through conversation, then let Claude implement. This two-phase approach produces better results than jumping straight to code.
@@ -245,8 +252,8 @@ Copy
 Ask AI
 
 ```shiki
-> The checkout flow is broken for users with expired cards.
-> The relevant code is in src/payments/. Can you investigate and fix it?
+The checkout flow is broken for users with expired cards.
+The relevant code is in src/payments/. Can you investigate and fix it?
 ```
 
 You don’t need to specify which files to read or what commands to run. Claude figures that out.

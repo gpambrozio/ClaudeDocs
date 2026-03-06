@@ -6,7 +6,21 @@ The web search tool gives Claude direct access to real-time web content, allowin
 
 The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Opus 4.6 and Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
-This feature is [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) eligible. When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+The basic web search tool (`web_search_20250305`) is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md).
+
+The `web_search_20260209` version with dynamic filtering is **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
+
+To use `web_search_20260209` with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
+
+```shiki
+{
+  "type": "web_search_20260209",
+  "name": "web_search",
+  "allowed_callers": ["direct"]
+}
+```
+
+This restricts the tool to direct invocation only, bypassing the internal code execution step.
 
 ## Supported models
 

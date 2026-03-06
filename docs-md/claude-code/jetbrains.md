@@ -48,7 +48,16 @@ Ask AI
 
 ```shiki
 claude
-> /ide
+```
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+/ide
 ```
 
 If you want Claude to have access to the same files as your IDE, start Claude Code from the same directory as your IDE project root.
