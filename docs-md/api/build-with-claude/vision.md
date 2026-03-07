@@ -114,29 +114,31 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "image",
-            "source": {
-              "type": "base64",
-              "media_type": "image/jpeg",
-              "data": "'"$BASE64_IMAGE_DATA"'"
-            }
-          },
-          {
-            "type": "text",
-            "text": "Describe this image."
+  -d @- <<EOF
+{
+  "model": "claude-opus-4-6",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "image",
+          "source": {
+            "type": "base64",
+            "media_type": "image/jpeg",
+            "data": "$BASE64_IMAGE_DATA"
           }
-        ]
-      }
-    ]
-  }'
+        },
+        {
+          "type": "text",
+          "text": "Describe this image."
+        }
+      ]
+    }
+  ]
+}
+EOF
 ```
 
 ### URL-based image example
@@ -174,7 +176,14 @@ curl https://api.anthropic.com/v1/messages \
 
 ### Files API image example
 
-For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
+For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
+
+In multi-turn conversations and agentic workflows, each request resends the
+full conversation history. If images are base64-encoded, the full image bytes
+are included in the payload on every turn, which can significantly increase
+request size and latency as the conversation grows. Uploading images to the
+Files API and referencing them by `file_id` keeps request payloads small
+regardless of how many images accumulate in the conversation history.
 
 Shell
 

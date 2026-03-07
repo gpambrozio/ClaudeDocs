@@ -171,7 +171,7 @@ curl https://api.anthropic.com/v1/messages \
     --data '{
         "model": "claude-opus-4-6",
         "max_tokens": 16000,
-        "messages": [/* ... */],
+        "messages": [{"role": "user", "content": "Hello"}],
         "thinking": {
             "type": "enabled",
             "budget_tokens": 10000
@@ -341,7 +341,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 "content": "Continue our conversation..."
             }
         ],
-        "tools": [...],
+        "tools": [],
         "context_management": {
             "edits": [
                 {

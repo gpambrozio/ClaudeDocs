@@ -661,7 +661,7 @@ Python
 ```shiki
 # Initial request with web search
 response = client.messages.create(
-    model="claude-3-7-sonnet-latest",
+    model="claude-opus-4-6",
     max_tokens=1024,
     messages=[
         {
@@ -685,7 +685,7 @@ if response.stop_reason == "pause_turn":
 
     # Send the continuation request
     continuation = client.messages.create(
-        model="claude-3-7-sonnet-latest",
+        model="claude-opus-4-6",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],

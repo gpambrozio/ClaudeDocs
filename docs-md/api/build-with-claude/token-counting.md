@@ -102,26 +102,27 @@ Shell
 
 IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
 IMAGE_MEDIA_TYPE="image/jpeg"
-IMAGE_BASE64=$(curl "$IMAGE_URL" | base64)
+IMAGE_BASE64=$(curl -s "$IMAGE_URL" | base64 | tr -d '\n')
 
 curl https://api.anthropic.com/v1/messages/count_tokens \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
      --header "anthropic-version: 2023-06-01" \
      --header "content-type: application/json" \
-     --data \
-'{
+     --data @- <<EOF
+{
     "model": "claude-opus-4-6",
     "messages": [
         {"role": "user", "content": [
             {"type": "image", "source": {
                 "type": "base64",
-                "media_type": "'$IMAGE_MEDIA_TYPE'",
-                "data": "'$IMAGE_BASE64'"
+                "media_type": "$IMAGE_MEDIA_TYPE",
+                "data": "$IMAGE_BASE64"
             }},
             {"type": "text", "text": "Describe this image"}
         ]}
     ]
-}'
+}
+EOF
 ```
 
 JSON
@@ -194,26 +195,28 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "content-type: application/json" \
     --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-opus-4-6",
-      "messages": [{
-        "role": "user",
-        "content": [
-          {
-            "type": "document",
-            "source": {
-              "type": "base64",
-              "media_type": "application/pdf",
-              "data": "'$(base64 -i document.pdf)'"
-            }
-          },
-          {
-            "type": "text",
-            "text": "Please summarize this document."
-          }
-        ]
-      }]
-    }'
+    --data @- <<EOF
+{
+  "model": "claude-opus-4-6",
+  "messages": [{
+    "role": "user",
+    "content": [
+      {
+        "type": "document",
+        "source": {
+          "type": "base64",
+          "media_type": "application/pdf",
+          "data": "$PDF_BASE64"
+        }
+      },
+      {
+        "type": "text",
+        "text": "Please summarize this document."
+      }
+    ]
+  }]
+}
+EOF
 ```
 
 JSON

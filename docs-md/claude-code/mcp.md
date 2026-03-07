@@ -94,17 +94,17 @@ The AI notepad for meetingsCommand
 
 `claude mcp add --transport http granola https://mcp.granola.ai/mcp`
 
-[**Sentry**](https://docs.sentry.io/product/sentry-mcp/)
-
-Search, query, and debug errors intelligentlyCommand
-
-`claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`
-
 [**Asana**](https://developers.asana.com/docs/mcp-server)
 
 Connect to Asana to coordinate tasks, projects, and goalsCommand
 
 `claude mcp add --transport streamable-http asana https://mcp.asana.com/v2/mcp`
+
+[**Sentry**](https://docs.sentry.io/product/sentry-mcp/)
+
+Search, query, and debug errors intelligentlyCommand
+
+`claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`
 
 [**Miro**](https://developers.miro.com/docs/miro-mcp)
 
@@ -246,17 +246,17 @@ Secure AI access to manage your WordPress.com sitesCommand
 
 `claude mcp add wordpress-com --transport http https://public-api.wordpress.com/wpcom/v2/mcp/v1`
 
-[**NPI Registry**](https://docs.mcp.deepsense.ai/guides/npi_registry.html)
-
-Access US National Provider Identifier (NPI) RegistryCommand
-
-`claude mcp add npi-registry --transport http https://mcp.deepsense.ai/npi_registry/mcp`
-
 [**Make**](https://developers.make.com/mcp-server/)
 
 Run Make scenarios and manage your Make accountCommand
 
 `claude mcp add --transport http make https://mcp.make.com`
+
+[**NPI Registry**](https://docs.mcp.deepsense.ai/guides/npi_registry.html)
+
+Access US National Provider Identifier (NPI) RegistryCommand
+
+`claude mcp add npi-registry --transport http https://mcp.deepsense.ai/npi_registry/mcp`
 
 [**GoDaddy**](https://developer.godaddy.com/mcp)
 
@@ -264,17 +264,17 @@ Search domains and check availabilityCommand
 
 `claude mcp add --transport http godaddy https://api.godaddy.com/v1/domains/mcp`
 
-[**PayPal**](https://mcp.paypal.com/)
-
-Access PayPal payments platformCommand
-
-`claude mcp add --transport http paypal https://mcp.paypal.com/mcp`
-
 [**CMS Coverage**](https://docs.mcp.deepsense.ai/guides/cms_coverage.html)
 
 Access the CMS Coverage DatabaseCommand
 
 `claude mcp add cms-coverage --transport http https://mcp.deepsense.ai/cms_coverage/mcp`
+
+[**PayPal**](https://mcp.paypal.com/)
+
+Access PayPal payments platformCommand
+
+`claude mcp add --transport http paypal https://mcp.paypal.com/mcp`
 
 [**ChEMBL**](https://docs.mcp.deepsense.ai/guides/chembl.html)
 
@@ -282,15 +282,15 @@ Access the ChEMBL DatabaseCommand
 
 `claude mcp add chembl --transport http https://mcp.deepsense.ai/chembl/mcp`
 
-[**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
-
-Answer questions with the Hex agentRequires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude).
-
 [**Google Cloud BigQuery**](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
 
 BigQuery: Advanced analytical insights for agentsCommand
 
 `claude mcp add --transport http bigquery https://bigquery.googleapis.com/mcp`
+
+[**Hex**](https://learn.hex.tech/docs/administration/mcp-server)
+
+Answer questions with the Hex agentRequires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude).
 
 [**Glean**](https://docs.glean.com/administration/platform/mcp/about)
 
@@ -316,6 +316,12 @@ Discover, evaluate, and buy solutions for the cloudCommand
 
 Connect to Pendo for product and user insightsRequires user-specific URL. [Get your URL here](https://support.pendo.io/hc/en-us/articles/41102236924955).
 
+[**Wix**](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
+
+Manage and build sites and apps on WixCommand
+
+`claude mcp add wix --transport http https://mcp.wix.com/mcp`
+
 [**BioRender**](https://help.biorender.com/hc/en-gb/articles/30870978672157-How-to-use-the-BioRender-MCP-connector)
 
 Search for and use scientific templates and iconsCommand
@@ -328,17 +334,17 @@ Real time prices, orders, charts, and more for cryptoCommand
 
 `claude mcp add --transport http crypto.com https://mcp.crypto.com/market-data/mcp`
 
-[**Wix**](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
-
-Manage and build sites and apps on WixCommand
-
-`claude mcp add wix --transport http https://mcp.wix.com/mcp`
-
 [**Klaviyo**](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
 
 Report, strategize & create with real-time Klaviyo dataCommand
 
 `claude mcp add klaviyo --transport http https://mcp.klaviyo.com/mcp?include-mcp-app=true`
+
+[**Similarweb**](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+
+Real time web, mobile app, and market data.Command
+
+`claude mcp add --transport http similarweb https://mcp.similarweb.com`
 
 [**ICD-10 Codes**](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
 
@@ -352,17 +358,11 @@ Search and interact with your company knowledgeCommand
 
 `claude mcp add guru --transport http https://mcp.api.getguru.com/mcp`
 
-[**Similarweb**](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
+[**Vibe Prospecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
 
-Real time web, mobile app, and market data.Command
+Find company & contact dataCommand
 
-`claude mcp add --transport http similarweb https://mcp.similarweb.com`
-
-[**Synapse.org**](https://github.com/susheel/synapse-mcp?tab=readme-ov-file#synapse-mcp-server)
-
-Search and metadata tools for Synapse scientific dataCommand
-
-`claude mcp add synapse-org --transport http https://mcp.synapse.org/mcp`
+`claude mcp add vibe-prospecting --transport http https://vibeprospecting.explorium.ai/mcp`
 
 [**Trivago**](https://mcp.trivago.com/docs)
 
@@ -370,23 +370,29 @@ Find your ideal hotel at the best price.Command
 
 `claude mcp add --transport http trivago https://mcp.trivago.com/mcp`
 
+[**Synapse.org**](https://github.com/susheel/synapse-mcp?tab=readme-ov-file#synapse-mcp-server)
+
+Search and metadata tools for Synapse scientific dataCommand
+
+`claude mcp add synapse-org --transport http https://mcp.synapse.org/mcp`
+
 [**Jam**](https://jam.dev/docs/debug-a-jam/mcp)
 
 Record screen and collect automatic context for issuesCommand
 
 `claude mcp add --transport http jam https://mcp.jam.dev/mcp`
 
-[**Vibe Prospecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
-
-Find company & contact dataCommand
-
-`claude mcp add vibe-prospecting --transport http https://vibeprospecting.explorium.ai/mcp`
-
 [**Attio**](https://docs.attio.com/mcp/overview)
 
 Search, manage, and update your Attio CRM from ClaudeCommand
 
 `claude mcp add --transport http attio https://mcp.attio.com/mcp`
+
+[**PostHog**](https://posthog.com/docs/model-context-protocol)
+
+Query, analyze, and manage your PostHog insightsCommand
+
+`claude mcp add --transport http posthog https://mcp.posthog.com/mcp`
 
 [**Windsor.ai**](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
 
@@ -405,12 +411,6 @@ Explore partner data and ecosystem insights in ClaudeCommand
 Explore scientific researchCommand
 
 `claude mcp add --transport http consensus https://mcp.consensus.app/mcp`
-
-[**PostHog**](https://posthog.com/docs/model-context-protocol)
-
-Query, analyze, and manage your PostHog insightsCommand
-
-`claude mcp add --transport http posthog https://mcp.posthog.com/mcp`
 
 [**Clockwise**](https://support.getclockwise.com/article/238-connecting-to-clockwise-mcp)
 
@@ -436,29 +436,29 @@ Search and manage transaction, merchant, and payment dataCommand
 
 `claude mcp add --transport sse square https://mcp.squareup.com/sse`
 
-[**MT Newswires**](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
-
-Trusted real-time global financial news providerCommand
-
-`claude mcp add --transport http mtnewswire`
-
 [**Bitly**](https://dev.bitly.com/bitly-mcp/)
 
 Shorten links, generate QR Codes, and track performanceCommand
 
 `claude mcp add bitly --transport http https://api-ssl.bitly.com/v4/mcp`
 
-[**Day AI**](https://day.ai/mcp)
+[**MT Newswires**](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
-Know everything about your prospects & customers with CRMxCommand
+Trusted real-time global financial news providerCommand
 
-`claude mcp add day-ai --transport http https://day.ai/api/mcp`
+`claude mcp add --transport http mtnewswire`
 
 [**lastminute.com**](https://mcp.lastminute.com/docs)
 
 Search, compare and book flights, dynamic packages (flight + hotel) and hotels across global airlines and hotel suppliers.Command
 
 `claude mcp add lastminute-com --transport http https://mcp.lastminute.com/mcp`
+
+[**Day AI**](https://day.ai/mcp)
+
+Know everything about your prospects & customers with CRMxCommand
+
+`claude mcp add day-ai --transport http https://day.ai/api/mcp`
 
 [**Egnyte**](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
@@ -484,17 +484,17 @@ Unleash your team's best performance with Outreach AICommand
 
 `claude mcp add --transport http outreach https://api.outreach.io/mcp/`
 
-[**Coupler.io**](https://help.coupler.io/article/592-coupler-local-mcp-server)
-
-Access business data from hundreds of sourcesCommand
-
-`claude mcp add --transport http coupler https://mcp.coupler.io/mcp`
-
 [**Pylon**](https://support.usepylon.com/articles/2407390554-connecting-to-the-pylon-mcp-server?lang=en)
 
 Search and manage Pylon support issuesCommand
 
 `claude mcp add --transport http pylon https://mcp.usepylon.com/`
+
+[**Coupler.io**](https://help.coupler.io/article/592-coupler-local-mcp-server)
+
+Access business data from hundreds of sourcesCommand
+
+`claude mcp add --transport http coupler https://mcp.coupler.io/mcp`
 
 [**Udemy Business**](https://business-support.udemy.com/hc/en-us/articles/34213384429335-How-to-Integrate-the-Udemy-Business-MCP-Server-With-Your-AI-Tool#h_01K9CA42YGCV1AVXPY1RKABKP1)
 
@@ -544,17 +544,17 @@ Analyze your data with natural languageCommand
 
 `claude mcp add motherduck --transport http https://api.motherduck.com/mcp`
 
-[**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
-
-Discover, research, and enrich companies and peopleCommand
-
-`claude mcp add harmonic --transport http https://mcp.api.harmonic.ai`
-
 [**AirOps**](https://docs.airops.com/mcp)
 
 Craft content that wins AI searchCommand
 
 `claude mcp add airops --transport http https://app.airops.com/mcp`
+
+[**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
+
+Discover, research, and enrich companies and peopleCommand
+
+`claude mcp add harmonic --transport http https://mcp.api.harmonic.ai`
 
 [**Dice**](https://www.dice.com/about/mcp)
 
@@ -596,17 +596,23 @@ Interact with AI agents built for biologyCommand
 
 `claude mcp add owkin --transport http https://mcp.k.owkin.com/mcp`
 
-[**Melon**](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
-
-Browse music charts & your personalized music picksCommand
-
-`claude mcp add melon --transport http https://mcp.melon.com/mcp/`
-
 [**DevRev**](https://support.devrev.ai/en-US/devrev/article/ART-21859-remote-mcp-server)
 
 Search and update your company's knowledge graphCommand
 
 `claude mcp add devrev --transport http https://api.devrev.ai/mcp/v1`
+
+[**Midpage Legal Research**](https://midpage-docs.apidocumentation.com/documentation/integration/mcp-tools)
+
+Conduct legal research and create work productCommand
+
+`claude mcp add --transport http midpage https://app.midpage.ai/mcp`
+
+[**Melon**](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
+
+Browse music charts & your personalized music picksCommand
+
+`claude mcp add melon --transport http https://mcp.melon.com/mcp/`
 
 [**Medidata**](https://learn.medidata.com/en-US/bundle/mcp-server-documentation/page/medidata_mcp_server_documentation.html)
 
@@ -620,17 +626,23 @@ Connect and use PlayMCP servers in your toolboxCommand
 
 `claude mcp add playmcp --transport http https://playmcp.kakao.com/mcp`
 
-[**Midpage Legal Research**](https://midpage-docs.apidocumentation.com/documentation/integration/mcp-tools)
-
-Conduct legal research and create work productCommand
-
-`claude mcp add --transport http midpage https://app.midpage.ai/mcp`
-
 [**Clarify**](https://docs.clarify.ai/en/articles/13367278-clarify-mcp)
 
 Query your CRM. Create records. Ask anything.Command
 
 `claude mcp add --transport http clarify https://api.clarify.ai/mcp`
+
+[**MailerLite**](https://developers.mailerlite.com/mcp/#how-mcp-works)
+
+Turn Claude into your email marketing assistantCommand
+
+`claude mcp add --transport http mailerlite https://mcp.mailerlite.com/mcp`
+
+[**Sanity**](https://www.sanity.io/docs/ai/mcp-server)
+
+Create, query, and manage structured content in SanityCommand
+
+`claude mcp add --transport http sanity https://mcp.sanity.io`
 
 [**Ticket Tailor**](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)
 
@@ -642,17 +654,11 @@ Event platform for managing tickets, orders & moreCommand
 
 Search your context lake and safely run actionsRequires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp).
 
-[**Sanity**](https://www.sanity.io/docs/ai/mcp-server)
+[**Mem**](https://docs.mem.ai/mcp/overview)
 
-Create, query, and manage structured content in SanityCommand
+The AI notebook for everything on your mindCommand
 
-`claude mcp add --transport http sanity https://mcp.sanity.io`
-
-[**MailerLite**](https://developers.mailerlite.com/mcp/#how-mcp-works)
-
-Turn Claude into your email marketing assistantCommand
-
-`claude mcp add --transport http mailerlite https://mcp.mailerlite.com/mcp`
+`claude mcp add --transport http mem https://mcp.mem.ai/mcp`
 
 [**Lumin**](https://github.com/luminpdf/lumin-mcp-server)
 
@@ -672,12 +678,6 @@ High-quality translation with human verificationCommand
 
 `claude mcp add --transport http lilt https://mcp.lilt.com/mcp`
 
-[**Mem**](https://docs.mem.ai/mcp/overview)
-
-The AI notebook for everything on your mindCommand
-
-`claude mcp add --transport http mem https://mcp.mem.ai/mcp`
-
 [**Wyndham Hotels and Resorts**](https://www.wyndhamhotels.com/mcp-doc)
 
 Discover the right Wyndham Hotel for you, fasterCommand
@@ -694,17 +694,23 @@ From query to qualified lead in seconds.Command
 
 `claude mcp add --transport http sprouts https://sprouts-mcp-server.kartikay-dhar.workers.dev`
 
+[**Clerk**](https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server)
+
+Add authentication, organizations, and billingCommand
+
+`claude mcp add --transport http clerk https://mcp.clerk.com/mcp`
+
 [**GraphOS MCP Tools**](https://www.apollographql.com/docs/graphos/platform/graphos-mcp-tools)
 
 Search Apollo docs, specs, and best practicesCommand
 
 `claude mcp add --transport http graphos-tools https://mcp.apollographql.com`
 
-[**Clerk**](https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server)
+[**Postman**](https://github.com/postmanlabs/postman-mcp-server)
 
-Add authentication, organizations, and billingCommand
+Give API context to your coding agentsCommand
 
-`claude mcp add --transport http clerk https://mcp.clerk.com/mcp`
+`claude mcp add --transport http postman https://mcp.postman.com/minimal`
 
 [**Airwallex Developer**](https://www.airwallex.com/docs/developer-tools/ai/developer-mcp)
 

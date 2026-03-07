@@ -208,9 +208,9 @@ end
 Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
 
 ```shiki
-if page.next_page?
-  new_page = page.next_page
-  puts(new_page.data[0].id)
+while page.next_page?
+  page = page.next_page
+  page.data&.each { |batch| puts(batch.id) }
 end
 ```
 

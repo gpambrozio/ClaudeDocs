@@ -173,6 +173,7 @@ Shell
 
 ```shiki
 #!/bin/sh
+# ...
 
 until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
           --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -180,6 +181,7 @@ until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
           | grep -o '"processing_status":[[:space:]]*"[^"]*"' \
           | cut -d'"' -f4) == "ended" ]]; do
     echo "Batch $MESSAGE_BATCH_ID is still processing..."
+# ...
     sleep 60
 done
 
@@ -307,6 +309,7 @@ Shell
 
 ```shiki
 #!/bin/sh
+# ...
 curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     --header "x-api-key: $ANTHROPIC_API_KEY" \
     --header "anthropic-version: 2023-06-01"

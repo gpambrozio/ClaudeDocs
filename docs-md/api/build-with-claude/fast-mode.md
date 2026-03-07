@@ -93,7 +93,11 @@ curl https://api.anthropic.com/v1/messages \
         "speed": "fast",
         "messages": [{"role": "user", "content": "Hello"}]
     }'
+```
 
+JSON
+
+```shiki
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
