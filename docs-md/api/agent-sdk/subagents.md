@@ -13,7 +13,7 @@ You can create subagents in three ways:
 
 - **Programmatically**: use the `agents` parameter in your `query()` options ([TypeScript](agent-sdk/typescript.md), [Python](agent-sdk/python.md))
 - **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories (see [defining subagents as files](sub-agents.md))
-- **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Task tool without you defining anything
+- **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Agent tool without you defining anything
 
 This guide focuses on the programmatic approach, which is recommended for SDK applications.
 
@@ -49,7 +49,7 @@ Subagents can be limited to specific tools, reducing the risk of unintended acti
 
 ### Programmatic definition (recommended)
 
-Define subagents directly in your code using the `agents` parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. The `Task` tool must be included in `allowedTools` since Claude invokes subagents through the Task tool.
+Define subagents directly in your code using the `agents` parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. The `Agent` tool must be included in `allowedTools` since Claude invokes subagents through the Agent tool.
 
 Python
 
@@ -61,8 +61,8 @@ async def main():
     async for message in query(
         prompt="Review the authentication module for security issues",
         options=ClaudeAgentOptions(
-            # Task tool is required for subagent invocation
-            allowed_tools=["Read", "Grep", "Glob", "Task"],
+            # Agent tool is required for subagent invocation
+            allowed_tools=["Read", "Grep", "Glob", "Agent"],
             agents={
                 "code-reviewer": AgentDefinition(
                     # description tells Claude when to use this subagent
@@ -112,25 +112,25 @@ asyncio.run(main())
 | `tools` | `string[]` | No | Array of allowed tool names. If omitted, inherits all tools |
 | `model` | `'sonnet' | 'opus' | 'haiku' | 'inherit'` | No | Model override for this agent. Defaults to main model if omitted |
 
-Subagents cannot spawn their own subagents. Don't include `Task` in a subagent's `tools` array.
+Subagents cannot spawn their own subagents. Don't include `Agent` in a subagent's `tools` array.
 
 ### Filesystem-based definition (alternative)
 
 You can also define subagents as markdown files in `.claude/agents/` directories. See the [Claude Code subagents documentation](sub-agents.md) for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.
 
-Even without defining custom subagents, Claude can spawn the built-in `general-purpose` subagent when `Task` is in your `allowedTools`. This is useful for delegating research or exploration tasks without creating specialized agents.
+Even without defining custom subagents, Claude can spawn the built-in `general-purpose` subagent when `Agent` is in your `allowedTools`. This is useful for delegating research or exploration tasks without creating specialized agents.
 
 ## What subagents inherit
 
-A subagent's context window starts fresh (no parent conversation) but isn't empty. The only channel from parent to subagent is the Task prompt string, so include any file paths, error messages, or decisions the subagent needs directly in that prompt.
+A subagent's context window starts fresh (no parent conversation) but isn't empty. The only channel from parent to subagent is the Agent tool's prompt string, so include any file paths, error messages, or decisions the subagent needs directly in that prompt.
 
 | The subagent receives | The subagent does not receive |
 | --- | --- |
-| Its own system prompt (`AgentDefinition.prompt`) and the Task prompt | The parent's conversation history or tool results |
+| Its own system prompt (`AgentDefinition.prompt`) and the Agent tool's prompt | The parent's conversation history or tool results |
 | Project CLAUDE.md (loaded via `settingSources`) | Skills (unless listed in `AgentDefinition.skills`, TypeScript only) |
 | Tool definitions (inherited from parent, or the subset in `tools`) | The parent's system prompt |
 
-The parent receives the subagent's final message verbatim as the Task tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the **main** `query()` call.
+The parent receives the subagent's final message verbatim as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the **main** `query()` call.
 
 ## Invoking subagents
 
@@ -178,7 +178,7 @@ async def main():
     async for message in query(
         prompt="Review this PR for security issues",
         options=ClaudeAgentOptions(
-            allowed_tools=["Read", "Grep", "Glob", "Task"],
+            allowed_tools=["Read", "Grep", "Glob", "Agent"],
             agents={
                 # Call the factory with your desired configuration
                 "security-reviewer": create_security_agent("strict")
@@ -193,7 +193,9 @@ asyncio.run(main())
 
 ## Detecting subagent invocation
 
-Subagents are invoked via the Task tool. To detect when a subagent is invoked, check for `tool_use` blocks with `name: "Task"`. Messages from within a subagent's context include a `parent_tool_use_id` field.
+Subagents are invoked via the Agent tool. To detect when a subagent is invoked, check for `tool_use` blocks where `name` is `"Agent"`. Messages from within a subagent's context include a `parent_tool_use_id` field.
+
+The tool name was renamed from `"Task"` to `"Agent"` in Claude Code v2.1.63. Current SDK releases emit `"Agent"` in `tool_use` blocks but still use `"Task"` in the `system:init` tools list and in `result.permission_denials[].tool_name`. Checking both values in `block.name` ensures compatibility across SDK versions.
 
 This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context.
 
@@ -209,7 +211,7 @@ async def main():
     async for message in query(
         prompt="Use the code-reviewer agent to review this codebase",
         options=ClaudeAgentOptions(
-            allowed_tools=["Read", "Glob", "Grep", "Task"],
+            allowed_tools=["Read", "Glob", "Grep", "Agent"],
             agents={
                 "code-reviewer": AgentDefinition(
                     description="Expert code reviewer.",
@@ -219,10 +221,14 @@ async def main():
             },
         ),
     ):
-        # Check for subagent invocation in message content
+        # Check for subagent invocation. Match both names: older SDK
+        # versions emitted "Task", current versions emit "Agent".
         if hasattr(message, "content") and message.content:
             for block in message.content:
-                if getattr(block, "type", None) == "tool_use" and block.name == "Task":
+                if getattr(block, "type", None) == "tool_use" and block.name in (
+                    "Task",
+                    "Agent",
+                ):
                     print(f"Subagent invoked: {block.input.get('subagent_type')}")
 
         # Check if this message is from within a subagent's context
@@ -239,7 +245,7 @@ asyncio.run(main())
 
 Subagents can be resumed to continue where they left off. Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 
-When a subagent completes, Claude receives its agent ID in the Task tool result. To resume a subagent programmatically:
+When a subagent completes, Claude receives its agent ID in the Agent tool result. To resume a subagent programmatically:
 
 1. **Capture the session ID**: Extract `session_id` from messages during the first query
 2. **Extract the agent ID**: Parse `agentId` from the message content
@@ -272,11 +278,11 @@ let sessionId: string | undefined;
 // First invocation - use the Explore agent to find API endpoints
 for await (const message of query({
   prompt: "Use the Explore agent to find all API endpoints in this codebase",
-  options: { allowedTools: ["Read", "Grep", "Glob", "Task"] }
+  options: { allowedTools: ["Read", "Grep", "Glob", "Agent"] }
 })) {
   // Capture session_id from ResultMessage (needed to resume this session)
   if ("session_id" in message) sessionId = message.session_id;
-  // Search message content for the agentId (appears in Task tool results)
+  // Search message content for the agentId (appears in Agent tool results)
   const extractedId = extractAgentId(message);
   if (extractedId) agentId = extractedId;
   // Print the final result
@@ -287,7 +293,7 @@ for await (const message of query({
 if (agentId && sessionId) {
   for await (const message of query({
     prompt: `Resume agent ${agentId} and list the top 3 most complex endpoints`,
-    options: { allowedTools: ["Read", "Grep", "Glob", "Task"], resume: sessionId }
+    options: { allowedTools: ["Read", "Grep", "Glob", "Agent"], resume: sessionId }
   })) {
     if ("result" in message) console.log(message.result);
   }
@@ -319,7 +325,7 @@ async def main():
     async for message in query(
         prompt="Analyze the architecture of this codebase",
         options=ClaudeAgentOptions(
-            allowed_tools=["Read", "Grep", "Glob", "Task"],
+            allowed_tools=["Read", "Grep", "Glob", "Agent"],
             agents={
                 "code-analyzer": AgentDefinition(
                     description="Static code analysis and architecture review",
@@ -352,7 +358,7 @@ asyncio.run(main())
 
 If Claude completes tasks directly instead of delegating to your subagent:
 
-1. **Include the Task tool**: subagents are invoked via the Task tool, so it must be in `allowedTools`
+1. **Include the Agent tool**: subagents are invoked via the Agent tool, so it must be in `allowedTools`
 2. **Use explicit prompting**: mention the subagent by name in your prompt (for example, "Use the code-reviewer agent to...")
 3. **Write a clear description**: explain exactly when the subagent should be used so Claude can match tasks appropriately
 

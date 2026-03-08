@@ -162,7 +162,7 @@ The Agent SDK gives you access to several ways to extend your agent's behavior. 
 | Set project conventions your agent always follows | [CLAUDE.md](memory.md) | `settingSources: ["project"]` loads it automatically |
 | Give the agent reference material it loads when relevant | [Skills](agent-sdk/skills.md) | `settingSources` + `allowedTools: ["Skill"]` |
 | Run a reusable workflow (deploy, review, release) | [User-invocable skills](agent-sdk/skills.md) | `settingSources` + `allowedTools: ["Skill"]` |
-| Delegate an isolated subtask to a fresh context (research, review) | [Subagents](agent-sdk/subagents.md) | `agents` parameter + `allowedTools: ["Task"]` |
+| Delegate an isolated subtask to a fresh context (research, review) | [Subagents](agent-sdk/subagents.md) | `agents` parameter + `allowedTools: ["Agent"]` |
 | Coordinate multiple Claude Code instances with shared task lists and direct inter-agent messaging | [Agent teams](agent-teams.md) | Not directly configured via SDK options. Agent teams are a CLI feature where one session acts as the team lead, coordinating work across independent teammates |
 | Run deterministic logic on tool calls (audit, block, transform) | [Hooks](agent-sdk/hooks.md) | `hooks` parameter with callbacks, or shell scripts loaded via `settingSources` |
 | Give Claude structured tool access to an external service | [MCP](agent-sdk/mcp.md) | `mcpServers` parameter |
