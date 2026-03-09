@@ -301,8 +301,6 @@ async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], s
                     if resp.status_code >= 400:
                         continue
                     markdown = resp.text.strip()
-                    if len(markdown) < 100:
-                        continue
                     # Derive title from first heading or filename
                     title_match = re.match(r"^#\s+(.+)$", markdown, re.MULTILINE)
                     if title_match:
