@@ -47,6 +47,9 @@ SITES = [
         "start_url": "https://code.claude.com/docs/en/",
         "url_pattern": r"^https://code\.claude\.com/docs/en",
         "use_sitemap": False,
+        "extra_urls": [
+            "https://code.claude.com/docs/en/claude_code_docs_map.md",
+        ],
     },
     {
         "name": "api",
@@ -186,7 +189,7 @@ def url_to_filepath(url: str, site_name: str) -> Path:
         rel_path = "index"
 
     # Clean up
-    rel_path = re.sub(r"\.html?$", "", rel_path)
+    rel_path = re.sub(r"\.(html?|md)$", "", rel_path)
 
     return OUTPUT_DIR / site_name / f"{rel_path}.md"
 
@@ -264,6 +267,14 @@ async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], s
         if start_normalized:
             valid_urls.add(start_normalized)
 
+    # Add any extra static URLs
+    for extra_url in site.get("extra_urls", []):
+        normalized = extra_url.split("#")[0].rstrip("/")
+        if normalized and normalized not in SKIP_URLS:
+            valid_urls.add(normalized)
+            if normalized not in visited:
+                to_visit.append(extra_url)
+
     page = await browser.new_page()
 
     while to_visit:
@@ -283,6 +294,26 @@ async def crawl_site(site: dict, browser) -> tuple[list[tuple[str, str, str]], s
         visited.add(url)
 
         try:
+            # Handle raw markdown files directly
+            if url.endswith(".md"):
+                async with httpx.AsyncClient() as client:
+                    resp = await client.get(url, timeout=30)
+                    if resp.status_code >= 400:
+                        continue
+                    markdown = resp.text.strip()
+                    if len(markdown) < 100:
+                        continue
+                    # Derive title from first heading or filename
+                    title_match = re.match(r"^#\s+(.+)$", markdown, re.MULTILINE)
+                    if title_match:
+                        title = title_match.group(1).strip()
+                    else:
+                        path = urlparse(url).path.rstrip("/").split("/")[-1]
+                        title = re.sub(r"\.md$", "", path).replace("-", " ").replace("_", " ").title()
+                    results.append((url, title, markdown))
+                    print(f"  {title}")
+                    continue
+
             # Navigate and wait for network idle
             response = await page.goto(url, wait_until="networkidle", timeout=30000)
 
