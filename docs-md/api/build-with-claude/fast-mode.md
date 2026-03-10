@@ -102,7 +102,7 @@ JSON
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
   "role": "assistant",
-  ...
+// ...
   "usage": {
     "input_tokens": 523,
     "output_tokens": 1842,

@@ -69,7 +69,7 @@ Context editing is available on:
 
 The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -104,7 +104,7 @@ curl https://api.anthropic.com/v1/messages \
 
 You can customize the tool result clearing behavior with additional parameters:
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -160,7 +160,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Enable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -325,7 +325,7 @@ Streaming Response
 
 The [token counting](build-with-claude/token-counting.md) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \

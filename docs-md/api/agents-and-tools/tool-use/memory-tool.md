@@ -124,7 +124,7 @@ For working examples, see:
 
 ## Basic usage
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

@@ -16,7 +16,7 @@ Once your marketplace is live, you can update it by pushing changes to your repo
 
 ## [​](#walkthrough-create-a-local-marketplace) Walkthrough: create a local marketplace
 
-This example creates a marketplace with one plugin: a `/review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
+This example creates a marketplace with one plugin: a `/quality-review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
 
 1
 
@@ -30,17 +30,17 @@ Ask AI
 
 ```shiki
 mkdir -p my-marketplace/.claude-plugin
-mkdir -p my-marketplace/plugins/review-plugin/.claude-plugin
-mkdir -p my-marketplace/plugins/review-plugin/skills/review
+mkdir -p my-marketplace/plugins/quality-review-plugin/.claude-plugin
+mkdir -p my-marketplace/plugins/quality-review-plugin/skills/quality-review
 ```
 
 2
 
 Create the skill
 
-Create a `SKILL.md` file that defines what the `/review` skill does.
+Create a `SKILL.md` file that defines what the `/quality-review` skill does.
 
-my-marketplace/plugins/review-plugin/skills/review/SKILL.md
+my-marketplace/plugins/quality-review-plugin/skills/quality-review/SKILL.md
 
 Report incorrect code
 
@@ -69,7 +69,7 @@ Create the plugin manifest
 
 Create a `plugin.json` file that describes the plugin. The manifest goes in the `.claude-plugin/` directory.
 
-my-marketplace/plugins/review-plugin/.claude-plugin/plugin.json
+my-marketplace/plugins/quality-review-plugin/.claude-plugin/plugin.json
 
 Report incorrect code
 
@@ -79,8 +79,8 @@ Ask AI
 
 ```shiki
 {
-  "name": "review-plugin",
-  "description": "Adds a /review skill for quick code reviews",
+  "name": "quality-review-plugin",
+  "description": "Adds a /quality-review skill for quick code reviews",
   "version": "1.0.0"
 }
 ```
@@ -107,9 +107,9 @@ Ask AI
   },
   "plugins": [
     {
-      "name": "review-plugin",
-      "source": "./plugins/review-plugin",
-      "description": "Adds a /review skill for quick code reviews"
+      "name": "quality-review-plugin",
+      "source": "./plugins/quality-review-plugin",
+      "description": "Adds a /quality-review skill for quick code reviews"
     }
   ]
 }
@@ -129,7 +129,7 @@ Ask AI
 
 ```shiki
 /plugin marketplace add ./my-marketplace
-/plugin install review-plugin@my-plugins
+/plugin install quality-review-plugin@my-plugins
 ```
 
 6

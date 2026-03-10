@@ -1,11 +1,8 @@
 # Claude Code GitHub Actions
 
-Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project’s standards.
+Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project’s standards. For automatic reviews posted on every PR without a trigger, see [GitHub Code Review](code-review.md).
 
-Claude Code GitHub Actions is built on top of the [Claude
-Agent SDK](agent-sdk/overview.md), which enables programmatic integration of
-Claude Code into your applications. You can use the SDK to build custom
-automation workflows beyond GitHub Actions.
+Claude Code GitHub Actions is built on top of the [Claude Agent SDK](agent-sdk/overview.md), which enables programmatic integration of Claude Code into your applications. You can use the SDK to build custom automation workflows beyond GitHub Actions.
 
 **Claude Opus 4.6 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.6, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-6`.
 
@@ -174,7 +171,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: "/review"
+          prompt: "Review this pull request for code quality, correctness, and security. Analyze the diff, then post your findings as review comments."
           claude_args: "--max-turns 5"
 ```
 
@@ -286,7 +283,7 @@ Ask AI
 Key features:
 
 - **Unified prompt interface** - Use `prompt` for all instructions
-- **Commands** - Prebuilt prompts like `/review` or `/fix`
+- **Skills** - Invoke installed [skills](skills.md) directly from the prompt
 - **CLI passthrough** - Any Claude Code CLI argument via `claude_args`
 - **Flexible triggers** - Works with any GitHub event
 
@@ -633,7 +630,7 @@ The Claude Code Action v1 uses a simplified configuration:
 
 | Parameter | Description | Required |
 | --- | --- | --- |
-| `prompt` | Instructions for Claude (text or skill like `/review`) | No\* |
+| `prompt` | Instructions for Claude (plain text or a [skill](skills.md) name) | No\* |
 | `claude_args` | CLI arguments passed to Claude Code | No |
 | `anthropic_api_key` | Claude API key | Yes\*\* |
 | `github_token` | GitHub token for API access | No |

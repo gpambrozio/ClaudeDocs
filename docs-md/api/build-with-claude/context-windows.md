@@ -99,7 +99,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-
 
 To use the 1M token context window, include the `context-1m-2025-08-07` [beta header](api/beta-headers.md) in your API requests:
 
-cURL
+Shell
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
