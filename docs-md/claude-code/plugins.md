@@ -195,7 +195,7 @@ description: Greet the user with a personalized message
 Greet the user named "$ARGUMENTS" warmly and ask how you can help them today. Make the greeting personal and encouraging.
 ```
 
-Restart Claude Code to pick up the changes, then try the skill with your name:
+Run `/reload-plugins` to pick up the changes, then try the skill with your name:
 
 Report incorrect code
 
@@ -281,7 +281,7 @@ When reviewing code, check for:
 4. Test coverage
 ```
 
-After installing the plugin, restart Claude Code to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see [Agent Skills](skills.md).
+After installing the plugin, run `/reload-plugins` to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see [Agent Skills](skills.md).
 
 ### [​](#add-lsp-servers-to-your-plugin) Add LSP servers to your plugin
 
@@ -351,7 +351,7 @@ Ask AI
 claude --plugin-dir ./my-plugin
 ```
 
-As you make changes to your plugin, restart Claude Code to pick up the updates. Test your plugin components:
+As you make changes to your plugin, run `/reload-plugins` to pick up the updates without restarting. Changes to LSP server configuration still require a full restart. Test your plugin components:
 
 - Try your skills with `/plugin-name:skill-name`
 - Check that agents appear in `/agents`

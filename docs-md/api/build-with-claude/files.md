@@ -18,7 +18,7 @@ The Files API is currently not supported on Amazon Bedrock or Google Vertex AI.
 
 The Files API provides a simple create-once, use-many-times approach for working with files:
 
-- **Upload files** to our secure storage and receive a unique `file_id`
+- **Upload files** to Anthropic's secure storage and receive a unique `file_id`
 - **Download files** that are created from skills or the code execution tool
 - **Reference files** in [Messages](api/messages.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
@@ -67,28 +67,30 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
   -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "Please summarize this document for me."
-          },
-          {
-            "type": "document",
-            "source": {
-              "type": "file",
-              "file_id": "file_011CNha8iCJcU1wXNR6q4V8w"
-            }
+  -d @- <<EOF
+{
+  "model": "claude-opus-4-6",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Please summarize this document for me."
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "file",
+            "file_id": "$FILE_ID"
           }
-        ]
-      }
-    ]
-  }'
+        }
+      ]
+    }
+  ]
+}
+EOF
 ```
 
 ### File types and content blocks
@@ -191,7 +193,7 @@ Retrieve information about a specific file:
 Shell
 
 ```shiki
-curl https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \
+curl "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
@@ -204,7 +206,7 @@ Remove a file from your workspace:
 Shell
 
 ```shiki
-curl -X DELETE https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \
+curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14"
@@ -217,7 +219,7 @@ Download files that have been created by skills or the code execution tool:
 Shell
 
 ```shiki
-curl -X GET "https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w/content" \
+curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: files-api-2025-04-14" \
@@ -241,7 +243,7 @@ You can only download files that were created by [skills](build-with-claude/skil
 - Files persist until you delete them
 - Deleted files cannot be recovered
 - Files are inaccessible via the API shortly after deletion, but they may persist in active `Messages` API calls and associated tool uses
-- Files that users delete will be deleted in accordance with our [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
+- Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
 
 ---
 
@@ -283,7 +285,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#3f4c5e535a4c7f5e514b574d504f565c115c5052) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#e794868b8294a78689938f9588978e84c984888a) if you need higher limits for your use case
 
 Was this page helpful?
 
