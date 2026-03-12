@@ -72,7 +72,7 @@ Infrastructure for controlling and optimizing Claude's context window.
 | [Context editing](build-with-claude/context-editing.md) | Automatically manage conversation context with configurable strategies. Supports clearing tool results when approaching token limits and managing thinking blocks in extended thinking conversations. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Automatic prompt caching](build-with-claude/prompt-caching.md) | Simplify prompt caching to a single API parameter. The system automatically caches the last cacheable block in your request, moving the cache point forward as conversations grow. | Claude API  Microsoft Foundry (Beta) |
 | [Prompt caching (5m)](build-with-claude/prompt-caching.md) | Provide Claude with more background knowledge and example outputs to reduce costs and latency. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
-| [Prompt caching (1hr)](build-with-claude/prompt-caching.md) | Extended 1-hour cache duration for less frequently accessed but important context, complementing the standard 5-minute cache. | Claude API  Microsoft Foundry (Beta) |
+| [Prompt caching (1hr)](build-with-claude/prompt-caching.md) | Extended 1-hour cache duration for less frequently accessed but important context, complementing the standard 5-minute cache. | Claude API  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Token counting](api/messages-count-tokens.md) | Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 
 ## Files and assets

@@ -82,7 +82,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/chrome` | Configure [Claude in Chrome](chrome.md) settings |
 | `/clear` | Clear conversation history and free up context. Aliases: `/reset`, `/new` |
 | `/compact [instructions]` | Compact conversation with optional focus instructions |
-| `/config` | Open the [Settings](settings.md) interface (Config tab). Alias: `/settings` |
+| `/config` | Open the [Settings](settings.md) interface to adjust theme, model, [output style](output-styles.md), and other preferences. Alias: `/settings` |
 | `/context` | Visualize current context usage as a colored grid |
 | `/copy` | Copy the last assistant response to clipboard. When code blocks are present, shows an interactive picker to select individual blocks or the full response |
 | `/cost` | Show token usage statistics. See [cost tracking guide](costs.md) for subscription-specific details |
@@ -109,7 +109,6 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/memory` | Edit `CLAUDE.md` memory files, enable or disable [auto-memory](memory.md), and view auto-memory entries |
 | `/mobile` | Show QR code to download the Claude mobile app. Aliases: `/ios`, `/android` |
 | `/model [model]` | Select or change the AI model. For models that support it, use left/right arrows to [adjust effort level](model-config.md). The change takes effect immediately without waiting for the current response to finish |
-| `/output-style [style]` | Switch between [output styles](output-styles.md). **Default** is standard behavior, **Explanatory** adds educational insights about implementation choices and codebase patterns, and **Learning** pauses to ask you to write small code pieces for hands-on practice. You can also [create custom output styles](output-styles.md) |
 | `/passes` | Share a free week of Claude Code with friends. Only visible if your account is eligible |
 | `/permissions` | View or update [permissions](permissions.md). Alias: `/allowed-tools` |
 | `/plan` | Enter plan mode directly from the prompt |

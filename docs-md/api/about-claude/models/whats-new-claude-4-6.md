@@ -8,8 +8,8 @@ Claude 4.6 represents the next generation of Claude models, bringing significant
 
 | Model | API model ID | Description |
 | --- | --- | --- |
-| Claude Opus 4.6 | `claude-opus-4-6` | Our most intelligent model for building agents and coding |
-| Claude Sonnet 4.6 | `claude-sonnet-4-6` | Our best combination of speed and intelligence |
+| Claude Opus 4.6 | `claude-opus-4-6` | The most intelligent model for building agents and coding |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` | The best combination of speed and intelligence |
 
 Claude Opus 4.6 supports a 200K context window (with [1M token context window](build-with-claude/context-windows.md) available in beta), 128K max output tokens, extended thinking, and all existing Claude API features.
 

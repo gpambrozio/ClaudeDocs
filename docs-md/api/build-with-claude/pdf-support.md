@@ -62,7 +62,7 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
 
 If customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
-This is a known constraint with the Converse API that we're working to address. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
+This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
 
 For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](build-with-claude/files.md).
 
@@ -364,7 +364,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 [Try PDF examples
 
-Explore practical examples of PDF processing in our cookbook recipe.](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)[View API reference
+Explore practical examples of PDF processing in the cookbook recipe.](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)[View API reference
 
 See complete API documentation for PDF support.](api/messages.md)
 

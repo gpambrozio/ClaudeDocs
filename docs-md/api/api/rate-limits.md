@@ -35,7 +35,7 @@ To qualify for the next tier, you must meet a deposit requirement. To minimize t
 | Tier 1 | $5 | $100 |
 | Tier 2 | $40 | $500 |
 | Tier 3 | $200 | $1,000 |
-| Tier 4 | $400 | $5,000 |
+| Tier 4 | $400 | $200,000 |
 | Monthly Invoicing | N/A | N/A |
 
 **Credit Purchase** shows the cumulative credit purchases (excluding tax) required to advance to that tier. You advance immediately upon reaching the threshold.

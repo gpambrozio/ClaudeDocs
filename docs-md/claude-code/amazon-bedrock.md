@@ -206,6 +206,29 @@ export DISABLE_PROMPT_CACHING=1
 
 [Prompt caching](build-with-claude/prompt-caching.md) may not be available in all regions.
 
+#### [​](#map-each-model-version-to-an-inference-profile) Map each model version to an inference profile
+
+The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](settings.md) instead.
+This example maps three Opus versions to distinct ARNs so users can switch between them without bypassing your organization’s inference profiles:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "modelOverrides": {
+    "claude-opus-4-6": "arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-46-prod",
+    "claude-opus-4-5-20251101": "arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-45-prod",
+    "claude-opus-4-1-20250805": "arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/opus-41-prod"
+  }
+}
+```
+
+When a user selects one of these versions in `/model`, Claude Code calls Bedrock with the mapped ARN. Versions without an override fall back to the built-in Bedrock model ID or any matching inference profile discovered at startup. See [Override model IDs per version](model-config.md) for details on how overrides interact with `availableModels` and other model settings.
+
 ## [​](#iam-configuration) IAM configuration
 
 Create an IAM policy with the required permissions for Claude Code:
