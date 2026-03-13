@@ -10,6 +10,9 @@ When you start a Remote Control session on your machine, Claude keeps running lo
 - **Survive interruptions**: if your laptop sleeps or your network drops, the session reconnects automatically when your machine comes back online
 
 Unlike [Claude Code on the web](claude-code-on-the-web.md), which runs on cloud infrastructure, Remote Control sessions run directly on your machine and interact with your local filesystem. The web and mobile interfaces are just a window into that local session.
+
+Remote Control requires Claude Code v2.1.51 or later. Check your version with `claude --version`.
+
 This page covers setup, how to start and connect to sessions, and how Remote Control compares to Claude Code on the web.
 
 ## [​](#requirements) Requirements

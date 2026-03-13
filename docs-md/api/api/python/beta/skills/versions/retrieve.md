@@ -2,6 +2,8 @@
 
 Copy page
 
+Python
+
 # Get Skill Version
 
 beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta.md)

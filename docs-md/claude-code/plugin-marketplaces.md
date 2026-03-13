@@ -280,7 +280,7 @@ For example, a marketplace hosted at `acme-corp/plugin-catalog` (marketplace sou
 
 ### [​](#relative-paths) Relative paths
 
-For plugins in the same repository:
+For plugins in the same repository, use a path starting with `./`:
 
 Report incorrect code
 
@@ -294,6 +294,8 @@ Ask AI
   "source": "./plugins/my-plugin"
 }
 ```
+
+Paths resolve relative to the marketplace root, which is the directory containing `.claude-plugin/`. In the example above, `./plugins/my-plugin` points to `<repo>/plugins/my-plugin`, even though `marketplace.json` lives at `<repo>/.claude-plugin/marketplace.json`. Do not use `../` to climb out of `.claude-plugin/`.
 
 Relative paths only work when users add your marketplace via Git (GitHub, GitLab, or git URL). If users add your marketplace via a direct URL to the `marketplace.json` file, relative paths will not resolve correctly. For URL-based distribution, use GitHub, npm, or git URL sources instead. See [Troubleshooting](#plugins-with-relative-paths-fail-in-url-based-marketplaces) for details.
 
@@ -381,7 +383,7 @@ Ask AI
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `url` | string | Required. Full git repository URL (must end with `.git`) |
+| `url` | string | Required. Full git repository URL (`https://` or `git@`). The `.git` suffix is optional, so Azure DevOps and AWS CodeCommit URLs without the suffix work |
 | `ref` | string | Optional. Git branch or tag (defaults to repository default branch) |
 | `sha` | string | Optional. Full 40-character git commit SHA to pin to an exact version |
 
@@ -783,6 +785,8 @@ Ask AI
 
 Use `".*"` as the `pathPattern` to allow any filesystem path while still controlling network sources with `hostPattern`.
 
+`strictKnownMarketplaces` restricts what users can add, but does not register marketplaces on its own. To make allowed marketplaces available automatically without users running `/plugin marketplace add`, pair it with [`extraKnownMarketplaces`](settings.md) in the same `managed-settings.json`. See [Using both together](settings.md).
+
 #### [​](#how-restrictions-work) How restrictions work
 
 Restrictions are validated early in the plugin installation process, before any network requests or filesystem operations occur. This prevents unauthorized marketplace access attempts.
@@ -972,7 +976,7 @@ Run `claude plugin validate .` or `/plugin validate .` from your marketplace dir
 | `File not found: .claude-plugin/marketplace.json` | Missing manifest | Create `.claude-plugin/marketplace.json` with required fields |
 | `Invalid JSON syntax: Unexpected token...` | JSON syntax error | Check for missing commas, extra commas, or unquoted strings |
 | `Duplicate plugin name "x" found in marketplace` | Two plugins share the same name | Give each plugin a unique `name` value |
-| `plugins[0].source: Path traversal not allowed` | Source path contains `..` | Use paths relative to marketplace root without `..` |
+| `plugins[0].source: Path contains ".."` | Source path contains `..` | Use paths relative to the marketplace root without `..`. See [Relative paths](#relative-paths) |
 
 **Warnings** (non-blocking):
 

@@ -8,11 +8,12 @@ Plugins allow you to extend Claude Code with custom functionality that can be sh
 
 Plugins are packages of Claude Code extensions that can include:
 
-- **Commands**: Custom slash commands
+- **Skills**: Model-invoked capabilities that Claude uses autonomously (can also be invoked with `/skill-name`)
 - **Agents**: Specialized subagents for specific tasks
-- **Skills**: Model-invoked capabilities that Claude uses autonomously
 - **Hooks**: Event handlers that respond to tool use and other events
 - **MCP servers**: External tool integrations via Model Context Protocol
+
+The `commands/` directory is a legacy format. Use `skills/` for new plugins. Claude Code continues to support both formats for backward compatibility.
 
 For complete information on plugin structure and how to create plugins, see [Plugins](plugins.md).
 
@@ -74,23 +75,23 @@ for await (const message of query({
 }
 ```
 
-## Using plugin commands
+## Using plugin skills
 
-Commands from plugins are automatically namespaced with the plugin name to avoid conflicts. The format is `plugin-name:command-name`.
+Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. When invoked as slash commands, the format is `plugin-name:skill-name`.
 
 TypeScript
 
 ```shiki
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
-// Load a plugin with a custom /greet command
+// Load a plugin with a custom /greet skill
 for await (const message of query({
-  prompt: "/my-plugin:greet", // Use plugin command with namespace
+  prompt: "/my-plugin:greet", // Use plugin skill with namespace
   options: {
     plugins: [{ type: "local", path: "./my-plugin" }]
   }
 })) {
-  // Claude executes the custom greeting command from the plugin
+  // Claude executes the custom greeting skill from the plugin
   if (message.type === "assistant") {
     console.log(message.content);
   }
@@ -143,13 +144,13 @@ A plugin directory must contain a `.claude-plugin/plugin.json` manifest file. It
 my-plugin/
 ├── .claude-plugin/
 │   └── plugin.json          # Required: plugin manifest
-├── commands/                 # Custom slash commands
+├── skills/                   # Agent Skills (invoked autonomously or via /skill-name)
+│   └── my-skill/
+│       └── SKILL.md
+├── commands/                 # Legacy: use skills/ instead
 │   └── custom-cmd.md
 ├── agents/                   # Custom agents
 │   └── specialist.md
-├── skills/                   # Agent Skills
-│   └── my-skill/
-│       └── SKILL.md
 ├── hooks/                    # Event handlers
 │   └── hooks.json
 └── .mcp.json                # MCP server definitions
@@ -199,13 +200,13 @@ If your plugin doesn't appear in the init message:
 2. **Validate plugin.json**: Ensure your manifest file has valid JSON syntax
 3. **Check file permissions**: Ensure the plugin directory is readable
 
-### Commands not available
+### Skills not appearing
 
-If plugin commands don't work:
+If plugin skills don't work:
 
-1. **Use the namespace**: Plugin commands require the `plugin-name:command-name` format
-2. **Check init message**: Verify the command appears in `slash_commands` with the correct namespace
-3. **Validate command files**: Ensure command markdown files are in the `commands/` directory
+1. **Use the namespace**: Plugin skills require the `plugin-name:skill-name` format when invoked as slash commands
+2. **Check init message**: Verify the skill appears in `slash_commands` with the correct namespace
+3. **Validate skill files**: Ensure each skill has a `SKILL.md` file in its own subdirectory under `skills/` (for example, `skills/my-skill/SKILL.md`)
 
 ### Path resolution issues
 

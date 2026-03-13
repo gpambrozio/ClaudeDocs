@@ -281,6 +281,8 @@ Managed policy CLAUDE.md files cannot be excluded. This ensures organization-wid
 
 Auto memory lets Claude accumulate knowledge across sessions without you writing anything. Claude saves notes for itself as it works: build commands, debugging insights, architecture notes, code style preferences, and workflow habits. Claude doesn’t save something every session. It decides what’s worth remembering based on whether the information would be useful in a future conversation.
 
+Auto memory requires Claude Code v2.1.59 or later. Check your version with `claude --version`.
+
 ### [​](#enable-or-disable-auto-memory) Enable or disable auto memory
 
 Auto memory is on by default. To toggle it, open `/memory` in a session and use the auto memory toggle, or set `autoMemoryEnabled` in your project settings:
@@ -302,6 +304,21 @@ To disable auto memory via environment variable, set `CLAUDE_CODE_DISABLE_AUTO_M
 ### [​](#storage-location) Storage location
 
 Each project gets its own memory directory at `~/.claude/projects/<project>/memory/`. The `<project>` path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.
+To store auto memory in a different location, set `autoMemoryDirectory` in your user or local settings:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "autoMemoryDirectory": "~/my-custom-memory-dir"
+}
+```
+
+This setting is accepted from policy, local, and user settings. It is not accepted from project settings (`.claude/settings.json`) to prevent a shared project from redirecting auto memory writes to sensitive locations.
 The directory contains a `MEMORY.md` entrypoint and optional topic files:
 
 Report incorrect code

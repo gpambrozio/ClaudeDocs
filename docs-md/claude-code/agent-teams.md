@@ -4,6 +4,9 @@ Agent teams are experimental and disabled by default. Enable them by adding `CLA
 
 Agent teams let you coordinate multiple Claude Code instances working together. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and communicate directly with each other.
 Unlike [subagents](sub-agents.md), which run within a single session and can only report back to the main agent, you can also interact with individual teammates directly without going through the lead.
+
+Agent teams require Claude Code v2.1.32 or later. Check your version with `claude --version`.
+
 This page covers:
 
 - [When to use agent teams](#when-to-use-agent-teams), including best use cases and how they compare with subagents
@@ -27,6 +30,8 @@ Agent teams add coordination overhead and use significantly more tokens than a s
 Both agent teams and [subagents](sub-agents.md) let you parallelize work, but they operate differently. Choose based on whether your workers need to communicate with each other:
 
 ![Diagram comparing subagent and agent team architectures. Subagents are spawned by the main agent, do work, and report results back. Agent teams coordinate through a shared task list, with teammates communicating directly with each other.](https://mintcdn.com/claude-code/nsvRFSDNfpSU5nT7/images/subagents-vs-agent-teams-light.png?fit=max&auto=format&n=nsvRFSDNfpSU5nT7&q=85&s=2f8db9b4f3705dd3ab931fbe2d96e42a)![Diagram comparing subagent and agent team architectures. Subagents are spawned by the main agent, do work, and report results back. Agent teams coordinate through a shared task list, with teammates communicating directly with each other.](https://mintcdn.com/claude-code/nsvRFSDNfpSU5nT7/images/subagents-vs-agent-teams-dark.png?fit=max&auto=format&n=nsvRFSDNfpSU5nT7&q=85&s=d573a037540f2ada6a9ae7d8285b46fd)
+
+Subagents only report results back to the main agent and never talk to each other. In agent teams, teammates share a task list, claim work, and communicate directly with each other.
 
 |  | Subagents | Agent teams |
 | --- | --- | --- |
