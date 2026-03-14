@@ -11,9 +11,7 @@ Claude 4.6 represents the next generation of Claude models, bringing significant
 | Claude Opus 4.6 | `claude-opus-4-6` | The most intelligent model for building agents and coding |
 | Claude Sonnet 4.6 | `claude-sonnet-4-6` | The best combination of speed and intelligence |
 
-Claude Opus 4.6 supports a 200K context window (with [1M token context window](build-with-claude/context-windows.md) available in beta), 128K max output tokens, extended thinking, and all existing Claude API features.
-
-Claude Sonnet 4.6 supports a 200K context window (with [1M token context window](build-with-claude/context-windows.md) available in beta), 64K max output tokens, extended thinking, and adaptive thinking.
+Claude Opus 4.6 and Sonnet 4.6 both support a [1M token context window](build-with-claude/context-windows.md), extended thinking, and all existing Claude API features. Opus 4.6 offers 128k max output tokens; Sonnet 4.6 offers 64k max output tokens.
 
 For complete pricing and specs, see the [models overview](about-claude/models/overview.md).
 
@@ -81,9 +79,9 @@ response = client.beta.messages.create(
 
 [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) is now generally available on all models and platforms. No beta header is required.
 
-### 128K output tokens
+### 128k output tokens
 
-Opus 4.6 supports up to 128K output tokens, doubling the previous 64K limit. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response. See [Streaming Messages](build-with-claude/streaming.md) for details.
+Opus 4.6 supports up to 128k output tokens, doubling the previous 64k limit. This enables longer thinking budgets and more comprehensive responses. The SDKs require streaming for requests with large `max_tokens` values to avoid HTTP timeouts. If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` to get the complete response. See [Streaming Messages](build-with-claude/streaming.md) for details.
 
 ### Data residency controls
 

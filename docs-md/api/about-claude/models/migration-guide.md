@@ -460,7 +460,7 @@ Extended thinking impacts [prompt caching](build-with-claude/prompt-caching.md) 
 
 Extended thinking is deprecated in Claude 4.6 or newer models. If using newer models, use [adaptive thinking](build-with-claude/adaptive-thinking.md) instead.
 
-**Explore new capabilities:** See the [models overview](about-claude/models/overview.md) for details on context awareness, increased output capacity (64K tokens), higher intelligence, and improved speed.
+**Explore new capabilities:** See the [models overview](about-claude/models/overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
 
 ### Breaking changes
 

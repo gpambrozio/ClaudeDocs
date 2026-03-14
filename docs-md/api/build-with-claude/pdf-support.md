@@ -17,11 +17,13 @@ Claude works with any standard PDF. However, you should ensure your request size
 
 | Requirement | Limit |
 | --- | --- |
-| Maximum request size | 32MB |
-| Maximum pages per request | 100 |
+| Maximum request size | 32 MB ([varies by platform](api/overview.md)) |
+| Maximum pages per request | 600 (100 for models with a 200k-token context window) |
 | Format | Standard PDF (no passwords/encryption) |
 
-Both limits are on the entire request payload, including any other content sent alongside PDFs.
+Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
+
+Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. If this happens, try splitting the document into sections.
 
 Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](build-with-claude/vision.md) as other vision tasks.
 

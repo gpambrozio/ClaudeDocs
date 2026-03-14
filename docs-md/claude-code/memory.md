@@ -360,13 +360,15 @@ These are the most common issues with CLAUDE.md and auto memory, along with step
 
 ### [​](#claude-isn’t-following-my-claude-md) Claude isn’t following my CLAUDE.md
 
-CLAUDE.md is context, not enforcement. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.
+CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself. Claude reads it and tries to follow it, but there’s no guarantee of strict compliance, especially for vague or conflicting instructions.
 To debug:
 
 - Run `/memory` to verify your CLAUDE.md files are being loaded. If a file isn’t listed, Claude can’t see it.
 - Check that the relevant CLAUDE.md is in a location that gets loaded for your session (see [Choose where to put CLAUDE.md files](#choose-where-to-put-claudemd-files)).
 - Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”
 - Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.
+
+For instructions you want at the system prompt level, use [`--append-system-prompt`](cli-reference.md). This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.
 
 Use the [`InstructionsLoaded` hook](hooks.md) to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.
 

@@ -148,7 +148,7 @@ Ask AI
 apk add libgcc libstdc++ ripgrep
 ```
 
-Then set `USE_BUILTIN_RIPGREP` to `0` in your [settings.json file](settings.md):
+Then set `USE_BUILTIN_RIPGREP` to `0` in your [`settings.json`](settings.md) file:
 
 Report incorrect code
 
@@ -230,7 +230,7 @@ For enterprise deployments, you can enforce a consistent release channel across 
 
 ### [​](#disable-auto-updates) Disable auto-updates
 
-Set `DISABLE_AUTOUPDATER` to `"1"` in the `env` key of your [settings.json file](settings.md):
+Set `DISABLE_AUTOUPDATER` to `"1"` in the `env` key of your [`settings.json`](settings.md) file:
 
 Report incorrect code
 

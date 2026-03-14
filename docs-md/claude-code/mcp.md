@@ -134,10 +134,6 @@ Project management & collaboration for teams & agentsCommand
 
 `claude mcp add clickup --transport http https://mcp.clickup.com/mcp`
 
-[**Zapier**](https://docs.zapier.com/mcp/home)
-
-Automate workflows across thousands of apps via conversationRequires user-specific URL. [Get your URL here](https://mcp.zapier.com/mcp/servers?client=claudeai).
-
 [**Hugging Face**](https://huggingface.co/settings/mcp)
 
 Access the Hugging Face Hub and thousands of Gradio AppsCommand
@@ -218,17 +214,17 @@ Enrich contacts & accounts with GTM intelligenceCommand
 
 `claude mcp add --transport http zoominfo https://mcp.zoominfo.com/mcp`
 
-[**WordPress.com**](https://developer.wordpress.com/docs/mcp/)
-
-Secure AI access to manage your WordPress.com sitesCommand
-
-`claude mcp add wordpress-com --transport http https://public-api.wordpress.com/wpcom/v2/mcp/v1`
-
 [**bioRxiv**](https://docs.mcp.deepsense.ai/guides/biorxiv.html)
 
 Access bioRxiv and medRxiv preprint dataCommand
 
 `claude mcp add biorxiv --transport http https://mcp.deepsense.ai/biorxiv/mcp`
+
+[**WordPress.com**](https://developer.wordpress.com/docs/mcp/)
+
+Secure AI access to manage your WordPress.com sitesCommand
+
+`claude mcp add wordpress-com --transport http https://public-api.wordpress.com/wpcom/v2/mcp/v1`
 
 [**Netlify**](https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/)
 
@@ -264,15 +260,15 @@ BigQuery: Advanced analytical insights for agentsCommand
 
 `claude mcp add --transport http bigquery https://bigquery.googleapis.com/mcp`
 
-[**Glean**](https://docs.glean.com/administration/platform/mcp/about)
-
-Bring enterprise context to Claude and your AI toolsRequires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about).
-
 [**CMS Coverage**](https://docs.mcp.deepsense.ai/guides/cms_coverage.html)
 
 Access the CMS Coverage DatabaseCommand
 
 `claude mcp add cms-coverage --transport http https://mcp.deepsense.ai/cms_coverage/mcp`
+
+[**Glean**](https://docs.glean.com/administration/platform/mcp/about)
+
+Bring enterprise context to Claude and your AI toolsRequires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about).
 
 [**ChEMBL**](https://docs.mcp.deepsense.ai/guides/chembl.html)
 
@@ -442,17 +438,17 @@ Managed MCP platform for 350 sourcesCommand
 
 `claude mcp add cdata-connect-ai --transport http https://mcp.cloud.cdata.com/mcp`
 
-[**Square**](https://developer.squareup.com/docs/mcp)
-
-Search and manage transaction, merchant, and payment dataCommand
-
-`claude mcp add --transport sse square https://mcp.squareup.com/sse`
-
 [**MT Newswires**](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
 Trusted real-time global financial news providerCommand
 
 `claude mcp add --transport http mtnewswire`
+
+[**Square**](https://developer.squareup.com/docs/mcp)
+
+Search and manage transaction, merchant, and payment dataCommand
+
+`claude mcp add --transport sse square https://mcp.squareup.com/sse`
 
 [**Egnyte**](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
@@ -580,15 +576,15 @@ Discuss and iterate on Magic Patterns designsCommand
 
 `claude mcp add --transport http magic-patterns https://mcp.magicpatterns.com/mcp`
 
-[**ActiveCampaign**](https://developers.activecampaign.com/page/mcp)
-
-Autonomous marketing to transform how you workRequires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp).
-
 [**Chronograph**](https://lp-help.chronograph.pe/article/735-chronograph-mcp)
 
 Interact with your Chronograph data directly in ClaudeCommand
 
 `claude mcp add --transport http chronograph https://ai.chronograph.pe/mcp`
+
+[**ActiveCampaign**](https://developers.activecampaign.com/page/mcp)
+
+Autonomous marketing to transform how you workRequires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp).
 
 [**MailerLite**](https://developers.mailerlite.com/mcp/#how-mcp-works)
 
@@ -596,17 +592,17 @@ Turn Claude into your email marketing assistantCommand
 
 `claude mcp add --transport http mailerlite https://mcp.mailerlite.com/mcp`
 
-[**Owkin**](https://docs.owkin.com/core-features-and-usage)
-
-Interact with AI agents built for biologyCommand
-
-`claude mcp add owkin --transport http https://mcp.k.owkin.com/mcp`
-
 [**Blockscout**](https://github.com/blockscout/mcp-server)
 
 Access and analyze blockchain dataCommand
 
 `claude mcp add blockscout --transport http https://mcp.blockscout.com/mcp`
+
+[**Owkin**](https://docs.owkin.com/core-features-and-usage)
+
+Interact with AI agents built for biologyCommand
+
+`claude mcp add owkin --transport http https://mcp.k.owkin.com/mcp`
 
 [**Aura**](https://docs.getaura.ai/)
 
@@ -655,6 +651,12 @@ Query your CRM. Create records. Ask anything.Command
 The AI notebook for everything on your mindCommand
 
 `claude mcp add --transport http mem https://mcp.mem.ai/mcp`
+
+[**Zapier**](https://docs.zapier.com/mcp/home)
+
+Automate workflows across thousands of apps via conversationCommand
+
+`claude mcp add zapier --transport http https://mcp.zapier.com/api/v1/connect`
 
 [**Ticket Tailor**](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)
 
@@ -753,6 +755,12 @@ Secure, production-ready AI orchestration for privacyRequires user-specific URL.
 [**Starburst**](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 
 Securely retrieve data from your federated data sourcesRequires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html).
+
+[**Fever Event Discovery**](https://developer.feverup.com/)
+
+Discover live entertainment events worldwideCommand
+
+`claude mcp add --transport http fever-event-discovery https://data-search.apigw.feverup.com/mcp`
 
 [**Amplitude**](https://amplitude.com/docs/analytics/amplitude-mcp)
 
@@ -1696,6 +1704,17 @@ This is particularly useful when working with MCP servers that:
 - Process extensive log files or debugging information
 
 If you frequently encounter output warnings with specific MCP servers, consider increasing the limit or configuring the server to paginate or filter its responses.
+
+## [​](#respond-to-mcp-elicitation-requests) Respond to MCP elicitation requests
+
+MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can’t get on its own, Claude Code displays an interactive dialog and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.
+Servers can request input in two ways:
+
+- **Form mode**: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.
+- **URL mode**: Claude Code opens a browser URL for authentication or approval. Complete the flow in the browser, then confirm in the CLI.
+
+To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](hooks.md).
+If you’re building an MCP server that uses elicitation, see the [MCP elicitation specification](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) for protocol details and schema examples.
 
 ## [​](#use-mcp-resources) Use MCP resources
 

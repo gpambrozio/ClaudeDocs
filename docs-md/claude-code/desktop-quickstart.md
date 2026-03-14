@@ -13,7 +13,7 @@ The desktop app has three tabs:
 
 Chat and Cowork are covered in the [Claude Desktop support articles](https://support.claude.com/en/collections/16163169-claude-desktop). This page focuses on the **Code** tab.
 
-Claude Code requires a [Pro, Max, Teams, or Enterprise subscription](https://claude.com/pricing).
+Claude Code requires a [Pro, Max, Teams, or Enterprise subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=desktop_quickstart_pricing).
 
 ## [​](#install) Install
 
@@ -41,7 +41,7 @@ Launch Claude from your Applications folder (macOS) or Start menu (Windows). Sig
 
 Open the Code tab
 
-Click the **Code** tab at the top center. If clicking Code prompts you to upgrade, you need to [subscribe to a paid plan](https://claude.com/pricing) first. If it prompts you to sign in online, complete the sign-in and restart the app. If you see a 403 error, see [authentication troubleshooting](desktop.md).
+Click the **Code** tab at the top center. If clicking Code prompts you to upgrade, you need to [subscribe to a paid plan](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=desktop_quickstart_upgrade) first. If it prompts you to sign in online, complete the sign-in and restart the app. If you see a 403 error, see [authentication troubleshooting](desktop.md).
 
 The desktop app includes Claude Code. You don’t need to install Node.js or the CLI separately. To use `claude` from the terminal, install the CLI separately. See [Get started with the CLI](quickstart.md).
 
@@ -97,7 +97,7 @@ If you reject a change, Claude will ask how you’d like to proceed differently.
 You’ve made your first edit. For the full reference on everything Desktop can do, see [Use Claude Code Desktop](desktop.md). Here are some things to try next.
 **Interrupt and steer.** You can interrupt Claude at any point. If it’s going down the wrong path, click the stop button or type your correction and press **Enter**. Claude stops what it’s doing and adjusts based on your input. You don’t have to wait for it to finish or start over.
 **Give Claude more context.** Type `@filename` in the prompt box to pull a specific file into the conversation, attach images and PDFs using the attachment button, or drag and drop files directly into the prompt. The more context Claude has, the better the results. See [Add files and context](desktop.md).
-**Use skills for repeatable tasks.** Type `/` or click **+** → **Slash commands** to browse [built-in commands](interactive-mode.md), [custom skills](skills.md), and plugin skills. Skills are reusable prompts you can invoke whenever you need them, like code review checklists or deployment steps.
+**Use skills for repeatable tasks.** Type `/` or click **+** → **Slash commands** to browse [built-in commands](commands.md), [custom skills](skills.md), and plugin skills. Skills are reusable prompts you can invoke whenever you need them, like code review checklists or deployment steps.
 **Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.
 **Adjust how much control you have.** Your [permission mode](desktop.md) controls the balance. Ask permissions (default) requires approval before every edit. Auto accept edits auto-accepts file edits for faster iteration. Plan mode lets Claude map out an approach without touching any files, which is useful before a large refactor.
 **Add plugins for more capabilities.** Click the **+** button next to the prompt box and select **Plugins** to browse and install [plugins](desktop.md) that add skills, agents, MCP servers, and more.

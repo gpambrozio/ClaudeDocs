@@ -368,7 +368,7 @@ Tips:
 
 ## [​](#use-plan-mode-for-safe-code-analysis) Use Plan Mode for safe code analysis
 
-Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](settings.md) to gather requirements and clarify your goals before proposing a plan.
+Plan Mode instructs Claude to create a plan by analyzing the codebase with read-only operations, perfect for exploring codebases, planning complex changes, or reviewing code safely. In Plan Mode, Claude uses [`AskUserQuestion`](tools-reference.md) to gather requirements and clarify your goals before proposing a plan.
 
 ### [​](#when-to-use-plan-mode) When to use Plan Mode
 
@@ -827,7 +827,7 @@ Tips:
 ## [​](#use-extended-thinking-thinking-mode) Use extended thinking (thinking mode)
 
 [Extended thinking](build-with-claude/extended-thinking.md) is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`.
-Additionally, Opus 4.6 introduces adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your [effort level](model-config.md) setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.
+Additionally, Opus 4.6 and Sonnet 4.6 support adaptive reasoning: instead of a fixed thinking token budget, the model dynamically allocates thinking based on your [effort level](model-config.md) setting. Extended thinking and adaptive reasoning work together to give you control over how deeply Claude reasons before responding.
 Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.
 
 Phrases like “think”, “think hard”, and “think more” are interpreted as regular prompt instructions and don’t allocate thinking tokens.
@@ -838,20 +838,20 @@ Thinking is enabled by default, but you can adjust or disable it.
 
 | Scope | How to configure | Details |
 | --- | --- | --- |
-| **Effort level** | Adjust in `/model` or set [`CLAUDE_CODE_EFFORT_LEVEL`](settings.md) | Control thinking depth for Opus 4.6 and Sonnet 4.6: low, medium, high. See [Adjust effort level](model-config.md) |
+| **Effort level** | Run `/effort`, adjust in `/model`, or set [`CLAUDE_CODE_EFFORT_LEVEL`](env-vars.md) | Control thinking depth for Opus 4.6 and Sonnet 4.6. See [Adjust effort level](model-config.md) |
 | **`ultrathink` keyword** | Include “ultrathink” anywhere in your prompt | Sets effort to high for that turn on Opus 4.6 and Sonnet 4.6. Useful for one-off tasks requiring deep reasoning without permanently changing your effort setting |
 | **Toggle shortcut** | Press `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle thinking on/off for the current session (all models). May require [terminal configuration](terminal-config.md) to enable Option key shortcuts |
 | **Global default** | Use `/config` to toggle thinking mode | Sets your default across all projects (all models). Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json` |
-| **Limit token budget** | Set [`MAX_THINKING_TOKENS`](settings.md) environment variable | Limit the thinking budget to a specific number of tokens (ignored on Opus 4.6 unless set to 0). Example: `export MAX_THINKING_TOKENS=10000` |
+| **Limit token budget** | Set [`MAX_THINKING_TOKENS`](env-vars.md) environment variable | Limit the thinking budget to a specific number of tokens (ignored on Opus 4.6 and Sonnet 4.6 unless set to 0). Example: `export MAX_THINKING_TOKENS=10000` |
 
 To view Claude’s thinking process, press `Ctrl+O` to toggle verbose mode and see the internal reasoning displayed as gray italic text.
 
 ### [​](#how-extended-thinking-works) How extended thinking works
 
 Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.
-**With Opus 4.6**, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the [effort level](model-config.md) you select (low, medium, high). This is the recommended way to tune the tradeoff between speed and reasoning depth.
-**With other models**, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the [`MAX_THINKING_TOKENS`](settings.md) environment variable, or disable thinking entirely via `/config` or the `Option+T`/`Alt+T` toggle.
-`MAX_THINKING_TOKENS` is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting `MAX_THINKING_TOKENS=0` still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1`. See [environment variables](settings.md).
+**With Opus 4.6 and Sonnet 4.6**, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the [effort level](model-config.md) you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.
+**With older models**, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the [`MAX_THINKING_TOKENS`](env-vars.md) environment variable, or disable thinking entirely via `/config` or the `Option+T`/`Alt+T` toggle.
+`MAX_THINKING_TOKENS` is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting `MAX_THINKING_TOKENS=0` still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1`. See [environment variables](env-vars.md).
 
 You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking
 
@@ -874,9 +874,21 @@ Give sessions descriptive names to find them later. This is a best practice when
 
 1
 
-Name the current session
+Name the session
 
-Use `/rename` during a session to give it a memorable name:
+Name a session at startup with `-n`:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+claude -n auth-refactor
+```
+
+Or use `/rename` during a session, which also shows the name on the prompt bar:
 
 Report incorrect code
 
@@ -1057,15 +1069,93 @@ When you kick off a long-running task and switch to another window, you can set 
 
 1
 
-Open the hooks menu
+Add the hook to your settings
 
-Type `/hooks` and select `Notification` from the list of events.
+Open `~/.claude/settings.json` and add a `Notification` hook that calls your platform’s native notification command:
+
+- macOS
+- Linux
+- Windows
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'Claude Code needs your attention'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\""
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+If your settings file already has a `hooks` key, merge the `Notification` entry into it rather than overwriting. You can also ask Claude to write the hook for you by describing what you want in the CLI.
 
 2
 
-Configure the matcher
+Optionally narrow the matcher
 
-Select `+ Match all (no filter)` to fire on all notification types. To notify only for specific events, select `+ Add new matcher…` and enter one of these values:
+By default the hook fires on all notification types. To fire only for specific events, set the `matcher` field to one of these values:
 
 | Matcher | Fires when |
 | --- | --- |
@@ -1076,57 +1166,11 @@ Select `+ Match all (no filter)` to fire on all notification types. To notify on
 
 3
 
-Add your notification command
+Verify the hook
 
-Select `+ Add new hook…` and enter the command for your OS:
+Type `/hooks` and select `Notification` to confirm the hook appears. Selecting it shows the command that will run. To test it end-to-end, ask Claude to run a command that requires permission and switch away from the terminal, or ask Claude to trigger a notification directly.
 
-- macOS
-- Linux
-- Windows (PowerShell)
-
-Uses [`osascript`](https://ss64.com/mac/osascript.html) to trigger a native macOS notification through AppleScript:
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-osascript -e 'display notification "Claude Code needs your attention" with title "Claude Code"'
-```
-
-Uses `notify-send`, which is pre-installed on most Linux desktops with a notification daemon:
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-notify-send 'Claude Code' 'Claude Code needs your attention'
-```
-
-Uses PowerShell to show a native message box through .NET’s Windows Forms:
-
-Report incorrect code
-
-Copy
-
-Ask AI
-
-```shiki
-powershell.exe -Command "[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')"
-```
-
-4
-
-Save to user settings
-
-Select `User settings` to apply the notification across all your projects.
-
-For the full walkthrough with JSON configuration examples, see [Automate workflows with hooks](hooks-guide.md). For the complete event schema and notification types, see the [Notification reference](hooks.md).
+For the complete event schema and notification types, see the [Notification reference](hooks.md).
 
 ---
 

@@ -22,7 +22,7 @@ The diagram below illustrates the standard context window behavior for API reque
 
 - **Progressive token accumulation:** As the conversation advances through turns, each user message and assistant response accumulates within the context window. Previous turns are preserved completely.
 - **Linear growth pattern:** The context usage grows linearly with each turn, with previous turns preserved completely.
-- **200K token capacity:** The total available context window (200,000 tokens) represents the maximum capacity for storing conversation history and generating new output from Claude.
+- **Context window capacity:** The total available context window (up to 1M tokens) represents the maximum capacity for storing conversation history and generating new output from Claude.
 - **Input-output flow:** Each turn consists of:
   - **Input phase:** Contains all previous conversation history plus the current user message
   - **Output phase:** Generates a text response that becomes part of a future input
@@ -89,41 +89,11 @@ Claude Sonnet 3.7 does not support interleaved thinking, so there is no interlea
 
 For more information about using tools with extended thinking, see the [extended thinking guide](build-with-claude/extended-thinking.md).
 
-## 1M token context window
+Claude Opus 4.6 and Sonnet 4.6 have a 1M-token context window.
 
-Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support a 1-million token context window. This extended context window allows you to process much larger documents, maintain longer conversations, and work with more extensive codebases.
+Claude Sonnet 4.5 and Sonnet 4 require the `context-1m-2025-08-07` [beta header](api/beta-headers.md) for requests beyond 200k tokens (available to organizations in [usage tier](api/rate-limits.md) 4 and those with custom rate limits). Other Claude models have a 200k-token context window.
 
-The 1M token context window is in beta for organizations in [usage tier](api/rate-limits.md) 4 and organizations with custom rate limits. The 1M token context window is only available for Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4.
-
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-
-To use the 1M token context window, include the `context-1m-2025-08-07` [beta header](api/beta-headers.md) in your API requests:
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: context-1m-2025-08-07" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Process this large document..."}
-    ]
-  }'
-```
-
-**Important considerations:**
-
-- **Beta status:** This is a beta feature subject to change. Features and pricing may be modified or removed in future releases.
-- **Usage tier requirement:** The 1M token context window is available to organizations in [usage tier](api/rate-limits.md) 4 and organizations with custom rate limits. Lower tier organizations must advance to usage tier 4 to access this feature.
-- **Availability:** The 1M token context window is currently available on the Claude API, [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md), and [Google Cloud's Vertex AI](build-with-claude/claude-on-vertex-ai.md).
-- **Pricing:** Requests exceeding 200K tokens are automatically charged at premium rates (2x input, 1.5x output pricing). See the [pricing documentation](about-claude/pricing.md) for details.
-- **Rate limits:** Long context requests have dedicated rate limits. See the [rate limits documentation](api/rate-limits.md) for details.
-- **Multimodal considerations:** When processing large numbers of images or PDFs, be aware that the files can vary in token usage. When pairing a large prompt with a large number of images, you may hit [request size limits](api/overview.md).
+A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](api/overview.md) before the token limit.
 
 ## Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
 
@@ -134,15 +104,15 @@ Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature **context awa
 At the start of a conversation, Claude receives information about its total context window:
 
 ```shiki
-<budget:token_budget>200000</budget:token_budget>
+<budget:token_budget>1000000</budget:token_budget>
 ```
 
-The budget is set to 200K tokens (standard), 500K tokens (claude.ai Enterprise), or 1M tokens (beta, for eligible organizations).
+The budget is set to 1M tokens (200k for models with a smaller context window).
 
 After each tool call, Claude receives an update on remaining capacity:
 
 ```shiki
-<system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
+<system_warning>Token usage: 35000/1000000; 965000 remaining</system_warning>
 ```
 
 This awareness helps Claude determine how much capacity remains for work and enables more effective execution on long-running tasks. Image tokens are included in these budgets.
@@ -161,7 +131,7 @@ For prompting guidance on leveraging context awareness, see the [prompting best 
 
 ## Managing context with compaction
 
-If your conversations regularly approach context window limits, [server-side compaction](build-with-claude/compaction.md) is the recommended approach. Compaction provides server-side summarization that automatically condenses earlier parts of a conversation, enabling long-running conversations beyond context limits with minimal integration work. It is currently available in beta for Claude Opus 4.6.
+If your conversations regularly approach context window limits, [server-side compaction](build-with-claude/compaction.md) is the recommended approach. Compaction provides server-side summarization that automatically condenses earlier parts of a conversation, enabling long-running conversations beyond context limits with minimal integration work. It is currently available in beta for Claude Opus 4.6 and Sonnet 4.6.
 
 For more specialized needs, [context editing](build-with-claude/context-editing.md) offers additional strategies:
 

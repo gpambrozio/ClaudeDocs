@@ -11,7 +11,7 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 
 ### Example: Analyzing a merger & acquisition report
 
-- **Use direct quotes for factual grounding:** For tasks involving long documents (>20K tokens), ask Claude to extract word-for-word quotes first before performing its task. This grounds its responses in the actual text, reducing hallucinations.
+- **Use direct quotes for factual grounding:** For tasks involving long documents (>20k tokens), ask Claude to extract word-for-word quotes first before performing its task. This grounds its responses in the actual text, reducing hallucinations.
 
 ### Example: Auditing a data privacy policy
 

@@ -1052,7 +1052,7 @@ apk add ripgrep
 pacman -S ripgrep
 ```
 
-Then set `USE_BUILTIN_RIPGREP=0` in your [environment](settings.md).
+Then set `USE_BUILTIN_RIPGREP=0` in your [environment](env-vars.md).
 
 ### [​](#slow-or-incomplete-search-results-on-wsl) Slow or incomplete search results on WSL
 

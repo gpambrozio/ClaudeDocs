@@ -13,7 +13,7 @@ If your organization has specific infrastructure requirements, compare the optio
 | Feature | Claude for Teams/Enterprise | Anthropic Console | Amazon Bedrock | Google Vertex AI | Microsoft Foundry |
 | --- | --- | --- | --- | --- | --- |
 | Best for | Most organizations (recommended) | Individual developers | AWS-native deployments | GCP-native deployments | Azure-native deployments |
-| Billing | **Teams:** $150/seat (Premium) with PAYG available **Enterprise:** [Contact Sales](https://claude.com/contact-sales) | PAYG | PAYG through AWS | PAYG through GCP | PAYG through Azure |
+| Billing | **Teams:** $150/seat (Premium) with PAYG available **Enterprise:** [Contact Sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=third_party_enterprise) | PAYG | PAYG through AWS | PAYG through GCP | PAYG through Azure |
 | Regions | Supported [countries](https://www.anthropic.com/supported-countries) | Supported [countries](https://www.anthropic.com/supported-countries) | Multiple AWS [regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html) | Multiple GCP [regions](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) | Multiple Azure [regions](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) |
 | Prompt caching | Enabled by default | Enabled by default | Enabled by default | Enabled by default | Enabled by default |
 | Authentication | Claude.ai SSO or email | API key | API key or AWS credentials | GCP credentials | API key or Microsoft Entra ID |
@@ -43,7 +43,7 @@ The following examples show the environment variables to set in your shell or sh
 - Corporate proxy
 - LLM Gateway
 
-Route Bedrock traffic through your corporate proxy by setting the following [environment variables](settings.md):
+Route Bedrock traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 
@@ -60,7 +60,7 @@ export AWS_REGION=us-east-1
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Bedrock traffic through your LLM gateway by setting the following [environment variables](settings.md):
+Route Bedrock traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 
@@ -82,7 +82,7 @@ export CLAUDE_CODE_SKIP_BEDROCK_AUTH=1  # If gateway handles AWS auth
 - Corporate proxy
 - LLM Gateway
 
-Route Foundry traffic through your corporate proxy by setting the following [environment variables](settings.md):
+Route Foundry traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 
@@ -100,7 +100,7 @@ export ANTHROPIC_FOUNDRY_API_KEY=your-api-key  # Or omit for Entra ID auth
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Foundry traffic through your LLM gateway by setting the following [environment variables](settings.md):
+Route Foundry traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 
@@ -122,7 +122,7 @@ export CLAUDE_CODE_SKIP_FOUNDRY_AUTH=1  # If gateway handles Azure auth
 - Corporate proxy
 - LLM Gateway
 
-Route Vertex AI traffic through your corporate proxy by setting the following [environment variables](settings.md):
+Route Vertex AI traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 
@@ -140,7 +140,7 @@ export ANTHROPIC_VERTEX_PROJECT_ID=your-project-id
 export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
-Route Vertex AI traffic through your LLM gateway by setting the following [environment variables](settings.md):
+Route Vertex AI traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
 
 Report incorrect code
 

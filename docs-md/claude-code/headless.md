@@ -157,7 +157,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
 
 The `--allowedTools` flag uses [permission rule syntax](settings.md). The trailing  `*` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
-User-invoked [skills](skills.md) like `/commit` and [built-in commands](interactive-mode.md) are only available in interactive mode. In `-p` mode, describe the task you want to accomplish instead.
+User-invoked [skills](skills.md) like `/commit` and [built-in commands](commands.md) are only available in interactive mode. In `-p` mode, describe the task you want to accomplish instead.
 
 ### [​](#customize-the-system-prompt) Customize the system prompt
 

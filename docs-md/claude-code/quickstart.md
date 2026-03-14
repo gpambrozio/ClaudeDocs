@@ -9,7 +9,7 @@ Make sure you have:
 - A terminal or command prompt open
   - If you’ve never used the terminal before, check out the [terminal guide](terminal-guide.md)
 - A code project to work with
-- A [Claude subscription](https://claude.com/pricing) (Pro, Max, Teams, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
+- A [Claude subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=quickstart_prereq) (Pro, Max, Teams, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
 
 This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md).
 
@@ -113,7 +113,7 @@ Ask AI
 
 You can log in using any of these account types:
 
-- [Claude Pro, Max, Teams, or Enterprise](https://claude.com/pricing) (recommended)
+- [Claude Pro, Max, Teams, or Enterprise](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=quickstart_login) (recommended)
 - [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits). On first login, a “Claude Code” workspace is automatically created in the Console for centralized cost tracking.
 - [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](third-party-integrations.md) (enterprise cloud providers)
 

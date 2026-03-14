@@ -162,12 +162,6 @@ URL
 
 `https://mcp.clickup.com/mcp`
 
-[Zapier](https://docs.zapier.com/mcp/home)
-
-Automate workflows across thousands of apps via conversation
-
-Requires user-specific URL. [Get your URL here](https://mcp.zapier.com/mcp/servers?client=claudeai)
-
 [Hugging Face](https://huggingface.co/settings/mcp)
 
 Access the Hugging Face Hub and thousands of Gradio Apps
@@ -594,14 +588,6 @@ URL
 
 `https://mcp.cloud.cdata.com/mcp`
 
-[Square](https://developer.squareup.com/docs/mcp)
-
-Search and manage transaction, merchant, and payment data
-
-URL
-
-`https://mcp.squareup.com/sse`
-
 [MT Newswires](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
 Trusted real-time global financial news provider
@@ -609,6 +595,14 @@ Trusted real-time global financial news provider
 URL
 
 `https://vast-mcp.blueskyapi.com/mcp`
+
+[Square](https://developer.squareup.com/docs/mcp)
+
+Search and manage transaction, merchant, and payment data
+
+URL
+
+`https://mcp.squareup.com/sse`
 
 [Egnyte](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
@@ -658,14 +652,6 @@ URL
 
 `https://api.udemy.com/mcp`
 
-[Day AI](https://day.ai/mcp)
-
-Know everything about your prospects & customers with CRMx
-
-URL
-
-`https://day.ai/api/mcp`
-
 [LSEG](https://www.lseg.com/en/solutions/ai-finance-solutions/anthropic)
 
 Access best in class data & analytics across a broad spectrum of asset classes.
@@ -673,6 +659,14 @@ Access best in class data & analytics across a broad spectrum of asset classes.
 URL
 
 `https://api.analytics.lseg.com/lfa/mcp/server-cl`
+
+[Day AI](https://day.ai/mcp)
+
+Know everything about your prospects & customers with CRMx
+
+URL
+
+`https://day.ai/api/mcp`
 
 [Coupler.io](https://help.coupler.io/article/592-coupler-local-mcp-server)
 
@@ -836,12 +830,6 @@ URL
 
 `https://mcp.magicpatterns.com/mcp`
 
-[ActiveCampaign](https://developers.activecampaign.com/page/mcp)
-
-Autonomous marketing to transform how you work
-
-Requires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp)
-
 [Chronograph](https://lp-help.chronograph.pe/article/735-chronograph-mcp)
 
 Interact with your Chronograph data directly in Claude
@@ -849,6 +837,12 @@ Interact with your Chronograph data directly in Claude
 URL
 
 `https://ai.chronograph.pe/mcp`
+
+[ActiveCampaign](https://developers.activecampaign.com/page/mcp)
+
+Autonomous marketing to transform how you work
+
+Requires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp)
 
 [MailerLite](https://developers.mailerlite.com/mcp/#how-mcp-works)
 
@@ -858,14 +852,6 @@ URL
 
 `https://mcp.mailerlite.com/mcp`
 
-[Owkin](https://docs.owkin.com/core-features-and-usage)
-
-Interact with AI agents built for biology
-
-URL
-
-`https://mcp.k.owkin.com/mcp`
-
 [Blockscout](https://github.com/blockscout/mcp-server)
 
 Access and analyze blockchain data
@@ -873,6 +859,14 @@ Access and analyze blockchain data
 URL
 
 `https://mcp.blockscout.com/mcp`
+
+[Owkin](https://docs.owkin.com/core-features-and-usage)
+
+Interact with AI agents built for biology
+
+URL
+
+`https://mcp.k.owkin.com/mcp`
 
 [DevRev](https://support.devrev.ai/en-US/devrev/article/ART-21859-remote-mcp-server)
 
@@ -953,6 +947,14 @@ The AI notebook for everything on your mind
 URL
 
 `https://mcp.mem.ai/mcp`
+
+[Zapier](https://docs.zapier.com/mcp/home)
+
+Automate workflows across thousands of apps via conversation
+
+URL
+
+`https://mcp.zapier.com/api/v1/connect`
 
 [Stytch](https://stytch.com/docs/workspace-management/stytch-mcp)
 
@@ -1127,6 +1129,14 @@ Requires user-specific URL. [Get your URL here](https://docs.visier.com/develope
 Securely retrieve data from your federated data sources
 
 Requires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
+
+[Fever Event Discovery](https://developer.feverup.com/)
+
+Discover live entertainment events worldwide
+
+URL
+
+`https://data-search.apigw.feverup.com/mcp`
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 

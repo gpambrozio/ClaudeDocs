@@ -18,7 +18,7 @@ Ways to steer Claude and Claude's direct outputs, including response format, rea
 
 | Feature | Description | Availability |
 | --- | --- | --- |
-| [1M token context window](build-with-claude/context-windows.md) | An extended context window that allows you to process much larger documents, maintain longer conversations, and work with more extensive codebases. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
+| [Context windows](build-with-claude/context-windows.md) | Up to 1M tokens for processing large documents, extensive codebases, and long conversations. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Adaptive thinking](build-with-claude/adaptive-thinking.md) | Let Claude dynamically decide when and how much to think. The recommended thinking mode for Opus 4.6. Use the effort parameter to control thinking depth. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
 | [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls cost 50% less than standard API calls. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI |
 | [Citations](build-with-claude/citations.md) | Ground Claude's responses in source documents. With Citations, Claude can provide detailed references to the exact sentences and passages it uses to generate responses, leading to more verifiable, trustworthy outputs. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |
@@ -68,7 +68,7 @@ Infrastructure for controlling and optimizing Claude's context window.
 
 | Feature | Description | Availability |
 | --- | --- | --- |
-| [Compaction](build-with-claude/compaction.md) | Server-side context summarization for long-running conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation. Supported on Opus 4.6 and Haiku 4.5. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
+| [Compaction](build-with-claude/compaction.md) | Server-side context summarization for long-running conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation. Supported on Opus 4.6 and Sonnet 4.6. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Context editing](build-with-claude/context-editing.md) | Automatically manage conversation context with configurable strategies. Supports clearing tool results when approaching token limits and managing thinking blocks in extended thinking conversations. | Claude API (Beta)  Amazon Bedrock (Beta)  Google Cloud's Vertex AI (Beta)  Microsoft Foundry (Beta) |
 | [Automatic prompt caching](build-with-claude/prompt-caching.md) | Simplify prompt caching to a single API parameter. The system automatically caches the last cacheable block in your request, moving the cache point forward as conversations grow. | Claude API  Microsoft Foundry (Beta) |
 | [Prompt caching (5m)](build-with-claude/prompt-caching.md) | Provide Claude with more background knowledge and example outputs to reduce costs and latency. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |

@@ -24,16 +24,14 @@ Once you've picked a model, [learn how to make your first API call](get-started.
 | **[Adaptive thinking](build-with-claude/adaptive-thinking.md)** | Yes | Yes | No |
 | **[Priority Tier](api/service-tiers.md)** | Yes | Yes | Yes |
 | **Comparative latency** | Moderate | Fast | Fastest |
-| **Context window** | 200K tokens /   1M tokens (beta)3 | 200K tokens /   1M tokens (beta)3 | 200K tokens |
-| **Max output** | 128K tokens | 64K tokens | 64K tokens |
+| **Context window** | 1M tokens | 1M tokens | 200k tokens |
+| **Max output** | 128k tokens | 64k tokens | 64k tokens |
 | **Reliable knowledge cutoff** | May 20252 | Aug 20252 | Feb 2025 |
 | **Training data cutoff** | Aug 2025 | Jan 2026 | Jul 2025 |
 
 *1 - See the [pricing page](about-claude/pricing.md) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.*
 
 *2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).*
-
-*3 - Claude Opus 4.6 and Sonnet 4.6 support a [1M token context window](build-with-claude/context-windows.md) when using the `context-1m-2025-08-07` beta header. [Long context pricing](about-claude/pricing.md) applies to requests exceeding 200K tokens.*
 
 Models with the same snapshot date (e.g., 20240620) are identical across all platforms and do not change. The snapshot date in the model name ensures consistency and allows developers to rely on stable performance across different environments.
 

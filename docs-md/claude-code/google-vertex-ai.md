@@ -137,9 +137,8 @@ Create a dedicated GCP project for Claude Code to simplify cost tracking and acc
 
 ## [​](#1m-token-context-window) 1M token context window
 
-Claude Sonnet 4 and Sonnet 4.6 support the [1M token context window](build-with-claude/context-windows.md) on Vertex AI.
-
-The 1M token context window is currently in beta. To use the extended context window, include the `context-1m-2025-08-07` beta header in your Vertex AI requests.
+Claude Opus 4.6, Sonnet 4.6, Sonnet 4.5, and Sonnet 4 support the [1M token context window](build-with-claude/context-windows.md) on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.
+To enable the 1M context window for your pinned model, append `[1m]` to the model ID. See [Pin models for third-party deployments](model-config.md) for details.
 
 ## [​](#troubleshooting) Troubleshooting
 

@@ -6,6 +6,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### March 13, 2026
+
+- The [1M token context window](build-with-claude/context-windows.md) is now generally available for Claude Opus 4.6 and Sonnet 4.6 at standard pricing. Requests over 200k tokens work automatically for these models with no beta header required. The 1M token context window remains in beta for Claude Sonnet 4.5 and Sonnet 4.
+- We've removed the dedicated 1M rate limits for all supported models. Your standard account limits now apply across every context length.
+- We've raised the media limit from 100 to 600 images or PDF pages per request when using the 1M token context window.
+
 ### February 19, 2026
 
 - We've launched **automatic caching** for the Messages API. Add a single `cache_control` field to your request body and the system automatically caches the last cacheable block, moving the cache point forward as conversations grow. No manual breakpoint management required. Works alongside existing block-level cache control for fine-grained optimization. Available on the Claude API and Azure AI Foundry (preview). Learn more in [Prompt caching](build-with-claude/prompt-caching.md).
@@ -29,7 +35,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - The [effort parameter](build-with-claude/effort.md) is now generally available (no beta header required) and supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
 - We've launched the [compaction API](build-with-claude/compaction.md) in beta, providing server-side context summarization for effectively infinite conversations. Available on Opus 4.6.
 - We've introduced [data residency controls](build-with-claude/data-residency.md), allowing you to specify where model inference runs with the `inference_geo` parameter. US-only inference is available at 1.1x pricing for models released after February 1, 2026.
-- The [1M token context window](build-with-claude/context-windows.md) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](about-claude/pricing.md) applies to requests exceeding 200K input tokens.
+- The [1M token context window](build-with-claude/context-windows.md) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](about-claude/pricing.md) applies to requests exceeding 200k input tokens.
 - [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) is now generally available on all models and platforms (no beta header required). The `output_format` parameter for [structured outputs](build-with-claude/structured-outputs.md) has been moved to `output_config.format`.
 
 ### January 29, 2026
@@ -141,8 +147,8 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### August 26, 2025
 
-- We've increased rate limits on the [1M token context window](build-with-claude/context-windows.md) for Claude Sonnet 4 on the Claude API. For more information, see [Long context rate limits](api/rate-limits.md).
-- The 1m token context window is now available on Google Cloud's Vertex AI. For more information, see [Claude on Vertex AI](build-with-claude/claude-on-vertex-ai.md).
+- We've increased rate limits on the [1M token context window](build-with-claude/context-windows.md) for Claude Sonnet 4 on the Claude API.
+- The 1M token context window is now available on Google Cloud's Vertex AI. For more information, see [Claude on Vertex AI](build-with-claude/claude-on-vertex-ai.md).
 
 ### August 19, 2025
 
