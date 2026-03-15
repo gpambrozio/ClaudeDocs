@@ -548,7 +548,7 @@ Discover, research, and enrich companies and peopleCommand
 
 [**MotherDuck**](https://motherduck.com/docs/sql-reference/mcp/)
 
-Analyze your data with natural languageCommand
+Get answers from your dataCommand
 
 `claude mcp add motherduck --transport http https://api.motherduck.com/mcp`
 

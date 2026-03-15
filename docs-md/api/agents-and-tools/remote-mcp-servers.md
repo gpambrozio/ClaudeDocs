@@ -792,7 +792,7 @@ URL
 
 [MotherDuck](https://motherduck.com/docs/sql-reference/mcp/)
 
-Analyze your data with natural language
+Get answers from your data
 
 URL
 
