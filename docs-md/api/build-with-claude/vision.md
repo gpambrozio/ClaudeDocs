@@ -8,7 +8,7 @@ This guide describes how to work with images in Claude, including best practices
 
 ## How to use vision
 
-Use Claude’s vision capabilities via:
+Use Claude’s vision capabilities through:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
 - The [Console Workbench](/workbench). A button to add images appears at the top right of every User message block.
@@ -20,17 +20,19 @@ Use Claude’s vision capabilities via:
 
 ### Basics and limits
 
-You can include multiple images in a single request: up to 20 for [claude.ai](https://claude.ai/), and up to 600 for API requests (100 for models with a 200k-token context window). Claude will analyze all provided images when formulating its response. This can be helpful for comparing or contrasting images.
+You can include multiple images in a single request: up to 20 for [claude.ai](https://claude.ai/), and up to 600 for API requests (100 for models with a 200k-token context window). Claude analyzes all provided images when formulating its response. This can be helpful for comparing or contrasting images.
 
 If you submit an image larger than 8000x8000 px, it is rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
 
 While the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
+Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
+
 ### Evaluate image size
 
 For optimal performance, resize images before uploading if they are too large. If your image's long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it is first scaled down, preserving aspect ratio, until it's within the size limits.
 
-If your input image is too large and needs to be resized, it increases latency of [time-to-first-token](about-claude/glossary.md), without giving you any additional model performance. Very small images under 200 pixels on any given edge may degrade performance.
+If your input image is too large and needs to be resized, it increases latency of [time-to-first-token](about-claude/glossary.md), with no benefit to output quality. Very small images under 200 pixels on any given edge may degrade output quality.
 
 To improve [time-to-first-token](about-claude/glossary.md), consider
 resizing images to no more than 1.15 megapixels (and within 1568 pixels in
@@ -76,10 +78,7 @@ Many of the [prompting techniques](build-with-claude/prompt-engineering/overview
 
 These examples demonstrate best practice prompt structures involving images.
 
-Just as with document-query placement, Claude works best when images come
-before text. Images placed after text or interpolated with text will still
-perform well, but if your use case allows it, prefer an image-then-text
-structure.
+Just as [placing long documents before your query](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
 ### About the prompt examples
 
@@ -241,12 +240,12 @@ See [Messages API examples](api/messages.md) for more example code and parameter
 
 While Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
-- **People identification**: Claude [cannot be used](https://www.anthropic.com/legal/aup) to identify (i.e., name) people in images and will refuse to do so.
+- **People identification**: Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
 - **Accuracy**: Claude may hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
 - **Spatial reasoning**: Claude's spatial reasoning abilities are limited. It may struggle with tasks requiring precise localization or layouts, like reading an analog clock face or describing exact positions of chess pieces.
 - **Counting**: Claude can give approximate counts of objects in an image but may not always be precisely accurate, especially with large numbers of small objects.
 - **AI generated images**: Claude does not know if an image is AI-generated and may be incorrect if asked. Do not rely on it to detect fake or synthetic images.
-- **Inappropriate content**: Claude will not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
+- **Inappropriate content**: Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
 - **Healthcare applications**: While Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
 
 Always carefully review and verify Claude's image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.

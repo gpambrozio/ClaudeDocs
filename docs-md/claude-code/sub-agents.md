@@ -198,6 +198,8 @@ claude --agents '{
 The `--agents` flag accepts JSON with the same [frontmatter](#supported-frontmatter-fields) fields as file-based subagents: `description`, `prompt`, `tools`, `disallowedTools`, `model`, `permissionMode`, `mcpServers`, `hooks`, `maxTurns`, `skills`, and `memory`. Use `prompt` for the system prompt, equivalent to the markdown body in file-based subagents.
 **Plugin subagents** come from [plugins](plugins.md) you’ve installed. They appear in `/agents` alongside your custom subagents. See the [plugin components reference](plugins-reference.md) for details on creating plugin subagents.
 
+For security reasons, plugin subagents do not support the `hooks`, `mcpServers`, or `permissionMode` frontmatter fields. These fields are ignored when loading agents from a plugin. If you need them, copy the agent file into `.claude/agents/` or `~/.claude/agents/`. You can also add rules to [`permissions.allow`](settings.md) in `settings.json` or `settings.local.json`, but these rules apply to the entire session, not just the plugin subagent.
+
 ### [​](#write-subagent-files) Write subagent files
 
 Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:

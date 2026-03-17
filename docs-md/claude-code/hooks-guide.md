@@ -66,6 +66,7 @@ Each example includes a ready-to-use configuration block that you add to a [sett
 - [Block edits to protected files](#block-edits-to-protected-files)
 - [Re-inject context after compaction](#re-inject-context-after-compaction)
 - [Audit configuration changes](#audit-configuration-changes)
+- [Auto-approve specific permission prompts](#auto-approve-specific-permission-prompts)
 
 ### [​](#get-notified-when-claude-needs-input) Get notified when Claude needs input
 
@@ -322,6 +323,62 @@ Ask AI
 ```
 
 The matcher filters by configuration type: `user_settings`, `project_settings`, `local_settings`, `policy_settings`, or `skills`. To block a change from taking effect, exit with code 2 or return `{"decision": "block"}`. See the [ConfigChange reference](hooks.md) for the full input schema.
+
+### [​](#auto-approve-specific-permission-prompts) Auto-approve specific permission prompts
+
+Skip the approval dialog for tool calls you always allow. This example auto-approves `ExitPlanMode`, the tool Claude calls when it finishes presenting a plan and asks to proceed, so you aren’t prompted every time a plan is ready.
+Unlike the exit-code examples above, auto-approval requires your hook to write a JSON decision to stdout. A `PermissionRequest` hook fires when Claude Code is about to show a permission dialog, and returning `"behavior": "allow"` answers it on your behalf.
+The matcher scopes the hook to `ExitPlanMode` only, so no other prompts are affected. Add this to `~/.claude/settings.json`:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PermissionRequest\", \"decision\": {\"behavior\": \"allow\"}}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+When the hook approves, Claude Code exits plan mode and restores whatever permission mode was active before you entered plan mode. The transcript shows “Allowed by PermissionRequest hook” where the dialog would have appeared. The hook path always keeps the current conversation: it cannot clear context and start a fresh implementation session the way the dialog can.
+To set a specific permission mode instead, your hook’s output can include an `updatedPermissions` array with a `setMode` entry. The `mode` value is any permission mode like `default`, `acceptEdits`, or `bypassPermissions`, and `destination: "session"` applies it for the current session only.
+To switch the session to `acceptEdits`, your hook writes this JSON to stdout:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PermissionRequest",
+    "decision": {
+      "behavior": "allow",
+      "updatedPermissions": [
+        { "type": "setMode", "mode": "acceptEdits", "destination": "session" }
+      ]
+    }
+  }
+}
+```
+
+Keep the matcher as narrow as possible. Matching on `.*` or leaving the matcher empty would auto-approve every permission prompt, including file writes and shell commands. See the [PermissionRequest reference](hooks.md) for the full set of decision fields.
 
 ## [​](#how-hooks-work) How hooks work
 
@@ -587,7 +644,7 @@ Where you add a hook determines its scope:
 | [Skill](skills.md) or [agent](sub-agents.md) frontmatter | While the skill or agent is active | Yes, defined in the component file |
 
 Run [`/hooks`](hooks.md) in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set `"disableAllHooks": true` in your settings file.
-If you edit settings files directly while Claude Code is running, hook changes won’t take effect until you review them in the `/hooks` menu or restart your session. This prevents unexpected hook modifications from taking effect mid-session.
+If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.
 
 ## [​](#prompt-based-hooks) Prompt-based hooks
 
@@ -737,7 +794,7 @@ You see a message like “PreToolUse hook error: …” in the transcript.
 
 You edited a settings file but the hooks don’t appear in the menu.
 
-- Restart your session or open `/hooks` to reload. Manual file edits require a reload before they take effect.
+- File edits are normally picked up automatically. If they haven’t appeared after a few seconds, the file watcher may have missed the change: restart your session to force a reload.
 - Verify your JSON is valid (trailing commas and comments are not allowed)
 - Confirm the settings file is in the correct location: `.claude/settings.json` for project hooks, `~/.claude/settings.json` for global hooks
 

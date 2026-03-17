@@ -248,14 +248,6 @@ URL
 
 `https://api.ahrefs.com/mcp/mcp`
 
-[Cloudflare Developer Platform](https://www.support.cloudflare.com/)
-
-Build applications with compute, storage, and AI
-
-URL
-
-`https://bindings.mcp.cloudflare.com/mcp`
-
 [PitchBook Premium](https://help.pitchbook.com/s/article/PitchBook-Premium-for-Claude-by-Anthropic)
 
 PitchBook data, embedded in the way you work.
@@ -263,6 +255,14 @@ PitchBook data, embedded in the way you work.
 URL
 
 `https://premium.mcp.pitchbook.com/mcp`
+
+[Cloudflare Developer Platform](https://www.support.cloudflare.com/)
+
+Build applications with compute, storage, and AI
+
+URL
+
+`https://bindings.mcp.cloudflare.com/mcp`
 
 [Scholar Gateway](https://docs.scholargateway.ai)
 
@@ -572,6 +572,14 @@ URL
 
 `https://mcp.lastminute.com/mcp`
 
+[Mixpanel](https://docs.mixpanel.com/docs/features/mcp)
+
+Analyze, query, and manage your Mixpanel data
+
+URL
+
+`https://mcp.mixpanel.com/mcp`
+
 [Bitly](https://dev.bitly.com/bitly-mcp/)
 
 Shorten links, generate QR Codes, and track performance
@@ -716,14 +724,6 @@ URL
 
 `https://callbacks.omniapp.co/callback/mcp`
 
-[Cloudinary](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
-
-Manage, transform and deliver your images & videos
-
-URL
-
-`https://asset-management.mcp.cloudinary.com/sse`
-
 [Postman](https://github.com/postmanlabs/postman-mcp-server)
 
 Give API context to your coding agents
@@ -731,6 +731,14 @@ Give API context to your coding agents
 URL
 
 `https://mcp.postman.com/minimal`
+
+[Cloudinary](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
+
+Manage, transform and deliver your images & videos
+
+URL
+
+`https://asset-management.mcp.cloudinary.com/sse`
 
 [Customer.io](https://docs.customer.io/ai/mcp-server/)
 
@@ -760,6 +768,12 @@ Automate workflows and connect your business apps
 
 Requires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp)
 
+[Pigment](https://kb.pigment.com/docs/mcp-server)
+
+Analyze business data
+
+Requires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server)
+
 [LunarCrush](https://lunarcrush.com/developers/api/ai)
 
 Add real-time social media data to your searches
@@ -767,12 +781,6 @@ Add real-time social media data to your searches
 URL
 
 `https://lunarcrush.ai/mcp`
-
-[Pigment](https://kb.pigment.com/docs/mcp-server)
-
-Analyze business data
-
-Requires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server)
 
 [Gusto](https://docs.gusto.com/app-integrations/docs/mcp)
 
@@ -790,14 +798,6 @@ URL
 
 `https://mcp.api.harmonic.ai`
 
-[MotherDuck](https://motherduck.com/docs/sql-reference/mcp/)
-
-Get answers from your data
-
-URL
-
-`https://api.motherduck.com/mcp`
-
 [Dice](https://www.dice.com/about/mcp)
 
 Find active tech jobs on Dice
@@ -805,6 +805,14 @@ Find active tech jobs on Dice
 URL
 
 `https://mcp.dice.com/mcp`
+
+[MotherDuck](https://motherduck.com/docs/sql-reference/mcp/)
+
+Get answers from your data
+
+URL
+
+`https://api.motherduck.com/mcp`
 
 [AirOps](https://docs.airops.com/mcp)
 
@@ -900,14 +908,6 @@ URL
 
 `https://mcp.sanity.io`
 
-[Melon](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
-
-Browse music charts & your personalized music picks
-
-URL
-
-`https://mcp.melon.com/mcp/`
-
 [Base44](https://docs.base44.com/developers/backend/overview/mcp-server)
 
 Build and manage Base44 apps
@@ -915,6 +915,14 @@ Build and manage Base44 apps
 URL
 
 `https://app.base44.com/mcp`
+
+[Melon](https://tech.kakaoent.com/ai/using-melon-mcp-server-en/)
+
+Browse music charts & your personalized music picks
+
+URL
+
+`https://mcp.melon.com/mcp/`
 
 [PlayMCP](https://www.notion.so/2189b97b4888803dbbdcef264e7eff58)
 
@@ -940,6 +948,14 @@ URL
 
 `https://api.clarify.ai/mcp`
 
+[Krisp](https://help.krisp.ai/hc/en-us/articles/25416265429660-Krisp-MCP-Supported-tools)
+
+Add your meetings context via transcripts and notes
+
+URL
+
+`https://mcp.krisp.ai/mcp`
+
 [Mem](https://docs.mem.ai/mcp/overview)
 
 The AI notebook for everything on your mind
@@ -956,14 +972,6 @@ URL
 
 `https://mcp.zapier.com/api/v1/connect`
 
-[Stytch](https://stytch.com/docs/workspace-management/stytch-mcp)
-
-Manage your Stytch Project
-
-URL
-
-`https://mcp.stytch.dev/mcp`
-
 [PagerDuty](https://developer.pagerduty.com/docs/mcp-tooling-remote-server)
 
 Manage incidents, services and on-call schedules
@@ -971,6 +979,14 @@ Manage incidents, services and on-call schedules
 URL
 
 `https://mcp.pagerduty.com/mcp`
+
+[Stytch](https://stytch.com/docs/workspace-management/stytch-mcp)
+
+Manage your Stytch Project
+
+URL
+
+`https://mcp.stytch.dev/mcp`
 
 [Google Compute Engine](https://cloud.google.com/docs)
 
@@ -1026,14 +1042,6 @@ URL
 
 `https://mcp.wyndhamhotels.com/claude/mcp`
 
-[LILT](https://support.lilt.com/kb/LILT-mcp)
-
-High-quality translation with human verification
-
-URL
-
-`https://mcp.lilt.com/mcp`
-
 [Sprouts Data Intelligence](https://support.sprouts.ai/en/articles/13384582-sprouts-mcp-server-documentation#h_541c149a52)
 
 From query to qualified lead in seconds.
@@ -1042,11 +1050,27 @@ URL
 
 `https://sprouts-mcp-server.kartikay-dhar.workers.dev`
 
+[LILT](https://support.lilt.com/kb/LILT-mcp)
+
+High-quality translation with human verification
+
+URL
+
+`https://mcp.lilt.com/mcp`
+
 [Benchling](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
 
 Connect to R&D data, source experiments, and notebooks
 
 Requires user-specific URL. [Get your URL here](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
+
+[Craft](https://documents.craft.me/jWeCVJrSfxFRuA)
+
+Notes & second brain
+
+URL
+
+`https://mcp.craft.do/my/mcp`
 
 [SignNow](https://docs.signnow.com/docs/signnow/mcp-server)
 
@@ -1123,6 +1147,14 @@ URL
 Find people, productivity and business impact insights
 
 Requires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm)
+
+[Jentic](https://docs.jentic.com/guides/mcp/remote-mcp/)
+
+One connection to access all your tools securely
+
+URL
+
+`https://api.jentic.com/mcp`
 
 [Starburst](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 

@@ -465,7 +465,7 @@ Selecting a hook opens a detail view showing its event, matcher, type, source fi
 To remove a hook, delete its entry from the settings JSON file.
 To temporarily disable all hooks without removing them, set `"disableAllHooks": true` in your settings file. There is no way to disable an individual hook while keeping it in the configuration.
 The `disableAllHooks` setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, `disableAllHooks` set in user, project, or local settings cannot disable those managed hooks. Only `disableAllHooks` set at the managed settings level can disable managed hooks.
-Direct edits to hooks in settings files don’t take effect immediately. Claude Code captures a snapshot of hooks at startup and uses it throughout the session. This prevents malicious or accidental hook modifications from taking effect mid-session without your review. If hooks are modified externally, Claude Code warns you and requires review in the `/hooks` menu before changes apply.
+Direct edits to hooks in settings files are normally picked up automatically by the file watcher.
 
 ## [​](#hook-input-and-output) Hook input and output
 
@@ -1076,7 +1076,12 @@ Ask AI
     "description": "Remove node_modules directory"
   },
   "permission_suggestions": [
-    { "type": "toolAlwaysAllow", "tool": "Bash" }
+    {
+      "type": "addRules",
+      "rules": [{ "toolName": "Bash", "ruleContent": "rm -rf node_modules" }],
+      "behavior": "allow",
+      "destination": "localSettings"
+    }
   ]
 }
 ```
@@ -1089,7 +1094,7 @@ Ask AI
 | --- | --- |
 | `behavior` | `"allow"` grants the permission, `"deny"` denies it |
 | `updatedInput` | For `"allow"` only: modifies the tool’s input parameters before execution |
-| `updatedPermissions` | For `"allow"` only: applies permission rule updates, equivalent to the user selecting an “always allow” option |
+| `updatedPermissions` | For `"allow"` only: array of [permission update entries](#permission-update-entries) to apply, such as adding an allow rule or changing the session permission mode |
 | `message` | For `"deny"` only: tells Claude why the permission was denied |
 | `interrupt` | For `"deny"` only: if `true`, stops Claude |
 
@@ -1112,6 +1117,30 @@ Ask AI
   }
 }
 ```
+
+#### [​](#permission-update-entries) Permission update entries
+
+The `updatedPermissions` output field and the [`permission_suggestions` input field](#permissionrequest-input) both use the same array of entry objects. Each entry has a `type` that determines its other fields, and a `destination` that controls where the change is written.
+
+| `type` | Fields | Effect |
+| --- | --- | --- |
+| `addRules` | `rules`, `behavior`, `destination` | Adds permission rules. `rules` is an array of `{toolName, ruleContent?}` objects. Omit `ruleContent` to match the whole tool. `behavior` is `"allow"`, `"deny"`, or `"ask"` |
+| `replaceRules` | `rules`, `behavior`, `destination` | Replaces all rules of the given `behavior` at the `destination` with the provided `rules` |
+| `removeRules` | `rules`, `behavior`, `destination` | Removes matching rules of the given `behavior` |
+| `setMode` | `mode`, `destination` | Changes the permission mode. Valid modes are `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, and `plan` |
+| `addDirectories` | `directories`, `destination` | Adds working directories. `directories` is an array of path strings |
+| `removeDirectories` | `directories`, `destination` | Removes working directories |
+
+The `destination` field on every entry determines whether the change stays in memory or persists to a settings file.
+
+| `destination` | Writes to |
+| --- | --- |
+| `session` | in-memory only, discarded when the session ends |
+| `localSettings` | `.claude/settings.local.json` |
+| `projectSettings` | `.claude/settings.json` |
+| `userSettings` | `~/.claude/settings.json` |
+
+A hook can echo one of the `permission_suggestions` it received as its own `updatedPermissions` output, which is equivalent to the user selecting that “always allow” option in the dialog.
 
 ### [​](#posttooluse) PostToolUse
 

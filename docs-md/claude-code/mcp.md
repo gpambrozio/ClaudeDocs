@@ -426,6 +426,12 @@ Unleash your team's best performance with Outreach AICommand
 
 `claude mcp add --transport http outreach https://api.outreach.io/mcp/`
 
+[**Mixpanel**](https://docs.mixpanel.com/docs/features/mcp)
+
+Analyze, query, and manage your Mixpanel dataCommand
+
+`claude mcp add --transport http mixpanel https://mcp.mixpanel.com/mcp`
+
 [**Bitly**](https://dev.bitly.com/bitly-mcp/)
 
 Shorten links, generate QR Codes, and track performanceCommand
@@ -504,17 +510,17 @@ Query your data using natural language through Omni's semantic modelCommand
 
 `claude mcp add --transport http omni-analytics https://callbacks.omniapp.co/callback/mcp`
 
-[**Cloudinary**](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
-
-Manage, transform and deliver your images & videosCommand
-
-`claude mcp add --transport http cloudinary https://asset-management.mcp.cloudinary.com/sse`
-
 [**Postman**](https://github.com/postmanlabs/postman-mcp-server)
 
 Give API context to your coding agentsCommand
 
 `claude mcp add --transport http postman https://mcp.postman.com/minimal`
+
+[**Cloudinary**](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
+
+Manage, transform and deliver your images & videosCommand
+
+`claude mcp add --transport http cloudinary https://asset-management.mcp.cloudinary.com/sse`
 
 [**Customer.io**](https://docs.customer.io/ai/mcp-server/)
 
@@ -530,15 +536,15 @@ Research nonprofits and funders using Candid's dataCommand
 
 Automate workflows and connect your business appsRequires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp).
 
+[**Pigment**](https://kb.pigment.com/docs/mcp-server)
+
+Analyze business dataRequires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server).
+
 [**LunarCrush**](https://lunarcrush.com/developers/api/ai)
 
 Add real-time social media data to your searchesCommand
 
 `claude mcp add lunarcrush --transport http https://lunarcrush.ai/mcp`
-
-[**Pigment**](https://kb.pigment.com/docs/mcp-server)
-
-Analyze business dataRequires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server).
 
 [**Harmonic**](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
 
@@ -546,17 +552,17 @@ Discover, research, and enrich companies and peopleCommand
 
 `claude mcp add harmonic --transport http https://mcp.api.harmonic.ai`
 
-[**MotherDuck**](https://motherduck.com/docs/sql-reference/mcp/)
-
-Get answers from your dataCommand
-
-`claude mcp add motherduck --transport http https://api.motherduck.com/mcp`
-
 [**Dice**](https://www.dice.com/about/mcp)
 
 Find active tech jobs on DiceCommand
 
 `claude mcp add dice --transport http https://mcp.dice.com/mcp`
+
+[**MotherDuck**](https://motherduck.com/docs/sql-reference/mcp/)
+
+Get answers from your dataCommand
+
+`claude mcp add motherduck --transport http https://api.motherduck.com/mcp`
 
 [**AirOps**](https://docs.airops.com/mcp)
 
@@ -646,6 +652,12 @@ Query your CRM. Create records. Ask anything.Command
 
 `claude mcp add --transport http clarify https://api.clarify.ai/mcp`
 
+[**Krisp**](https://help.krisp.ai/hc/en-us/articles/25416265429660-Krisp-MCP-Supported-tools)
+
+Add your meetings context via transcripts and notesCommand
+
+`claude mcp add --transport http krisp https://mcp.krisp.ai/mcp`
+
 [**Mem**](https://docs.mem.ai/mcp/overview)
 
 The AI notebook for everything on your mindCommand
@@ -692,17 +704,17 @@ Discover the right Wyndham Hotel for you, fasterCommand
 
 `claude mcp add --transport http wyndham-hotels https://mcp.wyndhamhotels.com/claude/mcp`
 
-[**LILT**](https://support.lilt.com/kb/LILT-mcp)
-
-High-quality translation with human verificationCommand
-
-`claude mcp add --transport http lilt https://mcp.lilt.com/mcp`
-
 [**Sprouts Data Intelligence**](https://support.sprouts.ai/en/articles/13384582-sprouts-mcp-server-documentation#h_541c149a52)
 
 From query to qualified lead in seconds.Command
 
 `claude mcp add --transport http sprouts https://sprouts-mcp-server.kartikay-dhar.workers.dev`
+
+[**LILT**](https://support.lilt.com/kb/LILT-mcp)
+
+High-quality translation with human verificationCommand
+
+`claude mcp add --transport http lilt https://mcp.lilt.com/mcp`
 
 [**GraphOS MCP Tools**](https://www.apollographql.com/docs/graphos/platform/graphos-mcp-tools)
 
@@ -713,6 +725,12 @@ Search Apollo docs, specs, and best practicesCommand
 [**Benchling**](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
 
 Connect to R&D data, source experiments, and notebooksRequires user-specific URL. [Get your URL here](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP).
+
+[**Craft**](https://documents.craft.me/jWeCVJrSfxFRuA)
+
+Notes & second brainCommand
+
+`claude mcp add --transport http craft https://mcp.craft.do/my/mcp`
 
 [**Metaview**](https://support.metaview.ai/integrations/mcp-integration/mcp-overview.mdx)
 
@@ -955,7 +973,7 @@ Ask AI
 
 **Plugin MCP features**:
 
-- **Automatic lifecycle**: Servers start when plugin enables, but you must restart Claude Code to apply MCP server changes (enabling or disabling)
+- **Automatic lifecycle**: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers
 - **Environment variables**: Use `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths
 - **User environment access**: Access to same environment variables as manually configured servers
 - **Multiple transport types**: Support stdio, SSE, and HTTP transports (transport support may vary by server)
