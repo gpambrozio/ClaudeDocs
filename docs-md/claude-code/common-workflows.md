@@ -453,6 +453,8 @@ How should we handle database migration?
 
 Press `Ctrl+G` to open the plan in your default text editor, where you can edit it directly before Claude proceeds.
 
+When you accept a plan, Claude automatically names the session from the plan content. The name appears on the prompt bar and in the session picker. If you’ve already set a name with `--name` or `/rename`, accepting a plan won’t overwrite it.
+
 ### [​](#configure-plan-mode-as-default) Configure Plan Mode as default
 
 Report incorrect code
@@ -842,7 +844,7 @@ Thinking is enabled by default, but you can adjust or disable it.
 | **`ultrathink` keyword** | Include “ultrathink” anywhere in your prompt | Sets effort to high for that turn on Opus 4.6 and Sonnet 4.6. Useful for one-off tasks requiring deep reasoning without permanently changing your effort setting |
 | **Toggle shortcut** | Press `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle thinking on/off for the current session (all models). May require [terminal configuration](terminal-config.md) to enable Option key shortcuts |
 | **Global default** | Use `/config` to toggle thinking mode | Sets your default across all projects (all models). Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json` |
-| **Limit token budget** | Set [`MAX_THINKING_TOKENS`](env-vars.md) environment variable | Limit the thinking budget to a specific number of tokens (ignored on Opus 4.6 and Sonnet 4.6 unless set to 0). Example: `export MAX_THINKING_TOKENS=10000` |
+| **Limit token budget** | Set [`MAX_THINKING_TOKENS`](env-vars.md) environment variable | Limit the thinking budget to a specific number of tokens. On Opus 4.6 and Sonnet 4.6, only `0` applies unless adaptive reasoning is disabled. Example: `export MAX_THINKING_TOKENS=10000` |
 
 To view Claude’s thinking process, press `Ctrl+O` to toggle verbose mode and see the internal reasoning displayed as gray italic text.
 
@@ -850,8 +852,8 @@ To view Claude’s thinking process, press `Ctrl+O` to toggle verbose mode and s
 
 Extended thinking controls how much internal reasoning Claude performs before responding. More thinking provides more space to explore solutions, analyze edge cases, and self-correct mistakes.
 **With Opus 4.6 and Sonnet 4.6**, thinking uses adaptive reasoning: the model dynamically allocates thinking tokens based on the [effort level](model-config.md) you select. This is the recommended way to tune the tradeoff between speed and reasoning depth.
-**With older models**, thinking uses a fixed budget of up to 31,999 tokens from your output budget. You can limit this with the [`MAX_THINKING_TOKENS`](env-vars.md) environment variable, or disable thinking entirely via `/config` or the `Option+T`/`Alt+T` toggle.
-`MAX_THINKING_TOKENS` is ignored on Opus 4.6 and Sonnet 4.6, since adaptive reasoning controls thinking depth instead. The one exception: setting `MAX_THINKING_TOKENS=0` still disables thinking entirely on any model. To disable adaptive thinking and revert to the fixed thinking budget, set `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1`. See [environment variables](env-vars.md).
+**With older models**, thinking uses a fixed token budget drawn from your output allocation. The budget varies by model; see [`MAX_THINKING_TOKENS`](env-vars.md) for per-model ceilings. You can limit the budget with that environment variable, or disable thinking entirely via `/config` or the `Option+T`/`Alt+T` toggle.
+On Opus 4.6 and Sonnet 4.6, [adaptive reasoning](model-config.md) controls thinking depth, so `MAX_THINKING_TOKENS` only applies when set to `0` to disable thinking, or when `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1` reverts these models to the fixed budget. See [environment variables](env-vars.md).
 
 You’re charged for all thinking tokens used, even though Claude 4 models show summarized thinking
 
@@ -955,11 +957,11 @@ The picker displays sessions with helpful metadata:
 - Message count
 - Git branch (if applicable)
 
-Forked sessions (created with `/rewind` or `--fork-session`) are grouped together under their root session, making it easier to find related conversations.
+Forked sessions (created with `/branch`, `/rewind`, or `--fork-session`) are grouped together under their root session, making it easier to find related conversations.
 
 Tips:
 
-- **Name sessions early**: Use `/rename` when starting work on a distinct task—it’s much easier to find “payment-integration” than “explain this function” later
+- **Name sessions early**: Use `/rename` when starting work on a distinct task: it’s much easier to find “payment-integration” than “explain this function” later
 - Use `--continue` for quick access to your most recent conversation in the current directory
 - Use `--resume session-name` when you know which session you need
 - Use `--resume` (without a name) when you need to browse and select
@@ -1365,13 +1367,19 @@ Tips:
 
 [## Best practices
 
-Patterns for getting the most out of Claude Code](best-practices.md)[## How Claude Code works
+Patterns for getting the most out of Claude Code](/en/best-practices)
 
-Understand the agentic loop and context management](how-claude-code-works.md)[## Extend Claude Code
+[## How Claude Code works
 
-Add skills, hooks, MCP, subagents, and plugins](features-overview.md)[## Reference implementation
+Understand the agentic loop and context management](/en/how-claude-code-works)
 
-Clone our development container reference implementation](https://github.com/anthropics/claude-code/tree/main/.devcontainer)
+[## Extend Claude Code
+
+Add skills, hooks, MCP, subagents, and plugins](/en/features-overview)
+
+[## Reference implementation
+
+Clone the development container reference implementation](https://github.com/anthropics/claude-code/tree/main/.devcontainer)
 
 ---
 

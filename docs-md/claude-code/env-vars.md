@@ -4,8 +4,9 @@ Claude Code supports the following environment variables to control its behavior
 
 | Variable | Purpose |
 | --- | --- |
-| `ANTHROPIC_API_KEY` | API key sent as `X-Api-Key` header, typically for the Claude SDK (for interactive usage, run `/login`) |
+| `ANTHROPIC_API_KEY` | API key sent as `X-Api-Key` header. When set, this key is used instead of your Claude Pro, Max, Team, or Enterprise subscription even if you are logged in. In non-interactive mode (`-p`), the key is always used when present. In interactive mode, you are prompted to approve the key once before it overrides your subscription. To use your subscription instead, run `unset ANTHROPIC_API_KEY` |
 | `ANTHROPIC_AUTH_TOKEN` | Custom value for the `Authorization` header (the value you set here will be prefixed with `Bearer` ) |
+| `ANTHROPIC_BASE_URL` | Override the API endpoint to route requests through a proxy or gateway. When set to a non-first-party host, [MCP tool search](mcp.md) is disabled by default. Set `ENABLE_TOOL_SEARCH=true` if your proxy forwards `tool_reference` blocks |
 | `ANTHROPIC_CUSTOM_HEADERS` | Custom headers to add to requests (`Name: Value` format, newline-separated for multiple headers) |
 | `ANTHROPIC_DEFAULT_HAIKU_MODEL` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | See [Model configuration](model-config.md) |
@@ -36,10 +37,10 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` | Set to `1` to remove built-in commit and PR workflow instructions from Claude’s system prompt. Useful when using your own git workflow skills. Takes precedence over the [`includeGitInstructions`](settings.md) setting when set |
 | `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to disable all background task functionality, including the `run_in_background` parameter on Bash and subagent tools, auto-backgrounding, and the Ctrl+B shortcut |
 | `CLAUDE_CODE_DISABLE_CRON` | Set to `1` to disable [scheduled tasks](scheduled-tasks.md). The `/loop` skill and cron tools become unavailable and any already-scheduled tasks stop firing, including tasks that are already running mid-session |
-| `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to disable Anthropic API-specific `anthropic-beta` headers. Use this if experiencing issues like “Unexpected value(s) for the `anthropic-beta` header” when using an LLM gateway with third-party providers |
+| `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to strip Anthropic-specific `anthropic-beta` request headers and beta tool-schema fields (such as `defer_loading` and `eager_input_streaming`) from API requests. Use this when a proxy gateway rejects requests with errors like “Unexpected value(s) for the `anthropic-beta` header” or “Extra inputs are not permitted”. Standard fields (`name`, `description`, `input_schema`, `cache_control`) are preserved. |
 | `CLAUDE_CODE_DISABLE_FAST_MODE` | Set to `1` to disable [fast mode](fast-mode.md) |
 | `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` | Set to `1` to disable the “How is Claude doing?” session quality surveys. Surveys are also disabled when `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is set. See [Session quality surveys](data-usage.md) |
-| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_BUG_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
+| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_FEEDBACK_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |
 | `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high`, `max` (Opus 4.6 only), or `auto` to use the model default. Takes precedence over `/effort` and the `effortLevel` setting. See [Adjust effort level](model-config.md) |
 | `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` | Set to `false` to disable prompt suggestions (the “Prompt suggestions” toggle in `/config`). These are the grayed-out predictions that appear in your prompt input after Claude responds. See [Prompt suggestions](interactive-mode.md) |
@@ -49,11 +50,13 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` | Set to `1` to enable [agent teams](agent-teams.md). Agent teams are experimental and disabled by default |
 | `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS` | Override the default token limit for file reads. Useful when you need to read larger files in full |
 | `CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL` | Skip auto-installation of IDE extensions |
-| `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Set the maximum number of output tokens for most requests. Default: 32,000. Maximum: 64,000. Increasing this value reduces the effective context window available before [auto-compaction](costs.md) triggers. |
+| `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Set the maximum number of output tokens for most requests. Defaults and caps vary by model; see [max output tokens](about-claude/models/overview.md). Increasing this value reduces the effective context window available before [auto-compaction](costs.md) triggers. |
+| `CLAUDE_CODE_NEW_INIT` | Set to `true` to make `/init` run an interactive setup flow. The flow asks which files to generate, including CLAUDE.md, skills, and hooks, before exploring the codebase and writing them. Without this variable, `/init` generates a CLAUDE.md automatically without prompting. |
 | `CLAUDE_CODE_ORGANIZATION_UUID` | Organization UUID for the authenticated user. Used by SDK callers to provide account information synchronously. Requires `CLAUDE_CODE_ACCOUNT_UUID` and `CLAUDE_CODE_USER_EMAIL` to also be set |
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic OpenTelemetry headers in milliseconds (default: 1740000 / 29 minutes). See [Dynamic headers](monitoring-usage.md) |
 | `CLAUDE_CODE_PLAN_MODE_REQUIRED` | Auto-set to `true` on [agent team](agent-teams.md) teammates that require plan approval. Read-only: set by Claude Code when spawning teammates. See [require plan approval](agent-teams.md) |
 | `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS` | Timeout in milliseconds for git operations when installing or updating plugins (default: 120000). Increase this value for large repositories or slow network connections. See [Git operations time out](plugin-marketplaces.md) |
+| `CLAUDE_CODE_PLUGIN_SEED_DIR` | Path to a read-only plugin seed directory. Use this to bundle a pre-populated plugins directory into a container image. Claude Code registers marketplaces from this directory at startup and uses pre-cached plugins without re-cloning. See [Pre-populate plugins for containers](plugin-marketplaces.md) |
 | `CLAUDE_CODE_PROXY_RESOLVES_HOSTS` | Set to `true` to allow the proxy to perform DNS resolution instead of the caller. Opt-in for environments where the proxy should handle hostname resolution |
 | `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | Maximum time in milliseconds for [SessionEnd](hooks.md) hooks to complete (default: `1500`). Applies to both session exit and `/clear`. Per-hook `timeout` values are also capped by this budget |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |
@@ -74,9 +77,9 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CONFIG_DIR` | Customize where Claude Code stores its configuration and data files |
 | `CLAUDE_ENV_FILE` | Path to a shell script that Claude Code sources before each Bash command. Use to persist virtualenv or conda activation across commands. Also populated dynamically by [SessionStart hooks](hooks.md) |
 | `DISABLE_AUTOUPDATER` | Set to `1` to disable automatic updates. |
-| `DISABLE_BUG_COMMAND` | Set to `1` to disable the `/bug` command |
 | `DISABLE_COST_WARNINGS` | Set to `1` to disable cost warning messages |
 | `DISABLE_ERROR_REPORTING` | Set to `1` to opt out of Sentry error reporting |
+| `DISABLE_FEEDBACK_COMMAND` | Set to `1` to disable the `/feedback` command. The older name `DISABLE_BUG_COMMAND` is also accepted |
 | `DISABLE_INSTALLATION_CHECKS` | Set to `1` to disable installation warnings. Use only when manually managing the installation location, as this can mask issues with standard installations |
 | `DISABLE_PROMPT_CACHING` | Set to `1` to disable prompt caching for all models (takes precedence over per-model settings) |
 | `DISABLE_PROMPT_CACHING_HAIKU` | Set to `1` to disable prompt caching for Haiku models |
@@ -90,7 +93,7 @@ Claude Code supports the following environment variables to control its behavior
 | `HTTPS_PROXY` | Specify HTTPS proxy server for network connections |
 | `IS_DEMO` | Set to `true` to enable demo mode: hides email and organization from the UI, skips onboarding, and hides internal commands. Useful for streaming or recording sessions |
 | `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens (default: 25000) |
-| `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. Thinking is enabled at max budget (31,999 tokens) by default. Use this to limit the budget (for example, `MAX_THINKING_TOKENS=10000`) or disable thinking entirely (`MAX_THINKING_TOKENS=0`). For Opus 4.6, thinking depth is controlled by [effort level](model-config.md) instead, and this variable is ignored unless set to `0` to disable thinking. |
+| `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. The ceiling is the model’s [max output tokens](about-claude/models/overview.md) minus one. Set to `0` to disable thinking entirely. On models with adaptive reasoning (Opus 4.6, Sonnet 4.6), the budget is ignored unless adaptive reasoning is disabled via `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` |
 | `MCP_CLIENT_SECRET` | OAuth client secret for MCP servers that require [pre-configured credentials](mcp.md). Avoids the interactive prompt when adding a server with `--client-secret` |
 | `MCP_OAUTH_CALLBACK_PORT` | Fixed port for the OAuth redirect callback, as an alternative to `--callback-port` when adding an MCP server with [pre-configured credentials](mcp.md) |
 | `MCP_TIMEOUT` | Timeout in milliseconds for MCP server startup |

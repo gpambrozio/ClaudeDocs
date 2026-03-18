@@ -1,4 +1,4 @@
-# Claude Developer Platform
+# Claude Platform
 
 Copy page
 

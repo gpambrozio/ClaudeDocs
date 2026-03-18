@@ -1096,6 +1096,14 @@ URL
 
 `https://mcp-demo.airwallex.com/developer`
 
+[Intuit TurboTax](https://ttlc.intuit.com/turbotax-support/en-us/help-article/tax-return/access-turbotax-tools-claude)
+
+Estimate tax refunds and connect with live tax experts
+
+URL
+
+`https://ai-inc.turbotax.intuit.com/358A1C1B-F73B-46A7-B130-4B14916E6843/v1/mcp`
+
 [Local Falcon](https://github.com/local-falcon/mcp)
 
 AI visibility and local search intelligence platform
@@ -1169,6 +1177,14 @@ Discover live entertainment events worldwide
 URL
 
 `https://data-search.apigw.feverup.com/mcp`
+
+[DocuSeal](https://www.docuseal.com/guides/integrate-with-ai-agents-using-mcp)
+
+Sign, send & manage documents with DocuSeal
+
+URL
+
+`https://docuseal.com/mcp`
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 

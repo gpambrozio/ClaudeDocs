@@ -165,6 +165,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `fileSuggestion` | Configure a custom script for `@` file autocomplete. See [File suggestion settings](#file-suggestion-settings) | `{"type": "command", "command": "~/.claude/file-suggestion.sh"}` |
 | `respectGitignore` | Control whether the `@` file picker respects `.gitignore` patterns. When `true` (default), files matching `.gitignore` patterns are excluded from suggestions | `false` |
 | `outputStyle` | Configure an output style to adjust the system prompt. See [output styles documentation](output-styles.md) | `"Explanatory"` |
+| `agent` | Run the main thread as a named subagent. Applies that subagent’s system prompt, tool restrictions, and model. See [Invoke subagents explicitly](sub-agents.md) | `"code-reviewer"` |
 | `forceLoginMethod` | Use `claudeai` to restrict login to Claude.ai accounts, `console` to restrict login to Claude Console (API usage billing) accounts | `claudeai` |
 | `forceLoginOrgUUID` | Specify the UUID of an organization to automatically select it during login, bypassing the organization selection step. Requires `forceLoginMethod` to be set | `"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` |
 | `enableAllProjectMcpServers` | Automatically approve all MCP servers defined in project `.mcp.json` files | `true` |
@@ -179,17 +180,25 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `alwaysThinkingEnabled` | Enable [extended thinking](common-workflows.md) by default for all sessions. Typically configured via the `/config` command rather than editing directly | `true` |
 | `plansDirectory` | Customize where plan files are stored. Path is relative to project root. Default: `~/.claude/plans` | `"./plans"` |
-| `showTurnDuration` | Show turn duration messages after responses (e.g., “Cooked for 1m 6s”). Set to `false` to hide these messages | `true` |
 | `spinnerVerbs` | Customize the action verbs shown in the spinner and turn duration messages. Set `mode` to `"replace"` to use only your verbs, or `"append"` to add them to the defaults | `{"mode": "append", "verbs": ["Pondering", "Crafting"]}` |
-| `language` | Configure Claude’s preferred response language (e.g., `"japanese"`, `"spanish"`, `"french"`). Claude will respond in this language by default | `"japanese"` |
+| `language` | Configure Claude’s preferred response language (e.g., `"japanese"`, `"spanish"`, `"french"`). Claude will respond in this language by default. Also sets the [voice dictation](voice-dictation.md) language | `"japanese"` |
+| `voiceEnabled` | Enable push-to-talk [voice dictation](voice-dictation.md). Written automatically when you run `/voice`. Requires a Claude.ai account | `true` |
 | `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release | `"stable"` |
 | `spinnerTipsEnabled` | Show tips in the spinner while Claude is working. Set to `false` to disable tips (default: `true`) | `false` |
 | `spinnerTipsOverride` | Override spinner tips with custom strings. `tips`: array of tip strings. `excludeDefault`: if `true`, only show custom tips; if `false` or absent, custom tips are merged with built-in tips | `{ "excludeDefault": true, "tips": ["Use our internal tool X"] }` |
-| `terminalProgressBarEnabled` | Enable the terminal progress bar that shows progress in supported terminals like Windows Terminal and iTerm2 (default: `true`) | `false` |
 | `prefersReducedMotion` | Reduce or disable UI animations (spinners, shimmer, flash effects) for accessibility | `true` |
 | `fastModePerSessionOptIn` | When `true`, fast mode does not persist across sessions. Each session starts with fast mode off, requiring users to enable it with `/fast`. The user’s fast mode preference is still saved. See [Require per-session opt-in](fast-mode.md) | `true` |
 | `teammateMode` | How [agent team](agent-teams.md) teammates display: `auto` (picks split panes in tmux or iTerm2, in-process otherwise), `in-process`, or `tmux`. See [set up agent teams](agent-teams.md) | `"in-process"` |
 | `feedbackSurveyRate` | Probability (0–1) that the [session quality survey](data-usage.md) appears when eligible. Set to `0` to suppress entirely. Useful when using Bedrock, Vertex, or Foundry where the default sample rate does not apply | `0.05` |
+
+### [​](#global-config-settings) Global config settings
+
+These display preferences are stored in `~/.claude.json` rather than `settings.json`. Adding them to `settings.json` will trigger a schema validation error.
+
+| Key | Description | Example |
+| --- | --- | --- |
+| `showTurnDuration` | Show turn duration messages after responses, e.g. “Cooked for 1m 6s”. Default: `true`. Edit `~/.claude.json` directly to change | `false` |
+| `terminalProgressBarEnabled` | Show the terminal progress bar in supported terminals like Windows Terminal and iTerm2. Default: `true`. Appears in `/config` as **Terminal progress bar** | `false` |
 
 ### [​](#worktree-settings) Worktree settings
 
@@ -238,6 +247,8 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 | `filesystem.allowWrite` | Additional paths where sandboxed commands can write. Arrays are merged across all settings scopes: user, project, and managed paths are combined, not replaced. Also merged with paths from `Edit(...)` allow permission rules. See [path prefixes](#sandbox-path-prefixes) below. | `["//tmp/build", "~/.kube"]` |
 | `filesystem.denyWrite` | Paths where sandboxed commands cannot write. Arrays are merged across all settings scopes. Also merged with paths from `Edit(...)` deny permission rules. | `["//etc", "//usr/local/bin"]` |
 | `filesystem.denyRead` | Paths where sandboxed commands cannot read. Arrays are merged across all settings scopes. Also merged with paths from `Read(...)` deny permission rules. | `["~/.aws/credentials"]` |
+| `filesystem.allowRead` | Paths to re-allow reading within `denyRead` regions. Takes precedence over `denyRead`. Arrays are merged across all settings scopes. Use this to create workspace-only read access patterns. | `["."]` |
+| `filesystem.allowManagedReadPathsOnly` | (Managed settings only) Only `allowRead` paths from managed settings are respected. `allowRead` entries from user, project, and local settings are ignored. Default: false | `true` |
 | `network.allowUnixSockets` | Unix socket paths accessible in sandbox (for SSH agents, etc.) | `["~/.ssh/agent-socket"]` |
 | `network.allowAllUnixSockets` | Allow all Unix socket connections in sandbox. Default: false | `true` |
 | `network.allowLocalBinding` | Allow binding to localhost ports (macOS only). Default: false | `true` |
@@ -250,7 +261,7 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 
 #### [​](#sandbox-path-prefixes) Sandbox path prefixes
 
-Paths in `filesystem.allowWrite`, `filesystem.denyWrite`, and `filesystem.denyRead` support these prefixes:
+Paths in `filesystem.allowWrite`, `filesystem.denyWrite`, `filesystem.denyRead`, and `filesystem.allowRead` support these prefixes:
 
 | Prefix | Meaning | Example |
 | --- | --- | --- |

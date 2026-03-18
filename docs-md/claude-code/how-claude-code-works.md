@@ -262,9 +262,11 @@ You don’t need to specify which files to read or what commands to run. Claude 
 
 [## Extend with features
 
-Add Skills, MCP connections, and custom commands](features-overview.md)[## Common workflows
+Add Skills, MCP connections, and custom commands](/en/features-overview)
 
-Step-by-step guides for typical tasks](common-workflows.md)
+[## Common workflows
+
+Step-by-step guides for typical tasks](/en/common-workflows)
 
 ---
 

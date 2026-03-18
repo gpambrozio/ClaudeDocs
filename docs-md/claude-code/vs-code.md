@@ -237,7 +237,7 @@ Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to you
 | `respectGitIgnore` | `true` | Exclude .gitignore patterns from file searches |
 | `environmentVariables` | `[]` | Set environment variables for the Claude process. Use Claude Code settings instead for shared config. |
 | `disableLoginPrompt` | `false` | Skip authentication prompts (for third-party provider setups) |
-| `allowDangerouslySkipPermissions` | `false` | Bypass all permission prompts. **Use with extreme caution.** |
+| `allowDangerouslySkipPermissions` | `false` | Bypass permission prompts. **Use with extreme caution.** See [permission modes](permissions.md) |
 | `claudeProcessWrapper` | - | Executable path used to launch the Claude process |
 
 ## [​](#vs-code-extension-vs-claude-code-cli) VS Code extension vs. Claude Code CLI

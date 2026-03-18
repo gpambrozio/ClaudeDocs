@@ -186,7 +186,7 @@ The `matcher` field is a regex string that filters when hooks fire. Use `"*"`, `
 | `SessionEnd` | why the session ended | `clear`, `logout`, `prompt_input_exit`, `bypass_permissions_disabled`, `other` |
 | `Notification` | notification type | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog` |
 | `SubagentStart` | agent type | `Bash`, `Explore`, `Plan`, or custom agent names |
-| `PreCompact` | what triggered compaction | `manual`, `auto` |
+| `PreCompact`, `PostCompact` | what triggered compaction | `manual`, `auto` |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
 | `ConfigChange` | configuration source | `user_settings`, `project_settings`, `local_settings`, `policy_settings`, `skills` |
 | `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCompleted`, `WorktreeCreate`, `WorktreeRemove`, `InstructionsLoaded` | no matcher support | always fires on every occurrence |
@@ -357,7 +357,8 @@ All matching hooks run in parallel, and identical handlers are deduplicated auto
 Use environment variables to reference hook scripts relative to the project or plugin root, regardless of the working directory when the hook runs:
 
 - `$CLAUDE_PROJECT_DIR`: the project root. Wrap in quotes to handle paths with spaces.
-- `${CLAUDE_PLUGIN_ROOT}`: the plugin’s root directory, for scripts bundled with a [plugin](plugins.md).
+- `${CLAUDE_PLUGIN_ROOT}`: the plugin’s installation directory, for scripts bundled with a [plugin](plugins.md). Changes on each plugin update.
+- `${CLAUDE_PLUGIN_DATA}`: the plugin’s [persistent data directory](plugins-reference.md), for dependencies and state that should survive plugin updates.
 
 - Project scripts
 - Plugin scripts
@@ -818,7 +819,7 @@ In addition to the [common input fields](#common-input-fields), InstructionsLoad
 | --- | --- |
 | `file_path` | Absolute path to the instruction file that was loaded |
 | `memory_type` | Scope of the file: `"User"`, `"Project"`, `"Local"`, or `"Managed"` |
-| `load_reason` | Why the file was loaded: `"session_start"`, `"nested_traversal"`, `"path_glob_match"`, or `"include"` |
+| `load_reason` | Why the file was loaded: `"session_start"`, `"nested_traversal"`, `"path_glob_match"`, `"include"`, or `"compact"`. The `"compact"` value fires when instruction files are re-loaded after a compaction event |
 | `globs` | Path glob patterns from the file’s `paths:` frontmatter, if any. Present only for `path_glob_match` loads |
 | `trigger_file_path` | Path to the file whose access triggered this load, for lazy loads |
 | `parent_file_path` | Path to the parent instruction file that included this one, for `include` loads |
@@ -1018,7 +1019,7 @@ Spawns a [subagent](sub-agents.md).
 
 | Field | Description |
 | --- | --- |
-| `permissionDecision` | `"allow"` bypasses the permission system, `"deny"` prevents the tool call, `"ask"` prompts the user to confirm |
+| `permissionDecision` | `"allow"` skips the permission prompt. `"deny"` prevents the tool call. `"ask"` prompts the user to confirm. [Deny and ask rules](permissions.md) still apply when a hook returns `"allow"` |
 | `permissionDecisionReason` | For `"allow"` and `"ask"`, shown to the user but not Claude. For `"deny"`, shown to Claude |
 | `updatedInput` | Modifies the tool’s input parameters before execution. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user |
 | `additionalContext` | String added to Claude’s context before the tool executes |

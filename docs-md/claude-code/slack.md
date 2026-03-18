@@ -207,11 +207,17 @@ for more details.
 
 [## Claude Code on the web
 
-Learn more about Claude Code on the web](claude-code-on-the-web.md)[## Claude for Slack
+Learn more about Claude Code on the web](/en/claude-code-on-the-web)
 
-General Claude for Slack documentation](https://claude.com/claude-and-slack)[## Slack App Marketplace
+[## Claude for Slack
 
-Install the Claude app from the Slack Marketplace](https://slack.com/marketplace/A08SF47R6P4)[## Claude Help Center
+General Claude for Slack documentation](https://claude.com/claude-and-slack)
+
+[## Slack App Marketplace
+
+Install the Claude app from the Slack Marketplace](https://slack.com/marketplace/A08SF47R6P4)
+
+[## Claude Help Center
 
 Get additional support](https://support.claude.com)
 

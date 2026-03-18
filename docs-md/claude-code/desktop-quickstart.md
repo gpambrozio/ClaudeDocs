@@ -25,7 +25,9 @@ Download Claude for your platform.
 
 [## macOS
 
-Universal build for Intel and Apple Silicon](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs)[## Windows
+Universal build for Intel and Apple Silicon](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs)
+
+[## Windows
 
 For x64 processors](https://claude.ai/api/desktop/win32/x64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs)
 

@@ -32,9 +32,9 @@ Claude Code supports several permission modes that control how tools are approve
 | `acceptEdits` | Automatically accepts file edit permissions for the session |
 | `plan` | Plan Mode: Claude can analyze but not modify files or execute commands |
 | `dontAsk` | Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules |
-| `bypassPermissions` | Skips all permission prompts (requires safe environment, see warning below) |
+| `bypassPermissions` | Skips permission prompts except for writes to protected directories (see warning below) |
 
-`bypassPermissions` mode disables all permission checks. Only use this in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting `disableBypassPermissionsMode` to `"disable"` in [managed settings](#managed-settings).
+`bypassPermissions` mode skips permission prompts. Writes to `.git`, `.claude`, `.vscode`, and `.idea` directories still prompt for confirmation to prevent accidental corruption of repository state and local configuration. Writes to `.claude/commands`, `.claude/agents`, and `.claude/skills` are exempt and do not prompt, because Claude routinely writes there when creating skills, subagents, and commands. Only use this mode in isolated environments like containers or VMs where Claude Code cannot cause damage. Administrators can prevent this mode by setting `disableBypassPermissionsMode` to `"disable"` in [managed settings](#managed-settings).
 
 ## [​](#permission-rule-syntax) Permission rule syntax
 
@@ -107,6 +107,8 @@ When `*` appears at the end with a space before it (like `Bash(ls *)`), it enfor
 
 Claude Code is aware of shell operators (like `&&`) so a prefix match rule like `Bash(safe-cmd *)` won’t give it permission to run the command `safe-cmd && other-cmd`.
 
+When you approve a compound command with “Yes, don’t ask again”, Claude Code saves a separate rule for each subcommand that requires approval, rather than a single rule for the full compound string. For example, approving `git status && npm test` saves a rule for `npm test`, so future `npm test` invocations are recognized regardless of what precedes the `&&`. Subcommands like `cd` into a subdirectory generate their own Read rule for that path. Up to 5 rules may be saved for a single compound command.
+
 Bash permission patterns that try to constrain command arguments are fragile. For example, `Bash(curl http://github.com/ *)` intends to restrict curl to GitHub URLs, but won’t match variations like:
 
 - Options before URL: `curl -X GET http://github.com/...`
@@ -126,6 +128,9 @@ Note that using WebFetch alone does not prevent network access. If Bash is allow
 ### [​](#read-and-edit) Read and Edit
 
 `Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep and Glob.
+
+Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A `Read(./.env)` deny rule blocks the Read tool but does not prevent `cat .env` in Bash. For OS-level enforcement that blocks all processes from accessing a path, [enable the sandbox](sandboxing.md).
+
 Read and Edit rules both follow the [gitignore](https://git-scm.com/docs/gitignore) specification with four distinct pattern types:
 
 | Pattern | Meaning | Example | Matches |
@@ -137,6 +142,7 @@ Read and Edit rules both follow the [gitignore](https://git-scm.com/docs/gitigno
 
 A pattern like `/Users/alice/file` is NOT an absolute path. It’s relative to the project root. Use `//Users/alice/file` for absolute paths.
 
+On Windows, paths are normalized to POSIX form before matching. `C:\Users\alice` becomes `/c/Users/alice`, so use `//c/**/.env` to match `.env` files anywhere on that drive. To match across all drives, use `//**/.env`.
 Examples:
 
 - `Edit(/docs/**)`: edits in `<project>/docs/` (NOT `/docs/` and NOT `<project>/.claude/docs/`)
@@ -182,7 +188,8 @@ Ask AI
 
 ## [​](#extend-permissions-with-hooks) Extend permissions with hooks
 
-[Claude Code hooks](hooks-guide.md) provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission system, and the hook output can determine whether to approve or deny the tool call in place of the permission system.
+[Claude Code hooks](hooks-guide.md) provide a way to register custom shell commands to perform permission evaluation at runtime. When Claude Code makes a tool call, PreToolUse hooks run before the permission prompt. The hook output can deny the tool call, force a prompt, or skip the prompt to let the call proceed.
+Skipping the prompt does not bypass permission rules. Deny and ask rules are still evaluated after a hook returns `"allow"`, so a matching deny rule still blocks the call. This preserves the deny-first precedence described in [Manage permissions](#manage-permissions), including deny rules set in managed settings.
 
 ## [​](#working-directories) Working directories
 
@@ -224,6 +231,7 @@ Some settings are only effective in managed settings:
 | `allowManagedMcpServersOnly` | When `true`, only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. See [Managed MCP configuration](mcp.md) |
 | `blockedMarketplaces` | Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [managed marketplace restrictions](plugin-marketplaces.md) |
 | `sandbox.network.allowManagedDomainsOnly` | When `true`, only `allowedDomains` and `WebFetch(domain:...)` allow rules from managed settings are respected. Non-allowed domains are blocked automatically without prompting the user. Denied domains still merge from all sources |
+| `sandbox.filesystem.allowManagedReadPathsOnly` | When `true`, only `allowRead` paths from managed settings are respected. `allowRead` entries from user, project, and local settings are ignored |
 | `strictKnownMarketplaces` | Controls which plugin marketplaces users can add. See [managed marketplace restrictions](plugin-marketplaces.md) |
 | `allow_remote_sessions` | When `true`, allows users to start [Remote Control](remote-control.md) and [web sessions](claude-code-on-the-web.md). Defaults to `true`. Set to `false` to prevent remote session access |
 

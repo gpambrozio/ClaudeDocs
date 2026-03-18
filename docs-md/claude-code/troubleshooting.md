@@ -945,6 +945,25 @@ If you see `API Error: 403 {"error":{"type":"forbidden","message":"Request not a
 - **Console users**: confirm your account has the “Claude Code” or “Developer” role assigned by your admin
 - **Behind a proxy**: corporate proxies can interfere with API requests. See [network configuration](network-config.md) for proxy setup.
 
+### [​](#”this-organization-has-been-disabled”-with-an-active-subscription) ”This organization has been disabled” with an active subscription
+
+If you see `API Error: 400 ... "This organization has been disabled"` despite having an active Claude subscription, an `ANTHROPIC_API_KEY` environment variable is overriding your subscription. This commonly happens when an old API key from a previous employer or project is still set in your shell profile.
+When `ANTHROPIC_API_KEY` is present and you have approved it, Claude Code uses that key instead of your subscription’s OAuth credentials. In non-interactive mode (`-p`), the key is always used when present. See [authentication precedence](authentication.md) for the full resolution order.
+To use your subscription instead, unset the environment variable and remove it from your shell profile:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+unset ANTHROPIC_API_KEY
+claude
+```
+
+Check `~/.zshrc`, `~/.bashrc`, or `~/.profile` for `export ANTHROPIC_API_KEY=...` lines and remove them to make the change permanent. Run `/status` inside Claude Code to confirm which authentication method is active.
+
 ### [​](#oauth-login-fails-in-wsl2) OAuth login fails in WSL2
 
 Browser-based login in WSL2 may fail if WSL can’t open your Windows browser. Set the `BROWSER` environment variable:
@@ -1214,7 +1233,7 @@ To minimize formatting issues:
 
 If you’re experiencing issues not covered here:
 
-1. Use the `/bug` command within Claude Code to report problems directly to Anthropic
+1. Use the `/feedback` command within Claude Code to report problems directly to Anthropic
 2. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
 3. Run `/doctor` to diagnose issues. It checks:
    - Installation type, version, and search functionality
