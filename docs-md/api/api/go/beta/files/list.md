@@ -155,18 +155,18 @@ Response 200
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "filename": "x",
-      "mime_type": "x",
-      "size_bytes": 0,
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
       "type": "file",
-      "downloadable": true
+      "downloadable": false
     }
   ],
-  "first_id": "first_id",
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "has_more": true,
-  "last_id": "last_id"
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
 }
 ```
 
@@ -178,18 +178,18 @@ Response 200
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "filename": "x",
-      "mime_type": "x",
-      "size_bytes": 0,
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
       "type": "file",
-      "downloadable": true
+      "downloadable": false
     }
   ],
-  "first_id": "first_id",
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "has_more": true,
-  "last_id": "last_id"
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
 }
 ```
 

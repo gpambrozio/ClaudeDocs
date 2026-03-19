@@ -6,7 +6,7 @@ Ruby
 
 # List Models
 
-models.list(\*\*kwargs) -> Page<[ModelInfo](api/models.md) { id, created\_at, display\_name, type } >
+models.list(\*\*kwargs) -> Page<[ModelInfo](api/models.md) { id, capabilities, created\_at, 4 more } >
 
 GET/v1/models
 
@@ -34,7 +34,7 @@ maximum1000
 
 minimum1
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -88,11 +88,163 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-class ModelInfo { id, created\_at, display\_name, type }
+class ModelInfo { id, capabilities, created\_at, 4 more }
 
 id: String
 
 Unique model identifier.
+
+capabilities: [ModelCapabilities](api/models.md) { batch, citations, code\_execution, 6 more }
+
+Model capability information.
+
+batch: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports the Batch API.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+citations: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports citation generation.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+code\_execution: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports code execution tools.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+context\_management: [ContextManagementCapability](api/models.md) { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+Context management support and available strategies.
+
+clear\_thinking\_20251015: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+clear\_tool\_uses\_20250919: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+compact\_20260112: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+effort: [EffortCapability](api/models.md) { high, low, max, 2 more }
+
+Effort (reasoning\_effort) support and available levels.
+
+high: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports high effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+low: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports low effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+max: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports max effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+medium: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports medium effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+image\_input: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model accepts image content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+pdf\_input: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model accepts PDF content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+structured\_outputs: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports structured output / JSON mode / strict tool schemas.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+thinking: [ThinkingCapability](api/models.md) { supported, types }
+
+Thinking capability and supported type configurations.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+types: [ThinkingTypes](api/models.md) { adaptive, enabled }
+
+Supported thinking type configurations.
+
+adaptive: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports thinking with type 'adaptive' (auto).
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+enabled: [CapabilitySupport](api/models.md) { supported }
+
+Whether the model supports thinking with type 'enabled'.
+
+supported: bool
+
+Whether this capability is supported by the model.
 
 created\_at: Time
 
@@ -101,6 +253,14 @@ RFC 3339 datetime string representing the time at which the model was released. 
 display\_name: String
 
 A human-readable name for the model.
+
+max\_input\_tokens: Integer
+
+Maximum input context window size in tokens for this model.
+
+max\_tokens: Integer
+
+Maximum value for the `max_tokens` parameter when using this model.
 
 type: :model
 
@@ -129,8 +289,68 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
       "created_at": "2026-02-04T00:00:00Z",
       "display_name": "Claude Opus 4.6",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
       "type": "model"
     }
   ],
@@ -149,8 +369,68 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
       "created_at": "2026-02-04T00:00:00Z",
       "display_name": "Claude Opus 4.6",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
       "type": "model"
     }
   ],

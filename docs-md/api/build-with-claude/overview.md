@@ -16,6 +16,8 @@ If you're new, start with [model capabilities](#model-capabilities) and [tools](
 
 Ways to steer Claude and Claude's direct outputs, including response format, reasoning depth, and input modalities.
 
+You can discover which capabilities a model supports programmatically. The [Models API](api/models/list.md) returns `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
+
 | Feature | Description | Availability |
 | --- | --- | --- |
 | [Context windows](build-with-claude/context-windows.md) | Up to 1M tokens for processing large documents, extensive codebases, and long conversations. | Claude API  Amazon Bedrock  Google Cloud's Vertex AI  Microsoft Foundry (Beta) |

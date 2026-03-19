@@ -3818,6 +3818,85 @@ Optional<Boolean> strict
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaWebFetchTool20260309:
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+JsonValue; name "web\_fetch"constant"web\_fetch"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<List<String>> allowedDomains
+
+List of domains to allow fetching from
+
+Optional<List<String>> blockedDomains
+
+List of domains to block fetching from
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[BetaCitationsConfigParam](api/beta.md)> citations
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Optional<Boolean> enabled
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxContentTokens
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+Optional<Boolean> useCache
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 class BetaToolSearchToolBm25\_20251119:
 
 JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant

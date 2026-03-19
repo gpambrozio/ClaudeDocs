@@ -1367,15 +1367,15 @@ Tips:
 
 [## Best practices
 
-Patterns for getting the most out of Claude Code](/en/best-practices)
+Patterns for getting the most out of Claude Code](best-practices.md)
 
 [## How Claude Code works
 
-Understand the agentic loop and context management](/en/how-claude-code-works)
+Understand the agentic loop and context management](how-claude-code-works.md)
 
 [## Extend Claude Code
 
-Add skills, hooks, MCP, subagents, and plugins](/en/features-overview)
+Add skills, hooks, MCP, subagents, and plugins](features-overview.md)
 
 [## Reference implementation
 

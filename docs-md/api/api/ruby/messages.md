@@ -5333,7 +5333,7 @@ Accepts one of the following:
 
 :batch
 
-MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 12 more
+MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 13 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -6157,6 +6157,85 @@ Maximum number of times the tool can be used in the API request.
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
+
+class WebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260309
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: bool
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 class ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
@@ -8394,7 +8473,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 Model = :"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 12 more | String
 
@@ -12909,15 +12988,25 @@ thinking: String
 
 type: :thinking
 
-class ThinkingConfigAdaptive { type }
+class ThinkingConfigAdaptive { type, display\_ }
 
 type: :adaptive
+
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
 
 class ThinkingConfigDisabled { type }
 
 type: :disabled
 
-class ThinkingConfigEnabled { budget\_tokens, type }
+class ThinkingConfigEnabled { budget\_tokens, type, display\_ }
 
 budget\_tokens: Integer
 
@@ -12931,7 +13020,17 @@ minimum1024
 
 type: :enabled
 
-ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type }  | [ThinkingConfigDisabled](api/messages.md) { type }  | [ThinkingConfigAdaptive](api/messages.md) { type }
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
+
+ThinkingConfigParam = [ThinkingConfigEnabled](api/messages.md) { budget\_tokens, type, display\_ }  | [ThinkingConfigDisabled](api/messages.md) { type }  | [ThinkingConfigAdaptive](api/messages.md) { type, display\_ }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -12941,7 +13040,7 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 Accepts one of the following:
 
-class ThinkingConfigEnabled { budget\_tokens, type }
+class ThinkingConfigEnabled { budget\_tokens, type, display\_ }
 
 budget\_tokens: Integer
 
@@ -12955,13 +13054,33 @@ minimum1024
 
 type: :enabled
 
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
+
 class ThinkingConfigDisabled { type }
 
 type: :disabled
 
-class ThinkingConfigAdaptive { type }
+class ThinkingConfigAdaptive { type, display\_ }
 
 type: :adaptive
+
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
 
 class ThinkingDelta { thinking, type }
 
@@ -14323,7 +14442,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUnion = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 12 more
+ToolUnion = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 more }  | [ToolBash20250124](api/messages.md) { name, type, allowed\_callers, 4 more }  | [CodeExecutionTool20250522](api/messages.md) { name, type, allowed\_callers, 3 more }  | 13 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -15148,6 +15267,85 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
+class WebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260309
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: bool
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 class ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_bm25
@@ -15883,6 +16081,85 @@ Maximum number of times the tool can be used in the API request.
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
+
+class WebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260309
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [CitationsConfigParam](api/messages.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: bool
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 class WebFetchToolResultBlock { caller\_, content, tool\_use\_id, type }
 

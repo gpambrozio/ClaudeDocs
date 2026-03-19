@@ -22,7 +22,7 @@ message\_batch\_id: String
 
 ID of the Message Batch.
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 

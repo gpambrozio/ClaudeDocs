@@ -26,7 +26,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 

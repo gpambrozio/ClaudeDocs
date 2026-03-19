@@ -34,7 +34,7 @@ maximum1000
 
 minimum1
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 

@@ -9222,7 +9222,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 BetaOutputConfig { effort, format }
 
@@ -15256,15 +15256,25 @@ thinking: string
 
 type: "thinking"
 
-BetaThinkingConfigAdaptive { type }
+BetaThinkingConfigAdaptive { type, display }
 
 type: "adaptive"
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
 
 BetaThinkingConfigDisabled { type }
 
 type: "disabled"
 
-BetaThinkingConfigEnabled { budget\_tokens, type }
+BetaThinkingConfigEnabled { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -15278,7 +15288,17 @@ minimum1024
 
 type: "enabled"
 
-BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type }
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
+
+BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type, display }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -15288,7 +15308,7 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 Accepts one of the following:
 
-BetaThinkingConfigEnabled { budget\_tokens, type }
+BetaThinkingConfigEnabled { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -15302,13 +15322,33 @@ minimum1024
 
 type: "enabled"
 
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
+
 BetaThinkingConfigDisabled { type }
 
 type: "disabled"
 
-BetaThinkingConfigAdaptive { type }
+BetaThinkingConfigAdaptive { type, display }
 
 type: "adaptive"
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
 
 BetaThinkingDelta { thinking, type }
 
@@ -16983,7 +17023,7 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 18 more
+BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 19 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -18113,6 +18153,85 @@ strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
 
+BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260309"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains?: Array<string> | null
+
+List of domains to allow fetching from
+
+blocked\_domains?: Array<string> | null
+
+List of domains to block fetching from
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled?: boolean
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens?: number | null
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache?: boolean
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
@@ -19016,6 +19135,85 @@ Maximum number of times the tool can be used in the API request.
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
+
+BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260309"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains?: Array<string> | null
+
+List of domains to allow fetching from
+
+blocked\_domains?: Array<string> | null
+
+List of domains to block fetching from
+
+cache\_control?: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations?: [BetaCitationsConfigParam](api/beta.md) { enabled }  | null
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled?: boolean
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens?: number | null
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache?: boolean
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 

@@ -8,6 +8,9 @@ Claude Code supports the following environment variables to control its behavior
 | `ANTHROPIC_AUTH_TOKEN` | Custom value for the `Authorization` header (the value you set here will be prefixed with `Bearer` ) |
 | `ANTHROPIC_BASE_URL` | Override the API endpoint to route requests through a proxy or gateway. When set to a non-first-party host, [MCP tool search](mcp.md) is disabled by default. Set `ENABLE_TOOL_SEARCH=true` if your proxy forwards `tool_reference` blocks |
 | `ANTHROPIC_CUSTOM_HEADERS` | Custom headers to add to requests (`Name: Value` format, newline-separated for multiple headers) |
+| `ANTHROPIC_CUSTOM_MODEL_OPTION` | Model ID to add as a custom entry in the `/model` picker. Use this to make a non-standard or gateway-specific model selectable without replacing built-in aliases. See [Model configuration](model-config.md) |
+| `ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION` | Display description for the custom model entry in the `/model` picker. Defaults to `Custom model (<model-id>)` when not set |
+| `ANTHROPIC_CUSTOM_MODEL_OPTION_NAME` | Display name for the custom model entry in the `/model` picker. Defaults to the model ID when not set |
 | `ANTHROPIC_DEFAULT_HAIKU_MODEL` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | See [Model configuration](model-config.md) |
@@ -56,7 +59,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic OpenTelemetry headers in milliseconds (default: 1740000 / 29 minutes). See [Dynamic headers](monitoring-usage.md) |
 | `CLAUDE_CODE_PLAN_MODE_REQUIRED` | Auto-set to `true` on [agent team](agent-teams.md) teammates that require plan approval. Read-only: set by Claude Code when spawning teammates. See [require plan approval](agent-teams.md) |
 | `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS` | Timeout in milliseconds for git operations when installing or updating plugins (default: 120000). Increase this value for large repositories or slow network connections. See [Git operations time out](plugin-marketplaces.md) |
-| `CLAUDE_CODE_PLUGIN_SEED_DIR` | Path to a read-only plugin seed directory. Use this to bundle a pre-populated plugins directory into a container image. Claude Code registers marketplaces from this directory at startup and uses pre-cached plugins without re-cloning. See [Pre-populate plugins for containers](plugin-marketplaces.md) |
+| `CLAUDE_CODE_PLUGIN_SEED_DIR` | Path to one or more read-only plugin seed directories, separated by `:` on Unix or `;` on Windows. Use this to bundle a pre-populated plugins directory into a container image. Claude Code registers marketplaces from these directories at startup and uses pre-cached plugins without re-cloning. See [Pre-populate plugins for containers](plugin-marketplaces.md) |
 | `CLAUDE_CODE_PROXY_RESOLVES_HOSTS` | Set to `true` to allow the proxy to perform DNS resolution instead of the caller. Opt-in for environments where the proxy should handle hostname resolution |
 | `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | Maximum time in milliseconds for [SessionEnd](hooks.md) hooks to complete (default: `1500`). Applies to both session exit and `/clear`. Per-hook `timeout` values are also capped by this budget |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |

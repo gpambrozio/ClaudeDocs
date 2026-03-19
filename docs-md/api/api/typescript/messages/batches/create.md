@@ -2280,7 +2280,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 output\_config?: [OutputConfig](api/messages.md) { effort, format }
 
@@ -2471,7 +2471,7 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 Accepts one of the following:
 
-ThinkingConfigEnabled { budget\_tokens, type }
+ThinkingConfigEnabled { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -2485,13 +2485,33 @@ minimum1024
 
 type: "enabled"
 
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
+
 ThinkingConfigDisabled { type }
 
 type: "disabled"
 
-ThinkingConfigAdaptive { type }
+ThinkingConfigAdaptive { type, display }
 
 type: "adaptive"
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+"summarized"
+
+"omitted"
 
 tool\_choice?: [ToolChoice](api/messages.md)
 
@@ -3429,6 +3449,85 @@ Maximum number of times the tool can be used in the API request.
 strict?: boolean
 
 When true, guarantees schema validation on tool names and inputs
+
+WebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: "web\_fetch"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "web\_fetch\_20260309"
+
+allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+allowed\_domains?: Array<string> | null
+
+List of domains to allow fetching from
+
+blocked\_domains?: Array<string> | null
+
+List of domains to block fetching from
+
+cache\_control?: [CacheControlEphemeral](api/messages.md) { type, ttl }  | null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl?: "5m" | "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+citations?: [CitationsConfigParam](api/messages.md) { enabled }  | null
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled?: boolean
+
+defer\_loading?: boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens?: number | null
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses?: number | null
+
+Maximum number of times the tool can be used in the API request.
+
+strict?: boolean
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache?: boolean
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 

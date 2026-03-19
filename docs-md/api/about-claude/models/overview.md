@@ -37,6 +37,8 @@ Models with the same snapshot date (e.g., 20240620) are identical across all pla
 
 Starting with **Claude Sonnet 4.5 and all subsequent models** (including Claude Sonnet 4.6), AWS Bedrock and Google Vertex AI offer two endpoint types: **global endpoints** (dynamic routing for maximum availability) and **regional endpoints** (guaranteed data routing through specific geographic regions). For more information, see the [third-party platform pricing section](about-claude/pricing.md).
 
+You can query model capabilities and token limits programmatically with the [Models API](api/models/list.md). The response includes `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
+
 ### Legacy models
 
 ## Prompt and output performance

@@ -189,35 +189,35 @@ Each feature has its own guide with setup instructions, examples, and configurat
 
 [## CLAUDE.md
 
-Store project context, conventions, and instructions](/en/memory)
+Store project context, conventions, and instructions](memory.md)
 
 [## Skills
 
-Give Claude domain expertise and reusable workflows](/en/skills)
+Give Claude domain expertise and reusable workflows](skills.md)
 
 [## Subagents
 
-Offload work to isolated context](/en/sub-agents)
+Offload work to isolated context](sub-agents.md)
 
 [## Agent teams
 
-Coordinate multiple sessions working in parallel](/en/agent-teams)
+Coordinate multiple sessions working in parallel](agent-teams.md)
 
 [## MCP
 
-Connect Claude to external services](/en/mcp)
+Connect Claude to external services](mcp.md)
 
 [## Hooks
 
-Automate workflows with hooks](/en/hooks-guide)
+Automate workflows with hooks](hooks-guide.md)
 
 [## Plugins
 
-Bundle and share feature sets](/en/plugins)
+Bundle and share feature sets](plugins.md)
 
 [## Marketplaces
 
-Host and distribute plugin collections](/en/plugin-marketplaces)
+Host and distribute plugin collections](plugin-marketplaces.md)
 
 ---
 

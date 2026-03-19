@@ -20,7 +20,7 @@ Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 

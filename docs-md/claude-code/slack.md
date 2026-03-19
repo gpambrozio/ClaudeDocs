@@ -207,7 +207,7 @@ for more details.
 
 [## Claude Code on the web
 
-Learn more about Claude Code on the web](/en/claude-code-on-the-web)
+Learn more about Claude Code on the web](claude-code-on-the-web.md)
 
 [## Claude for Slack
 

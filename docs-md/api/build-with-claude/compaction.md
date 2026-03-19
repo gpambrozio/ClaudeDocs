@@ -445,7 +445,7 @@ print(chat("Now add rate limiting and error handling"))
 # ... continue as long as needed
 ```
 
-Here's an example that uses `pause_after_compaction` to preserve the last two messages (one user + one assistant turn) verbatim instead of summarizing them:
+Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 Python
 
@@ -481,9 +481,9 @@ def chat(user_message: str) -> str:
         # Get the compaction block from the response
         compaction_block = response.content[0]
 
-        # Preserve the last 2 messages (1 user + 1 assistant turn)
+        # Preserve the prior exchange + current user message (3 messages)
         # by including them after the compaction block
-        preserved_messages = messages[-2:] if len(messages) >= 2 else messages
+        preserved_messages = messages[-3:] if len(messages) >= 3 else messages
 
         # Build new message list: compaction + preserved messages
         new_assistant_content = [compaction_block]

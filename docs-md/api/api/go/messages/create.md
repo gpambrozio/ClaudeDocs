@@ -3213,6 +3213,85 @@ Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
 
+type WebFetchTool20260309 struct{…}
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+Name WebFetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebFetch20260309
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const WebFetchTool20260309AllowedCallerDirect WebFetchTool20260309AllowedCaller = "direct"
+
+const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool20260309AllowedCaller = "code\_execution\_20250825"
+
+const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
+
+AllowedDomains []stringoptional
+
+List of domains to allow fetching from
+
+BlockedDomains []stringoptional
+
+List of domains to block fetching from
+
+CacheControl [CacheControlEphemeral](api/messages.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL CacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+
+const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Citations [CitationsConfigParamResp](api/messages.md)optional
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Enabled booloptional
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxContentTokens int64optional
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+UseCache booloptional
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 type ToolSearchToolBm25\_20251119 struct{…}
 
 Name ToolSearchToolBm25

@@ -18,7 +18,7 @@ file: FileInput
 
 The file to upload
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -115,7 +115,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.upload(file: Pathname(__FILE__))
+file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
 puts(file_metadata)
 ```
@@ -124,13 +124,13 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
   "type": "file",
-  "downloadable": true
+  "downloadable": false
 }
 ```
 
@@ -140,13 +140,13 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "x",
-  "mime_type": "x",
-  "size_bytes": 0,
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
   "type": "file",
-  "downloadable": true
+  "downloadable": false
 }
 ```
 

@@ -396,6 +396,7 @@ Hook events fire at specific lifecycle points in Claude Code. When an event fire
 | `SubagentStart` | When a subagent is spawned |
 | `SubagentStop` | When a subagent finishes |
 | `Stop` | When Claude finishes responding |
+| `StopFailure` | When the turn ends due to an API error. Output and exit code are ignored |
 | `TeammateIdle` | When an [agent team](agent-teams.md) teammate is about to go idle |
 | `TaskCompleted` | When a task is being marked as completed |
 | `InstructionsLoaded` | When a CLAUDE.md or `.claude/rules/*.md` file is loaded into context. Fires at session start and when files are lazily loaded during a session |
@@ -543,6 +544,10 @@ Each event type matches on a specific field. Matchers support exact strings and 
 | `PreCompact`, `PostCompact` | what triggered compaction | `manual`, `auto` |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
 | `ConfigChange` | configuration source | `user_settings`, `project_settings`, `local_settings`, `policy_settings`, `skills` |
+| `StopFailure` | error type | `rate_limit`, `authentication_failed`, `billing_error`, `invalid_request`, `server_error`, `max_output_tokens`, `unknown` |
+| `InstructionsLoaded` | load reason | `session_start`, `nested_traversal`, `path_glob_match`, `include`, `compact` |
+| `Elicitation` | MCP server name | your configured MCP server names |
+| `ElicitationResult` | MCP server name | same values as `Elicitation` |
 | `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCompleted`, `WorktreeCreate`, `WorktreeRemove` | no matcher support | always fires on every occurrence |
 
 A few more examples showing matchers on different event types:
@@ -760,7 +765,7 @@ For full configuration options and response handling, see [HTTP hooks](hooks.md)
 - Hook timeout is 10 minutes by default, configurable per hook with the `timeout` field (in seconds).
 - `PostToolUse` hooks cannot undo actions since the tool has already executed.
 - `PermissionRequest` hooks do not fire in [non-interactive mode](headless.md) (`-p`). Use `PreToolUse` hooks for automated permission decisions.
-- `Stop` hooks fire whenever Claude finishes responding, not only at task completion. They do not fire on user interrupts.
+- `Stop` hooks fire whenever Claude finishes responding, not only at task completion. They do not fire on user interrupts. API errors fire [StopFailure](hooks.md) instead.
 
 ### [​](#hook-not-firing) Hook not firing
 

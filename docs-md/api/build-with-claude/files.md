@@ -235,7 +235,7 @@ You can only download files that were created by [skills](build-with-claude/skil
 ### Storage limits
 
 - **Maximum file size:** 500 MB per file
-- **Total storage:** 100 GB per organization
+- **Total storage:** 500 GB per organization
 
 ### File lifecycle
 
@@ -256,7 +256,7 @@ Common errors when using the Files API include:
 - **Exceeds context window size (400):** The file is larger than the context window size (e.g. using a 500 MB plaintext file in a `/v1/messages` request)
 - **Invalid filename (400):** Filename doesn't meet the length requirements (1-255 characters) or contains forbidden characters (`<`, `>`, `:`, `"`, `|`, `?`, `*`, `\`, `/`, or unicode characters 0-31)
 - **File too large (413):** File exceeds the 500 MB limit
-- **Storage limit exceeded (403):** Your organization has reached the 100 GB storage limit
+- **Storage limit exceeded (403):** Your organization has reached the 500 GB storage limit
 
 ```shiki
 {
@@ -285,7 +285,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#f281939e9781b2939c869a809d829b91dc919d9f) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#92e1f3fef7e1d2f3fce6fae0fde2fbf1bcf1fdff) if you need higher limits for your use case
 
 Was this page helpful?
 

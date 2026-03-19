@@ -463,19 +463,19 @@ Now that you’ve learned the basics, explore more advanced features:
 
 [## How Claude Code works
 
-Understand the agentic loop, built-in tools, and how Claude Code interacts with your project](/en/how-claude-code-works)
+Understand the agentic loop, built-in tools, and how Claude Code interacts with your project](how-claude-code-works.md)
 
 [## Best practices
 
-Get better results with effective prompting and project setup](/en/best-practices)
+Get better results with effective prompting and project setup](best-practices.md)
 
 [## Common workflows
 
-Step-by-step guides for common tasks](/en/common-workflows)
+Step-by-step guides for common tasks](common-workflows.md)
 
 [## Extend Claude Code
 
-Customize with CLAUDE.md, skills, hooks, MCP, and more](/en/features-overview)
+Customize with CLAUDE.md, skills, hooks, MCP, and more](features-overview.md)
 
 ## [​](#getting-help) Getting help
 

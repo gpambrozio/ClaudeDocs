@@ -6,6 +6,10 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### March 18, 2026
+
+- We've added model capability fields to the [Models API](api/models/list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now return `max_input_tokens`, `max_tokens`, and a `capabilities` object. Query the API to discover what each model supports.
+
 ### March 16, 2026
 
 - We've launched the `display` field for extended thinking, letting you omit thinking content from responses for faster streaming. Set `thinking.display: "omitted"` to receive thinking blocks with an empty `thinking` field and the `signature` preserved for multi-turn continuity. Billing is unchanged. Learn more in [Controlling thinking display](build-with-claude/extended-thinking.md).
@@ -304,7 +308,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 The following features are now generally available in the Claude API:
 
-- [Models API](api/models-list.md): Query available models, validate model IDs, and resolve [model aliases](about-claude/models.md) to their canonical model IDs.
+- [Models API](api/models/list.md): Query available models, validate model IDs, and resolve [model aliases](about-claude/models.md) to their canonical model IDs.
 - [Message Batches API](build-with-claude/batch-processing.md): Process large batches of messages asynchronously at 50% of the standard API cost.
 - [Token counting API](build-with-claude/token-counting.md): Calculate token counts for Messages before sending them to Claude.
 - [Prompt Caching](build-with-claude/prompt-caching.md): Reduce costs by up to 90% and latency by up to 80% by caching and reusing prompt content.

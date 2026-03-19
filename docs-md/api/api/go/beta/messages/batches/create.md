@@ -2716,7 +2716,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 OutputConfig [BetaOutputConfig](api/beta.md)optional
 
@@ -2941,6 +2941,16 @@ minimum1024
 
 Type Enabled
 
+Display BetaThinkingConfigEnabledDisplayoptional
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"
+
+const BetaThinkingConfigEnabledDisplayOmitted BetaThinkingConfigEnabledDisplay = "omitted"
+
 type BetaThinkingConfigDisabled struct{…}
 
 Type Disabled
@@ -2948,6 +2958,16 @@ Type Disabled
 type BetaThinkingConfigAdaptive struct{…}
 
 Type Adaptive
+
+Display BetaThinkingConfigAdaptiveDisplayoptional
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"
+
+const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay = "omitted"
 
 ToolChoice [BetaToolChoiceUnion](api/beta.md)optional
 
@@ -4190,6 +4210,85 @@ Maximum number of times the tool can be used in the API request.
 Strict booloptional
 
 When true, guarantees schema validation on tool names and inputs
+
+type BetaWebFetchTool20260309 struct{…}
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+Name WebFetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type WebFetch20260309
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaWebFetchTool20260309AllowedCallerDirect BetaWebFetchTool20260309AllowedCaller = "direct"
+
+const BetaWebFetchTool20260309AllowedCallerCodeExecution20250825 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20250825"
+
+const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
+
+AllowedDomains []stringoptional
+
+List of domains to allow fetching from
+
+BlockedDomains []stringoptional
+
+List of domains to block fetching from
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+Enabled booloptional
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxContentTokens int64optional
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
+UseCache booloptional
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 type BetaToolSearchToolBm25\_20251119 struct{…}
 

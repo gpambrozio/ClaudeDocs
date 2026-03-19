@@ -238,23 +238,407 @@ type: :rate\_limit\_error
 
 ##### [List Models](api/beta/models/list.md)
 
-beta.models.list(\*\*kwargs) -> Page<[BetaModelInfo](api/beta.md) { id, created\_at, display\_name, type } >
+beta.models.list(\*\*kwargs) -> Page<[BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more } >
 
 GET/v1/models
 
 ##### [Get a Model](api/beta/models/retrieve.md)
 
-beta.models.retrieve(model\_id, \*\*kwargs) -> [BetaModelInfo](api/beta.md) { id, created\_at, display\_name, type }
+beta.models.retrieve(model\_id, \*\*kwargs) -> [BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more }
 
 GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-class BetaModelInfo { id, created\_at, display\_name, type }
+class BetaCapabilitySupport { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+class BetaContextManagementCapability { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+Context management capability details.
+
+clear\_thinking\_20251015: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+clear\_tool\_uses\_20250919: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+compact\_20260112: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+class BetaEffortCapability { high, low, max, 2 more }
+
+Effort (reasoning\_effort) capability details.
+
+high: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports high effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+low: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports low effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+max: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports max effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+medium: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports medium effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+class BetaModelCapabilities { batch, citations, code\_execution, 6 more }
+
+Model capability information.
+
+batch: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports the Batch API.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+citations: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports citation generation.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+code\_execution: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports code execution tools.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+context\_management: [BetaContextManagementCapability](api/beta.md) { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+Context management support and available strategies.
+
+clear\_thinking\_20251015: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+clear\_tool\_uses\_20250919: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+compact\_20260112: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
+
+Effort (reasoning\_effort) support and available levels.
+
+high: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports high effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+low: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports low effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+max: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports max effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+medium: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports medium effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+image\_input: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model accepts image content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+pdf\_input: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model accepts PDF content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+structured\_outputs: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports structured output / JSON mode / strict tool schemas.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+thinking: [BetaThinkingCapability](api/beta.md) { supported, types }
+
+Thinking capability and supported type configurations.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+types: [BetaThinkingTypes](api/beta.md) { adaptive, enabled }
+
+Supported thinking type configurations.
+
+adaptive: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'adaptive' (auto).
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+enabled: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'enabled'.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+class BetaModelInfo { id, capabilities, created\_at, 4 more }
 
 id: String
 
 Unique model identifier.
+
+capabilities: [BetaModelCapabilities](api/beta.md) { batch, citations, code\_execution, 6 more }
+
+Model capability information.
+
+batch: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports the Batch API.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+citations: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports citation generation.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+code\_execution: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports code execution tools.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+context\_management: [BetaContextManagementCapability](api/beta.md) { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+
+Context management support and available strategies.
+
+clear\_thinking\_20251015: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+clear\_tool\_uses\_20250919: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+compact\_20260112: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
+
+Effort (reasoning\_effort) support and available levels.
+
+high: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports high effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+low: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports low effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+max: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports max effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+medium: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports medium effort level.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+image\_input: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model accepts image content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+pdf\_input: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model accepts PDF content blocks.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+structured\_outputs: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports structured output / JSON mode / strict tool schemas.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+thinking: [BetaThinkingCapability](api/beta.md) { supported, types }
+
+Thinking capability and supported type configurations.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+types: [BetaThinkingTypes](api/beta.md) { adaptive, enabled }
+
+Supported thinking type configurations.
+
+adaptive: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'adaptive' (auto).
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+enabled: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'enabled'.
+
+supported: bool
+
+Whether this capability is supported by the model.
 
 created\_at: Time
 
@@ -264,11 +648,67 @@ display\_name: String
 
 A human-readable name for the model.
 
+max\_input\_tokens: Integer
+
+Maximum input context window size in tokens for this model.
+
+max\_tokens: Integer
+
+Maximum value for the `max_tokens` parameter when using this model.
+
 type: :model
 
 Object type.
 
 For Models, this is always `"model"`.
+
+class BetaThinkingCapability { supported, types }
+
+Thinking capability details.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+types: [BetaThinkingTypes](api/beta.md) { adaptive, enabled }
+
+Supported thinking type configurations.
+
+adaptive: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'adaptive' (auto).
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+enabled: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'enabled'.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+class BetaThinkingTypes { adaptive, enabled }
+
+Supported thinking type configurations.
+
+adaptive: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'adaptive' (auto).
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+enabled: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Whether the model supports thinking with type 'enabled'.
+
+supported: bool
+
+Whether this capability is supported by the model.
 
 #### BetaMessages
 
@@ -9510,7 +9950,7 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-maxLength256
+maxLength512
 
 class BetaOutputConfig { effort, format\_ }
 
@@ -15558,15 +15998,25 @@ thinking: String
 
 type: :thinking
 
-class BetaThinkingConfigAdaptive { type }
+class BetaThinkingConfigAdaptive { type, display\_ }
 
 type: :adaptive
+
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
 
 class BetaThinkingConfigDisabled { type }
 
 type: :disabled
 
-class BetaThinkingConfigEnabled { budget\_tokens, type }
+class BetaThinkingConfigEnabled { budget\_tokens, type, display\_ }
 
 budget\_tokens: Integer
 
@@ -15580,7 +16030,17 @@ minimum1024
 
 type: :enabled
 
-BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type }
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
+
+BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display\_ }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type, display\_ }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -15590,7 +16050,7 @@ See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extend
 
 Accepts one of the following:
 
-class BetaThinkingConfigEnabled { budget\_tokens, type }
+class BetaThinkingConfigEnabled { budget\_tokens, type, display\_ }
 
 budget\_tokens: Integer
 
@@ -15604,13 +16064,33 @@ minimum1024
 
 type: :enabled
 
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
+
 class BetaThinkingConfigDisabled { type }
 
 type: :disabled
 
-class BetaThinkingConfigAdaptive { type }
+class BetaThinkingConfigAdaptive { type, display\_ }
 
 type: :adaptive
+
+display\_: :summarized | :omitted
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+Accepts one of the following:
+
+:summarized
+
+:omitted
 
 class BetaThinkingDelta { thinking, type }
 
@@ -17289,7 +17769,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 18 more
+BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers, 7 more }  | [BetaToolBash20241022](api/beta.md) { name, type, allowed\_callers, 4 more }  | [BetaToolBash20250124](api/beta.md) { name, type, allowed\_callers, 4 more }  | 19 more
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -18419,6 +18899,85 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
+class BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260309
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [BetaCitationsConfigParam](api/beta.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: bool
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
 class BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more }
 
 name: :tool\_search\_tool\_bm25
@@ -19324,6 +19883,85 @@ Maximum number of times the tool can be used in the API request.
 strict: bool
 
 When true, guarantees schema validation on tool names and inputs
+
+class BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more }
+
+Web fetch tool with use\_cache parameter for bypassing cached content.
+
+name: :web\_fetch
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: :web\_fetch\_20260309
+
+allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
+
+Accepts one of the following:
+
+:direct
+
+:code\_execution\_20250825
+
+:code\_execution\_20260120
+
+allowed\_domains: Array[String]
+
+List of domains to allow fetching from
+
+blocked\_domains: Array[String]
+
+List of domains to block fetching from
+
+cache\_control: [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+:"5m"
+
+:"1h"
+
+citations: [BetaCitationsConfigParam](api/beta.md) { enabled }
+
+Citations configuration for fetched documents. Citations are disabled by default.
+
+enabled: bool
+
+defer\_loading: bool
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_content\_tokens: Integer
+
+Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+max\_uses: Integer
+
+Maximum number of times the tool can be used in the API request.
+
+strict: bool
+
+When true, guarantees schema validation on tool names and inputs
+
+use\_cache: bool
+
+Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 class BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller\_ }
 

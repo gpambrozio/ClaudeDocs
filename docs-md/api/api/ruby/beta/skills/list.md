@@ -35,7 +35,7 @@ If provided, only skills from the specified source will be returned:
 - `"custom"`: only return user-created skills
 - `"anthropic"`: only return Anthropic-created skills
 
-anthropic\_beta: Array[[AnthropicBeta](api/beta.md)]
+betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
