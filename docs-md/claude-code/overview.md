@@ -208,6 +208,7 @@ Beyond the [Terminal](quickstart.md), [VS Code](vs-code.md), [JetBrains](jetbrai
 | I want to… | Best option |
 | --- | --- |
 | Continue a local session from my phone or another device | [Remote Control](remote-control.md) |
+| Push events from Telegram, Discord, or my own webhooks into a session | [Channels](channels.md) |
 | Start a task locally, continue on mobile | [Web](claude-code-on-the-web.md) or [Claude iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684) |
 | Automate PR reviews and issue triage | [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md) |
 | Get automatic code review on every PR | [GitHub Code Review](code-review.md) |

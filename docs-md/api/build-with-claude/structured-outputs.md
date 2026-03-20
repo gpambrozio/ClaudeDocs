@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 These features can be used independently or together in the same request.
 
-Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in public beta on Microsoft Foundry.
+Structured outputs are generally available on the Claude API and Amazon Bedrock for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry.
 
 Prompts and responses using structured outputs are processed with [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). However, the JSON schema itself is temporarily cached for up to 24 hours for optimization purposes. No prompt or response data is retained.
 

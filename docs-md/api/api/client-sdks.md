@@ -108,7 +108,7 @@ See [Beta headers](api/beta-headers.md) for available beta features.
 | Python | 3.9+ |
 | TypeScript | 4.9+ (Node.js 20+) |
 | Java | 8+ |
-| Go | 1.22+ |
+| Go | 1.23+ |
 | Ruby | 3.2.0+ |
 | C# | .NET Standard 2.0 |
 | PHP | 8.1.0+ |

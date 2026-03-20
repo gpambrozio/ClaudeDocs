@@ -171,6 +171,7 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `enableAllProjectMcpServers` | Automatically approve all MCP servers defined in project `.mcp.json` files | `true` |
 | `enabledMcpjsonServers` | List of specific MCP servers from `.mcp.json` files to approve | `["memory", "github"]` |
 | `disabledMcpjsonServers` | List of specific MCP servers from `.mcp.json` files to reject | `["filesystem"]` |
+| `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for Team and Enterprise users. Unset or `false` blocks channel message delivery regardless of what users pass to `--channels` | `true` |
 | `allowedMcpServers` | When set in managed-settings.json, allowlist of MCP servers users can configure. Undefined = no restrictions, empty array = lockdown. Applies to all scopes. Denylist takes precedence. See [Managed MCP configuration](mcp.md) | `[{ "serverName": "github" }]` |
 | `deniedMcpServers` | When set in managed-settings.json, denylist of MCP servers that are explicitly blocked. Applies to all scopes including managed servers. Denylist takes precedence over allowlist. See [Managed MCP configuration](mcp.md) | `[{ "serverName": "filesystem" }]` |
 | `strictKnownMarketplaces` | When set in managed-settings.json, allowlist of plugin marketplaces users can add. Undefined = no restrictions, empty array = lockdown. Applies to marketplace additions only. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "acme-corp/plugins" }]` |
@@ -656,7 +657,7 @@ Ask AI
 - List of sources: Users can only add marketplaces that match exactly
 
 **All supported source types**:
-The allowlist supports seven marketplace source types. Most sources use exact matching, while `hostPattern` uses regex matching against the marketplace host.
+The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` uses regex matching against the marketplace host.
 
 1. **GitHub repositories**:
 

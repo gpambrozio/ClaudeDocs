@@ -38,7 +38,7 @@ response = client.beta.messages.create(
 
 Beta features are experimental and may:
 
-- Have breaking changes without notice
+- Have breaking changes with notice
 - Be deprecated or removed
 - Have different rate limits or pricing
 - Not be available in all regions

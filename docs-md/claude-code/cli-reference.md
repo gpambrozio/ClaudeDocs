@@ -33,8 +33,10 @@ Customize Claude Code’s behavior with these command-line flags:
 | `--append-system-prompt` | Append custom text to the end of the default system prompt | `claude --append-system-prompt "Always use TypeScript"` |
 | `--append-system-prompt-file` | Load additional system prompt text from a file and append to the default prompt | `claude --append-system-prompt-file ./extra-rules.txt` |
 | `--betas` | Beta headers to include in API requests (API key users only) | `claude --betas interleaved-thinking` |
+| `--channels` | Enable named [channel](channels.md) servers to push messages into this session. Accepts space-separated `plugin:<name>@<marketplace>` entries from the [approved allowlist](channels.md) | `claude --channels plugin:fakechat@claude-plugins-official` |
 | `--chrome` | Enable [Chrome browser integration](chrome.md) for web automation and testing | `claude --chrome` |
 | `--continue`, `-c` | Load the most recent conversation in the current directory | `claude --continue` |
+| `--dangerously-load-development-channels` | Enable [channels](channels-reference.md) that are not on the approved allowlist, for local development. Accepts `plugin:<name>@<marketplace>` and `server:<name>` entries. Prompts for confirmation | `claude --dangerously-load-development-channels server:webhook` |
 | `--dangerously-skip-permissions` | Skip permission prompts (use with caution). See [permission modes](permissions.md) for what this does and does not skip | `claude --dangerously-skip-permissions` |
 | `--debug` | Enable debug mode with optional category filtering (for example, `"api,hooks"` or `"!statsig,!file"`) | `claude --debug "api,mcp"` |
 | `--disable-slash-commands` | Disable all skills and commands for this session | `claude --disable-slash-commands` |

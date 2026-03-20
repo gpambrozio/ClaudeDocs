@@ -194,7 +194,7 @@ Custom
 
 ### Fast mode rate limits
 
-When using [fast mode](build-with-claude/fast-mode.md) (`speed: "fast"`) on Opus 4.6 (research preview), dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
+When using [fast mode](build-with-claude/fast-mode.md) (beta: research preview) with `speed: "fast"` on Opus 4.6, dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header.
 
 The response includes `anthropic-fast-*` headers that indicate your fast mode rate limit status. See the [fast mode documentation](build-with-claude/fast-mode.md) for details on these headers.
 
