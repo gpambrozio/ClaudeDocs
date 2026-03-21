@@ -36,7 +36,7 @@ In [Claude.ai](https://claude.ai), navigate to **Admin Settings > Claude Code > 
 
 Define your settings
 
-Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [managed-only settings](permissions.md) like `disableBypassPermissionsMode`.This example enforces a permission deny list and prevents users from bypassing permissions:
+Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `disableBypassPermissionsMode`.This example enforces a permission deny list and prevents users from bypassing permissions:
 
 Report incorrect code
 
@@ -57,6 +57,31 @@ Ask AI
   }
 }
 ```
+
+Hooks use the same format as in `settings.json`.This example runs an audit script after every file edit across the organization:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "/usr/local/bin/audit-edit.sh" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they’re applied.
 
 3
 

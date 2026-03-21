@@ -145,7 +145,7 @@ Path prefixes control how paths are resolved:
 
 The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](permissions.md), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 You can also deny write or read access using `sandbox.filesystem.denyWrite` and `sandbox.filesystem.denyRead`. These are merged with any paths from `Edit(...)` and `Read(...)` permission rules. To re-allow reading specific paths within a denied region, use `sandbox.filesystem.allowRead`, which takes precedence over `denyRead`. When `allowManagedReadPathsOnly` is enabled in managed settings, only managed `allowRead` entries are respected; user, project, and local `allowRead` entries are ignored.
-For example, to block reading from the entire home directory while still allowing reads from the current project:
+For example, to block reading from the entire home directory while still allowing reads from the current project, add this to your project’s `.claude/settings.json`:
 
 Report incorrect code
 
@@ -164,6 +164,8 @@ Ask AI
   }
 }
 ```
+
+The `.` in `allowRead` resolves to the project root because this configuration lives in project settings. If you placed the same configuration in `~/.claude/settings.json`, `.` would resolve to `~/.claude` instead, and project files would remain blocked by the `denyRead` rule.
 
 Not all commands are compatible with sandboxing out of the box. Some notes that may help you make the most out of the sandbox:
 

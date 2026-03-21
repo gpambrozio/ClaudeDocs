@@ -3,6 +3,7 @@
 Channels are in [research preview](#research-preview) and require Claude Code v2.1.80 or later. They require claude.ai login. Console and API key authentication is not supported. Team and Enterprise organizations must [explicitly enable them](#enterprise-controls).
 
 A channel is an MCP server that pushes events into your running Claude Code session, so Claude can react to things that happen while you’re not at the terminal. Channels can be two-way: Claude reads the event and replies back through the same channel, like a chat bridge. Events only arrive while the session is open, so for an always-on setup you run Claude in a background process or persistent terminal.
+Unlike integrations that spawn a fresh cloud session or wait to be polled, the event arrives in the session you already have open: see [how channels compare](#how-channels-compare).
 You install a channel as a plugin and configure it with your own credentials. Telegram and Discord are included in the research preview.
 When Claude replies through a channel, you see the inbound message in your terminal but not the reply text. The terminal shows the tool call and a confirmation (like “sent”), and the actual reply appears on the other platform.
 This page covers:
@@ -11,6 +12,7 @@ This page covers:
 - [Install and run a channel](#quickstart) with fakechat, a localhost demo
 - [Who can push messages](#security): sender allowlists and how you pair
 - [Enable channels for your organization](#enterprise-controls) on Team and Enterprise
+- [How channels compare](#how-channels-compare) to web sessions, Slack, MCP, and Remote Control
 
 To build your own channel, see the [Channels reference](channels-reference.md).
 
@@ -45,6 +47,8 @@ Ask AI
 /plugin install telegram@claude-plugins-official
 ```
 
+If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
+
 3
 
 Configure your token
@@ -61,7 +65,7 @@ Ask AI
 /telegram:configure <token>
 ```
 
-This saves it to `.claude/channels/telegram/.env` in your project. You can also set `TELEGRAM_BOT_TOKEN` in your shell environment before launching Claude Code.
+This saves it to `~/.claude/channels/telegram/.env`. You can also set `TELEGRAM_BOT_TOKEN` in your shell environment before launching Claude Code.
 
 4
 
@@ -156,6 +160,8 @@ Ask AI
 /plugin install discord@claude-plugins-official
 ```
 
+If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
+
 5
 
 Configure your token
@@ -172,7 +178,7 @@ Ask AI
 /discord:configure <token>
 ```
 
-This saves it to `.claude/channels/discord/.env` in your project. You can also set `DISCORD_BOT_TOKEN` in your shell environment before launching Claude Code.
+This saves it to `~/.claude/channels/discord/.env`. You can also set `DISCORD_BOT_TOKEN` in your shell environment before launching Claude Code.
 
 6
 
@@ -250,7 +256,7 @@ Ask AI
 /plugin install fakechat@claude-plugins-official
 ```
 
-Fakechat is in the `claude-plugins-official` marketplace, which is added automatically for most setups. If you don’t have it, run `/plugin marketplace add anthropics/claude-plugins-official` first.
+If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
 
 2
 
@@ -325,6 +331,22 @@ Channels are a research preview feature. Availability is rolling out gradually, 
 During the preview, `--channels` only accepts plugins from an Anthropic-maintained allowlist. The channel plugins in [claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins) are the approved set. If you pass something that isn’t, Claude Code starts normally but the channel doesn’t register, and the startup notice tells you why.
 To test a channel you’re building, use `--dangerously-load-development-channels`. See [Test during the research preview](channels-reference.md) for information about testing custom channels that you build.
 Report issues or feedback on the [Claude Code GitHub repository](https://github.com/anthropics/claude-code/issues).
+
+## [​](#how-channels-compare) How channels compare
+
+Several Claude Code features connect to systems outside the terminal, each suited to a different kind of work:
+
+| Feature | What it does | Good for |
+| --- | --- | --- |
+| [Claude Code on the web](claude-code-on-the-web.md) | Runs tasks in a fresh cloud sandbox, cloned from GitHub | Delegating self-contained async work you check on later |
+| [Claude in Slack](slack.md) | Spawns a web session from an `@Claude` mention in a channel or thread | Starting tasks directly from team conversation context |
+| Standard [MCP server](mcp.md) | Claude queries it during a task; nothing is pushed to the session | Giving Claude on-demand access to read or query a system |
+| [Remote Control](remote-control.md) | You drive your local session from claude.ai or the Claude mobile app | Steering an in-progress session while away from your desk |
+
+Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.
+
+- **Chat bridge**: ask Claude something from your phone via Telegram or Discord, and the answer comes back in the same chat while the work runs on your machine against your real files.
+- **[Webhook receiver](channels-reference.md)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
 
 ## [​](#next-steps) Next steps
 

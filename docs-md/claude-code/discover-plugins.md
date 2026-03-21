@@ -23,8 +23,8 @@ Think of it like adding an app store: adding the store gives you access to brows
 
 ## [​](#official-anthropic-marketplace) Official Anthropic marketplace
 
-The official Anthropic marketplace (`claude-plugins-official`) is automatically available when you start Claude Code. Run `/plugin` and go to the **Discover** tab to browse what’s available.
-To install a plugin from the official marketplace:
+The official Anthropic marketplace (`claude-plugins-official`) is automatically available when you start Claude Code. Run `/plugin` and go to the **Discover** tab to browse what’s available, or view the catalog at [claude.com/plugins](https://claude.com/plugins).
+To install a plugin from the official marketplace, use `/plugin install <name>@claude-plugins-official`. For example, to install the GitHub integration:
 
 Report incorrect code
 
@@ -33,7 +33,7 @@ Copy
 Ask AI
 
 ```shiki
-/plugin install plugin-name@claude-plugins-official
+/plugin install github@claude-plugins-official
 ```
 
 The official marketplace is maintained by Anthropic. To submit a plugin to the official marketplace, use one of the in-app submission forms:
