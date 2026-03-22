@@ -96,8 +96,6 @@ Adaptive thinking works seamlessly with [streaming](build-with-claude/streaming.
 Python
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 with client.messages.stream(
@@ -184,7 +182,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#bdcedcd1d8cefddcd3c9d5cfd2cdd4de93ded2d0).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#6211030e071122030c160a100d120b014c010d0f).
 
 ### Controlling thinking display
 

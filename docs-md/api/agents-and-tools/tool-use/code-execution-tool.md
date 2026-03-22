@@ -210,6 +210,9 @@ When Claude creates files during code execution, you can retrieve these files us
 Python
 
 ```shiki
+# Initialize the client
+client = Anthropic()
+
 # Request code execution that creates files
 response = client.beta.messages.create(
     model="claude-opus-4-6",

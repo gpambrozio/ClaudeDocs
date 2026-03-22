@@ -24,8 +24,6 @@ When using the SDK, you can specify beta headers in the request options:
 Python
 
 ```shiki
-from anthropic import Anthropic
-
 client = Anthropic()
 
 response = client.beta.messages.create(

@@ -43,6 +43,19 @@ Kitty and Ghostty support desktop notifications without additional configuration
 3. Click “Filter Alerts” and check “Send escape sequence-generated alerts”
 
 If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.
+When running Claude Code inside tmux, notifications and the [terminal progress bar](settings.md) only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+set -g allow-passthrough on
+```
+
+Without this setting, tmux intercepts the escape sequences and they do not reach the terminal application.
 Other terminals, including the default macOS Terminal, do not support native notifications. Use [notification hooks](hooks.md) instead.
 
 #### [​](#notification-hooks) Notification hooks
@@ -59,7 +72,7 @@ When working with extensive code or long instructions:
 
 ### [​](#vim-mode) Vim Mode
 
-Claude Code supports a subset of Vim keybindings that can be enabled with `/vim` or configured via `/config`.
+Claude Code supports a subset of Vim keybindings that can be enabled with `/vim` or configured via `/config`. To set the mode directly in your config file, set the [`editorMode`](settings.md) global config key to `"vim"` in `~/.claude.json`.
 The supported subset includes:
 
 - Mode switching: `Esc` (to NORMAL), `i`/`I`, `a`/`A`, `o`/`O` (to INSERT)

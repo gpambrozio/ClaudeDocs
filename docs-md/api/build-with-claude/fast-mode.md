@@ -130,6 +130,8 @@ Since setting `max_retries` to `0` also disables retries for other transient err
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+
 def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params):
     try:
         return client.beta.messages.create(**params, max_retries=max_retries)

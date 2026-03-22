@@ -374,6 +374,8 @@ Tool search works with [prompt caching](build-with-claude/prompt-caching.md). Ad
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+
 # First request with tool search
 messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
 

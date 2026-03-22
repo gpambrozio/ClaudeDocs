@@ -47,7 +47,7 @@ Ask AI
 /plugin install telegram@claude-plugins-official
 ```
 
-If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
+If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run `/plugin marketplace update claude-plugins-official` to refresh it, or `/plugin marketplace add anthropics/claude-plugins-official` if you haven’t added it before. Then retry the install.After installing, run `/reload-plugins` to activate the plugin’s configure command.
 
 3
 
@@ -160,7 +160,7 @@ Ask AI
 /plugin install discord@claude-plugins-official
 ```
 
-If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
+If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run `/plugin marketplace update claude-plugins-official` to refresh it, or `/plugin marketplace add anthropics/claude-plugins-official` if you haven’t added it before. Then retry the install.After installing, run `/reload-plugins` to activate the plugin’s configure command.
 
 5
 
@@ -256,7 +256,7 @@ Ask AI
 /plugin install fakechat@claude-plugins-official
 ```
 
-If Claude Code reports that the plugin is not found in any marketplace, run `/plugin marketplace add anthropics/claude-plugins-official` first and retry the install.
+If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run `/plugin marketplace update claude-plugins-official` to refresh it, or `/plugin marketplace add anthropics/claude-plugins-official` if you haven’t added it before. Then retry the install.
 
 2
 

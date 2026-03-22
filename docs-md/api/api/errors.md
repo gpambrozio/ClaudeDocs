@@ -63,8 +63,6 @@ The official SDKs provide this value as a property on top-level response objects
 Python
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 message = client.messages.create(

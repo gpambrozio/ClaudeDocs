@@ -81,6 +81,8 @@ console.log(message.usage);
 The SDK provides support for streaming responses using Server Sent Events (SSE).
 
 ```shiki
+const client = new Anthropic();
+
 const stream = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
@@ -99,27 +101,23 @@ If you need to cancel a stream, you can `break` from the loop or call `stream.co
 This library provides several conveniences for streaming messages, for example:
 
 ```shiki
-async function main() {
-  const stream = anthropic.messages
-    .stream({
-      model: "claude-opus-4-6",
-      max_tokens: 1024,
-      messages: [
-        {
-          role: "user",
-          content: "Say hello there!"
-        }
-      ]
-    })
-    .on("text", (text) => {
-      console.log(text);
-    });
+const stream = anthropic.messages
+  .stream({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: "Say hello there!"
+      }
+    ]
+  })
+  .on("text", (text) => {
+    console.log(text);
+  });
 
-  const message = await stream.finalMessage();
-  console.log(message);
-}
-
-main();
+const message = await stream.finalMessage();
+console.log(message);
 ```
 
 Streaming with `client.messages.stream(...)` exposes various helpers for your convenience including event handlers and accumulation.
@@ -525,6 +523,8 @@ If you need to, you can override it by setting default headers on a per-request 
 Be aware that doing so may result in incorrect types and other unexpected or undefined behavior in the SDK.
 
 ```shiki
+const client = new Anthropic();
+
 const message = await client.messages.create(
   {
     max_tokens: 1024,
@@ -546,6 +546,8 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 Unlike `.asResponse()` this method consumes the body, returning once it is parsed.
 
 ```shiki
+const client = new Anthropic();
+
 const response = await client.messages
   .create({
     max_tokens: 1024,
@@ -580,8 +582,6 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
-
 const client = new Anthropic({
   logLevel: "debug" // Show all log messages
 });
@@ -676,7 +676,6 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```shiki
-import Anthropic from "@anthropic-ai/sdk";
 import fetch from "my-fetch";
 
 const client = new Anthropic({ fetch });
@@ -731,6 +730,7 @@ You can access most beta API features through the beta property of the client. T
 For example, to use the [Files API](build-with-claude/files.md):
 
 ```shiki
+const client = new Anthropic();
 const response = await client.beta.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,

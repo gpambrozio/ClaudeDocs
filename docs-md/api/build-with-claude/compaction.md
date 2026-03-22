@@ -86,6 +86,8 @@ Configure when compaction triggers using the `trigger` parameter:
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -115,6 +117,8 @@ You can provide custom instructions via the `instructions` parameter to replace 
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -140,6 +144,8 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -172,6 +178,8 @@ When a model works on long tasks with many tool-use iterations, total token cons
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 TRIGGER_THRESHOLD = 100_000
 TOTAL_TOKEN_BUDGET = 3_000_000
 n_compactions = 0
@@ -234,6 +242,8 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -268,6 +278,9 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+
 with client.beta.messages.stream(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -326,6 +339,8 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -390,6 +405,8 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
 count_response = client.beta.messages.count_tokens(
     betas=["compact-2026-01-12"],
     model="claude-opus-4-6",
@@ -408,8 +425,6 @@ Here's a complete example of a long-running conversation with compaction:
 Python
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 messages: list[dict] = []
@@ -450,7 +465,6 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 Python
 
 ```shiki
-import anthropic
 from typing import Any
 
 client = anthropic.Anthropic()

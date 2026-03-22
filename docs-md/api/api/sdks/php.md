@@ -23,10 +23,6 @@ PHP 8.1.0 or higher.
 This library uses named parameters to specify optional arguments. Parameters with a default value must be set by name.
 
 ```shiki
-<?php
-
-use Anthropic\Client;
-
 $client = new Client(
   apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
 );
@@ -51,10 +47,6 @@ However, builders are also provided `(new Base64ImageSource)->withData("U3RhaW5s
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
 ```shiki
-<?php
-
-use Anthropic\Client;
-
 $client = new Client(
   apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
 );
@@ -80,7 +72,6 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Anthropic\Core\Exceptions\APIConnectionException;
 use Anthropic\Core\Exceptions\APIStatusException;
 use Anthropic\Core\Exceptions\RateLimitException;
-
 // ...
 try {
   $message = $client->messages->create(
@@ -124,11 +115,8 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `maxRetries` option to configure or disable this:
 
 ```shiki
-<?php
-
-use Anthropic\Client;
 use Anthropic\RequestOptions;
-
+// ...
 // Configure the default for all requests:
 $client = new Client(requestOptions: RequestOptions::with(maxRetries: 0));
 
@@ -148,10 +136,6 @@ List methods in the Claude API are paginated.
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```shiki
-<?php
-
-use Anthropic\Client;
-
 $client = new Client(
   apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
 );
@@ -182,7 +166,6 @@ The `extra*` parameters of the same name override the documented parameters.
 <?php
 // ...
 use Anthropic\RequestOptions;
-
 // ...
 $message = $client->messages->create(
   maxTokens: 1024,
@@ -205,8 +188,8 @@ If you want to explicitly send an extra param, you can do so with the `extraQuer
 To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client->request`, like so:
 
 ```shiki
-<?php
-// ...
+$client = new Client();
+
 $response = $client->request(
   method: "post",
   path: '/undocumented/endpoint',

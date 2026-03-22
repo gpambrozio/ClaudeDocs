@@ -307,6 +307,8 @@ For example, to use prompt caching with web search for a multi-turn conversation
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+
 # First request with web search and cache breakpoint
 messages = [
     {"role": "user", "content": "What's the current weather in San Francisco today?"}

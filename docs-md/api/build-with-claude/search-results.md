@@ -87,7 +87,6 @@ The most powerful use case is returning search results from your custom tools. T
 Python
 
 ```shiki
-from anthropic import Anthropic
 from anthropic.types import (
     MessageParam,
     TextBlockParam,
@@ -349,6 +348,8 @@ Claude can cite specific blocks using the `start_block_index` and `end_block_ind
 You can use both tool-based and top-level search results in the same conversation:
 
 ```shiki
+from anthropic.types import MessageParam, SearchResultBlockParam, TextBlockParam
+
 # First message with top-level search results
 messages = [
     MessageParam(
@@ -382,6 +383,8 @@ messages = [
 Both methods support mixing search results with other content:
 
 ```shiki
+from anthropic.types import SearchResultBlockParam, TextBlockParam
+
 # In tool results
 tool_result = [
     SearchResultBlockParam(

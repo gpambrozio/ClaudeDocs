@@ -11,8 +11,6 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 Python
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 with client.messages.stream(
@@ -31,12 +29,16 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
 Python
 
 ```shiki
+client = anthropic.Anthropic()
+
 with client.messages.stream(
     max_tokens=128000,
     messages=[{"role": "user", "content": "Write a detailed analysis..."}],
     model="claude-opus-4-6",
 ) as stream:
     message = stream.get_final_message()
+
+print(message.content[0].text)
 ```
 
 The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.

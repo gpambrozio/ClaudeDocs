@@ -751,8 +751,6 @@ Handle Skill-related errors gracefully:
 Python
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 try:

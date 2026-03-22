@@ -114,7 +114,6 @@ Shell
 # Example: Reading a text file and sending it as plain text
 # Note: For files with special characters, consider base64 encoding
 # ...
-
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -285,7 +284,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#2b584a474e586b4a455f4359445b424805484446) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#3d4e5c51584e7d5c5349554f524d545e135e5250) if you need higher limits for your use case
 
 Was this page helpful?
 
