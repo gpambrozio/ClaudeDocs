@@ -107,7 +107,7 @@ This creates a new session ID while preserving the conversation history up to th
 
 ### [​](#the-context-window) The context window
 
-Claude’s context window holds your conversation history, file contents, command outputs, [CLAUDE.md](memory.md), loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run `/context` to see what’s using space.
+Claude’s context window holds your conversation history, file contents, command outputs, [CLAUDE.md](memory.md), [auto memory](memory.md), loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run `/context` to see what’s using space.
 
 #### [​](#when-context-fills-up) When context fills up
 
