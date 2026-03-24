@@ -100,14 +100,6 @@ URL
 
 `https://mcp.gamma.app/mcp`
 
-[Vercel](https://vercel.com/docs/mcp/vercel-mcp)
-
-Analyze, debug, and manage projects and deployments
-
-URL
-
-`https://mcp.vercel.com/`
-
 [Miro](https://developers.miro.com/docs/miro-mcp)
 
 Access and create new content on Miro boards
@@ -115,6 +107,14 @@ Access and create new content on Miro boards
 URL
 
 `https://mcp.miro.com/`
+
+[Vercel](https://vercel.com/docs/mcp/vercel-mcp)
+
+Analyze, debug, and manage projects and deployments
+
+URL
+
+`https://mcp.vercel.com/`
 
 [Granola](https://help.granola.ai/article/granola-mcp#set-up-guide)
 
@@ -338,6 +338,14 @@ Bring enterprise context to Claude and your AI tools
 
 Requires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about)
 
+[Google Cloud BigQuery](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
+
+BigQuery: Advanced analytical insights for agents
+
+URL
+
+`https://bigquery.googleapis.com/mcp`
+
 [GoDaddy](https://developer.godaddy.com/mcp)
 
 Search domains and check availability
@@ -353,14 +361,6 @@ Up-to-date investment and market insights
 URL
 
 `https://mcp.morningstar.com/mcp`
-
-[Google Cloud BigQuery](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
-
-BigQuery: Advanced analytical insights for agents
-
-URL
-
-`https://bigquery.googleapis.com/mcp`
 
 [ICD-10 Codes](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
 
@@ -392,14 +392,6 @@ URL
 
 `https://mcp.daloopa.com/server/mcp`
 
-[Kiwi.com](https://mcp-install-instructions.alpic.cloud/servers/kiwi-com-flight-search)
-
-Search flights in Claude
-
-URL
-
-`https://mcp.kiwi.com`
-
 [Wix](https://dev.wix.com/docs/sdk/articles/use-the-wix-mcp/about-the-wix-mcp)
 
 Manage and build sites and apps on Wix
@@ -414,51 +406,13 @@ Managed MCP servers with Unity Catalog and Mosaic AI
 
 Requires user-specific URL. [Get your URL here](https://docs.databricks.com/aws/en/generative-ai/mcp/connect-external-services)
 
-[Klaviyo](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
+[Kiwi.com](https://mcp-install-instructions.alpic.cloud/servers/kiwi-com-flight-search)
 
-Report, strategize & create with real-time Klaviyo data
-
-URL
-
-`https://mcp.klaviyo.com/mcp?include-mcp-app=true`
-
-[PayPal](https://mcp.paypal.com/)
-
-Access PayPal payments platform
+Search flights in Claude
 
 URL
 
-`https://mcp.paypal.com/mcp`
-
-[Open Targets](https://github.com/opentargets/open-targets-platform-mcp)
-
-Drug target discovery and prioritisation platform
-
-URL
-
-`https://mcp.platform.opentargets.org/mcp`
-
-[AWS Marketplace](https://docs.aws.amazon.com/marketplace/latest/APIReference/marketplace-mcp-server.html)
-
-Discover, evaluate, and buy solutions for the cloud
-
-URL
-
-`https://marketplace-mcp.us-east-1.api.aws/mcp`
-
-[Windsor.ai](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
-
-Connect 325+ marketing, analytics and CRM data sources
-
-URL
-
-`https://mcp.windsor.ai`
-
-[Pendo](https://support.pendo.io/hc/en-us/articles/41102236924955)
-
-Connect to Pendo for product and user insights
-
-Requires user-specific URL. [Get your URL here](https://support.pendo.io/hc/en-us/articles/41102236924955)
+`https://mcp.kiwi.com`
 
 [Zapier](https://docs.zapier.com/mcp/home)
 
@@ -468,6 +422,52 @@ URL
 
 `https://mcp.zapier.com/api/v1/connect`
 
+[Klaviyo](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
+
+Report, strategize & create with real-time Klaviyo data
+
+URL
+
+`https://mcp.klaviyo.com/mcp?include-mcp-app=true`
+
+[Windsor.ai](https://windsor.ai/introducing-windsor-mcp/#method-1-using-claude-desktop-3)
+
+Connect 325+ marketing, analytics and CRM data sources
+
+URL
+
+`https://mcp.windsor.ai`
+
+[AWS Marketplace](https://docs.aws.amazon.com/marketplace/latest/APIReference/marketplace-mcp-server.html)
+
+Discover, evaluate, and buy solutions for the cloud
+
+URL
+
+`https://marketplace-mcp.us-east-1.api.aws/mcp`
+
+[Open Targets](https://github.com/opentargets/open-targets-platform-mcp)
+
+Drug target discovery and prioritisation platform
+
+URL
+
+`https://mcp.platform.opentargets.org/mcp`
+
+[PayPal](https://mcp.paypal.com/)
+
+Access PayPal payments platform
+
+URL
+
+`https://mcp.paypal.com/mcp`
+
+[Pendo](https://support.pendo.io/hc/en-us/articles/41102236924955)
+
+Connect to Pendo for product and user insights
+
+Requires user-specific URL. [Get your URL here](https://support.pendo.io/hc/en-us/articles/41102236924955)
+
 [Similarweb](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
 
 Real time web, mobile app, and market data.
@@ -475,6 +475,14 @@ Real time web, mobile app, and market data.
 URL
 
 `https://mcp.similarweb.com`
+
+[Postman](https://github.com/postmanlabs/postman-mcp-server)
+
+Give API context to your coding agents
+
+URL
+
+`https://mcp.postman.com/minimal`
 
 [Crypto.com](https://mcp.crypto.com/docs)
 
@@ -484,13 +492,13 @@ URL
 
 `https://mcp.crypto.com/market-data/mcp`
 
-[Postman](https://github.com/postmanlabs/postman-mcp-server)
+[Mixpanel](https://docs.mixpanel.com/docs/features/mcp)
 
-Give API context to your coding agents
+Analyze, query, and manage your Mixpanel data
 
 URL
 
-`https://mcp.postman.com/minimal`
+`https://mcp.mixpanel.com/mcp`
 
 [Consensus](https://docs.consensus.app/docs/mcp)
 
@@ -507,14 +515,6 @@ Search for and use scientific templates and icons
 URL
 
 `https://mcp.services.biorender.com/mcp`
-
-[Mixpanel](https://docs.mixpanel.com/docs/features/mcp)
-
-Analyze, query, and manage your Mixpanel data
-
-URL
-
-`https://mcp.mixpanel.com/mcp`
 
 [Attio](https://docs.attio.com/mcp/overview)
 
@@ -540,22 +540,6 @@ URL
 
 `https://api.moodys.com/genai-ready-data/m1/mcp`
 
-[Jam](https://jam.dev/docs/debug-a-jam/mcp)
-
-Record screen and collect automatic context for issues
-
-URL
-
-`https://mcp.jam.dev/mcp`
-
-[Synapse.org](https://github.com/susheel/synapse-mcp?tab=readme-ov-file#synapse-mcp-server)
-
-Search and metadata tools for Synapse scientific data
-
-URL
-
-`https://mcp.synapse.org/mcp`
-
 [Udemy Business](https://business-support.udemy.com/hc/en-us/articles/34213384429335-How-to-Integrate-the-Udemy-Business-MCP-Server-With-Your-AI-Tool#h_01K9CA42YGCV1AVXPY1RKABKP1)
 
 Search and explore skill-building resources
@@ -564,6 +548,14 @@ URL
 
 `https://api.udemy.com/mcp`
 
+[Jam](https://jam.dev/docs/debug-a-jam/mcp)
+
+Record screen and collect automatic context for issues
+
+URL
+
+`https://mcp.jam.dev/mcp`
+
 [Fellow.ai](https://help.fellow.ai/en/articles/12622641-fellow-s-mcp-server)
 
 Chat with your meetings to uncover actionable insights
@@ -571,6 +563,14 @@ Chat with your meetings to uncover actionable insights
 URL
 
 `https://fellow.app/mcp`
+
+[Synapse.org](https://github.com/susheel/synapse-mcp?tab=readme-ov-file#synapse-mcp-server)
+
+Search and metadata tools for Synapse scientific data
+
+URL
+
+`https://mcp.synapse.org/mcp`
 
 [Crossbeam](https://help.crossbeam.com/en/articles/12601327-crossbeam-mcp-server-beta)
 
@@ -612,6 +612,14 @@ URL
 
 `https://app.circleback.ai/api/mcp`
 
+[Base44](https://docs.base44.com/developers/backend/overview/mcp-server)
+
+Build and manage Base44 apps
+
+URL
+
+`https://app.base44.com/mcp`
+
 [MT Newswires](https://console.blueskyapi.com/docs/EDGE/news/MT_NEWSWIRES_Global#mcp)
 
 Trusted real-time global financial news provider
@@ -619,6 +627,14 @@ Trusted real-time global financial news provider
 URL
 
 `https://vast-mcp.blueskyapi.com/mcp`
+
+[Jotform](https://www.jotform.com/developers/mcp/)
+
+Create forms & analyze submissions inside Claude
+
+URL
+
+`https://mcp.jotform.com/mcp-app`
 
 [Square](https://developer.squareup.com/docs/mcp)
 
@@ -628,21 +644,21 @@ URL
 
 `https://mcp.squareup.com/sse`
 
-[Base44](https://docs.base44.com/developers/backend/overview/mcp-server)
+[Egnyte](https://developers.egnyte.com/docs/Remote_MCP_Server)
 
-Build and manage Base44 apps
-
-URL
-
-`https://app.base44.com/mcp`
-
-[Jotform](https://www.jotform.com/developers/mcp/)
-
-Create forms & analyze submissions inside Claude
+Securely access and analyze Egnyte content
 
 URL
 
-`https://mcp.jotform.com/mcp-app`
+`https://mcp-server.egnyte.com/mcp`
+
+[Calendly](https://help.calendly.com/hc/en-us/articles/36734570264855-Connect-Calendly-to-your-AI-tools-with-Calendly-MCP)
+
+Manage event types, availability, and bookings.
+
+URL
+
+`https://mcp.calendly.com`
 
 [Bigdata.com](https://docs.bigdata.com/mcp-reference)
 
@@ -659,14 +675,6 @@ Access best in class data & analytics across a broad spectrum of asset classes.
 URL
 
 `https://api.analytics.lseg.com/lfa/mcp/server-cl`
-
-[Egnyte](https://developers.egnyte.com/docs/Remote_MCP_Server)
-
-Securely access and analyze Egnyte content
-
-URL
-
-`https://mcp-server.egnyte.com/mcp`
 
 [Pylon](https://support.usepylon.com/articles/2407390554-connecting-to-the-pylon-mcp-server?lang=en)
 
@@ -692,13 +700,13 @@ URL
 
 `https://callbacks.omniapp.co/callback/mcp`
 
-[Calendly](https://help.calendly.com/hc/en-us/articles/36734570264855-Connect-Calendly-to-your-AI-tools-with-Calendly-MCP)
+[Supermetrics](https://mcp.supermetrics.com/docs)
 
-Manage event types, availability, and bookings.
+Analyze marketing performance across 200+ platforms
 
 URL
 
-`https://mcp.calendly.com`
+`https://mcp.supermetrics.com/mcp`
 
 [Honeycomb](https://docs.honeycomb.io/troubleshoot/product-lifecycle/beta/mcp/)
 
@@ -708,14 +716,6 @@ URL
 
 `https://mcp.honeycomb.io/mcp`
 
-[Supermetrics](https://mcp.supermetrics.com/docs)
-
-Analyze marketing performance across 200+ platforms
-
-URL
-
-`https://mcp.supermetrics.com/mcp`
-
 [MSCI](https://www.msci.com/downloads/documents/index/resources/indexai-insights-user-guide-feb26.pdf)
 
 Converse, query and comprehend a world of MSCI indexes
@@ -724,6 +724,12 @@ URL
 
 `https://mcp.msci.com/index/index-mcp/v1.0/mcp`
 
+[Customer.io](https://docs.customer.io/ai/mcp-server/)
+
+Explore customer data and generate insights via Claude
+
+Requires user-specific URL. [Get your URL here](https://docs.customer.io/ai/mcp-server/)
+
 [Coupler.io](https://help.coupler.io/article/592-coupler-local-mcp-server)
 
 Access business data from hundreds of sources
@@ -731,12 +737,6 @@ Access business data from hundreds of sources
 URL
 
 `https://mcp.coupler.io/mcp/`
-
-[Customer.io](https://docs.customer.io/ai/mcp-server/)
-
-Explore customer data and generate insights via Claude
-
-Requires user-specific URL. [Get your URL here](https://docs.customer.io/ai/mcp-server/)
 
 [Gusto](https://docs.gusto.com/app-integrations/docs/mcp)
 
@@ -762,6 +762,14 @@ URL
 
 `https://kg.mcp.learningcommons.org/mcp`
 
+[tldraw](https://tldraw.notion.site/tldraw-mcp-app)
+
+Let Claude sketch, draw, and diagram with you
+
+URL
+
+`https://tldraw-mcp-app.tldraw.workers.dev/mcp`
+
 [Cloudinary](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
 
 Manage, transform and deliver your images & videos
@@ -769,14 +777,6 @@ Manage, transform and deliver your images & videos
 URL
 
 `https://asset-management.mcp.cloudinary.com/sse`
-
-[LunarCrush](https://lunarcrush.com/developers/api/ai)
-
-Add real-time social media data to your searches
-
-URL
-
-`https://lunarcrush.ai/mcp`
 
 [AirOps](https://docs.airops.com/mcp)
 
@@ -786,17 +786,25 @@ URL
 
 `https://app.airops.com/mcp`
 
+[Pigment](https://kb.pigment.com/docs/mcp-server)
+
+Analyze business data
+
+Requires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server)
+
 [Workato](https://docs.workato.com/en/mcp.html)
 
 Automate workflows and connect your business apps
 
 Requires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp)
 
-[Pigment](https://kb.pigment.com/docs/mcp-server)
+[LunarCrush](https://lunarcrush.com/developers/api/ai)
 
-Analyze business data
+Add real-time social media data to your searches
 
-Requires user-specific URL. [Get your URL here](https://kb.pigment.com/docs/mcp-server)
+URL
+
+`https://lunarcrush.ai/mcp`
 
 [Common Room](https://www.commonroom.io/docs/using-common-room/common-room-for-claude-connector-and-plugin/)
 
@@ -806,14 +814,6 @@ URL
 
 `https://mcp.commonroom.io/mcp`
 
-[Close](mcp-server.md)
-
-Connect Claude to Close CRM to securely access and act on your sales data
-
-URL
-
-`https://mcp.close.com/mcp`
-
 [DevRev](https://support.devrev.ai/en-US/devrev/article/ART-21859-remote-mcp-server)
 
 Search and update your company's knowledge graph
@@ -821,6 +821,14 @@ Search and update your company's knowledge graph
 URL
 
 `https://api.devrev.ai/mcp/v1`
+
+[Close](mcp-server.md)
+
+Connect Claude to Close CRM to securely access and act on your sales data
+
+URL
+
+`https://mcp.close.com/mcp`
 
 [Candid](https://support.claude.com/en/articles/12923235-using-the-candid-connector-in-claude)
 
@@ -830,14 +838,6 @@ URL
 
 `https://mcp.candid.org/mcp`
 
-[Harmonic](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
-
-Discover, research, and enrich companies and people
-
-URL
-
-`https://mcp.api.harmonic.ai`
-
 [MailerLite](https://developers.mailerlite.com/mcp/#how-mcp-works)
 
 Turn Claude into your email marketing assistant
@@ -845,6 +845,14 @@ Turn Claude into your email marketing assistant
 URL
 
 `https://mcp.mailerlite.com/mcp`
+
+[Harmonic](https://support.harmonic.ai/en/articles/12785899-harmonic-mcp-server-getting-started-guide)
+
+Discover, research, and enrich companies and people
+
+URL
+
+`https://mcp.api.harmonic.ai`
 
 [MotherDuck](https://motherduck.com/docs/sql-reference/mcp/)
 
@@ -854,14 +862,6 @@ URL
 
 `https://api.motherduck.com/mcp`
 
-[tldraw](https://tldraw.notion.site/tldraw-mcp-app)
-
-Let Claude sketch, draw, and diagram with you
-
-URL
-
-`https://tldraw-mcp-app.tldraw.workers.dev/mcp`
-
 [Magic Patterns](https://www.magicpatterns.com/docs/documentation/features/mcp-server/overview)
 
 Discuss and iterate on Magic Patterns designs
@@ -869,36 +869,6 @@ Discuss and iterate on Magic Patterns designs
 URL
 
 `https://mcp.magicpatterns.com/mcp`
-
-[Day AI](https://day.ai/mcp)
-
-Know everything about your prospects & customers with CRMx
-
-URL
-
-`https://day.ai/api/mcp`
-
-[Chronograph](https://lp-help.chronograph.pe/article/735-chronograph-mcp)
-
-Interact with your Chronograph data directly in Claude
-
-URL
-
-`https://ai.chronograph.pe/mcp`
-
-[ActiveCampaign](https://developers.activecampaign.com/page/mcp)
-
-Autonomous marketing to transform how you work
-
-Requires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp)
-
-[Craft](https://documents.craft.me/jWeCVJrSfxFRuA)
-
-Notes & second brain
-
-URL
-
-`https://mcp.craft.do/my/mcp`
 
 [PagerDuty](https://developer.pagerduty.com/docs/mcp-tooling-remote-server)
 
@@ -908,6 +878,22 @@ URL
 
 `https://mcp.pagerduty.com/mcp`
 
+[Craft](https://documents.craft.me/jWeCVJrSfxFRuA)
+
+Notes & second brain
+
+URL
+
+`https://mcp.craft.do/my/mcp`
+
+[Chronograph](https://lp-help.chronograph.pe/article/735-chronograph-mcp)
+
+Interact with your Chronograph data directly in Claude
+
+URL
+
+`https://ai.chronograph.pe/mcp`
+
 [Tavily](https://docs.tavily.com/documentation/mcp)
 
 Connect your AI agents to the web
@@ -915,6 +901,20 @@ Connect your AI agents to the web
 URL
 
 `https://mcp.tavily.com/mcp`
+
+[Day AI](https://day.ai/mcp)
+
+Know everything about your prospects & customers with CRMx
+
+URL
+
+`https://day.ai/api/mcp`
+
+[ActiveCampaign](https://developers.activecampaign.com/page/mcp)
+
+Autonomous marketing to transform how you work
+
+Requires user-specific URL. [Get your URL here](https://developers.activecampaign.com/page/mcp)
 
 [Mem](https://docs.mem.ai/mcp/overview)
 
@@ -948,11 +948,21 @@ URL
 
 `https://www.directbooker.ai/claude`
 
-[Qlik](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm)
+[Krisp](https://help.krisp.ai/hc/en-us/articles/25416265429660-Krisp-MCP-Supported-tools)
 
-Analyze, integrate, and take action on your data
+Add your meetings context via transcripts and notes
 
-Requires user-specific URL. [Get your URL here](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/QlikMCP/Qlik-MCP-server.htm)
+URL
+
+`https://mcp.krisp.ai/mcp`
+
+[Metaview](https://support.metaview.ai/integrations/mcp-integration/mcp-overview.mdx)
+
+The AI platform for recruiting.
+
+URL
+
+`https://mcp.metaview.ai/mcp`
 
 [Medidata](https://learn.medidata.com/en-US/bundle/mcp-server-documentation/page/medidata_mcp_server_documentation.html)
 
@@ -961,14 +971,6 @@ Clinical trial software and site ranking tools
 URL
 
 `https://mcp.imedidata.com/mcp`
-
-[Krisp](https://help.krisp.ai/hc/en-us/articles/25416265429660-Krisp-MCP-Supported-tools)
-
-Add your meetings context via transcripts and notes
-
-URL
-
-`https://mcp.krisp.ai/mcp`
 
 [Blockscout](https://github.com/blockscout/mcp-server)
 
@@ -986,6 +988,14 @@ URL
 
 `https://mcp.virtuoso.ai/mcp`
 
+[Brex](https://www.brex.com/support/using-brex-in-ai-apps)
+
+Intelligent finance automation
+
+URL
+
+`https://api.brex.com/mcp`
+
 [PlayMCP](https://www.notion.so/2189b97b4888803dbbdcef264e7eff58)
 
 Connect and use PlayMCP servers in your toolbox
@@ -1002,22 +1012,6 @@ URL
 
 `https://mcp.melon.com/mcp/`
 
-[Brex](https://www.brex.com/support/using-brex-in-ai-apps)
-
-Intelligent finance automation
-
-URL
-
-`https://api.brex.com/mcp`
-
-[Metaview](https://support.metaview.ai/integrations/mcp-integration/mcp-overview.mdx)
-
-The AI platform for recruiting.
-
-URL
-
-`https://mcp.metaview.ai/mcp`
-
 [Clerk](https://clerk.com/docs/guides/ai/mcp/clerk-mcp-server)
 
 Add authentication, organizations, and billing
@@ -1025,6 +1019,14 @@ Add authentication, organizations, and billing
 URL
 
 `https://mcp.clerk.com/mcp`
+
+[Intuit TurboTax](https://ttlc.intuit.com/turbotax-support/en-us/help-article/tax-return/access-turbotax-tools-claude)
+
+Estimate tax refunds and connect with live tax experts
+
+URL
+
+`https://ai-inc.turbotax.intuit.com/358A1C1B-F73B-46A7-B130-4B14916E6843/v1/mcp`
 
 [Clarify](https://docs.clarify.ai/en/articles/13367278-clarify-mcp)
 
@@ -1049,14 +1051,6 @@ Manage your Stytch Project
 URL
 
 `https://mcp.stytch.dev/mcp`
-
-[Intuit TurboTax](https://ttlc.intuit.com/turbotax-support/en-us/help-article/tax-return/access-turbotax-tools-claude)
-
-Estimate tax refunds and connect with live tax experts
-
-URL
-
-`https://ai-inc.turbotax.intuit.com/358A1C1B-F73B-46A7-B130-4B14916E6843/v1/mcp`
 
 [Razorpay](https://razorpay.com/docs/mcp-server/?preferred-country=IN)
 
@@ -1144,12 +1138,6 @@ URL
 
 `https://mcp-demo.airwallex.com/developer`
 
-[Benchling](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
-
-Connect to R&D data, source experiments, and notebooks
-
-Requires user-specific URL. [Get your URL here](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
-
 [Granted](https://grantedai.com/mcp)
 
 Discover every grant opportunity in existence.
@@ -1157,6 +1145,12 @@ Discover every grant opportunity in existence.
 URL
 
 `https://grantedai.com/api/mcp/mcp`
+
+[Benchling](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
+
+Connect to R&D data, source experiments, and notebooks
+
+Requires user-specific URL. [Get your URL here](https://help.benchling.com/hc/en-us/articles/40342713479437-Benchling-MCP)
 
 [Clarity AI](https://clarity-sfdr20-mcp.pro.clarity.ai/)
 
@@ -1166,6 +1160,14 @@ URL
 
 `https://clarity-sfdr20-mcp.pro.clarity.ai/mcp`
 
+[G2](https://documentation.g2.com/docs/g2-mcp-server)
+
+Bring real buyer signals into AI workflows
+
+URL
+
+`https://mcp.g2.com/mcp`
+
 [Fever Event Discovery](https://developer.feverup.com/)
 
 Discover live entertainment events worldwide
@@ -1173,12 +1175,6 @@ Discover live entertainment events worldwide
 URL
 
 `https://data-search.apigw.feverup.com/mcp`
-
-[Dremio Cloud](https://docs.dremio.com/cloud/sonar/mcp-server/)
-
-Analyze and get insights from your lakehouse data
-
-Requires user-specific URL. [Get your URL here](https://docs.dremio.com/cloud/sonar/mcp-server/)
 
 [DocuSeal](https://www.docuseal.com/guides/integrate-with-ai-agents-using-mcp)
 
@@ -1188,13 +1184,11 @@ URL
 
 `https://docuseal.com/mcp`
 
-[G2](https://documentation.g2.com/docs/g2-mcp-server)
+[Dremio Cloud](https://docs.dremio.com/cloud/sonar/mcp-server/)
 
-Bring real buyer signals into AI workflows
+Analyze and get insights from your lakehouse data
 
-URL
-
-`https://mcp.g2.com/mcp`
+Requires user-specific URL. [Get your URL here](https://docs.dremio.com/cloud/sonar/mcp-server/)
 
 [Jentic](https://docs.jentic.com/guides/mcp/remote-mcp/)
 
@@ -1212,6 +1206,14 @@ URL
 
 `https://govcon.dev/mcp`
 
+[Aiwyn Tax](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
+
+Prepare your federal & state tax return 100% accurately
+
+URL
+
+`https://mcp.columnapi.com/mcp`
+
 [Starburst](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 
 Securely retrieve data from your federated data sources
@@ -1223,14 +1225,6 @@ Requires user-specific URL. [Get your URL here](https://docs.starburst.io/starbu
 Find people, productivity and business impact insights
 
 Requires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm)
-
-[Aiwyn Tax](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
-
-Prepare your federal & state tax return 100% accurately
-
-URL
-
-`https://mcp.columnapi.com/mcp`
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 

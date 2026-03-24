@@ -29,7 +29,7 @@ This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](
 
 The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
 
-When activated, the API automatically clears the oldest tool results in chronological order. Each cleared result is replaced with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
+When activated, the API automatically clears the oldest tool results in chronological order. The API replaces each cleared result with placeholder text so Claude knows it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
 
 ### Thinking block clearing
 
@@ -405,7 +405,7 @@ response = client.beta.messages.create(
 
 ## Client-side compaction (SDK)
 
-**Server-side compaction is recommended over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+**Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
 Compaction is available in the [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/implement-tool-use.md).
 
@@ -422,7 +422,35 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 
 ### Using compaction
 
-Add `compaction_control` to your `tool_runner` call:
+Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 Python
 
@@ -431,21 +459,14 @@ client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
-    max_tokens=4096,
-    tools=[...],
-    messages=[
-        {
-            "role": "user",
-            "content": "Analyze all the files in this directory and write a summary report.",
-        }
-    ],
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
     compaction_control={"enabled": True, "context_token_threshold": 100000},
 )
 
 for message in runner:
     print(f"Tokens used: {message.usage.input_tokens}")
-
-final = runner.until_done()
 ```
 
 #### What happens during compaction
@@ -586,11 +607,41 @@ The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, th
 
 #### Tool use edge cases
 
-When compaction is triggered while a tool use response is pending, the SDK removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.
+When the SDK triggers compaction while a tool use response is pending, it removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.
 
 ### Monitoring compaction
 
-Enable logging to track when compaction occurs:
+Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
+
+Python
+
+Python
+
+TypeScript
+
+TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
+
+The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
 
 Python
 

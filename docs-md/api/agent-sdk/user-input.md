@@ -33,12 +33,13 @@ To automatically allow or deny tools without prompting users, use [hooks](agent-
 
 ## Handle tool approval requests
 
-Once you've passed a `canUseTool` callback in your query options, it fires when Claude wants to use a tool that isn't auto-approved. Your callback receives two arguments:
+Once you've passed a `canUseTool` callback in your query options, it fires when Claude wants to use a tool that isn't auto-approved. Your callback receives three arguments:
 
 | Argument | Description |
 | --- | --- |
 | `toolName` | The name of the tool Claude wants to use (e.g., `"Bash"`, `"Write"`, `"Edit"`) |
 | `input` | The parameters Claude is passing to the tool. Contents vary by tool. |
+| `options` (TS) / `context` (Python) | Additional context including optional `suggestions` (proposed `PermissionUpdate` entries to avoid re-prompting) and a cancellation signal. In TypeScript, `signal` is an `AbortSignal`; in Python, the signal field is reserved for future use. See [`ToolPermissionContext`](agent-sdk/python.md) for Python. |
 
 The `input` object contains tool-specific parameters. Common examples:
 
@@ -60,7 +61,7 @@ Python
 ```shiki
 import asyncio
 
-from claude_agent_sdk import ClaudeAgentOptions, query
+from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 from claude_agent_sdk.types import (
     HookMatcher,
     PermissionResultAllow,
@@ -112,7 +113,7 @@ async def main():
             hooks={"PreToolUse": [HookMatcher(matcher=None, hooks=[dummy_hook])]},
         ),
     ):
-        if hasattr(message, "result"):
+        if isinstance(message, ResultMessage) and message.subtype == "success":
             print(message.result)
 
 asyncio.run(main())
@@ -413,7 +414,7 @@ Python
 ```shiki
 import asyncio
 
-from claude_agent_sdk import ClaudeAgentOptions, query
+from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 from claude_agent_sdk.types import HookMatcher, PermissionResultAllow
 
 def parse_response(response: str, options: list) -> str:
@@ -480,7 +481,7 @@ async def main():
             hooks={"PreToolUse": [HookMatcher(matcher=None, hooks=[dummy_hook])]},
         ),
     ):
-        if hasattr(message, "result"):
+        if isinstance(message, ResultMessage) and message.subtype == "success":
             print(message.result)
 
 asyncio.run(main())

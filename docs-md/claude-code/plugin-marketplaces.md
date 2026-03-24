@@ -145,7 +145,7 @@ Copy
 Ask AI
 
 ```shiki
-/review
+/quality-review
 ```
 
 To learn more about what plugins can do, including hooks, agents, MCP servers, and LSP servers, see [Plugins](plugins.md).
