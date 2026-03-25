@@ -374,6 +374,7 @@ These shortcuts cannot be rebound:
 | --- | --- |
 | Ctrl+C | Hardcoded interrupt/cancel |
 | Ctrl+D | Hardcoded exit |
+| Ctrl+M | Identical to Enter in terminals (both send CR) |
 
 ## [​](#terminal-conflicts) Terminal conflicts
 

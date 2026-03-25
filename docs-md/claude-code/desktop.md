@@ -41,7 +41,7 @@ The **+** button next to the prompt box gives you access to file attachments, [s
 
 The prompt box supports two ways to bring in external context:
 
-- **@mention files**: type `@` followed by a filename to add a file to the conversation context. Claude can then read and reference that file.
+- **@mention files**: type `@` followed by a filename to add a file to the conversation context. Claude can then read and reference that file. @mention is not available in remote sessions.
 - **Attach files**: attach images, PDFs, and other files to your prompt using the attachment button, or drag and drop files directly into the prompt. This is useful for sharing screenshots of bugs, design mockups, or reference documents.
 
 ### [​](#choose-a-permission-mode) Choose a permission mode
@@ -53,9 +53,10 @@ Permission modes control how much autonomy Claude has during a session: whether 
 | **Ask permissions** | `default` | Claude asks before editing files or running commands. You see a diff and can accept or reject each change. Recommended for new users. |
 | **Auto accept edits** | `acceptEdits` | Claude auto-accepts file edits but still asks before running terminal commands. Use this when you trust file changes and want faster iteration. |
 | **Plan mode** | `plan` | Claude analyzes your code and creates a plan without modifying files or running commands. Good for complex tasks where you want to review the approach first. |
-| **Bypass permissions** | `bypassPermissions` | Claude runs without permission prompts, equivalent to `--dangerously-skip-permissions` in the CLI. Enable in your Settings → Claude Code under “Allow bypass permissions mode”. Only use this in sandboxed containers or VMs. See [permission modes](permissions.md) for what is and isn’t skipped. Enterprise admins can disable this option. |
+| **Auto** | `auto` | Claude executes all actions with background safety checks that verify alignment with your request. Reduces permission prompts while maintaining oversight. Currently a research preview. Available on Team plans (Enterprise rolling out shortly). Requires Claude Sonnet 4.6 or Opus 4.6. Enable in your Settings → Claude Code. |
+| **Bypass permissions** | `bypassPermissions` | Claude runs without any permission prompts, equivalent to `--dangerously-skip-permissions` in the CLI. Enable in your Settings → Claude Code under “Allow bypass permissions mode”. Only use this in sandboxed containers or VMs. Enterprise admins can disable this option. |
 
-The `dontAsk` permission mode is available only in the [CLI](permissions.md).
+The `dontAsk` permission mode is available only in the [CLI](permission-modes.md).
 
 Start complex tasks in Plan mode so Claude maps out an approach before making changes. Once you approve the plan, switch to Auto accept edits or Ask permissions to execute it. See [explore first, then plan, then code](best-practices.md) for more on this workflow.
 
@@ -503,9 +504,11 @@ Managed settings override project and user settings and apply when Desktop spawn
 
 | Key | Description |
 | --- | --- |
-| `disableBypassPermissionsMode` | set to `"disable"` to prevent users from enabling Bypass permissions mode. See [managed settings](permissions.md). |
+| `permissions.disableBypassPermissionsMode` | set to `"disable"` to prevent users from enabling Bypass permissions mode. |
+| `disableAutoMode` | set to `"disable"` to prevent users from enabling [Auto](permission-modes.md) mode. Removes Auto from the mode selector. Also accepted under `permissions`. |
+| `autoMode` | customize what the auto mode classifier trusts and blocks across your organization. See [Configure the auto mode classifier](permissions.md). |
 
-For the complete list of managed-only settings including `allowManagedPermissionRulesOnly` and `allowManagedHooksOnly`, see [managed-only settings](permissions.md).
+`permissions.disableBypassPermissionsMode` and `disableAutoMode` also work in user and project settings, but placing them in managed settings prevents users from overriding them. `autoMode` is read from user settings, `.claude/settings.local.json`, and managed settings, but not from the checked-in `.claude/settings.json`: a cloned repo cannot inject its own classifier rules. For the complete list of managed-only settings including `allowManagedPermissionRulesOnly` and `allowManagedHooksOnly`, see [managed-only settings](permissions.md).
 Remote managed settings uploaded through the admin console currently apply to CLI and IDE sessions only. For Desktop-specific restrictions, use the admin console controls above.
 
 ### [​](#device-management-policies) Device management policies
@@ -575,12 +578,12 @@ This table compares core capabilities between the CLI and Desktop. For a full li
 
 | Feature | CLI | Desktop |
 | --- | --- | --- |
-| Permission modes | All modes including `dontAsk` | Ask permissions, Auto accept edits, Plan mode, and Bypass permissions via Settings |
+| Permission modes | All modes including `dontAsk` | Ask permissions, Auto accept edits, Plan mode, Auto, and Bypass permissions via Settings |
 | `--dangerously-skip-permissions` | CLI flag | Bypass permissions mode. Enable in Settings → Claude Code → “Allow bypass permissions mode” |
 | [Third-party providers](third-party-integrations.md) | Bedrock, Vertex, Foundry | Not available. Desktop connects to Anthropic’s API directly. |
 | [MCP servers](mcp.md) | Configure in settings files | Connectors UI for local and SSH sessions, or settings files |
 | [Plugins](plugins.md) | `/plugin` command | Plugin manager UI |
-| @mention files | Text-based | With autocomplete |
+| @mention files | Text-based | With autocomplete; local and SSH sessions only |
 | File attachments | Not available | Images, PDFs |
 | Session isolation | [`--worktree`](cli-reference.md) flag | Automatic worktrees |
 | Multiple sessions | Separate terminals | Sidebar tabs |

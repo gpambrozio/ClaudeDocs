@@ -4,11 +4,11 @@ Channels are in [research preview](#research-preview) and require Claude Code v2
 
 A channel is an MCP server that pushes events into your running Claude Code session, so Claude can react to things that happen while you’re not at the terminal. Channels can be two-way: Claude reads the event and replies back through the same channel, like a chat bridge. Events only arrive while the session is open, so for an always-on setup you run Claude in a background process or persistent terminal.
 Unlike integrations that spawn a fresh cloud session or wait to be polled, the event arrives in the session you already have open: see [how channels compare](#how-channels-compare).
-You install a channel as a plugin and configure it with your own credentials. Telegram and Discord are included in the research preview.
+You install a channel as a plugin and configure it with your own credentials. Telegram, Discord, and iMessage are included in the research preview.
 When Claude replies through a channel, you see the inbound message in your terminal but not the reply text. The terminal shows the tool call and a confirmation (like “sent”), and the actual reply appears on the other platform.
 This page covers:
 
-- [Supported channels](#supported-channels): Telegram and Discord setup
+- [Supported channels](#supported-channels): Telegram, Discord, and iMessage setup
 - [Install and run a channel](#quickstart) with fakechat, a localhost demo
 - [Who can push messages](#security): sender allowlists and how you pair
 - [Enable channels for your organization](#enterprise-controls) on Team and Enterprise
@@ -22,6 +22,7 @@ Each supported channel is a plugin that requires [Bun](https://bun.sh). For a ha
 
 - Telegram
 - Discord
+- iMessage
 
 View the full [Telegram plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram).
 
@@ -228,12 +229,80 @@ Ask AI
 /discord:access policy allowlist
 ```
 
+View the full [iMessage plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/imessage).The iMessage channel reads your Messages database directly and sends replies through AppleScript. It requires macOS and needs no bot token or external service.
+
+1
+
+Grant Full Disk Access
+
+The Messages database at `~/Library/Messages/chat.db` is protected by macOS. The first time the server reads it, macOS prompts for access: click **Allow**. The prompt names whichever app launched Bun, such as Terminal, iTerm, or your IDE.If the prompt doesn’t appear or you clicked Don’t Allow, grant access manually under **System Settings > Privacy & Security > Full Disk Access** and add your terminal. Without this, the server exits immediately with `authorization denied`.
+
+2
+
+Install the plugin
+
+In Claude Code, run:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+/plugin install imessage@claude-plugins-official
+```
+
+If Claude Code reports that the plugin is not found in any marketplace, your marketplace is either missing or outdated. Run `/plugin marketplace update claude-plugins-official` to refresh it, or `/plugin marketplace add anthropics/claude-plugins-official` if you haven’t added it before. Then retry the install.
+
+3
+
+Restart with channels enabled
+
+Exit Claude Code and restart with the channel flag:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+claude --channels plugin:imessage@claude-plugins-official
+```
+
+4
+
+Text yourself
+
+Open Messages on any device signed into your Apple ID and send a message to yourself. It reaches Claude immediately: self-chat bypasses access control with no setup.
+
+The first reply Claude sends triggers a macOS Automation prompt asking if your terminal can control Messages. Click **OK**.
+
+5
+
+Allow other senders
+
+By default, only your own messages pass through. To let another contact reach Claude, add their handle:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+/imessage:access allow +15551234567
+```
+
+Handles are phone numbers in `+country` format or Apple ID emails like `user@example.com`.
+
 You can also [build your own channel](channels-reference.md) for systems that don’t have a plugin yet.
 
 ## [​](#quickstart) Quickstart
 
 Fakechat is an officially supported demo channel that runs a chat UI on localhost, with nothing to authenticate and no external service to configure.
-Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out [Telegram](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram) or [Discord](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord).
+Once you install and enable fakechat, you can type in the browser and the message arrives in your Claude Code session. Claude replies, and the reply shows up back in the browser. After you’ve tested the fakechat interface, try out [Telegram](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram), [Discord](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord), or [iMessage](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/imessage).
 To try the fakechat demo, you’ll need:
 
 - Claude Code [installed and authenticated](quickstart.md) with a claude.ai account
@@ -296,7 +365,7 @@ hey, what's in my working directory?
 
 The message arrives in your Claude Code session as a `<channel source="fakechat">` event. Claude reads it, does the work, and calls fakechat’s `reply` tool. The answer shows up in the chat UI.
 
-If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permissions.md) bypasses prompts entirely, but only use it in environments you trust.
+If Claude hits a permission prompt while you’re away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permission-modes.md) bypasses prompts entirely, but only use it in environments you trust.
 
 ## [​](#security) Security
 
@@ -308,6 +377,7 @@ Telegram and Discord bootstrap the list by pairing:
 3. In your Claude Code session, approve the code when prompted
 4. Your sender ID is added to the allowlist
 
+iMessage works differently: texting yourself bypasses the gate automatically, and you add other contacts by handle with `/imessage:access allow`.
 On top of that, you control which servers are enabled each session with `--channels`, and on Team and Enterprise plans your organization controls availability with [`channelsEnabled`](#enterprise-controls).
 Being in `.mcp.json` isn’t enough to push messages: a server also has to be named in `--channels`.
 The allowlist also gates [permission relay](channels-reference.md) if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.
@@ -346,7 +416,7 @@ Several Claude Code features connect to systems outside the terminal, each suite
 
 Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.
 
-- **Chat bridge**: ask Claude something from your phone via Telegram or Discord, and the answer comes back in the same chat while the work runs on your machine against your real files.
+- **Chat bridge**: ask Claude something from your phone via Telegram, Discord, or iMessage, and the answer comes back in the same chat while the work runs on your machine against your real files.
 - **[Webhook receiver](channels-reference.md)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
 
 ## [​](#next-steps) Next steps

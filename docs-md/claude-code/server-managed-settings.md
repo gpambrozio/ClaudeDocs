@@ -36,7 +36,7 @@ In [Claude.ai](https://claude.ai), navigate to **Admin Settings > Claude Code > 
 
 Define your settings
 
-Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `disableBypassPermissionsMode`.This example enforces a permission deny list and prevents users from bypassing permissions:
+Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `allowManagedPermissionRulesOnly`.This example enforces a permission deny list and prevents users from bypassing permissions:
 
 Report incorrect code
 
@@ -81,7 +81,27 @@ Ask AI
 }
 ```
 
-Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they’re applied.
+To configure the [auto mode](permission-modes.md) classifier so it knows which repos, buckets, and domains your organization trusts:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "autoMode": {
+    "environment": [
+      "Source control: github.example.com/acme-corp and all repos under it",
+      "Trusted cloud buckets: s3://acme-build-artifacts, gs://acme-ml-datasets",
+      "Trusted internal domains: *.corp.example.com"
+    ]
+  }
+}
+```
+
+Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they’re applied. See [Configure the auto mode classifier](permissions.md) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `allow` and `soft_deny` fields.
 
 3
 

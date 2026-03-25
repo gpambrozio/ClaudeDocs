@@ -220,18 +220,15 @@ You can place CLAUDE.md files in several locations:
 
 ### [​](#configure-permissions) Configure permissions
 
-Use `/permissions` to allowlist safe commands or `/sandbox` for OS-level isolation. This reduces interruptions while keeping you in control.
+Use [auto mode](permission-modes.md) to let a classifier handle approvals, `/permissions` to allowlist specific commands, or `/sandbox` for OS-level isolation. Each reduces interruptions while keeping you in control.
 
-By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are two ways to reduce these interruptions:
+By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you’re not really reviewing anymore, you’re just clicking through. There are three ways to reduce these interruptions:
 
-- **Permission allowlists**: permit specific tools you know are safe (like `npm run lint` or `git commit`)
+- **Auto mode**: a separate classifier model reviews commands and blocks only what looks risky: scope escalation, unknown infrastructure, or hostile-content-driven actions. Best when you trust the general direction of a task but don’t want to click through every step
+- **Permission allowlists**: permit specific tools you know are safe, like `npm run lint` or `git commit`
 - **Sandboxing**: enable OS-level isolation that restricts filesystem and network access, allowing Claude to work more freely within defined boundaries
 
-Alternatively, use `--dangerously-skip-permissions` to bypass permission prompts for contained workflows like fixing lint errors or generating boilerplate. See [permission modes](permissions.md) for what is and isn’t skipped.
-
-Letting Claude run arbitrary commands can result in data loss, system corruption, or data exfiltration via prompt injection. Only use `--dangerously-skip-permissions` in a sandbox without internet access.
-
-Read more about [configuring permissions](permissions.md) and [enabling sandboxing](sandboxing.md).
+Read more about [permission modes](permission-modes.md), [permission rules](permissions.md), and [sandboxing](sandboxing.md).
 
 ### [​](#use-cli-tools) Use CLI tools
 
@@ -581,6 +578,22 @@ claude -p "<your prompt>" --output-format json | your_command
 ```
 
 Use `--verbose` for debugging during development, and turn it off in production.
+
+### [​](#run-autonomously-with-auto-mode) Run autonomously with auto mode
+
+For uninterrupted execution with background safety checks, use [auto mode](permission-modes.md). A classifier model reviews commands before they run, blocking scope escalation, unknown infrastructure, and hostile-content-driven actions while letting routine work proceed without prompts.
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+claude --permission-mode auto -p "fix all lint errors"
+```
+
+For non-interactive runs with the `-p` flag, auto mode aborts if the classifier repeatedly blocks actions, since there is no user to fall back to. See [when auto mode falls back](permission-modes.md) for thresholds.
 
 ---
 

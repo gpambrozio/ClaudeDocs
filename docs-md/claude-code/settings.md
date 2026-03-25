@@ -149,6 +149,8 @@ The `$schema` line in the example above points to the [official JSON schema](htt
 | `includeCoAuthoredBy` | **Deprecated**: Use `attribution` instead. Whether to include the `co-authored-by Claude` byline in git commits and pull requests (default: `true`) | `false` |
 | `includeGitInstructions` | Include built-in commit and PR workflow instructions and the git status snapshot in Claude’s system prompt (default: `true`). Set to `false` to remove both, for example when using your own git workflow skills. The `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` environment variable takes precedence over this setting when set | `false` |
 | `permissions` | See table below for structure of permissions. |  |
+| `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, and `soft_deny` arrays of prose rules. See [Configure the auto mode classifier](permissions.md). Not read from shared project settings | `{"environment": ["Trusted repo: github.example.com/acme"]}` |
+| `disableAutoMode` | Set to `"disable"` to prevent [auto mode](permission-modes.md) from being activated. Removes `auto` from the `Shift+Tab` cycle and rejects `--permission-mode auto` at startup. Most useful in [managed settings](permissions.md) where users cannot override it | `"disable"` |
 | `hooks` | Configure custom commands to run at lifecycle events. See [hooks documentation](hooks.md) for format | See [hooks](hooks.md) |
 | `disableAllHooks` | Disable all [hooks](hooks.md) and any custom [status line](statusline.md) | `true` |
 | `allowManagedHooksOnly` | (Managed settings only) Prevent loading of user, project, and plugin hooks. Only allows managed hooks and SDK hooks. See [Hook configuration](#hook-configuration) | `true` |
@@ -222,8 +224,8 @@ Configure how `--worktree` creates and manages git worktrees. Use these settings
 | `ask` | Array of permission rules to ask for confirmation upon tool use. See [Permission rule syntax](#permission-rule-syntax) below | `[ "Bash(git push *)" ]` |
 | `deny` | Array of permission rules to deny tool use. Use this to exclude sensitive files from Claude Code access. See [Permission rule syntax](#permission-rule-syntax) and [Bash permission limitations](permissions.md) | `[ "WebFetch", "Bash(curl *)", "Read(./.env)", "Read(./secrets/**)" ]` |
 | `additionalDirectories` | Additional [working directories](permissions.md) that Claude has access to | `[ "../docs/" ]` |
-| `defaultMode` | Default [permission mode](permissions.md) when opening Claude Code | `"acceptEdits"` |
-| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. This disables the `--dangerously-skip-permissions` command-line flag. See [managed settings](permissions.md) | `"disable"` |
+| `defaultMode` | Default [permission mode](permission-modes.md) when opening Claude Code | `"acceptEdits"` |
+| `disableBypassPermissionsMode` | Set to `"disable"` to prevent `bypassPermissions` mode from being activated. Disables the `--dangerously-skip-permissions` flag. Most useful in [managed settings](permissions.md) where users cannot override it | `"disable"` |
 
 ### [​](#permission-rule-syntax) Permission rule syntax
 
@@ -480,7 +482,7 @@ Settings apply in order of precedence. From highest to lowest:
 5. **User settings** (`~/.claude/settings.json`)
    - Personal global settings
 
-This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience.
+This hierarchy ensures that organizational policies are always enforced while still allowing teams and individuals to customize their experience. The same precedence applies whether you run Claude Code from the CLI, the [VS Code extension](vs-code.md), or a [JetBrains IDE](jetbrains.md).
 For example, if your user settings allow `Bash(npm run *)` but a project’s shared settings deny it, the project setting takes precedence and the command is blocked.
 
 **Array settings merge across scopes.** When the same array-valued setting (such as `sandbox.filesystem.allowWrite` or `permissions.allow`) appears in multiple scopes, the arrays are **concatenated and deduplicated**, not replaced. This means lower-priority scopes can add entries without overriding those set by higher-priority scopes, and vice versa. For example, if managed settings set `allowWrite` to `["/opt/company-tools"]` and a user adds `["~/.kube"]`, both paths are included in the final configuration.
