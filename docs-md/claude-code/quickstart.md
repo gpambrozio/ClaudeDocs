@@ -2,20 +2,6 @@
 
 This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
-TerminalDesktopVS CodeJetBrains
-
-I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
-
-macOS / LinuxWindowsHomebrewWinGet
-
-$
-
-curl -fsSL https://claude.ai/install.sh | bash
-
-Copy
-
-[Troubleshooting](troubleshooting.md)
-
 ## [​](#before-you-begin) Before you begin
 
 Make sure you have:

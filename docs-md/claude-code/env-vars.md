@@ -12,8 +12,17 @@ Claude Code supports the following environment variables to control its behavior
 | `ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION` | Display description for the custom model entry in the `/model` picker. Defaults to `Custom model (<model-id>)` when not set |
 | `ANTHROPIC_CUSTOM_MODEL_OPTION_NAME` | Display name for the custom model entry in the `/model` picker. Defaults to the model ID when not set |
 | `ANTHROPIC_DEFAULT_HAIKU_MODEL` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL_NAME` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL_DESCRIPTION` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL_NAME` | See [Model configuration](model-config.md) |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES` | See [Model configuration](model-config.md) |
 | `ANTHROPIC_FOUNDRY_API_KEY` | API key for Microsoft Foundry authentication (see [Microsoft Foundry](microsoft-foundry.md)) |
 | `ANTHROPIC_FOUNDRY_BASE_URL` | Full base URL for the Foundry resource (for example, `https://my-resource.services.ai.azure.com/anthropic`). Alternative to `ANTHROPIC_FOUNDRY_RESOURCE` (see [Microsoft Foundry](microsoft-foundry.md)) |
 | `ANTHROPIC_FOUNDRY_RESOURCE` | Foundry resource name (for example, `my-resource`). Required if `ANTHROPIC_FOUNDRY_BASE_URL` is not set (see [Microsoft Foundry](microsoft-foundry.md)) |
@@ -44,6 +53,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_DISABLE_FAST_MODE` | Set to `1` to disable [fast mode](fast-mode.md) |
 | `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` | Set to `1` to disable the “How is Claude doing?” session quality surveys. Surveys are also disabled when `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is set. See [Session quality surveys](data-usage.md) |
 | `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | Equivalent of setting `DISABLE_AUTOUPDATER`, `DISABLE_FEEDBACK_COMMAND`, `DISABLE_ERROR_REPORTING`, and `DISABLE_TELEMETRY` |
+| `CLAUDE_CODE_DISABLE_NONSTREAMING_FALLBACK` | Set to `1` to disable the non-streaming fallback when a streaming request fails mid-stream. Streaming errors propagate to the retry layer instead. Useful when a proxy or gateway causes the fallback to produce duplicate tool execution |
 | `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` | Set to `1` to disable automatic terminal title updates based on conversation context |
 | `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high`, `max` (Opus 4.6 only), or `auto` to use the model default. Takes precedence over `/effort` and the `effortLevel` setting. See [Adjust effort level](model-config.md) |
 | `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` | Set to `false` to disable prompt suggestions (the “Prompt suggestions” toggle in `/config`). These are the grayed-out predictions that appear in your prompt input after Claude responds. See [Prompt suggestions](interactive-mode.md) |
@@ -70,15 +80,17 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_SKIP_FOUNDRY_AUTH` | Skip Azure authentication for Microsoft Foundry (for example, when using an LLM gateway) |
 | `CLAUDE_CODE_SKIP_VERTEX_AUTH` | Skip Google authentication for Vertex (for example, when using an LLM gateway) |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | See [Model configuration](model-config.md) |
+| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Set to `1` to strip Anthropic and cloud provider credentials from subprocess environments (Bash tool, hooks, MCP stdio servers). The parent Claude process keeps these credentials for API calls, but child processes cannot read them, reducing exposure to prompt injection attacks that attempt to exfiltrate secrets via shell expansion. `claude-code-action` sets this automatically when `allowed_non_write_users` is configured |
 | `CLAUDE_CODE_TASK_LIST_ID` | Share a task list across sessions. Set the same ID in multiple Claude Code instances to coordinate on a shared task list. See [Task list](interactive-mode.md) |
 | `CLAUDE_CODE_TEAM_NAME` | Name of the agent team this teammate belongs to. Set automatically on [agent team](agent-teams.md) members |
 | `CLAUDE_CODE_TMPDIR` | Override the temp directory used for internal temp files. Claude Code appends `/claude/` to this path. Default: `/tmp` on Unix/macOS, `os.tmpdir()` on Windows |
 | `CLAUDE_CODE_USER_EMAIL` | Email address for the authenticated user. Used by SDK callers to provide account information synchronously. Requires `CLAUDE_CODE_ACCOUNT_UUID` and `CLAUDE_CODE_ORGANIZATION_UUID` to also be set |
 | `CLAUDE_CODE_USE_BEDROCK` | Use [Bedrock](amazon-bedrock.md) |
 | `CLAUDE_CODE_USE_FOUNDRY` | Use [Microsoft Foundry](microsoft-foundry.md) |
+| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Set to `1` to enable the PowerShell tool on Windows (opt-in preview). When enabled, Claude can run PowerShell commands natively instead of routing through Git Bash. Only supported on native Windows, not WSL. See [PowerShell tool](tools-reference.md) |
 | `CLAUDE_CODE_USE_VERTEX` | Use [Vertex](google-vertex-ai.md) |
 | `CLAUDE_CONFIG_DIR` | Customize where Claude Code stores its configuration and data files |
-| `CLAUDE_ENV_FILE` | Path to a shell script that Claude Code sources before each Bash command. Use to persist virtualenv or conda activation across commands. Also populated dynamically by [SessionStart hooks](hooks.md) |
+| `CLAUDE_ENV_FILE` | Path to a shell script that Claude Code sources before each Bash command. Use to persist virtualenv or conda activation across commands. Also populated dynamically by [SessionStart](hooks.md), [CwdChanged](hooks.md), and [FileChanged](hooks.md) hooks |
 | `DISABLE_AUTOUPDATER` | Set to `1` to disable automatic updates. |
 | `DISABLE_COST_WARNINGS` | Set to `1` to disable cost warning messages |
 | `DISABLE_ERROR_REPORTING` | Set to `1` to opt out of Sentry error reporting |

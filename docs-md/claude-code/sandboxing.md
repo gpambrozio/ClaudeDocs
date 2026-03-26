@@ -98,6 +98,7 @@ Ask AI
 ```
 
 This opens a menu where you can choose between sandbox modes. If required dependencies are missing (such as `bubblewrap` or `socat` on Linux), the menu displays installation instructions for your platform.
+By default, if the sandbox cannot start (missing dependencies, unsupported platform, or platform restrictions), Claude Code shows a warning and runs commands without sandboxing. To make this a hard failure instead, set [`sandbox.failIfUnavailable`](settings.md) to `true`. This is intended for managed deployments that require sandboxing as a security gate.
 
 ### [​](#sandbox-modes) Sandbox modes
 

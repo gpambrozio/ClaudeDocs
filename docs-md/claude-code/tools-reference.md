@@ -20,13 +20,14 @@ Claude Code has access to a set of tools that help it understand and modify your
 | `ListMcpResourcesTool` | Lists resources exposed by connected [MCP servers](mcp.md) | No |
 | `LSP` | Code intelligence via language servers. Reports type errors and warnings automatically after file edits. Also supports navigation operations: jump to definitions, find references, get type info, list symbols, find implementations, trace call hierarchies. Requires a [code intelligence plugin](discover-plugins.md) and its language server binary | No |
 | `NotebookEdit` | Modifies Jupyter notebook cells | Yes |
+| `PowerShell` | Executes PowerShell commands on Windows. Opt-in preview. See [PowerShell tool](#powershell-tool) | Yes |
 | `Read` | Reads the contents of files | No |
 | `ReadMcpResourceTool` | Reads a specific MCP resource by URI | No |
 | `Skill` | Executes a [skill](skills.md) within the main conversation | Yes |
 | `TaskCreate` | Creates a new task in the task list | No |
 | `TaskGet` | Retrieves full details for a specific task | No |
 | `TaskList` | Lists all tasks with their current status | No |
-| `TaskOutput` | Retrieves output from a background task | No |
+| `TaskOutput` | (Deprecated) Retrieves output from a background task. Prefer `Read` on the task’s output file path | No |
 | `TaskStop` | Kills a running background task by ID | No |
 | `TaskUpdate` | Updates task status, dependencies, details, or deletes tasks | No |
 | `TodoWrite` | Manages the session task checklist. Available in non-interactive mode and the [Agent SDK](headless.md); interactive sessions use TaskCreate, TaskGet, TaskList, and TaskUpdate instead | No |
@@ -45,6 +46,48 @@ The Bash tool runs each command in a separate process with the following persist
 - Environment variables do not persist. An `export` in one command will not be available in the next.
 
 Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set [`CLAUDE_ENV_FILE`](env-vars.md) to a shell script before launching Claude Code, or use a [SessionStart hook](hooks.md) to populate it dynamically.
+
+## [​](#powershell-tool) PowerShell tool
+
+On Windows, Claude Code can run PowerShell commands natively instead of routing through Git Bash. This is an opt-in preview.
+
+### [​](#enable-the-powershell-tool) Enable the PowerShell tool
+
+Set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` in your environment or in `settings.json`:
+
+Report incorrect code
+
+Copy
+
+Ask AI
+
+```shiki
+{
+  "env": {
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
+  }
+}
+```
+
+Claude Code auto-detects `pwsh.exe` (PowerShell 7+) with a fallback to `powershell.exe` (PowerShell 5.1). The Bash tool remains registered alongside the PowerShell tool, so you may need to ask Claude to use PowerShell.
+
+### [​](#shell-selection-in-settings-hooks-and-skills) Shell selection in settings, hooks, and skills
+
+Three additional settings control where PowerShell is used:
+
+- `"defaultShell": "powershell"` in [`settings.json`](settings.md): routes interactive `!` commands through PowerShell. Requires the PowerShell tool to be enabled.
+- `"shell": "powershell"` on individual [command hooks](hooks.md): runs that hook in PowerShell. Hooks spawn PowerShell directly, so this works regardless of `CLAUDE_CODE_USE_POWERSHELL_TOOL`.
+- `shell: powershell` in [skill frontmatter](skills.md): runs `` !`command` `` blocks in PowerShell. Requires the PowerShell tool to be enabled.
+
+### [​](#preview-limitations) Preview limitations
+
+The PowerShell tool has the following known limitations during the preview:
+
+- Auto mode does not work with the PowerShell tool yet
+- PowerShell profiles are not loaded
+- Sandboxing is not supported
+- Only supported on native Windows, not WSL
+- Git Bash is still required to start Claude Code
 
 ## [​](#see-also) See also
 

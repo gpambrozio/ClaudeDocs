@@ -870,7 +870,7 @@ The three channel-specific pieces in this file:
 ## [​](#package-as-a-plugin) Package as a plugin
 
 To make your channel installable and shareable, wrap it in a [plugin](plugins.md) and publish it to a [marketplace](plugin-marketplaces.md). Users install it with `/plugin install`, then enable it per session with `--channels plugin:<name>@<marketplace>`.
-A channel published to your own marketplace still needs `--dangerously-load-development-channels` to run, since it isn’t on the [approved allowlist](channels.md). To get it added, [submit it to the official marketplace](plugins.md). Channel plugins go through security review before being approved.
+A channel published to your own marketplace still needs `--dangerously-load-development-channels` to run, since it isn’t on the [approved allowlist](channels.md). To get it added, [submit it to the official marketplace](plugins.md). Channel plugins go through security review before being approved. On Team and Enterprise plans, an admin can instead include your plugin in the organization’s own [`allowedChannelPlugins`](channels.md) list, which replaces the default Anthropic allowlist.
 
 ## [​](#see-also) See also
 
