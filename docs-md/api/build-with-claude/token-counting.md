@@ -8,7 +8,7 @@ Token counting enables you to determine the number of tokens in a message before
 - Make smart model routing decisions
 - Optimize prompts to be a specific length
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ---
 
@@ -51,7 +51,7 @@ JSON
 
 ### Count tokens in messages with tools
 
-[Server tool](agents-and-tools/tool-use/overview.md) token counts only apply to the first sampling call.
+[Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
 Shell
 

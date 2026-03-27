@@ -45,12 +45,6 @@ The following examples show the environment variables to set in your shell or sh
 
 Route Bedrock traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Enable Bedrock
 export CLAUDE_CODE_USE_BEDROCK=1
@@ -61,12 +55,6 @@ export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
 Route Bedrock traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Enable Bedrock
@@ -84,12 +72,6 @@ export CLAUDE_CODE_SKIP_BEDROCK_AUTH=1  # If gateway handles AWS auth
 
 Route Foundry traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Enable Microsoft Foundry
 export CLAUDE_CODE_USE_FOUNDRY=1
@@ -101,12 +83,6 @@ export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
 Route Foundry traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Enable Microsoft Foundry
@@ -124,12 +100,6 @@ export CLAUDE_CODE_SKIP_FOUNDRY_AUTH=1  # If gateway handles Azure auth
 
 Route Vertex AI traffic through your corporate proxy by setting the following [environment variables](env-vars.md):
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Enable Vertex
 export CLAUDE_CODE_USE_VERTEX=1
@@ -141,12 +111,6 @@ export HTTPS_PROXY='https://proxy.example.com:8080'
 ```
 
 Route Vertex AI traffic through your LLM gateway by setting the following [environment variables](env-vars.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Enable Vertex

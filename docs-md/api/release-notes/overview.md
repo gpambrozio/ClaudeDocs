@@ -31,7 +31,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](build-with-claude/extended-thinking.md) and a [1M token context window](build-with-claude/context-windows.md) (beta). See [Models & Pricing](about-claude/models.md) for details.
 - API [code execution](agents-and-tools/tool-use/code-execution-tool.md) is now **free when used with web search or web fetch**. Sandboxed code execution improves model capability and token efficiency. See the [pricing details](agents-and-tools/tool-use/code-execution-tool.md) for standalone usage.
 - The [web search tool](agents-and-tools/tool-use/web-search-tool.md) and [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) are now generally available (no beta header required). Web search and web fetch now support [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md), which uses code execution to filter results before they reach the context window for better performance and reduced token cost.
-- The [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), [web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md), [tool search tool](agents-and-tools/tool-use/tool-search-tool.md), [tool use examples](agents-and-tools/tool-use/implement-tool-use.md), and [memory tool](agents-and-tools/tool-use/memory-tool.md) are now generally available (no beta header required).
+- The [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), [web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md), [tool search tool](agents-and-tools/tool-use/tool-search-tool.md), [tool use examples](agents-and-tools/tool-use/define-tools.md), and [memory tool](agents-and-tools/tool-use/memory-tool.md) are now generally available (no beta header required).
 
 ### February 7, 2026
 
@@ -143,7 +143,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### September 3, 2025
 
-- We've launched support for citable documents in client-side tool results. Learn more in [How to implement tool use](agents-and-tools/tool-use/implement-tool-use.md).
+- We've launched support for citable documents in client-side tool results. Learn more in [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
 ### September 2, 2025
 
@@ -363,7 +363,7 @@ We also released new official SDKs:
 
 ### October 3rd, 2024
 
-- We've added the ability to disable parallel tool use in the API. Set `disable_parallel_tool_use: true` in the `tool_choice` field to ensure that Claude uses at most one tool. Read more in [How to implement tool use](agents-and-tools/tool-use/implement-tool-use.md).
+- We've added the ability to disable parallel tool use in the API. Set `disable_parallel_tool_use: true` in the `tool_choice` field to ensure that Claude uses at most one tool. Read more in [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
 
 ### September 10th, 2024
 

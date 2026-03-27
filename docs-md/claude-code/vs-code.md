@@ -74,12 +74,6 @@ The prompt box supports several features:
 
 Use @-mentions to give Claude context about specific files or folders. When you type `@` followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 > Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
 > What's in @src/components/ (include a trailing slash for folders)
@@ -180,12 +174,6 @@ For more about the plugin system, see [Plugins](plugins.md) and [Plugin marketpl
 Connect Claude to your Chrome browser to test web apps, debug with console logs, and automate browser workflows without leaving VS Code. This requires the [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or higher.
 Type `@browser` in the prompt box followed by what you want Claude to do:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 @browser go to localhost:3000 and check the console for errors
 ```
@@ -218,12 +206,6 @@ These are VS Code commands for controlling the extension. Not all built-in Claud
 The extension registers a URI handler at `vscode://anthropic.claude-code/open`. Use it to open a new Claude Code tab from your own tooling: a shell alias, a browser bookmarklet, or any script that can open a URL. If VS Code isn’t already running, opening the URL launches it first. If VS Code is already running, the URL opens in whichever window is currently focused.
 Invoke the handler with your operating system’s URL opener. On macOS:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 open "vscode://anthropic.claude-code/open"
 ```
@@ -237,12 +219,6 @@ The handler accepts two optional query parameters:
 | `session` | A session ID to resume instead of starting a new conversation. The session must belong to the workspace currently open in VS Code. If the session isn’t found, a fresh conversation starts instead. If the session is already open in a tab, that tab is focused. To capture a session ID programmatically, see [Continue conversations](headless.md). |
 
 For example, to open a tab pre-filled with “review my changes”:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 vscode://anthropic.claude-code/open?prompt=review%20my%20changes
@@ -319,12 +295,6 @@ When Claude runs long-running commands, the extension shows progress in the stat
 MCP (Model Context Protocol) servers give Claude access to external tools, databases, and APIs.
 To add an MCP server, open the integrated terminal (`` Ctrl+` `` or `` Cmd+` ``) and run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude mcp add --transport http github https://api.githubcopilot.com/mcp/
 ```
@@ -340,12 +310,6 @@ Claude Code integrates with git to help with version control workflows directly 
 
 Claude can stage changes, write commit messages, and create pull requests based on your work:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 > commit my changes with a descriptive message
 > create a pr for this feature
@@ -357,12 +321,6 @@ When creating pull requests, Claude generates descriptions based on the actual c
 ### [​](#use-git-worktrees-for-parallel-tasks) Use git worktrees for parallel tasks
 
 Use the `--worktree` (`-w`) flag to start Claude in an isolated worktree with its own files and branch:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --worktree feature-auth
@@ -456,12 +414,6 @@ To uninstall the Claude Code extension:
 3. Click **Uninstall**
 
 To also remove extension data and reset all settings:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 rm -rf ~/.vscode/globalStorage/anthropic.claude-code

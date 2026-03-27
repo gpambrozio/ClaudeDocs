@@ -2,6 +2,8 @@
 
 Copy page
 
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 As conversations grow, you'll eventually approach context window limits. This guide explains how context windows work and introduces strategies for managing them effectively.
 
 For long-running conversations and agentic workflows, [server-side compaction](build-with-claude/compaction.md) is the primary strategy for context management. For more specialized needs, [context editing](build-with-claude/context-editing.md) offers additional strategies like tool result clearing and thinking block clearing.

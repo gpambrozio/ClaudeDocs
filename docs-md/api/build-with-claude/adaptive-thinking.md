@@ -2,11 +2,13 @@
 
 Copy page
 
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 Adaptive thinking is the recommended way to use [extended thinking](build-with-claude/extended-thinking.md) with Claude Opus 4.6 and Sonnet 4.6. Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request.
 
 Adaptive thinking can drive better performance than extended thinking with a fixed `budget_tokens` for many workloads, especially bimodal tasks and long-horizon agentic workflows. No beta header is required.
 
-For workloads where predictable latency and token usage matter, or where you need precise control over thinking costs, extended thinking with `budget_tokens` continues to be fully supported. Consider testing both modes on your specific workloads to determine which works best.
+If your workload requires predictable latency or precise control over thinking costs, extended thinking with `budget_tokens` is still functional on these models but is deprecated and no longer recommended. See the warning below.
 
 ## Supported models
 
@@ -15,7 +17,7 @@ Adaptive thinking is supported on the following models:
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
 
-`thinking.type: "enabled"` and `budget_tokens` are **deprecated** on Opus 4.6 and Sonnet 4.6 and will be removed in a future model release. Use `thinking.type: "adaptive"` with the `effort` parameter instead. If you are already using extended thinking with `budget_tokens`, it continues to work and no immediate changes are required.
+`thinking.type: "enabled"` and `budget_tokens` are [**deprecated**](build-with-claude/overview.md) on Opus 4.6 and Sonnet 4.6 and will be removed in a future model release. Use `thinking.type: "adaptive"` with the `effort` parameter instead. Existing `budget_tokens` configurations are still functional but no longer recommended; plan to migrate.
 
 Older models (Sonnet 4.5, Opus 4.5, etc.) do not support adaptive thinking and require `thinking.type: "enabled"` with `budget_tokens`.
 
@@ -127,12 +129,12 @@ with client.messages.stream(
 | **Manual** | `thinking: {type: "enabled", budget_tokens: N}` | All models. Deprecated on Opus 4.6 and Sonnet 4.6 (consider adaptive mode instead). | When you need precise control over thinking token spend. |
 | **Disabled** | Omit `thinking` parameter or pass `{type: "disabled"}` | All models | When you don't need extended thinking and want the lowest latency. |
 
-Adaptive thinking is available on Opus 4.6 and Sonnet 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On both Opus 4.6 and Sonnet 4.6, `type: "enabled"` with `budget_tokens` is still accepted but deprecated.
+Adaptive thinking is available on Opus 4.6 and Sonnet 4.6. Older models only support `type: "enabled"` with `budget_tokens`. On both Opus 4.6 and Sonnet 4.6, `type: "enabled"` with `budget_tokens` is still functional but deprecated.
 
 **Interleaved thinking availability by mode:**
 
 - **Adaptive mode:** Interleaved thinking is automatically enabled on both Opus 4.6 and Sonnet 4.6.
-- **Manual mode on Sonnet 4.6:** Interleaved thinking is supported via the `interleaved-thinking-2025-05-14` beta header.
+- **Manual mode on Sonnet 4.6:** Interleaved thinking works via the `interleaved-thinking-2025-05-14` beta header.
 - **Manual mode on Opus 4.6:** Interleaved thinking is not available. If your agentic workflow requires thinking between tool calls on Opus 4.6, use adaptive mode.
 
 ## Important considerations
@@ -182,7 +184,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#64170508011724050a100c160b140d074a070b09).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#87f4e6ebe2f4c7e6e9f3eff5e8f7eee4a9e4e8ea).
 
 ### Controlling thinking display
 

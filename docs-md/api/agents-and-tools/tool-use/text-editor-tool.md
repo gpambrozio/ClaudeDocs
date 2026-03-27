@@ -2,18 +2,11 @@
 
 Copy page
 
-Claude can use an Anthropic-defined text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-## Model compatibility
+Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
-| Model | Tool Version |
-| --- | --- |
-| Claude 4.x models | `text_editor_20250728` |
-| Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)) | `text_editor_20250124` |
-
-The `text_editor_20250728` tool for Claude 4 models does not include the `undo_edit` command. If you require this functionality, you'll need to use Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)).
-
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ## When to use the text editor tool
 
@@ -25,14 +18,6 @@ Some examples of when to use the text editor tool are:
 - **Test creation:** Have Claude create unit tests for your code based on its understanding of the implementation.
 
 ## Use the text editor tool
-
-Claude 4
-
-Claude 4
-
-Claude Sonnet 3.7
-
-Claude Sonnet 3.7
 
 Provide the text editor tool (named `str_replace_based_edit_tool`) to Claude using the Messages API.
 
@@ -161,30 +146,9 @@ Parameters:
 
 ### Example insert command
 
-#### undo\_edit
-
-The `undo_edit` command allows Claude to revert the last edit made to a file.
-
-This command is only available in Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)). It is not supported in Claude 4 models using the `text_editor_20250728`.
-
-Parameters:
-
-- `command`: Must be "undo\_edit"
-- `path`: The path to the file whose last edit should be undone
-
-### Example undo\_edit command
-
 ### Example: Fixing a syntax error with the text editor tool
 
-Claude 4
-
-Claude 4
-
-Claude Sonnet 3.7
-
-Claude Sonnet 3.7
-
-This example demonstrates how Claude 4 models use the text editor tool to fix a syntax error in a Python file.
+This example demonstrates how Claude uses the text editor tool to fix a syntax error in a Python file.
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
@@ -369,6 +333,8 @@ response = client.messages.create(
         },
     ],
 )
+
+print(response)
 ```
 
 Finally, Claude provides a complete explanation of the fix:
@@ -388,16 +354,11 @@ Finally, Claude provides a complete explanation of the fix:
 }
 ```
 
----
-
 ## Implement the text editor tool
 
 The text editor tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
-The tool type depends on the model version:
-
-- **Claude 4:** `type: "text_editor_20250728"`
-- **Claude Sonnet 3.7:** `type: "text_editor_20250124"`
+The tool type is `type: "text_editor_20250728"` for Claude 4 models.
 
 1. 1
 
@@ -411,7 +372,7 @@ The tool type depends on the model version:
    Create a function that processes tool calls from Claude based on the command type:
 
    ```shiki
-   def handle_editor_tool(tool_call, model_version):
+   def handle_editor_tool(tool_call):
        input_params = tool_call.input
        command = input_params.get("command", "")
        file_path = input_params.get("path", "")
@@ -427,12 +388,6 @@ The tool type depends on the model version:
            pass
        elif command == "insert":
            # Insert text at location
-           pass
-       elif command == "undo_edit":
-           # Check if it's a Claude 4 model
-           if "str_replace_based_edit_tool" in model_version:
-               return {"error": "undo_edit command is not supported in Claude 4"}
-           # Restore from backup for Claude 3.7
            pass
    ```
 3. 3
@@ -538,7 +493,7 @@ Here are some ideas for how to use the text editor tool in more convenient and p
 - **Implement file format conversion**: Let Claude help you convert files from one format to another
 - **Automate documentation**: Set up workflows for Claude to automatically document your code
 
-As you build applications with the text editor tool, we're excited to see how you leverage Claude's capabilities to enhance your development workflow and productivity.
+The text editor tool enables Claude to work directly with your codebase, supporting workflows from debugging to automated documentation.
 
 [Tool use overview
 

@@ -23,12 +23,6 @@ Install Claude Code
 
 Copy this line, paste it into your terminal (`Cmd + V` on macOS, `Ctrl + Shift + V` on Linux), and press `Enter`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash
 ```
@@ -40,12 +34,6 @@ This downloads and runs the Claude Code installer from claude.ai. You’ll see t
 Start Claude Code
 
 Type `claude` and press `Enter`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude
@@ -100,12 +88,6 @@ Install Claude Code
 
 Copy this line, paste it into PowerShell with `Ctrl + V` or right-click, and press `Enter`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 irm https://claude.ai/install.ps1 | iex
 ```
@@ -113,12 +95,6 @@ irm https://claude.ai/install.ps1 | iex
 This downloads and runs the Claude Code installer. `irm` fetches the file and `iex` runs it. You’ll see text scrolling as it works. When it’s done, you’ll see “Claude Code successfully installed!” If you see an error instead, check the [troubleshooting section](#windows-troubleshooting) below.
 
 If you’re in CMD instead of PowerShell, use this command:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
@@ -129,12 +105,6 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 Start Claude Code
 
 Close PowerShell and open a new PowerShell window so it recognizes the newly installed `claude` command. Then type:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude
@@ -163,12 +133,6 @@ Once you see the Claude Code welcome screen, you’re ready to go. You don’t n
 
 Claude can create projects from a description:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 make me a simple webpage that says hello world
 ```
@@ -179,12 +143,6 @@ Claude creates the files for you. Double-click the HTML file to open it in your 
 
 Claude can read and organize files you already have:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 look at the screenshots on my Desktop and rename them based on what's in each image
 ```
@@ -192,12 +150,6 @@ look at the screenshots on my Desktop and rename them based on what's in each im
 ### [​](#ask-questions) Ask questions
 
 Claude can explain things, help you learn, or plan out a project:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 I want to build a personal budget tracker. What would I need?
@@ -234,12 +186,6 @@ If you run into problems installing on macOS or Linux, check these common issues
 
 If you see `command not found: claude` after installing, your terminal needs to reload its settings. Close the Terminal window and open a new one, then try `claude` again.If it still doesn’t work, add the install directory to your PATH. Run the command for your shell:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Zsh (macOS default)
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
@@ -256,12 +202,6 @@ Error with HTML code or 'syntax error near unexpected token'
 
 If you see `bash: line 1: syntax error near unexpected token '<'` or HTML code like `<!DOCTYPE html>` in your terminal, the install URL returned a web page instead of the installer script.If the page says “App unavailable in region,” Claude Code is not available in your country. See [supported countries](https://www.anthropic.com/supported-countries).Otherwise, try running the command again. If it keeps happening, install with [Homebrew](https://brew.sh) instead:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 brew install --cask claude-code
 ```
@@ -276,12 +216,6 @@ If you run into problems installing on Windows, check these common issues:
 
 You’re in CMD, not PowerShell. Close this window and open PowerShell instead (`Win + X` then select Windows PowerShell).Alternatively, use the CMD install command:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
@@ -289,12 +223,6 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 SSL/TLS error or 'Could not create SSL/TLS secure channel'
 
 This usually happens on older Windows 10 systems. Run this line first, then retry the install:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -308,23 +236,11 @@ Git for Windows isn’t installed or Claude Code can’t find it.
 1. If you haven’t installed Git yet, go back to the [first step in the Windows section](#windows).
 2. If Git is installed but Claude Code can’t find it, tell it where to look:
 
-   Report incorrect code
-
-   Copy
-
-   Ask AI
-
    ```shiki
    $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
    ```
 
    Then run `claude` again. If your Git is installed somewhere else, find the path by running:
-
-   Report incorrect code
-
-   Copy
-
-   Ask AI
 
    ```shiki
    Get-Command git | Select-Object Source
@@ -337,12 +253,6 @@ To make this permanent so you don’t have to set it every time, see [configure 
 'claude is not recognized'
 
 Restart your computer and try again. This usually fixes the problem.If restarting didn’t help, run these commands to add Claude Code to your PATH:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')

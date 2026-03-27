@@ -157,6 +157,27 @@ if response.stop_reason == "max_tokens":
     # Consider making another request to continue
 ```
 
+#### Incomplete tool use blocks
+
+If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+
+Python
+
+```shiki
+# Check if response was truncated during tool use
+if response.stop_reason == "max_tokens":
+    # Check if the last content block is an incomplete tool_use
+    last_block = response.content[-1]
+    if last_block.type == "tool_use":
+        # Send the request with higher max_tokens
+        response = client.messages.create(
+            model="claude-opus-4-6",
+            max_tokens=4096,  # Increased limit
+            messages=messages,
+            tools=tools,
+        )
+```
+
 ### stop\_sequence
 
 Claude encountered one of your custom stop sequences.
@@ -177,7 +198,7 @@ if response.stop_reason == "stop_sequence":
 
 Claude is calling a tool and expects you to execute it.
 
-For most tool use implementations, we recommend using the [tool runner](agents-and-tools/tool-use/implement-tool-use.md) which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, we recommend using the [tool runner](agents-and-tools/tool-use/tool-runner.md) which automatically handles tool execution, result formatting, and conversation management.
 
 ```shiki
 from anthropic import Anthropic
@@ -216,7 +237,7 @@ if response.stop_reason == "tool_use":
 
 ### pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/overview.md) like web search or web fetch. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) like web search or web fetch. The default limit is 10 iterations per request.
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
@@ -338,7 +359,7 @@ def handle_truncated_response(response):
 
 ### 3. Implement retry logic for pause\_turn
 
-When using [server tools](agents-and-tools/tool-use/overview.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```shiki
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
@@ -440,7 +461,7 @@ with client.messages.stream(
 
 ### Handling tool use workflows
 
-**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/implement-tool-use.md) automatically handles tool execution with much less code.
+**Simpler with tool runner**: The example below shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
 
 ```shiki
 def complete_tool_workflow(client, user_query, tools):

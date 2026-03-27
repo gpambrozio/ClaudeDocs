@@ -2,6 +2,8 @@
 
 Copy page
 
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 ## Overview
 
 For most use cases, [server-side compaction](build-with-claude/compaction.md) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
@@ -15,15 +17,13 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 | --- | --- | --- | --- |
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using [`tool_runner`](agents-and-tools/tool-use/implement-tool-use.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
+| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
 
 ## Server-side strategies
 
 Context editing is in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
 
 Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
-
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
 
 ### Tool result clearing
 
@@ -403,11 +403,13 @@ response = client.beta.messages.create(
 )
 ```
 
+For the full memory tool reference including commands and examples, see [Memory tool](agents-and-tools/tool-use/memory-tool.md).
+
 ## Client-side compaction (SDK)
 
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
-Compaction is available in the [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/implement-tool-use.md).
+Compaction is available in the [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/tool-runner.md).
 
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](build-with-claude/context-windows.md).
 

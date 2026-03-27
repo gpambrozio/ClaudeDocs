@@ -12,12 +12,6 @@ The `/cost` command shows API token usage and is intended for API users. Claude 
 
 The `/cost` command provides detailed token usage statistics for your current session:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Total cost:            $0.55
 Total duration (API):  6m 19.7s
@@ -76,12 +70,6 @@ Use `/cost` to check your current token usage, or [configure your status line](s
 
 You can also customize compaction behavior in your CLAUDE.md:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Compact instructions
 
@@ -94,11 +82,10 @@ Sonnet handles most coding tasks well and costs less than Opus. Reserve Opus for
 
 ### [​](#reduce-mcp-server-overhead) Reduce MCP server overhead
 
-Each MCP server adds tool definitions to your context, even when idle. Run `/context` to see what’s consuming space.
+MCP tool definitions are [deferred by default](mcp.md), so only tool names enter context until Claude uses a specific tool. Run `/context` to see what’s consuming space.
 
-- **Prefer CLI tools when available**: Tools like `gh`, `aws`, `gcloud`, and `sentry-cli` are more context-efficient than MCP servers because they don’t add persistent tool definitions. Claude can run CLI commands directly without the overhead.
+- **Prefer CLI tools when available**: Tools like `gh`, `aws`, `gcloud`, and `sentry-cli` are still more context-efficient than MCP servers because they don’t add any per-tool listing. Claude can run CLI commands directly.
 - **Disable unused servers**: Run `/mcp` to see configured servers and disable any you’re not actively using.
-- **Tool search is automatic**: When MCP tool descriptions exceed 10% of your context window, Claude Code automatically defers them and loads tools on-demand via [tool search](mcp.md). Since deferred tools only enter context when actually used, a lower threshold means fewer idle tool definitions consuming space. Set a lower threshold with `ENABLE_TOOL_SEARCH=auto:<N>` (for example, `auto:5` triggers when tools exceed 5% of your context window).
 
 ### [​](#install-code-intelligence-plugins-for-typed-languages) Install code intelligence plugins for typed languages
 
@@ -114,12 +101,6 @@ For example, this PreToolUse hook filters test output to show only failures:
 - filter-test-output.sh
 
 Add this to your [settings.json](settings.md) to run the hook before every Bash command:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -140,12 +121,6 @@ Ask AI
 ```
 
 The hook calls this script, which checks if the command is a test runner and modifies it to show only failures:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 #!/bin/bash

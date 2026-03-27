@@ -45,12 +45,6 @@ Kitty and Ghostty support desktop notifications without additional configuration
 If notifications aren’t appearing, verify that your terminal app has notification permissions in your OS settings.
 When running Claude Code inside tmux, notifications and the [terminal progress bar](settings.md) only reach the outer terminal, such as iTerm2, Kitty, or Ghostty, if you enable passthrough in your tmux configuration:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 set -g allow-passthrough on
 ```

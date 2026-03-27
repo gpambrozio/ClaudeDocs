@@ -22,12 +22,6 @@ Vertex AI may not support the Claude Code default models in all [regions](https:
 
 Enable the Vertex AI API in your GCP project:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Set your project ID
 gcloud config set project YOUR-PROJECT-ID
@@ -55,12 +49,6 @@ When authenticating, Claude Code will automatically use the project ID from the 
 ### [​](#4-configure-claude-code) 4. Configure Claude Code
 
 Set the following environment variables:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Enable Vertex AI integration
@@ -90,12 +78,6 @@ Pin specific model versions for every deployment. If you use model aliases (`son
 
 Set these environment variables to specific Vertex AI model IDs:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'
 export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'
@@ -111,12 +93,6 @@ Claude Code uses these default models when no pinning variables are set:
 | Small/fast model | `claude-haiku-4-5@20251001` |
 
 To customize models further:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 export ANTHROPIC_MODEL='claude-opus-4-6'

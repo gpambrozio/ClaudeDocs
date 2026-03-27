@@ -40,12 +40,6 @@ selection is saved to `.claude/settings.local.json` at the
 To set a style without the menu, edit the `outputStyle` field directly in a
 settings file:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "outputStyle": "Explanatory"
@@ -61,12 +55,6 @@ cost.
 
 Custom output styles are Markdown files with frontmatter and the text that will
 be added to the system prompt:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---

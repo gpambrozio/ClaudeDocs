@@ -33,35 +33,17 @@ To install Claude Code, use one of the following methods:
 
 **macOS, Linux, WSL:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 **Windows PowerShell:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 irm https://claude.ai/install.ps1 | iex
 ```
 
 **Windows CMD:**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
@@ -71,23 +53,11 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 
 Native installations automatically update in the background to keep you on the latest version.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 brew install --cask claude-code
 ```
 
 Homebrew installations do not auto-update. Run `brew upgrade claude-code` periodically to get the latest features and security fixes.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 winget install Anthropic.ClaudeCode
@@ -96,12 +66,6 @@ winget install Anthropic.ClaudeCode
 WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 After installation completes, open a terminal in the project you want to work in and start Claude Code:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude
@@ -115,12 +79,6 @@ Claude Code on Windows requires [Git for Windows](https://git-scm.com/downloads/
 **Option 1: Native Windows with Git Bash**
 Install [Git for Windows](https://git-scm.com/downloads/win), then run the install command from PowerShell or CMD.
 If Claude Code can’t find your Git Bash installation, set the path in your [settings.json file](settings.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -139,23 +97,11 @@ Both WSL 1 and WSL 2 are supported. WSL 2 supports [sandboxing](sandboxing.md) f
 The native installer on Alpine and other musl/uClibc-based distributions requires `libgcc`, `libstdc++`, and `ripgrep`. Install these using your distribution’s package manager, then set `USE_BUILTIN_RIPGREP=0`.
 This example installs the required packages on Alpine:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 apk add libgcc libstdc++ ripgrep
 ```
 
 Then set `USE_BUILTIN_RIPGREP` to `0` in your [`settings.json`](settings.md) file:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -169,23 +115,11 @@ Ask AI
 
 After installing, confirm Claude Code is working:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --version
 ```
 
 For a more detailed check of your installation and configuration, run [`claude doctor`](troubleshooting.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude doctor
@@ -215,12 +149,6 @@ Control which release channel Claude Code follows for auto-updates and `claude u
 
 Configure this via `/config` → **Auto-update channel**, or add it to your [settings.json file](settings.md):
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "autoUpdatesChannel": "stable"
@@ -233,12 +161,6 @@ For enterprise deployments, you can enforce a consistent release channel across 
 
 Set `DISABLE_AUTOUPDATER` to `"1"` in the `env` key of your [`settings.json`](settings.md) file:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "env": {
@@ -250,12 +172,6 @@ Ask AI
 ### [​](#update-manually) Update manually
 
 To apply an update immediately without waiting for the next background check, run:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude update
@@ -274,31 +190,13 @@ To install the latest version (default):
 - Windows PowerShell
 - Windows CMD
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 irm https://claude.ai/install.ps1 | iex
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
@@ -310,31 +208,13 @@ To install the stable version:
 - Windows PowerShell
 - Windows CMD
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash -s stable
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) stable
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd stable && del install.cmd
@@ -346,31 +226,13 @@ To install a specific version number:
 - Windows PowerShell
 - Windows CMD
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 & ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 1.0.58
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 1.0.58 && del install.cmd
@@ -383,12 +245,6 @@ npm installation is deprecated. The native installer is faster, requires no depe
 #### [​](#migrate-from-npm-to-native) Migrate from npm to native
 
 If you previously installed Claude Code with npm, switch to the native installer:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Install the native binary
@@ -403,12 +259,6 @@ You can also run `claude install` from an existing npm installation to install t
 #### [​](#install-with-npm) Install with npm
 
 If you need npm installation for compatibility reasons, you must have [Node.js 18+](https://nodejs.org/en/download) installed. Install the package globally:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 npm install -g @anthropic-ai/claude-code
@@ -436,22 +286,10 @@ Remove the Claude Code binary and version files:
 - macOS, Linux, WSL
 - Windows PowerShell
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 rm -f ~/.local/bin/claude
 rm -rf ~/.local/share/claude
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Remove-Item -Path "$env:USERPROFILE\.local\bin\claude.exe" -Force
@@ -462,12 +300,6 @@ Remove-Item -Path "$env:USERPROFILE\.local\share\claude" -Recurse -Force
 
 Remove the Homebrew cask:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 brew uninstall --cask claude-code
 ```
@@ -476,12 +308,6 @@ brew uninstall --cask claude-code
 
 Remove the WinGet package:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 winget uninstall Anthropic.ClaudeCode
 ```
@@ -489,12 +315,6 @@ winget uninstall Anthropic.ClaudeCode
 ### [​](#npm) npm
 
 Remove the global npm package:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 npm uninstall -g @anthropic-ai/claude-code
@@ -509,12 +329,6 @@ To remove Claude Code settings and cached data:
 - macOS, Linux, WSL
 - Windows PowerShell
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Remove user settings and state
 rm -rf ~/.claude
@@ -524,12 +338,6 @@ rm ~/.claude.json
 rm -rf .claude
 rm -f .mcp.json
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Remove user settings and state

@@ -52,7 +52,7 @@ When you run `claude` in a directory, Claude Code gains access to:
 - **Your terminal.** Any command you could run: build tools, git, package managers, system utilities, scripts. If you can do it from the command line, Claude can too.
 - **Your git state.** Current branch, uncommitted changes, and recent commit history.
 - **Your [CLAUDE.md](memory.md).** A markdown file where you store project-specific instructions, conventions, and context that Claude should know every session.
-- **[Auto memory](memory.md).** Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines of MEMORY.md are loaded at the start of each session.
+- **[Auto memory](memory.md).** Learnings Claude saves automatically as you work, like project patterns and your preferences. The first 200 lines or 25KB of MEMORY.md, whichever comes first, load at the start of each session.
 - **Extensions you configure.** [MCP servers](mcp.md) for external services, [skills](skills.md) for workflows, [subagents](sub-agents.md) for delegated work, and [Claude in Chrome](chrome.md) for browser interaction.
 
 Because Claude sees your whole project, it can work across it. When you ask Claude to “fix the authentication bug,” it searches for relevant files, reads multiple files to understand context, makes coordinated edits across them, runs tests to verify the fix, and commits the changes if you ask. This is different from inline code assistants that only see the current file.
@@ -92,12 +92,6 @@ When you resume a session with `claude --continue` or `claude --resume`, you pic
 ![Session continuity: resume continues the same session, fork creates a new branch with a new ID.](https://mintcdn.com/claude-code/c5r9_6tjPMzFdDDT/images/session-continuity.svg?fit=max&auto=format&n=c5r9_6tjPMzFdDDT&q=85&s=fa41d12bfb57579cabfeece907151d30)
 To branch off and try a different approach without affecting the original session, use the `--fork-session` flag:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --continue --fork-session
 ```
@@ -108,12 +102,13 @@ This creates a new session ID while preserving the conversation history up to th
 ### [​](#the-context-window) The context window
 
 Claude’s context window holds your conversation history, file contents, command outputs, [CLAUDE.md](memory.md), [auto memory](memory.md), loaded skills, and system instructions. As you work, context fills up. Claude compacts automatically, but instructions from early in the conversation can get lost. Put persistent rules in CLAUDE.md, and run `/context` to see what’s using space.
+For an interactive walkthrough of what loads and when, see [Explore the context window](context-window.md).
 
 #### [​](#when-context-fills-up) When context fills up
 
 Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.
 To control what’s preserved during compaction, add a “Compact Instructions” section to CLAUDE.md or run `/compact` with a focus (like `/compact focus on the API changes`).
-Run `/context` to see what’s using space. MCP servers add tool definitions to every request, so a few servers can consume significant context before you start working. Run `/mcp` to check per-server costs.
+Run `/context` to see what’s using space. MCP tool definitions are deferred by default and loaded on demand via [tool search](mcp.md), so only tool names consume context until Claude uses a specific tool. Run `/mcp` to check per-server costs.
 
 #### [​](#manage-context-with-skills-and-subagents) Manage context with skills and subagents
 
@@ -161,23 +156,11 @@ Built-in commands also guide you through setup:
 
 Claude Code is conversational. You don’t need perfect prompts. Start with what you want, then refine:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Fix the login bug
 ```
 
 [Claude investigates, tries something]
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 That's not quite right. The issue is in the session handling.
@@ -194,12 +177,6 @@ You can interrupt Claude at any point. If it’s going down the wrong path, just
 
 The more precise your initial prompt, the fewer corrections you’ll need. Reference specific files, mention constraints, and point to example patterns.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 The checkout flow is broken for users with expired cards.
 Check src/payments/ for the issue, especially token refresh.
@@ -212,12 +189,6 @@ Vague prompts work, but you’ll spend more time steering. Specific prompts like
 
 Claude performs better when it can check its own work. Include test cases, paste screenshots of expected UI, or define the output you want.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Implement validateEmail. Test cases: 'user@example.com' → true,
 'invalid' → false, 'user@.com' → false. Run the tests after.
@@ -229,12 +200,6 @@ For visual work, paste a screenshot of the design and ask Claude to compare its 
 
 For complex problems, separate research from coding. Use plan mode (`Shift+Tab` twice) to analyze the codebase first:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Read src/auth/ and understand how we handle sessions.
 Then create a plan for adding OAuth support.
@@ -245,12 +210,6 @@ Review the plan, refine it through conversation, then let Claude implement. This
 ### [​](#delegate-don’t-dictate) Delegate, don’t dictate
 
 Think of delegating to a capable colleague. Give context and direction, then trust Claude to figure out the details:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 The checkout flow is broken for users with expired cards.

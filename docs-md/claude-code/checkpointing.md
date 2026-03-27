@@ -54,12 +54,6 @@ Checkpoints are particularly useful when:
 
 Checkpointing does not track files modified by bash commands. For example, if Claude Code runs:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 rm file.txt
 mv old.txt new.txt

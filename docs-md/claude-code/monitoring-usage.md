@@ -6,12 +6,6 @@ Track Claude Code usage, costs, and tool activity across your organization by ex
 
 Configure OpenTelemetry using environment variables:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # 1. Enable telemetry
 export CLAUDE_CODE_ENABLE_TELEMETRY=1
@@ -43,12 +37,6 @@ For full configuration options, see the [OpenTelemetry specification](https://gi
 
 Administrators can configure OpenTelemetry settings for all users through the [managed settings file](settings.md). This allows for centralized control of telemetry settings across an organization. See the [settings precedence](settings.md) for more information about how settings are applied.
 Example managed settings configuration:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -86,7 +74,7 @@ Managed settings can be distributed via MDM (Mobile Device Management) or other 
 | `OTEL_METRIC_EXPORT_INTERVAL` | Export interval in milliseconds (default: 60000) | `5000`, `60000` |
 | `OTEL_LOGS_EXPORT_INTERVAL` | Logs export interval in milliseconds (default: 5000) | `1000`, `10000` |
 | `OTEL_LOG_USER_PROMPTS` | Enable logging of user prompt content (default: disabled) | `1` to enable |
-| `OTEL_LOG_TOOL_DETAILS` | Enable logging of tool input arguments, MCP server/tool names, and skill names in tool events (default: disabled) | `1` to enable |
+| `OTEL_LOG_TOOL_DETAILS` | Enable logging of tool parameters (bash commands, MCP server/tool names, skill names) and tool input arguments in tool events (default: disabled) | `1` to enable |
 | `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` | Metrics temporality preference (default: `delta`). Set to `cumulative` if your backend expects cumulative temporality | `delta`, `cumulative` |
 | `CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS` | Interval for refreshing dynamic headers (default: 1740000ms / 29 minutes) | `900000` |
 
@@ -110,12 +98,6 @@ For enterprise environments that require dynamic authentication, you can configu
 
 Add to your `.claude/settings.json`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "otelHeadersHelper": "/bin/generate_opentelemetry_headers.sh"
@@ -125,12 +107,6 @@ Ask AI
 #### [​](#script-requirements) Script requirements
 
 The script must output valid JSON with string key-value pairs representing HTTP headers:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 #!/bin/bash
@@ -145,12 +121,6 @@ The headers helper script runs at startup and periodically thereafter to support
 ### [​](#multi-team-organization-support) Multi-team organization support
 
 Organizations with multiple teams or departments can add custom attributes to distinguish between different groups using the `OTEL_RESOURCE_ATTRIBUTES` environment variable:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Add custom attributes for team identification
@@ -173,12 +143,6 @@ These custom attributes will be included in all metrics and events, allowing you
 
 **Examples:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # ❌ Invalid - contains spaces
 export OTEL_RESOURCE_ATTRIBUTES="org.name=John's Organization"
@@ -196,12 +160,6 @@ Note: wrapping values in quotes doesn’t escape spaces. For example, `org.name=
 ### [​](#example-configurations) Example configurations
 
 Set these environment variables before running `claude`. Each block shows a complete configuration for a different exporter or deployment scenario:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Console debugging (1-second intervals)
@@ -399,11 +357,11 @@ Logged when a tool completes execution.
 - `decision_source`: Decision source - `"config"`, `"hook"`, `"user_permanent"`, `"user_temporary"`, `"user_abort"`, or `"user_reject"`
 - `tool_result_size_bytes`: Size of the tool result in bytes
 - `mcp_server_scope`: MCP server scope identifier (for MCP tools)
-- `tool_parameters`: JSON string containing tool-specific parameters (when available)
+- `tool_parameters` (when `OTEL_LOG_TOOL_DETAILS=1`): JSON string containing tool-specific parameters
   - For Bash tool: includes `bash_command`, `full_command`, `timeout`, `description`, `dangerouslyDisableSandbox`, and `git_commit_id` (the commit SHA, when a `git commit` command succeeds)
-  - For MCP tools (when `OTEL_LOG_TOOL_DETAILS=1`): includes `mcp_server_name`, `mcp_tool_name`
-  - For Skill tool (when `OTEL_LOG_TOOL_DETAILS=1`): includes `skill_name`
-- `tool_input` (when `OTEL_LOG_TOOL_DETAILS=1`): JSON-serialized tool arguments. Individual values over 512 characters are truncated, and the full payload is bounded to ~4 K characters. Applies to all tools including MCP tools.
+  - For MCP tools: includes `mcp_server_name`, `mcp_tool_name`
+  - For Skill tool: includes `skill_name`
+- `tool_input` (when `OTEL_LOG_TOOL_DETAILS=1`): JSON-serialized tool arguments with long strings truncated. Bounded to ~4 K characters. Applies to all tools including MCP tools.
 
 #### [​](#api-request-event) API request event
 
@@ -536,10 +494,10 @@ For a comprehensive guide on measuring return on investment for Claude Code, inc
 ## [​](#security-and-privacy) Security and privacy
 
 - Telemetry is opt-in and requires explicit configuration
-- Raw file contents and code snippets are not included in metrics or events. Tool execution events include bash commands and file paths in the `tool_parameters` field, which may contain sensitive values. If your commands may include secrets, configure your telemetry backend to filter or redact `tool_parameters`
+- Raw file contents and code snippets are not included in metrics or events
 - When authenticated via OAuth, `user.email` is included in telemetry attributes. If this is a concern for your organization, work with your telemetry backend to filter or redact this field
 - User prompt content is not collected by default. Only prompt length is recorded. To include prompt content, set `OTEL_LOG_USER_PROMPTS=1`
-- Tool input arguments are not logged by default. To include them, set `OTEL_LOG_TOOL_DETAILS=1`. When enabled, `tool_result` events include MCP server/tool names and skill names plus a `tool_input` attribute with file paths, URLs, search patterns, and other arguments. Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact `tool_input` as needed
+- Tool input arguments and parameters are not logged by default. To include them, set `OTEL_LOG_TOOL_DETAILS=1`. When enabled, tool\_result events include a `tool_parameters` attribute (bash commands, MCP server/tool names, skill names) and a `tool_input` attribute (file paths, URLs, search patterns, and other arguments). Individual values over 512 characters are truncated and the total is bounded to ~4 K characters, but the arguments may still contain sensitive values. Configure your telemetry backend to filter or redact these attributes as needed
 
 ## [​](#monitor-claude-code-on-amazon-bedrock) Monitor Claude Code on Amazon Bedrock
 

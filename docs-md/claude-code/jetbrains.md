@@ -40,21 +40,9 @@ Run `claude` from your IDE’s integrated terminal, and all integration features
 
 Use the `/ide` command in any external terminal to connect Claude Code to your JetBrains IDE and activate all features:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /ide

@@ -55,12 +55,6 @@ On Windows, Claude Code can run PowerShell commands natively instead of routing 
 
 Set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` in your environment or in `settings.json`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "env": {

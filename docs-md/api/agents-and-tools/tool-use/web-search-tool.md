@@ -2,40 +2,13 @@
 
 Copy page
 
-The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. Claude automatically cites sources from search results as part of its answer.
+The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
 The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Opus 4.6 and Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
-The basic web search tool (`web_search_20250305`) is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md).
+For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-The `web_search_20260209` version with dynamic filtering is **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
-
-To use `web_search_20260209` with ZDR, disable dynamic filtering by setting `"allowed_callers": ["direct"]` on the tool:
-
-```shiki
-{
-  "type": "web_search_20260209",
-  "name": "web_search",
-  "allowed_callers": ["direct"]
-}
-```
-
-This restricts the tool to direct invocation only, bypassing the internal code execution step.
-
-## Supported models
-
-Web search is available on:
-
-- Claude Opus 4.6 (`claude-opus-4-6`)
-- Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-- Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-- Claude Opus 4 (`claude-opus-4-20250514`)
-- Claude Sonnet 4.6 (`claude-sonnet-4-6`)
-- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-- Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-- Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md)) (`claude-3-7-sonnet-20250219`)
-- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-- Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md)) (`claude-3-5-haiku-latest`)
+For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ## How web search works
 
@@ -152,23 +125,7 @@ The `max_uses` parameter limits the number of searches performed. If Claude atte
 
 #### Domain filtering
 
-When using domain filters:
-
-- Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)
-- Subdomains are automatically included (`example.com` covers `docs.example.com`)
-- Specific subdomains restrict results to only that subdomain (`docs.example.com` returns only results from that subdomain, not from `example.com` or `api.example.com`)
-- Subpaths are supported and match anything after the path (`example.com/blog` matches `example.com/blog/post-1`)
-- You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.
-
-**Wildcard support:**
-
-- Only one wildcard (`*`) is allowed per domain entry, and it must appear after the domain part (in the path)
-- Valid: `example.com/*`, `example.com/*/articles`
-- Invalid: `*.example.com`, `ex*.com`, `example.com/*/news/*`
-
-Invalid domain formats return an `invalid_tool_input` tool error.
-
-Request-level domain restrictions must be compatible with organization-level domain restrictions configured in the Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API returns a validation error.
+For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
 #### Localization
 
@@ -294,84 +251,11 @@ These are the possible error codes:
 
 #### `pause_turn` stop reason
 
-The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running turn. You may provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation.
+For continuing after a `pause_turn` stop reason, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
 ## Prompt caching
 
-Web search works with [prompt caching](build-with-claude/prompt-caching.md). To enable prompt caching, add at least one `cache_control` breakpoint in your request. The system will automatically cache up until the last `web_search_tool_result` block when executing the tool.
-
-For multi-turn conversations, set a `cache_control` breakpoint on or after the last `web_search_tool_result` block to reuse cached content.
-
-For example, to use prompt caching with web search for a multi-turn conversation:
-
-Python
-
-```shiki
-client = anthropic.Anthropic()
-
-# First request with web search and cache breakpoint
-messages = [
-    {"role": "user", "content": "What's the current weather in San Francisco today?"}
-]
-
-response1 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=messages,
-    tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "user_location": {
-                "type": "approximate",
-                "city": "San Francisco",
-                "region": "California",
-                "country": "US",
-                "timezone": "America/Los_Angeles",
-            },
-        }
-    ],
-)
-
-# Add Claude's response to the conversation
-messages.append({"role": "assistant", "content": response1.content})
-
-# Second request with cache breakpoint after the search results
-messages.append(
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": "Should I expect rain later this week?",
-                "cache_control": {"type": "ephemeral"},
-            }
-        ],
-    }
-)
-
-response2 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=messages,
-    tools=[
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "user_location": {
-                "type": "approximate",
-                "city": "San Francisco",
-                "region": "California",
-                "country": "US",
-                "timezone": "America/Los_Angeles",
-            },
-        }
-    ],
-)
-# The second response will benefit from cached search results
-# while still being able to perform new searches if needed
-print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
-```
+For caching tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
 ## Streaming
 
@@ -425,6 +309,14 @@ Web search usage is charged in addition to token usage:
 Web search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
+
+## Next steps
+
+[Server tools
+
+Shared mechanics for Anthropic-executed tools.](agents-and-tools/tool-use/server-tools.md)[Tool reference
+
+Directory of all Anthropic-provided tools.](agents-and-tools/tool-use/tool-reference.md)
 
 Was this page helpful?
 

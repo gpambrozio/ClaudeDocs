@@ -10,20 +10,11 @@ For a deeper look at the inference and context costs that programmatic tool call
 
 This feature requires the code execution tool to be enabled.
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 
-Programmatic tool calling is available on the following models:
-
-| Model | Tool Version |
-| --- | --- |
-| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20260120` |
-| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20260120` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20260120` |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20260120` |
-
-Programmatic tool calling is available via the Claude API and Microsoft Foundry.
+For model compatibility and tool version details, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md). Programmatic tool calling is available via the Claude API and Microsoft Foundry.
 
 ## Quick start
 
@@ -152,7 +143,7 @@ The `tool_id` references the code execution tool that made the programmatic call
 Programmatic tool calling uses the same containers as code execution:
 
 - **Container creation:** A new container is created for each session unless you reuse an existing one
-- **Expiration:** Containers expire after approximately 4.5 minutes of inactivity (subject to change)
+- **Expiration:** Containers have a 30-day maximum lifetime and are cleaned up after 4.5 minutes of idle time
 - **Container ID:** Returned in responses via the `container` field
 - **Reuse:** Pass the container ID to maintain state across requests
 
@@ -168,29 +159,7 @@ Send a request with code execution and a tool that allows programmatic calling. 
 
 Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 
-Python
-
-```shiki
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue",
-        }
-    ],
-    tools=[
-        {"type": "code_execution_20260120", "name": "code_execution"},
-        {
-            "name": "query_database",
-            "description": "Execute a SQL query against the sales database. Returns a list of rows as JSON objects.",
-            "input_schema": {...},
-            "allowed_callers": ["code_execution_20260120"],
-        },
-    ],
-)
-```
+The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message.
 
 ### Step 2: API response with tool call
 
@@ -285,6 +254,8 @@ response = client.messages.create(
     ],
     tools=[...],
 )
+
+print(response)
 ```
 
 ### Step 4: Next tool call or completion
@@ -325,16 +296,16 @@ Once the code execution completes, Claude provides the final response:
 Claude can write code that processes multiple items efficiently:
 
 ```shiki
-# async wrapper omitted for clarity
-regions = ["West", "East", "Central", "North", "South"]
-results = {}
-for region in regions:
-    data = await query_database(f"<sql for {region}>")
-    results[region] = sum(row["revenue"] for row in data)
+async def _claude_code():
+    regions = ["West", "East", "Central", "North", "South"]
+    results = {}
+    for region in regions:
+        data = await query_database(f"<sql for {region}>")
+        results[region] = sum(row["revenue"] for row in data)
 
-# Process results programmatically
-top_region = max(results.items(), key=lambda x: x[1])
-print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
+    # Process results programmatically
+    top_region = max(results.items(), key=lambda x: x[1])
+    print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
 ```
 
 This pattern:
@@ -348,36 +319,36 @@ This pattern:
 Claude can stop processing as soon as success criteria are met:
 
 ```shiki
-# async wrapper omitted for clarity
-endpoints = ["us-east", "eu-west", "apac"]
-for endpoint in endpoints:
-    status = await check_health(endpoint)
-    if status == "healthy":
-        print(f"Found healthy endpoint: {endpoint}")
-        break  # Stop early, don't check remaining
+async def _claude_code():
+    endpoints = ["us-east", "eu-west", "apac"]
+    for endpoint in endpoints:
+        status = await check_health(endpoint)
+        if status == "healthy":
+            print(f"Found healthy endpoint: {endpoint}")
+            break  # Stop early, don't check remaining
 ```
 
 ### Conditional tool selection
 
 ```shiki
-# async wrapper omitted for clarity
-file_info = await get_file_info(path)
-if file_info["size"] < 10000:
-    content = await read_full_file(path)
-else:
-    content = await read_file_summary(path)
-print(content)
+async def _claude_code():
+    file_info = await get_file_info(path)
+    if file_info["size"] < 10000:
+        content = await read_full_file(path)
+    else:
+        content = await read_file_summary(path)
+    print(content)
 ```
 
 ### Data filtering
 
 ```shiki
-# async wrapper omitted for clarity
-logs = await fetch_logs(server_id)
-errors = [log for log in logs if "ERROR" in log]
-print(f"Found {len(errors)} errors")
-for error in errors[-10:]:  # Only return last 10 errors
-    print(error)
+async def _claude_code():
+    logs = await fetch_logs(server_id)
+    errors = [log for log in logs if "ERROR" in log]
+    print(f"Found {len(errors)} errors")
+    for error in errors[-10:]:  # Only return last 10 errors
+        print(error)
 ```
 
 ## Response format
@@ -442,7 +413,7 @@ When all tool calls are satisfied and code completes:
 | --- | --- | --- |
 | `invalid_tool_input` | Tool input doesn't match schema | Validate your tool's input\_schema |
 | `tool_not_allowed` | Tool doesn't allow the requested caller type | Check `allowed_callers` includes the right contexts |
-| `missing_beta_header` | Required beta header not provided | Add the required beta headers to your request |
+| `missing_beta_header` | Required beta header not provided (Bedrock and Vertex AI only; programmatic tool calling is GA on the first-party Claude API) | Add the required beta headers to your request |
 
 ### Container expiration during tool call
 
@@ -473,11 +444,10 @@ To prevent timeouts:
 If your tool returns an error:
 
 ```shiki
-# Provide error information in the tool result
 {
-    "type": "tool_result",
-    "tool_use_id": "toolu_abc123",
-    "content": "Error: Query timeout - table lock exceeded 30 seconds",
+  "type": "tool_result",
+  "tool_use_id": "toolu_abc123",
+  "content": "Error: Query timeout - table lock exceeded 30 seconds"
 }
 ```
 
@@ -542,7 +512,7 @@ Programmatic tool calls are subject to the same rate limits as regular tool call
 
 ### Validate tool results before use
 
-When implementing custom tools that will be called programmatically:
+When implementing user-defined tools that will be called programmatically:
 
 - **Tool results are returned as strings:** They can contain any content, including code snippets or executable commands that may be processed by the execution environment.
 - **Validate external tool results:** If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.
@@ -602,7 +572,7 @@ Token counting for programmatic tool calls: Tool results from programmatic invoc
 
 **Container expiration**
 
-- Ensure you respond to tool calls within the container's lifetime (~4.5 minutes)
+- Ensure you respond to tool calls before the container idles out (4.5 minutes of inactivity; 30-day hard maximum)
 - Monitor the `expires_at` field in responses
 - Consider implementing faster tool execution
 
@@ -676,15 +646,21 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 
 Consider using Anthropic's managed solution if you're using the Claude API.
 
+## Data retention
+
+Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+
 ## Related features
 
 [Code Execution Tool
 
 Learn about the underlying code execution capability that powers programmatic tool calling.](agents-and-tools/tool-use/code-execution-tool.md)[Tool Use Overview
 
-Understand the fundamentals of tool use with Claude.](agents-and-tools/tool-use/overview.md)[Implement Tool Use
+Understand the fundamentals of tool use with Claude.](agents-and-tools/tool-use/overview.md)[Define tools
 
-Step-by-step guide for implementing tools.](agents-and-tools/tool-use/implement-tool-use.md)
+Step-by-step guide for defining tools.](agents-and-tools/tool-use/define-tools.md)
 
 Was this page helpful?
 

@@ -9,7 +9,7 @@ For complete API reference including request/response schemas and all parameters
 - [Skill Management API Reference](api/skills/list-skills.md) - CRUD operations for Skills
 - [Skill Versions API Reference](api/skills/list-skill-versions.md) - Version management
 
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Quick Links
 
@@ -779,6 +779,12 @@ except anthropic.BadRequestError as e:
 ```
 
 ---
+
+## Data retention
+
+Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## Next Steps
 

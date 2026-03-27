@@ -25,23 +25,11 @@ First-time users of Anthropic models are required to submit use case details bef
 Claude Code uses the default AWS SDK credential chain. Set up your credentials using one of these methods:
 **Option A: AWS CLI configuration**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 aws configure
 ```
 
 **Option B: Environment variables (access key)**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 export AWS_ACCESS_KEY_ID=your-access-key-id
@@ -51,12 +39,6 @@ export AWS_SESSION_TOKEN=your-session-token
 
 **Option C: Environment variables (SSO profile)**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 aws sso login --profile=<your-profile-name>
 
@@ -65,24 +47,12 @@ export AWS_PROFILE=your-profile-name
 
 **Option D: AWS Management Console credentials**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 aws login
 ```
 
 [Learn more](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html) about `aws login`.
 **Option E: Bedrock API keys**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 export AWS_BEARER_TOKEN_BEDROCK=your-bedrock-api-key
@@ -96,12 +66,6 @@ Claude Code supports automatic credential refresh for AWS SSO and corporate iden
 When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured `awsAuthRefresh` and/or `awsCredentialExport` commands to obtain new credentials before retrying the request.
 
 ##### Example configuration
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -117,12 +81,6 @@ Ask AI
 **`awsAuthRefresh`**: Use this for commands that modify the `.aws` directory, such as updating credentials, SSO cache, or config files. The command’s output is displayed to the user, but interactive input isn’t supported. This works well for browser-based SSO flows where the CLI displays a URL or code and you complete authentication in the browser.
 **`awsCredentialExport`**: Only use this if you can’t modify `.aws` and must directly return credentials. Output is captured silently and not shown to the user. The command must output JSON in this format:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "Credentials": {
@@ -136,12 +94,6 @@ Ask AI
 ### [​](#3-configure-claude-code) 3. Configure Claude Code
 
 Set the following environment variables to enable Bedrock:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Enable Bedrock integration
@@ -164,12 +116,6 @@ Pin specific model versions for every deployment. If you use model aliases (`son
 
 Set these environment variables to specific Bedrock model IDs:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-6-v1'
 export ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'
@@ -185,12 +131,6 @@ Claude Code uses these default models when no pinning variables are set:
 | Small/fast model | `us.anthropic.claude-haiku-4-5-20251001-v1:0` |
 
 To customize models further, use one of these methods:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Using inference profile ID
@@ -211,12 +151,6 @@ export DISABLE_PROMPT_CACHING=1
 The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](settings.md) instead.
 This example maps three Opus versions to distinct ARNs so users can switch between them without bypassing your organization’s inference profiles:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "modelOverrides": {
@@ -232,12 +166,6 @@ When a user selects one of these versions in `/model`, Claude Code calls Bedrock
 ## [​](#iam-configuration) IAM configuration
 
 Create an IAM policy with the required permissions for Claude Code:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -284,12 +212,6 @@ Create a dedicated AWS account for Claude Code to simplify cost tracking and acc
 
 [Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), publish a version, then add the Guardrail headers to your [settings file](settings.md). Enable Cross-Region inference on your Guardrail if you’re using cross-region inference profiles.
 Example configuration:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

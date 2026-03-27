@@ -27,12 +27,6 @@ Use **cloud tasks** for work that should run reliably without your machine. Use 
 
 The `/loop` [bundled skill](skills.md) is the quickest way to schedule a recurring prompt. Pass an optional interval and a prompt, and Claude sets up a cron job that fires in the background while the session stays open.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /loop 5m check if the deployment finished and tell me what happened
 ```
@@ -55,12 +49,6 @@ Supported units are `s` for seconds, `m` for minutes, `h` for hours, and `d` for
 
 The scheduled prompt can itself be a command or skill invocation. This is useful for re-running a workflow you’ve already packaged.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /loop 20m /review-pr 1234
 ```
@@ -71,21 +59,9 @@ Each time the job fires, Claude runs `/review-pr 1234` as if you had typed it.
 
 For one-shot reminders, describe what you want in natural language instead of using `/loop`. Claude schedules a single-fire task that deletes itself after running.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 remind me at 3pm to push the release branch
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 in 45 minutes, check whether the integration tests passed
@@ -97,21 +73,9 @@ Claude pins the fire time to a specific minute and hour using a cron expression 
 
 Ask Claude in natural language to list or cancel tasks, or reference the underlying tools directly.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 what scheduled tasks do I have?
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 cancel the deploy check job

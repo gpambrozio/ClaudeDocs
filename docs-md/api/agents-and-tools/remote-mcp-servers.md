@@ -676,14 +676,6 @@ URL
 
 `https://mcp.squareup.com/sse`
 
-[Bigdata.com](https://docs.bigdata.com/mcp-reference)
-
-Access real-time financial data
-
-URL
-
-`https://mcp.bigdata.com/`
-
 [LSEG](https://www.lseg.com/en/solutions/ai-finance-solutions/anthropic)
 
 Access best in class data & analytics across a broad spectrum of asset classes.
@@ -691,6 +683,14 @@ Access best in class data & analytics across a broad spectrum of asset classes.
 URL
 
 `https://api.analytics.lseg.com/lfa/mcp/server-cl`
+
+[Bigdata.com](https://docs.bigdata.com/mcp-reference)
+
+Access real-time financial data
+
+URL
+
+`https://mcp.bigdata.com/`
 
 [Pylon](https://support.usepylon.com/articles/2407390554-connecting-to-the-pylon-mcp-server?lang=en)
 
@@ -738,14 +738,6 @@ Explore customer data and generate insights via Claude
 
 Requires user-specific URL. [Get your URL here](https://docs.customer.io/ai/mcp-server/)
 
-[Dice](https://www.dice.com/about/mcp)
-
-Find active tech jobs on Dice
-
-URL
-
-`https://mcp.dice.com/mcp`
-
 [Gusto](https://docs.gusto.com/app-integrations/docs/mcp)
 
 Query and analyze your Gusto data
@@ -753,6 +745,14 @@ Query and analyze your Gusto data
 URL
 
 `https://mcp.api.gusto.com/anthropic`
+
+[Dice](https://www.dice.com/about/mcp)
+
+Find active tech jobs on Dice
+
+URL
+
+`https://mcp.dice.com/mcp`
 
 [Coupler.io](https://help.coupler.io/article/592-coupler-local-mcp-server)
 
@@ -792,12 +792,6 @@ URL
 
 `https://kg.mcp.learningcommons.org/mcp`
 
-[Workato](https://docs.workato.com/en/mcp.html)
-
-Automate workflows and connect your business apps
-
-Requires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp)
-
 [Cloudinary](https://cloudinary.com/documentation/cloudinary_llm_mcp#available_mcp_servers)
 
 Manage, transform and deliver your images & videos
@@ -805,6 +799,12 @@ Manage, transform and deliver your images & videos
 URL
 
 `https://asset-management.mcp.cloudinary.com/sse`
+
+[Workato](https://docs.workato.com/en/mcp.html)
+
+Automate workflows and connect your business apps
+
+Requires user-specific URL. [Get your URL here](https://app.workato.com/ai_hub/mcp)
 
 [LunarCrush](https://lunarcrush.com/developers/api/ai)
 
@@ -1068,6 +1068,12 @@ URL
 
 `https://mcp.msci.com/mcp/v1.0/mcp`
 
+[Port IO](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
+
+Search your context lake and safely run actions
+
+Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp)
+
 [Ticket Tailor](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)
 
 Event platform for managing tickets, orders & more
@@ -1075,12 +1081,6 @@ Event platform for managing tickets, orders & more
 URL
 
 `https://mcp.tickettailor.ai/mcp`
-
-[Port IO](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
-
-Search your context lake and safely run actions
-
-Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp)
 
 [Lumin](https://github.com/luminpdf/lumin-mcp-server)
 
@@ -1192,12 +1192,6 @@ URL
 
 `https://ai-inc.quickbooks.intuit.com/v1/mcp`
 
-[Dremio Cloud](https://docs.dremio.com/cloud/sonar/mcp-server/)
-
-Analyze and get insights from your lakehouse data
-
-Requires user-specific URL. [Get your URL here](https://docs.dremio.com/cloud/sonar/mcp-server/)
-
 [Tango](https://tango.makegov.com/docs/mcp/)
 
 Search for US Government Contracting Data
@@ -1205,6 +1199,12 @@ Search for US Government Contracting Data
 URL
 
 `https://govcon.dev/mcp`
+
+[Dremio Cloud](https://docs.dremio.com/cloud/sonar/mcp-server/)
+
+Analyze and get insights from your lakehouse data
+
+Requires user-specific URL. [Get your URL here](https://docs.dremio.com/cloud/sonar/mcp-server/)
 
 [Jentic](https://docs.jentic.com/guides/mcp/remote-mcp/)
 

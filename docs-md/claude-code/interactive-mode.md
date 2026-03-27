@@ -35,7 +35,7 @@ See [Terminal configuration](terminal-config.md) for details.
 | Shortcut | Description | Context |
 | --- | --- | --- |
 | `Ctrl+K` | Delete to end of line | Stores deleted text for pasting |
-| `Ctrl+U` | Delete entire line | Stores deleted text for pasting |
+| `Ctrl+U` | Delete from cursor to line start | Stores deleted text for pasting. Repeat to clear across lines in multiline input |
 | `Ctrl+Y` | Paste deleted text | Paste text deleted with `Ctrl+K` or `Ctrl+U` |
 | `Alt+Y` (after `Ctrl+Y`) | Cycle paste history | After pasting, cycle through previously deleted text. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
 | `Alt+B` | Move cursor back one word | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
@@ -218,12 +218,6 @@ To disable all background task functionality, set the `CLAUDE_CODE_DISABLE_BACKG
 
 Run bash commands directly without going through Claude by prefixing your input with `!`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ! npm test
 ! git status
@@ -253,12 +247,6 @@ The suggestion runs as a background request that reuses the parent conversation�
 Suggestions are automatically skipped after the first turn of a conversation, in non-interactive mode, and in plan mode.
 To disable prompt suggestions entirely, set the environment variable or toggle the setting in `/config`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false
 ```
@@ -266,12 +254,6 @@ export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false
 ## [​](#side-questions-with-/btw) Side questions with /btw
 
 Use `/btw` to ask a quick question about your current work without adding to the conversation history. This is useful when you want a fast answer but don’t want to clutter the main context or derail Claude from a long-running task.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /btw what was the name of that config file again?

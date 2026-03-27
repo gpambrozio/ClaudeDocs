@@ -10,12 +10,6 @@ All environment variables shown on this page can also be configured in [`setting
 
 Claude Code respects standard proxy environment variables:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # HTTPS proxy (recommended)
 export HTTPS_PROXY=https://proxy.example.com:8080
@@ -37,12 +31,6 @@ Claude Code does not support SOCKS proxies.
 
 If your proxy requires basic authentication, include credentials in the proxy URL:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export HTTPS_PROXY=http://username:password@proxy.example.com:8080
 ```
@@ -55,12 +43,6 @@ For proxies requiring advanced authentication (NTLM, Kerberos, etc.), consider u
 
 If your enterprise environment uses custom CAs for HTTPS connections (whether through a proxy or direct API access), configure Claude Code to trust them:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem
 ```
@@ -68,12 +50,6 @@ export NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem
 ## [​](#mtls-authentication) mTLS authentication
 
 For enterprise environments requiring client certificate authentication:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Client certificate for authentication

@@ -38,12 +38,6 @@ You can configure your model in several ways, listed in order of priority:
 
 Example usage:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Start with Opus
 claude --model opus
@@ -53,12 +47,6 @@ claude --model opus
 ```
 
 Example settings file:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -73,12 +61,6 @@ Ask AI
 
 Enterprise administrators can use `availableModels` in [managed or policy settings](settings.md) to restrict which models users can select.
 When `availableModels` is set, users cannot switch to models not in the list via `/model`, `--model` flag, Config tool, or `ANTHROPIC_MODEL` environment variable.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -99,12 +81,6 @@ To fully control the model experience, use `availableModels` together with the `
 - **model**: sets the explicit model override, taking precedence over the Default
 
 This example ensures all users run Sonnet 4.6 and can only choose between Sonnet and Haiku:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -177,12 +153,6 @@ The 1M context window uses standard model pricing with no premium for tokens bey
 If your account supports 1M context, the option appears in the model picker (`/model`) in the latest versions of Claude Code. If you don’t see it, try restarting your session.
 You can also use the `[1m]` suffix with model aliases or full model names:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # Use the opus[1m] or sonnet[1m] alias
 /model opus[1m]
@@ -203,12 +173,6 @@ You can see which model you’re currently using in several ways:
 
 Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model` picker without replacing the built-in aliases. This is useful for LLM gateway deployments or testing model IDs that Claude Code does not list by default.
 This example sets all three variables to make a gateway-routed Opus deployment selectable:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 export ANTHROPIC_CUSTOM_MODEL_OPTION="my-gateway/claude-opus-4-6"
@@ -252,12 +216,6 @@ Use the following environment variables with version-specific model IDs for your
 Apply the same pattern for `ANTHROPIC_DEFAULT_SONNET_MODEL` and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. For current and legacy model IDs across all providers, see [Models overview](about-claude/models/overview.md). To upgrade users to a new model version, update these environment variables and redeploy.
 To enable [extended context](#extended-context) for a pinned model, append `[1m]` to the model ID in `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6[1m]'
 ```
@@ -291,12 +249,6 @@ Claude Code enables features like [effort levels](#adjust-effort-level) and [ext
 When `_SUPPORTED_CAPABILITIES` is set, listed capabilities are enabled and unlisted capabilities are disabled for the matching pinned model. When the variable is unset, Claude Code falls back to built-in detection based on the model ID.
 This example pins Opus to a Bedrock custom model ARN, sets a friendly name, and declares its capabilities:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export ANTHROPIC_DEFAULT_OPUS_MODEL='arn:aws:bedrock:us-east-1:123456789012:custom-model/abc'
 export ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='Opus via Bedrock'
@@ -310,12 +262,6 @@ The family-level environment variables above configure one model ID per family a
 `modelOverrides` maps individual Anthropic model IDs to the provider-specific strings that Claude Code sends to your provider’s API. When a user selects a mapped model in the `/model` picker, Claude Code uses your configured value instead of the built-in default.
 This lets enterprise administrators route each model version to a specific Bedrock inference profile ARN, Vertex AI version name, or Foundry deployment name for governance, cost allocation, or regional routing.
 Set `modelOverrides` in your [settings file](settings.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

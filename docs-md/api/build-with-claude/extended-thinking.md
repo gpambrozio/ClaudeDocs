@@ -2,19 +2,21 @@
 
 Copy page
 
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
 
-For Claude Opus 4.6, use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md) instead of the manual thinking mode described on this page. The manual `thinking: {type: "enabled", budget_tokens: N}` configuration is deprecated on Opus 4.6 and will be removed in a future model release.
+For Claude Opus 4.6 and Claude Sonnet 4.6, use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md) instead of the manual thinking mode described on this page. The manual `thinking: {type: "enabled", budget_tokens: N}` configuration is still functional on these models but is deprecated and will be removed in a future model release.
 
 ## Supported models
 
 Extended thinking is supported in the following models:
 
-- Claude Opus 4.6 (`claude-opus-4-6`), [adaptive thinking](build-with-claude/adaptive-thinking.md) only; manual mode (`type: "enabled"`) is deprecated
+- Claude Opus 4.6 (`claude-opus-4-6`), [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated but still functional
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
 - Claude Opus 4 (`claude-opus-4-20250514`)
-- Claude Sonnet 4.6 (`claude-sonnet-4-6`), supports both manual extended thinking with [interleaved mode](#interleaved-thinking) and [adaptive thinking](build-with-claude/adaptive-thinking.md)
+- Claude Sonnet 4.6 (`claude-sonnet-4-6`), [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) with [interleaved mode](#interleaved-thinking) is deprecated but still functional
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Sonnet 4 (`claude-sonnet-4-20250514`)
 - Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](about-claude/model-deprecations.md))
@@ -78,11 +80,11 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-To turn on extended thinking, add a `thinking` object, with the `type` parameter set to `enabled` and the `budget_tokens` to a specified token budget for extended thinking. For Claude Opus 4.6, use `type: "adaptive"` instead. See [Adaptive thinking](build-with-claude/adaptive-thinking.md) for details. While `type: "enabled"` with `budget_tokens` is still supported on Opus 4.6, it is deprecated and will be removed in a future release.
+To turn on extended thinking, add a `thinking` object, with the `type` parameter set to `enabled` and the `budget_tokens` to a specified token budget for extended thinking. For Claude Opus 4.6 and Claude Sonnet 4.6, use `type: "adaptive"` instead. See [Adaptive thinking](build-with-claude/adaptive-thinking.md) for details. While `type: "enabled"` with `budget_tokens` is still functional on these models, it is deprecated and will be removed in a future release.
 
 The `budget_tokens` parameter determines the maximum number of tokens Claude is allowed to use for its internal reasoning process. In Claude 4 and later models, this limit applies to full thinking tokens, and not to [the summarized output](#summarized-thinking). Larger budgets can improve response quality by enabling more thorough analysis for complex problems, although Claude may not use the entire budget allocated, especially at ranges above 32k.
 
-`budget_tokens` is deprecated on Claude Opus 4.6 and will be removed in a future model release. Use [adaptive thinking](build-with-claude/adaptive-thinking.md) with the [effort parameter](build-with-claude/effort.md) to control thinking depth instead.
+`budget_tokens` is [deprecated](build-with-claude/overview.md) on Claude Opus 4.6 and Claude Sonnet 4.6 and will be removed in a future model release. Use [adaptive thinking](build-with-claude/adaptive-thinking.md) with the [effort parameter](build-with-claude/effort.md) to control thinking depth instead.
 
 Claude Opus 4.6 supports up to 128k output tokens. Earlier models support up to 64k output tokens.
 
@@ -103,7 +105,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#1d6e7c71786e5d7c7369756f726d747e337e7270).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#f083919c9583b0919e8498829f809993de939f9d).
 
 ### Controlling thinking display
 
@@ -395,7 +397,7 @@ With interleaved thinking, Claude can:
 **Model support:**
 
 - **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md). No beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
-- **Claude Sonnet 4.6**: Supports the `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`). You can also use [adaptive thinking](build-with-claude/adaptive-thinking.md), which automatically enables interleaved thinking.
+- **Claude Sonnet 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) (recommended). The `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`) is still functional but deprecated.
 - **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4, Sonnet 4.5, Sonnet 4): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
@@ -644,7 +646,7 @@ The billed output token count will **not** match the visible token count in the 
 
 ### Feature compatibility
 
-- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](agents-and-tools/tool-use/implement-tool-use.md).
+- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](agents-and-tools/tool-use/define-tools.md).
 - When thinking is enabled, you can set `top_p` to values between 1 and 0.95.
 - You can't pre-fill responses when thinking is enabled.
 - Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.

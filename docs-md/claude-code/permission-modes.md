@@ -22,23 +22,11 @@ You can switch modes at any time during a session, at startup, or as a persisten
 
 **During a session**: press `Shift+Tab` to cycle through `default` → `acceptEdits` → `plan` → `auto`. The current mode appears in the status bar. `auto` does not appear in the cycle until you pass `--enable-auto-mode` at startup. Auto also requires a Team (or Enterprise/API once available) plan and Claude Sonnet 4.6 or Opus 4.6, so the option may remain unavailable even with the flag. If `bypassPermissions` is also enabled, it appears in the cycle between `plan` and `auto`.**At startup**: pass the mode as a CLI flag:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --permission-mode plan
 ```
 
 **As a default**: set `defaultMode` in your [settings file](settings.md):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -49,12 +37,6 @@ Ask AI
 ```
 
 **Non-interactively**: the same flag works with `-p` for scripted runs:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude -p "refactor auth" --permission-mode acceptEdits
@@ -89,12 +71,6 @@ Auto and Bypass permissions appear only after you enable **Allow dangerously ski
 Auto and Bypass permissions appear in the selector only after you enable them in Desktop settings. See the [Desktop guide](desktop.md) for details.
 
 **During a session**: use the mode dropdown next to the prompt box on [claude.ai/code](https://claude.ai/code) or in the Claude mobile app.For [Claude Code on the web](claude-code-on-the-web.md) sessions running on Anthropic’s cloud VMs, the dropdown offers Auto accept edits and Plan mode. Ask permissions and Auto are not available for cloud sessions.For [Remote Control](remote-control.md) sessions running on your local machine, the dropdown offers Ask permissions, Auto accept edits, and Plan mode. You can also set the starting mode when you launch the local host:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude remote-control --permission-mode acceptEdits
@@ -133,35 +109,17 @@ Plan mode is useful when you want Claude to research and propose an approach bef
 
 Enter plan mode for a single request by prefixing your prompt with `/plan`, or switch the whole session into plan mode by pressing `Shift+Tab` to [cycle through permission modes](#switch-permission-modes). You can also start in plan mode from the CLI:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --permission-mode plan
 ```
 
 This example starts a planning session for a complex refactor:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 I need to refactor our authentication system to use OAuth2. Create a detailed migration plan.
 ```
 
 Claude analyzes the current implementation and creates a plan. Refine with follow-ups:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 What about backward compatibility?
@@ -245,12 +203,6 @@ Repeated blocks usually mean one of two things: the task genuinely requires acti
 
 `dontAsk` mode auto-denies every tool that is not explicitly allowed. Only actions matching your `/permissions` allow rules or `permissions.allow` settings can execute. If a tool has an explicit `ask` rule, the action is also denied rather than prompting. This makes the mode fully non-interactive, suitable for CI pipelines or restricted environments where you pre-define exactly what Claude is permitted to do.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --permission-mode dontAsk
 ```
@@ -259,23 +211,11 @@ claude --permission-mode dontAsk
 
 `bypassPermissions` mode disables all permission prompts and safety checks. Every tool call executes immediately without any verification. Only use this in isolated environments like containers, VMs, or devcontainers without internet access, where Claude Code cannot cause damage to your host system.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --permission-mode bypassPermissions
 ```
 
 The `--dangerously-skip-permissions` flag is equivalent to `--permission-mode bypassPermissions`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude -p "refactor the auth module" --dangerously-skip-permissions

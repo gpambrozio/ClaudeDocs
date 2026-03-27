@@ -48,12 +48,6 @@ Create the plugin directory
 
 Every plugin lives in its own directory containing a manifest and your skills, agents, or hooks. Create one now:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 mkdir my-first-plugin
 ```
@@ -64,12 +58,6 @@ Create the plugin manifest
 
 The manifest file at `.claude-plugin/plugin.json` defines your plugin’s identity: its name, description, and version. Claude Code uses this metadata to display your plugin in the plugin manager.Create the `.claude-plugin` directory inside your plugin folder:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 mkdir my-first-plugin/.claude-plugin
 ```
@@ -77,12 +65,6 @@ mkdir my-first-plugin/.claude-plugin
 Then create `my-first-plugin/.claude-plugin/plugin.json` with this content:
 
 my-first-plugin/.claude-plugin/plugin.json
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -110,12 +92,6 @@ Add a skill
 
 Skills live in the `skills/` directory. Each skill is a folder containing a `SKILL.md` file. The folder name becomes the skill name, prefixed with the plugin’s namespace (`hello/` in a plugin named `my-first-plugin` creates `/my-first-plugin:hello`).Create a skill directory in your plugin folder:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 mkdir -p my-first-plugin/skills/hello
 ```
@@ -123,12 +99,6 @@ mkdir -p my-first-plugin/skills/hello
 Then create `my-first-plugin/skills/hello/SKILL.md` with this content:
 
 my-first-plugin/skills/hello/SKILL.md
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -145,23 +115,11 @@ Test your plugin
 
 Run Claude Code with the `--plugin-dir` flag to load your plugin:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --plugin-dir ./my-first-plugin
 ```
 
 Once Claude Code starts, try your new skill:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /my-first-plugin:hello
@@ -179,12 +137,6 @@ Make your skill dynamic by accepting user input. The `$ARGUMENTS` placeholder ca
 
 my-first-plugin/skills/hello/SKILL.md
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 description: Greet the user with a personalized message
@@ -196,12 +148,6 @@ Greet the user named "$ARGUMENTS" warmly and ask how you can help them today. Ma
 ```
 
 Run `/reload-plugins` to pick up the changes, then try the skill with your name:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /my-first-plugin:hello Alex
@@ -245,12 +191,6 @@ Once you’re comfortable with basic plugins, you can create more sophisticated 
 Plugins can include [Agent Skills](skills.md) to extend Claude’s capabilities. Skills are model-invoked: Claude automatically uses them based on the task context.
 Add a `skills/` directory at your plugin root with Skill folders containing `SKILL.md` files:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 my-plugin/
 ├── .claude-plugin/
@@ -261,12 +201,6 @@ my-plugin/
 ```
 
 Each `SKILL.md` needs frontmatter with `name` and `description` fields, followed by instructions:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -291,12 +225,6 @@ LSP (Language Server Protocol) plugins give Claude real-time code intelligence. 
 
 .lsp.json
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "go": {
@@ -319,12 +247,6 @@ Setting `agent` activates one of the plugin’s [custom agents](sub-agents.md) a
 
 settings.json
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "agent": "security-reviewer"
@@ -341,12 +263,6 @@ For plugins with many components, organize your directory structure by functiona
 
 Use the `--plugin-dir` flag to test plugins during development. This loads your plugin directly without requiring installation.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --plugin-dir ./my-plugin
 ```
@@ -359,12 +275,6 @@ As you make changes to your plugin, run `/reload-plugins` to pick up the updates
 - Verify hooks work as expected
 
 You can load multiple plugins at once by specifying the flag multiple times:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
@@ -410,12 +320,6 @@ Create the plugin structure
 
 Create a new plugin directory:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 mkdir -p my-plugin/.claude-plugin
 ```
@@ -423,12 +327,6 @@ mkdir -p my-plugin/.claude-plugin
 Create the manifest file at `my-plugin/.claude-plugin/plugin.json`:
 
 my-plugin/.claude-plugin/plugin.json
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -443,12 +341,6 @@ Ask AI
 Copy your existing files
 
 Copy your existing configurations to the plugin directory:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 # Copy commands
@@ -467,12 +359,6 @@ Migrate hooks
 
 If you have hooks in your settings, create a hooks directory:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 mkdir my-plugin/hooks
 ```
@@ -480,12 +366,6 @@ mkdir my-plugin/hooks
 Create `my-plugin/hooks/hooks.json` with your hooks configuration. Copy the `hooks` object from your `.claude/settings.json` or `settings.local.json`, since the format is the same. The command receives hook input as JSON on stdin, so use `jq` to extract the file path:
 
 my-plugin/hooks/hooks.json
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -505,12 +385,6 @@ Ask AI
 Test your migrated plugin
 
 Load your plugin to verify everything works:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --plugin-dir ./my-plugin

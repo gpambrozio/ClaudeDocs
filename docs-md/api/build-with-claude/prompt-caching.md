@@ -4,7 +4,7 @@ Copy page
 
 Prompt caching optimizes your API usage by allowing resuming from specific prefixes in your prompts. This significantly reduces processing time and costs for repetitive tasks or prompts with consistent elements.
 
-Prompt caching stores KV cache representations and cryptographic hashes of cached content, but does not store the raw text of prompts or responses. This may be suitable for customers who require [ZDR-type data retention](build-with-claude/zero-data-retention.md) commitments. See [cache lifetime](build-with-claude/prompt-caching.md) for details.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 There are two ways to enable prompt caching:
 
@@ -517,6 +517,14 @@ The following code snippets showcase various prompt caching patterns. These exam
 ### Continuing a multi-turn conversation
 
 ### Putting it all together: Multiple cache breakpoints
+
+## Data retention
+
+Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude's responses.
+
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 60 minutes (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ---
 

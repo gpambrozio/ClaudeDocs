@@ -40,7 +40,7 @@ These are not required but will improve your experience:
    Note that the migration also moves from `client.beta.messages.create` to `client.messages.create`. Adaptive thinking and effort are GA features and do not require the beta SDK namespace or any beta headers.
 2. **Remove effort beta header:** The effort parameter is now GA. Remove `betas=["effort-2025-11-24"]` from your requests.
 3. **Remove fine-grained tool streaming beta header:** Fine-grained tool streaming is now GA. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
-4. **Remove interleaved thinking beta header (Opus 4.6 only):** Adaptive thinking automatically enables interleaved thinking on Opus 4.6. Remove `betas=["interleaved-thinking-2025-05-14"]` from your Opus 4.6 requests. Note: Sonnet 4.6 continues to support this beta header with manual extended thinking.
+4. **Remove interleaved thinking beta header:** Adaptive thinking automatically enables interleaved thinking on both Opus 4.6 and Sonnet 4.6. Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests. The header is still functional on Sonnet 4.6 with manual extended thinking, but manual mode is deprecated.
 5. **Migrate to output\_config.format:** If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The old parameter remains functional but is deprecated and will be removed in a future model release.
 
 ### Migrating from Claude 4.1 or earlier to Claude 4.6
@@ -142,7 +142,7 @@ model = "claude-opus-4-6"  # After
 - Verify tool call JSON parsing uses a standard JSON parser
 - Remove `effort-2025-11-24` beta header (effort is now GA)
 - Remove `fine-grained-tool-streaming-2025-05-14` beta header
-- Remove `interleaved-thinking-2025-05-14` beta header (Opus 4.6 only; Sonnet 4.6 still supports it)
+- Remove `interleaved-thinking-2025-05-14` beta header (adaptive thinking enables interleaved thinking automatically)
 - Migrate `output_format` to `output_config.format` (if applicable)
 - If migrating from Claude 4.1 or earlier: update sampling parameters to use only `temperature` OR `top_p`
 - If migrating from Claude 4.1 or earlier: update tool versions (`text_editor_20250728`, `code_execution_20250825`)
@@ -257,75 +257,11 @@ curl https://api.anthropic.com/v1/messages \
 
 #### If you're using extended thinking
 
-If you're using extended thinking on Sonnet 4.5, it continues to be supported on Sonnet 4.6 with no changes needed to your thinking configuration. Consider keeping a thinking budget around 16k tokens. In practice, most tasks don't use that much, but it provides headroom for harder problems without risk of runaway token usage.
+If you're using extended thinking with `budget_tokens` on Sonnet 4.5, it is still functional on Sonnet 4.6 but is deprecated. Migrate to [adaptive thinking](build-with-claude/adaptive-thinking.md) with the [effort parameter](build-with-claude/effort.md).
 
-##### Coding and agentic use cases
+##### Migrating to adaptive thinking
 
-For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 16384,
-    "thinking": {
-        "type": "enabled",
-        "budget_tokens": 16384
-    },
-    "output_config": {
-        "effort": "medium"
-    },
-    "messages": [
-        {
-            "role": "user",
-            "content": "Your prompt here"
-        }
-    ]
-}'
-```
-
-##### Chat and non-coding use cases
-
-For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 8192,
-    "thinking": {
-        "type": "enabled",
-        "budget_tokens": 16384
-    },
-    "output_config": {
-        "effort": "low"
-    },
-    "messages": [
-        {
-            "role": "user",
-            "content": "Your prompt here"
-        }
-    ]
-}'
-```
-
-##### When to try adaptive thinking
-
-The migration paths above use extended thinking with `budget_tokens` for predictable token usage. If your workload fits one of the following patterns, consider trying [adaptive thinking](build-with-claude/adaptive-thinking.md) instead:
+[Adaptive thinking](build-with-claude/adaptive-thinking.md) is the recommended replacement for `budget_tokens` on Sonnet 4.6. It is particularly well suited to the following workload patterns:
 
 - **Autonomous multi-step agents:** coding agents that turn requirements into working software, data analysis pipelines, and bug finding where the model runs independently across many steps. Adaptive thinking lets the model calibrate its reasoning per step, staying on path over longer trajectories. For these workloads, start at `high` effort. If latency or token usage is a concern, scale down to `medium`.
 - **Computer use agents:** Sonnet 4.6 achieved best-in-class accuracy on computer use evaluations using adaptive mode.
@@ -359,7 +295,75 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-If you see inconsistent behavior or quality regressions with adaptive thinking, switch to extended thinking with `budget_tokens`. This provides more predictable results with a cap on thinking costs.
+If you see inconsistent behavior or quality regressions with adaptive thinking, try lowering the [effort](build-with-claude/effort.md) setting or using `max_tokens` as a hard limit first. Extended thinking with `budget_tokens` is still functional on Sonnet 4.6 but is deprecated and no longer recommended.
+
+##### Keeping budget\_tokens during migration
+
+If you need to keep `budget_tokens` temporarily while migrating, a budget around 16k tokens provides headroom for harder problems without risk of runaway token usage. This configuration is deprecated and will be removed in a future model release.
+
+###### Coding and agentic use cases
+
+For agentic coding, frontend design, tool-heavy workflows, and complex enterprise workflows, start with `medium` effort. If you find latency is too high, consider reducing effort to `low`. If you need higher intelligence, consider increasing effort to `high` or migrating to Opus 4.6.
+
+Shell
+
+```shiki
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 16384,
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 16384
+    },
+    "output_config": {
+        "effort": "medium"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
+```
+
+###### Chat and non-coding use cases
+
+For chat, content generation, search, classification, and other non-coding tasks, start with `low` effort with extended thinking. If you need more depth, increase effort to `medium`.
+
+Shell
+
+```shiki
+curl https://api.anthropic.com/v1/messages \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: interleaved-thinking-2025-05-14" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 8192,
+    "thinking": {
+        "type": "enabled",
+        "budget_tokens": 16384
+    },
+    "output_config": {
+        "effort": "low"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "Your prompt here"
+        }
+    ]
+}'
+```
 
 ### Sonnet 4.6 migration checklist
 
@@ -373,7 +377,7 @@ If you see inconsistent behavior or quality regressions with adaptive thinking, 
 - Remove `fine-grained-tool-streaming-2025-05-14` beta header (now GA)
 - Migrate `output_format` to `output_config.format`
 - Review and update prompts following [prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
-- Consider enabling extended thinking or adaptive thinking for complex reasoning tasks
+- **Recommended:** Migrate from `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}` with the [effort parameter](build-with-claude/effort.md) (`budget_tokens` is deprecated and will be removed in a future release)
 - Test in development environment before production deployment
 
 ---

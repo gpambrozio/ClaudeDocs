@@ -63,21 +63,9 @@ On **Linux and WSL2**, install the required packages first:
 - Ubuntu/Debian
 - Fedora
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 sudo apt-get install bubblewrap socat
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 sudo dnf install bubblewrap socat
@@ -86,12 +74,6 @@ sudo dnf install bubblewrap socat
 ### [​](#enable-sandboxing) Enable sandboxing
 
 You can enable sandboxing by running the `/sandbox` command:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /sandbox
@@ -117,12 +99,6 @@ Customize sandbox behavior through your `settings.json` file. See [Settings](set
 
 By default, sandboxed commands can only write to the current working directory. If subprocess commands like `kubectl`, `terraform`, or `npm` need to write outside the project directory, use `sandbox.filesystem.allowWrite` to grant access to specific paths:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "sandbox": {
@@ -147,12 +123,6 @@ Path prefixes control how paths are resolved:
 The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](permissions.md), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 You can also deny write or read access using `sandbox.filesystem.denyWrite` and `sandbox.filesystem.denyRead`. These are merged with any paths from `Edit(...)` and `Read(...)` permission rules. To re-allow reading specific paths within a denied region, use `sandbox.filesystem.allowRead`, which takes precedence over `denyRead`. When `allowManagedReadPathsOnly` is enabled in managed settings, only managed `allowRead` entries are respected; user, project, and local `allowRead` entries are ignored.
 For example, to block reading from the entire home directory while still allowing reads from the current project, add this to your project’s `.claude/settings.json`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -260,12 +230,6 @@ For organizations requiring advanced network security, you can implement a custo
 - Log all network requests
 - Integrate with existing security infrastructure
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "sandbox": {
@@ -296,12 +260,6 @@ The sandboxed bash tool works alongside:
 ## [​](#open-source) Open source
 
 The sandbox runtime is available as an open source npm package for use in your own agent projects. This enables the broader AI agent community to build safer, more secure autonomous systems. This can also be used to sandbox other programs you may wish to run. For example, to sandbox an MCP server you could run:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 npx @anthropic-ai/sandbox-runtime <command-to-sandbox>

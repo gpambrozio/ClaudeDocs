@@ -69,12 +69,6 @@ Add a specifier in parentheses to match specific tool uses:
 
 Bash rules support glob patterns with `*`. Wildcards can appear at any position in the command. This configuration allows npm and git commit commands while blocking git push:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "permissions": {
@@ -175,12 +169,6 @@ Use `Agent(AgentName)` rules to control which [subagents](sub-agents.md) Claude 
 
 Add these rules to the `deny` array in your settings or use the `--disallowedTools` CLI flag to disable specific agents. To disable the Explore agent:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "permissions": {
@@ -232,6 +220,7 @@ Some settings are only effective in managed settings:
 | `allowManagedPermissionRulesOnly` | When `true`, prevents user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply |
 | `allowManagedHooksOnly` | When `true`, prevents loading of user, project, and plugin hooks. Only managed hooks and SDK hooks are allowed |
 | `allowManagedMcpServersOnly` | When `true`, only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. See [Managed MCP configuration](mcp.md) |
+| `allowedChannelPlugins` | Allowlist of channel plugins that may push messages. Replaces the default Anthropic allowlist when set. Requires `channelsEnabled: true`. See [Restrict which channel plugins can run](channels.md) |
 | `blockedMarketplaces` | Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [managed marketplace restrictions](plugin-marketplaces.md) |
 | `sandbox.network.allowManagedDomainsOnly` | When `true`, only `allowedDomains` and `WebFetch(domain:...)` allow rules from managed settings are respected. Non-allowed domains are blocked automatically without prompting the user. Denied domains still merge from all sources |
 | `sandbox.filesystem.allowManagedReadPathsOnly` | When `true`, only `allowRead` paths from managed settings are respected. `allowRead` entries from user, project, and local settings are ignored |
@@ -255,12 +244,6 @@ Entries from each scope are combined. A developer can extend `environment`, `all
 ### [​](#define-trusted-infrastructure) Define trusted infrastructure
 
 For most organizations, `autoMode.environment` is the only field you need to set. It tells the classifier which repos, buckets, and domains are trusted, without touching the built-in block and allow rules. The classifier uses `environment` to decide what “external” means: any destination not listed is a potential exfiltration target.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -286,12 +269,6 @@ Entries are prose, not regex or tool patterns. The classifier reads them as natu
 
 A useful starting template: fill in the bracketed fields and remove any lines that don’t apply:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "autoMode": {
@@ -316,12 +293,6 @@ You don’t need to fill everything in at once. A reasonable rollout: start with
 Two additional fields let you replace the classifier’s built-in rule lists: `autoMode.soft_deny` controls what gets blocked, and `autoMode.allow` controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules.
 Inside the classifier, the precedence is: `soft_deny` rules block first, then `allow` rules override as exceptions, then explicit user intent overrides both. If the user’s message directly and specifically describes the exact action Claude is about to take, the classifier allows it even if a `soft_deny` rule matches. General requests don’t count: asking Claude to “clean up the repo” does not authorize force-pushing, but asking Claude to “force-push this branch” does.
 To loosen: remove rules from `soft_deny` when the defaults block something your pipeline already guards against with PR review, CI, or staging environments, or add to `allow` when the classifier repeatedly flags a routine pattern the default exceptions don’t cover. To tighten: add to `soft_deny` for risks specific to your environment that the defaults miss, or remove from `allow` to hold a default exception to the block rules. In all cases, run `claude auto-mode defaults` to get the full default lists, then copy and edit: never start from an empty list.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -349,12 +320,6 @@ The three sections are evaluated independently, so setting `environment` alone l
 ### [​](#inspect-the-defaults-and-your-effective-config) Inspect the defaults and your effective config
 
 Because setting `allow` or `soft_deny` replaces the defaults, start any customization by copying the full default lists. Three CLI subcommands help you inspect and validate:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude auto-mode defaults  # the built-in environment, allow, and soft_deny rules

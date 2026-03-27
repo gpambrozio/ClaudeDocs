@@ -38,12 +38,6 @@ Define your settings
 
 Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `allowManagedPermissionRulesOnly`.This example enforces a permission deny list and prevents users from bypassing permissions:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "permissions": {
@@ -59,12 +53,6 @@ Ask AI
 ```
 
 Hooks use the same format as in `settings.json`.This example runs an audit script after every file edit across the organization:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -82,12 +70,6 @@ Ask AI
 ```
 
 To configure the [auto mode](permission-modes.md) classifier so it knows which repos, buckets, and domains your organization trusts:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

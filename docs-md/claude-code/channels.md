@@ -38,12 +38,6 @@ Install the plugin
 
 In Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install telegram@claude-plugins-official
 ```
@@ -56,12 +50,6 @@ Configure your token
 
 Run the configure command with the token from BotFather:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /telegram:configure <token>
 ```
@@ -73,12 +61,6 @@ This saves it to `~/.claude/channels/telegram/.env`. You can also set `TELEGRAM_
 Restart with channels enabled
 
 Exit Claude Code and restart with the channel flag. This starts the Telegram plugin, which begins polling for messages from your bot:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --channels plugin:telegram@claude-plugins-official
@@ -94,23 +76,11 @@ If your bot doesn’t respond, make sure Claude Code is running with `--channels
 
 Back in Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /telegram:access pair <code>
 ```
 
 Then lock down access so only your account can send messages:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /telegram:access policy allowlist
@@ -151,12 +121,6 @@ Install the plugin
 
 In Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install discord@claude-plugins-official
 ```
@@ -169,12 +133,6 @@ Configure your token
 
 Run the configure command with the bot token you copied:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /discord:configure <token>
 ```
@@ -186,12 +144,6 @@ This saves it to `~/.claude/channels/discord/.env`. You can also set `DISCORD_BO
 Restart with channels enabled
 
 Exit Claude Code and restart with the channel flag. This connects the Discord plugin so your bot can receive and respond to messages:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --channels plugin:discord@claude-plugins-official
@@ -207,23 +159,11 @@ If your bot doesn’t respond, make sure Claude Code is running with `--channels
 
 Back in Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /discord:access pair <code>
 ```
 
 Then lock down access so only your account can send messages:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /discord:access policy allowlist
@@ -243,12 +183,6 @@ Install the plugin
 
 In Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install imessage@claude-plugins-official
 ```
@@ -260,12 +194,6 @@ If Claude Code reports that the plugin is not found in any marketplace, your mar
 Restart with channels enabled
 
 Exit Claude Code and restart with the channel flag:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --channels plugin:imessage@claude-plugins-official
@@ -284,12 +212,6 @@ The first reply Claude sends triggers a macOS Automation prompt asking if your t
 Allow other senders
 
 By default, only your own messages pass through. To let another contact reach Claude, add their handle:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /imessage:access allow +15551234567
@@ -315,12 +237,6 @@ Install the fakechat channel plugin
 
 Start a Claude Code session and run the install command:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install fakechat@claude-plugins-official
 ```
@@ -332,12 +248,6 @@ If Claude Code reports that the plugin is not found in any marketplace, your mar
 Restart with the channel enabled
 
 Exit Claude Code, then restart with `--channels` and pass the fakechat plugin you installed:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --channels plugin:fakechat@claude-plugins-official
@@ -352,12 +262,6 @@ You can pass several plugins to `--channels`, space-separated.
 Push a message in
 
 Open the fakechat UI at <http://localhost:8787> and type a message:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 hey, what's in my working directory?
@@ -401,12 +305,6 @@ Once enabled, users in your organization can use `--channels` to opt channel ser
 ### [​](#restrict-which-channel-plugins-can-run) Restrict which channel plugins can run
 
 By default, any plugin on the Anthropic-maintained allowlist can register as a channel. Admins on Team and Enterprise plans can replace that allowlist with their own by setting `allowedChannelPlugins` in managed settings. Use this to restrict which official plugins are allowed, approve channels from your own internal marketplace, or both. Each entry names a plugin and the marketplace it comes from:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

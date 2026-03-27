@@ -49,12 +49,6 @@ Agent teams are disabled by default. Enable them by setting the `CLAUDE_CODE_EXP
 
 settings.json
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "env": {
@@ -67,12 +61,6 @@ Ask AI
 
 After enabling agent teams, tell Claude to create an agent team and describe the task and the team structure you want in natural language. Claude creates the team, spawns teammates, and coordinates work based on your prompt.
 This example works well because the three roles are independent and can explore the problem without waiting on each other:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 I'm designing a CLI tool that helps developers track TODO comments across
@@ -99,12 +87,6 @@ Agent teams support two display modes:
 
 The default is `"auto"`, which uses split panes if you’re already running inside a tmux session, and in-process otherwise. The `"tmux"` setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set `teammateMode` in your [settings.json](settings.md):
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "teammateMode": "in-process"
@@ -112,12 +94,6 @@ Ask AI
 ```
 
 To force in-process mode for a single session, pass it as a flag:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --teammate-mode in-process
@@ -132,12 +108,6 @@ Split-pane mode requires either [tmux](https://github.com/tmux/tmux/wiki) or iTe
 
 Claude decides the number of teammates to spawn based on your task, or you can specify exactly what you want:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Create a team with 4 teammates to refactor these modules in parallel.
 Use Sonnet for each teammate.
@@ -146,12 +116,6 @@ Use Sonnet for each teammate.
 ### [​](#require-plan-approval-for-teammates) Require plan approval for teammates
 
 For complex or risky tasks, you can require teammates to plan before implementing. The teammate works in read-only plan mode until the lead approves their approach:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Spawn an architect teammate to refactor the authentication module.
@@ -182,12 +146,6 @@ Task claiming uses file locking to prevent race conditions when multiple teammat
 
 To gracefully end a teammate’s session:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Ask the researcher teammate to shut down
 ```
@@ -197,12 +155,6 @@ The lead sends a shutdown request. The teammate can approve, exiting gracefully,
 ### [​](#clean-up-the-team) Clean up the team
 
 When you’re done, ask the lead to clean up:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Clean up the team
@@ -214,9 +166,10 @@ Always use the lead to clean up. Teammates should not run cleanup because their 
 
 ### [​](#enforce-quality-gates-with-hooks) Enforce quality gates with hooks
 
-Use [hooks](hooks.md) to enforce rules when teammates finish work or tasks complete:
+Use [hooks](hooks.md) to enforce rules when teammates finish work or tasks are created or completed:
 
 - [`TeammateIdle`](hooks.md): runs when a teammate is about to go idle. Exit with code 2 to send feedback and keep the teammate working.
+- [`TaskCreated`](hooks.md): runs when a task is being created. Exit with code 2 to prevent creation and send feedback.
 - [`TaskCompleted`](hooks.md): runs when a task is being marked complete. Exit with code 2 to prevent completion and send feedback.
 
 ## [​](#how-agent-teams-work) How agent teams work
@@ -282,12 +235,6 @@ These examples show how agent teams handle tasks where parallel exploration adds
 
 A single reviewer tends to gravitate toward one type of issue at a time. Splitting review criteria into independent domains means security, performance, and test coverage all get thorough attention simultaneously. The prompt assigns each teammate a distinct lens so they don’t overlap:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Create an agent team to review PR #142. Spawn three reviewers:
 - One focused on security implications
@@ -301,12 +248,6 @@ Each reviewer works from the same PR but applies a different filter. The lead sy
 ### [​](#investigate-with-competing-hypotheses) Investigate with competing hypotheses
 
 When the root cause is unclear, a single agent tends to find one plausible explanation and stop looking. The prompt fights this by making teammates explicitly adversarial: each one’s job is not only to investigate its own theory but to challenge the others’.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Users report the app exits after one message instead of staying connected.
@@ -323,12 +264,6 @@ With multiple independent investigators actively trying to disprove each other, 
 ### [​](#give-teammates-enough-context) Give teammates enough context
 
 Teammates load project context automatically, including CLAUDE.md, MCP servers, and skills, but they don’t inherit the lead’s conversation history. See [Context and communication](#context-and-communication) for details. Include task-specific details in the spawn prompt:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Spawn a security reviewer teammate with the prompt: "Review the authentication module
@@ -361,12 +296,6 @@ The lead breaks work into tasks and assigns them to teammates automatically. If 
 
 Sometimes the lead starts implementing tasks itself instead of waiting for teammates. If you notice this:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Wait for your teammates to complete their tasks before proceeding
 ```
@@ -393,12 +322,6 @@ If teammates aren’t appearing after you ask Claude to create a team:
 - Check that the task you gave Claude was complex enough to warrant a team. Claude decides whether to spawn teammates based on the task.
 - If you explicitly requested split panes, ensure tmux is installed and available in your PATH:
 
-  Report incorrect code
-
-  Copy
-
-  Ask AI
-
   ```shiki
   which tmux
   ```
@@ -422,12 +345,6 @@ The lead may decide the team is finished before all tasks are actually complete.
 ### [​](#orphaned-tmux-sessions) Orphaned tmux sessions
 
 If a tmux session persists after the team ends, it may not have been fully cleaned up. List sessions and kill the one created by the team:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 tmux ls

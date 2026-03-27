@@ -1,6 +1,6 @@
 # Create custom subagents
 
-Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results.
+Subagents are specialized AI assistants that handle specific types of tasks. Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent’s description, it delegates to that subagent, which works independently and returns results. To see the context savings in practice, the [context window visualization](context-window.md) walks through a session where a subagent handles research in its own separate window.
 
 If you need multiple agents working in parallel and communicating with each other, see [agent teams](agent-teams.md) instead. Subagents work within a single session; agent teams coordinate across separate sessions.
 
@@ -69,12 +69,6 @@ Open the subagents interface
 
 In Claude Code, run:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /agents
 ```
@@ -90,12 +84,6 @@ Select **Create new agent**, then choose **Personal**. This saves the subagent t
 Generate with Claude
 
 Select **Generate with Claude**. When prompted, describe the subagent:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 A code improvement agent that scans files and suggests improvements
@@ -134,12 +122,6 @@ Select **User scope** to give the subagent a [persistent memory directory](#enab
 Save and try it out
 
 Review the configuration summary. Press `s` or `Enter` to save, or press `e` to save and edit the file in your editor. The subagent is available immediately. Try it:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Use the code-improver agent to suggest improvements in this project
@@ -180,12 +162,6 @@ Subagents are Markdown files with YAML frontmatter. Store them in different loca
 **User subagents** (`~/.claude/agents/`) are personal subagents available in all your projects.
 **CLI-defined subagents** are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single `--agents` call:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --agents '{
   "code-reviewer": {
@@ -211,12 +187,6 @@ For security reasons, plugin subagents do not support the `hooks`, `mcpServers`,
 Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:
 
 Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use `/agents` to load it immediately.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -279,12 +249,6 @@ You can control what subagents can do through tool access, permission modes, and
 Subagents can use any of Claude Code’s [internal tools](tools-reference.md). By default, subagents inherit all tools from the main conversation, including MCP tools.
 To restrict tools, use either the `tools` field (allowlist) or the `disallowedTools` field (denylist). This example uses `tools` to exclusively allow Read, Grep, Glob, and Bash. The subagent can’t edit files, write files, or use any MCP tools:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 name: safe-researcher
@@ -294,12 +258,6 @@ tools: Read, Grep, Glob, Bash
 ```
 
 This example uses `disallowedTools` to inherit every tool from the main conversation except Write and Edit. The subagent keeps Bash, MCP tools, and everything else:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -317,12 +275,6 @@ When an agent runs as the main thread with `claude --agent`, it can spawn subage
 
 In version 2.1.63, the Task tool was renamed to Agent. Existing `Task(...)` references in settings and agent definitions still work as aliases.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 name: coordinator
@@ -334,12 +286,6 @@ tools: Agent(worker, researcher), Read, Bash
 This is an allowlist: only the `worker` and `researcher` subagents can be spawned. If the agent tries to spawn any other type, the request fails and the agent sees only the allowed types in its prompt. To block specific agents while allowing all others, use [`permissions.deny`](#disable-specific-subagents) instead.
 To allow spawning any subagent without restrictions, use `Agent` without parentheses:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 tools: Agent, Read, Bash
 ```
@@ -350,12 +296,6 @@ If `Agent` is omitted from the `tools` list entirely, the agent cannot spawn any
 
 Use the `mcpServers` field to give a subagent access to [MCP](mcp.md) servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts and disconnected when it finishes. String references share the parent session’s connection.
 Each entry in the list is either an inline server definition or a string referencing an MCP server already configured in your session:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -397,12 +337,6 @@ If the parent uses `bypassPermissions`, this takes precedence and cannot be over
 
 Use the `skills` field to inject skill content into a subagent’s context at startup. This gives the subagent domain knowledge without requiring it to discover and load skills during execution.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 name: api-developer
@@ -422,12 +356,6 @@ This is the inverse of [running a skill in a subagent](skills.md). With `skills`
 #### [​](#enable-persistent-memory) Enable persistent memory
 
 The `memory` field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as codebase patterns, debugging insights, and architectural decisions.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -451,7 +379,7 @@ Choose a scope based on how broadly the memory should apply:
 When memory is enabled:
 
 - The subagent’s system prompt includes instructions for reading and writing to the memory directory.
-- The subagent’s system prompt also includes the first 200 lines of `MEMORY.md` in the memory directory, with instructions to curate `MEMORY.md` if it exceeds 200 lines.
+- The subagent’s system prompt also includes the first 200 lines or 25KB of `MEMORY.md` in the memory directory, whichever comes first, with instructions to curate `MEMORY.md` if it exceeds that limit.
 - Read, Write, and Edit tools are automatically enabled so the subagent can manage its memory files.
 
 ##### Persistent memory tips
@@ -460,12 +388,6 @@ When memory is enabled:
 - Ask the subagent to consult its memory before starting work: “Review this PR, and check your memory for patterns you’ve seen before.”
 - Ask the subagent to update its memory after completing a task: “Now that you’re done, save what you learned to your memory.” Over time, this builds a knowledge base that makes the subagent more effective.
 - Include memory instructions directly in the subagent’s markdown file so it proactively maintains its own knowledge base:
-
-  Report incorrect code
-
-  Copy
-
-  Ask AI
 
   ```shiki
   Update your agent memory as you discover codepaths, patterns, library
@@ -478,12 +400,6 @@ When memory is enabled:
 
 For more dynamic control over tool usage, use `PreToolUse` hooks to validate operations before they execute. This is useful when you need to allow some operations of a tool while blocking others.
 This example creates a subagent that only allows read-only database queries. The `PreToolUse` hook runs the script specified in `command` before each Bash command executes:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -500,12 +416,6 @@ hooks:
 ```
 
 Claude Code [passes hook input as JSON](hooks.md) via stdin to hook commands. The validation script reads this JSON, extracts the Bash command, and [exits with code 2](hooks.md) to block write operations:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 #!/bin/bash
@@ -529,12 +439,6 @@ See [Hook input](hooks.md) for the complete input schema and [exit codes](hooks.
 
 You can prevent Claude from using specific subagents by adding them to the `deny` array in your [settings](settings.md). Use the format `Agent(subagent-name)` where `subagent-name` matches the subagent’s name field.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "permissions": {
@@ -544,12 +448,6 @@ Ask AI
 ```
 
 This works for both built-in and custom subagents. You can also use the `--disallowedTools` CLI flag:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude --disallowedTools "Agent(Explore)"
@@ -576,12 +474,6 @@ All [hook events](hooks.md) are supported. The most common events for subagents 
 | `Stop` | (none) | When the subagent finishes (converted to `SubagentStop` at runtime) |
 
 This example validates Bash commands with the `PreToolUse` hook and runs a linter after file edits with `PostToolUse`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -613,12 +505,6 @@ Configure hooks in `settings.json` that respond to subagent lifecycle events in 
 | `SubagentStop` | Agent type name | When a subagent completes |
 
 Both events support matchers to target specific agent types by name. This example runs a setup script only when the `db-agent` subagent starts, and a cleanup script when any subagent stops:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -660,24 +546,12 @@ When automatic delegation isn’t enough, you can request a subagent yourself. T
 
 For natural language, there’s no special syntax. Name the subagent and Claude typically delegates:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Use the test-runner subagent to fix failing tests
 Have the code-reviewer subagent look at my recent changes
 ```
 
 **@-mention the subagent.** Type `@` and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 @"code-reviewer (agent)" look at the auth changes
@@ -687,12 +561,6 @@ Your full message still goes to Claude, which writes the subagent’s task promp
 Subagents provided by an enabled [plugin](plugins.md) appear in the typeahead as `<plugin-name>:<agent-name>`. You can also type the mention manually without using the picker: `@agent-<name>` for local subagents, or `@agent-<plugin-name>:<agent-name>` for plugin subagents.
 **Run the whole session as a subagent.** Pass [`--agent <name>`](cli-reference.md) to start a session where the main thread itself takes on that subagent’s system prompt, tool restrictions, and model:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --agent code-reviewer
 ```
@@ -701,12 +569,6 @@ The subagent’s system prompt replaces the default Claude Code system prompt en
 This works with built-in and custom subagents, and the choice persists when you resume the session.
 For a plugin-provided subagent, pass the scoped name: `claude --agent <plugin-name>:<agent-name>`.
 To make it the default for every session in a project, set `agent` in `.claude/settings.json`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -737,12 +599,6 @@ To disable all background task functionality, set the `CLAUDE_CODE_DISABLE_BACKG
 
 One of the most effective uses for subagents is isolating operations that produce large amounts of output. Running tests, fetching documentation, or processing log files can consume significant context. By delegating these to a subagent, the verbose output stays in the subagent’s context while only the relevant summary returns to your main conversation.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Use a subagent to run the test suite and report only the failing tests with their error messages
 ```
@@ -750,12 +606,6 @@ Use a subagent to run the test suite and report only the failing tests with thei
 #### [​](#run-parallel-research) Run parallel research
 
 For independent investigations, spawn multiple subagents to work simultaneously:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Research the authentication, database, and API modules in parallel using separate subagents
@@ -770,12 +620,6 @@ For tasks that need sustained parallelism or exceed your context window, [agent 
 #### [​](#chain-subagents) Chain subagents
 
 For multi-step workflows, ask Claude to use subagents in sequence. Each subagent completes its task and returns results to Claude, which then passes relevant context to the next subagent.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Use the code-reviewer subagent to find performance issues, then use the optimizer subagent to fix them
@@ -809,12 +653,6 @@ Each subagent invocation creates a new instance with fresh context. To continue 
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 When a subagent completes, Claude receives its agent ID. Claude uses the `SendMessage` tool with the agent’s ID as the `to` field to resume it. To resume a subagent, ask Claude to continue the previous work:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Use the code-reviewer subagent to review the authentication module
 [Agent completes]
@@ -835,12 +673,6 @@ Subagent transcripts persist independently of the main conversation:
 
 Subagents support automatic compaction using the same logic as the main conversation. By default, auto-compaction triggers at approximately 95% capacity. To trigger compaction earlier, set `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` to a lower percentage (for example, `50`). See [environment variables](env-vars.md) for details.
 Compaction events are logged in subagent transcript files:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -869,12 +701,6 @@ These examples demonstrate effective patterns for building subagents. Use them a
 ### [​](#code-reviewer) Code reviewer
 
 A read-only subagent that reviews code without modifying it. This example shows how to design a focused subagent with limited tool access (no Edit or Write) and a detailed prompt that specifies exactly what to look for and how to format output.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -913,12 +739,6 @@ Include specific examples of how to fix issues.
 
 A subagent that can both analyze and fix issues. Unlike the code reviewer, this one includes Edit because fixing bugs requires modifying code. The prompt provides a clear workflow from diagnosis to verification.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 name: debugger
@@ -955,12 +775,6 @@ Focus on fixing the underlying issue, not the symptoms.
 ### [​](#data-scientist) Data scientist
 
 A domain-specific subagent for data analysis work. This example shows how to create subagents for specialized workflows outside of typical coding tasks. It explicitly sets `model: sonnet` for more capable analysis.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 ---
@@ -999,12 +813,6 @@ Always ensure queries are efficient and cost-effective.
 
 A subagent that allows Bash access but validates commands to permit only read-only SQL queries. This example shows how to use `PreToolUse` hooks for conditional validation when you need finer control than the `tools` field provides.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 ---
 name: db-reader
@@ -1031,12 +839,6 @@ You cannot modify data. If asked to INSERT, UPDATE, DELETE, or modify schema, ex
 Claude Code [passes hook input as JSON](hooks.md) via stdin to hook commands. The validation script reads this JSON, extracts the command being executed, and checks it against a list of SQL write operations. If a write operation is detected, the script [exits with code 2](hooks.md) to block execution and returns an error message to Claude via stderr.
 Create the validation script anywhere in your project. The path must match the `command` field in your hook configuration:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 #!/bin/bash
 # Blocks SQL write operations, allows SELECT queries
@@ -1061,12 +863,6 @@ exit 0
 ```
 
 Make the script executable:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 chmod +x ./scripts/validate-readonly-query.sh

@@ -8,7 +8,7 @@ Claude's Model Context Protocol (MCP) connector feature enables you to connect t
 
 The previous version (`mcp-client-2025-04-04`) is deprecated. See the [deprecated version documentation](#deprecated-version-mcp-client-2025-04-04) below.
 
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Key features
 
@@ -128,6 +128,8 @@ Each tool (whether configured in `default_config` or in `configs`) supports the 
 | --- | --- | --- | --- |
 | `enabled` | boolean | `true` | Whether this tool is enabled |
 | `defer_loading` | boolean | `false` | If true, tool description is not sent to the model initially. Used with [Tool Search Tool](agents-and-tools/tool-use/tool-search-tool.md). |
+
+For the full directory of Anthropic-provided tools and optional properties like `defer_loading`, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md). For searching across large tool sets, see [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md).
 
 ### Configuration merging
 
@@ -407,7 +409,7 @@ import {
 
 ### Use MCP tools
 
-Convert MCP tools for use with the SDK's [tool runner](agents-and-tools/tool-use/implement-tool-use.md), which handles tool execution automatically:
+Convert MCP tools for use with the SDK's [tool runner](agents-and-tools/tool-use/tool-runner.md), which handles tool execution automatically:
 
 ```shiki
 import { mcpTools } from "@anthropic-ai/sdk/helpers/beta/mcp";
@@ -477,6 +479,12 @@ await anthropic.beta.files.upload({ file: mcpResourceToFile(fileResource) });
 ### Error handling
 
 The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't supported by the Claude API. This can happen with unsupported content types, MIME types, or non-HTTP resource links.
+
+## Data retention
+
+The MCP Connector is not covered by ZDR arrangements. Data exchanged with MCP servers, including tool definitions and execution results, is retained according to Anthropic's standard data retention policy.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## Migration guide
 

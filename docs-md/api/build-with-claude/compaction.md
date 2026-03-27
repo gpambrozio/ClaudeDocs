@@ -2,6 +2,8 @@
 
 Copy page
 
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+
 Server-side compaction is the recommended strategy for managing context in long-running conversations and agentic workflows. It handles context management automatically with minimal integration work.
 
 Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit. This isn't just about staying under a token cap. As conversations get longer, models struggle to maintain focus across the full history. Compaction keeps the active context focused and performant by replacing stale content with concise summaries.
@@ -15,8 +17,6 @@ This is ideal for:
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the context window
 
 Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
-
-Compaction is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements.
 
 ## Supported models
 

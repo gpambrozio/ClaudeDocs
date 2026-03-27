@@ -10,7 +10,7 @@ Code execution is a core primitive for building high-performance agents. It enab
 
 Reach out through the [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Model compatibility
 
@@ -29,7 +29,7 @@ The code execution tool is available on the following models:
 | Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
 | Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 
-The current version `code_execution_20250825` supports Bash commands and file operations. A legacy version `code_execution_20250522` (Python only) is also available. See [Upgrade to latest tool version](#upgrade-to-latest-tool-version) for migration details.
+The `code_execution_20250825` version supports Bash commands and file operations. For models that support [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), `code_execution_20260120` adds REPL state persistence and the ability to call tools from within the sandbox. A legacy version `code_execution_20250522` (Python only) is also available; see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 
 Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
 
@@ -98,56 +98,6 @@ When multiple code execution environments are available, be aware that:
 This is especially important when combining code execution with [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md), which enable code execution automatically. If your application already provides a client-side shell tool, the automatic code execution creates a second execution environment that Claude needs to distinguish between.
 
 ## How to use the tool
-
-### Execute Bash commands
-
-Ask Claude to check system information and install packages:
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Check the Python version and list installed packages"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
-
-### Create and edit files directly
-
-Claude can create, view, and edit files directly in the sandbox using the file manipulation capabilities:
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": "Create a config.yaml file with database settings, then update the port from 5432 to 3306"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
-```
 
 ### Upload and analyze your own files
 
@@ -234,9 +184,9 @@ def extract_file_ids(response):
         if item.type == "bash_code_execution_tool_result":
             content_item = item.content
             if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
                 for file in content_item.content:
-                    if hasattr(file, "file_id"):
-                        file_ids.append(file.file_id)
+                    file_ids.append(file.file_id)
     return file_ids
 
 # Download the created files
@@ -245,53 +195,6 @@ for file_id in extract_file_ids(response):
     file_content = client.beta.files.download(file_id)
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
-```
-
-### Combine operations
-
-A complex workflow using all capabilities:
-
-Shell
-
-```shiki
-# First, upload a file
-curl https://api.anthropic.com/v1/files \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --form 'file=@"data.csv"' \
-    > file_response.json
-
-# Extract file_id (using jq)
-FILE_ID=$(jq -r '.id' file_response.json)
-
-# Then use it with code execution
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings"
-                },
-                {
-                    "type": "container_upload",
-                    "file_id": "'$FILE_ID'"
-                }
-            ]
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
 ```
 
 ## Tool definition
@@ -633,33 +536,13 @@ To upgrade, update the tool type in your API requests:
 
 ## Programmatic tool calling
 
-The code execution tool powers [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), which allows Claude to write code that calls your custom tools programmatically within the execution container. This enables efficient multi-tool workflows, data filtering before reaching Claude's context, and complex conditional logic.
+For running tools inside the code execution container, see [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md).
 
-Python
+## Data retention
 
-```shiki
-# Enable programmatic calling for your tools
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[
-        {"role": "user", "content": "Get weather for 5 cities and find the warmest"}
-    ],
-    tools=[
-        {"type": "code_execution_20250825", "name": "code_execution"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a city",
-            "input_schema": {...},
-            "allowed_callers": [
-                "code_execution_20250825"
-            ],  # Enable programmatic calling
-        },
-    ],
-)
-```
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](build-with-claude/files.md) (retrievable via `client.beta.files.download()`) persist until explicitly deleted.
 
-Learn more in the [Programmatic tool calling documentation](agents-and-tools/tool-use/programmatic-tool-calling.md).
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## Using code execution with Agent Skills
 

@@ -15,7 +15,7 @@ Although this is provided as a server-side tool, you can also implement your own
 
 Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 
-Server-side tool search is **not** covered by [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md) arrangements. Data is retained according to the feature's standard retention policy. [Custom client-side tool search implementations](#custom-tool-search-implementation) use the standard Messages API and are ZDR-eligible.
+This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 
 On Amazon Bedrock, server-side tool search is available only via the [invoke
 API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
@@ -171,6 +171,8 @@ JSON
 
 Both tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.
 
+**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the tool definition is appended inline as a `tool_reference` block in the conversation. The prefix is untouched, so prompt caching is preserved. The grammar for strict mode builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
+
 ## Response format
 
 When Claude uses the tool search tool, the response includes new block types:
@@ -227,58 +229,7 @@ The `tool_reference` blocks are automatically expanded into full tool definition
 
 ## MCP integration
 
-The tool search tool works with [MCP servers](agents-and-tools/mcp-connector.md). Add the `"mcp-client-2025-11-20"` [beta header](api/beta-headers.md) to your API request, and then use `mcp_toolset` with `default_config` to defer loading MCP tools:
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-  --header "x-api-key: $ANTHROPIC_API_KEY" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "anthropic-beta: mcp-client-2025-11-20" \
-  --header "content-type: application/json" \
-  --data '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 2048,
-    "mcp_servers": [
-      {
-        "type": "url",
-        "name": "database-server",
-        "url": "https://mcp-db.example.com"
-      }
-    ],
-    "tools": [
-      {
-        "type": "tool_search_tool_regex_20251119",
-        "name": "tool_search_tool_regex"
-      },
-      {
-        "type": "mcp_toolset",
-        "mcp_server_name": "database-server",
-        "default_config": {
-          "defer_loading": true
-        },
-        "configs": {
-          "search_events": {
-            "defer_loading": false
-          }
-        }
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "What events are in my database?"
-      }
-    ]
-  }'
-```
-
-**MCP configuration options:**
-
-- `default_config.defer_loading`: Set default for all tools from the MCP server
-- `configs`: Override defaults for specific tools by name
-- Combine multiple MCP servers with tool search for massive tool libraries
+For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](agents-and-tools/mcp-connector.md).
 
 ## Custom tool search implementation
 
@@ -298,12 +249,12 @@ Every tool referenced must have a corresponding tool definition in the top-level
 
 The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
 
-For a complete example using embeddings, see our [tool search with embeddings cookbook](https://platform.claude.com/cookbooks).
+For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/cookbooks/tool_use).
 
 ## Error handling
 
 The tool search tool is not compatible with [tool use
-examples](agents-and-tools/tool-use/implement-tool-use.md).
+examples](agents-and-tools/tool-use/define-tools.md).
 If you need to provide examples of tool usage, use standard tool calling
 without tool search.
 
@@ -369,75 +320,9 @@ JSON
 
 ## Prompt caching
 
-Tool search works with [prompt caching](build-with-claude/prompt-caching.md). Add `cache_control` breakpoints to optimize multi-turn conversations:
+For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-Python
-
-```shiki
-client = anthropic.Anthropic()
-
-# First request with tool search
-messages = [{"role": "user", "content": "What's the weather in Seattle?"}]
-
-response1 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=2048,
-    messages=messages,
-    tools=[
-        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a location",
-            "input_schema": {
-                "type": "object",
-                "properties": {"location": {"type": "string"}},
-                "required": ["location"],
-            },
-            "defer_loading": True,
-        },
-    ],
-)
-
-# Add Claude's response to conversation
-messages.append({"role": "assistant", "content": response1.content})
-
-# Second request with cache breakpoint
-messages.append(
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": "What about New York?",
-                "cache_control": {"type": "ephemeral"},
-            }
-        ],
-    }
-)
-
-response2 = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=2048,
-    messages=messages,
-    tools=[
-        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
-        {
-            "name": "get_weather",
-            "description": "Get weather for a location",
-            "input_schema": {
-                "type": "object",
-                "properties": {"location": {"type": "string"}},
-                "required": ["location"],
-            },
-            "defer_loading": True,
-        },
-    ],
-)
-
-print(f"Cache read tokens: {response2.usage.cache_read_input_tokens or 0}")
-```
-
-The system automatically expands tool\_reference blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
+The system automatically expands `tool_reference` blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
 
 ## Streaming
 
@@ -463,6 +348,12 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 ## Batch requests
 
 You can include the tool search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
+
+## Data retention
+
+Server-side tool search (`tool_search` tool) indexes and stores tool catalog data (tool names, descriptions, and argument metadata) beyond the immediate API response; this catalog data is retained according to Anthropic's standard retention policy. Custom client-side tool search implementations that use the standard Messages API are fully ZDR-eligible.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## Limits and best practices
 
@@ -515,6 +406,18 @@ JSON
   }
 }
 ```
+
+## Next steps
+
+[Tool reference
+
+Full tool catalog with model compatibility and parameters.](agents-and-tools/tool-use/tool-reference.md)[MCP connector
+
+Configure MCP toolsets with deferred loading.](agents-and-tools/mcp-connector.md)[Prompt caching
+
+Combine tool search with cached tool definitions.](agents-and-tools/tool-use/tool-use-with-prompt-caching.md)[Define tools
+
+Step-by-step guide for defining tools.](agents-and-tools/tool-use/define-tools.md)
 
 Was this page helpful?
 

@@ -23,35 +23,17 @@ To install Claude Code, use one of the following methods:
 
 **macOS, Linux, WSL:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 **Windows PowerShell:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 irm https://claude.ai/install.ps1 | iex
 ```
 
 **Windows CMD:**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
@@ -61,23 +43,11 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 
 Native installations automatically update in the background to keep you on the latest version.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 brew install --cask claude-code
 ```
 
 Homebrew installations do not auto-update. Run `brew upgrade claude-code` periodically to get the latest features and security fixes.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 winget install Anthropic.ClaudeCode
@@ -89,22 +59,10 @@ WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCod
 
 Claude Code requires an account to use. When you start an interactive session with the `claude` command, you’ll need to log in:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude
 # You'll be prompted to log in on first use
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /login
@@ -123,12 +81,6 @@ Once logged in, your credentials are stored and you won’t need to log in again
 
 Open your terminal in any project directory and start Claude Code:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 cd /path/to/your/project
 claude
@@ -142,43 +94,19 @@ After logging in (Step 2), your credentials are stored on your system. Learn mor
 
 Let’s start with understanding your codebase. Try one of these commands:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 what does this project do?
 ```
 
 Claude will analyze your files and provide a summary. You can also ask more specific questions:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 what technologies does this project use?
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 where is the main entry point?
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 explain the folder structure
@@ -186,31 +114,13 @@ explain the folder structure
 
 You can also ask Claude about its own capabilities:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 what can Claude Code do?
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 how do I create custom skills in Claude Code?
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 can Claude Code work with Docker?
@@ -221,12 +131,6 @@ Claude Code reads your project files as needed. You don’t have to manually add
 ## [​](#step-5-make-your-first-code-change) Step 5: Make your first code change
 
 Now let’s make Claude Code do some actual coding. Try a simple task:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 add a hello world function to the main file
@@ -245,21 +149,9 @@ Claude Code always asks for permission before modifying files. You can approve i
 
 Claude Code makes Git operations conversational:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 what files have I changed?
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 commit my changes with a descriptive message
@@ -267,31 +159,13 @@ commit my changes with a descriptive message
 
 You can also prompt for more complex Git operations:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 create a new branch called feature/quickstart
 ```
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 show me the last 5 commits
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 help me resolve merge conflicts
@@ -302,23 +176,11 @@ help me resolve merge conflicts
 Claude is proficient at debugging and feature implementation.
 Describe what you want in natural language:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 add input validation to the user registration form
 ```
 
 Or fix existing issues:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 there's a bug where users can submit empty forms - fix it
@@ -336,23 +198,11 @@ Claude Code will:
 There are a number of ways to work with Claude:
 **Refactor code**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 refactor the authentication module to use async/await instead of callbacks
 ```
 
 **Write tests**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 write unit tests for the calculator functions
@@ -360,23 +210,11 @@ write unit tests for the calculator functions
 
 **Update documentation**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 update the README with installation instructions
 ```
 
 **Code review**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 review my changes and suggest improvements
@@ -414,12 +252,6 @@ Use step-by-step instructions
 
 Break complex tasks into steps:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 1. create a new database table for user profiles
 2. create an API endpoint to get and update user profiles
@@ -430,21 +262,9 @@ Let Claude explore first
 
 Before making changes, let Claude understand your code:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 analyze the database schema
 ```
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 build a dashboard showing products that are most frequently returned by our UK customers

@@ -26,12 +26,6 @@ Think of it like adding an app store: adding the store gives you access to brows
 The official Anthropic marketplace (`claude-plugins-official`) is automatically available when you start Claude Code. Run `/plugin` and go to the **Discover** tab to browse what’s available, or view the catalog at [claude.com/plugins](https://claude.com/plugins).
 To install a plugin from the official marketplace, use `/plugin install <name>@claude-plugins-official`. For example, to install the GitHub integration:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install github@claude-plugins-official
 ```
@@ -114,12 +108,6 @@ Add the marketplace
 
 From within Claude Code, run the `plugin marketplace add` command for the `anthropics/claude-code` marketplace:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace add anthropics/claude-code
 ```
@@ -151,12 +139,6 @@ Select a plugin to view its details, then choose an installation scope:
 
 For example, select **commit-commands** (a plugin that adds git workflow commands) and install it to your user scope.You can also install directly from the command line:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin install commit-commands@anthropics-claude-code
 ```
@@ -168,12 +150,6 @@ See [Configuration scopes](settings.md) to learn more about scopes.
 Use your new plugin
 
 After installing, run `/reload-plugins` to activate the plugin. Plugin commands are namespaced by the plugin name, so **commit-commands** provides commands like `/commit-commands:commit`.Try it out by making a change to a file and running:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /commit-commands:commit
@@ -199,12 +175,6 @@ Use the `/plugin marketplace add` command to add marketplaces from different sou
 Add a GitHub repository that contains a `.claude-plugin/marketplace.json` file using the `owner/repo` format—where `owner` is the GitHub username or organization and `repo` is the repository name.
 For example, `anthropics/claude-code` refers to the `claude-code` repository owned by `anthropics`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace add anthropics/claude-code
 ```
@@ -214,35 +184,17 @@ Ask AI
 Add any git repository by providing the full URL. This works with any Git host, including GitLab, Bitbucket, and self-hosted servers:
 Using HTTPS:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace add https://gitlab.com/company/plugins.git
 ```
 
 Using SSH:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace add git@gitlab.com:company/plugins.git
 ```
 
 To add a specific branch or tag, append `#` followed by the ref:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin marketplace add https://gitlab.com/company/plugins.git#v1.0.0
@@ -252,23 +204,11 @@ Ask AI
 
 Add a local directory that contains a `.claude-plugin/marketplace.json` file:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace add ./my-marketplace
 ```
 
 You can also add a direct path to a `marketplace.json` file:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin marketplace add ./path/to/marketplace.json
@@ -277,12 +217,6 @@ Ask AI
 ### [​](#add-from-remote-urls) Add from remote URLs
 
 Add a remote `marketplace.json` file via URL:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin marketplace add https://example.com/marketplace.json
@@ -293,12 +227,6 @@ URL-based marketplaces have some limitations compared to Git-based marketplaces.
 ## [​](#install-plugins) Install plugins
 
 Once you’ve added marketplaces, you can install plugins directly (installs to user scope by default):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin install plugin-name@marketplace-name
@@ -321,23 +249,11 @@ Run `/plugin` and go to the **Installed** tab to view, enable, disable, or unins
 You can also manage plugins with direct commands.
 Disable a plugin without uninstalling:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin disable plugin-name@marketplace-name
 ```
 
 Re-enable a disabled plugin:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin enable plugin-name@marketplace-name
@@ -345,23 +261,11 @@ Ask AI
 
 Completely remove a plugin:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin uninstall plugin-name@marketplace-name
 ```
 
 The `--scope` option lets you target a specific scope with CLI commands:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude plugin install formatter@your-org --scope project
@@ -371,12 +275,6 @@ claude plugin uninstall formatter@your-org --scope project
 ### [​](#apply-plugin-changes-without-restarting) Apply plugin changes without restarting
 
 When you install, enable, or disable plugins during a session, run `/reload-plugins` to pick up all changes without restarting:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /reload-plugins
@@ -402,35 +300,17 @@ Run `/plugin` and go to the **Marketplaces** tab to:
 You can also manage marketplaces with direct commands.
 List all configured marketplaces:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace list
 ```
 
 Refresh plugin listings from a marketplace:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 /plugin marketplace update marketplace-name
 ```
 
 Remove a marketplace:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 /plugin marketplace remove marketplace-name
@@ -452,12 +332,6 @@ Official Anthropic marketplaces have auto-update enabled by default. Third-party
 To disable all automatic updates entirely for both Claude Code and all plugins, set the `DISABLE_AUTOUPDATER` environment variable. See [Auto updates](setup.md) for details.
 To keep plugin auto-updates enabled while disabling Claude Code auto-updates, set `FORCE_AUTOUPDATE_PLUGINS=true` along with `DISABLE_AUTOUPDATER`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 export DISABLE_AUTOUPDATER=true
 export FORCE_AUTOUPDATE_PLUGINS=true
@@ -469,12 +343,6 @@ This is useful when you want to manage Claude Code updates manually but still re
 
 Team admins can set up automatic marketplace installation for projects by adding marketplace configuration to `.claude/settings.json`. When team members trust the repository folder, Claude Code prompts them to install these marketplaces and plugins.
 Add `extraKnownMarketplaces` to your project’s `.claude/settings.json`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

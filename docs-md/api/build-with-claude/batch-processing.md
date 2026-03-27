@@ -11,7 +11,7 @@ Batch processing is a powerful approach for handling large volumes of requests e
 
 The Message Batches API is Anthropic's first implementation of this pattern.
 
-This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ---
 
@@ -174,7 +174,6 @@ Shell
 ```shiki
 #!/bin/sh
 # ...
-
 until [[ $(curl -s "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
           --header "x-api-key: $ANTHROPIC_API_KEY" \
           --header "anthropic-version: 2023-06-01" \
@@ -438,6 +437,12 @@ Note that the failure of one request in a batch does not affect the processing o
 - **Result availability**: Batch results are available for 29 days after the batch is created, allowing ample time for retrieval and processing.
 
 ---
+
+## Data retention
+
+Batch processing stores request and response data for up to 29 days after batch creation. You can delete a message batch at any time after processing using the `DELETE /v1/messages/batches/{batch_id}` endpoint. To delete an in-progress batch, cancel it first. Asynchronous processing requires server-side storage of both inputs and outputs until batch completion and result retrieval.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## FAQ
 

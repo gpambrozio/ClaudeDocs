@@ -36,12 +36,6 @@ Launch Claude Code with Chrome
 
 Start Claude Code with the `--chrome` flag:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 claude --chrome
 ```
@@ -53,12 +47,6 @@ You can also enable Chrome from within an existing session by running `/chrome`.
 Ask Claude to use the browser
 
 This example navigates to a page, interacts with it, and reports what it finds, all from your terminal or editor:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Go to code.claude.com/docs, click on the search box,
@@ -87,12 +75,6 @@ These examples show common ways to combine browser actions with coding tasks. Ru
 
 When developing a web app, ask Claude to verify your changes work correctly:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 I just updated the login form validation. Can you open localhost:3000,
 try submitting the form with invalid data, and check if the error
@@ -105,12 +87,6 @@ Claude navigates to your local server, interacts with the form, and reports what
 
 Claude can read console output to help diagnose problems. Tell Claude what patterns to look for rather than asking for all console output, since logs can be verbose:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Open the dashboard page and check the console for any errors when
 the page loads.
@@ -121,12 +97,6 @@ Claude reads the console messages and can filter for specific patterns or error 
 ### [​](#automate-form-filling) Automate form filling
 
 Speed up repetitive data entry tasks:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 I have a spreadsheet of customer contacts in contacts.csv. For each row,
@@ -140,12 +110,6 @@ Claude reads your local file, navigates the web interface, and enters the data f
 
 Use Claude to write directly in your documents without API setup:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Draft a project update based on the recent commits and add it to my
 Google Doc at docs.google.com/document/d/abc123
@@ -156,12 +120,6 @@ Claude opens the document, clicks into the editor, and types the content. This w
 ### [​](#extract-data-from-web-pages) Extract data from web pages
 
 Pull structured information from websites:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Go to the product listings page and extract the name, price, and
@@ -174,12 +132,6 @@ Claude navigates to the page, reads the content, and compiles the data into a st
 
 Coordinate tasks across multiple websites:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 Check my calendar for meetings tomorrow, then for each meeting with
 an external attendee, look up their company website and add a note
@@ -191,12 +143,6 @@ Claude works across tabs to gather information and complete the workflow.
 ### [​](#record-a-demo-gif) Record a demo GIF
 
 Create shareable recordings of browser interactions:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 Record a GIF showing how to complete the checkout flow, from adding

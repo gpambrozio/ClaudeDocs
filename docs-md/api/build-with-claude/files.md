@@ -6,7 +6,7 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 The Files API is in beta. Reach out through the [feedback form](https://forms.gle/tisHyierGwgN4DUE9) to share your experience with the Files API.
 
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
 ## Supported models
 
@@ -246,6 +246,12 @@ You can only download files that were created by [skills](build-with-claude/skil
 
 ---
 
+## Data retention
+
+Files uploaded via the Files API are retained until explicitly deleted using the `DELETE /v1/files/{file_id}` endpoint. Files are stored for reuse across multiple API requests.
+
+For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+
 ## Error handling
 
 Common errors when using the Files API include:
@@ -284,7 +290,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#e695878a8395a68788928e9489968f85c885898b) if you need higher limits for your use case
+- [Contact us](mailto:sales@anthropic.com) if you need higher limits for your use case
 
 Was this page helpful?
 

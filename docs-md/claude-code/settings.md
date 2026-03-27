@@ -102,12 +102,6 @@ Claude Code automatically creates timestamped backups of configuration files and
 
 Example settings.json
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
@@ -287,12 +281,6 @@ Paths in `filesystem.allowWrite`, `filesystem.denyWrite`, `filesystem.denyRead`,
 The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](permissions.md), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 **Configuration example:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "sandbox": {
@@ -333,12 +321,6 @@ Claude Code adds attribution to git commits and pull requests. These are configu
 
 **Default commit attribution:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
@@ -347,23 +329,11 @@ Ask AI
 
 **Default pull request attribution:**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
 
 **Example:**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -380,12 +350,6 @@ The `attribution` setting takes precedence over the deprecated `includeCoAuthore
 
 Configure a custom command for `@` file path autocomplete. The built-in file suggestion uses fast filesystem traversal, but large monorepos may benefit from project-specific indexing such as a pre-built file index or custom tooling.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "fileSuggestion": {
@@ -397,23 +361,11 @@ Ask AI
 
 The command runs with the same environment variables as [hooks](hooks.md), including `CLAUDE_PROJECT_DIR`. It receives JSON via stdin with a `query` field:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {"query": "src/comp"}
 ```
 
 Output newline-separated file paths to stdout (currently limited to 15):
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 src/components/Button.tsx
@@ -422,12 +374,6 @@ src/components/Form.tsx
 ```
 
 **Example:**
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 #!/bin/bash
@@ -446,12 +392,6 @@ These settings control which hooks are allowed to run and what HTTP hooks can ac
 **Restrict HTTP hook URLs:**
 Limit which URLs HTTP hooks can target. Supports `*` as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "allowedHttpHookUrls": ["https://hooks.example.com/*", "http://localhost:*"]
@@ -460,12 +400,6 @@ Ask AI
 
 **Restrict HTTP hook environment variables:**
 Limit which environment variable names HTTP hooks can interpolate into header values. Each hook’s effective `allowedEnvVars` is the intersection of its own list and this setting.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -516,12 +450,6 @@ Claude Code’s internal system prompt is not published. To add custom instructi
 
 To prevent Claude Code from accessing files containing sensitive information like API keys, secrets, and environment files, use the `permissions.deny` setting in your `.claude/settings.json` file:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "permissions": {
@@ -555,12 +483,6 @@ Claude Code supports a plugin system that lets you extend functionality with ski
 
 Plugin-related settings in `settings.json`:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "enabledPlugins": {
@@ -588,12 +510,6 @@ Controls which plugins are enabled. Format: `"plugin-name@marketplace-name": tru
 
 **Example**:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "enabledPlugins": {
@@ -615,12 +531,6 @@ Defines additional marketplaces that should be made available for the repository
 4. Installation respects trust boundaries and requires explicit consent
 
 **Example**:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -650,12 +560,6 @@ Ask AI
 - `settings`: inline marketplace declared directly in settings.json without a separate hosted repository (uses `name` and `plugins`)
 
 Use `source: 'settings'` to declare a small set of plugins inline without setting up a hosted marketplace repository. Plugins listed here must reference external sources such as GitHub or npm. You still need to enable each plugin separately in `enabledPlugins`.
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -706,12 +610,6 @@ The allowlist supports multiple marketplace source types. Most sources use exact
 
 1. **GitHub repositories**:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 { "source": "github", "repo": "acme-corp/approved-plugins" }
 { "source": "github", "repo": "acme-corp/security-tools", "ref": "v2.0" }
@@ -722,12 +620,6 @@ Fields: `repo` (required), `ref` (optional: branch/tag/SHA), `path` (optional: s
 
 2. **Git repositories**:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 { "source": "git", "url": "https://gitlab.example.com/tools/plugins.git" }
 { "source": "git", "url": "https://bitbucket.org/acme-corp/plugins.git", "ref": "production" }
@@ -737,12 +629,6 @@ Ask AI
 Fields: `url` (required), `ref` (optional: branch/tag/SHA), `path` (optional: subdirectory)
 
 3. **URL-based marketplaces**:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 { "source": "url", "url": "https://plugins.example.com/marketplace.json" }
@@ -755,12 +641,6 @@ URL-based marketplaces only download the `marketplace.json` file. They do not do
 
 4. **NPM packages**:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 { "source": "npm", "package": "@acme-corp/claude-plugins" }
 { "source": "npm", "package": "@acme-corp/approved-marketplace" }
@@ -769,12 +649,6 @@ Ask AI
 Fields: `package` (required, supports scoped packages)
 
 5. **File paths**:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 { "source": "file", "path": "/usr/local/share/claude/acme-marketplace.json" }
@@ -785,12 +659,6 @@ Fields: `path` (required: absolute path to marketplace.json file)
 
 6. **Directory paths**:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 { "source": "directory", "path": "/usr/local/share/claude/acme-plugins" }
 { "source": "directory", "path": "/opt/acme-corp/approved-marketplaces" }
@@ -799,12 +667,6 @@ Ask AI
 Fields: `path` (required: absolute path to directory containing `.claude-plugin/marketplace.json`)
 
 7. **Host pattern matching**:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 { "source": "hostPattern", "hostPattern": "^github\\.example\\.com$" }
@@ -822,12 +684,6 @@ Host extraction by source type:
 
 **Configuration examples**:
 Example: allow specific marketplaces only:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -855,12 +711,6 @@ Ask AI
 
 Example - Disable all marketplace additions:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "strictKnownMarketplaces": []
@@ -868,12 +718,6 @@ Ask AI
 ```
 
 Example: allow all marketplaces from an internal git server:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -894,12 +738,6 @@ Marketplace sources must match **exactly** for a user’s addition to be allowed
 - The `path` field must match exactly (or both be undefined)
 
 Examples of sources that **do NOT match**:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 // These are DIFFERENT sources:
@@ -926,12 +764,6 @@ Ask AI
 **Format difference**:
 `strictKnownMarketplaces` uses direct source objects:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 {
   "strictKnownMarketplaces": [
@@ -941,12 +773,6 @@ Ask AI
 ```
 
 `extraKnownMarketplaces` requires named marketplaces:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {
@@ -960,12 +786,6 @@ Ask AI
 
 **Using both together**:
 `strictKnownMarketplaces` is a policy gate: it controls what users may add but does not register any marketplaces. To both restrict and pre-register a marketplace for all users, set both in `managed-settings.json`:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 {

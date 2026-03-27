@@ -11,7 +11,7 @@ Computer use is in beta and requires a [beta header](api/beta-headers.md):
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 
-This feature is in beta and is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). Beta features are excluded from ZDR.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Overview
 
@@ -24,18 +24,7 @@ Computer use is a beta feature that enables Claude to interact with desktop envi
 
 While computer use can be augmented with other tools like bash and text editor for more comprehensive automation workflows, computer use specifically refers to the computer use tool's capability to see and control desktop environments.
 
-## Model compatibility
-
-Computer use is available for the following Claude models:
-
-| Model | Tool Version | Beta Flag |
-| --- | --- | --- |
-| Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5 | `computer_20251124` | `computer-use-2025-11-24` |
-| All other supported models | `computer_20250124` | `computer-use-2025-01-24` |
-
-Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 introduce the `computer_20251124` tool version with new capabilities including the zoom action for detailed screen region inspection. All other models (Sonnet 4.5, Haiku 4.5, Sonnet 4, Opus 4, Opus 4.1, and Sonnet 3.7) use the `computer_20250124` tool version.
-
-Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ## Security considerations
 
@@ -61,10 +50,6 @@ Inform end users of relevant risks and obtain their consent prior to enabling co
 Get started quickly with the computer use reference implementation that includes a web interface, Docker container, example tool implementations, and an agent loop.
 
 **Note:** The implementation has been updated to include new tools for both Claude 4 models and Claude Sonnet 3.7. Be sure to pull the latest version of the repo to access these new features.](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)
-
-Use [this form](https://forms.gle/BT1hpBrqDPDUrCqo7) to provide
-feedback on the quality of the model responses, the API itself, or the quality
-of the documentation.
 
 ## Quick start
 
@@ -177,7 +162,7 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 - An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and executes the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
-### Understanding the multi-agent loop
+### Understanding the agentic loop
 
 The core of computer use is the "agent loop" - a cycle where Claude requests tool actions, your application executes them, and returns results to Claude. Here's a simplified example:
 
@@ -207,8 +192,11 @@ async def sampling_loop(
         "computer-use-2025-11-24"
         if "20251124" in tool_version
         else "computer-use-2025-01-24"
-        if "20250124" in tool_version
-        else "computer-use-2024-10-22"
+    )
+    text_editor_type = (
+        "text_editor_20250728"
+        if "20251124" in tool_version
+        else f"text_editor_{tool_version}"
     )
 
     # Configure tools - you should already have these initialized elsewhere
@@ -219,8 +207,8 @@ async def sampling_loop(
             "display_width_px": 1024,
             "display_height_px": 768,
         },
-        {"type": f"text_editor_{tool_version}", "name": "str_replace_editor"},
-        {"type": f"bash_{tool_version}", "name": "bash"},
+        {"type": text_editor_type, "name": "str_replace_based_edit_tool"},
+        {"type": "bash_20250124", "name": "bash"},
     ]
 
     # Main agent loop (with iteration limit to prevent runaway API costs)
@@ -293,7 +281,7 @@ for details.
 
 ### System prompts
 
-When one of the Anthropic-defined tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](agents-and-tools/tool-use/implement-tool-use.md) but starts with:
+When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](agents-and-tools/tool-use/define-tools.md) but starts with:
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
@@ -323,7 +311,7 @@ Available in Claude 4 models and Claude Sonnet 3.7:
 - **wait** - Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
-Available in Claude Opus 4.6 and Claude Opus 4.5:
+Available in Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 
 - All actions from `computer_20250124`
 - **zoom** - View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
@@ -336,7 +324,7 @@ Available in Claude Opus 4.6 and Claude Opus 4.5:
 
 | Parameter | Required | Description |
 | --- | --- | --- |
-| `type` | Yes | Tool version (`computer_20251124`, `computer_20250124`, or `computer_20241022`) |
+| `type` | Yes | Tool version (`computer_20251124` or `computer_20250124`) |
 | `name` | Yes | Must be "computer" |
 | `display_width_px` | Yes | Display width in pixels |
 | `display_height_px` | Yes | Display height in pixels |
@@ -345,115 +333,20 @@ Available in Claude Opus 4.6 and Claude Opus 4.5:
 
 **Important:** The computer use tool must be explicitly executed by your application - Claude cannot execute it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 
-### Enable thinking capability in Claude 4 models and Claude Sonnet 3.7
+### Combining with extended thinking
 
-Claude Sonnet 3.7 introduced a new "thinking" capability that allows you to see the model's reasoning process as it works through complex tasks. This feature helps you understand how Claude is approaching a problem and can be particularly valuable for debugging or educational purposes.
-
-To enable thinking, add a `thinking` parameter to your API request:
-
-```shiki
-"thinking": {
-  "type": "enabled",
-  "budget_tokens": 1024
-}
-```
-
-The `budget_tokens` parameter specifies how many tokens Claude can use for thinking. This is subtracted from your overall `max_tokens` budget.
-
-When thinking is enabled, Claude will return its reasoning process as part of the response, which can help you:
-
-1. Understand the model's decision-making process
-2. Identify potential issues or misconceptions
-3. Learn from Claude's approach to problem-solving
-4. Get more visibility into complex multi-step operations
-
-Here's an example of what thinking output might look like:
-
-```inline-block
-[Thinking]
-I need to save a picture of a cat to the desktop. Let me break this down into steps:
-
-1. First, I'll take a screenshot to see what's on the desktop
-2. Then I'll look for a web browser to search for cat images
-3. After finding a suitable image, I'll need to save it to the desktop
-
-Let me start by taking a screenshot to see what's available...
-```
+For combining computer use with extended thinking, see [Extended thinking](build-with-claude/extended-thinking.md).
 
 ### Augmenting computer use with other tools
 
-The computer use tool can be combined with other tools to create more powerful automation workflows. This is particularly useful when you need to:
-
-- Execute system commands ([bash tool](agents-and-tools/tool-use/bash-tool.md))
-- Edit configuration files or scripts ([text editor tool](agents-and-tools/tool-use/text-editor-tool.md))
-- Integrate with custom APIs or services (custom tools)
-
-Shell
-
-```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: computer-use-2025-11-24" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 2000,
-    "tools": [
-      {
-        "type": "computer_20251124",
-        "name": "computer",
-        "display_width_px": 1024,
-        "display_height_px": 768,
-        "display_number": 1
-      },
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool"
-      },
-      {
-        "type": "bash_20250124",
-        "name": "bash"
-      },
-      {
-        "name": "get_weather",
-        "description": "Get the current weather in a given location",
-        "input_schema": {
-          "type": "object",
-          "properties": {
-            "location": {
-              "type": "string",
-              "description": "The city and state, e.g. San Francisco, CA"
-            },
-            "unit": {
-              "type": "string",
-              "enum": ["celsius", "fahrenheit"],
-              "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
-            }
-          },
-          "required": ["location"]
-        }
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "Find flights from San Francisco to a place with warmer weather."
-      }
-    ],
-    "thinking": {
-      "type": "enabled",
-      "budget_tokens": 1024
-    }
-  }'
-```
+To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](agents-and-tools/tool-use/bash-tool.md) and [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). You can add your own [custom tool definitions](agents-and-tools/tool-use/define-tools.md) the same way.
 
 ### Build a custom computer use environment
 
 The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
 - A virtualized or containerized environment suitable for computer use with Claude
-- An implementation of at least one of the Anthropic-defined computer use tools
+- An implementation of at least one of the Anthropic-schema computer use tools
 - An agent loop that interacts with the Claude API and executes the `tool_use` results using your tool implementations
 - An API or UI that allows user input to start the agent loop
 
@@ -510,7 +403,13 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
    ```shiki
    while True:
-       response = client.beta.messages.create(...)
+       response = client.beta.messages.create(
+           model="claude-opus-4-6",
+           max_tokens=4096,
+           messages=messages,
+           tools=tools,
+           betas=["computer-use-2025-11-24"],
+       )
 
        # Check if Claude used any tools
        tool_results = process_tool_calls(response)
@@ -603,7 +502,11 @@ The computer use functionality is in beta. While Claude's capabilities are cutti
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
----
+## Data retention
+
+Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
+
+Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
 
 ## Pricing
 

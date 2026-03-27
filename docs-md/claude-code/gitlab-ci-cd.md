@@ -47,12 +47,6 @@ The fastest way to get started is to add a minimal job to your `.gitlab-ci.yml` 
    - Add `ANTHROPIC_API_KEY` (masked, protected as needed)
 2. **Add a Claude job to `.gitlab-ci.yml`**
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 stages:
   - ai
@@ -112,12 +106,6 @@ If you prefer a more controlled setup or need enterprise providers:
 
 In an issue comment:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 @claude implement this feature based on the issue description
 ```
@@ -128,12 +116,6 @@ Claude analyzes the issue and codebase, writes changes in a branch, and opens an
 
 In an MR discussion:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 @claude suggest a concrete approach to cache the results of this API call
 ```
@@ -143,12 +125,6 @@ Claude proposes changes, adds code with appropriate caching, and updates the MR.
 ### [​](#fix-bugs-quickly) Fix bugs quickly
 
 In an issue or MR comment:
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 @claude fix the TypeError in the user dashboard component
@@ -190,12 +166,6 @@ Configure AWS to allow GitLab CI jobs to assume an IAM role via OIDC (no static 
 
 Add variables in Settings → CI/CD → Variables:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # For AWS Bedrock:
 - AWS_ROLE_TO_ASSUME
@@ -232,12 +202,6 @@ Configure Google Cloud to allow GitLab CI jobs to impersonate a service account 
 
 Add variables in Settings → CI/CD → Variables:
 
-Report incorrect code
-
-Copy
-
-Ask AI
-
 ```shiki
 # For Google Vertex AI:
 - GCP_WORKLOAD_IDENTITY_PROVIDER
@@ -252,12 +216,6 @@ Use the Google Vertex AI job example above to authenticate without storing keys.
 Below are ready-to-use snippets you can adapt to your pipeline.
 
 ### [​](#basic-gitlab-ci-yml-claude-api) Basic .gitlab-ci.yml (Claude API)
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 stages:
@@ -298,12 +256,6 @@ claude:
 
 - `AWS_ROLE_TO_ASSUME`: ARN of the IAM role for Bedrock access
 - `AWS_REGION`: Bedrock region (for example, `us-west-2`)
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude-bedrock:
@@ -354,12 +306,6 @@ Model IDs for Bedrock include region-specific prefixes (for example, `us.anthrop
 - `GCP_WORKLOAD_IDENTITY_PROVIDER`: Full provider resource name
 - `GCP_SERVICE_ACCOUNT`: Service account email
 - `CLOUD_ML_REGION`: Vertex region (for example, `us-east5`)
-
-Report incorrect code
-
-Copy
-
-Ask AI
 
 ```shiki
 claude-vertex:

@@ -10,7 +10,7 @@ The memory tool operates client-side: you control where and how the data is stor
 
 Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 
-This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 ## Use cases
 
@@ -95,18 +95,7 @@ Claude calls the memory tool:
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
-## Supported models
-
-The memory tool is available on:
-
-- Claude Opus 4.6 (`claude-opus-4-6`)
-- Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-- Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-- Claude Opus 4 (`claude-opus-4-20250514`)
-- Claude Sonnet 4.6 (`claude-sonnet-4-6`)
-- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-- Claude Sonnet 4 (`claude-sonnet-4-20250514`)
-- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
+For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
 ## Getting started
 
@@ -379,68 +368,9 @@ Consider these safeguards:
 
 The memory tool uses similar error handling patterns to the [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). See the individual tool command sections above for detailed error messages and behaviors. Common errors include file not found, permission errors, invalid paths, and duplicate text matches.
 
-## Using with Context Editing
+## Context editing integration
 
-The memory tool can be combined with [context editing](build-with-claude/context-editing.md), which automatically clears old tool results when conversation context grows beyond a configured threshold. This combination enables long-running agentic workflows that would otherwise exceed context limits.
-
-### How they work together
-
-When context editing is enabled and your conversation approaches the clearing threshold, Claude automatically receives a warning notification. This prompts Claude to preserve any important information from tool results into memory files before those results are cleared from the context window.
-
-After tool results are cleared, Claude can retrieve the stored information from memory files whenever needed, effectively treating memory as an extension of its working context. This allows Claude to:
-
-- Continue complex, multi-step workflows without losing critical information
-- Reference past work and decisions even after tool results are removed
-- Maintain coherent context across conversations that would exceed typical context limits
-- Build up a knowledge base over time while keeping the active context window manageable
-
-### Example workflow
-
-Consider a code refactoring project with many file operations:
-
-1. Claude makes numerous edits to files, generating many tool results
-2. As the context grows and approaches your threshold, Claude receives a warning
-3. Claude summarizes the changes made so far to a memory file (for example, `/memories/refactoring_progress.xml`)
-4. Context editing clears the older tool results automatically
-5. Claude continues working, referencing the memory file when it needs to recall what changes were already completed
-6. The workflow can continue indefinitely, with Claude managing both active context and persistent memory
-
-### Configuration
-
-To use both features together:
-
-Python
-
-```shiki
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[...],
-    tools=[
-        {"type": "memory_20250818", "name": "memory"},
-        # Your other tools
-    ],
-    context_management={
-        "edits": [
-            {
-                "type": "clear_tool_uses_20250919",
-                "trigger": {"type": "input_tokens", "value": 100000},
-                "keep": {"type": "tool_uses", "value": 3},
-            }
-        ]
-    },
-)
-```
-
-You can also exclude memory tool calls from being cleared to ensure Claude always has access to recent memory operations:
-
-Python
-
-```shiki
-context_management = {
-    "edits": [{"type": "clear_tool_uses_20250919", "exclude_tools": ["memory"]}]
-}
-```
+The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](build-with-claude/context-editing.md).
 
 ## Using with Compaction
 
@@ -463,6 +393,14 @@ For long-running software projects that span multiple agent sessions, memory fil
 Work on one feature at a time. Only mark a feature complete after end-to-end verification confirms it works, not just after the code is written. This keeps the progress log trustworthy and prevents scope creep from compounding across sessions.
 
 For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
+
+## Next steps
+
+[See all tools
+
+Directory of Anthropic-provided tools and their properties.](agents-and-tools/tool-use/tool-reference.md)[Context editing
+
+Manage conversation length alongside memory.](build-with-claude/context-editing.md)
 
 Was this page helpful?
 

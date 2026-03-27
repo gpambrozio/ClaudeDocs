@@ -91,6 +91,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_USE_VERTEX` | Use [Vertex](google-vertex-ai.md) |
 | `CLAUDE_CONFIG_DIR` | Customize where Claude Code stores its configuration and data files |
 | `CLAUDE_ENV_FILE` | Path to a shell script that Claude Code sources before each Bash command. Use to persist virtualenv or conda activation across commands. Also populated dynamically by [SessionStart](hooks.md), [CwdChanged](hooks.md), and [FileChanged](hooks.md) hooks |
+| `CLAUDE_STREAM_IDLE_TIMEOUT_MS` | Timeout in milliseconds before the streaming idle watchdog closes a stalled connection. Default: `90000` (90 seconds). Increase this value if long-running tools or slow networks cause premature timeout errors |
 | `DISABLE_AUTOUPDATER` | Set to `1` to disable automatic updates. |
 | `DISABLE_COST_WARNINGS` | Set to `1` to disable cost warning messages |
 | `DISABLE_ERROR_REPORTING` | Set to `1` to opt out of Sentry error reporting |
