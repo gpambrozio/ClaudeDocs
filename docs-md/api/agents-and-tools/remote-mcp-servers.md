@@ -362,14 +362,6 @@ URL
 
 `https://mcp.morningstar.com/mcp`
 
-[ICD-10 Codes](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
-
-Access ICD-10-CM and ICD-10-PCS code sets
-
-URL
-
-`https://mcp.deepsense.ai/icd10_codes/mcp`
-
 [Zapier](https://docs.zapier.com/mcp/home)
 
 Automate workflows across thousands of apps via conversation
@@ -422,6 +414,14 @@ URL
 
 `https://mcp.kiwi.com`
 
+[Postman](https://github.com/postmanlabs/postman-mcp-server)
+
+Give API context to your coding agents
+
+URL
+
+`https://mcp.postman.com/minimal`
+
 [Klaviyo](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server)
 
 Report, strategize & create with real-time Klaviyo data
@@ -438,14 +438,6 @@ URL
 
 `https://mcp.windsor.ai`
 
-[Postman](https://github.com/postmanlabs/postman-mcp-server)
-
-Give API context to your coding agents
-
-URL
-
-`https://mcp.postman.com/minimal`
-
 [Pendo](https://support.pendo.io/hc/en-us/articles/41102236924955)
 
 Connect to Pendo for product and user insights
@@ -460,14 +452,6 @@ URL
 
 `https://marketplace-mcp.us-east-1.api.aws/mcp`
 
-[Open Targets](https://github.com/opentargets/open-targets-platform-mcp)
-
-Drug target discovery and prioritisation platform
-
-URL
-
-`https://mcp.platform.opentargets.org/mcp`
-
 [Similarweb](https://docs.similarweb.com/api-v5/mcp/mcp-setup)
 
 Real time web, mobile app, and market data.
@@ -475,6 +459,14 @@ Real time web, mobile app, and market data.
 URL
 
 `https://mcp.similarweb.com`
+
+[Open Targets](https://github.com/opentargets/open-targets-platform-mcp)
+
+Drug target discovery and prioritisation platform
+
+URL
+
+`https://mcp.platform.opentargets.org/mcp`
 
 [PayPal](https://mcp.paypal.com/)
 
@@ -572,14 +564,6 @@ URL
 
 `https://fellow.app/mcp`
 
-[lastminute.com](https://mcp.lastminute.com/docs)
-
-Search, compare and book flights, dynamic packages (flight + hotel) and hotels across global airlines and hotel suppliers.
-
-URL
-
-`https://mcp.lastminute.com/mcp`
-
 [Crossbeam](https://help.crossbeam.com/en/articles/12601327-crossbeam-mcp-server-beta)
 
 Explore partner data and ecosystem insights in Claude
@@ -587,6 +571,14 @@ Explore partner data and ecosystem insights in Claude
 URL
 
 `https://mcp.crossbeam.com`
+
+[lastminute.com](https://mcp.lastminute.com/docs)
+
+Search, compare and book flights, dynamic packages (flight + hotel) and hotels across global airlines and hotel suppliers.
+
+URL
+
+`https://mcp.lastminute.com/mcp`
 
 [Synapse.org](https://github.com/susheel/synapse-mcp?tab=readme-ov-file#synapse-mcp-server)
 
@@ -684,14 +676,6 @@ URL
 
 `https://api.analytics.lseg.com/lfa/mcp/server-cl`
 
-[Bigdata.com](https://docs.bigdata.com/mcp-reference)
-
-Access real-time financial data
-
-URL
-
-`https://mcp.bigdata.com/`
-
 [Pylon](https://support.usepylon.com/articles/2407390554-connecting-to-the-pylon-mcp-server?lang=en)
 
 Search and manage Pylon support issues
@@ -699,6 +683,14 @@ Search and manage Pylon support issues
 URL
 
 `https://mcp.usepylon.com/`
+
+[Bigdata.com](https://docs.bigdata.com/mcp-reference)
+
+Access real-time financial data
+
+URL
+
+`https://mcp.bigdata.com/`
 
 [Mercury](https://docs.mercury.com/docs/connecting-mercury-mcp)
 
@@ -830,14 +822,6 @@ URL
 
 `https://mcp.mailerlite.com/mcp`
 
-[Close](mcp-server.md)
-
-Connect Claude to Close CRM to securely access and act on your sales data
-
-URL
-
-`https://mcp.close.com/mcp`
-
 [Tavily](https://docs.tavily.com/documentation/mcp)
 
 Connect your AI agents to the web
@@ -845,6 +829,14 @@ Connect your AI agents to the web
 URL
 
 `https://mcp.tavily.com/mcp`
+
+[Close](mcp-server.md)
+
+Connect Claude to Close CRM to securely access and act on your sales data
+
+URL
+
+`https://mcp.close.com/mcp`
 
 [PagerDuty](https://developer.pagerduty.com/docs/mcp-tooling-remote-server)
 
@@ -1052,14 +1044,6 @@ URL
 
 `https://mcp.localfalcon.com`
 
-[Stytch](https://stytch.com/docs/workspace-management/stytch-mcp)
-
-Manage your Stytch Project
-
-URL
-
-`https://mcp.stytch.dev/mcp`
-
 [MSCI](https://www.msci.com/downloads/web/msci-com/data-and-analytics/private-asset-solutions/ai-for-private-markets/msci-mcp-msci-connector-user-guide.pdf)
 
 Turn data into insight
@@ -1068,11 +1052,13 @@ URL
 
 `https://mcp.msci.com/mcp/v1.0/mcp`
 
-[Port IO](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
+[Stytch](https://stytch.com/docs/workspace-management/stytch-mcp)
 
-Search your context lake and safely run actions
+Manage your Stytch Project
 
-Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp)
+URL
+
+`https://mcp.stytch.dev/mcp`
 
 [Ticket Tailor](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)
 
@@ -1081,6 +1067,12 @@ Event platform for managing tickets, orders & more
 URL
 
 `https://mcp.tickettailor.ai/mcp`
+
+[Port IO](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation)
+
+Search your context lake and safely run actions
+
+Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp)
 
 [Lumin](https://github.com/luminpdf/lumin-mcp-server)
 
@@ -1236,29 +1228,35 @@ Securely retrieve data from your federated data sources
 
 Requires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 
-[Zoho Projects](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
-
-Zoho Projects MCP for Task & Project Automation
-
-Requires user-specific URL. [Get your URL here](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
-
 [Visier](https://docs.visier.com/developer/agents/mcp/mcp-server.htm)
 
 Find people, productivity and business impact insights
 
 Requires user-specific URL. [Get your URL here](https://docs.visier.com/developer/agents/mcp/mcp-server-set-up.htm)
 
+[ICD-10 Codes](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
+
+Access ICD-10-CM and ICD-10-PCS code sets
+
+URL
+
+`https://hcls.mcp.claude.com/icd10_codes/mcp`
+
 [Zoho Books](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
 
 Zoho Books MCP for Smart Finance Ops
-
-Requires user-specific URL. [Get your URL here](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
 
 [Zoho CRM](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
 
 MCP Server for Zoho CRM Workflows
 
-Requires user-specific URL. [Get your URL here](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
+[Zoho Desk](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
+
+Zoho Desk MCP for Customer Support Automation
+
+[Zoho Projects](https://help.zoho.com/portal/en/kb/mcp/getting-started/articles/zoho-mcp-help-documentation-29-9-2025)
+
+Zoho Projects MCP for Task & Project Automation
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 

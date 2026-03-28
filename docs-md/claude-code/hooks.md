@@ -42,7 +42,7 @@ The table below summarizes when each event fires. The [Hook events](#hook-events
 
 ### [​](#how-a-hook-resolves) How a hook resolves
 
-To see how these pieces fit together, consider this `PreToolUse` hook that blocks destructive shell commands. The hook runs `block-rm.sh` before every Bash tool call:
+To see how these pieces fit together, consider this `PreToolUse` hook that blocks destructive shell commands. The `matcher` narrows to Bash tool calls and the `if` condition narrows further to commands starting with `rm`, so `block-rm.sh` only spawns when both filters match:
 
 ```shiki
 {
@@ -53,7 +53,8 @@ To see how these pieces fit together, consider this `PreToolUse` hook that block
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/block-rm.sh"
+            "if": "Bash(rm *)",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-rm.sh"
           }
         ]
       }
@@ -84,7 +85,7 @@ fi
 
 Now suppose Claude Code decides to run `Bash "rm -rf /tmp/build"`. Here’s what happens:
 
-![Hook resolution flow: PreToolUse event fires, matcher checks for Bash match, hook handler runs, result returns to Claude Code](https://mintcdn.com/claude-code/c5r9_6tjPMzFdDDT/images/hook-resolution.svg?fit=max&auto=format&n=c5r9_6tjPMzFdDDT&q=85&s=ad667ee6d86ab2276aa48a4e73e220df)
+![Hook resolution flow: PreToolUse event fires, matcher checks for Bash match, if condition checks for Bash(rm *) match, hook handler runs, result returns to Claude Code](https://mintcdn.com/claude-code/-tYw1BD_DEqfyyOZ/images/hook-resolution.svg?fit=max&auto=format&n=-tYw1BD_DEqfyyOZ&q=85&s=c73ebc1eeda2037570427d7af1e0a891)
 
 1
 
@@ -100,13 +101,19 @@ The `PreToolUse` event fires. Claude Code sends the tool input as JSON on stdin 
 
 Matcher checks
 
-The matcher `"Bash"` matches the tool name, so `block-rm.sh` runs. If you omit the matcher or use `"*"`, the hook runs on every occurrence of the event. Hooks only skip when a matcher is defined and doesn’t match.
+The matcher `"Bash"` matches the tool name, so this hook group activates. If you omit the matcher or use `"*"`, the group activates on every occurrence of the event.
 
 3
 
+If condition checks
+
+The `if` condition `"Bash(rm *)"` matches because the command starts with `rm`, so this handler spawns. If the command had been `npm test`, the `if` check would fail and `block-rm.sh` would never run, avoiding the process spawn overhead. The `if` field is optional; without it, every handler in the matched group runs.
+
+4
+
 Hook handler runs
 
-The script extracts `"rm -rf /tmp/build"` from the input and finds `rm -rf`, so it prints a decision to stdout:
+The script inspects the full command and finds `rm -rf`, so it prints a decision to stdout:
 
 ```shiki
 {
@@ -118,9 +125,9 @@ The script extracts `"rm -rf /tmp/build"` from the input and finds `rm -rf`, so 
 }
 ```
 
-If the command had been safe (like `npm test`), the script would hit `exit 0` instead, which tells Claude Code to allow the tool call with no further action.
+If the command had been a safer `rm` variant like `rm file.txt`, the script would hit `exit 0` instead, which tells Claude Code to allow the tool call with no further action.
 
-4
+5
 
 Claude Code acts on the result
 
@@ -199,6 +206,7 @@ This example runs a linting script only when Claude writes or edits a file:
 ```
 
 `UserPromptSubmit`, `Stop`, `TeammateIdle`, `TaskCreated`, `TaskCompleted`, `WorktreeCreate`, `WorktreeRemove`, and `CwdChanged` don’t support matchers and always fire on every occurrence. If you add a `matcher` field to these events, it is silently ignored.
+For tool events, you can filter more narrowly by setting the [`if` field](#common-fields) on individual hook handlers. `if` uses [permission rule syntax](permissions.md) to match against the tool name and arguments together, so `"Bash(git *)"` runs only for `git` commands and `"Edit(*.ts)"` runs only for TypeScript files.
 
 #### [​](#match-mcp-tools) Match MCP tools
 
@@ -259,6 +267,7 @@ These fields apply to all hook types:
 | Field | Required | Description |
 | --- | --- | --- |
 | `type` | yes | `"command"`, `"http"`, `"prompt"`, or `"agent"` |
+| `if` | no | Permission rule syntax to filter when this hook runs, such as `"Bash(git *)"` or `"Edit(*.ts)"`. The hook only spawns if the tool call matches the pattern. Only evaluated on tool events: `PreToolUse`, `PostToolUse`, `PostToolUseFailure`, and `PermissionRequest`. On other events, a hook with `if` set never runs. Uses the same syntax as [permission rules](permissions.md) |
 | `timeout` | no | Seconds before canceling. Defaults: 600 for command, 30 for prompt, 60 for agent |
 | `statusMessage` | no | Custom spinner message displayed while the hook runs |
 | `once` | no | If `true`, runs only once per session then is removed. Skills only, not agents. See [Hooks in skills and agents](#hooks-in-skills-and-agents) |
@@ -788,7 +797,7 @@ block prompts or want more structured control.
 
 ### [​](#pretooluse) PreToolUse
 
-Runs after Claude creates tool parameters and before processing the tool call. Matches on tool name: `Bash`, `Edit`, `Write`, `Read`, `Glob`, `Grep`, `Agent`, `WebFetch`, `WebSearch`, and any [MCP tool names](#match-mcp-tools).
+Runs after Claude creates tool parameters and before processing the tool call. Matches on tool name: `Bash`, `Edit`, `Write`, `Read`, `Glob`, `Grep`, `Agent`, `WebFetch`, `WebSearch`, `AskUserQuestion`, `ExitPlanMode`, and any [MCP tool names](#match-mcp-tools).
 Use [PreToolUse decision control](#pretooluse-decision-control) to allow, deny, or ask for permission to use the tool.
 
 #### [​](#pretooluse-input) PreToolUse input
@@ -888,6 +897,15 @@ Spawns a [subagent](sub-agents.md).
 | `subagent_type` | string | `"Explore"` | Type of specialized agent to use |
 | `model` | string | `"sonnet"` | Optional model alias to override the default |
 
+##### AskUserQuestion
+
+Asks the user one to four multiple-choice questions.
+
+| Field | Type | Example | Description |
+| --- | --- | --- | --- |
+| `questions` | array | `[{"question": "Which framework?", "header": "Framework", "options": [{"label": "React"}], "multiSelect": false}]` | Questions to present, each with a `question` string, short `header`, `options` array, and optional `multiSelect` flag |
+| `answers` | object | `{"Which framework?": "React"}` | Optional. Maps question text to the selected option label. Multi-select answers join labels with commas. Claude does not set this field; supply it via `updatedInput` to answer programmatically |
+
 #### [​](#pretooluse-decision-control) PreToolUse decision control
 
 `PreToolUse` hooks can control whether a tool call proceeds. Unlike other hooks that use a top-level `decision` field, PreToolUse returns its decision inside a `hookSpecificOutput` object. This gives it richer control: three outcomes (allow, deny, or ask) plus the ability to modify tool input before execution.
@@ -896,7 +914,7 @@ Spawns a [subagent](sub-agents.md).
 | --- | --- |
 | `permissionDecision` | `"allow"` skips the permission prompt. `"deny"` prevents the tool call. `"ask"` prompts the user to confirm. [Deny and ask rules](permissions.md) still apply when a hook returns `"allow"` |
 | `permissionDecisionReason` | For `"allow"` and `"ask"`, shown to the user but not Claude. For `"deny"`, shown to Claude |
-| `updatedInput` | Modifies the tool’s input parameters before execution. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user |
+| `updatedInput` | Modifies the tool’s input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user |
 | `additionalContext` | String added to Claude’s context before the tool executes |
 
 When a hook returns `"ask"`, the permission prompt displayed to the user includes a label identifying where the hook came from: for example, `[User]`, `[Project]`, `[Plugin]`, or `[Local]`. This helps users understand which configuration source is requesting confirmation.
@@ -914,6 +932,8 @@ When a hook returns `"ask"`, the permission prompt displayed to the user include
   }
 }
 ```
+
+`AskUserQuestion` and `ExitPlanMode` require user interaction and normally block in [non-interactive mode](headless.md) with the `-p` flag. Returning `permissionDecision: "allow"` together with `updatedInput` satisfies that requirement: the hook reads the tool’s input from stdin, collects the answer through your own UI, and returns it in `updatedInput` so the tool runs without prompting. Returning `"allow"` alone is not sufficient for these tools. For `AskUserQuestion`, echo back the original `questions` array and add an [`answers`](#askuserquestion) object mapping each question’s text to the chosen answer.
 
 PreToolUse previously used top-level `decision` and `reason` fields, but these are deprecated for this event. Use `hookSpecificOutput.permissionDecision` and `hookSpecificOutput.permissionDecisionReason` instead. The deprecated values `"approve"` and `"block"` map to `"allow"` and `"deny"` respectively. Other events like PostToolUse and Stop continue to use top-level `decision` and `reason` as their current format.
 
@@ -957,7 +977,7 @@ PermissionRequest hooks receive `tool_name` and `tool_input` fields like PreTool
 | Field | Description |
 | --- | --- |
 | `behavior` | `"allow"` grants the permission, `"deny"` denies it |
-| `updatedInput` | For `"allow"` only: modifies the tool’s input parameters before execution |
+| `updatedInput` | For `"allow"` only: modifies the tool’s input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones |
 | `updatedPermissions` | For `"allow"` only: array of [permission update entries](#permission-update-entries) to apply, such as adding an allow rule or changing the session permission mode |
 | `message` | For `"deny"` only: tells Claude why the permission was denied |
 | `interrupt` | For `"deny"` only: if `true`, stops Claude |
@@ -1569,6 +1589,7 @@ FileChanged hooks have no decision control. They cannot block the file change fr
 ### [​](#worktreecreate) WorktreeCreate
 
 When you run `claude --worktree` or a [subagent uses `isolation: "worktree"`](sub-agents.md), Claude Code creates an isolated working copy using `git worktree`. If you configure a WorktreeCreate hook, it replaces the default git behavior, letting you use a different version control system like SVN, Perforce, or Mercurial.
+Because the hook replaces the default behavior entirely, [`.worktreeinclude`](common-workflows.md) is not processed. If you need to copy local configuration files like `.env` into the new worktree, do it inside your hook script.
 The hook must return the absolute path to the created worktree directory. Claude Code uses this path as the working directory for the isolated session. Command hooks print it on stdout; HTTP hooks return it via `hookSpecificOutput.worktreePath`.
 This example creates an SVN working copy and prints the path for Claude Code to use. Replace the repository URL with your own:
 

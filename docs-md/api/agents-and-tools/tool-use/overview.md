@@ -25,7 +25,7 @@ print(response.content)
 
 ## How tool use works
 
-Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and Anthropic-schema tools like bash and text\_editor) run in your application: Claude returns a `tool_use` block, your code executes the operation, and you send back a `tool_result`. **Server tools** (web\_search, code\_execution, web\_fetch, tool\_search) run on Anthropic's infrastructure: you see the results directly without handling execution.
+Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and Anthropic-schema tools like bash and text\_editor) run in your application: Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks, your code executes the operation, and you send back a `tool_result`. **Server tools** (web\_search, code\_execution, web\_fetch, tool\_search) run on Anthropic's infrastructure: you see the results directly without handling execution.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](agents-and-tools/tool-use/how-tool-use-works.md).
 

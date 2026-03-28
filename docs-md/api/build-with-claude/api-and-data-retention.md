@@ -6,7 +6,7 @@ Information about Anthropic's standard retention policies is set out in [Anthrop
 
 When users use API endpoints with zero data retention (ZDR), customer data submitted through those endpoints is not stored at rest after the API response is returned except where needed to comply with law or combat misuse. Subject to these exceptions, when using ZDR-enabled endpoints, customer data is processed in real time and promptly discarded, with no logging or non-ephemeral storage of prompts or outputs.
 
-## Our approach to data retention
+## Anthropic's approach to data retention
 
 Different APIs and features have different storage and retention needs. Where an API or feature doesn't require storage of customer prompts or responses, it may be eligible for ZDR. Where an API or feature necessarily requires storage of customer prompts or responses, Anthropic designs for the smallest possible retention footprint. For these features:
 

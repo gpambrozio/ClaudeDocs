@@ -111,6 +111,9 @@ asyncio.run(main())
 | `prompt` | `string` | Yes | The agent's system prompt defining its role and behavior |
 | `tools` | `string[]` | No | Array of allowed tool names. If omitted, inherits all tools |
 | `model` | `'sonnet' | 'opus' | 'haiku' | 'inherit'` | No | Model override for this agent. Defaults to main model if omitted |
+| `skills` | `string[]` | No | List of skill names available to this agent |
+| `memory` | `'user' | 'project' | 'local'` | No | Memory source for this agent (Python only) |
+| `mcpServers` | `(string | object)[]` | No | MCP servers available to this agent, by name or inline config |
 
 Subagents cannot spawn their own subagents. Don't include `Agent` in a subagent's `tools` array.
 
@@ -127,7 +130,7 @@ A subagent's context window starts fresh (no parent conversation) but isn't empt
 | The subagent receives | The subagent does not receive |
 | --- | --- |
 | Its own system prompt (`AgentDefinition.prompt`) and the Agent tool's prompt | The parent's conversation history or tool results |
-| Project CLAUDE.md (loaded via `settingSources`) | Skills (unless listed in `AgentDefinition.skills`, TypeScript only) |
+| Project CLAUDE.md (loaded via `settingSources`) | Skills (unless listed in `AgentDefinition.skills`) |
 | Tool definitions (inherited from parent, or the subset in `tools`) | The parent's system prompt |
 
 The parent receives the subagent's final message verbatim as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the **main** `query()` call.

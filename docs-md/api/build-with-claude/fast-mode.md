@@ -45,7 +45,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates across the full context window. The following table shows pricing for Claude Opus 4.6 with fast mode:
+Fast mode is priced at 6x standard Opus rates across the full context window, including requests over 200k input tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
 
 | Input | Output |
 | --- | --- |

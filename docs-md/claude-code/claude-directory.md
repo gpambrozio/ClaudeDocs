@@ -12,6 +12,8 @@ CLAUDE.md
 
 {}.mcp.json
 
+.worktreeinclude
+
 ▾.claude/
 
 {}settings.json
@@ -111,7 +113,7 @@ The explorer covers the files you’ll interact with most. A few things live els
 
 ## [​](#file-reference) File reference
 
-This table lists every file the explorer covers. Project-scope files live in your repo under `.claude/` (or at the root for `CLAUDE.md` and `.mcp.json`). Global-scope files live in `~/.claude/` and apply across all projects.
+This table lists every file the explorer covers. Project-scope files live in your repo under `.claude/` (or at the root for `CLAUDE.md`, `.mcp.json`, and `.worktreeinclude`). Global-scope files live in `~/.claude/` and apply across all projects.
 
 Several things can override what you put in these files:
 
@@ -130,6 +132,7 @@ Click a filename to open that node in the explorer above.
 | [`settings.json`](#ce-settings-json) | Project and global | ✓ | Permissions, hooks, env vars, model defaults | [Settings](settings.md) |
 | [`settings.local.json`](#ce-settings-local-json) | Project only |  | Your personal overrides, auto-gitignored | [Settings scopes](settings.md) |
 | [`.mcp.json`](#ce-mcp-json) | Project only | ✓ | Team-shared MCP servers | [MCP scopes](mcp.md) |
+| [`.worktreeinclude`](#ce-worktreeinclude) | Project only | ✓ | Gitignored files to copy into new worktrees | [Worktrees](common-workflows.md) |
 | [`skills/<name>/SKILL.md`](#ce-skills) | Project and global | ✓ | Reusable prompts invoked with `/name` or auto-invoked | [Skills](skills.md) |
 | [`commands/*.md`](#ce-commands) | Project and global | ✓ | Single-file prompts; same mechanism as skills | [Skills](skills.md) |
 | [`output-styles/*.md`](#ce-output-styles) | Project and global | ✓ | Custom system-prompt sections | [Output styles](output-styles.md) |
