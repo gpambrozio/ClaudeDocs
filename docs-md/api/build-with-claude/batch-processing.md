@@ -408,6 +408,41 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 In this example, both requests in the batch include identical system messages and the full text of Pride and Prejudice marked with `cache_control` to increase the likelihood of cache hits.
 
+### Extended output (beta)
+
+The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.6 or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
+
+Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and is not available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
+
+Use extended output for long-form generation such as book-length drafts and technical documentation, exhaustive structured data extraction, large code-generation scaffolds, and long reasoning chains.
+
+A single 300k-token generation can take over an hour to complete, so plan your batch submissions with the 24-hour processing window in mind. Standard batch pricing (50% of standard API prices) applies.
+
+Shell
+
+```shiki
+curl https://api.anthropic.com/v1/messages/batches \
+     --header "x-api-key: $ANTHROPIC_API_KEY" \
+     --header "anthropic-version: 2023-06-01" \
+     --header "anthropic-beta: output-300k-2026-03-24" \
+     --header "content-type: application/json" \
+     --data \
+'{
+    "requests": [
+        {
+            "custom_id": "long-form-request",
+            "params": {
+                "model": "claude-opus-4-6",
+                "max_tokens": 300000,
+                "messages": [
+                    {"role": "user", "content": "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices."}
+                ]
+            }
+        }
+    ]
+}'
+```
+
 ### Best practices for effective batching
 
 To get the most out of the Batches API:

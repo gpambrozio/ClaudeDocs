@@ -86,7 +86,7 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 
 `budget_tokens` is [deprecated](build-with-claude/overview.md) on Claude Opus 4.6 and Claude Sonnet 4.6 and will be removed in a future model release. Use [adaptive thinking](build-with-claude/adaptive-thinking.md) with the [effort parameter](build-with-claude/effort.md) to control thinking depth instead.
 
-Claude Opus 4.6 supports up to 128k output tokens. Earlier models support up to 64k output tokens.
+Claude Opus 4.6 supports up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](about-claude/models/overview.md) for limits on legacy models. On the [Message Batches API](build-with-claude/batch-processing.md), the `output-300k-2026-03-24` [beta header](api/beta-headers.md) raises the output limit to 300k for Opus 4.6 and Sonnet 4.6.
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window.
 
@@ -105,7 +105,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#fd8e9c91988ebd9c9389958f928d949ed39e9290).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ee9d8f828b9dae8f809a869c819e878dc08d8183).
 
 ### Controlling thinking display
 

@@ -616,7 +616,7 @@ Allow specific marketplaces only:
 }
 ```
 
-Allow all marketplaces from an internal git server using regex pattern matching on the host:
+Allow all marketplaces from an internal git server using regex pattern matching on the host. This is the recommended approach for [GitHub Enterprise Server](github-enterprise-server.md) or self-hosted GitLab instances:
 
 ```shiki
 {

@@ -39,6 +39,8 @@ Starting with **Claude Sonnet 4.5 and all subsequent models** (including Claude 
 
 You can query model capabilities and token limits programmatically with the [Models API](api/models/list.md). The response includes `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
 
+The Max output values above apply to the synchronous Messages API. On the [Message Batches API](build-with-claude/batch-processing.md), Opus 4.6 and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
+
 ### Legacy models
 
 ## Prompt and output performance

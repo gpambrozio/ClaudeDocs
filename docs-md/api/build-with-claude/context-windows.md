@@ -91,9 +91,7 @@ Claude Sonnet 3.7 does not support interleaved thinking, so there is no interlea
 
 For more information about using tools with extended thinking, see the [extended thinking guide](build-with-claude/extended-thinking.md).
 
-Claude Opus 4.6 and Sonnet 4.6 have a 1M-token context window.
-
-Claude Sonnet 4.5 and Sonnet 4 require the `context-1m-2025-08-07` [beta header](api/beta-headers.md) for requests beyond 200k tokens (available to organizations in [usage tier](api/rate-limits.md) 4 and those with custom rate limits). Other Claude models have a 200k-token context window.
+Claude Opus 4.6 and Sonnet 4.6 have a 1M-token context window. Other Claude models, including Claude Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
 
 A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](api/overview.md) before the token limit.
 

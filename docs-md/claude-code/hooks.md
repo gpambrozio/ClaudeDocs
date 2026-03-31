@@ -502,7 +502,7 @@ Exit code 2 is the way a hook signals “stop, don’t do this.” The effect de
 | `Stop` | Yes | Prevents Claude from stopping, continues the conversation |
 | `SubagentStop` | Yes | Prevents the subagent from stopping |
 | `TeammateIdle` | Yes | Prevents the teammate from going idle (teammate continues working) |
-| `TaskCreated` | Yes | Prevents the task from being created |
+| `TaskCreated` | Yes | Rolls back the task creation |
 | `TaskCompleted` | Yes | Prevents the task from being marked as completed |
 | `ConfigChange` | Yes | Blocks the configuration change from taking effect (except `policy_settings`) |
 | `StopFailure` | No | Output and exit code are ignored |
@@ -2170,18 +2170,16 @@ On Windows, you can run individual hooks in PowerShell by setting `"shell": "pow
 
 ## [​](#debug-hooks) Debug hooks
 
-Run `claude --debug` to see hook execution details, including which hooks matched, their exit codes, and output. Toggle verbose mode with `Ctrl+O` to see hook progress in the transcript.
+Run `claude --debug` to see hook execution details, including which hooks matched, their exit codes, and output.
 
 ```shiki
 [DEBUG] Executing hooks for PostToolUse:Write
-[DEBUG] Getting matching hook commands for PostToolUse with query: Write
-[DEBUG] Found 1 hook matchers in settings
-[DEBUG] Matched 1 hooks for query "Write"
 [DEBUG] Found 1 hook commands to execute
 [DEBUG] Executing hook command: <Your command> with timeout 600000ms
 [DEBUG] Hook command completed with status 0: <Your stdout>
 ```
 
+For more granular hook matching details, set `CLAUDE_CODE_DEBUG_LOG_LEVEL=verbose` to see additional log lines such as hook matcher counts and query matching.
 For troubleshooting common issues like hooks not firing, infinite Stop hook loops, or configuration errors, see [Limitations and troubleshooting](hooks-guide.md) in the guide.
 
 ---
