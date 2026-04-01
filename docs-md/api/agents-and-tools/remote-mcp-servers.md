@@ -282,6 +282,14 @@ URL
 
 `https://mcp.krisp.ai/mcp`
 
+[Lorikeet](https://docs.lorikeetcx.ai/mcp/mcp-server)
+
+A universal concierge for complex businesses
+
+URL
+
+`https://api.lorikeetcx.ai/v1/mcp`
+
 [LunarCrush](https://lunarcrush.com/developers/api/ai)
 
 Add real-time social media data to your searches
@@ -353,6 +361,12 @@ Create presentations, docs, socials, and sites with AI
 URL
 
 `https://mcp.gamma.app/mcp`
+
+[Natoma](https://docs.natoma.ai)
+
+Access all your internal tools, enterprise apps & data.
+
+Requires user-specific URL. [Get your URL here](https://docs.natoma.ai)
 
 [Netlify](https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/)
 
@@ -639,6 +653,14 @@ Search domains and check availability
 URL
 
 `https://api.godaddy.com/v1/domains/mcp`
+
+[Goodnotes](https://www.notion.so/goodnotes-team/Goodnotes-MCP-Server-Documentation-320b740273d28187a23ad52780a37620)
+
+Turn AI insights into documents
+
+URL
+
+`https://claude-mcp-api.ml.goodnotes.com/mcp`
 
 [Google Cloud BigQuery](https://cloud.google.com/bigquery/docs/use-bigquery-mcp)
 
@@ -1211,6 +1233,14 @@ URL
 Securely retrieve data from your federated data sources
 
 Requires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
+
+[Zocks](https://help.zocks.io/en/articles/14075856-connect-to-the-zocks-mcp-server)
+
+Analyze client conversations, patterns, and insights.
+
+URL
+
+`https://mcp.zocks.io/v1/mcp`
 
 [Candid](https://support.claude.com/en/articles/12923235-using-the-candid-connector-in-claude)
 

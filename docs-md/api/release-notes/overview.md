@@ -9,7 +9,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 ### March 30, 2026
 
 - We've raised the `max_tokens` cap to 300k on the [Message Batches API](build-with-claude/batch-processing.md) for Claude Opus 4.6 and Sonnet 4.6. Include the `output-300k-2026-03-24` beta header to generate longer single-turn outputs for long-form content, structured data, and large code generation tasks.
-- We're retiring the 1M token context window beta for Claude Sonnet 4.5 and Claude Sonnet 4 on **April 30, 2026**. After that date, requests that include the `context-1m-2025-08-07` beta header on these models will return a 400 error. To continue using 1M context windows, migrate to [Claude Sonnet 4.6](about-claude/models/overview.md) or [Claude Opus 4.6](about-claude/models/overview.md), which support the full 1M token context window at standard pricing with no beta header required.
+- We're retiring the 1M token context window beta for Claude Sonnet 4.5 and Claude Sonnet 4 on **April 30, 2026**. After that date, the `context-1m-2025-08-07` beta header will have no effect on these models, and requests that exceed the standard 200k-token context window will return an error. To continue using 1M context windows, migrate to [Claude Sonnet 4.6](about-claude/models/overview.md) or [Claude Opus 4.6](about-claude/models/overview.md), which support the full 1M token context window at standard pricing with no beta header required.
 
 ### March 18, 2026
 

@@ -247,6 +247,12 @@ Add your meetings context via transcripts and notesCommand
 
 `claude mcp add --transport http krisp https://mcp.krisp.ai/mcp`
 
+[**Lorikeet**](https://docs.lorikeetcx.ai/mcp/mcp-server)
+
+A universal concierge for complex businessesCommand
+
+`claude mcp add --transport http lorikeet https://api.lorikeetcx.ai/v1/mcp`
+
 [**LunarCrush**](https://lunarcrush.com/developers/api/ai)
 
 Add real-time social media data to your searchesCommand
@@ -816,6 +822,12 @@ Create, query, and manage structured content in SanityCommand
 [**Starburst**](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 
 Securely retrieve data from your federated data sourcesRequires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html).
+
+[**Zocks**](https://help.zocks.io/en/articles/14075856-connect-to-the-zocks-mcp-server)
+
+Analyze client conversations, patterns, and insights.Command
+
+`claude mcp add --transport http zocks https://mcp.zocks.io/v1/mcp`
 
 [**Candid**](https://support.claude.com/en/articles/12923235-using-the-candid-connector-in-claude)
 
@@ -1653,12 +1665,12 @@ ENABLE_TOOL_SEARCH=false claude
 ```
 
 Or set the value in your [settings.json `env` field](settings.md).
-You can also disable the MCPSearch tool specifically using the `disallowedTools` setting:
+You can also disable the `ToolSearch` tool specifically:
 
 ```shiki
 {
   "permissions": {
-    "deny": ["MCPSearch"]
+    "deny": ["ToolSearch"]
   }
 }
 ```

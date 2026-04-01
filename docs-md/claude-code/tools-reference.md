@@ -1,6 +1,7 @@
 # Tools reference
 
-Claude Code has access to a set of tools that help it understand and modify your codebase. The tool names below are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md).
+Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md). To disable a tool entirely, add its name to the `deny` array in your [permission settings](permissions.md).
+To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reusable prompt-based workflows, write a [skill](skills.md), which runs through the existing `Skill` tool rather than adding a new tool entry.
 
 | Tool | Description | Permission Required |
 | --- | --- | --- |
@@ -18,11 +19,12 @@ Claude Code has access to a set of tools that help it understand and modify your
 | `Glob` | Finds files based on pattern matching | No |
 | `Grep` | Searches for patterns in file contents | No |
 | `ListMcpResourcesTool` | Lists resources exposed by connected [MCP servers](mcp.md) | No |
-| `LSP` | Code intelligence via language servers. Reports type errors and warnings automatically after file edits. Also supports navigation operations: jump to definitions, find references, get type info, list symbols, find implementations, trace call hierarchies. Requires a [code intelligence plugin](discover-plugins.md) and its language server binary | No |
+| `LSP` | Code intelligence via language servers: jump to definitions, find references, report type errors and warnings. See [LSP tool behavior](#lsp-tool-behavior) | No |
 | `NotebookEdit` | Modifies Jupyter notebook cells | Yes |
 | `PowerShell` | Executes PowerShell commands on Windows. Opt-in preview. See [PowerShell tool](#powershell-tool) | Yes |
 | `Read` | Reads the contents of files | No |
 | `ReadMcpResourceTool` | Reads a specific MCP resource by URI | No |
+| `SendMessage` | Sends a message to an [agent team](agent-teams.md) teammate, or [resumes a subagent](sub-agents.md) by its agent ID. Stopped subagents auto-resume in the background. Only available when `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` or the `--agent-teams` flag is set | No |
 | `Skill` | Executes a [skill](skills.md) within the main conversation | Yes |
 | `TaskCreate` | Creates a new task in the task list | No |
 | `TaskGet` | Retrieves full details for a specific task | No |
@@ -30,6 +32,8 @@ Claude Code has access to a set of tools that help it understand and modify your
 | `TaskOutput` | (Deprecated) Retrieves output from a background task. Prefer `Read` on the task’s output file path | No |
 | `TaskStop` | Kills a running background task by ID | No |
 | `TaskUpdate` | Updates task status, dependencies, details, or deletes tasks | No |
+| `TeamCreate` | Creates an [agent team](agent-teams.md) with multiple teammates. Only available when `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` or the `--agent-teams` flag is set | No |
+| `TeamDelete` | Disbands an agent team and cleans up teammate processes. Only available when `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` or the `--agent-teams` flag is set | No |
 | `TodoWrite` | Manages the session task checklist. Available in non-interactive mode and the [Agent SDK](headless.md); interactive sessions use TaskCreate, TaskGet, TaskList, and TaskUpdate instead | No |
 | `ToolSearch` | Searches for and loads deferred tools when [tool search](mcp.md) is enabled | No |
 | `WebFetch` | Fetches content from a specified URL | Yes |
@@ -46,6 +50,19 @@ The Bash tool runs each command in a separate process with the following persist
 - Environment variables do not persist. An `export` in one command will not be available in the next.
 
 Activate your virtualenv or conda environment before launching Claude Code. To make environment variables persist across Bash commands, set [`CLAUDE_ENV_FILE`](env-vars.md) to a shell script before launching Claude Code, or use a [SessionStart hook](hooks.md) to populate it dynamically.
+
+## [​](#lsp-tool-behavior) LSP tool behavior
+
+The LSP tool gives Claude code intelligence from a running language server. After each file edit, it automatically reports type errors and warnings so Claude can fix issues without a separate build step. Claude can also call it directly to navigate code:
+
+- Jump to a symbol’s definition
+- Find all references to a symbol
+- Get type information at a position
+- List symbols in a file or workspace
+- Find implementations of an interface
+- Trace call hierarchies
+
+The tool is inactive until you install a [code intelligence plugin](discover-plugins.md) for your language. The plugin bundles the language server configuration, and you install the server binary separately.
 
 ## [​](#powershell-tool) PowerShell tool
 
@@ -83,8 +100,19 @@ The PowerShell tool has the following known limitations during the preview:
 - Only supported on native Windows, not WSL
 - Git Bash is still required to start Claude Code
 
+## [​](#check-which-tools-are-available) Check which tools are available
+
+Your exact tool set depends on your provider, platform, and settings. To check what’s loaded in a running session, ask Claude directly:
+
+```shiki
+What tools do you have access to?
+```
+
+Claude gives a conversational summary. For exact MCP tool names, run `/mcp`.
+
 ## [​](#see-also) See also
 
+- [MCP servers](mcp.md): add custom tools by connecting external servers
 - [Permissions](permissions.md): permission system, rule syntax, and tool-specific patterns
 - [Subagents](sub-agents.md): configure tool access for subagents
 - [Hooks](hooks-guide.md): run custom commands before or after tool execution

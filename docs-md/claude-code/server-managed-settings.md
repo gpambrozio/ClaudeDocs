@@ -36,7 +36,7 @@ In [Claude.ai](https://claude.ai), navigate to **Admin Settings > Claude Code > 
 
 Define your settings
 
-Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `allowManagedPermissionRulesOnly`.This example enforces a permission deny list and prevents users from bypassing permissions:
+Add your configuration as JSON. All [settings available in `settings.json`](settings.md) are supported, including [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](permissions.md) like `allowManagedPermissionRulesOnly`.This example enforces a permission deny list, prevents users from bypassing permissions, and restricts permission rules to those defined in managed settings:
 
 ```shiki
 {
@@ -48,7 +48,8 @@ Add your configuration as JSON. All [settings available in `settings.json`](sett
       "Read(./secrets/**)"
     ],
     "disableBypassPermissionsMode": "disable"
-  }
+  },
+  "allowManagedPermissionRulesOnly": true
 }
 ```
 
@@ -104,6 +105,10 @@ The following roles can manage server-managed settings:
 
 Restrict access to trusted personnel, as settings changes apply to all users in the organization.
 
+### [​](#managed-only-settings) Managed-only settings
+
+Most [settings keys](settings.md) work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See [managed-only settings](permissions.md) for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence.
+
 ### [​](#current-limitations) Current limitations
 
 Server-managed settings have the following limitations during the beta period:
@@ -115,7 +120,9 @@ Server-managed settings have the following limitations during the beta period:
 
 ### [​](#settings-precedence) Settings precedence
 
-Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments. When both are present, server-managed settings take precedence and endpoint-managed settings are not used.
+Server-managed settings and [endpoint-managed settings](settings.md) both occupy the highest tier in the Claude Code [settings hierarchy](settings.md). No other settings level can override them, including command line arguments.
+Within the managed tier, the first source that delivers a non-empty configuration wins. Server-managed settings are checked first, then endpoint-managed settings. Sources do not merge: if server-managed settings deliver any keys at all, endpoint-managed settings are ignored entirely. If server-managed settings deliver nothing, endpoint-managed settings apply.
+If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that [cached settings](#fetch-and-caching-behavior) persist on client machines until the next successful fetch. Run `/status` to see which managed source is active.
 
 ### [​](#fetch-and-caching-behavior) Fetch and caching behavior
 
