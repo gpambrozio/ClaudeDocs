@@ -49,7 +49,7 @@ irm https://claude.ai/install.ps1 | iex
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
-**Windows requires [Git for Windows](https://git-scm.com/downloads/win).** Install it first if you don’t have it.
+If you see `The token '&&' is not a valid statement separator`, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows `PS C:\` when you’re in PowerShell.**Windows requires [Git for Windows](https://git-scm.com/downloads/win).** Install it first if you don’t have it.
 
 Native installations automatically update in the background to keep you on the latest version.
 
@@ -268,12 +268,90 @@ Do NOT use `sudo npm install -g` as this can lead to permission issues and secur
 
 ### [​](#binary-integrity-and-code-signing) Binary integrity and code signing
 
-You can verify the integrity of Claude Code binaries using SHA256 checksums and code signatures.
+Each release publishes a `manifest.json` containing SHA256 checksums for every platform binary. The manifest is signed with an Anthropic GPG key, so verifying the signature on the manifest transitively verifies every binary it lists.
 
-- SHA256 checksums for all platforms are published in the release manifests at `https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json`. Replace `{VERSION}` with a version number such as `2.0.30`.
-- Signed binaries are distributed for the following platforms:
-  - **macOS**: signed by “Anthropic PBC” and notarized by Apple
-  - **Windows**: signed by “Anthropic, PBC”
+#### [​](#verify-the-manifest-signature) Verify the manifest signature
+
+The following steps require a POSIX shell with `gpg` and `curl`. On Windows, run them in Git Bash or WSL.
+
+1
+
+Download and import the public key
+
+The release signing key is published at a fixed URL.
+
+```shiki
+curl -fsSL https://downloads.claude.ai/keys/claude-code.asc | gpg --import
+```
+
+Display the fingerprint of the imported key.
+
+```shiki
+gpg --fingerprint security@anthropic.com
+```
+
+Confirm the output includes this fingerprint:
+
+```shiki
+31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE
+```
+
+2
+
+Download the manifest and signature
+
+Set `VERSION` to the release you want to verify.
+
+```shiki
+REPO=https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases
+VERSION=2.1.89
+curl -fsSLO "$REPO/$VERSION/manifest.json"
+curl -fsSLO "$REPO/$VERSION/manifest.json.sig"
+```
+
+3
+
+Verify the signature
+
+Verify the detached signature against the manifest.
+
+```shiki
+gpg --verify manifest.json.sig manifest.json
+```
+
+A valid result reports `Good signature from "Anthropic Claude Code Release Signing <security@anthropic.com>"`.`gpg` also prints `WARNING: This key is not certified with a trusted signature!` for any freshly imported key. This is expected. The `Good signature` line confirms the cryptographic check passed. The fingerprint comparison in Step 1 confirms the key itself is authentic.
+
+4
+
+Check the binary against the manifest
+
+Compare the SHA256 checksum of your downloaded binary with the value listed under `platforms.<platform>.checksum` in `manifest.json`.
+
+- Linux
+- macOS
+- Windows PowerShell
+
+```shiki
+sha256sum claude
+```
+
+```shiki
+shasum -a 256 claude
+```
+
+```shiki
+(Get-FileHash claude.exe -Algorithm SHA256).Hash.ToLower()
+```
+
+Manifest signatures are available for releases from `2.1.89` onward. Earlier releases publish checksums in `manifest.json` without a detached signature.
+
+#### [​](#platform-code-signatures) Platform code signatures
+
+In addition to the signed manifest, individual binaries carry platform-native code signatures where supported.
+
+- **macOS**: signed by “Anthropic PBC” and notarized by Apple. Verify with `codesign --verify --verbose ./claude`.
+- **Windows**: signed by “Anthropic, PBC”. Verify with `Get-AuthenticodeSignature .\claude.exe`.
+- **Linux**: use the manifest signature above to verify integrity. Linux binaries are not individually code-signed.
 
 ## [​](#uninstall-claude-code) Uninstall Claude Code
 

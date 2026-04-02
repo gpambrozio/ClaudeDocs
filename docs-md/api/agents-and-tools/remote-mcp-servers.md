@@ -186,7 +186,7 @@ Search your context lake and safely run actions
 
 Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp)
 
-[Aiwyn Tax](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
+[Aiwyn Tax (formerly Column Tax)](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
 
 Prepare your federal & state tax return 100% accurately
 
@@ -725,6 +725,14 @@ Access to Intercom data for better customer insights
 URL
 
 `https://mcp.intercom.com/mcp`
+
+[Intuit Mailchimp](https://mailchimp.com/help/use-mailchimp-connector-claude)
+
+Create marketing campaigns
+
+URL
+
+`https://ai-inc.mailchimp.com/claude/mcp/v2`
 
 [Intuit QuickBooks](https://quickbooks.intuit.com/learn-support/en-us/help-article/accounting-bookkeeping/use-quickbooks-connector-claude/L3YBlo6Ht_US_en_US?uid=mmzgz9ag)
 

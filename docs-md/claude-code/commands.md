@@ -42,7 +42,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/mobile` | Show QR code to download the Claude mobile app. Aliases: `/ios`, `/android` |
 | `/model [model]` | Select or change the AI model. For models that support it, use left/right arrows to [adjust effort level](model-config.md). The change takes effect immediately without waiting for the current response to finish |
 | `/passes` | Share a free week of Claude Code with friends. Only visible if your account is eligible |
-| `/permissions` | View or update [permissions](permissions.md). Alias: `/allowed-tools` |
+| `/permissions` | Manage allow, ask, and deny rules for tool permissions. Opens an interactive dialog where you can view rules by scope, add or remove rules, manage working directories, and review [recent auto mode denials](permissions.md). Alias: `/allowed-tools` |
 | `/plan [description]` | Enter plan mode directly from the prompt. Pass an optional description to enter plan mode and immediately start with that task, for example `/plan fix the auth bug` |
 | `/plugin` | Manage Claude Code [plugins](plugins.md) |
 | `/pr-comments [PR]` | Fetch and display comments from a GitHub pull request. Automatically detects the PR for the current branch, or pass a PR URL or number. Requires the `gh` CLI |
@@ -63,7 +63,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/status` | Open the Settings interface (Status tab) showing version, model, account, and connectivity. Works while Claude is responding, without waiting for the current response to finish |
 | `/statusline` | Configure Claude Code’s [status line](statusline.md). Describe what you want, or run without arguments to auto-configure from your shell prompt |
 | `/stickers` | Order Claude Code stickers |
-| `/tasks` | List and manage background tasks |
+| `/tasks` | List and manage background tasks. Also available as `/bashes` |
 | `/terminal-setup` | Configure terminal keybindings for Shift+Enter and other shortcuts. Only visible in terminals that need it, like VS Code, Alacritty, or Warp |
 | `/theme` | Change the color theme. Includes light and dark variants, colorblind-accessible (daltonized) themes, and ANSI themes that use your terminal’s color palette |
 | `/upgrade` | Open the upgrade page to switch to a higher plan tier |

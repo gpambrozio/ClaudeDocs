@@ -157,7 +157,7 @@ Access and create new content on Miro boardsCommand
 
 Search your context lake and safely run actionsRequires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfaces/port-mcp-server/overview-and-installation/?mcp-setup=claude&region=eu#installing-port-mcp).
 
-[**Aiwyn Tax**](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
+[**Aiwyn Tax (formerly Column Tax)**](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
 
 Prepare your federal & state tax return 100% accuratelyCommand
 

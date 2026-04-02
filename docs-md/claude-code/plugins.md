@@ -36,7 +36,6 @@ This quickstart walks you through creating a plugin with a custom skill. You’l
 ### [​](#prerequisites) Prerequisites
 
 - Claude Code [installed and authenticated](quickstart.md)
-- Claude Code version 1.0.33 or later (run `claude --version` to check)
 
 If you don’t see the `/plugin` command, update Claude Code to the latest version. See [Troubleshooting](troubleshooting.md) for upgrade instructions.
 

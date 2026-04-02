@@ -105,9 +105,9 @@ To avoid every session hitting the API at the same wall-clock moment, the schedu
 
 The offset is derived from the task ID, so the same task always gets the same offset. If exact timing matters, pick a minute that is not `:00` or `:30`, for example `3 9 * * *` instead of `0 9 * * *`, and the one-shot jitter will not apply.
 
-### [​](#three-day-expiry) Three-day expiry
+### [​](#seven-day-expiry) Seven-day expiry
 
-Recurring tasks automatically expire 3 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Cloud scheduled tasks](web-scheduled-tasks.md) or [Desktop scheduled tasks](desktop.md) for durable scheduling.
+Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Cloud scheduled tasks](web-scheduled-tasks.md) or [Desktop scheduled tasks](desktop.md) for durable scheduling.
 
 ## [​](#cron-expression-reference) Cron expression reference
 
