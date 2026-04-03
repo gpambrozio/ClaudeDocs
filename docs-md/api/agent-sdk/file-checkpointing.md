@@ -157,7 +157,7 @@ asyncio.run(main())
    If you capture the session ID and checkpoint ID, you can also rewind from the CLI:
 
    ```shiki
-   claude --resume <session-id> --rewind-files <checkpoint-uuid>
+   claude -p --resume <session-id> --rewind-files <checkpoint-uuid>
    ```
 
 ## Common patterns

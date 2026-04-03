@@ -46,7 +46,7 @@ const q = query({
 });
 
 for await (const msg of q) {
-  if (msg.type === "result") {
+  if (msg.type === "result" && msg.subtype === "success") {
     console.log(msg.result);
   }
 }

@@ -23,7 +23,7 @@ Claude Code runs on the following platforms and configurations:
 
 ## [​](#install-claude-code) Install Claude Code
 
-Prefer a graphical interface? The [Desktop app](desktop-quickstart.md) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) or [Windows](https://claude.ai/api/desktop/win32/x64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs).New to the terminal? See the [terminal guide](terminal-guide.md) for step-by-step instructions.
+Prefer a graphical interface? The [Desktop app](desktop-quickstart.md) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code&utm_medium=docs).New to the terminal? See the [terminal guide](terminal-guide.md) for step-by-step instructions.
 
 To install Claude Code, use one of the following methods:
 
@@ -127,7 +127,7 @@ claude doctor
 
 ## [​](#authenticate) Authenticate
 
-Claude Code requires a Pro, Max, Teams, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md).
+Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](amazon-bedrock.md), [Google Vertex AI](google-vertex-ai.md), or [Microsoft Foundry](microsoft-foundry.md).
 After installing, log in by running `claude` and following the browser prompts. See [Authentication](authentication.md) for all account types and team setup options.
 
 ## [​](#update-claude-code) Update Claude Code
@@ -227,15 +227,15 @@ To install a specific version number:
 - Windows CMD
 
 ```shiki
-curl -fsSL https://claude.ai/install.sh | bash -s 1.0.58
+curl -fsSL https://claude.ai/install.sh | bash -s 2.1.89
 ```
 
 ```shiki
-& ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 1.0.58
+& ([scriptblock]::Create((irm https://claude.ai/install.ps1))) 2.1.89
 ```
 
 ```shiki
-curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 1.0.58 && del install.cmd
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 2.1.89 && del install.cmd
 ```
 
 ### [​](#deprecated-npm-installation) Deprecated npm installation
@@ -272,7 +272,7 @@ Each release publishes a `manifest.json` containing SHA256 checksums for every p
 
 #### [​](#verify-the-manifest-signature) Verify the manifest signature
 
-The following steps require a POSIX shell with `gpg` and `curl`. On Windows, run them in Git Bash or WSL.
+Steps 1-3 require a POSIX shell with `gpg` and `curl`. On Windows, run them in Git Bash or WSL. Step 4 includes a PowerShell option.
 
 1
 

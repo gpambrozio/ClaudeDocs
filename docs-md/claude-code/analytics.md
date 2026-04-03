@@ -4,13 +4,13 @@ Claude Code provides analytics dashboards to help organizations understand devel
 
 | Plan | Dashboard URL | Includes | Read more |
 | --- | --- | --- | --- |
-| Claude for Teams / Enterprise | [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code) | Usage metrics, contribution metrics with GitHub integration, leaderboard, data export | [Details](#access-analytics-for-teams-and-enterprise) |
+| Claude for Teams / Enterprise | [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code) | Usage metrics, contribution metrics with GitHub integration, leaderboard, data export | [Details](#access-analytics-for-team-and-enterprise) |
 | API (Claude Console) | [platform.claude.com/claude-code](https://platform.claude.com/claude-code) | Usage metrics, spend tracking, team insights | [Details](#access-analytics-for-api-customers) |
 
-## [​](#access-analytics-for-teams-and-enterprise) Access analytics for Teams and Enterprise
+## [​](#access-analytics-for-team-and-enterprise) Access analytics for Team and Enterprise
 
 Navigate to [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code). Admins and Owners can view the dashboard.
-The Teams and Enterprise dashboard includes:
+The Team and Enterprise dashboard includes:
 
 - **Usage metrics**: lines of code accepted, suggestion accept rate, daily active users and sessions
 - **Contribution metrics**: PRs and lines of code shipped with Claude Code assistance, with [GitHub integration](#enable-contribution-metrics)

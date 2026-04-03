@@ -229,6 +229,18 @@ Search and update your company's knowledge graphCommand
 
 `claude mcp add devrev --transport http https://api.devrev.ai/mcp/v1`
 
+[**Exa**](https://docs.exa.ai/reference/exa-mcp)
+
+Web Search + Code Docs SearchCommand
+
+`claude mcp add --transport http exa https://mcp.exa.ai/mcp`
+
+[**Fiscal.ai**](https://docs.fiscal.ai/docs/guides/mcp-integration)
+
+Clean Public Equity Fundamental DataCommand
+
+`claude mcp add --transport sse fiscal-ai https://api.fiscal.ai/mcp/sse`
+
 [**Granola**](https://help.granola.ai/article/granola-mcp#set-up-guide)
 
 The AI notepad for meetingsCommand
@@ -312,6 +324,12 @@ Connect 325+ marketing, analytics and CRM data sourcesCommand
 Create presentations, docs, socials, and sites with AICommand
 
 `claude mcp add gamma --transport http https://mcp.gamma.app/mcp`
+
+[**Lucid**](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
+
+Ideate, diagram, and align teamsCommand
+
+`claude mcp add --transport http lucid https://mcp.lucid.app/mcp`
 
 [**Netlify**](https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/)
 
@@ -479,6 +497,12 @@ Managed MCP servers with Unity Catalog and Mosaic AIRequires user-specific URL. 
 
 Secure, production-ready AI orchestration for privacyRequires user-specific URL. [Get your URL here](https://docs.datagrail.io/docs/vera/vera-mcp/introduction-and-use).
 
+[**Enterpret Wisdom**](https://helpcenter.enterpret.com/en/articles/12665166-wisdom-mcp-server)
+
+Get answers from unified feedback of your customers.Command
+
+`claude mcp add --transport http enterpret-wisdom https://wisdom-api.enterpret.com/server/mcp`
+
 [**Fever Event Discovery**](https://developer.feverup.com/)
 
 Discover live entertainment events worldwideCommand
@@ -488,6 +512,12 @@ Discover live entertainment events worldwideCommand
 [**Glean**](https://docs.glean.com/administration/platform/mcp/about)
 
 Bring enterprise context to Claude and your AI toolsRequires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about).
+
+[**GoCardless**](https://developer.gocardless.com/developer-tools/mcp/)
+
+Build GoCardless payment API integrationsCommand
+
+`claude mcp add --transport http gocardless https://mcp.gocardless.com`
 
 [**GoDaddy**](https://developer.godaddy.com/mcp)
 
@@ -506,6 +536,12 @@ BigQuery: Advanced analytical insights for agentsCommand
 Discover every grant opportunity in existence.Command
 
 `claude mcp add --transport http granted https://grantedai.com/api/mcp/mcp`
+
+[**IFTTT**](https://ift.tt/ai_assistants)
+
+Connect, control, and automate 1,000+ apps with IFTTTCommand
+
+`claude mcp add --transport http ifttt https://ifttt.com/mcp`
 
 [**Medidata**](https://learn.medidata.com/en-US/bundle/mcp-server-documentation/page/medidata_mcp_server_documentation.html)
 
@@ -1556,7 +1592,6 @@ When MCP tools produce large outputs, Claude Code helps manage the token usage t
 To increase the limit for tools that produce large outputs:
 
 ```shiki
-# Set a higher limit for MCP tool outputs
 export MAX_MCP_OUTPUT_TOKENS=50000
 claude
 ```
@@ -1567,7 +1602,22 @@ This is particularly useful when working with MCP servers that:
 - Generate detailed reports or documentation
 - Process extensive log files or debugging information
 
-If you frequently encounter output warnings with specific MCP servers, consider increasing the limit or configuring the server to paginate or filter its responses.
+### [​](#override-result-size-per-tool) Override result size per tool
+
+If you’re building an MCP server, you can allow individual tools to return results larger than the default limit by setting `_meta["anthropic/maxResultSizeChars"]` in the tool’s `tools/list` response entry. Claude Code uses this value as the maximum result size for that tool, up to a hard ceiling of 500,000 characters.
+This is useful for tools that return inherently large but necessary outputs, such as database schemas or full file trees. Without the annotation, results that exceed the default limit are persisted to disk and replaced with a file reference in the conversation.
+
+```shiki
+{
+  "name": "get_schema",
+  "description": "Returns the full database schema",
+  "_meta": {
+    "anthropic/maxResultSizeChars": 500000
+  }
+}
+```
+
+If you frequently encounter output warnings with specific MCP servers you don’t control, consider increasing the `MAX_MCP_OUTPUT_TOKENS` limit or asking the server author to add the `anthropic/maxResultSizeChars` annotation.
 
 ## [​](#respond-to-mcp-elicitation-requests) Respond to MCP elicitation requests
 

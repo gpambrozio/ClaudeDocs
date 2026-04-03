@@ -250,6 +250,14 @@ URL
 
 `https://www.directbooker.ai/claude`
 
+[Exa](https://docs.exa.ai/reference/exa-mcp)
+
+Web Search + Code Docs Search
+
+URL
+
+`https://mcp.exa.ai/mcp`
+
 [Fireflies](https://guide.fireflies.ai/articles/8272956938-learn-about-the-fireflies-mcp-server-model-context-protocol)
 
 Analyze and generate insights from meeting transcripts
@@ -257,6 +265,14 @@ Analyze and generate insights from meeting transcripts
 URL
 
 `https://api.fireflies.ai/mcp`
+
+[Fiscal.ai](https://docs.fiscal.ai/docs/guides/mcp-integration)
+
+Clean Public Equity Fundamental Data
+
+URL
+
+`https://api.fiscal.ai/mcp/sse`
 
 [Granola](https://help.granola.ai/article/granola-mcp#set-up-guide)
 
@@ -361,6 +377,14 @@ Create presentations, docs, socials, and sites with AI
 URL
 
 `https://mcp.gamma.app/mcp`
+
+[Lucid](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
+
+Ideate, diagram, and align teams
+
+URL
+
+`https://mcp.lucid.app/mcp`
 
 [Natoma](https://docs.natoma.ai)
 
@@ -580,6 +604,14 @@ URL
 
 `https://mcp.context7.com/mcp`
 
+[Intuit Credit Karma](https://support.creditkarma.com/s/article/Intuit-Credit-Karma-on-Claude-and-ChatGPT)
+
+Credit score factors & insights
+
+URL
+
+`https://anthropic.mcp.creditkarma.com/mcp`
+
 [Crossbeam](https://help.crossbeam.com/en/articles/12601327-crossbeam-mcp-server-beta)
 
 Explore partner data and ecosystem insights in Claude
@@ -624,6 +656,14 @@ Analyze and get insights from your lakehouse data
 
 Requires user-specific URL. [Get your URL here](https://docs.dremio.com/cloud/sonar/mcp-server/)
 
+[Enterpret Wisdom](https://helpcenter.enterpret.com/en/articles/12665166-wisdom-mcp-server)
+
+Get answers from unified feedback of your customers.
+
+URL
+
+`https://wisdom-api.enterpret.com/server/mcp`
+
 [Fever Event Discovery](https://developer.feverup.com/)
 
 Discover live entertainment events worldwide
@@ -645,6 +685,14 @@ URL
 Bring enterprise context to Claude and your AI tools
 
 Requires user-specific URL. [Get your URL here](https://docs.glean.com/administration/platform/mcp/about)
+
+[GoCardless](https://developer.gocardless.com/developer-tools/mcp/)
+
+Build GoCardless payment API integrations
+
+URL
+
+`https://mcp.gocardless.com`
 
 [GoDaddy](https://developer.godaddy.com/mcp)
 
@@ -701,6 +749,14 @@ Chat with your CRM data to get personalized insights
 URL
 
 `https://mcp.hubspot.com/anthropic`
+
+[IFTTT](https://ift.tt/ai_assistants)
+
+Connect, control, and automate 1,000+ apps with IFTTT
+
+URL
+
+`https://ifttt.com/mcp`
 
 [Medidata](https://learn.medidata.com/en-US/bundle/mcp-server-documentation/page/medidata_mcp_server_documentation.html)
 

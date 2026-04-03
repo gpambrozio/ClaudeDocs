@@ -980,6 +980,7 @@ PermissionMode = Literal[
     "default",  # Standard permission behavior
     "acceptEdits",  # Auto-accept file edits
     "plan",  # Planning mode - no execution
+    "dontAsk",  # Deny anything not pre-approved instead of prompting
     "bypassPermissions",  # Bypass all permission checks (use with caution)
 ]
 ```
@@ -1340,6 +1341,7 @@ class AssistantMessage:
     parent_tool_use_id: str | None = None
     error: AssistantMessageError | None = None
     usage: dict[str, Any] | None = None
+    message_id: str | None = None
 ```
 
 | Field | Type | Description |
@@ -1349,6 +1351,7 @@ class AssistantMessage:
 | `parent_tool_use_id` | `str | None` | Tool use ID if this is a nested response |
 | `error` | [`AssistantMessageError`](#assistant-message-error)  `| None` | Error type if the response encountered an error |
 | `usage` | `dict[str, Any] | None` | Per-message token usage (same keys as [`ResultMessage.usage`](#result-message)) |
+| `message_id` | `str | None` | API message ID. Multiple messages from one turn share the same ID |
 
 ### `AssistantMessageError`
 
@@ -1395,6 +1398,7 @@ class ResultMessage:
     result: str | None = None
     stop_reason: str | None = None
     structured_output: Any = None
+    model_usage: dict[str, Any] | None = None
 ```
 
 The `usage` dict contains the following keys when present:
@@ -1405,6 +1409,19 @@ The `usage` dict contains the following keys when present:
 | `output_tokens` | `int` | Total output tokens generated. |
 | `cache_creation_input_tokens` | `int` | Tokens used to create new cache entries. |
 | `cache_read_input_tokens` | `int` | Tokens read from existing cache entries. |
+
+The `model_usage` dict maps model names to per-model usage. The inner dict keys use camelCase because the value is passed through unmodified from the underlying CLI process, matching the TypeScript [`ModelUsage`](agent-sdk/typescript.md) type:
+
+| Key | Type | Description |
+| --- | --- | --- |
+| `inputTokens` | `int` | Input tokens for this model. |
+| `outputTokens` | `int` | Output tokens for this model. |
+| `cacheReadInputTokens` | `int` | Cache read tokens for this model. |
+| `cacheCreationInputTokens` | `int` | Cache creation tokens for this model. |
+| `webSearchRequests` | `int` | Web search requests made by this model. |
+| `costUSD` | `float` | Cost in USD for this model. |
+| `contextWindow` | `int` | Context window size for this model. |
+| `maxOutputTokens` | `int` | Maximum output token limit for this model. |
 
 ### `StreamEvent`
 

@@ -5,7 +5,7 @@ You can use Claude Code even if you’ve never used a terminal before. This guid
 - [macOS and Linux](#macos-and-linux)
 - [Windows](#windows)
 
-Don’t want to use the terminal? The Claude Code desktop app lets you skip the terminal entirely. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) or [Windows](https://claude.ai/api/desktop/win32/x64/exe/latest/redirect?utm_source=claude_code&utm_medium=docs), then see the [Desktop quickstart](desktop-quickstart.md) to get started.
+Don’t want to use the terminal? The Claude Code desktop app lets you skip the terminal entirely. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code&utm_medium=docs), then see the [Desktop quickstart](desktop-quickstart.md) to get started.
 
 ## [​](#macos-and-linux) macOS and Linux
 
@@ -49,7 +49,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 - You can’t click on things in the terminal. Use the arrow keys to move around.
 - Press `Esc` to interrupt Claude if it’s running.
-- Type `exit` or press `Ctrl + C` to leave Claude Code.
+- Type `exit` or press `Ctrl + D` to leave Claude Code.
 - Type `/help` to see available commands.
 
 ---
@@ -120,7 +120,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 - You can’t click on things in the terminal. Use the arrow keys to move around.
 - Press `Esc` to interrupt Claude if it’s running.
-- Type `exit` or press `Ctrl + C` to leave Claude Code.
+- Type `exit` or press `Ctrl + D` to leave Claude Code.
 - Type `/help` to see available commands.
 
 ---
