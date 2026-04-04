@@ -14,7 +14,7 @@ Scheduled tasks are available to all Claude Code on the web users, including Pro
 
 Claude Code offers three ways to schedule recurring work:
 
-|  | [Cloud](web-scheduled-tasks.md) | [Desktop](desktop.md) | [`/loop`](scheduled-tasks.md) |
+|  | [Cloud](web-scheduled-tasks.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
 | --- | --- | --- | --- |
 | Runs on | Anthropic cloud | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
@@ -33,7 +33,7 @@ Use **cloud tasks** for work that should run reliably without your machine. Use 
 You can create a scheduled task from three places:
 
 - **Web**: visit [claude.ai/code/scheduled](https://claude.ai/code/scheduled) and click **New scheduled task**
-- **Desktop app**: open the **Schedule** page, click **New task**, and choose **New remote task**. See [Desktop scheduled tasks](desktop.md) for details.
+- **Desktop app**: open the **Schedule** page, click **New task**, and choose **New remote task**. See [Desktop scheduled tasks](desktop-scheduled-tasks.md) for details.
 - **CLI**: run `/schedule` in any session. Claude walks you through the setup conversationally. You can also pass a description directly, like `/schedule daily PR review at 9am`.
 
 The web and Desktop entry points open a form. The CLI collects the same information through a guided conversation.
@@ -139,7 +139,7 @@ You can also manage tasks from the CLI with `/schedule`. Run `/schedule list` to
 
 ## [​](#related-resources) Related resources
 
-- [Desktop scheduled tasks](desktop.md): schedule tasks that run on your machine with access to local files. The Desktop app’s **Schedule** page shows both local and remote tasks in the same grid.
+- [Desktop scheduled tasks](desktop-scheduled-tasks.md): schedule tasks that run on your machine with access to local files. The Desktop app’s **Schedule** page shows both local and remote tasks in the same grid.
 - [`/loop` and CLI scheduled tasks](scheduled-tasks.md): lightweight scheduling within a CLI session
 - [Cloud environment](claude-code-on-the-web.md): configure the runtime environment for cloud tasks
 - [MCP connectors](mcp.md): connect external services like Slack, Linear, and Google Drive

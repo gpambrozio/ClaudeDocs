@@ -548,6 +548,14 @@ URL
 
 `https://mcp.cloud.cdata.com/mcp`
 
+[Microsoft 365](https://support.claude.com/en/articles/12542951-enabling-and-using-the-microsoft-365-connector)
+
+Access your company's SharePoint, OneDrive, Outlook, and Teams directly in Claude
+
+URL
+
+`https://microsoft365.mcp.claude.com/mcp`
+
 [PubMed](https://support.claude.com/en/)
 
 Search biomedical literature from PubMed

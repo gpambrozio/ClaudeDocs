@@ -1,27 +1,7 @@
 # Get started with the desktop app
 
 The desktop app gives you Claude Code with a graphical interface: visual diff review, live app preview, GitHub PR monitoring with auto-merge, parallel sessions with Git worktree isolation, scheduled tasks, and the ability to run tasks remotely. No terminal required.
-This page walks through installing the app and starting your first session. If you’re already set up, see [Use Claude Code Desktop](desktop.md) for the full reference.
-
-![The Claude Code Desktop interface showing the Code tab selected, with a prompt box, permission mode selector set to Ask permissions, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-light.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=9a36a7a27b9f4c6f2e1c83bdb34f69ce)![The Claude Code Desktop interface in dark mode showing the Code tab selected, with a prompt box, permission mode selector set to Ask permissions, model picker, folder selector, and Local environment option](https://mintcdn.com/claude-code/CNLUpFGiXoc9mhvD/images/desktop-code-tab-dark.png?fit=max&auto=format&n=CNLUpFGiXoc9mhvD&q=85&s=5463defe81c459fb9b1f91f6a958cfb8)
-
-The desktop app has three tabs:
-
-- **Chat**: General conversation with no file access, similar to claude.ai.
-- **Cowork**: An autonomous background agent that works on tasks in a cloud VM with its own environment. It can run independently while you do other work.
-- **Code**: An interactive coding assistant with direct access to your local files. You review and approve each change in real time.
-
-Chat and Cowork are covered in the [Claude Desktop support articles](https://support.claude.com/en/collections/16163169-claude-desktop). This page focuses on the **Code** tab.
-
-Claude Code requires a [Pro, Max, Team, or Enterprise subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=desktop_quickstart_pricing).
-
-## [​](#install) Install
-
-1
-
-Download the app
-
-Download Claude for your platform.
+Download Claude for your platform:
 
 [## macOS
 
@@ -31,15 +11,34 @@ Universal build for Intel and Apple Silicon](https://claude.ai/api/desktop/darwi
 
 For x64 processors](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs)
 
-For Windows ARM64, [download here](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs).Linux is not currently supported.
+For Windows ARM64, download the [ARM64 installer](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs). Linux is not currently supported.
 
-2
+Claude Code requires a [Pro, Max, Team, or Enterprise subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=desktop_quickstart_pricing).
 
-Sign in
+This page walks through installing the app and starting your first session. If you’re already set up, see [Use Claude Code Desktop](desktop.md) for the full reference.
+The desktop app has three tabs:
+
+- **Chat**: General conversation with no file access, similar to claude.ai.
+- **Cowork**: An autonomous background agent that works on tasks in a cloud VM with its own environment. It can run independently while you do other work.
+- **Code**: An interactive coding assistant with direct access to your local files. You review and approve each change in real time.
+
+Chat and Cowork are covered in the [Claude Desktop support articles](https://support.claude.com/en/collections/16163169-claude-desktop). This page focuses on the **Code** tab.
+
+## [​](#install) Install
+
+1
+
+Install and sign in
+
+Download Claude for your platform and run the installer:
+
+- [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs): universal build for Intel and Apple Silicon
+- [Windows x64](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs): for x64 processors
+- [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs): for ARM processors
 
 Launch Claude from your Applications folder (macOS) or Start menu (Windows). Sign in with your Anthropic account.
 
-3
+2
 
 Open the Code tab
 
@@ -105,7 +104,7 @@ You’ve made your first edit. For the full reference on everything Desktop can 
 **Add plugins for more capabilities.** Click the **+** button next to the prompt box and select **Plugins** to browse and install [plugins](desktop.md) that add skills, agents, MCP servers, and more.
 **Preview your app.** Click the **Preview** dropdown to run your dev server directly in the desktop. Claude can view the running app, test endpoints, inspect logs, and iterate on what it sees. See [Preview your app](desktop.md).
 **Track your pull request.** After opening a PR, Claude Code monitors CI check results and can automatically fix failures or merge the PR once all checks pass. See [Monitor pull request status](desktop.md).
-**Put Claude on a schedule.** Set up [scheduled tasks](desktop.md) to run Claude automatically on a recurring basis: a daily code review every morning, a weekly dependency audit, or a briefing that pulls from your connected tools.
+**Put Claude on a schedule.** Set up [scheduled tasks](desktop-scheduled-tasks.md) to run Claude automatically on a recurring basis: a daily code review every morning, a weekly dependency audit, or a briefing that pulls from your connected tools.
 **Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in your IDE](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.
 
 ## [​](#coming-from-the-cli) Coming from the CLI?

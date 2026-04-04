@@ -142,7 +142,7 @@ Schedule recurring tasks
 Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
 
 - [Cloud scheduled tasks](web-scheduled-tasks.md) run on Anthropic-managed infrastructure, so they keep running even when your computer is off. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
-- [Desktop scheduled tasks](desktop.md) run on your machine, with direct access to your local files and tools
+- [Desktop scheduled tasks](desktop-scheduled-tasks.md) run on your machine, with direct access to your local files and tools
 - [`/loop`](scheduled-tasks.md) repeats a prompt within a CLI session for quick polling
 
 Work from anywhere
@@ -165,7 +165,7 @@ Beyond the [Terminal](quickstart.md), [VS Code](vs-code.md), [JetBrains](jetbrai
 | Continue a local session from my phone or another device | [Remote Control](remote-control.md) |
 | Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](channels.md) |
 | Start a task locally, continue on mobile | [Web](claude-code-on-the-web.md) or [Claude iOS app](https://apps.apple.com/app/claude-by-anthropic/id6473753684) |
-| Run Claude on a recurring schedule | [Cloud scheduled tasks](web-scheduled-tasks.md) or [Desktop scheduled tasks](desktop.md) |
+| Run Claude on a recurring schedule | [Cloud scheduled tasks](web-scheduled-tasks.md) or [Desktop scheduled tasks](desktop-scheduled-tasks.md) |
 | Automate PR reviews and issue triage | [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md) |
 | Get automatic code review on every PR | [GitHub Code Review](code-review.md) |
 | Route bug reports from Slack to pull requests | [Slack](slack.md) |

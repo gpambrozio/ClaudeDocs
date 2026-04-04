@@ -435,6 +435,12 @@ Managed MCP platform for 350 sourcesCommand
 
 `claude mcp add cdata-connect-ai --transport http https://mcp.cloud.cdata.com/mcp`
 
+[**Microsoft 365**](https://support.claude.com/en/articles/12542951-enabling-and-using-the-microsoft-365-connector)
+
+Access your company's SharePoint, OneDrive, Outlook, and Teams directly in ClaudeCommand
+
+`claude mcp add microsoft-365 --transport http https://microsoft365.mcp.claude.com/mcp`
+
 [**PubMed**](https://support.claude.com/en/)
 
 Search biomedical literature from PubMedCommand

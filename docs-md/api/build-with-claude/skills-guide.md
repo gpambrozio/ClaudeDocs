@@ -388,7 +388,7 @@ curl -X POST "https://api.anthropic.com/v1/skills" \
 
 - Must include a SKILL.md file at the top level
 - All files must specify a common root directory in their paths
-- Total upload size must be under 8 MB
+- Total upload size must be under 30 MB
 - YAML frontmatter requirements:
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
@@ -632,7 +632,7 @@ curl https://api.anthropic.com/v1/messages \
 ### Request Limits
 
 - **Maximum Skills per request:** 8
-- **Maximum Skill upload size:** 8 MB (all files combined)
+- **Maximum Skill upload size:** 30 MB (all files combined)
 - **YAML frontmatter requirements:**
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words
   - `description`: Maximum 1024 characters, non-empty, no XML tags
