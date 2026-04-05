@@ -89,7 +89,7 @@ See the [commands reference](commands.md) for the full list of built-in commands
 
 ## [​](#vim-editor-mode) Vim editor mode
 
-Enable vim-style editing with `/vim` command or configure permanently via `/config`.
+Enable vim-style editing via `/config` → Editor mode.
 
 ### [​](#mode-switching) Mode switching
 

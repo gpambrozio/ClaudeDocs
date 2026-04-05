@@ -391,7 +391,7 @@ Some shortcuts may conflict with terminal multiplexers:
 
 ## [​](#vim-mode-interaction) Vim mode interaction
 
-When vim mode is enabled (`/vim`), keybindings and vim mode operate independently:
+When vim mode is enabled via `/config` → Editor mode, keybindings and vim mode operate independently:
 
 - **Vim mode** handles input at the text input level (cursor movement, modes, motions)
 - **Keybindings** handle actions at the component level (toggle todos, submit, etc.)

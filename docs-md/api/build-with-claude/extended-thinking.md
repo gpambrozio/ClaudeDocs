@@ -105,7 +105,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ec9f8d80899fac8d8298849e839c858fc28f8381).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#0370626f667043626d776b716c736a602d606c6e).
 
 ### Controlling thinking display
 
