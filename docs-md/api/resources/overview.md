@@ -48,9 +48,7 @@ Concise API guide meant for ingestion by Claude.](claude_api_primer.md)[Claude A
 
 Concise overview of Claude API documentation, optimized for LLM ingestion.](/docs/for-claude)[llms.txt
 
-LLM-optimized documentation index.](/llms.txt)[llms-full.txt
-
-Complete LLM-optimized documentation.](/llms-full.txt)
+LLM-optimized documentation index.](/llms.txt)
 
 ---
 

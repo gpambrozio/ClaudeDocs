@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-opus-4-6",
+    "model": "claude-sonnet-4-5",
     "max_tokens": 1,
     "messages": [
         {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
@@ -132,7 +132,7 @@ JSON
       "text": "C"
     }
   ],
-  "model": "claude-opus-4-6",
+  "model": "claude-sonnet-4-5",
   "stop_reason": "max_tokens",
   "stop_sequence": null,
   "usage": {
@@ -142,7 +142,7 @@ JSON
 }
 ```
 
-Prefilling is deprecated and not supported on Claude Opus 4.6, Claude Sonnet 4.6, and Claude Sonnet 4.5. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead.
+Prefilling is not supported on Claude Opus 4.6 and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 ## Vision
 

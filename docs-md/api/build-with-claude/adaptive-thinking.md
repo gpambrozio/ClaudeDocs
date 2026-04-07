@@ -60,7 +60,7 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 
 | Effort level | Thinking behavior |
 | --- | --- |
-| `max` | Claude always thinks with no constraints on thinking depth. Opus 4.6 only. Requests using `max` on other models return an error. |
+| `max` | Claude always thinks with no constraints on thinking depth. Available on Claude Opus 4.6 and Claude Sonnet 4.6. |
 | `high` (default) | Claude always thinks. Provides deep reasoning on complex tasks. |
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
@@ -184,7 +184,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ed9e8c81889ead8c8399859f829d848ec38e8280).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#e794868b8294a78689938f9588978e84c984888a).
 
 ### Controlling thinking display
 
