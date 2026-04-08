@@ -6,7 +6,7 @@ Ruby
 
 # Create a Message
 
-messages.create(\*\*kwargs) -> [Message](api/messages.md) { id, container, content, 6 more }
+messages.create(\*\*kwargs) -> [Message](api/messages.md) { id, container, content, 7 more }
 
 POST/v1/messages
 
@@ -3661,7 +3661,7 @@ minimum0
 
 ##### ReturnsExpand Collapse
 
-class Message { id, container, content, 6 more }
+class Message { id, container, content, 7 more }
 
 id: String
 
@@ -4385,6 +4385,30 @@ role: :assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -4501,7 +4525,7 @@ Accepts one of the following:
 
 class RawMessageStartEvent { message, type }
 
-message: [Message](api/messages.md) { id, container, content, 6 more }
+message: [Message](api/messages.md) { id, container, content, 7 more }
 
 id: String
 
@@ -5226,6 +5250,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
+
 stop\_reason: [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -5339,7 +5387,7 @@ type: :message\_start
 
 class RawMessageDeltaEvent { delta, type, usage }
 
-delta: { container, stop\_reason, stop\_sequence}
+delta: { container, stop\_details, stop\_reason, stop\_sequence}
 
 container: [Container](api/messages.md) { id, expires\_at }
 
@@ -5352,6 +5400,30 @@ Identifier for the container used in this request
 expires\_at: Time
 
 The time at which the container will expire.
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
 
 stop\_reason: [StopReason](api/messages.md)
 
@@ -6189,6 +6261,11 @@ Response 200
   ],
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -6241,6 +6318,11 @@ Response 200
   ],
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

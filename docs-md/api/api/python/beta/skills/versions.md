@@ -30,6 +30,160 @@ beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [Vers
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 
+##### ModelsExpand Collapse
+
+class VersionCreateResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionListResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionRetrieveResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionDeleteResponse: …
+
+id: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+type: str
+
+Deleted object type.
+
+For Skill Versions, this is always `"skill_version_deleted"`.
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

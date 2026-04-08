@@ -1163,6 +1163,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -2409,6 +2433,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -3616,6 +3664,30 @@ Role Assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 

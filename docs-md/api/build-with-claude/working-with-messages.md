@@ -142,7 +142,7 @@ JSON
 }
 ```
 
-Prefilling is not supported on Claude Opus 4.6 and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 ## Vision
 

@@ -99,7 +99,7 @@ https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/
 
 See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
-Claude is also available through [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ## Activity logging
 
@@ -115,18 +115,19 @@ For all currently supported features on Vertex AI, see [API features overview](a
 
 ### Context window
 
-Claude Opus 4.6 and Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
+Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4, have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
-## Global vs regional endpoints
+## Global, multi-region, and regional endpoints
 
-Starting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:
+Google Vertex AI offers three endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
+- **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States) for data residency with high availability
 - **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
-Regional endpoints include a 10% pricing premium over global endpoints.
+Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
 
 This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.
 
@@ -140,10 +141,17 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 - Best for applications where data residency is flexible
 - Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
 
+**Multi-region endpoints:**
+
+- Dynamically route requests across regions within a geographic area (currently `us`, with `eu` coming soon)
+- Useful when you need data residency within a broad geography but want higher availability than a single region
+- 10% pricing premium over global endpoints
+- Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
+
 **Regional endpoints:**
 
 - Route traffic through specific geographic regions
-- Required for data residency and compliance requirements
+- Required for single-region data residency, strict compliance mandates, or provisioned throughput
 - Support both pay-as-you-go and provisioned throughput
 - 10% pricing premium reflects infrastructure costs for dedicated regional capacity
 
@@ -160,6 +168,33 @@ from anthropic import AnthropicVertex
 
 project_id = "MY_PROJECT_ID"
 region = "global"
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
+```
+
+**Using multi-region endpoints:**
+
+Set the `region` parameter to a multi-region identifier such as `"us"`. The SDK routes requests to the multi-region endpoint (for example, `https://aiplatform.us.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
+
+Python
+
+```shiki
+from anthropic import AnthropicVertex
+
+project_id = "MY_PROJECT_ID"
+region = "us"  # Multi-region: routes within US regions
 
 client = AnthropicVertex(project_id=project_id, region=region)
 
@@ -202,6 +237,8 @@ message = client.messages.create(
 )
 print(message)
 ```
+
+Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
 ### Additional resources
 

@@ -28,7 +28,7 @@ Different models have different maximum values for this parameter. See [models](
 
 minimum1
 
-messages: [Iterable](api/messages/create.md)[[MessageParam](api/messages.md)]
+messages: Iterable[[MessageParam](api/messages.md)]
 
 Input messages.
 
@@ -2332,7 +2332,7 @@ Accepts one of the following:
 
 "standard\_only"
 
-stop\_sequences: Optional[[SequenceNotStr](api/messages/create.md)[str]]
+stop\_sequences: Optional[Sequence[str]]
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -2575,7 +2575,7 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-tools: Optional[[Iterable](api/messages/create.md)[[ToolUnionParam](api/messages.md)]]
+tools: Optional[Iterable[[ToolUnionParam](api/messages.md)]]
 
 Definitions of tools that the model may use.
 
@@ -4418,6 +4418,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: Optional[RefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
+
 stop\_reason: Optional[StopReason]
 
 The reason that we stopped.
@@ -5274,6 +5298,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: Optional[RefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
+
 stop\_reason: Optional[StopReason]
 
 The reason that we stopped.
@@ -5400,6 +5448,30 @@ Identifier for the container used in this request
 expires\_at: datetime
 
 The time at which the container will expire.
+
+stop\_details: Optional[RefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
 
 stop\_reason: Optional[StopReason]
 
@@ -6241,6 +6313,11 @@ Response 200
   ],
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -6293,6 +6370,11 @@ Response 200
   ],
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

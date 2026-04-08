@@ -14,20 +14,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-clau
 
 ## Model compatibility
 
-The code execution tool is available on the following models:
-
-| Model | Tool Version |
-| --- | --- |
-| Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825` |
-| Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825` |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |
-| Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |
-| Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |
-| Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
-| Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |
-| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
+The code execution tool is available on all supported Claude models using tool version `code_execution_20250825`.
 
 The `code_execution_20250825` version supports Bash commands and file operations. For models that support [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), `code_execution_20260120` adds REPL state persistence and the ability to call tools from within the sandbox. A legacy version `code_execution_20250522` (Python only) is also available; see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 
@@ -41,6 +28,8 @@ Code execution is available on:
 - **Microsoft Azure AI Foundry**
 
 Code execution is not currently available on Amazon Bedrock or Google Vertex AI.
+
+For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock or Google Vertex AI.
 
 ## Quick start
 
@@ -361,6 +350,7 @@ Each tool type can return specific errors:
 | All tools | `container_expired` | Container expired and is no longer available |
 | All tools | `invalid_tool_input` | Invalid parameters provided to the tool |
 | All tools | `too_many_requests` | Rate limit exceeded for tool usage |
+| bash | `output_file_too_large` | Command output exceeded the maximum size |
 | text\_editor | `file_not_found` | File doesn't exist (for view/edit operations) |
 | text\_editor | `string_not_found` | The `old_str` not found in file (for str\_replace) |
 

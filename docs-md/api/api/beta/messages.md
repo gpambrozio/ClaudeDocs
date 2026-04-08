@@ -5598,7 +5598,7 @@ view\_range: optional array of number
 
 Optional line range for viewing specific lines
 
-BetaMessage = object { id, container, content, 7 more }
+BetaMessage = object { id, container, content, 8 more }
 
 id: string
 
@@ -6518,6 +6518,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -10300,7 +10324,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: object { container, stop\_reason, stop\_sequence }
+delta: object { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }
 
@@ -10335,6 +10359,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -10486,7 +10534,7 @@ The number of web search tool requests.
 
 BetaRawMessageStartEvent = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -11406,6 +11454,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -11626,7 +11698,7 @@ Accepts one of the following:
 
 BetaRawMessageStartEvent = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -12546,6 +12618,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -12796,7 +12892,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: object { container, stop\_reason, stop\_sequence }
+delta: object { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }
 
@@ -12831,6 +12927,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -13861,6 +13981,30 @@ BetaRedactedThinkingBlockParam = object { data, type }
 data: string
 
 type: "redacted\_thinking"
+
+BetaRefusalStopDetails = object { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
 
@@ -20474,7 +20618,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -21394,6 +21538,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -21720,7 +21888,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -22640,6 +22808,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -22928,7 +23120,7 @@ type: "expired"
 
 BetaMessageBatchSucceededResult = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -23848,6 +24040,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 

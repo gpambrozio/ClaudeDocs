@@ -761,6 +761,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [RefusalStopDetails](api/messages.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [StopReason](api/messages.md)? StopReason
 
 The reason that we stopped.

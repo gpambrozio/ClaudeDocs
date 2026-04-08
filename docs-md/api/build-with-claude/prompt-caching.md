@@ -96,19 +96,7 @@ These multipliers stack with other pricing modifiers such as the Batch API disco
 
 ## Supported models
 
-Prompt caching (both automatic and explicit) is currently supported on:
-
-- Claude Opus 4.6
-- Claude Opus 4.5
-- Claude Opus 4.1
-- Claude Opus 4
-- Claude Sonnet 4.6
-- Claude Sonnet 4.5
-- Claude Sonnet 4
-- Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
-- Claude Haiku 4.5
-- Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md))
-- Claude Haiku 3
+Prompt caching (both automatic and explicit) is supported on all [active Claude models](about-claude/models/overview.md).
 
 ---
 
@@ -260,7 +248,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 The minimum cacheable prompt length is:
 
-- 4096 tokens for Claude Opus 4.6, Claude Opus 4.5
+- 4096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Opus 4.5
 - 2048 tokens for Claude Sonnet 4.6
 - 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
 - 4096 tokens for Claude Haiku 4.5

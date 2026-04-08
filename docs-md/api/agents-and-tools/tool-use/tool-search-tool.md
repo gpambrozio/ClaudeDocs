@@ -362,7 +362,7 @@ For ZDR eligibility across all features, see [API and data retention](build-with
 - **Maximum tools:** 10,000 tools in your catalog
 - **Search results:** Returns 3-5 most relevant tools per search
 - **Pattern length:** Maximum 200 characters for regex patterns
-- **Model support:** Sonnet 4.0+, Opus 4.0+ only (no Haiku)
+- **Model support:** [Claude Mythos Preview](https://anthropic.com/glasswing), Sonnet 4.0+, Opus 4.0+ only (no Haiku)
 
 ### When to use tool search
 

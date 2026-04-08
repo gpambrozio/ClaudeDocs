@@ -131,7 +131,7 @@ The `effort` option controls how much reasoning Claude applies. Lower effort lev
 | `"high"` | Thorough analysis | Refactors, debugging |
 | `"max"` | Maximum reasoning depth | Multi-step problems requiring deep analysis |
 
-If you don't set `effort`, the Python SDK leaves the parameter unset and defers to the model's default behavior. The TypeScript SDK defaults to `"high"`.
+If you don't set `effort`, both SDKs leave the parameter unset and the underlying engine resolves a model-dependent default.
 
 `effort` trades latency and token cost for reasoning depth within each response. [Extended thinking](build-with-claude/extended-thinking.md) is a separate feature that produces visible chain-of-thought blocks in the output. They are independent: you can set `effort: "low"` with extended thinking enabled, or `effort: "max"` without it.
 
@@ -145,7 +145,7 @@ The permission mode option (`permission_mode` in Python, `permissionMode` in Typ
 | --- | --- |
 | `"default"` | Tools not covered by allow rules trigger your approval callback; no callback means deny |
 | `"acceptEdits"` | Auto-approves file edits, other tools follow default rules |
-| `"plan"` | No tool execution; Claude produces a plan for review |
+| `"plan"` | Read-only tools run; tools that make changes are blocked while Claude produces a plan for review |
 | `"dontAsk"` | Never prompts. Tools pre-approved by [permission rules](settings.md) run, everything else is denied |
 | `"auto"` (TypeScript only) | Uses a model classifier to approve or deny each tool call. See [Auto mode](permission-modes.md) for availability and behavior |
 | `"bypassPermissions"` | Runs all allowed tools without asking. Cannot be used when running as root on Unix. Use only in isolated environments where the agent's actions cannot affect systems you care about |

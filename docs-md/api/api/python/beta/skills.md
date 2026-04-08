@@ -30,6 +30,151 @@ beta.skills.delete(strskill\_id, SkillDeleteParams\*\*kwargs)  -> [SkillDeleteRe
 
 DELETE/v1/skills/{skill\_id}
 
+##### ModelsExpand Collapse
+
+class SkillCreateResponse: …
+
+id: str
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: Optional[str]
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: Optional[str]
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: str
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: str
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: str
+
+ISO 8601 timestamp of when the skill was last updated.
+
+class SkillListResponse: …
+
+id: str
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: Optional[str]
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: Optional[str]
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: str
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: str
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: str
+
+ISO 8601 timestamp of when the skill was last updated.
+
+class SkillRetrieveResponse: …
+
+id: str
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: Optional[str]
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: Optional[str]
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: str
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: str
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: str
+
+ISO 8601 timestamp of when the skill was last updated.
+
+class SkillDeleteResponse: …
+
+id: str
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+type: str
+
+Deleted object type.
+
+For Skills, this is always `"skill_deleted"`.
+
 #### SkillsVersions
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
@@ -55,6 +200,160 @@ GET/v1/skills/{skill\_id}/versions/{version}
 beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta.md)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+##### ModelsExpand Collapse
+
+class VersionCreateResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionListResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionRetrieveResponse: …
+
+id: str
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: str
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: str
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: str
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: str
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: str
+
+Identifier for the skill that this version belongs to.
+
+type: str
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+class VersionDeleteResponse: …
+
+id: str
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+type: str
+
+Deleted object type.
+
+For Skill Versions, this is always `"skill_version_deleted"`.
 
 ---
 

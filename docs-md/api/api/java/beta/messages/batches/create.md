@@ -64,6 +64,10 @@ SKILLS\_2025\_10\_02("skills-2025-10-02")
 
 FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 List<Request> requests
 
 List of requests for prompt completion. Each is an individual request to create a Message.
@@ -4517,6 +4521,10 @@ Recommended for advanced use cases only. You usually only need to use `temperatu
 maximum1
 
 minimum0
+
+Optional<String> userProfileId
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ##### ReturnsExpand Collapse
 

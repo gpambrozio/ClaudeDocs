@@ -68,6 +68,10 @@ Optional header to specify the beta version(s) you want to use.
 
 "fast-mode-2026-02-01"FastMode2026\_02\_01
 
+"output-300k-2026-03-24"Output300k2026\_03\_24
+
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -1000,6 +1004,30 @@ JsonElement Role "assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
 
 required [BetaStopReason](api/beta.md)? StopReason
 

@@ -18,7 +18,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-requests: [Iterable](api/beta/messages/batches/create.md)[Request]
+requests: Iterable[Request]
 
 List of requests for prompt completion. Each is an individual request to create a Message.
 
@@ -2798,7 +2798,7 @@ Accepts one of the following:
 
 "fast"
 
-stop\_sequences: Optional[SequenceNotStr[str]]
+stop\_sequences: Optional[Sequence[str]]
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -4498,6 +4498,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id: Optional[str]
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
@@ -4506,7 +4510,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -4549,6 +4553,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

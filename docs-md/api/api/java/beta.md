@@ -7069,6 +7069,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -10884,6 +10908,30 @@ String version
 
 Skill version or 'latest' for most recent version
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 Accepts one of the following:
@@ -11944,6 +11992,30 @@ JsonValue; role "assistant"constant"assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -13073,6 +13145,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -13357,6 +13453,30 @@ CUSTOM("custom")
 String version
 
 Skill version or 'latest' for most recent version
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -14387,6 +14507,30 @@ class BetaRedactedThinkingBlockParam:
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+
+class BetaRefusalStopDetails:
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 class BetaRequestDocumentBlock:
 
@@ -21903,6 +22047,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -23137,6 +23305,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -24335,6 +24527,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -24675,6 +24891,76 @@ GET/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/user\_profiles/{id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles/{id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+[BetaUserProfileEnrollmentUrl](api/beta.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles/{id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+class BetaUserProfile:
+
+String id
+
+LocalDateTime createdAt
+
+A timestamp in RFC 3339 format
+
+Metadata metadata
+
+TrustGrants trustGrants
+
+String status
+
+String type
+
+LocalDateTime updatedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> externalId
+
+class BetaUserProfileEnrollmentUrl:
+
+LocalDateTime expiresAt
+
+A timestamp in RFC 3339 format
+
+String type
+
+String url
+
+class BetaUserProfileTrustGrant:
+
+String status
 
 ---
 

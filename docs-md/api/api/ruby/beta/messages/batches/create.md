@@ -32,7 +32,7 @@ maxLength64
 
 minLength1
 
-params: { max\_tokens, messages, model, 19 more}
+params: { max\_tokens, messages, model, 20 more}
 
 Messages API creation parameters for the individual request.
 
@@ -4482,6 +4482,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id: String
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
@@ -4490,7 +4494,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
@@ -4533,6 +4537,10 @@ Accepts one of the following:
 :"skills-2025-10-02"
 
 :"fast-mode-2026-02-01"
+
+:"output-300k-2026-03-24"
+
+:"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

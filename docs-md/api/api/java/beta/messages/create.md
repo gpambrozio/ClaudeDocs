@@ -64,6 +64,10 @@ SKILLS\_2025\_10\_02("skills-2025-10-02")
 
 FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 long maxTokens
 
 The maximum number of tokens to generate before stopping.
@@ -4169,6 +4173,10 @@ maximum1
 
 minimum0
 
+Optional<String> userProfileId
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ##### ReturnsExpand Collapse
 
 class BetaMessage:
@@ -5081,6 +5089,30 @@ JsonValue; role "assistant"constant"assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -6204,6 +6236,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -6488,6 +6544,30 @@ CUSTOM("custom")
 String version
 
 Skill version or 'latest' for most recent version
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -7580,6 +7660,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -7662,6 +7747,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

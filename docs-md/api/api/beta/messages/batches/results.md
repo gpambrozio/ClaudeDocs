@@ -30,7 +30,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -74,6 +74,10 @@ Accepts one of the following:
 
 "fast-mode-2026-02-01"
 
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
 BetaMessageBatchIndividualResponse = object { custom\_id, result }
@@ -96,7 +100,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -1017,6 +1021,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
+
 stop\_reason: [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -1307,7 +1335,7 @@ Retrieve Message Batch results
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results?beta=true \
+curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"

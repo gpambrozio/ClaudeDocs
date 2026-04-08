@@ -18,7 +18,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ##### ParametersExpand Collapse
 
-requests: [Iterable](api/messages/batches/create.md)[Request]
+requests: Iterable[Request]
 
 List of requests for prompt completion. Each is an individual request to create a Message.
 
@@ -2352,7 +2352,7 @@ Accepts one of the following:
 
 "standard\_only"
 
-stop\_sequences: Optional[SequenceNotStr[str]]
+stop\_sequences: Optional[Sequence[str]]
 
 Custom text sequences that will cause the model to stop generating.
 

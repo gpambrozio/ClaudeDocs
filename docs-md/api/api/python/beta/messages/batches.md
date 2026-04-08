@@ -1179,6 +1179,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
+
 stop\_reason: Optional[BetaStopReason]
 
 The reason that we stopped.
@@ -2441,6 +2465,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
+
 stop\_reason: Optional[BetaStopReason]
 
 The reason that we stopped.
@@ -3664,6 +3712,30 @@ role: Literal["assistant"]
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 

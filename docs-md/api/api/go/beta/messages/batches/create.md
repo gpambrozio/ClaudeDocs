@@ -4478,6 +4478,10 @@ maximum1
 
 minimum0
 
+UserProfileID stringoptional
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4527,6 +4531,10 @@ const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model
 const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+
+const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

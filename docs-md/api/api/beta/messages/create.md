@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 17 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -67,6 +67,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -4514,9 +4518,13 @@ maximum1
 
 minimum0
 
+user\_profile\_id: optional string
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ##### ReturnsExpand Collapse
 
-BetaMessage = object { id, container, content, 7 more }
+BetaMessage = object { id, container, content, 8 more }
 
 id: string
 
@@ -5436,6 +5444,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -5650,7 +5682,7 @@ Accepts one of the following:
 
 BetaRawMessageStartEvent = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -6570,6 +6602,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -6820,7 +6876,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: object { container, stop\_reason, stop\_sequence }
+delta: object { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }
 
@@ -6855,6 +6911,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" or "bio"
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -7879,7 +7959,7 @@ Create a Message
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/messages?beta=true \
+curl https://api.anthropic.com/v1/messages \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
@@ -7940,6 +8020,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -8022,6 +8107,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

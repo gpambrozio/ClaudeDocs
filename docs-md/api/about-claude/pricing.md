@@ -29,27 +29,27 @@ MTok = Million tokens. The "Base Input Tokens" column shows standard input prici
 
 ## Third-party platform pricing
 
-Claude models are available on [AWS Bedrock](build-with-claude/claude-on-amazon-bedrock.md), [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). For official pricing, visit:
+Claude models are available on [AWS Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). For official pricing, visit:
 
 - [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)
 - [Google Vertex AI pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 - [Microsoft Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/#pricing)
 
-**Regional endpoint pricing for Claude 4.5 models and beyond**
+**Regional and multi-region endpoint pricing for Claude 4.5 models and beyond**
 
-Starting with Claude Sonnet 4.5 and Haiku 4.5, AWS Bedrock and Google Vertex AI offer two endpoint types:
+Starting with Claude Sonnet 4.5 and Haiku 4.5:
 
-- **Global endpoints:** Dynamic routing across regions for maximum availability
-- **Regional endpoints:** Data routing guaranteed within specific geographic regions
+- **AWS Bedrock** offers two endpoint types: global endpoints (dynamic routing for maximum availability) and regional endpoints (guaranteed data routing through specific geographic regions).
+- **Google Vertex AI** offers three endpoint types: global endpoints, multi-region endpoints (dynamic routing within a geographic area), and regional endpoints.
 
-Regional endpoints include a 10% premium over global endpoints. The Claude API (1P) is global by default; for 1P data residency options and pricing, see [Data residency pricing](#data-residency-pricing) below.
+Regional and multi-region endpoints include a 10% premium over global endpoints. The Claude API (1P) is global by default; for 1P data residency options and pricing, see [Data residency pricing](#data-residency-pricing) below.
 
 **Scope:** This pricing structure applies to Claude Sonnet 4.5, Haiku 4.5, and all future models. Earlier models (Claude Sonnet 4, Opus 4, and prior releases) retain their existing pricing.
 
 For implementation details and code examples:
 
 - [AWS Bedrock global vs regional endpoints](build-with-claude/claude-on-amazon-bedrock.md)
-- [Google Vertex AI global vs regional endpoints](build-with-claude/claude-on-vertex-ai.md)
+- [Google Vertex AI global, multi-region, and regional endpoints](build-with-claude/claude-on-vertex-ai.md)
 
 ## Feature-specific pricing
 
@@ -124,7 +124,7 @@ For more information about batch processing, see the [batch processing documenta
 
 ### Long context pricing
 
-Claude Opus 4.6 and Sonnet 4.6 include the full [1M token context window](build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
+[Claude Mythos Preview](https://anthropic.com/glasswing), Opus 4.6 and Sonnet 4.6 include the full [1M token context window](build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
 ### Tool use pricing
 

@@ -68,6 +68,10 @@ SKILLS\_2025\_10\_02("skills-2025-10-02")
 
 FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -1000,6 +1004,30 @@ JsonValue; role "assistant"constant"assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 

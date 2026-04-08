@@ -58,6 +58,10 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
+const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 type BetaAPIError struct{…}
 
 Message string
@@ -7227,6 +7231,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -11040,6 +11068,30 @@ Version string
 
 Skill version or 'latest' for most recent version
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 Accepts one of the following:
@@ -12110,6 +12162,30 @@ Role Assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 
@@ -13251,6 +13327,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -13535,6 +13635,30 @@ const BetaSkillTypeCustom BetaSkillType = "custom"
 Version string
 
 Skill version or 'latest' for most recent version
+
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 
@@ -14565,6 +14689,30 @@ type BetaRedactedThinkingBlockParamResp struct{…}
 Data string
 
 Type RedactedThinking
+
+type BetaRefusalStopDetails struct{…}
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 type BetaRequestDocumentBlock struct{…}
 
@@ -22109,6 +22257,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -23355,6 +23527,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -24563,6 +24759,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [BetaStopReason](api/beta.md)
 
 The reason that we stopped.
@@ -24903,6 +25123,76 @@ GET/v1/skills/{skill\_id}/versions/{version}
 client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta.md), error)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+client.Beta.UserProfiles.New(ctx, params) (\*[BetaUserProfile](api/beta.md), error)
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+client.Beta.UserProfiles.List(ctx, params) (\*PageCursorV2[[BetaUserProfile](api/beta.md)], error)
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+client.Beta.UserProfiles.Get(ctx, id, query) (\*[BetaUserProfile](api/beta.md), error)
+
+GET/v1/user\_profiles/{id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+client.Beta.UserProfiles.Update(ctx, id, params) (\*[BetaUserProfile](api/beta.md), error)
+
+POST/v1/user\_profiles/{id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+client.Beta.UserProfiles.NewEnrollmentURL(ctx, id, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
+
+POST/v1/user\_profiles/{id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+type BetaUserProfile struct{…}
+
+ID string
+
+CreatedAt Time
+
+A timestamp in RFC 3339 format
+
+Metadata map[string, string]
+
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+
+Status string
+
+Type string
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
+
+ExternalID stringoptional
+
+type BetaUserProfileEnrollmentURL struct{…}
+
+ExpiresAt Time
+
+A timestamp in RFC 3339 format
+
+Type string
+
+URL string
+
+type BetaUserProfileTrustGrant struct{…}
+
+Status string
 
 ---
 

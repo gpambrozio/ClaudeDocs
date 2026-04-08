@@ -8,13 +8,13 @@ TypeScript
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
+AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
 
 "message-batches-2024-09-24"
 
@@ -55,6 +55,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 BetaAPIError { message, type }
 
@@ -712,7 +716,7 @@ Whether this capability is supported by the model.
 
 ##### [Create a Message](api/beta/messages/create.md)
 
-client.beta.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): [BetaMessage](api/beta.md) { id, container, content, 7 more }  | Stream<[BetaRawMessageStreamEvent](api/beta.md)>
+client.beta.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): [BetaMessage](api/beta.md) { id, container, content, 8 more }  | Stream<[BetaRawMessageStreamEvent](api/beta.md)>
 
 POST/v1/messages
 
@@ -6300,7 +6304,7 @@ view\_range?: Array<number>
 
 Optional line range for viewing specific lines
 
-BetaMessage { id, container, content, 7 more }
+BetaMessage { id, container, content, 8 more }
 
 id: string
 
@@ -7214,6 +7218,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -10986,7 +11014,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: Delta { container, stop\_reason, stop\_sequence }
+delta: Delta { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
@@ -11021,6 +11049,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -11172,7 +11224,7 @@ The number of web search tool requests.
 
 BetaRawMessageStartEvent { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -12086,6 +12138,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -12306,7 +12382,7 @@ Accepts one of the following:
 
 BetaRawMessageStartEvent { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -13220,6 +13296,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -13470,7 +13570,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: Delta { container, stop\_reason, stop\_sequence }
+delta: Delta { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
@@ -13505,6 +13605,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -14535,6 +14659,30 @@ BetaRedactedThinkingBlockParam { data, type }
 data: string
 
 type: "redacted\_thinking"
+
+BetaRefusalStopDetails { category, explanation, type }
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 BetaRequestDocumentBlock { source, type, cache\_control, 3 more }
 
@@ -21150,7 +21298,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -22064,6 +22212,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -22390,7 +22562,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -23304,6 +23476,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -23592,7 +23788,7 @@ type: "expired"
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -24506,6 +24702,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -24822,6 +25042,151 @@ client.beta.skills.delete(stringskillID, SkillDeleteParams { betas } params?, Re
 
 DELETE/v1/skills/{skill\_id}
 
+##### ModelsExpand Collapse
+
+SkillCreateResponse { id, created\_at, display\_title, 4 more }
+
+id: string
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: string | null
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: string | null
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: string
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: string
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: string
+
+ISO 8601 timestamp of when the skill was last updated.
+
+SkillListResponse { id, created\_at, display\_title, 4 more }
+
+id: string
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: string | null
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: string | null
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: string
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: string
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: string
+
+ISO 8601 timestamp of when the skill was last updated.
+
+SkillRetrieveResponse { id, created\_at, display\_title, 4 more }
+
+id: string
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill was created.
+
+display\_title: string | null
+
+Display title for the skill.
+
+This is a human-readable label that is not included in the prompt sent to the model.
+
+latest\_version: string | null
+
+The latest version identifier for the skill.
+
+This represents the most recent version of the skill that has been created.
+
+source: string
+
+Source of the skill.
+
+This may be one of the following values:
+
+- `"custom"`: the skill was created by a user
+- `"anthropic"`: the skill was created by Anthropic
+
+type: string
+
+Object type.
+
+For Skills, this is always `"skill"`.
+
+updated\_at: string
+
+ISO 8601 timestamp of when the skill was last updated.
+
+SkillDeleteResponse { id, type }
+
+id: string
+
+Unique identifier for the skill.
+
+The format and length of IDs may change over time.
+
+type: string
+
+Deleted object type.
+
+For Skills, this is always `"skill_deleted"`.
+
 #### BetaSkillsVersions
 
 ##### [Create Skill Version](api/beta/skills/versions/create.md)
@@ -24847,6 +25212,230 @@ GET/v1/skills/{skill\_id}/versions/{version}
 client.beta.skills.versions.delete(stringversion, VersionDeleteParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionDeleteResponse](api/beta.md) { id, type }
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+##### ModelsExpand Collapse
+
+VersionCreateResponse { id, created\_at, description, 5 more }
+
+id: string
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: string
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: string
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: string
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: string
+
+Identifier for the skill that this version belongs to.
+
+type: string
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: string
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+VersionListResponse { id, created\_at, description, 5 more }
+
+id: string
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: string
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: string
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: string
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: string
+
+Identifier for the skill that this version belongs to.
+
+type: string
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: string
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+VersionRetrieveResponse { id, created\_at, description, 5 more }
+
+id: string
+
+Unique identifier for the skill version.
+
+The format and length of IDs may change over time.
+
+created\_at: string
+
+ISO 8601 timestamp of when the skill version was created.
+
+description: string
+
+Description of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+directory: string
+
+Directory name of the skill version.
+
+This is the top-level directory name that was extracted from the uploaded files.
+
+name: string
+
+Human-readable name of the skill version.
+
+This is extracted from the SKILL.md file in the skill upload.
+
+skill\_id: string
+
+Identifier for the skill that this version belongs to.
+
+type: string
+
+Object type.
+
+For Skill Versions, this is always `"skill_version"`.
+
+version: string
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+VersionDeleteResponse { id, type }
+
+id: string
+
+Version identifier for the skill.
+
+Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+
+type: string
+
+Deleted object type.
+
+For Skill Versions, this is always `"skill_version_deleted"`.
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursorV2<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more } >
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+client.beta.userProfiles.retrieve(stringid, UserProfileRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+
+GET/v1/user\_profiles/{id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+client.beta.userProfiles.update(stringid, UserProfileUpdateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+
+POST/v1/user\_profiles/{id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+client.beta.userProfiles.createEnrollmentURL(stringid, UserProfileCreateEnrollmentURLParams { betas } params?, RequestOptionsoptions?): [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+
+POST/v1/user\_profiles/{id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+BetaUserProfile { id, created\_at, metadata, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+metadata: Record<string, string>
+
+trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta.md) { status } >
+
+status: string
+
+type: string
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+external\_id?: string | null
+
+BetaUserProfileEnrollmentURL { expires\_at, type, url }
+
+expires\_at: string
+
+A timestamp in RFC 3339 format
+
+type: string
+
+url: string
+
+BetaUserProfileTrustGrant { status }
+
+status: string
 
 ---
 

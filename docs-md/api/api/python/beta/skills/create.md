@@ -20,7 +20,7 @@ Display title for the skill.
 
 This is a human-readable label that is not included in the prompt sent to the model.
 
-files: Optional[SequenceNotStr[FileTypes]]
+files: Optional[Sequence[FileTypes]]
 
 Files to upload for the skill.
 
@@ -34,7 +34,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -77,6 +77,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

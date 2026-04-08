@@ -154,7 +154,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-stop\_sequences: Optional[[SequenceNotStr](api/completions/create.md)[str]]
+stop\_sequences: Optional[Sequence[str]]
 
 Sequences that will cause the model to stop generating.
 
@@ -210,7 +210,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -253,6 +253,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

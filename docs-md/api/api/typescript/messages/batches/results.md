@@ -44,7 +44,7 @@ Accepts one of the following:
 
 MessageBatchSucceededResult { message, type }
 
-message: [Message](api/messages.md) { id, container, content, 6 more }
+message: [Message](api/messages.md) { id, container, content, 7 more }
 
 id: string
 
@@ -762,6 +762,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [StopReason](api/messages.md) | null
 

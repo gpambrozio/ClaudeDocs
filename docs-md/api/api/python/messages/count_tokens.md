@@ -18,7 +18,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-messages: [Iterable](api/messages/count_tokens.md)[[MessageParam](api/messages.md)]
+messages: Iterable[[MessageParam](api/messages.md)]
 
 Input messages.
 
@@ -2507,7 +2507,7 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-tools: Optional[[Iterable](api/messages/count_tokens.md)[[MessageCountTokensToolParam](api/messages.md)]]
+tools: Optional[Iterable[[MessageCountTokensToolParam](api/messages.md)]]
 
 Definitions of tools that the model may use.
 

@@ -30,7 +30,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -73,6 +73,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -1032,6 +1036,30 @@ role: Literal["assistant"]
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 

@@ -74,6 +74,10 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
+const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessageBatchIndividualResponse struct{…}
@@ -1016,6 +1020,30 @@ Role Assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+StopDetails [BetaRefusalStopDetails](api/beta.md)
+
+Structured information about a refusal.
+
+Category BetaRefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
+
+const BetaRefusalStopDetailsCategoryBio BetaRefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 

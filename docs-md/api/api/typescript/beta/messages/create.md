@@ -6,7 +6,7 @@ TypeScript
 
 # Create a Message
 
-client.beta.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): [BetaMessage](api/beta.md) { id, container, content, 7 more }  | Stream<[BetaRawMessageStreamEvent](api/beta.md)>
+client.beta.messages.create(MessageCreateParamsparams, RequestOptionsoptions?): [BetaMessage](api/beta.md) { id, container, content, 8 more }  | Stream<[BetaRawMessageStreamEvent](api/beta.md)>
 
 POST/v1/messages
 
@@ -20,7 +20,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
 MessageCreateParams = MessageCreateParamsNonStreaming { stream }  | MessageCreateParamsStreaming { stream }
 
-MessageCreateParamsBase { max\_tokens, messages, model, 20 more }
+MessageCreateParamsBase { max\_tokens, messages, model, 21 more }
 
 max\_tokens: number
 
@@ -4452,6 +4452,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id?: string | null
+
+Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4460,7 +4464,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 17 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
 
 "message-batches-2024-09-24"
 
@@ -4502,7 +4506,11 @@ Accepts one of the following:
 
 "fast-mode-2026-02-01"
 
-MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 20 more }  { stream }
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 21 more }  { stream }
 
 stream?: false
 
@@ -4510,7 +4518,7 @@ Body param: Whether to incrementally stream the response using server-sent event
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-MessageCreateParamsStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 20 more }  { stream }
+MessageCreateParamsStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 21 more }  { stream }
 
 stream: true
 
@@ -4520,7 +4528,7 @@ See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 ##### ReturnsExpand Collapse
 
-BetaMessage { id, container, content, 7 more }
+BetaMessage { id, container, content, 8 more }
 
 id: string
 
@@ -5434,6 +5442,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -5648,7 +5680,7 @@ Accepts one of the following:
 
 BetaRawMessageStartEvent { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: string
 
@@ -6562,6 +6594,30 @@ role: "assistant"
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -6812,7 +6868,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-delta: Delta { container, stop\_reason, stop\_sequence }
+delta: Delta { container, stop\_details, stop\_reason, stop\_sequence }
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }  | null
 
@@ -6847,6 +6903,30 @@ Accepts one of the following:
 version: string
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+
+Structured information about a refusal.
+
+category: "cyber" | "bio" | null
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: string | null
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md) | null
 
@@ -7930,6 +8010,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -8012,6 +8097,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

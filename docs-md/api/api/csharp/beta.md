@@ -7069,6 +7069,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 The reason that we stopped.
@@ -10884,6 +10908,30 @@ required string Version
 
 Skill version or 'latest' for most recent version
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 Accepts one of the following:
@@ -11944,6 +11992,30 @@ JsonElement Role "assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
 
 required [BetaStopReason](api/beta.md)? StopReason
 
@@ -13073,6 +13145,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 The reason that we stopped.
@@ -13357,6 +13453,30 @@ Accepts one of the following:
 required string Version
 
 Skill version or 'latest' for most recent version
+
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
 
 required [BetaStopReason](api/beta.md)? StopReason
 
@@ -14387,6 +14507,30 @@ class BetaRedactedThinkingBlockParam:
 required string Data
 
 JsonElement Type "redacted\_thinking"constant
+
+class BetaRefusalStopDetails:
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
 
 class BetaRequestDocumentBlock:
 
@@ -21903,6 +22047,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 The reason that we stopped.
@@ -23137,6 +23305,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 The reason that we stopped.
@@ -24335,6 +24527,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+required [BetaRefusalStopDetails](api/beta.md)? StopDetails
+
+Structured information about a refusal.
+
+required Category? Category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"Cyber
+
+"bio"Bio
+
+required string? Explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonElement Type "refusal"constant
+
 required [BetaStopReason](api/beta.md)? StopReason
 
 The reason that we stopped.
@@ -24675,6 +24891,76 @@ GET/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/user\_profiles/{id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles/{id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles/{id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+class BetaUserProfile:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required IReadOnlyDictionary<string, string> Metadata
+
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+
+required string Status
+
+required string Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+string? ExternalID
+
+class BetaUserProfileEnrollmentUrl:
+
+required DateTimeOffset ExpiresAt
+
+A timestamp in RFC 3339 format
+
+required string Type
+
+required string Url
+
+class BetaUserProfileTrustGrant:
+
+required string Status
 
 ---
 

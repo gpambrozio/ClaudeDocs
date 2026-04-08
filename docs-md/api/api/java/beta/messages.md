@@ -6415,6 +6415,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -10230,6 +10254,30 @@ String version
 
 Skill version or 'latest' for most recent version
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 Accepts one of the following:
@@ -11290,6 +11338,30 @@ JsonValue; role "assistant"constant"assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -12419,6 +12491,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -12703,6 +12799,30 @@ CUSTOM("custom")
 String version
 
 Skill version or 'latest' for most recent version
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
@@ -13733,6 +13853,30 @@ class BetaRedactedThinkingBlockParam:
 String data
 
 JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+
+class BetaRefusalStopDetails:
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 class BetaRequestDocumentBlock:
 
@@ -21249,6 +21393,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -22483,6 +22651,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
+
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
 The reason that we stopped.
@@ -23680,6 +23872,30 @@ JsonValue; role "assistant"constant"assistant"constant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+Optional<[BetaRefusalStopDetails](api/beta.md)> stopDetails
+
+Structured information about a refusal.
+
+Optional<Category> category
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+CYBER("cyber")
+
+BIO("bio")
+
+Optional<String> explanation
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 

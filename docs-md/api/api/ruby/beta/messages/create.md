@@ -6,7 +6,7 @@ Ruby
 
 # Create a Message
 
-beta.messages.create(\*\*kwargs) -> [BetaMessage](api/beta.md) { id, container, content, 7 more }
+beta.messages.create(\*\*kwargs) -> [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 POST/v1/messages
 
@@ -4462,6 +4462,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id: String
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
@@ -4470,7 +4474,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 17 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
@@ -4514,9 +4518,13 @@ Accepts one of the following:
 
 :"fast-mode-2026-02-01"
 
+:"output-300k-2026-03-24"
+
+:"user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
-class BetaMessage { id, container, content, 7 more }
+class BetaMessage { id, container, content, 8 more }
 
 id: String
 
@@ -5436,6 +5444,30 @@ role: :assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -5650,7 +5682,7 @@ Accepts one of the following:
 
 class BetaRawMessageStartEvent { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 7 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
 
 id: String
 
@@ -6570,6 +6602,30 @@ role: :assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -6820,7 +6876,7 @@ type: :clear\_thinking\_20251015
 
 The type of context management edit applied.
 
-delta: { container, stop\_reason, stop\_sequence}
+delta: { container, stop\_details, stop\_reason, stop\_sequence}
 
 container: [BetaContainer](api/beta.md) { id, expires\_at, skills }
 
@@ -6855,6 +6911,30 @@ Accepts one of the following:
 version: String
 
 Skill version or 'latest' for most recent version
+
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }
+
+Structured information about a refusal.
+
+category: :cyber | :bio
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+:cyber
+
+:bio
+
+explanation: String
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: :refusal
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
@@ -7936,6 +8016,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -8018,6 +8103,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

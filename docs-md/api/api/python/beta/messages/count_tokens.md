@@ -18,7 +18,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 ##### ParametersExpand Collapse
 
-messages: [Iterable](api/beta/messages/count_tokens.md)[[BetaMessageParam](api/beta.md)]
+messages: Iterable[[BetaMessageParam](api/beta.md)]
 
 Input messages.
 
@@ -2634,7 +2634,7 @@ type: Literal["input\_tokens"]
 
 value: int
 
-mcp\_servers: Optional[[Iterable](api/beta/messages/count_tokens.md)[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
+mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
 
 MCP servers to be utilized in this request
 
@@ -2919,7 +2919,7 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-tools: Optional[[Iterable](api/beta/messages/count_tokens.md)[Tool]]
+tools: Optional[Iterable[Tool]]
 
 Definitions of tools that the model may use.
 
@@ -4362,7 +4362,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -4405,6 +4405,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

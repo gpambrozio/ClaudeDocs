@@ -5222,6 +5222,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -9435,6 +9459,30 @@ ExpiresAt Time
 
 The time at which the container will expire.
 
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [StopReason](api/messages.md)
 
 Accepts one of the following:
@@ -10221,6 +10269,30 @@ Role Assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [StopReason](api/messages.md)
 
@@ -11068,6 +11140,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -11194,6 +11290,30 @@ Identifier for the container used in this request
 ExpiresAt Time
 
 The time at which the container will expire.
+
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [StopReason](api/messages.md)
 
@@ -11996,6 +12116,30 @@ type RedactedThinkingBlockParamResp struct{…}
 Data string
 
 Type RedactedThinking
+
+type RefusalStopDetails struct{…}
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 type SearchResultBlockParamResp struct{…}
 
@@ -18099,6 +18243,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -19051,6 +19219,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
+
 StopReason [StopReason](api/messages.md)
 
 The reason that we stopped.
@@ -19964,6 +20156,30 @@ Role Assistant
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+StopDetails [RefusalStopDetails](api/messages.md)
+
+Structured information about a refusal.
+
+Category RefusalStopDetailsCategory
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+
+const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+
+Explanation string
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Type Refusal
 
 StopReason [StopReason](api/messages.md)
 

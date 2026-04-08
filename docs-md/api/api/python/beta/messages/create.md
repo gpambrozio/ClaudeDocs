@@ -28,7 +28,7 @@ Different models have different maximum values for this parameter. See [models](
 
 minimum1
 
-messages: [Iterable](api/beta/messages/create.md)[[BetaMessageParam](api/beta.md)]
+messages: Iterable[[BetaMessageParam](api/beta.md)]
 
 Input messages.
 
@@ -2686,7 +2686,7 @@ inference\_geo: Optional[str]
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-mcp\_servers: Optional[[Iterable](api/beta/messages/create.md)[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
+mcp\_servers: Optional[Iterable[[BetaRequestMCPServerURLDefinitionParam](api/beta.md)]]
 
 MCP servers to be utilized in this request
 
@@ -2778,7 +2778,7 @@ Accepts one of the following:
 
 "fast"
 
-stop\_sequences: Optional[[SequenceNotStr](api/beta/messages/create.md)[str]]
+stop\_sequences: Optional[Sequence[str]]
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -3021,7 +3021,7 @@ The model will not be allowed to use tools.
 
 type: Literal["none"]
 
-tools: Optional[[Iterable](api/beta/messages/create.md)[[BetaToolUnionParam](api/beta.md)]]
+tools: Optional[Iterable[[BetaToolUnionParam](api/beta.md)]]
 
 Definitions of tools that the model may use.
 
@@ -4478,6 +4478,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id: Optional[str]
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
@@ -4486,7 +4490,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 17 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -4529,6 +4533,10 @@ Accepts one of the following:
 "skills-2025-10-02"
 
 "fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -5468,6 +5476,30 @@ role: Literal["assistant"]
 Conversational role of the generated message.
 
 This will always be `"assistant"`.
+
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -6619,6 +6651,30 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
+
 stop\_reason: Optional[BetaStopReason]
 
 The reason that we stopped.
@@ -6903,6 +6959,30 @@ Accepts one of the following:
 version: str
 
 Skill version or 'latest' for most recent version
+
+stop\_details: Optional[BetaRefusalStopDetails]
+
+Structured information about a refusal.
+
+category: Optional[Literal["cyber", "bio"]]
+
+The policy category that triggered the refusal.
+
+`null` when the refusal doesn't map to a named category.
+
+Accepts one of the following:
+
+"cyber"
+
+"bio"
+
+explanation: Optional[str]
+
+Human-readable explanation of the refusal.
+
+This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 
@@ -7988,6 +8068,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -8070,6 +8155,11 @@ Response 200
   },
   "model": "claude-opus-4-6",
   "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "explanation",
+    "type": "refusal"
+  },
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

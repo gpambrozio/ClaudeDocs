@@ -60,6 +60,10 @@ SKILLS\_2025\_10\_02("skills-2025-10-02")
 
 FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
+OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 InputStream file
 
 The file to upload
@@ -120,7 +124,7 @@ public final class Main {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         FileUploadParams params = FileUploadParams.builder()
-            .file(ByteArrayInputStream("Example data".getBytes()))
+            .file(new ByteArrayInputStream("Example data".getBytes()))
             .build();
         FileMetadata fileMetadata = client.beta().files().upload(params);
     }
