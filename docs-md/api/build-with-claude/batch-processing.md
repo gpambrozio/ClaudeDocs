@@ -17,7 +17,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-clau
 
 # Message Batches API
 
-The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](api/messages.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
+The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](api/messages/create.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
 
 You can [explore the API reference directly](api/creating-message-batches.md), in addition to this guide.
 
@@ -93,7 +93,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 A Message Batch is composed of a list of requests to create a Message. The shape of an individual request is comprised of:
 
 - A unique `custom_id` for identifying the Messages request
-- A `params` object with the standard [Messages API](api/messages.md) parameters
+- A `params` object with the standard [Messages API](api/messages/create.md) parameters
 
 You can [create a batch](api/creating-message-batches.md) by passing this list into the `requests` parameter:
 
@@ -135,11 +135,11 @@ In this example, two separate requests are batched together for asynchronous pro
 
 **Test your batch requests with the Messages API**
 
-Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](api/messages.md) first.
+Validation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](api/messages/create.md) first.
 
 When a batch is first created, the response will have a processing status of `in_progress`.
 
-JSON
+Output
 
 ```shiki
 {
@@ -269,7 +269,7 @@ curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4Z
           echo "Success! $custom_id"
           ;;
         "errored")
-          if [ "$error_type" = "invalid_request" ]; then
+          if [ "$error_type" = "invalid_request_error" ]; then
             # Request body must be fixed before re-sending request
             echo "Validation error: $custom_id"
           else
@@ -316,7 +316,7 @@ curl --request POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH
 
 The response will show the batch in a `canceling` state:
 
-JSON
+Output
 
 ```shiki
 {

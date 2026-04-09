@@ -210,7 +210,6 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Batch processing](build-with-claude/batch-processing.md)
 - [Files API](api/files-create.md)
-- [Agent SDK Sessions](agent-sdk/sessions.md)
 - [Trust Center](https://trust.anthropic.com/resources)
 
 Was this page helpful?

@@ -1,0 +1,811 @@
+# Send Events
+
+Copy page
+
+C#
+
+# Send Events
+
+[BetaManagedAgentsSendSessionEvents](api/beta.md) Beta.Sessions.Events.Send(EventSendParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}/events
+
+Send Events
+
+##### ParametersExpand Collapse
+
+EventSendParams parameters
+
+required string sessionID
+
+Path param: Path parameter session\_id
+
+required IReadOnlyList<[BetaManagedAgentsEventParams](api/beta.md)> events
+
+Body param: Events to send to the `session`.
+
+class BetaManagedAgentsUserMessageEventParams:
+
+Parameters for sending a user message to the session.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks for the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+class BetaManagedAgentsUserInterruptEventParams:
+
+Parameters for sending an interrupt to pause the agent.
+
+required Type Type
+
+class BetaManagedAgentsUserToolConfirmationEventParams:
+
+Parameters for confirming or denying a tool execution request.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+class BetaManagedAgentsUserCustomToolResultEventParams:
+
+Parameters for providing the result of a custom tool execution.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+
+Header param: Optional header to specify the beta version(s) you want to use.
+
+"message-batches-2024-09-24"MessageBatches2024\_09\_24
+
+"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+
+"computer-use-2024-10-22"ComputerUse2024\_10\_22
+
+"computer-use-2025-01-24"ComputerUse2025\_01\_24
+
+"pdfs-2024-09-25"Pdfs2024\_09\_25
+
+"token-counting-2024-11-01"TokenCounting2024\_11\_01
+
+"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+
+"output-128k-2025-02-19"Output128k2025\_02\_19
+
+"files-api-2025-04-14"FilesApi2025\_04\_14
+
+"mcp-client-2025-04-04"McpClient2025\_04\_04
+
+"mcp-client-2025-11-20"McpClient2025\_11\_20
+
+"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+
+"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+
+"code-execution-2025-05-22"CodeExecution2025\_05\_22
+
+"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+
+"context-1m-2025-08-07"Context1m2025\_08\_07
+
+"context-management-2025-06-27"ContextManagement2025\_06\_27
+
+"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+
+"skills-2025-10-02"Skills2025\_10\_02
+
+"fast-mode-2026-02-01"FastMode2026\_02\_01
+
+"output-300k-2026-03-24"Output300k2026\_03\_24
+
+##### ReturnsExpand Collapse
+
+class BetaManagedAgentsSendSessionEvents:
+
+Events that were successfully sent to the session.
+
+IReadOnlyList<Data> Data
+
+Sent events
+
+Accepts one of the following:
+
+class BetaManagedAgentsUserMessageEvent:
+
+A user message event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserInterruptEvent:
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+required string ID
+
+Unique identifier for this event.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserToolConfirmationEvent:
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserCustomToolResultEvent:
+
+Event sent by the client providing the result of a custom tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+Send Events
+
+C#
+
+```shiki
+EventSendParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
+    Events =
+    [
+        new BetaManagedAgentsUserMessageEventParams()
+        {
+            Content =
+            [
+                new BetaManagedAgentsTextBlock()
+                {
+                    Text = "Where is my order #1234?",
+                    Type = Type.Text,
+                },
+            ],
+            Type = Type.UserMessage,
+        },
+    ],
+};
+
+var betaManagedAgentsSendSessionEvents = await client.Beta.Sessions.Events.Send(parameters);
+
+Console.WriteLine(betaManagedAgentsSendSessionEvents);
+```
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

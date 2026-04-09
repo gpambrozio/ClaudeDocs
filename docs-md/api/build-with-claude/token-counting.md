@@ -43,7 +43,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-JSON
+Output
 
 ```shiki
 { "input_tokens": 14 }
@@ -87,7 +87,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-JSON
+Output
 
 ```shiki
 { "input_tokens": 403 }
@@ -125,7 +125,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 EOF
 ```
 
-JSON
+Output
 
 ```shiki
 { "input_tokens": 1551 }
@@ -178,7 +178,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-JSON
+Output
 
 ```shiki
 { "input_tokens": 88 }
@@ -219,7 +219,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 EOF
 ```
 
-JSON
+Output
 
 ```shiki
 { "input_tokens": 2188 }

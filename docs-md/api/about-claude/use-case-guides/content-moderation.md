@@ -106,6 +106,8 @@ Actual costs may differ from these estimates. These estimates are based on the p
 
 In order to use Claude for content moderation, Claude must understand the moderation requirements of your application. Let’s start by writing a prompt that allows you to define your moderation needs:
 
+Python
+
 ```shiki
 import json
 
@@ -179,6 +181,8 @@ The model's assessment is then parsed to determine if there is a violation. If t
 Content moderation is a classification problem. Thus, you can use the same techniques outlined in the [classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide) to determine the accuracy of your content moderation system.
 
 One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
+
+Python
 
 ```shiki
 import json
@@ -274,6 +278,8 @@ In complex scenarios, it may be helpful to consider additional strategies to imp
 
 In addition to listing the unsafe categories in the prompt, further improvements can be made by providing definitions and phrases related to each category.
 
+Python
+
 ```shiki
 import json
 
@@ -368,6 +374,8 @@ Notably, the definition for the `Specialized Advice` category now specifies the 
 ### Consider batch processing
 
 To reduce costs in situations where real-time moderation isn't necessary, consider moderating messages in batches. Include multiple messages within the prompt's context, and ask Claude to assess which messages should be moderated.
+
+Python
 
 ```shiki
 import json

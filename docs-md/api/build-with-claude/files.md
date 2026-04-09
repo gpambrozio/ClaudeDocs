@@ -20,7 +20,7 @@ The Files API provides a simple create-once, use-many-times approach for working
 
 - **Upload files** to Anthropic's secure storage and receive a unique `file_id`
 - **Download files** that are created from skills or the code execution tool
-- **Reference files** in [Messages](api/messages.md) requests using the `file_id` instead of re-uploading content
+- **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
 
 ## How to use the Files API
@@ -42,6 +42,8 @@ curl -X POST https://api.anthropic.com/v1/files \
 ```
 
 The response from uploading a file will include:
+
+Output
 
 ```shiki
 {
@@ -263,6 +265,8 @@ Common errors when using the Files API include:
 - **File too large (413):** File exceeds the 500 MB limit
 - **Storage limit exceeded (403):** Your organization has reached the 500 GB storage limit
 
+Output
+
 ```shiki
 {
   "type": "error",
@@ -290,7 +294,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#1f6c7e737a6c5f7e716b776d706f767c317c7072) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#1764767b7264577679637f6578677e743974787a) if you need higher limits for your use case
 
 Was this page helpful?
 

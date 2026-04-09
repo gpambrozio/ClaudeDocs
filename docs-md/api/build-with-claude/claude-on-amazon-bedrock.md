@@ -98,30 +98,10 @@ aws bedrock list-foundation-models --region=us-west-2 --by-provider anthropic --
 
 The following examples show how to generate text from Claude on Bedrock:
 
-Python
+CLI
 
 ```shiki
-from anthropic import AnthropicBedrock
-
-client = AnthropicBedrock(
-    # Authenticate by either providing the keys below or use the default AWS credential providers, such as
-    # using ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and "AWS_ACCESS_KEY_ID" environment variables.
-    aws_access_key="<access key>",
-    aws_secret_key="<secret key>",
-    # Temporary credentials can be used with aws_session_token.
-    # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
-    aws_session_token="<session_token>",
-    # aws_region changes the aws region to which the request is made. By default, we read AWS_REGION,
-    # and if that's not present, we default to us-east-1. Note that we do not read ~/.aws/config for the region.
-    aws_region="us-west-2",
-)
-
-message = client.messages.create(
-    model="global.anthropic.claude-opus-4-6-v1",
-    max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}],
-)
-print(message.content)
+# The ant CLI does not yet support Amazon Bedrock.
 ```
 
 See the [client SDKs](api/client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
@@ -221,37 +201,20 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
 
-Python
+CLI
 
 ```shiki
-from anthropic import AnthropicBedrock
-
-client = AnthropicBedrock(aws_region="us-west-2")
-
-message = client.messages.create(
-    model="global.anthropic.claude-opus-4-6-v1",
-    max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}],
-)
+# The ant CLI does not yet support Amazon Bedrock.
 ```
 
 **Using regional endpoints (CRIS):**
 
 To use regional endpoints, remove the `global.` prefix from the model ID:
 
-Python
+CLI
 
 ```shiki
-from anthropic import AnthropicBedrock
-
-client = AnthropicBedrock(aws_region="us-west-2")
-
-# Using US regional endpoint (CRIS)
-message = client.messages.create(
-    model="anthropic.claude-opus-4-6-v1",  # No global. prefix
-    max_tokens=256,
-    messages=[{"role": "user", "content": "Hello, world"}],
-)
+# The ant CLI does not yet support Amazon Bedrock.
 ```
 
 **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).

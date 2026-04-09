@@ -34,11 +34,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-haiku-4-5" | 12 more
+"claude-mythos-preview" | "claude-opus-4-6" | "claude-sonnet-4-6" | 13 more
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 

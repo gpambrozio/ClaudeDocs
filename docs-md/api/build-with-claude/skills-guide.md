@@ -110,6 +110,10 @@ Shell
 
 Shell
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -214,39 +218,45 @@ For complete details on the Files API, see the [Files API documentation](api/fil
 
 Reuse the same container across multiple messages by specifying the container ID:
 
-Python
+CLI
 
 ```shiki
 # First request creates container
-response1 = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
-    },
-    messages=[{"role": "user", "content": "Analyze this sales data"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+CONTAINER_ID=$(ant beta:messages create \
+  --beta code-execution-2025-08-25 --beta skills-2025-10-02 \
+  --transform container.id --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - {type: anthropic, skill_id: xlsx, version: latest}
+messages:
+  - role: user
+    content: Analyze this sales data
+tools:
+  - {type: code_execution_20250825, name: code_execution}
+YAML
 )
 
 # Continue conversation with same container
-messages = [
-    {"role": "user", "content": "Analyze this sales data"},
-    {"role": "assistant", "content": response1.content},
-    {"role": "user", "content": "What was the total revenue?"},
-]
-
-response2 = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "id": response1.container.id,  # Reuse container
-        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}],
-    },
-    messages=messages,
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+ant beta:messages create \
+  --beta code-execution-2025-08-25 --beta skills-2025-10-02 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  id: $CONTAINER_ID  # Reuse container
+  skills:
+    - {type: anthropic, skill_id: xlsx, version: latest}
+messages:
+  - role: user
+    content: Analyze this sales data
+  - role: assistant
+    content: []  # content blocks from the first response
+  - role: user
+    content: What was the total revenue?
+tools:
+  - {type: code_execution_20250825, name: code_execution}
+YAML
 ```
 
 ### Long-Running Operations
@@ -372,16 +382,21 @@ curl https://api.anthropic.com/v1/messages \
 
 Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
 
-Shell
+CLI
 
 ```shiki
-curl -X POST "https://api.anthropic.com/v1/skills" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02" \
-  -F "display_title=Financial Analysis" \
-  -F "files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md" \
-  -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
+# Option 1: Upload individual files (one --file flag per file)
+ant beta:skills create \
+  --display-title "Financial Analysis" \
+  --file financial_skill/SKILL.md \
+  --file financial_skill/analyze.py \
+  --beta skills-2025-10-02
+
+# Option 2: Upload a zip archive
+ant beta:skills create \
+  --display-title "Financial Analysis" \
+  --file financial_analysis_skill.zip \
+  --beta skills-2025-10-02
 ```
 
 **Requirements:**
@@ -399,20 +414,14 @@ For complete request/response schemas, see the [Create Skill API reference](api/
 
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
-Shell
+CLI
 
 ```shiki
 # List all Skills
-curl "https://api.anthropic.com/v1/skills" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+ant beta:skills list
 
 # List only custom Skills
-curl "https://api.anthropic.com/v1/skills?source=custom" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+ant beta:skills list --source custom
 ```
 
 See the [List Skills API reference](api/skills/list-skills.md) for pagination and filtering options.
@@ -421,27 +430,34 @@ See the [List Skills API reference](api/skills/list-skills.md) for pagination an
 
 Get details about a specific Skill:
 
-Shell
+CLI
 
 ```shiki
-curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+ant beta:skills retrieve \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv
 ```
 
 ### Deleting a Skill
 
 To delete a Skill, you must first delete all its versions:
 
-Shell
+CLI
 
 ```shiki
-# Delete all versions first, then delete the Skill
-curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02"
+# Step 1: Delete all versions
+ant beta:skills:versions list \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+  --transform version --format yaml \
+  | tr -d '"' \
+  | while read -r VERSION; do
+      ant beta:skills:versions delete \
+        --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+        --version "$VERSION" >/dev/null
+    done
+
+# Step 2: Delete the Skill
+ant beta:skills delete \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv >/dev/null
 ```
 
 Attempting to delete a Skill with existing versions returns a 400 error.
@@ -462,57 +478,52 @@ Skills support versioning to manage updates safely:
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
-Shell
+CLI
 
 ```shiki
 # Create a new version
-NEW_VERSION=$(curl -X POST "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: skills-2025-10-02" \
-  -F "files[]=@updated_skill/SKILL.md;filename=updated_skill/SKILL.md")
-
-VERSION_NUMBER=$(echo "$NEW_VERSION" | jq -r '.version')
+VERSION_NUMBER=$(ant beta:skills:versions create \
+  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
+  --file updated_skill/SKILL.md \
+  --transform version --format yaml)
 
 # Use specific version
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d "{
-    \"model\": \"claude-opus-4-6\",
-    \"max_tokens\": 4096,
-    \"container\": {
-      \"skills\": [{
-        \"type\": \"custom\",
-        \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",
-        \"version\": \"$VERSION_NUMBER\"
-      }]
-    },
-    \"messages\": [{\"role\": \"user\", \"content\": \"Use updated Skill\"}],
-    \"tools\": [{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]
-  }"
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<YAML
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: $VERSION_NUMBER
+messages:
+  - role: user
+    content: Use updated Skill
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
 
 # Use latest version
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [{
-        "type": "custom",
-        "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-        "version": "latest"
-      }]
-    },
-    "messages": [{"role": "user", "content": "Use latest Skill version"}],
-    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
-  }'
+ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Use latest Skill version
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
 ```
 
 See the [Create Skill Version API reference](api/skills/create-skill-version.md) for complete details.
@@ -748,34 +759,39 @@ For best caching performance, keep your Skills list consistent across requests.
 
 Handle Skill-related errors gracefully:
 
-Python
+CLI
 
 ```shiki
-client = anthropic.Anthropic()
-
-try:
-    response = client.beta.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=4096,
-        betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-        container={
-            "skills": [
-                {
-                    "type": "custom",
-                    "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
-                    "version": "latest",
-                }
-            ]
-        },
-        messages=[{"role": "user", "content": "Process data"}],
-        tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-    )
-except anthropic.BadRequestError as e:
-    if "skill" in str(e):
-        print(f"Skill error: {e}")
-        # Handle skill-specific errors
-    else:
-        raise
+if ! RESULT=$(ant beta:messages create \
+  --beta code-execution-2025-08-25 \
+  --beta skills-2025-10-02 \
+  --transform-error error.message --format-error yaml 2>&1 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container:
+  skills:
+    - type: custom
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+      version: latest
+messages:
+  - role: user
+    content: Process data
+tools:
+  - type: code_execution_20250825
+    name: code_execution
+YAML
+); then
+  case "$RESULT" in
+    *skill*)
+      printf 'Skill error: %s\n' "$RESULT"
+      # Handle skill-specific errors
+      ;;
+    *)
+      printf '%s\n' "$RESULT" >&2
+      exit 1
+      ;;
+  esac
+fi
 ```
 
 ---

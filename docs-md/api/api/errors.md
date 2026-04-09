@@ -61,17 +61,14 @@ Every API response includes a unique `request-id` header. This header contains a
 
 The official SDKs provide this value as a property on top-level response objects, containing the value of the `request-id` header:
 
-Python
+CLI
 
 ```shiki
-client = anthropic.Anthropic()
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-print(f"Request ID: {message._request_id}")
+# The request-id header is printed to stderr with --debug:
+ant --debug messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}'
 ```
 
 ## Long requests

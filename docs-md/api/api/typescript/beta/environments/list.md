@@ -1,0 +1,322 @@
+# List Environments
+
+Copy page
+
+TypeScript
+
+# List Environments
+
+client.beta.environments.list(EnvironmentListParams { include\_archived, limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaEnvironment](api/beta.md) { id, archived\_at, config, 6 more } >
+
+GET/v1/environments
+
+List environments with pagination support.
+
+##### ParametersExpand Collapse
+
+params: EnvironmentListParams { include\_archived, limit, page, betas }
+
+include\_archived?: boolean
+
+Query param: Include archived environments in the response
+
+limit?: number
+
+Query param: Maximum number of environments to return
+
+page?: string | null
+
+Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+
+betas?: Array<[AnthropicBeta](api/beta.md)>
+
+Header param: Optional header to specify the beta version(s) you want to use.
+
+Accepts one of the following:
+
+(string & {})
+
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more
+
+"message-batches-2024-09-24"
+
+"prompt-caching-2024-07-31"
+
+"computer-use-2024-10-22"
+
+"computer-use-2025-01-24"
+
+"pdfs-2024-09-25"
+
+"token-counting-2024-11-01"
+
+"token-efficient-tools-2025-02-19"
+
+"output-128k-2025-02-19"
+
+"files-api-2025-04-14"
+
+"mcp-client-2025-04-04"
+
+"mcp-client-2025-11-20"
+
+"dev-full-thinking-2025-05-14"
+
+"interleaved-thinking-2025-05-14"
+
+"code-execution-2025-05-22"
+
+"extended-cache-ttl-2025-04-11"
+
+"context-1m-2025-08-07"
+
+"context-management-2025-06-27"
+
+"model-context-window-exceeded-2025-08-26"
+
+"skills-2025-10-02"
+
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+##### ReturnsExpand Collapse
+
+BetaEnvironment { id, archived\_at, config, 6 more }
+
+Unified Environment resource for both cloud and BYOC environments.
+
+id: string
+
+Environment identifier (e.g., 'env\_...')
+
+archived\_at: string | null
+
+RFC 3339 timestamp when environment was archived, or null if not archived
+
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }
+
+`cloud` environment configuration.
+
+networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Network configuration policy.
+
+Accepts one of the following:
+
+BetaUnrestrictedNetwork { type }
+
+Unrestricted network access.
+
+type: "unrestricted"
+
+Network policy type
+
+BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Limited network access.
+
+allow\_mcp\_servers: boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+allow\_package\_managers: boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+allowed\_hosts: Array<string>
+
+Specifies domains the container can reach.
+
+type: "limited"
+
+Network policy type
+
+packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more }
+
+Package manager configuration.
+
+apt: Array<string>
+
+Ubuntu/Debian packages to install
+
+cargo: Array<string>
+
+Rust packages to install
+
+gem: Array<string>
+
+Ruby packages to install
+
+go: Array<string>
+
+Go packages to install
+
+npm: Array<string>
+
+Node.js packages to install
+
+pip: Array<string>
+
+Python packages to install
+
+type?: "packages"
+
+Package configuration type
+
+type: "cloud"
+
+Environment type
+
+created\_at: string
+
+RFC 3339 timestamp when environment was created
+
+description: string
+
+User-provided description for the environment
+
+metadata: Record<string, string>
+
+User-provided metadata key-value pairs
+
+name: string
+
+Human-readable name for the environment
+
+type: "environment"
+
+The type of object (always 'environment')
+
+updated\_at: string
+
+RFC 3339 timestamp when environment was last updated
+
+List Environments
+
+TypeScript
+
+```shiki
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+});
+
+// Automatically fetches more pages as needed.
+for await (const betaEnvironment of client.beta.environments.list()) {
+  console.log(betaEnvironment.id);
+}
+```
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

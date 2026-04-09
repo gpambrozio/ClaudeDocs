@@ -1,0 +1,123 @@
+# Delete Environment
+
+Copy page
+
+Ruby
+
+# Delete Environment
+
+beta.environments.delete(environment\_id, \*\*kwargs) -> [BetaEnvironmentDeleteResponse](api/beta.md) { id, type }
+
+DELETE/v1/environments/{environment\_id}
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+##### ParametersExpand Collapse
+
+environment\_id: String
+
+betas: Array[[AnthropicBeta](api/beta.md)]
+
+Optional header to specify the beta version(s) you want to use.
+
+Accepts one of the following:
+
+String
+
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more
+
+Accepts one of the following:
+
+:"message-batches-2024-09-24"
+
+:"prompt-caching-2024-07-31"
+
+:"computer-use-2024-10-22"
+
+:"computer-use-2025-01-24"
+
+:"pdfs-2024-09-25"
+
+:"token-counting-2024-11-01"
+
+:"token-efficient-tools-2025-02-19"
+
+:"output-128k-2025-02-19"
+
+:"files-api-2025-04-14"
+
+:"mcp-client-2025-04-04"
+
+:"mcp-client-2025-11-20"
+
+:"dev-full-thinking-2025-05-14"
+
+:"interleaved-thinking-2025-05-14"
+
+:"code-execution-2025-05-22"
+
+:"extended-cache-ttl-2025-04-11"
+
+:"context-1m-2025-08-07"
+
+:"context-management-2025-06-27"
+
+:"model-context-window-exceeded-2025-08-26"
+
+:"skills-2025-10-02"
+
+:"fast-mode-2026-02-01"
+
+:"output-300k-2026-03-24"
+
+##### ReturnsExpand Collapse
+
+class BetaEnvironmentDeleteResponse { id, type }
+
+Response after deleting an environment.
+
+id: String
+
+Environment identifier
+
+type: :environment\_deleted
+
+The type of response
+
+Delete Environment
+
+Ruby
+
+```shiki
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_environment_delete_response = anthropic.beta.environments.delete("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_environment_delete_response)
+```
+
+Response 200
+
+```shiki
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

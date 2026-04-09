@@ -329,7 +329,7 @@ The `permissionMode` field controls how the subagent handles permission prompts.
 | Mode | Behavior |
 | --- | --- |
 | `default` | Standard permission checking with prompts |
-| `acceptEdits` | Auto-accept file edits except in protected directories |
+| `acceptEdits` | Auto-accept file edits and common filesystem commands for paths in the working directory or `additionalDirectories` |
 | `auto` | [Auto mode](permission-modes.md): a background classifier reviews commands and protected-directory writes |
 | `dontAsk` | Auto-deny permission prompts (explicitly allowed tools still work) |
 | `bypassPermissions` | Skip permission prompts |

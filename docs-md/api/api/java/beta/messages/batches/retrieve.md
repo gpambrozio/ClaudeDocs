@@ -68,8 +68,6 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
-
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatch:

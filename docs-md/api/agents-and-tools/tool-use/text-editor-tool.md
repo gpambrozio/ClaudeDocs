@@ -179,6 +179,8 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude uses the text editor tool first to view the file:
 
+Output
+
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
@@ -264,6 +266,8 @@ In the example above, the `view` tool result includes file contents with line nu
 
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
+Output
+
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
@@ -292,52 +296,43 @@ Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
 Your application should then make the edit and return the result:
 
-Python
+CLI
 
 ```shiki
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
-    messages=[
-        # Previous messages...
-        {
-            "role": "assistant",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.",
-                },
-                {
-                    "type": "tool_use",
-                    "id": "toolu_01PqRsTuVwXyZAbCdEfGh",
-                    "name": "str_replace_based_edit_tool",
-                    "input": {
-                        "command": "str_replace",
-                        "path": "primes.py",
-                        "old_str": "    for num in range(2, limit + 1)",
-                        "new_str": "    for num in range(2, limit + 1):",
-                    },
-                },
-            ],
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "tool_result",
-                    "tool_use_id": "toolu_01PqRsTuVwXyZAbCdEfGh",
-                    "content": "Successfully replaced text at exactly one location.",
-                }
-            ],
-        },
-    ],
-)
-
-print(response)
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+tools:
+  - type: text_editor_20250728
+    name: str_replace_based_edit_tool
+messages:
+  # Previous messages...
+  - role: assistant
+    content:
+      - type: text
+        text: >-
+          I found the syntax error in your primes.py file. In the `get_primes`
+          function, there is a missing colon (:) at the end of the for loop
+          line. Let me fix that for you.
+      - type: tool_use
+        id: toolu_01PqRsTuVwXyZAbCdEfGh
+        name: str_replace_based_edit_tool
+        input:
+          command: str_replace
+          path: primes.py
+          old_str: "    for num in range(2, limit + 1)"
+          new_str: "    for num in range(2, limit + 1):"
+  - role: user
+    content:
+      - type: tool_result
+        tool_use_id: toolu_01PqRsTuVwXyZAbCdEfGh
+        content: Successfully replaced text at exactly one location.
+YAML
 ```
 
 Finally, Claude provides a complete explanation of the fix:
+
+Output
 
 ```shiki
 {

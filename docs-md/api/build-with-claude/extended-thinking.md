@@ -44,7 +44,7 @@ Here's an example of the default response format:
 }
 ```
 
-For more information about the response format of extended thinking, see the [Messages API Reference](api/messages.md).
+For more information about the response format of extended thinking, see the [Messages API Reference](api/messages/create.md).
 
 ## How to use extended thinking
 
@@ -99,7 +99,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#45362429203605242b312d372a352c266b262a28).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#d6a5b7bab3a596b7b8a2bea4b9a6bfb5f8b5b9bb).
 
 ### Controlling thinking display
 
@@ -128,6 +128,10 @@ Automated pipelines that never surface thinking content to end users can skip th
 Shell
 
 Shell
+
+CLI
+
+CLI
 
 Python
 
@@ -183,6 +187,8 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 When `display: "omitted"` is set, the response contains `thinking` blocks with an empty `thinking` field:
+
+Output
 
 ```shiki
 {
@@ -243,6 +249,8 @@ curl https://api.anthropic.com/v1/messages \
 
 Example streaming output:
 
+Output
+
 ```shiki
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-6", "stop_reason": null, "stop_sequence": null}}
@@ -283,6 +291,8 @@ data: {"type": "message_stop"}
 ```
 
 When `display: "omitted"` is set, the thinking block opens, a single `signature_delta` arrives, and the block closes without any `thinking_delta` events. Text streaming begins immediately after:
+
+Output
 
 ```shiki
 event: content_block_start

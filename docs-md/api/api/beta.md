@@ -8,13 +8,13 @@ cURL
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
 
 Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
 
 Accepts one of the following:
 
@@ -59,8 +59,6 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
-
-"user-profiles-2026-03-24"
 
 BetaAPIError = object { message, type }
 
@@ -7149,7 +7147,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -7157,9 +7155,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -12085,7 +12087,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -12093,9 +12095,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -13249,7 +13255,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -13257,9 +13263,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -22169,7 +22179,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -22177,9 +22187,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -23439,7 +23453,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -23447,9 +23461,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -24671,7 +24689,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 12 more
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
 
 The model that will complete your prompt.
 
@@ -24679,9 +24697,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -24980,6 +25002,8585 @@ Accepts one of the following:
 
 type: "succeeded"
 
+#### BetaAgents
+
+##### [Create Agent](api/beta/agents/create.md)
+
+POST/v1/agents
+
+##### [List Agents](api/beta/agents/list.md)
+
+GET/v1/agents
+
+##### [Get Agent](api/beta/agents/retrieve.md)
+
+GET/v1/agents/{agent\_id}
+
+##### [Update Agent](api/beta/agents/update.md)
+
+POST/v1/agents/{agent\_id}
+
+##### [Archive Agent](api/beta/agents/archive.md)
+
+POST/v1/agents/{agent\_id}/archive
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsAgent = object { id, archived\_at, created\_at, 11 more }
+
+A Managed Agents `agent`.
+
+id: string
+
+archived\_at: string
+
+A timestamp in RFC 3339 format
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+description: string
+
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url }
+
+name: string
+
+type: "url"
+
+url: string
+
+metadata: map[string]
+
+model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed }
+
+Model identifier and configuration.
+
+id: [BetaManagedAgentsModel](api/beta.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+name: string
+
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
+
+Accepts one of the following:
+
+BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+
+A resolved Anthropic-managed skill.
+
+skill\_id: string
+
+type: "anthropic"
+
+version: string
+
+BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+
+A resolved user-created custom skill.
+
+skill\_id: string
+
+type: "custom"
+
+version: string
+
+system: string
+
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+type: "agent\_toolset\_20260401"
+
+BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+mcp\_server\_name: string
+
+type: "mcp\_toolset"
+
+BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+
+A custom tool as returned in API responses.
+
+description: string
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+type: "custom"
+
+type: "agent"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+version: number
+
+The agent's current version. Starts at 1 and increments when the agent is modified.
+
+BetaManagedAgentsAgentToolConfig = object { enabled, name, permission\_policy }
+
+Configuration for a specific agent tool.
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAgentToolConfigParams = object { name, enabled, permission\_policy }
+
+Configuration override for a specific tool within a toolset.
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+enabled: optional boolean
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAgentToolsetDefaultConfig = object { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAgentToolsetDefaultConfigParams = object { enabled, permission\_policy }
+
+Default configuration for all tools in a toolset.
+
+enabled: optional boolean
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+type: "agent\_toolset\_20260401"
+
+BetaManagedAgentsAgentToolset20260401Params = object { type, configs, default\_config }
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+type: "agent\_toolset\_20260401"
+
+configs: optional array of [BetaManagedAgentsAgentToolConfigParams](api/beta.md) { name, enabled, permission\_policy }
+
+Per-tool configuration overrides.
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+enabled: optional boolean
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }
+
+Default configuration for all tools in a toolset.
+
+enabled: optional boolean
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+
+A resolved Anthropic-managed skill.
+
+skill\_id: string
+
+type: "anthropic"
+
+version: string
+
+BetaManagedAgentsAnthropicSkillParams = object { skill\_id, type, version }
+
+An Anthropic-managed skill.
+
+skill\_id: string
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+type: "anthropic"
+
+version: optional string
+
+Version to pin. Defaults to latest if omitted.
+
+BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+
+A resolved user-created custom skill.
+
+skill\_id: string
+
+type: "custom"
+
+version: string
+
+BetaManagedAgentsCustomSkillParams = object { skill\_id, type, version }
+
+A user-created custom skill.
+
+skill\_id: string
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+type: "custom"
+
+version: optional string
+
+Version to pin. Defaults to latest if omitted.
+
+BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+
+A custom tool as returned in API responses.
+
+description: string
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+type: "custom"
+
+BetaManagedAgentsCustomToolInputSchema = object { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+BetaManagedAgentsCustomToolParams = object { description, input\_schema, name, type }
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+description: string
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+type: "custom"
+
+BetaManagedAgentsMCPServerURLDefinition = object { name, type, url }
+
+URL-based MCP server connection as returned in API responses.
+
+name: string
+
+type: "url"
+
+url: string
+
+BetaManagedAgentsMCPToolConfig = object { enabled, name, permission\_policy }
+
+Resolved configuration for a specific MCP tool.
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsMCPToolConfigParams = object { name, enabled, permission\_policy }
+
+Configuration override for a specific MCP tool.
+
+name: string
+
+Name of the MCP tool to configure. 1-128 characters.
+
+enabled: optional boolean
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+mcp\_server\_name: string
+
+type: "mcp\_toolset"
+
+BetaManagedAgentsMCPToolsetDefaultConfig = object { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsMCPToolsetDefaultConfigParams = object { enabled, permission\_policy }
+
+Default configuration for all tools from an MCP server.
+
+enabled: optional boolean
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsMCPToolsetParams = object { mcp\_server\_name, type, configs, default\_config }
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+mcp\_server\_name: string
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+type: "mcp\_toolset"
+
+configs: optional array of [BetaManagedAgentsMCPToolConfigParams](api/beta.md) { name, enabled, permission\_policy }
+
+Per-tool configuration overrides.
+
+name: string
+
+Name of the MCP tool to configure. 1-128 characters.
+
+enabled: optional boolean
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }
+
+Default configuration for all tools from an MCP server.
+
+enabled: optional boolean
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsModel = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+BetaManagedAgentsModelConfig = object { id, speed }
+
+Model identifier and configuration.
+
+id: [BetaManagedAgentsModel](api/beta.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+BetaManagedAgentsModelConfigParams = object { id, speed }
+
+An object that defines additional configuration control over model use
+
+id: [BetaManagedAgentsModel](api/beta.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+BetaManagedAgentsSkillParams = [BetaManagedAgentsAnthropicSkillParams](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkillParams](api/beta.md) { skill\_id, type, version }
+
+Skill to load in the session container.
+
+Accepts one of the following:
+
+BetaManagedAgentsAnthropicSkillParams = object { skill\_id, type, version }
+
+An Anthropic-managed skill.
+
+skill\_id: string
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+type: "anthropic"
+
+version: optional string
+
+Version to pin. Defaults to latest if omitted.
+
+BetaManagedAgentsCustomSkillParams = object { skill\_id, type, version }
+
+A user-created custom skill.
+
+skill\_id: string
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+type: "custom"
+
+version: optional string
+
+Version to pin. Defaults to latest if omitted.
+
+BetaManagedAgentsURLMCPServerParams = object { name, type, url }
+
+URL-based MCP server connection.
+
+name: string
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+type: "url"
+
+url: string
+
+Endpoint URL for the MCP server.
+
+#### BetaAgentsVersions
+
+##### [List Agent Versions](api/beta/agents/versions/list.md)
+
+GET/v1/agents/{agent\_id}/versions
+
+#### BetaEnvironments
+
+##### [Create Environment](api/beta/environments/create.md)
+
+POST/v1/environments
+
+##### [List Environments](api/beta/environments/list.md)
+
+GET/v1/environments
+
+##### [Get Environment](api/beta/environments/retrieve.md)
+
+GET/v1/environments/{environment\_id}
+
+##### [Update Environment](api/beta/environments/update.md)
+
+POST/v1/environments/{environment\_id}
+
+##### [Delete Environment](api/beta/environments/delete.md)
+
+DELETE/v1/environments/{environment\_id}
+
+##### [Archive Environment](api/beta/environments/archive.md)
+
+POST/v1/environments/{environment\_id}/archive
+
+##### ModelsExpand Collapse
+
+BetaCloudConfig = object { networking, packages, type }
+
+`cloud` environment configuration.
+
+networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Network configuration policy.
+
+Accepts one of the following:
+
+BetaUnrestrictedNetwork = object { type }
+
+Unrestricted network access.
+
+type: "unrestricted"
+
+Network policy type
+
+BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Limited network access.
+
+allow\_mcp\_servers: boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+allow\_package\_managers: boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+allowed\_hosts: array of string
+
+Specifies domains the container can reach.
+
+type: "limited"
+
+Network policy type
+
+packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more }
+
+Package manager configuration.
+
+apt: array of string
+
+Ubuntu/Debian packages to install
+
+cargo: array of string
+
+Rust packages to install
+
+gem: array of string
+
+Ruby packages to install
+
+go: array of string
+
+Go packages to install
+
+npm: array of string
+
+Node.js packages to install
+
+pip: array of string
+
+Python packages to install
+
+type: optional "packages"
+
+Package configuration type
+
+type: "cloud"
+
+Environment type
+
+BetaCloudConfigParams = object { type, networking, packages }
+
+Request params for `cloud` environment configuration.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+type: "cloud"
+
+Environment type
+
+networking: optional [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetworkParams](api/beta.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+
+Network configuration policy. Omit on update to preserve the existing value.
+
+Accepts one of the following:
+
+BetaUnrestrictedNetwork = object { type }
+
+Unrestricted network access.
+
+type: "unrestricted"
+
+Network policy type
+
+BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+type: "limited"
+
+Network policy type
+
+allow\_mcp\_servers: optional boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+allow\_package\_managers: optional boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+allowed\_hosts: optional array of string
+
+Specifies domains the container can reach.
+
+packages: optional [BetaPackagesParams](api/beta.md) { apt, cargo, gem, 4 more }
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+apt: optional array of string
+
+Ubuntu/Debian packages to install
+
+cargo: optional array of string
+
+Rust packages to install
+
+gem: optional array of string
+
+Ruby packages to install
+
+go: optional array of string
+
+Go packages to install
+
+npm: optional array of string
+
+Node.js packages to install
+
+pip: optional array of string
+
+Python packages to install
+
+type: optional "packages"
+
+Package configuration type
+
+BetaEnvironment = object { id, archived\_at, config, 6 more }
+
+Unified Environment resource for both cloud and BYOC environments.
+
+id: string
+
+Environment identifier (e.g., 'env\_...')
+
+archived\_at: string
+
+RFC 3339 timestamp when environment was archived, or null if not archived
+
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }
+
+`cloud` environment configuration.
+
+networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetwork](api/beta.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Network configuration policy.
+
+Accepts one of the following:
+
+BetaUnrestrictedNetwork = object { type }
+
+Unrestricted network access.
+
+type: "unrestricted"
+
+Network policy type
+
+BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Limited network access.
+
+allow\_mcp\_servers: boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+allow\_package\_managers: boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+allowed\_hosts: array of string
+
+Specifies domains the container can reach.
+
+type: "limited"
+
+Network policy type
+
+packages: [BetaPackages](api/beta.md) { apt, cargo, gem, 4 more }
+
+Package manager configuration.
+
+apt: array of string
+
+Ubuntu/Debian packages to install
+
+cargo: array of string
+
+Rust packages to install
+
+gem: array of string
+
+Ruby packages to install
+
+go: array of string
+
+Go packages to install
+
+npm: array of string
+
+Node.js packages to install
+
+pip: array of string
+
+Python packages to install
+
+type: optional "packages"
+
+Package configuration type
+
+type: "cloud"
+
+Environment type
+
+created\_at: string
+
+RFC 3339 timestamp when environment was created
+
+description: string
+
+User-provided description for the environment
+
+metadata: map[string]
+
+User-provided metadata key-value pairs
+
+name: string
+
+Human-readable name for the environment
+
+type: "environment"
+
+The type of object (always 'environment')
+
+updated\_at: string
+
+RFC 3339 timestamp when environment was last updated
+
+BetaEnvironmentDeleteResponse = object { id, type }
+
+Response after deleting an environment.
+
+id: string
+
+Environment identifier
+
+type: "environment\_deleted"
+
+The type of response
+
+BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+
+Limited network access.
+
+allow\_mcp\_servers: boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+allow\_package\_managers: boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+allowed\_hosts: array of string
+
+Specifies domains the container can reach.
+
+type: "limited"
+
+Network policy type
+
+BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+type: "limited"
+
+Network policy type
+
+allow\_mcp\_servers: optional boolean
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+allow\_package\_managers: optional boolean
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+allowed\_hosts: optional array of string
+
+Specifies domains the container can reach.
+
+BetaPackages = object { apt, cargo, gem, 4 more }
+
+Packages (and their versions) available in this environment.
+
+apt: array of string
+
+Ubuntu/Debian packages to install
+
+cargo: array of string
+
+Rust packages to install
+
+gem: array of string
+
+Ruby packages to install
+
+go: array of string
+
+Go packages to install
+
+npm: array of string
+
+Node.js packages to install
+
+pip: array of string
+
+Python packages to install
+
+type: optional "packages"
+
+Package configuration type
+
+BetaPackagesParams = object { apt, cargo, gem, 4 more }
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+apt: optional array of string
+
+Ubuntu/Debian packages to install
+
+cargo: optional array of string
+
+Rust packages to install
+
+gem: optional array of string
+
+Ruby packages to install
+
+go: optional array of string
+
+Go packages to install
+
+npm: optional array of string
+
+Node.js packages to install
+
+pip: optional array of string
+
+Python packages to install
+
+type: optional "packages"
+
+Package configuration type
+
+BetaUnrestrictedNetwork = object { type }
+
+Unrestricted network access.
+
+type: "unrestricted"
+
+Network policy type
+
+#### BetaSessions
+
+##### [Create Session](api/beta/sessions/create.md)
+
+POST/v1/sessions
+
+##### [List Sessions](api/beta/sessions/list.md)
+
+GET/v1/sessions
+
+##### [Get Session](api/beta/sessions/retrieve.md)
+
+GET/v1/sessions/{session\_id}
+
+##### [Update Session](api/beta/sessions/update.md)
+
+POST/v1/sessions/{session\_id}
+
+##### [Delete Session](api/beta/sessions/delete.md)
+
+DELETE/v1/sessions/{session\_id}
+
+##### [Archive Session](api/beta/sessions/archive.md)
+
+POST/v1/sessions/{session\_id}/archive
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsAgentParams = object { id, type, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+id: string
+
+The `agent` ID.
+
+type: "agent"
+
+version: optional number
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCacheCreationUsage = object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+ephemeral\_1h\_input\_tokens: optional number
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+ephemeral\_5m\_input\_tokens: optional number
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsDeletedSession = object { id, type }
+
+Confirmation that a `session` has been permanently deleted.
+
+id: string
+
+type: "session\_deleted"
+
+BetaManagedAgentsFileResourceParams = object { file\_id, type, mount\_path }
+
+Mount a file uploaded via the Files API into the session.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+mount\_path: optional string
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+BetaManagedAgentsGitHubRepositoryResourceParams = object { authorization\_token, type, url, 2 more }
+
+Mount a GitHub repository into the session's container.
+
+authorization\_token: string
+
+GitHub authorization token used to clone the repository.
+
+type: "github\_repository"
+
+url: string
+
+Github URL of the repository
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+mount\_path: optional string
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+BetaManagedAgentsSession = object { id, agent, archived\_at, 11 more }
+
+A Managed Agents `session`.
+
+id: string
+
+agent: [BetaManagedAgentsSessionAgent](api/beta.md) { id, description, mcp\_servers, 7 more }
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+id: string
+
+description: string
+
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url }
+
+name: string
+
+type: "url"
+
+url: string
+
+model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed }
+
+Model identifier and configuration.
+
+id: [BetaManagedAgentsModel](api/beta.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+name: string
+
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
+
+Accepts one of the following:
+
+BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+
+A resolved Anthropic-managed skill.
+
+skill\_id: string
+
+type: "anthropic"
+
+version: string
+
+BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+
+A resolved user-created custom skill.
+
+skill\_id: string
+
+type: "custom"
+
+version: string
+
+system: string
+
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+type: "agent\_toolset\_20260401"
+
+BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+mcp\_server\_name: string
+
+type: "mcp\_toolset"
+
+BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+
+A custom tool as returned in API responses.
+
+description: string
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+type: "custom"
+
+type: "agent"
+
+version: number
+
+archived\_at: string
+
+A timestamp in RFC 3339 format
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+environment\_id: string
+
+metadata: map[string]
+
+resources: array of [BetaManagedAgentsSessionResource](api/beta.md)
+
+Accepts one of the following:
+
+BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+mount\_path: string
+
+type: "github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+file\_id: string
+
+mount\_path: string
+
+type: "file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+stats: [BetaManagedAgentsSessionStats](api/beta.md) { active\_seconds, duration\_seconds }
+
+Timing statistics for a session.
+
+active\_seconds: optional number
+
+Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+duration\_seconds: optional number
+
+Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+status: "rescheduling" or "running" or "idle" or "terminated"
+
+SessionStatus enum
+
+Accepts one of the following:
+
+"rescheduling"
+
+"running"
+
+"idle"
+
+"terminated"
+
+title: string
+
+type: "session"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+usage: [BetaManagedAgentsSessionUsage](api/beta.md) { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
+
+Cumulative token usage for a session across all turns.
+
+cache\_creation: optional [BetaManagedAgentsCacheCreationUsage](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+ephemeral\_1h\_input\_tokens: optional number
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+ephemeral\_5m\_input\_tokens: optional number
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+cache\_read\_input\_tokens: optional number
+
+Total tokens read from prompt cache.
+
+input\_tokens: optional number
+
+Total input tokens consumed across all turns.
+
+output\_tokens: optional number
+
+Total output tokens generated across all turns.
+
+vault\_ids: array of string
+
+Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+BetaManagedAgentsSessionAgent = object { id, description, mcp\_servers, 7 more }
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+id: string
+
+description: string
+
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url }
+
+name: string
+
+type: "url"
+
+url: string
+
+model: [BetaManagedAgentsModelConfig](api/beta.md) { id, speed }
+
+Model identifier and configuration.
+
+id: [BetaManagedAgentsModel](api/beta.md)
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+UnionMember1 = string
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+name: string
+
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
+
+Accepts one of the following:
+
+BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+
+A resolved Anthropic-managed skill.
+
+skill\_id: string
+
+type: "anthropic"
+
+version: string
+
+BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+
+A resolved user-created custom skill.
+
+skill\_id: string
+
+type: "custom"
+
+version: string
+
+system: string
+
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+type: "agent\_toolset\_20260401"
+
+BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md) { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+mcp\_server\_name: string
+
+type: "mcp\_toolset"
+
+BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+
+A custom tool as returned in API responses.
+
+description: string
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+type: "custom"
+
+type: "agent"
+
+version: number
+
+BetaManagedAgentsSessionStats = object { active\_seconds, duration\_seconds }
+
+Timing statistics for a session.
+
+active\_seconds: optional number
+
+Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+duration\_seconds: optional number
+
+Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+BetaManagedAgentsSessionUsage = object { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
+
+Cumulative token usage for a session across all turns.
+
+cache\_creation: optional [BetaManagedAgentsCacheCreationUsage](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+ephemeral\_1h\_input\_tokens: optional number
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+ephemeral\_5m\_input\_tokens: optional number
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+cache\_read\_input\_tokens: optional number
+
+Total tokens read from prompt cache.
+
+input\_tokens: optional number
+
+Total input tokens consumed across all turns.
+
+output\_tokens: optional number
+
+Total output tokens generated across all turns.
+
+#### BetaSessionsEvents
+
+##### [List Events](api/beta/sessions/events/list.md)
+
+GET/v1/sessions/{session\_id}/events
+
+##### [Send Events](api/beta/sessions/events/send.md)
+
+POST/v1/sessions/{session\_id}/events
+
+##### [Stream Events](api/beta/sessions/events/stream.md)
+
+GET/v1/sessions/{session\_id}/events/stream
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 2 more }
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the custom tool being called.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.custom\_tool\_use"
+
+BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+
+Event representing the result of an MCP tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+mcp\_tool\_use\_id: string
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 4 more }
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+mcp\_server\_name: string
+
+Name of the MCP server providing the tool.
+
+name: string
+
+Name of the MCP tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+
+An agent response event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }
+
+Array of text blocks comprising the agent response.
+
+text: string
+
+The text content.
+
+type: "text"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.message"
+
+BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thinking"
+
+BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+
+Indicates that context compaction (summarization) occurred during the session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thread\_context\_compacted"
+
+BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+
+Event representing the result of an agent tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+type: "agent.tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 3 more }
+
+Event emitted when the agent invokes a built-in agent tool.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the agent tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsBillingError = object { message, retry\_status, type }
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "billing\_error"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  or [BetaManagedAgentsUserInterruptEventParams](api/beta.md) { type }  or [BetaManagedAgentsUserToolConfirmationEventParams](api/beta.md) { result, tool\_use\_id, type, deny\_message }  or [BetaManagedAgentsUserCustomToolResultEventParams](api/beta.md) { custom\_tool\_use\_id, type, content, is\_error }
+
+Union type for event parameters that can be sent to a session.
+
+Accepts one of the following:
+
+BetaManagedAgentsUserMessageEventParams = object { content, type }
+
+Parameters for sending a user message to the session.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks for the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsUserInterruptEventParams = object { type }
+
+Parameters for sending an interrupt to pause the agent.
+
+type: "user.interrupt"
+
+BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+
+Parameters for confirming or denying a tool execution request.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+
+Parameters for providing the result of a custom tool execution.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Authentication to an MCP server failed.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed authentication.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_authentication\_failed\_error"
+
+BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Failed to connect to an MCP server.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed to connect.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_connection\_failed\_error"
+
+BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_overloaded\_error"
+
+BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+
+The model request was rate-limited.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_rate\_limited\_error"
+
+BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+
+A model request failed for a reason other than overload or rate-limiting.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_request\_failed\_error"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+BetaManagedAgentsSendSessionEvents = object { data }
+
+Events that were successfully sent to the session.
+
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  or [BetaManagedAgentsUserCustomToolResultEvent](api/beta.md) { id, custom\_tool\_use\_id, type, 3 more }
+
+Sent events
+
+Accepts one of the following:
+
+BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+
+A user message event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at }
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+id: string
+
+Unique identifier for this event.
+
+type: "user.interrupt"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 3 more }
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 3 more }
+
+Event sent by the client providing the result of a custom tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.deleted"
+
+BetaManagedAgentsSessionEndTurn = object { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: "end\_turn"
+
+BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+
+An error event indicating a problem occurred during session execution.
+
+id: string
+
+Unique identifier for this event.
+
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 4 more
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "unknown\_error"
+
+BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_overloaded\_error"
+
+BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+
+The model request was rate-limited.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_rate\_limited\_error"
+
+BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+
+A model request failed for a reason other than overload or rate-limiting.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_request\_failed\_error"
+
+BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Failed to connect to an MCP server.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed to connect.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_connection\_failed\_error"
+
+BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Authentication to an MCP server failed.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed authentication.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_authentication\_failed\_error"
+
+BetaManagedAgentsBillingError = object { message, retry\_status, type }
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "billing\_error"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.error"
+
+BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  or 17 more
+
+Union type for all event types in a session.
+
+Accepts one of the following:
+
+BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+
+A user message event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at }
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+id: string
+
+Unique identifier for this event.
+
+type: "user.interrupt"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 3 more }
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 3 more }
+
+Event sent by the client providing the result of a custom tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 2 more }
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the custom tool being called.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.custom\_tool\_use"
+
+BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+
+An agent response event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }
+
+Array of text blocks comprising the agent response.
+
+text: string
+
+The text content.
+
+type: "text"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.message"
+
+BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thinking"
+
+BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 4 more }
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+mcp\_server\_name: string
+
+Name of the MCP server providing the tool.
+
+name: string
+
+Name of the MCP tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+
+Event representing the result of an MCP tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+mcp\_tool\_use\_id: string
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 3 more }
+
+Event emitted when the agent invokes a built-in agent tool.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the agent tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+
+Event representing the result of an agent tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+type: "agent.tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+
+Indicates that context compaction (summarization) occurred during the session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thread\_context\_compacted"
+
+BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+
+An error event indicating a problem occurred during session execution.
+
+id: string
+
+Unique identifier for this event.
+
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 4 more
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "unknown\_error"
+
+BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_overloaded\_error"
+
+BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+
+The model request was rate-limited.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_rate\_limited\_error"
+
+BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+
+A model request failed for a reason other than overload or rate-limiting.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_request\_failed\_error"
+
+BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Failed to connect to an MCP server.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed to connect.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_connection\_failed\_error"
+
+BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Authentication to an MCP server failed.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed authentication.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_authentication\_failed\_error"
+
+BetaManagedAgentsBillingError = object { message, retry\_status, type }
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "billing\_error"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.error"
+
+BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_rescheduled"
+
+BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+
+Indicates the session is actively running and the agent is working.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_running"
+
+BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+
+Indicates the agent has paused and is awaiting user input.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsSessionEndTurn = object { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: "end\_turn"
+
+BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: array of string
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: "requires\_action"
+
+BetaManagedAgentsSessionRetriesExhausted = object { type }
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: "retries\_exhausted"
+
+type: "session.status\_idle"
+
+BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+
+Indicates the session has terminated, either due to an error or completion.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_terminated"
+
+BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+
+Emitted when a model request is initiated by the agent.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_start"
+
+BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+
+Emitted when a model request completes.
+
+id: string
+
+Unique identifier for this event.
+
+is\_error: boolean
+
+Whether the model request resulted in an error.
+
+model\_request\_start\_id: string
+
+The id of the corresponding `span.model_request_start` event.
+
+model\_usage: [BetaManagedAgentsSpanModelUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: number
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: number
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: number
+
+Input tokens consumed by this request.
+
+output\_tokens: number
+
+Output tokens generated by this request.
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_end"
+
+BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.deleted"
+
+BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: array of string
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: "requires\_action"
+
+BetaManagedAgentsSessionRetriesExhausted = object { type }
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: "retries\_exhausted"
+
+BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+
+Indicates the agent has paused and is awaiting user input.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsSessionEndTurn = object { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: "end\_turn"
+
+BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: array of string
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: "requires\_action"
+
+BetaManagedAgentsSessionRetriesExhausted = object { type }
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: "retries\_exhausted"
+
+type: "session.status\_idle"
+
+BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_rescheduled"
+
+BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+
+Indicates the session is actively running and the agent is working.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_running"
+
+BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+
+Indicates the session has terminated, either due to an error or completion.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_terminated"
+
+BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+
+Emitted when a model request completes.
+
+id: string
+
+Unique identifier for this event.
+
+is\_error: boolean
+
+Whether the model request resulted in an error.
+
+model\_request\_start\_id: string
+
+The id of the corresponding `span.model_request_start` event.
+
+model\_usage: [BetaManagedAgentsSpanModelUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: number
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: number
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: number
+
+Input tokens consumed by this request.
+
+output\_tokens: number
+
+Output tokens generated by this request.
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_end"
+
+BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+
+Emitted when a model request is initiated by the agent.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_start"
+
+BetaManagedAgentsSpanModelUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: number
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: number
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: number
+
+Input tokens consumed by this request.
+
+output\_tokens: number
+
+Output tokens generated by this request.
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  or 17 more
+
+Server-sent event in the session stream.
+
+Accepts one of the following:
+
+BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+
+A user message event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at }
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+id: string
+
+Unique identifier for this event.
+
+type: "user.interrupt"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 3 more }
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 3 more }
+
+Event sent by the client providing the result of a custom tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 2 more }
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the custom tool being called.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.custom\_tool\_use"
+
+BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+
+An agent response event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }
+
+Array of text blocks comprising the agent response.
+
+text: string
+
+The text content.
+
+type: "text"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.message"
+
+BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thinking"
+
+BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 4 more }
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+mcp\_server\_name: string
+
+Name of the MCP server providing the tool.
+
+name: string
+
+Name of the MCP tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+
+Event representing the result of an MCP tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+mcp\_tool\_use\_id: string
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.mcp\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 3 more }
+
+Event emitted when the agent invokes a built-in agent tool.
+
+id: string
+
+Unique identifier for this event.
+
+input: map[unknown]
+
+Input parameters for the tool call.
+
+name: string
+
+Name of the agent tool being used.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.tool\_use"
+
+evaluated\_permission: optional "allow" or "ask" or "deny"
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"
+
+"ask"
+
+"deny"
+
+BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+
+Event representing the result of an agent tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+type: "agent.tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+
+Indicates that context compaction (summarization) occurred during the session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "agent.thread\_context\_compacted"
+
+BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+
+An error event indicating a problem occurred during session execution.
+
+id: string
+
+Unique identifier for this event.
+
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 4 more
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "unknown\_error"
+
+BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_overloaded\_error"
+
+BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+
+The model request was rate-limited.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_rate\_limited\_error"
+
+BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+
+A model request failed for a reason other than overload or rate-limiting.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "model\_request\_failed\_error"
+
+BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Failed to connect to an MCP server.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed to connect.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_connection\_failed\_error"
+
+BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+
+Authentication to an MCP server failed.
+
+mcp\_server\_name: string
+
+Name of the MCP server that failed authentication.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "mcp\_authentication\_failed\_error"
+
+BetaManagedAgentsBillingError = object { message, retry\_status, type }
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "billing\_error"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.error"
+
+BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_rescheduled"
+
+BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+
+Indicates the session is actively running and the agent is working.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_running"
+
+BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+
+Indicates the agent has paused and is awaiting user input.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  or [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsSessionEndTurn = object { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: "end\_turn"
+
+BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: array of string
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: "requires\_action"
+
+BetaManagedAgentsSessionRetriesExhausted = object { type }
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: "retries\_exhausted"
+
+type: "session.status\_idle"
+
+BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+
+Indicates the session has terminated, either due to an error or completion.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.status\_terminated"
+
+BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+
+Emitted when a model request is initiated by the agent.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_start"
+
+BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+
+Emitted when a model request completes.
+
+id: string
+
+Unique identifier for this event.
+
+is\_error: boolean
+
+Whether the model request resulted in an error.
+
+model\_request\_start\_id: string
+
+The id of the corresponding `span.model_request_start` event.
+
+model\_usage: [BetaManagedAgentsSpanModelUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: number
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: number
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: number
+
+Input tokens consumed by this request.
+
+output\_tokens: number
+
+Output tokens generated by this request.
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "span.model\_request\_end"
+
+BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+id: string
+
+Unique identifier for this event.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "session.deleted"
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+BetaManagedAgentsRetryStatusRetrying = object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted = object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal = object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "unknown\_error"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 3 more }
+
+Event sent by the client providing the result of a custom tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+
+Parameters for providing the result of a custom tool execution.
+
+custom\_tool\_use\_id: string
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.custom\_tool\_result"
+
+content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+is\_error: optional boolean
+
+Whether the tool execution resulted in an error.
+
+BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at }
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+id: string
+
+Unique identifier for this event.
+
+type: "user.interrupt"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserInterruptEventParams = object { type }
+
+Parameters for sending an interrupt to pause the agent.
+
+type: "user.interrupt"
+
+BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+
+A user message event in the session conversation.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserMessageEventParams = object { content, type }
+
+Parameters for sending a user message to the session.
+
+content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  or [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }
+
+Array of content blocks for the user message.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock = object { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock = object { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource = object { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource = object { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  or [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  or [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource = object { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context: optional string
+
+Additional context about the document for the model.
+
+title: optional string
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 3 more }
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+id: string
+
+Unique identifier for this event.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+
+Parameters for confirming or denying a tool execution request.
+
+result: "allow" or "deny"
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"
+
+"deny"
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_confirmation"
+
+deny\_message: optional string
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+#### BetaSessionsResources
+
+##### [Add Session Resource](api/beta/sessions/resources/add.md)
+
+POST/v1/sessions/{session\_id}/resources
+
+##### [List Session Resources](api/beta/sessions/resources/list.md)
+
+GET/v1/sessions/{session\_id}/resources
+
+##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
+
+GET/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### [Update Session Resource](api/beta/sessions/resources/update.md)
+
+POST/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
+
+DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsDeleteSessionResource = object { id, type }
+
+Confirmation of resource deletion.
+
+id: string
+
+type: "session\_resource\_deleted"
+
+BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+file\_id: string
+
+mount\_path: string
+
+type: "file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+mount\_path: string
+
+type: "github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+
+Accepts one of the following:
+
+BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+mount\_path: string
+
+type: "github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+file\_id: string
+
+mount\_path: string
+
+type: "file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+
+The requested session resource.
+
+Accepts one of the following:
+
+BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+mount\_path: string
+
+type: "github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+file\_id: string
+
+mount\_path: string
+
+type: "file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+
+The updated session resource.
+
+Accepts one of the following:
+
+BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+mount\_path: string
+
+type: "github\_repository"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+url: string
+
+checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
+
+Accepts one of the following:
+
+BetaManagedAgentsBranchCheckout = object { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout = object { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+
+id: string
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+file\_id: string
+
+mount\_path: string
+
+type: "file"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+#### BetaVaults
+
+##### [Create Vault](api/beta/vaults/create.md)
+
+POST/v1/vaults
+
+##### [List Vaults](api/beta/vaults/list.md)
+
+GET/v1/vaults
+
+##### [Get Vault](api/beta/vaults/retrieve.md)
+
+GET/v1/vaults/{vault\_id}
+
+##### [Update Vault](api/beta/vaults/update.md)
+
+POST/v1/vaults/{vault\_id}
+
+##### [Delete Vault](api/beta/vaults/delete.md)
+
+DELETE/v1/vaults/{vault\_id}
+
+##### [Archive Vault](api/beta/vaults/archive.md)
+
+POST/v1/vaults/{vault\_id}/archive
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsDeletedVault = object { id, type }
+
+Confirmation of a deleted vault.
+
+id: string
+
+Unique identifier of the deleted vault.
+
+type: "vault\_deleted"
+
+BetaManagedAgentsVault = object { id, archived\_at, created\_at, 4 more }
+
+A vault that stores credentials for use by agents during sessions.
+
+id: string
+
+Unique identifier for the vault.
+
+archived\_at: string
+
+A timestamp in RFC 3339 format
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+display\_name: string
+
+Human-readable name for the vault.
+
+metadata: map[string]
+
+Arbitrary key-value metadata attached to the vault.
+
+type: "vault"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+#### BetaVaultsCredentials
+
+##### [Create Credential](api/beta/vaults/credentials/create.md)
+
+POST/v1/vaults/{vault\_id}/credentials
+
+##### [List Credentials](api/beta/vaults/credentials/list.md)
+
+GET/v1/vaults/{vault\_id}/credentials
+
+##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
+
+GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Update Credential](api/beta/vaults/credentials/update.md)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Delete Credential](api/beta/vaults/credentials/delete.md)
+
+DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Archive Credential](api/beta/vaults/credentials/archive.md)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsCredential = object { id, archived\_at, auth, 6 more }
+
+A credential stored in a vault. Sensitive fields are never returned in responses.
+
+id: string
+
+Unique identifier for the credential.
+
+archived\_at: string
+
+A timestamp in RFC 3339 format
+
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+
+Authentication details for a credential.
+
+Accepts one of the following:
+
+BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+
+OAuth credential details for an MCP server.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "mcp\_oauth"
+
+expires\_at: optional string
+
+A timestamp in RFC 3339 format
+
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: string
+
+OAuth client ID.
+
+token\_endpoint: string
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: "client\_secret\_post"
+
+resource: optional string
+
+OAuth resource indicator.
+
+scope: optional string
+
+OAuth scope for the refresh request.
+
+BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+
+Static bearer token credential details for an MCP server.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "static\_bearer"
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+metadata: map[string]
+
+Arbitrary key-value metadata attached to the credential.
+
+type: "vault\_credential"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+vault\_id: string
+
+Identifier of the vault this credential belongs to.
+
+display\_name: optional string
+
+Human-readable name for the credential.
+
+BetaManagedAgentsDeletedCredential = object { id, type }
+
+Confirmation of a deleted credential.
+
+id: string
+
+Unique identifier of the deleted credential.
+
+type: "vault\_credential\_deleted"
+
+BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+
+OAuth credential details for an MCP server.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "mcp\_oauth"
+
+expires\_at: optional string
+
+A timestamp in RFC 3339 format
+
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: string
+
+OAuth client ID.
+
+token\_endpoint: string
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: "client\_secret\_post"
+
+resource: optional string
+
+OAuth resource indicator.
+
+scope: optional string
+
+OAuth scope for the refresh request.
+
+BetaManagedAgentsMCPOAuthCreateParams = object { access\_token, mcp\_server\_url, type, 2 more }
+
+Parameters for creating an MCP OAuth credential.
+
+access\_token: string
+
+OAuth access token.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "mcp\_oauth"
+
+expires\_at: optional string
+
+A timestamp in RFC 3339 format
+
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshParams](api/beta.md) { client\_id, refresh\_token, token\_endpoint, 3 more }
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+client\_id: string
+
+OAuth client ID.
+
+refresh\_token: string
+
+OAuth refresh token.
+
+token\_endpoint: string
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_post"
+
+resource: optional string
+
+OAuth resource indicator.
+
+scope: optional string
+
+OAuth scope for the refresh request.
+
+BetaManagedAgentsMCPOAuthRefreshParams = object { client\_id, refresh\_token, token\_endpoint, 3 more }
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+client\_id: string
+
+OAuth client ID.
+
+refresh\_token: string
+
+OAuth refresh token.
+
+token\_endpoint: string
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_post"
+
+resource: optional string
+
+OAuth resource indicator.
+
+scope: optional string
+
+OAuth scope for the refresh request.
+
+BetaManagedAgentsMCPOAuthRefreshResponse = object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: string
+
+OAuth client ID.
+
+token\_endpoint: string
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: "client\_secret\_post"
+
+resource: optional string
+
+OAuth resource indicator.
+
+scope: optional string
+
+OAuth scope for the refresh request.
+
+BetaManagedAgentsMCPOAuthRefreshUpdateParams = object { refresh\_token, scope, token\_endpoint\_auth }
+
+Parameters for updating OAuth refresh token configuration.
+
+refresh\_token: optional string
+
+Updated OAuth refresh token.
+
+scope: optional string
+
+Updated OAuth scope for the refresh request.
+
+token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: "client\_secret\_basic"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: "client\_secret\_post"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
+BetaManagedAgentsMCPOAuthUpdateParams = object { type, access\_token, expires\_at, refresh }
+
+Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+type: "mcp\_oauth"
+
+access\_token: optional string
+
+Updated OAuth access token.
+
+expires\_at: optional string
+
+A timestamp in RFC 3339 format
+
+refresh: optional [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) { refresh\_token, scope, token\_endpoint\_auth }
+
+Parameters for updating OAuth refresh token configuration.
+
+refresh\_token: optional string
+
+Updated OAuth refresh token.
+
+scope: optional string
+
+Updated OAuth scope for the refresh request.
+
+token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: "client\_secret\_basic"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: "client\_secret\_post"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
+BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+
+Static bearer token credential details for an MCP server.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "static\_bearer"
+
+BetaManagedAgentsStaticBearerCreateParams = object { token, mcp\_server\_url, type }
+
+Parameters for creating a static bearer token credential.
+
+token: string
+
+Static bearer token value.
+
+mcp\_server\_url: string
+
+URL of the MCP server this credential authenticates against.
+
+type: "static\_bearer"
+
+BetaManagedAgentsStaticBearerUpdateParams = object { type, token }
+
+Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+type: "static\_bearer"
+
+token: optional string
+
+Updated static bearer token value.
+
+BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: "client\_secret\_basic"
+
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: "client\_secret\_basic"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
+BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+
+Token endpoint requires no client authentication.
+
+type: "none"
+
+BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: string
+
+OAuth client secret.
+
+type: "client\_secret\_post"
+
+BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: "client\_secret\_post"
+
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: "client\_secret\_post"
+
+client\_secret: optional string
+
+Updated OAuth client secret.
+
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
@@ -25004,6 +33605,16 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
+BetaFileScope = object { id, type }
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
+
 DeletedFile = object { id, type }
 
 id: string
@@ -25016,7 +33627,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata = object { id, created\_at, filename, 4 more }
+FileMetadata = object { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -25049,6 +33660,18 @@ For files, this is always `"file"`.
 downloadable: optional boolean
 
 Whether the file can be downloaded.
+
+scope: optional [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 #### BetaSkills
 
@@ -25384,66 +34007,6 @@ type: string
 Deleted object type.
 
 For Skill Versions, this is always `"skill_version_deleted"`.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-GET/v1/user\_profiles/{id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-POST/v1/user\_profiles/{id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-POST/v1/user\_profiles/{id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-BetaUserProfile = object { id, created\_at, metadata, 4 more }
-
-id: string
-
-created\_at: string
-
-A timestamp in RFC 3339 format
-
-metadata: map[string]
-
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
-
-status: string
-
-type: string
-
-updated\_at: string
-
-A timestamp in RFC 3339 format
-
-external\_id: optional string
-
-BetaUserProfileEnrollmentURL = object { expires\_at, type, url }
-
-expires\_at: string
-
-A timestamp in RFC 3339 format
-
-type: string
-
-url: string
-
-BetaUserProfileTrustGrant = object { status }
-
-status: string
 
 ---
 

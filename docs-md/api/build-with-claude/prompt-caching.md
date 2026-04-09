@@ -441,6 +441,8 @@ To use the extended cache, include `ttl` in the `cache_control` definition like 
 
 The response will include detailed cache information like the following:
 
+Output
+
 ```shiki
 {
   "usage": {

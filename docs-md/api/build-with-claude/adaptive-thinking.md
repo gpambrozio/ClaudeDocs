@@ -96,30 +96,14 @@ curl https://api.anthropic.com/v1/messages \
 
 Adaptive thinking works seamlessly with [streaming](build-with-claude/streaming.md). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
 
-Python
+CLI
 
 ```shiki
-client = anthropic.Anthropic()
-
-with client.messages.stream(
-    model="claude-opus-4-6",
-    max_tokens=16000,
-    thinking={"type": "adaptive"},
-    messages=[
-        {
-            "role": "user",
-            "content": "What is the greatest common divisor of 1071 and 462?",
-        }
-    ],
-) as stream:
-    for event in stream:
-        if event.type == "content_block_start":
-            print(f"\nStarting {event.content_block.type} block...")
-        elif event.type == "content_block_delta":
-            if event.delta.type == "thinking_delta":
-                print(event.delta.thinking, end="", flush=True)
-            elif event.delta.type == "text_delta":
-                print(event.delta.text, end="", flush=True)
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 16000 \
+  --thinking '{type: adaptive}' \
+  --message '{role: user, content: What is the greatest common divisor of 1071 and 462?}'
 ```
 
 ## Adaptive vs manual vs disabled thinking
@@ -185,7 +169,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#d7a4b6bbb2a497b6b9a3bfa5b8a7beb4f9b4b8ba).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#1261737e776152737c667a607d627b713c717d7f).
 
 ### Controlling thinking display
 

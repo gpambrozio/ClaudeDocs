@@ -176,9 +176,7 @@ Architecture and platform details](agents-and-tools/agent-skills/overview.md)[Be
 
 Authoring guidance for Skill creators](agents-and-tools/agent-skills/best-practices.md)[Using Skills with the API
 
-Upload and manage Skills programmatically](build-with-claude/skills-guide.md)[Securely deploying AI agents
-
-Security patterns for agent deployment](agent-sdk/secure-deployment.md)
+Upload and manage Skills programmatically](build-with-claude/skills-guide.md)
 
 Was this page helpful?
 

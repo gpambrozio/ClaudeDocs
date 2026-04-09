@@ -34,6 +34,10 @@ maximum1000
 
 minimum1
 
+Optional<String> scopeId
+
+Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
 Optional<List<AnthropicBeta>> betas
 
 Optional header to specify the beta version(s) you want to use.
@@ -80,8 +84,6 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
-
 ##### ReturnsExpand Collapse
 
 class FileMetadata:
@@ -118,6 +120,18 @@ Optional<Boolean> downloadable
 
 Whether the file can be downloaded.
 
+Optional<[BetaFileScope](api/beta.md)> scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+String id
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonValue; type "session"constant"session"constant
+
+The type of scope (e.g., `"session"`).
+
 List Files
 
 Java
@@ -153,7 +167,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -176,7 +194,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",

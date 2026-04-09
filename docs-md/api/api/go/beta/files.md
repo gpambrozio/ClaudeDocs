@@ -38,6 +38,16 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
+type BetaFileScope struct{…}
+
+ID string
+
+The ID of the scoping resource (e.g., the session ID).
+
+Type Session
+
+The type of scope (e.g., `"session"`).
+
 type DeletedFile struct{…}
 
 ID string
@@ -83,6 +93,18 @@ For files, this is always `"file"`.
 Downloadable booloptional
 
 Whether the file can be downloaded.
+
+Scope [BetaFileScope](api/beta.md)optional
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+ID string
+
+The ID of the scoping resource (e.g., the session ID).
+
+Type Session
+
+The type of scope (e.g., `"session"`).
 
 ---
 

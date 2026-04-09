@@ -25,18 +25,10 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
-Python
+CLI
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-# List Anthropic-managed Skills
-skills = client.beta.skills.list(source="anthropic", betas=["skills-2025-10-02"])
-
-for skill in skills.data:
-    print(f"{skill.id}: {skill.display_title}")
+ant beta:skills list --source anthropic
 ```
 
 You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
@@ -47,31 +39,35 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-# Create a message with the PowerPoint Skill
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
-    },
-    messages=[
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
         {
-            "role": "user",
-            "content": "Create a presentation about renewable energy with 5 slides",
+          "type": "anthropic",
+          "skill_id": "pptx",
+          "version": "latest"
         }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
-
-print(response.content)
+      ]
+    },
+    "messages": [{
+      "role": "user",
+      "content": "Create a presentation about renewable energy with 5 slides"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 Let's break down what each part does:
@@ -89,33 +85,20 @@ When you make this request, Claude automatically matches your task to the releva
 
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
-Python
+Shell
 
 ```shiki
-from typing import Any
+# Extract file_id from response (using jq)
+FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="tool_use" and .name=="code_execution") | .content[] | select(.file_id) | .file_id')
 
-response: Any = None
-# Extract file ID from response
-file_id = None
-for block in response.content:
-    if block.type == "tool_use" and block.name == "code_execution":
-        # File ID is in the tool result
-        for result_block in block.content:
-            if hasattr(result_block, "file_id"):
-                file_id = result_block.file_id
-                break
+# Download the file
+curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: files-api-2025-04-14" \
+  --output renewable_energy.pptx
 
-if file_id:
-    # Download the file
-    file_content = client.beta.files.download(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
-
-    # Save to disk
-    with open("renewable_energy.pptx", "wb") as f:
-        file_content.write_to_file(f.name)
-
-    print(f"Presentation saved to renewable_energy.pptx")
+echo "Presentation saved to renewable_energy.pptx"
 ```
 
 For complete details on working with generated files, see the [code execution tool documentation](agents-and-tools/tool-use/code-execution-tool.md).
@@ -126,63 +109,101 @@ Now that you've created your first document with Skills, try these variations:
 
 ### Create a spreadsheet
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
-    },
-    messages=[
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
         {
-            "role": "user",
-            "content": "Create a quarterly sales tracking spreadsheet with sample data",
+          "type": "anthropic",
+          "skill_id": "xlsx",
+          "version": "latest"
         }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+      ]
+    },
+    "messages": [{
+      "role": "user",
+      "content": "Create a quarterly sales tracking spreadsheet with sample data"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 ### Create a Word document
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
-    },
-    messages=[
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
         {
-            "role": "user",
-            "content": "Write a 2-page report on the benefits of renewable energy",
+          "type": "anthropic",
+          "skill_id": "docx",
+          "version": "latest"
         }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+      ]
+    },
+    "messages": [{
+      "role": "user",
+      "content": "Write a 2-page report on the benefits of renewable energy"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 ### Generate a PDF
 
-Python
+Shell
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
-    container={
-        "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 4096,
+    "container": {
+      "skills": [
+        {
+          "type": "anthropic",
+          "skill_id": "pdf",
+          "version": "latest"
+        }
+      ]
     },
-    messages=[{"role": "user", "content": "Generate a PDF invoice template"}],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
-)
+    "messages": [{
+      "role": "user",
+      "content": "Generate a PDF invoice template"
+    }],
+    "tools": [{
+      "type": "code_execution_20250825",
+      "name": "code_execution"
+    }]
+  }'
 ```
 
 ## Next steps
@@ -197,9 +218,7 @@ Upload your own Skills for specialized tasks](api/skills/create-skill.md)[Author
 
 Learn best practices for writing effective Skills](agents-and-tools/agent-skills/best-practices.md)[Use Skills in Claude Code
 
-Learn about Skills in Claude Code](skills.md)[Use Skills in the Agent SDK
-
-Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Agent Skills Cookbook
+Learn about Skills in Claude Code](skills.md)[Agent Skills Cookbook
 
 Explore example Skills and implementation patterns](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction)
 

@@ -51,6 +51,8 @@ If servicing the request would exceed the rate limits, the request is declined.
 
 You can control which service tiers can be used for a request by setting the `service_tier` parameter:
 
+Python
+
 ```shiki
 message = client.messages.create(
     model="claude-opus-4-6",

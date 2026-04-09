@@ -62,8 +62,6 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
-
 InputStream file
 
 The file to upload
@@ -104,6 +102,18 @@ Optional<Boolean> downloadable
 
 Whether the file can be downloaded.
 
+Optional<[BetaFileScope](api/beta.md)> scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+String id
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonValue; type "session"constant"session"constant
+
+The type of scope (e.g., `"session"`).
+
 Upload File
 
 Java
@@ -141,7 +151,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -157,7 +171,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

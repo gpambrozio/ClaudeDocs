@@ -72,8 +72,6 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
 type FileMetadata struct{…}
@@ -109,6 +107,18 @@ For files, this is always `"file"`.
 Downloadable booloptional
 
 Whether the file can be downloaded.
+
+Scope [BetaFileScope](api/beta.md)optional
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+ID string
+
+The ID of the scoping resource (e.g., the session ID).
+
+Type Session
+
+The type of scope (e.g., `"session"`).
 
 Upload File
 
@@ -151,7 +161,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -167,7 +181,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

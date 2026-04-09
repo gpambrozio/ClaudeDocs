@@ -693,13 +693,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]
+Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-- `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
 - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
 - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -717,9 +718,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 

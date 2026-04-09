@@ -34,6 +34,10 @@ maximum1000
 
 minimum1
 
+string scopeID
+
+Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -80,8 +84,6 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
-
 ##### ReturnsExpand Collapse
 
 class FileListPageResponse:
@@ -122,6 +124,18 @@ Boolean Downloadable
 
 Whether the file can be downloaded.
 
+[BetaFileScope](api/beta.md)? Scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
+
 string? FirstID
 
 ID of the first file in this page of results.
@@ -160,7 +174,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -183,7 +201,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",

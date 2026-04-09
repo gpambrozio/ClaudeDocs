@@ -66,8 +66,6 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
-
 ##### ReturnsExpand Collapse
 
 class FileMetadata:
@@ -104,6 +102,18 @@ Boolean Downloadable
 
 Whether the file can be downloaded.
 
+[BetaFileScope](api/beta.md)? Scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
+
 Upload File
 
 C#
@@ -129,7 +139,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -145,7 +159,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

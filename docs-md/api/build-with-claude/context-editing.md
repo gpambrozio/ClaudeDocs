@@ -218,30 +218,35 @@ You can use both thinking block clearing and tool result clearing together:
 
 When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
 
-Python
+CLI
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=16000,
-    messages=[...],
-    thinking={"type": "enabled", "budget_tokens": 10000},
-    tools=[...],
-    betas=["context-management-2025-06-27"],
-    context_management={
-        "edits": [
-            {
-                "type": "clear_thinking_20251015",
-                "keep": {"type": "thinking_turns", "value": 2},
-            },
-            {
-                "type": "clear_tool_uses_20250919",
-                "trigger": {"type": "input_tokens", "value": 50000},
-                "keep": {"type": "tool_uses", "value": 5},
-            },
-        ]
-    },
-)
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 16000
+thinking:
+  type: enabled
+  budget_tokens: 10000
+messages:
+  - role: user
+    content: Hello
+tools:
+  - type: web_search_20250305
+    name: web_search
+context_management:
+  edits:
+    - type: clear_thinking_20251015
+      keep:
+        type: thinking_turns
+        value: 2
+    - type: clear_tool_uses_20250919
+      trigger:
+        type: input_tokens
+        value: 50000
+      keep:
+        type: tool_uses
+        value: 5
+YAML
 ```
 
 ## Configuration options for tool result clearing
@@ -258,7 +263,7 @@ response = client.beta.messages.create(
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
-Response
+Output
 
 ```shiki
 {
@@ -351,7 +356,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     }'
 ```
 
-Response
+Output
 
 ```shiki
 {
@@ -378,20 +383,22 @@ For example, in a file editing workflow where Claude performs many operations, C
 
 To use both features together, enable them in your API request:
 
-Python
+CLI
 
 ```shiki
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    messages=[...],
-    tools=[
-        {"type": "memory_20250818", "name": "memory"},
-        # Your other tools
-    ],
-    betas=["context-management-2025-06-27"],
-    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
-)
+ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+messages:
+  - role: user
+    content: Hello
+tools:
+  - type: memory_20250818
+    name: memory
+context_management:
+  edits:
+    - type: clear_tool_uses_20250919
+YAML
 ```
 
 For the full memory tool reference including commands and examples, see [Memory tool](agents-and-tools/tool-use/memory-tool.md).
@@ -417,6 +424,10 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 
 Add `compaction_control` to your `tool_runner` call to enable automatic summarization when token usage exceeds the threshold.
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -445,22 +456,7 @@ Ruby
 
 Ruby
 
-Python
-
-```shiki
-client = anthropic.Anthropic()
-
-runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    tools=[read_file],
-    messages=[{"role": "user", "content": "What's in config.json?"}],
-    compaction_control={"enabled": True, "context_token_threshold": 100000},
-)
-
-for message in runner:
-    print(f"Tokens used: {message.usage.input_tokens}")
-```
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](build-with-claude/compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 
 #### What happens during compaction
 
@@ -580,6 +576,8 @@ Compaction requires special consideration when using server-side tools such as [
 When using server-side tools, the SDK may incorrectly calculate token usage, causing compaction to trigger at the wrong time.
 
 For example, after a web search operation, the API response might show:
+
+Output
 
 ```shiki
 {

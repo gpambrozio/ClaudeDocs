@@ -165,6 +165,8 @@ The request shape is identical to the [Quick start](#quick-start) example: inclu
 
 Claude writes code that calls your tool. The API pauses and returns:
 
+Output
+
 ```shiki
 {
   "role": "assistant",
@@ -204,58 +206,44 @@ Claude writes code that calls your tool. The API pauses and returns:
 
 Include the full conversation history plus your tool result:
 
-Python
+CLI
 
 ```shiki
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=4096,
-    container="container_xyz789",  # Reuse the container
-    messages=[
-        {
-            "role": "user",
-            "content": "Query customer purchase history from the last quarter and identify our top 5 customers by revenue",
-        },
-        {
-            "role": "assistant",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "I'll query the purchase history and analyze the results.",
-                },
-                {
-                    "type": "server_tool_use",
-                    "id": "srvtoolu_abc123",
-                    "name": "code_execution",
-                    "input": {"code": "..."},
-                },
-                {
-                    "type": "tool_use",
-                    "id": "toolu_def456",
-                    "name": "query_database",
-                    "input": {"sql": "<sql>"},
-                    "caller": {
-                        "type": "code_execution_20260120",
-                        "tool_id": "srvtoolu_abc123",
-                    },
-                },
-            ],
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "tool_result",
-                    "tool_use_id": "toolu_def456",
-                    "content": '[{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2", "revenue": 38000}, ...]',
-                }
-            ],
-        },
-    ],
-    tools=[...],
-)
-
-print(response)
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 4096
+container: container_xyz789
+messages:
+  - role: user
+    content: >-
+      Query customer purchase history from the last quarter and identify our
+      top 5 customers by revenue
+  - role: assistant
+    content:
+      - type: text
+        text: I'll query the purchase history and analyze the results.
+      - type: server_tool_use
+        id: srvtoolu_abc123
+        name: code_execution
+        input:
+          code: "..."
+      - type: tool_use
+        id: toolu_def456
+        name: query_database
+        input:
+          sql: "<sql>"
+        caller:
+          type: code_execution_20260120
+          tool_id: srvtoolu_abc123
+  - role: user
+    content:
+      - type: tool_result
+        tool_use_id: toolu_def456
+        content: >-
+          [{"customer_id": "C1", "revenue": 45000}, {"customer_id": "C2",
+          "revenue": 38000}, ...]
+tools: [...]
+YAML
 ```
 
 ### Step 4: Next tool call or completion
@@ -265,6 +253,8 @@ The code execution continues and processes the results. If additional tool calls
 ### Step 5: Final response
 
 Once the code execution completes, Claude provides the final response:
+
+Output
 
 ```shiki
 {

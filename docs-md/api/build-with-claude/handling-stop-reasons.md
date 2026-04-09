@@ -4,7 +4,7 @@ Copy page
 
 When you make a request to the Messages API, Claude's response includes a `stop_reason` field that indicates why the model stopped generating its response. Understanding these values is crucial for building robust applications that handle different response types appropriately.
 
-For details about `stop_reason` in the API response, see the [Messages API reference](api/messages.md).
+For details about `stop_reason` in the API response, see the [Messages API reference](api/messages/create.md).
 
 ## The stop\_reason field
 
@@ -37,6 +37,8 @@ Example response
 ### end\_turn
 
 The most common stop reason. Indicates Claude finished its response naturally.
+
+Python
 
 ```shiki
 from anthropic import Anthropic
@@ -143,6 +145,8 @@ def handle_empty_response(client, messages):
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
+Python
+
 ```shiki
 # Request with limited tokens
 response = client.messages.create(
@@ -161,26 +165,26 @@ if response.stop_reason == "max_tokens":
 
 If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-Python
+CLI
 
 ```shiki
-# Check if response was truncated during tool use
-if response.stop_reason == "max_tokens":
-    # Check if the last content block is an incomplete tool_use
-    last_block = response.content[-1]
-    if last_block.type == "tool_use":
-        # Send the request with higher max_tokens
-        response = client.messages.create(
-            model="claude-opus-4-6",
-            max_tokens=4096,  # Increased limit
-            messages=messages,
-            tools=tools,
-        )
+RESPONSE=$(ant messages create --max-tokens 1024 \
+  --format jsonl < request.yaml)
+
+# Check if the response was truncated mid tool use
+STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
+LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
+if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
+  # Retry with a higher max_tokens
+  ant messages create --max-tokens 4096 < request.yaml
+fi
 ```
 
 ### stop\_sequence
 
 Claude encountered one of your custom stop sequences.
+
+Python
 
 ```shiki
 response = client.messages.create(
@@ -199,6 +203,8 @@ if response.stop_reason == "stop_sequence":
 Claude is calling a tool and expects you to execute it.
 
 For most tool use implementations, we recommend using the [tool runner](agents-and-tools/tool-use/tool-runner.md) which automatically handles tool execution, result formatting, and conversation management.
+
+Python
 
 ```shiki
 from anthropic import Anthropic
@@ -241,6 +247,8 @@ Returned when the server-side sampling loop reaches its iteration limit while ex
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding `server_tool_result`. To let Claude finish processing, continue the conversation by sending the response back as-is.
 
+Python
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -268,6 +276,8 @@ Your application should handle `pause_turn` in any agent loop that uses server t
 
 Claude refused to generate a response due to safety concerns.
 
+Python
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -288,6 +298,8 @@ To learn more about refusals triggered by API safety filters for Claude Sonnet 4
 ### model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
+
+Python
 
 ```shiki
 # Request with maximum tokens to get as much as possible
@@ -407,6 +419,8 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Indicate request processing failures
 - Response contains error details
 
+Python
+
 ```shiki
 import anthropic
 from anthropic import Anthropic
@@ -439,6 +453,8 @@ When using streaming, `stop_reason` is:
 - `null` in the initial `message_start` event
 - Provided in the `message_delta` event
 - Not provided in any other events
+
+Python
 
 ```shiki
 from anthropic import Anthropic

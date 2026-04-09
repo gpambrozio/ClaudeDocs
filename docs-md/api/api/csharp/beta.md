@@ -7003,9 +7003,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -11927,9 +11931,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -13079,9 +13087,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -21981,9 +21993,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -23239,9 +23255,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -24461,9 +24481,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"ClaudeSonnet4\_6
 
@@ -24760,6 +24784,8427 @@ Accepts one of the following:
 
 JsonElement Type "succeeded"constant
 
+#### BetaAgents
+
+##### [Create Agent](api/beta/agents/create.md)
+
+[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Create(AgentCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/agents
+
+##### [List Agents](api/beta/agents/list.md)
+
+[AgentListPageResponse](api/beta.md) Beta.Agents.List(AgentListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/agents
+
+##### [Get Agent](api/beta/agents/retrieve.md)
+
+[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Retrieve(AgentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/agents/{agent\_id}
+
+##### [Update Agent](api/beta/agents/update.md)
+
+[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Update(AgentUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/agents/{agent\_id}
+
+##### [Archive Agent](api/beta/agents/archive.md)
+
+[BetaManagedAgentsAgent](api/beta.md) Beta.Agents.Archive(AgentArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/agents/{agent\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsAgent:
+
+A Managed Agents `agent`.
+
+required string ID
+
+required DateTimeOffset? ArchivedAt
+
+A timestamp in RFC 3339 format
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string? Description
+
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
+required string Name
+
+required Type Type
+
+required string Url
+
+required IReadOnlyDictionary<string, string> Metadata
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required string Name
+
+required IReadOnlyList<Skill> Skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+required string? System
+
+required IReadOnlyList<Tool> Tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required Int Version
+
+The agent's current version. Starts at 1 and increments when the agent is modified.
+
+class BetaManagedAgentsAgentToolConfig:
+
+Configuration for a specific agent tool.
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAgentToolConfigParams:
+
+Configuration override for a specific tool within a toolset.
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+Boolean? Enabled
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAgentToolsetDefaultConfig:
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAgentToolsetDefaultConfigParams:
+
+Default configuration for all tools in a toolset.
+
+Boolean? Enabled
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsAgentToolset20260401Params:
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+required Type Type
+
+IReadOnlyList<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)> Configs
+
+Per-tool configuration overrides.
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+Boolean? Enabled
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)? DefaultConfig
+
+Default configuration for all tools in a toolset.
+
+Boolean? Enabled
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsAnthropicSkillParams:
+
+An Anthropic-managed skill.
+
+required string SkillID
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkillParams:
+
+A user-created custom skill.
+
+required string SkillID
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+class BetaManagedAgentsCustomToolInputSchema:
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+class BetaManagedAgentsCustomToolParams:
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+required string Description
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+required Type Type
+
+class BetaManagedAgentsMcpServerUrlDefinition:
+
+URL-based MCP server connection as returned in API responses.
+
+required string Name
+
+required Type Type
+
+required string Url
+
+class BetaManagedAgentsMcpToolConfig:
+
+Resolved configuration for a specific MCP tool.
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsMcpToolConfigParams:
+
+Configuration override for a specific MCP tool.
+
+required string Name
+
+Name of the MCP tool to configure. 1-128 characters.
+
+Boolean? Enabled
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsMcpToolsetDefaultConfig:
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsMcpToolsetDefaultConfigParams:
+
+Default configuration for all tools from an MCP server.
+
+Boolean? Enabled
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsMcpToolsetParams:
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+required string McpServerName
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+required Type Type
+
+IReadOnlyList<[BetaManagedAgentsMcpToolConfigParams](api/beta.md)> Configs
+
+Per-tool configuration overrides.
+
+required string Name
+
+Name of the MCP tool to configure. 1-128 characters.
+
+Boolean? Enabled
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+[BetaManagedAgentsMcpToolsetDefaultConfigParams](api/beta.md)? DefaultConfig
+
+Default configuration for all tools from an MCP server.
+
+Boolean? Enabled
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+PermissionPolicy? PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+class BetaManagedAgentsModelConfig:
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+class BetaManagedAgentsModelConfigParams:
+
+An object that defines additional configuration control over model use
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+class BetaManagedAgentsSkillParams: A class that can be one of several variants.union
+
+Skill to load in the session container.
+
+class BetaManagedAgentsAnthropicSkillParams:
+
+An Anthropic-managed skill.
+
+required string SkillID
+
+Identifier of the Anthropic skill (e.g., "xlsx").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+class BetaManagedAgentsCustomSkillParams:
+
+A user-created custom skill.
+
+required string SkillID
+
+Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+
+required Type Type
+
+string? Version
+
+Version to pin. Defaults to latest if omitted.
+
+class BetaManagedAgentsUrlMcpServerParams:
+
+URL-based MCP server connection.
+
+required string Name
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+required Type Type
+
+required string Url
+
+Endpoint URL for the MCP server.
+
+#### BetaAgentsVersions
+
+##### [List Agent Versions](api/beta/agents/versions/list.md)
+
+[VersionListPageResponse](api/beta.md) Beta.Agents.Versions.List(VersionListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/agents/{agent\_id}/versions
+
+#### BetaEnvironments
+
+##### [Create Environment](api/beta/environments/create.md)
+
+[BetaEnvironment](api/beta.md) Beta.Environments.Create(EnvironmentCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/environments
+
+##### [List Environments](api/beta/environments/list.md)
+
+[EnvironmentListPageResponse](api/beta.md) Beta.Environments.List(EnvironmentListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/environments
+
+##### [Get Environment](api/beta/environments/retrieve.md)
+
+[BetaEnvironment](api/beta.md) Beta.Environments.Retrieve(EnvironmentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/environments/{environment\_id}
+
+##### [Update Environment](api/beta/environments/update.md)
+
+[BetaEnvironment](api/beta.md) Beta.Environments.Update(EnvironmentUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/environments/{environment\_id}
+
+##### [Delete Environment](api/beta/environments/delete.md)
+
+[BetaEnvironmentDeleteResponse](api/beta.md) Beta.Environments.Delete(EnvironmentDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/environments/{environment\_id}
+
+##### [Archive Environment](api/beta/environments/archive.md)
+
+[BetaEnvironment](api/beta.md) Beta.Environments.Archive(EnvironmentArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/environments/{environment\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaCloudConfig:
+
+`cloud` environment configuration.
+
+required Networking Networking
+
+Network configuration policy.
+
+Accepts one of the following:
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonElement Type "unrestricted"constant
+
+Network policy type
+
+class BetaLimitedNetwork:
+
+Limited network access.
+
+required Boolean AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+required Boolean AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+required IReadOnlyList<string> AllowedHosts
+
+Specifies domains the container can reach.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+required [BetaPackages](api/beta.md) Packages
+
+Package manager configuration.
+
+required IReadOnlyList<string> Apt
+
+Ubuntu/Debian packages to install
+
+required IReadOnlyList<string> Cargo
+
+Rust packages to install
+
+required IReadOnlyList<string> Gem
+
+Ruby packages to install
+
+required IReadOnlyList<string> Go
+
+Go packages to install
+
+required IReadOnlyList<string> Npm
+
+Node.js packages to install
+
+required IReadOnlyList<string> Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+JsonElement Type "cloud"constant
+
+Environment type
+
+class BetaCloudConfigParams:
+
+Request params for `cloud` environment configuration.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+JsonElement Type "cloud"constant
+
+Environment type
+
+Networking? Networking
+
+Network configuration policy. Omit on update to preserve the existing value.
+
+Accepts one of the following:
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonElement Type "unrestricted"constant
+
+Network policy type
+
+class BetaLimitedNetworkParams:
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+Boolean? AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+Boolean? AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+IReadOnlyList<string>? AllowedHosts
+
+Specifies domains the container can reach.
+
+[BetaPackagesParams](api/beta.md)? Packages
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+IReadOnlyList<string>? Apt
+
+Ubuntu/Debian packages to install
+
+IReadOnlyList<string>? Cargo
+
+Rust packages to install
+
+IReadOnlyList<string>? Gem
+
+Ruby packages to install
+
+IReadOnlyList<string>? Go
+
+Go packages to install
+
+IReadOnlyList<string>? Npm
+
+Node.js packages to install
+
+IReadOnlyList<string>? Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+class BetaEnvironment:
+
+Unified Environment resource for both cloud and BYOC environments.
+
+required string ID
+
+Environment identifier (e.g., 'env\_...')
+
+required string? ArchivedAt
+
+RFC 3339 timestamp when environment was archived, or null if not archived
+
+required [BetaCloudConfig](api/beta.md) Config
+
+`cloud` environment configuration.
+
+required Networking Networking
+
+Network configuration policy.
+
+Accepts one of the following:
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonElement Type "unrestricted"constant
+
+Network policy type
+
+class BetaLimitedNetwork:
+
+Limited network access.
+
+required Boolean AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+required Boolean AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+required IReadOnlyList<string> AllowedHosts
+
+Specifies domains the container can reach.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+required [BetaPackages](api/beta.md) Packages
+
+Package manager configuration.
+
+required IReadOnlyList<string> Apt
+
+Ubuntu/Debian packages to install
+
+required IReadOnlyList<string> Cargo
+
+Rust packages to install
+
+required IReadOnlyList<string> Gem
+
+Ruby packages to install
+
+required IReadOnlyList<string> Go
+
+Go packages to install
+
+required IReadOnlyList<string> Npm
+
+Node.js packages to install
+
+required IReadOnlyList<string> Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+JsonElement Type "cloud"constant
+
+Environment type
+
+required string CreatedAt
+
+RFC 3339 timestamp when environment was created
+
+required string Description
+
+User-provided description for the environment
+
+required IReadOnlyDictionary<string, string> Metadata
+
+User-provided metadata key-value pairs
+
+required string Name
+
+Human-readable name for the environment
+
+JsonElement Type "environment"constant
+
+The type of object (always 'environment')
+
+required string UpdatedAt
+
+RFC 3339 timestamp when environment was last updated
+
+class BetaEnvironmentDeleteResponse:
+
+Response after deleting an environment.
+
+required string ID
+
+Environment identifier
+
+JsonElement Type "environment\_deleted"constant
+
+The type of response
+
+class BetaLimitedNetwork:
+
+Limited network access.
+
+required Boolean AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+required Boolean AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+required IReadOnlyList<string> AllowedHosts
+
+Specifies domains the container can reach.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+class BetaLimitedNetworkParams:
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+Boolean? AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+Boolean? AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+IReadOnlyList<string>? AllowedHosts
+
+Specifies domains the container can reach.
+
+class BetaPackages:
+
+Packages (and their versions) available in this environment.
+
+required IReadOnlyList<string> Apt
+
+Ubuntu/Debian packages to install
+
+required IReadOnlyList<string> Cargo
+
+Rust packages to install
+
+required IReadOnlyList<string> Gem
+
+Ruby packages to install
+
+required IReadOnlyList<string> Go
+
+Go packages to install
+
+required IReadOnlyList<string> Npm
+
+Node.js packages to install
+
+required IReadOnlyList<string> Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+class BetaPackagesParams:
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+IReadOnlyList<string>? Apt
+
+Ubuntu/Debian packages to install
+
+IReadOnlyList<string>? Cargo
+
+Rust packages to install
+
+IReadOnlyList<string>? Gem
+
+Ruby packages to install
+
+IReadOnlyList<string>? Go
+
+Go packages to install
+
+IReadOnlyList<string>? Npm
+
+Node.js packages to install
+
+IReadOnlyList<string>? Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonElement Type "unrestricted"constant
+
+Network policy type
+
+#### BetaSessions
+
+##### [Create Session](api/beta/sessions/create.md)
+
+[BetaManagedAgentsSession](api/beta.md) Beta.Sessions.Create(SessionCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions
+
+##### [List Sessions](api/beta/sessions/list.md)
+
+[SessionListPageResponse](api/beta.md) Beta.Sessions.List(SessionListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions
+
+##### [Get Session](api/beta/sessions/retrieve.md)
+
+[BetaManagedAgentsSession](api/beta.md) Beta.Sessions.Retrieve(SessionRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions/{session\_id}
+
+##### [Update Session](api/beta/sessions/update.md)
+
+[BetaManagedAgentsSession](api/beta.md) Beta.Sessions.Update(SessionUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}
+
+##### [Delete Session](api/beta/sessions/delete.md)
+
+[BetaManagedAgentsDeletedSession](api/beta.md) Beta.Sessions.Delete(SessionDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/sessions/{session\_id}
+
+##### [Archive Session](api/beta/sessions/archive.md)
+
+[BetaManagedAgentsSession](api/beta.md) Beta.Sessions.Archive(SessionArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsAgentParams:
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+required string ID
+
+The `agent` ID.
+
+required Type Type
+
+Int Version
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
+
+Branch name to check out.
+
+required Type Type
+
+class BetaManagedAgentsCacheCreationUsage:
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+Int Ephemeral1hInputTokens
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+Int Ephemeral5mInputTokens
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
+
+Full commit SHA to check out.
+
+required Type Type
+
+class BetaManagedAgentsDeletedSession:
+
+Confirmation that a `session` has been permanently deleted.
+
+required string ID
+
+required Type Type
+
+class BetaManagedAgentsFileResourceParams:
+
+Mount a file uploaded via the Files API into the session.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+string? MountPath
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+class BetaManagedAgentsGitHubRepositoryResourceParams:
+
+Mount a GitHub repository into the session's container.
+
+required string AuthorizationToken
+
+GitHub authorization token used to clone the repository.
+
+required Type Type
+
+required string Url
+
+Github URL of the repository
+
+Checkout? Checkout
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
+
+Branch name to check out.
+
+required Type Type
+
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
+
+Full commit SHA to check out.
+
+required Type Type
+
+string? MountPath
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+class BetaManagedAgentsSession:
+
+A Managed Agents `session`.
+
+required string ID
+
+required [BetaManagedAgentsSessionAgent](api/beta.md) Agent
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+required string ID
+
+required string? Description
+
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
+required string Name
+
+required Type Type
+
+required string Url
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required string Name
+
+required IReadOnlyList<Skill> Skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+required string? System
+
+required IReadOnlyList<Tool> Tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+required Type Type
+
+required Int Version
+
+required DateTimeOffset? ArchivedAt
+
+A timestamp in RFC 3339 format
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string EnvironmentID
+
+required IReadOnlyDictionary<string, string> Metadata
+
+required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta.md)> Resources
+
+Accepts one of the following:
+
+class BetaManagedAgentsGitHubRepositoryResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string Url
+
+Checkout? Checkout
+
+Accepts one of the following:
+
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
+
+Branch name to check out.
+
+required Type Type
+
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
+
+Full commit SHA to check out.
+
+required Type Type
+
+class BetaManagedAgentsFileResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string FileID
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required [BetaManagedAgentsSessionStats](api/beta.md) Stats
+
+Timing statistics for a session.
+
+Double ActiveSeconds
+
+Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+Double DurationSeconds
+
+Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+required Status Status
+
+SessionStatus enum
+
+Accepts one of the following:
+
+"rescheduling"Rescheduling
+
+"running"Running
+
+"idle"Idle
+
+"terminated"Terminated
+
+required string? Title
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required [BetaManagedAgentsSessionUsage](api/beta.md) Usage
+
+Cumulative token usage for a session across all turns.
+
+[BetaManagedAgentsCacheCreationUsage](api/beta.md) CacheCreation
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+Int Ephemeral1hInputTokens
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+Int Ephemeral5mInputTokens
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+Int CacheReadInputTokens
+
+Total tokens read from prompt cache.
+
+Int InputTokens
+
+Total input tokens consumed across all turns.
+
+Int OutputTokens
+
+Total output tokens generated across all turns.
+
+required IReadOnlyList<string> VaultIds
+
+Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+class BetaManagedAgentsSessionAgent:
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+required string ID
+
+required string? Description
+
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
+required string Name
+
+required Type Type
+
+required string Url
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required string Name
+
+required IReadOnlyList<Skill> Skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+required string? System
+
+required IReadOnlyList<Tool> Tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+required Type Type
+
+required Int Version
+
+class BetaManagedAgentsSessionStats:
+
+Timing statistics for a session.
+
+Double ActiveSeconds
+
+Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+Double DurationSeconds
+
+Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+class BetaManagedAgentsSessionUsage:
+
+Cumulative token usage for a session across all turns.
+
+[BetaManagedAgentsCacheCreationUsage](api/beta.md) CacheCreation
+
+Prompt-cache creation token usage broken down by cache lifetime.
+
+Int Ephemeral1hInputTokens
+
+Tokens used to create 1-hour ephemeral cache entries.
+
+Int Ephemeral5mInputTokens
+
+Tokens used to create 5-minute ephemeral cache entries.
+
+Int CacheReadInputTokens
+
+Total tokens read from prompt cache.
+
+Int InputTokens
+
+Total input tokens consumed across all turns.
+
+Int OutputTokens
+
+Total output tokens generated across all turns.
+
+#### BetaSessionsEvents
+
+##### [List Events](api/beta/sessions/events/list.md)
+
+[EventListPageResponse](api/beta.md) Beta.Sessions.Events.List(EventListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions/{session\_id}/events
+
+##### [Send Events](api/beta/sessions/events/send.md)
+
+[BetaManagedAgentsSendSessionEvents](api/beta.md) Beta.Sessions.Events.Send(EventSendParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}/events
+
+##### [Stream Events](api/beta/sessions/events/stream.md)
+
+[BetaManagedAgentsStreamSessionEvents](api/beta.md) Beta.Sessions.Events.StreamStreaming(EventStreamParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions/{session\_id}/events/stream
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsAgentCustomToolUseEvent:
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the custom tool being called.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentMcpToolResultEvent:
+
+Event representing the result of an MCP tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string McpToolUseID
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentMcpToolUseEvent:
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string McpServerName
+
+Name of the MCP server providing the tool.
+
+required string Name
+
+Name of the MCP tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsAgentMessageEvent:
+
+An agent response event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+
+Array of text blocks comprising the agent response.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentThinkingEvent:
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentThreadContextCompactedEvent:
+
+Indicates that context compaction (summarization) occurred during the session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentToolResultEvent:
+
+Event representing the result of an agent tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToolUseID
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentToolUseEvent:
+
+Event emitted when the agent invokes a built-in agent tool.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the agent tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsBillingError:
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+class BetaManagedAgentsEventParams: A class that can be one of several variants.union
+
+Union type for event parameters that can be sent to a session.
+
+class BetaManagedAgentsUserMessageEventParams:
+
+Parameters for sending a user message to the session.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks for the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+class BetaManagedAgentsUserInterruptEventParams:
+
+Parameters for sending an interrupt to pause the agent.
+
+required Type Type
+
+class BetaManagedAgentsUserToolConfirmationEventParams:
+
+Parameters for confirming or denying a tool execution request.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+class BetaManagedAgentsUserCustomToolResultEventParams:
+
+Parameters for providing the result of a custom tool execution.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
+
+Authentication to an MCP server failed.
+
+required string McpServerName
+
+Name of the MCP server that failed authentication.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpConnectionFailedError:
+
+Failed to connect to an MCP server.
+
+required string McpServerName
+
+Name of the MCP server that failed to connect.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelOverloadedError:
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRateLimitedError:
+
+The model request was rate-limited.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRequestFailedError:
+
+A model request failed for a reason other than overload or rate-limiting.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+class BetaManagedAgentsSendSessionEvents:
+
+Events that were successfully sent to the session.
+
+IReadOnlyList<Data> Data
+
+Sent events
+
+Accepts one of the following:
+
+class BetaManagedAgentsUserMessageEvent:
+
+A user message event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserInterruptEvent:
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+required string ID
+
+Unique identifier for this event.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserToolConfirmationEvent:
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserCustomToolResultEvent:
+
+Event sent by the client providing the result of a custom tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsSessionDeletedEvent:
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionErrorEvent:
+
+An error event indicating a problem occurred during session execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Error Error
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+class BetaManagedAgentsUnknownError:
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelOverloadedError:
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRateLimitedError:
+
+The model request was rate-limited.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRequestFailedError:
+
+A model request failed for a reason other than overload or rate-limiting.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpConnectionFailedError:
+
+Failed to connect to an MCP server.
+
+required string McpServerName
+
+Name of the MCP server that failed to connect.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
+
+Authentication to an MCP server failed.
+
+required string McpServerName
+
+Name of the MCP server that failed authentication.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsBillingError:
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union
+
+Union type for all event types in a session.
+
+class BetaManagedAgentsUserMessageEvent:
+
+A user message event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserInterruptEvent:
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+required string ID
+
+Unique identifier for this event.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserToolConfirmationEvent:
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserCustomToolResultEvent:
+
+Event sent by the client providing the result of a custom tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsAgentCustomToolUseEvent:
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the custom tool being called.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentMessageEvent:
+
+An agent response event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+
+Array of text blocks comprising the agent response.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentThinkingEvent:
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentMcpToolUseEvent:
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string McpServerName
+
+Name of the MCP server providing the tool.
+
+required string Name
+
+Name of the MCP tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsAgentMcpToolResultEvent:
+
+Event representing the result of an MCP tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string McpToolUseID
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentToolUseEvent:
+
+Event emitted when the agent invokes a built-in agent tool.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the agent tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsAgentToolResultEvent:
+
+Event representing the result of an agent tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToolUseID
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadContextCompactedEvent:
+
+Indicates that context compaction (summarization) occurred during the session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionErrorEvent:
+
+An error event indicating a problem occurred during session execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Error Error
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+class BetaManagedAgentsUnknownError:
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelOverloadedError:
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRateLimitedError:
+
+The model request was rate-limited.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRequestFailedError:
+
+A model request failed for a reason other than overload or rate-limiting.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpConnectionFailedError:
+
+Failed to connect to an MCP server.
+
+required string McpServerName
+
+Name of the MCP server that failed to connect.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
+
+Authentication to an MCP server failed.
+
+required string McpServerName
+
+Name of the MCP server that failed authentication.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsBillingError:
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRescheduledEvent:
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRunningEvent:
+
+Indicates the session is actively running and the agent is working.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusIdleEvent:
+
+Indicates the agent has paused and is awaiting user input.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusTerminatedEvent:
+
+Indicates the session has terminated, either due to an error or completion.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestStartEvent:
+
+Emitted when a model request is initiated by the agent.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestEndEvent:
+
+Emitted when a model request completes.
+
+required string ID
+
+Unique identifier for this event.
+
+required Boolean? IsError
+
+Whether the model request resulted in an error.
+
+required string ModelRequestStartID
+
+The id of the corresponding `span.model_request_start` event.
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionDeletedEvent:
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusIdleEvent:
+
+Indicates the agent has paused and is awaiting user input.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRescheduledEvent:
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRunningEvent:
+
+Indicates the session is actively running and the agent is working.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusTerminatedEvent:
+
+Indicates the session has terminated, either due to an error or completion.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestEndEvent:
+
+Emitted when a model request completes.
+
+required string ID
+
+Unique identifier for this event.
+
+required Boolean? IsError
+
+Whether the model request resulted in an error.
+
+required string ModelRequestStartID
+
+The id of the corresponding `span.model_request_start` event.
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestStartEvent:
+
+Emitted when a model request is initiated by the agent.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelUsage:
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+class BetaManagedAgentsStreamSessionEvents: A class that can be one of several variants.union
+
+Server-sent event in the session stream.
+
+class BetaManagedAgentsUserMessageEvent:
+
+A user message event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserInterruptEvent:
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+required string ID
+
+Unique identifier for this event.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserToolConfirmationEvent:
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserCustomToolResultEvent:
+
+Event sent by the client providing the result of a custom tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsAgentCustomToolUseEvent:
+
+Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the custom tool being called.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentMessageEvent:
+
+An agent response event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<[BetaManagedAgentsTextBlock](api/beta.md)> Content
+
+Array of text blocks comprising the agent response.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentThinkingEvent:
+
+Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsAgentMcpToolUseEvent:
+
+Event emitted when the agent invokes a tool provided by an MCP server.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string McpServerName
+
+Name of the MCP server providing the tool.
+
+required string Name
+
+Name of the MCP tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsAgentMcpToolResultEvent:
+
+Event representing the result of an MCP tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string McpToolUseID
+
+The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentToolUseEvent:
+
+Event emitted when the agent invokes a built-in agent tool.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyDictionary<string, JsonElement> Input
+
+Input parameters for the tool call.
+
+required string Name
+
+Name of the agent tool being used.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+EvaluatedPermission EvaluatedPermission
+
+AgentEvaluatedPermission enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"ask"Ask
+
+"deny"Deny
+
+class BetaManagedAgentsAgentToolResultEvent:
+
+Event representing the result of an agent tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToolUseID
+
+The id of the `agent.tool_use` event this result corresponds to.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadContextCompactedEvent:
+
+Indicates that context compaction (summarization) occurred during the session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionErrorEvent:
+
+An error event indicating a problem occurred during session execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Error Error
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+Accepts one of the following:
+
+class BetaManagedAgentsUnknownError:
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelOverloadedError:
+
+The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRateLimitedError:
+
+The model request was rate-limited.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsModelRequestFailedError:
+
+A model request failed for a reason other than overload or rate-limiting.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpConnectionFailedError:
+
+Failed to connect to an MCP server.
+
+required string McpServerName
+
+Name of the MCP server that failed to connect.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpAuthenticationFailedError:
+
+Authentication to an MCP server failed.
+
+required string McpServerName
+
+Name of the MCP server that failed authentication.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsBillingError:
+
+The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRescheduledEvent:
+
+Indicates the session is recovering from an error state and is rescheduled for execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusRunningEvent:
+
+Indicates the session is actively running and the agent is working.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusIdleEvent:
+
+Indicates the agent has paused and is awaiting user input.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionStatusTerminatedEvent:
+
+Indicates the session has terminated, either due to an error or completion.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestStartEvent:
+
+Emitted when a model request is initiated by the agent.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanModelRequestEndEvent:
+
+Emitted when a model request completes.
+
+required string ID
+
+Unique identifier for this event.
+
+required Boolean? IsError
+
+Whether the model request resulted in an error.
+
+required string ModelRequestStartID
+
+The id of the corresponding `span.model_request_start` event.
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) ModelUsage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionDeletedEvent:
+
+Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+required string ID
+
+Unique identifier for this event.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsUnknownError:
+
+An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+Accepts one of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsUserCustomToolResultEvent:
+
+Event sent by the client providing the result of a custom tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserCustomToolResultEventParams:
+
+Parameters for providing the result of a custom tool execution.
+
+required string CustomToolUseID
+
+The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+IReadOnlyList<Content> Content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+Boolean? IsError
+
+Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsUserInterruptEvent:
+
+An interrupt event that pauses agent execution and returns control to the user.
+
+required string ID
+
+Unique identifier for this event.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserInterruptEventParams:
+
+Parameters for sending an interrupt to pause the agent.
+
+required Type Type
+
+class BetaManagedAgentsUserMessageEvent:
+
+A user message event in the session conversation.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks comprising the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserMessageEventParams:
+
+Parameters for sending a user message to the session.
+
+required IReadOnlyList<Content> Content
+
+Array of content blocks for the user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required Type Type
+
+class BetaManagedAgentsUserToolConfirmationEvent:
+
+A tool confirmation event that approves or denies a pending tool execution.
+
+required string ID
+
+Unique identifier for this event.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsUserToolConfirmationEventParams:
+
+Parameters for confirming or denying a tool execution request.
+
+required Result Result
+
+UserToolConfirmationResult enum
+
+Accepts one of the following:
+
+"allow"Allow
+
+"deny"Deny
+
+required string ToolUseID
+
+The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+required Type Type
+
+string? DenyMessage
+
+Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+#### BetaSessionsResources
+
+##### [Add Session Resource](api/beta/sessions/resources/add.md)
+
+[BetaManagedAgentsFileResource](api/beta.md) Beta.Sessions.Resources.Add(ResourceAddParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}/resources
+
+##### [List Session Resources](api/beta/sessions/resources/list.md)
+
+[ResourceListPageResponse](api/beta.md) Beta.Sessions.Resources.List(ResourceListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions/{session\_id}/resources
+
+##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
+
+[ResourceRetrieveResponse](api/beta.md) Beta.Sessions.Resources.Retrieve(ResourceRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### [Update Session Resource](api/beta/sessions/resources/update.md)
+
+[ResourceUpdateResponse](api/beta.md) Beta.Sessions.Resources.Update(ResourceUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
+
+[BetaManagedAgentsDeleteSessionResource](api/beta.md) Beta.Sessions.Resources.Delete(ResourceDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeleteSessionResource:
+
+Confirmation of resource deletion.
+
+required string ID
+
+required Type Type
+
+class BetaManagedAgentsFileResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string FileID
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsGitHubRepositoryResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string Url
+
+Checkout? Checkout
+
+Accepts one of the following:
+
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
+
+Branch name to check out.
+
+required Type Type
+
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
+
+Full commit SHA to check out.
+
+required Type Type
+
+class BetaManagedAgentsSessionResource: A class that can be one of several variants.union
+
+class BetaManagedAgentsGitHubRepositoryResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string Url
+
+Checkout? Checkout
+
+Accepts one of the following:
+
+class BetaManagedAgentsBranchCheckout:
+
+required string Name
+
+Branch name to check out.
+
+required Type Type
+
+class BetaManagedAgentsCommitCheckout:
+
+required string Sha
+
+Full commit SHA to check out.
+
+required Type Type
+
+class BetaManagedAgentsFileResource:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string FileID
+
+required string MountPath
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+#### BetaVaults
+
+##### [Create Vault](api/beta/vaults/create.md)
+
+[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Create(VaultCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults
+
+##### [List Vaults](api/beta/vaults/list.md)
+
+[VaultListPageResponse](api/beta.md) Beta.Vaults.List(VaultListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/vaults
+
+##### [Get Vault](api/beta/vaults/retrieve.md)
+
+[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Retrieve(VaultRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/vaults/{vault\_id}
+
+##### [Update Vault](api/beta/vaults/update.md)
+
+[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Update(VaultUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults/{vault\_id}
+
+##### [Delete Vault](api/beta/vaults/delete.md)
+
+[BetaManagedAgentsDeletedVault](api/beta.md) Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/vaults/{vault\_id}
+
+##### [Archive Vault](api/beta/vaults/archive.md)
+
+[BetaManagedAgentsVault](api/beta.md) Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults/{vault\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeletedVault:
+
+Confirmation of a deleted vault.
+
+required string ID
+
+Unique identifier of the deleted vault.
+
+required Type Type
+
+class BetaManagedAgentsVault:
+
+A vault that stores credentials for use by agents during sessions.
+
+required string ID
+
+Unique identifier for the vault.
+
+required DateTimeOffset? ArchivedAt
+
+A timestamp in RFC 3339 format
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string DisplayName
+
+Human-readable name for the vault.
+
+required IReadOnlyDictionary<string, string> Metadata
+
+Arbitrary key-value metadata attached to the vault.
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+#### BetaVaultsCredentials
+
+##### [Create Credential](api/beta/vaults/credentials/create.md)
+
+[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Create(CredentialCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults/{vault\_id}/credentials
+
+##### [List Credentials](api/beta/vaults/credentials/list.md)
+
+[CredentialListPageResponse](api/beta.md) Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/vaults/{vault\_id}/credentials
+
+##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
+
+[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Retrieve(CredentialRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Update Credential](api/beta/vaults/credentials/update.md)
+
+[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Update(CredentialUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Delete Credential](api/beta/vaults/credentials/delete.md)
+
+[BetaManagedAgentsDeletedCredential](api/beta.md) Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Archive Credential](api/beta/vaults/credentials/archive.md)
+
+[BetaManagedAgentsCredential](api/beta.md) Beta.Vaults.Credentials.Archive(CredentialArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsCredential:
+
+A credential stored in a vault. Sensitive fields are never returned in responses.
+
+required string ID
+
+Unique identifier for the credential.
+
+required DateTimeOffset? ArchivedAt
+
+A timestamp in RFC 3339 format
+
+required Auth Auth
+
+Authentication details for a credential.
+
+Accepts one of the following:
+
+class BetaManagedAgentsMcpOAuthAuthResponse:
+
+OAuth credential details for an MCP server.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+DateTimeOffset? ExpiresAt
+
+A timestamp in RFC 3339 format
+
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+
+OAuth refresh token configuration returned in credential responses.
+
+required string ClientID
+
+OAuth client ID.
+
+required string TokenEndpoint
+
+Token endpoint URL used to refresh the access token.
+
+required TokenEndpointAuth TokenEndpointAuth
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required Type Type
+
+string? Resource
+
+OAuth resource indicator.
+
+string? Scope
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsStaticBearerAuthResponse:
+
+Static bearer token credential details for an MCP server.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required IReadOnlyDictionary<string, string> Metadata
+
+Arbitrary key-value metadata attached to the credential.
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+required string VaultID
+
+Identifier of the vault this credential belongs to.
+
+string? DisplayName
+
+Human-readable name for the credential.
+
+class BetaManagedAgentsDeletedCredential:
+
+Confirmation of a deleted credential.
+
+required string ID
+
+Unique identifier of the deleted credential.
+
+required Type Type
+
+class BetaManagedAgentsMcpOAuthAuthResponse:
+
+OAuth credential details for an MCP server.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+DateTimeOffset? ExpiresAt
+
+A timestamp in RFC 3339 format
+
+[BetaManagedAgentsMcpOAuthRefreshResponse](api/beta.md)? Refresh
+
+OAuth refresh token configuration returned in credential responses.
+
+required string ClientID
+
+OAuth client ID.
+
+required string TokenEndpoint
+
+Token endpoint URL used to refresh the access token.
+
+required TokenEndpointAuth TokenEndpointAuth
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required Type Type
+
+string? Resource
+
+OAuth resource indicator.
+
+string? Scope
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMcpOAuthCreateParams:
+
+Parameters for creating an MCP OAuth credential.
+
+required string AccessToken
+
+OAuth access token.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+DateTimeOffset? ExpiresAt
+
+A timestamp in RFC 3339 format
+
+[BetaManagedAgentsMcpOAuthRefreshParams](api/beta.md)? Refresh
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+required string ClientID
+
+OAuth client ID.
+
+required string RefreshToken
+
+OAuth refresh token.
+
+required string TokenEndpoint
+
+Token endpoint URL used to refresh the access token.
+
+required TokenEndpointAuth TokenEndpointAuth
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostParam:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+string? Resource
+
+OAuth resource indicator.
+
+string? Scope
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMcpOAuthRefreshParams:
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+required string ClientID
+
+OAuth client ID.
+
+required string RefreshToken
+
+OAuth refresh token.
+
+required string TokenEndpoint
+
+Token endpoint URL used to refresh the access token.
+
+required TokenEndpointAuth TokenEndpointAuth
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostParam:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+string? Resource
+
+OAuth resource indicator.
+
+string? Scope
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMcpOAuthRefreshResponse:
+
+OAuth refresh token configuration returned in credential responses.
+
+required string ClientID
+
+OAuth client ID.
+
+required string TokenEndpoint
+
+Token endpoint URL used to refresh the access token.
+
+required TokenEndpointAuth TokenEndpointAuth
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required Type Type
+
+string? Resource
+
+OAuth resource indicator.
+
+string? Scope
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMcpOAuthRefreshUpdateParams:
+
+Parameters for updating OAuth refresh token configuration.
+
+string? RefreshToken
+
+Updated OAuth refresh token.
+
+string? Scope
+
+Updated OAuth scope for the refresh request.
+
+TokenEndpointAuth TokenEndpointAuth
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:
+
+Updated POST body authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsMcpOAuthUpdateParams:
+
+Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+required Type Type
+
+string? AccessToken
+
+Updated OAuth access token.
+
+DateTimeOffset? ExpiresAt
+
+A timestamp in RFC 3339 format
+
+[BetaManagedAgentsMcpOAuthRefreshUpdateParams](api/beta.md)? Refresh
+
+Parameters for updating OAuth refresh token configuration.
+
+string? RefreshToken
+
+Updated OAuth refresh token.
+
+string? Scope
+
+Updated OAuth scope for the refresh request.
+
+TokenEndpointAuth TokenEndpointAuth
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:
+
+Updated POST body authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsStaticBearerAuthResponse:
+
+Static bearer token credential details for an MCP server.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+class BetaManagedAgentsStaticBearerCreateParams:
+
+Parameters for creating a static bearer token credential.
+
+required string Token
+
+Static bearer token value.
+
+required string McpServerUrl
+
+URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+class BetaManagedAgentsStaticBearerUpdateParams:
+
+Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+required Type Type
+
+string? Token
+
+Updated static bearer token value.
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse:
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse:
+
+Token endpoint requires no client authentication.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostParam:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required string ClientSecret
+
+OAuth client secret.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse:
+
+Token endpoint uses POST body authentication with client credentials.
+
+required Type Type
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:
+
+Updated POST body authentication parameters for the token endpoint.
+
+required Type Type
+
+string? ClientSecret
+
+Updated OAuth client secret.
+
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
@@ -24793,6 +33238,16 @@ GET/v1/files/{file\_id}
 DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
+
+class BetaFileScope:
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
 
 class DeletedFile:
 
@@ -24839,6 +33294,18 @@ For files, this is always `"file"`.
 Boolean Downloadable
 
 Whether the file can be downloaded.
+
+[BetaFileScope](api/beta.md)? Scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
 
 #### BetaSkills
 
@@ -24891,76 +33358,6 @@ GET/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/user\_profiles/{id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles/{id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles/{id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile:
-
-required string ID
-
-required DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
-required IReadOnlyDictionary<string, string> Metadata
-
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
-
-required string Status
-
-required string Type
-
-required DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
-
-string? ExternalID
-
-class BetaUserProfileEnrollmentUrl:
-
-required DateTimeOffset ExpiresAt
-
-A timestamp in RFC 3339 format
-
-required string Type
-
-required string Url
-
-class BetaUserProfileTrustGrant:
-
-required string Status
 
 ---
 

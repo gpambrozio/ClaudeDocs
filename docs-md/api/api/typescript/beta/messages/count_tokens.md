@@ -2409,11 +2409,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-opus-4-6" | "claude-sonnet-4-6" | "claude-haiku-4-5" | 12 more
+"claude-mythos-preview" | "claude-opus-4-6" | "claude-sonnet-4-6" | 13 more
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
 
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -4334,7 +4338,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more
 
 "message-batches-2024-09-24"
 
@@ -4378,8 +4382,6 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
 BetaMessageTokensCount { context\_management, input\_tokens }
@@ -4409,7 +4411,7 @@ const client = new Anthropic({
 
 const betaMessageTokensCount = await client.beta.messages.countTokens({
   messages: [{ content: 'string', role: 'user' }],
-  model: 'claude-opus-4-6',
+  model: 'claude-mythos-preview',
 });
 
 console.log(betaMessageTokensCount.context_management);

@@ -2163,13 +2163,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]
+Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-- `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
 - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
 - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -2187,9 +2188,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -2459,9 +2464,11 @@ title: Optional[str]
 
 type: Literal["search\_result\_location"]
 
-temperature: Optional[float]
+Deprecatedtemperature: Optional[float]
 
 Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
 Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -3653,9 +3660,11 @@ strict: Optional[bool]
 
 When true, guarantees schema validation on tool names and inputs
 
-top\_k: Optional[int]
+Deprecatedtop\_k: Optional[int]
 
 Only sample from the top K options for each subsequent token.
+
+Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
@@ -3663,9 +3672,11 @@ Recommended for advanced use cases only. You usually only need to use `temperatu
 
 minimum0
 
-top\_p: Optional[float]
+Deprecatedtop\_p: Optional[float]
 
 Use nucleus sampling.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
 
@@ -4326,13 +4337,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]
+Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-- `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
 - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
 - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -4350,9 +4362,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 
@@ -5206,13 +5222,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 12 more]
+Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-- `claude-opus-4-6` - Most intelligent model for building agents and coding
+- `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
+- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
 - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
 - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
@@ -5230,9 +5247,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
 "claude-opus-4-6"
 
-Most intelligent model for building agents and coding
+Frontier intelligence for long-running agents and coding
 
 "claude-sonnet-4-6"
 

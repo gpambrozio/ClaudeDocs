@@ -38,6 +38,16 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
+class BetaFileScope: …
+
+id: str
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: Literal["session"]
+
+The type of scope (e.g., `"session"`).
+
 class DeletedFile: …
 
 id: str
@@ -83,6 +93,18 @@ For files, this is always `"file"`.
 downloadable: Optional[bool]
 
 Whether the file can be downloaded.
+
+scope: Optional[BetaFileScope]
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: str
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: Literal["session"]
+
+The type of scope (e.g., `"session"`).
 
 ---
 

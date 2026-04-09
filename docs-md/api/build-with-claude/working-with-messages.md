@@ -2,7 +2,15 @@
 
 Copy page
 
-This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages.md).
+Anthropic offers two ways to build with Claude, each suited to different use cases:
+
+|  | Messages API | Claude Managed Agents |
+| --- | --- | --- |
+| **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
+| **Learn more** | [Messages API docs](build-with-claude/working-with-messages.md) | [Claude Managed Agents docs](managed-agents/overview.md) |
+
+This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md).
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
@@ -26,7 +34,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-JSON
+Output
 
 ```shiki
 {
@@ -74,7 +82,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-JSON
+Output
 
 ```shiki
 {
@@ -119,7 +127,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-JSON
+Output
 
 ```shiki
 {
@@ -199,7 +207,7 @@ curl https://api.anthropic.com/v1/messages \
 }'
 ```
 
-JSON
+Output
 
 ```shiki
 {

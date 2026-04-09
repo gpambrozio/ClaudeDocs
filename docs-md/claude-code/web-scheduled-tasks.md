@@ -104,6 +104,7 @@ For custom intervals like every 2 hours or first of each month, pick the closest
 
 ### [​](#repositories-and-branch-permissions) Repositories and branch permissions
 
+Scheduled tasks need GitHub access to clone repositories. When you create a task from the CLI with `/schedule`, Claude checks whether your account has GitHub connected and prompts you to run `/web-setup` if it doesn’t. See [GitHub authentication options](claude-code-on-the-web.md) for the two ways to grant access.
 Each repository you add is cloned on every run. Claude starts from the repository’s default branch unless your prompt specifies otherwise.
 By default, Claude can only push to branches prefixed with `claude/`. This prevents scheduled tasks from accidentally modifying protected or long-lived branches.
 To remove this restriction for a specific repository, enable **Allow unrestricted branch pushes** for that repository when creating or editing the task.

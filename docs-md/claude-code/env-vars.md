@@ -39,6 +39,7 @@ Claude Code supports the following environment variables to control its behavior
 | `BASH_DEFAULT_TIMEOUT_MS` | Default timeout for long-running bash commands (default: 120000, or 2 minutes) |
 | `BASH_MAX_OUTPUT_LENGTH` | Maximum number of characters in bash outputs before they are middle-truncated |
 | `BASH_MAX_TIMEOUT_MS` | Maximum timeout the model can set for long-running bash commands (default: 600000, or 10 minutes) |
+| `CCR_FORCE_BUNDLE` | Set to `1` to force [`claude --remote`](claude-code-on-the-web.md) to bundle and upload your local repository even when GitHub access is available |
 | `CLAUDECODE` | Set to `1` in shell environments Claude Code spawns (Bash tool, tmux sessions). Not set in [hooks](hooks.md) or [status line](statusline.md) commands. Use to detect when a script is running inside a shell spawned by Claude Code |
 | `CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS` | Set to `1` to disable all built-in [subagent](sub-agents.md) types such as Explore and Plan. Only applies in non-interactive mode (the `-p` flag). Useful for SDK users who want a blank slate |
 | `CLAUDE_AGENT_SDK_MCP_NO_PREFIX` | Set to `1` to skip the `mcp__<server>__` prefix on tool names from SDK-created MCP servers. Tools use their original names. SDK usage only |
@@ -160,7 +161,7 @@ Claude Code supports the following environment variables to control its behavior
 | `HTTP_PROXY` | Specify HTTP proxy server for network connections |
 | `HTTPS_PROXY` | Specify HTTPS proxy server for network connections |
 | `IS_DEMO` | Set to `1` to enable demo mode: hides your email and organization name from the header and `/status` output, and skips onboarding. Useful when streaming or recording a session |
-| `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens (default: 25000) |
+| `MAX_MCP_OUTPUT_TOKENS` | Maximum number of tokens allowed in MCP tool responses. Claude Code displays a warning when output exceeds 10,000 tokens. Tools that declare [`anthropic/maxResultSizeChars`](mcp.md) use that character limit for text content instead, but image content from those tools is still subject to this variable (default: 25000) |
 | `MAX_STRUCTURED_OUTPUT_RETRIES` | Number of times to retry when the model’s response fails validation against the [`--json-schema`](cli-reference.md) in non-interactive mode (the `-p` flag). Defaults to 5 |
 | `MAX_THINKING_TOKENS` | Override the [extended thinking](build-with-claude/extended-thinking.md) token budget. The ceiling is the model’s [max output tokens](about-claude/models/overview.md) minus one. Set to `0` to disable thinking entirely. On models with adaptive reasoning (Opus 4.6, Sonnet 4.6), the budget is ignored unless adaptive reasoning is disabled via `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` |
 | `MCP_CLIENT_SECRET` | OAuth client secret for MCP servers that require [pre-configured credentials](mcp.md). Avoids the interactive prompt when adding a server with `--client-secret` |

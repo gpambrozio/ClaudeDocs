@@ -26,7 +26,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 18 more]
 
 Accepts one of the following:
 
@@ -72,8 +72,6 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
 class FileMetadata: …
@@ -110,6 +108,18 @@ downloadable: Optional[bool]
 
 Whether the file can be downloaded.
 
+scope: Optional[BetaFileScope]
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: str
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: Literal["session"]
+
+The type of scope (e.g., `"session"`).
+
 Upload File
 
 Python
@@ -137,7 +147,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -153,7 +167,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

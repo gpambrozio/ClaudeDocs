@@ -13,7 +13,7 @@ The table below shows which Claude Code features support GHES and any difference
 | --- | --- | --- |
 | Claude Code on the web | ✅ Supported | Admin connects the GHES instance once; developers use `claude --remote` or [claude.ai/code](https://claude.ai/code) as usual |
 | Code Review | ✅ Supported | Same automated PR reviews as github.com |
-| Teleport sessions | ✅ Supported | Move sessions between web and terminal with `/teleport` |
+| Teleport sessions | ✅ Supported | Move sessions between web and terminal with `--teleport` |
 | Plugin marketplaces | ✅ Supported | Use full git URLs instead of `owner/repo` shorthand |
 | Contribution metrics | ✅ Supported | Delivered via webhooks to the [analytics dashboard](analytics.md) |
 | GitHub Actions | ✅ Supported | Requires manual workflow setup; `/install-github-app` is github.com only |
@@ -98,7 +98,7 @@ The session runs on Anthropic infrastructure, clones your repository from GHES, 
 
 ### [​](#teleport-sessions-to-your-terminal) Teleport sessions to your terminal
 
-Pull a web session into your local terminal with `/teleport` or `claude --teleport`. Teleport verifies you’re in a checkout of the same GHES repository before fetching the branch and loading the session history. See [teleport requirements](claude-code-on-the-web.md) for details.
+Pull a web session into your local terminal with `claude --teleport`. Teleport verifies you’re in a checkout of the same GHES repository before fetching the branch and loading the session history. See [teleport requirements](claude-code-on-the-web.md) for details.
 
 ## [​](#plugin-marketplaces-on-ghes) Plugin marketplaces on GHES
 

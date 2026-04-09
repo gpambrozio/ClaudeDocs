@@ -26,7 +26,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
 
 Accepts one of the following:
 
@@ -72,11 +72,9 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
-FileMetadata = object { id, created\_at, filename, 4 more }
+FileMetadata = object { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -110,6 +108,18 @@ downloadable: optional boolean
 
 Whether the file can be downloaded.
 
+scope: optional [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
+
 Get File Metadata
 
 cURL
@@ -131,7 +141,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -147,7 +161,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

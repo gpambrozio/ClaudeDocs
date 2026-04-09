@@ -26,23 +26,29 @@ For model support, see the [Tool reference](agents-and-tools/tool-use/tool-refer
 
 ## Quick start
 
-Python
+Shell
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    tools=[{"type": "bash_20250124", "name": "bash"}],
-    messages=[
-        {"role": "user", "content": "List all Python files in the current directory."}
+curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-4-6",
+    "max_tokens": 1024,
+    "tools": [
+      {
+        "type": "bash_20250124",
+        "name": "bash"
+      }
     ],
-)
-
-print(response)
+    "messages": [
+      {
+        "role": "user",
+        "content": "List all Python files in the current directory."
+      }
+    ]
+  }'
 ```
 
 ## How it works

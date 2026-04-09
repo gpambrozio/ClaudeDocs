@@ -8,13 +8,13 @@ TypeScript
 
 ##### [Upload File](api/beta/files/upload.md)
 
-client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-client.beta.files.list(FileListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 4 more } >
+client.beta.files.list(FileListParams { after\_id, before\_id, limit, 2 more } params?, RequestOptionsoptions?): Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -26,7 +26,7 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParams { betas } params?, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 GET/v1/files/{file\_id}
 
@@ -37,6 +37,16 @@ client.beta.files.delete(stringfileID, FileDeleteParams { betas } params?, Reque
 DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
+
+BetaFileScope { id, type }
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 DeletedFile { id, type }
 
@@ -50,7 +60,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata { id, created\_at, filename, 4 more }
+FileMetadata { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -83,6 +93,18 @@ For files, this is always `"file"`.
 downloadable?: boolean
 
 Whether the file can be downloaded.
+
+scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 ---
 

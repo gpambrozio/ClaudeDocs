@@ -146,44 +146,33 @@ curl https://api.anthropic.com/v1/messages \
 
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
-Python
+CLI
 
 ```shiki
-# Initialize the client
-client = Anthropic()
-
-# Request code execution that creates files
-response = client.beta.messages.create(
-    model="claude-opus-4-6",
-    betas=["files-api-2025-04-14"],
-    max_tokens=4096,
-    messages=[
-        {
-            "role": "user",
-            "content": "Create a matplotlib visualization and save it as output.png",
-        }
-    ],
-    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+# Request code execution that creates files; extract file_ids from tool results
+TOOL_RESULT='content.#(type=="bash_code_execution_tool_result")#'
+FILE_IDS=$(ant beta:messages create \
+  --beta files-api-2025-04-14 \
+  --transform "${TOOL_RESULT}.content.content|@flatten|#.file_id" \
+  --format yaml \
+    --model claude-opus-4-6 \
+    --max-tokens 4096 \
+    --message '{role: user, content: Create a matplotlib visualization and save it as output.png}' \
+    --tool '{type: code_execution_20250825, name: code_execution}'
 )
 
-# Extract file IDs from the response
-def extract_file_ids(response):
-    file_ids = []
-    for item in response.content:
-        if item.type == "bash_code_execution_tool_result":
-            content_item = item.content
-            if content_item.type == "bash_code_execution_result":
-                # concrete-typed list: List[BashCodeExecutionOutputBlock]
-                for file in content_item.content:
-                    file_ids.append(file.file_id)
-    return file_ids
-
-# Download the created files
-for file_id in extract_file_ids(response):
-    file_metadata = client.beta.files.retrieve_metadata(file_id)
-    file_content = client.beta.files.download(file_id)
-    file_content.write_to_file(file_metadata.filename)
-    print(f"Downloaded: {file_metadata.filename}")
+# Download each created file
+while IFS= read -r LINE; do
+  [[ "$LINE" != "- "* ]] && continue
+  FILE_ID="${LINE#- }"
+  FILENAME=$(ant beta:files retrieve-metadata \
+    --file-id "$FILE_ID" \
+    --transform filename --format yaml)
+  ant beta:files download \
+    --file-id "$FILE_ID" \
+    --output "$FILENAME" > /dev/null
+  printf 'Downloaded: %s\n' "$FILENAME"
+done <<< "$FILE_IDS"
 ```
 
 ## Tool definition
@@ -210,6 +199,8 @@ The code execution tool can return two types of results depending on the operati
 
 ### Bash command response
 
+Output
+
 ```shiki
 {
   "type": "server_tool_use",
@@ -234,6 +225,8 @@ The code execution tool can return two types of results depending on the operati
 ### File operation responses
 
 **View file:**
+
+Output
 
 ```shiki
 {
@@ -261,6 +254,8 @@ The code execution tool can return two types of results depending on the operati
 
 **Create file:**
 
+Output
+
 ```shiki
 {
   "type": "server_tool_use",
@@ -283,6 +278,8 @@ The code execution tool can return two types of results depending on the operati
 ```
 
 **Edit file (str\_replace):**
+
+Output
 
 ```shiki
 {
@@ -329,6 +326,8 @@ Additional fields for file operations:
 Each tool type can return specific errors:
 
 **Common errors (all tools):**
+
+Output
 
 ```shiki
 {

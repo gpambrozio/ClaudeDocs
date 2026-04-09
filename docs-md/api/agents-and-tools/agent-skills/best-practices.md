@@ -1137,9 +1137,7 @@ Before sharing a Skill, verify:
 
 Create your first Skill](agents-and-tools/agent-skills/quickstart.md)[Use Skills in Claude Code
 
-Create and manage Skills in Claude Code](skills.md)[Use Skills in the Agent SDK
-
-Use Skills programmatically in TypeScript and Python](agent-sdk/skills.md)[Use Skills with the API
+Create and manage Skills in Claude Code](skills.md)[Use Skills with the API
 
 Upload and use Skills programmatically](build-with-claude/skills-guide.md)
 

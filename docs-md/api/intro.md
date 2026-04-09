@@ -12,6 +12,14 @@ The latest generation of Claude models:
 
 Looking to chat with Claude? Visit [claude.ai](https://www.claude.ai).
 
+Anthropic offers two ways to build with Claude, each suited to different use cases:
+
+|  | Messages API | Claude Managed Agents |
+| --- | --- | --- |
+| **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
+| **Learn more** | [Messages API docs](build-with-claude/working-with-messages.md) | [Claude Managed Agents docs](managed-agents/overview.md) |
+
 ## Recommended path for new developers
 
 Follow these steps to go from zero to a working Claude integration.

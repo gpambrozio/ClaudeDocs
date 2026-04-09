@@ -8,13 +8,13 @@ Ruby
 
 ##### [Upload File](api/beta/files/upload.md)
 
-beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
 ##### [List Files](api/beta/files/list.md)
 
-beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 4 more } >
+beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -26,7 +26,7 @@ GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
 
-beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 GET/v1/files/{file\_id}
 
@@ -37,6 +37,16 @@ beta.files.delete(file\_id, \*\*kwargs) -> [DeletedFile](api/beta.md) { id, type
 DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
+
+class BetaFileScope { id, type }
+
+id: String
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: :session
+
+The type of scope (e.g., `"session"`).
 
 class DeletedFile { id, type }
 
@@ -50,7 +60,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-class FileMetadata { id, created\_at, filename, 4 more }
+class FileMetadata { id, created\_at, filename, 5 more }
 
 id: String
 
@@ -83,6 +93,18 @@ For files, this is always `"file"`.
 downloadable: bool
 
 Whether the file can be downloaded.
+
+scope: [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: String
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: :session
+
+The type of scope (e.g., `"session"`).
 
 ---
 

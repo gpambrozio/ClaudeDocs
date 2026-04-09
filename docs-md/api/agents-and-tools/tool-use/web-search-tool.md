@@ -143,6 +143,8 @@ The `user_location` parameter allows you to localize search results based on a u
 
 Here's an example response structure:
 
+Output
+
 ```shiki
 {
   "role": "assistant",
@@ -232,6 +234,8 @@ When displaying API outputs directly to end users, citations must be included to
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
+Output
+
 ```shiki
 {
   "type": "web_search_tool_result",
@@ -262,6 +266,8 @@ For caching tool definitions across turns, see [Tool use with prompt caching](ag
 ## Streaming
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
+
+Output
 
 ```shiki
 event: message_start

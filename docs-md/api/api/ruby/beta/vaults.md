@@ -1,0 +1,667 @@
+# Vaults
+
+Copy page
+
+Ruby
+
+# Vaults
+
+##### [Create Vault](api/beta/vaults/create.md)
+
+beta.vaults.create(\*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+
+POST/v1/vaults
+
+##### [List Vaults](api/beta/vaults/list.md)
+
+beta.vaults.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more } >
+
+GET/v1/vaults
+
+##### [Get Vault](api/beta/vaults/retrieve.md)
+
+beta.vaults.retrieve(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+
+GET/v1/vaults/{vault\_id}
+
+##### [Update Vault](api/beta/vaults/update.md)
+
+beta.vaults.update(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+
+POST/v1/vaults/{vault\_id}
+
+##### [Delete Vault](api/beta/vaults/delete.md)
+
+beta.vaults.delete(vault\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedVault](api/beta.md) { id, type }
+
+DELETE/v1/vaults/{vault\_id}
+
+##### [Archive Vault](api/beta/vaults/archive.md)
+
+beta.vaults.archive(vault\_id, \*\*kwargs) -> [BetaManagedAgentsVault](api/beta.md) { id, archived\_at, created\_at, 4 more }
+
+POST/v1/vaults/{vault\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeletedVault { id, type }
+
+Confirmation of a deleted vault.
+
+id: String
+
+Unique identifier of the deleted vault.
+
+type: :vault\_deleted
+
+class BetaManagedAgentsVault { id, archived\_at, created\_at, 4 more }
+
+A vault that stores credentials for use by agents during sessions.
+
+id: String
+
+Unique identifier for the vault.
+
+archived\_at: Time
+
+A timestamp in RFC 3339 format
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+display\_name: String
+
+Human-readable name for the vault.
+
+metadata: Hash[Symbol, String]
+
+Arbitrary key-value metadata attached to the vault.
+
+type: :vault
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+#### VaultsCredentials
+
+##### [Create Credential](api/beta/vaults/credentials/create.md)
+
+beta.vaults.credentials.create(vault\_id, \*\*kwargs) -> [BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more }
+
+POST/v1/vaults/{vault\_id}/credentials
+
+##### [List Credentials](api/beta/vaults/credentials/list.md)
+
+beta.vaults.credentials.list(vault\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more } >
+
+GET/v1/vaults/{vault\_id}/credentials
+
+##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
+
+beta.vaults.credentials.retrieve(credential\_id, \*\*kwargs) -> [BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more }
+
+GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Update Credential](api/beta/vaults/credentials/update.md)
+
+beta.vaults.credentials.update(credential\_id, \*\*kwargs) -> [BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more }
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Delete Credential](api/beta/vaults/credentials/delete.md)
+
+beta.vaults.credentials.delete(credential\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedCredential](api/beta.md) { id, type }
+
+DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+
+##### [Archive Credential](api/beta/vaults/credentials/archive.md)
+
+beta.vaults.credentials.archive(credential\_id, \*\*kwargs) -> [BetaManagedAgentsCredential](api/beta.md) { id, archived\_at, auth, 6 more }
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsCredential { id, archived\_at, auth, 6 more }
+
+A credential stored in a vault. Sensitive fields are never returned in responses.
+
+id: String
+
+Unique identifier for the credential.
+
+archived\_at: Time
+
+A timestamp in RFC 3339 format
+
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+
+Authentication details for a credential.
+
+Accepts one of the following:
+
+class BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
+
+OAuth credential details for an MCP server.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :mcp\_oauth
+
+expires\_at: Time
+
+A timestamp in RFC 3339 format
+
+refresh: [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: String
+
+OAuth client ID.
+
+token\_endpoint: String
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: :client\_secret\_post
+
+resource: String
+
+OAuth resource indicator.
+
+scope: String
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsStaticBearerAuthResponse { mcp\_server\_url, type }
+
+Static bearer token credential details for an MCP server.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :static\_bearer
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+metadata: Hash[Symbol, String]
+
+Arbitrary key-value metadata attached to the credential.
+
+type: :vault\_credential
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+vault\_id: String
+
+Identifier of the vault this credential belongs to.
+
+display\_name: String
+
+Human-readable name for the credential.
+
+class BetaManagedAgentsDeletedCredential { id, type }
+
+Confirmation of a deleted credential.
+
+id: String
+
+Unique identifier of the deleted credential.
+
+type: :vault\_credential\_deleted
+
+class BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
+
+OAuth credential details for an MCP server.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :mcp\_oauth
+
+expires\_at: Time
+
+A timestamp in RFC 3339 format
+
+refresh: [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: String
+
+OAuth client ID.
+
+token\_endpoint: String
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: :client\_secret\_post
+
+resource: String
+
+OAuth resource indicator.
+
+scope: String
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMCPOAuthCreateParams { access\_token, mcp\_server\_url, type, 2 more }
+
+Parameters for creating an MCP OAuth credential.
+
+access\_token: String
+
+OAuth access token.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :mcp\_oauth
+
+expires\_at: Time
+
+A timestamp in RFC 3339 format
+
+refresh: [BetaManagedAgentsMCPOAuthRefreshParams](api/beta.md) { client\_id, refresh\_token, token\_endpoint, 3 more }
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+client\_id: String
+
+OAuth client ID.
+
+refresh\_token: String
+
+OAuth refresh token.
+
+token\_endpoint: String
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  | [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthPostParam { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_post
+
+resource: String
+
+OAuth resource indicator.
+
+scope: String
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMCPOAuthRefreshParams { client\_id, refresh\_token, token\_endpoint, 3 more }
+
+OAuth refresh token parameters for creating a credential with refresh support.
+
+client\_id: String
+
+OAuth client ID.
+
+refresh\_token: String
+
+OAuth refresh token.
+
+token\_endpoint: String
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta.md) { client\_secret, type }  | [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta.md) { client\_secret, type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthPostParam { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_post
+
+resource: String
+
+OAuth resource indicator.
+
+scope: String
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMCPOAuthRefreshResponse { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+
+OAuth refresh token configuration returned in credential responses.
+
+client\_id: String
+
+OAuth client ID.
+
+token\_endpoint: String
+
+Token endpoint URL used to refresh the access token.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta.md) { type }
+
+Token endpoint requires no client authentication.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: :client\_secret\_post
+
+resource: String
+
+OAuth resource indicator.
+
+scope: String
+
+OAuth scope for the refresh request.
+
+class BetaManagedAgentsMCPOAuthRefreshUpdateParams { refresh\_token, scope, token\_endpoint\_auth }
+
+Parameters for updating OAuth refresh token configuration.
+
+refresh\_token: String
+
+Updated OAuth refresh token.
+
+scope: String
+
+Updated OAuth scope for the refresh request.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  | [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: :client\_secret\_basic
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: :client\_secret\_post
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsMCPOAuthUpdateParams { type, access\_token, expires\_at, refresh }
+
+Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+type: :mcp\_oauth
+
+access\_token: String
+
+Updated OAuth access token.
+
+expires\_at: Time
+
+A timestamp in RFC 3339 format
+
+refresh: [BetaManagedAgentsMCPOAuthRefreshUpdateParams](api/beta.md) { refresh\_token, scope, token\_endpoint\_auth }
+
+Parameters for updating OAuth refresh token configuration.
+
+refresh\_token: String
+
+Updated OAuth refresh token.
+
+scope: String
+
+Updated OAuth scope for the refresh request.
+
+token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta.md) { type, client\_secret }  | [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta.md) { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: :client\_secret\_basic
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: :client\_secret\_post
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsStaticBearerAuthResponse { mcp\_server\_url, type }
+
+Static bearer token credential details for an MCP server.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :static\_bearer
+
+class BetaManagedAgentsStaticBearerCreateParams { token, mcp\_server\_url, type }
+
+Parameters for creating a static bearer token credential.
+
+token: String
+
+Static bearer token value.
+
+mcp\_server\_url: String
+
+URL of the MCP server this credential authenticates against.
+
+type: :static\_bearer
+
+class BetaManagedAgentsStaticBearerUpdateParams { type, token }
+
+Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+type: :static\_bearer
+
+token: String
+
+Updated static bearer token value.
+
+class BetaManagedAgentsTokenEndpointAuthBasicParam { client\_secret, type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthBasicResponse { type }
+
+Token endpoint uses HTTP Basic authentication with client credentials.
+
+type: :client\_secret\_basic
+
+class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam { type, client\_secret }
+
+Updated HTTP Basic authentication parameters for the token endpoint.
+
+type: :client\_secret\_basic
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+class BetaManagedAgentsTokenEndpointAuthNoneParam { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
+
+Token endpoint requires no client authentication.
+
+type: :none
+
+class BetaManagedAgentsTokenEndpointAuthPostParam { client\_secret, type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+client\_secret: String
+
+OAuth client secret.
+
+type: :client\_secret\_post
+
+class BetaManagedAgentsTokenEndpointAuthPostResponse { type }
+
+Token endpoint uses POST body authentication with client credentials.
+
+type: :client\_secret\_post
+
+class BetaManagedAgentsTokenEndpointAuthPostUpdateParam { type, client\_secret }
+
+Updated POST body authentication parameters for the token endpoint.
+
+type: :client\_secret\_post
+
+client\_secret: String
+
+Updated OAuth client secret.
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

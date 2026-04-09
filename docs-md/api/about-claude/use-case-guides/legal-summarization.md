@@ -137,6 +137,8 @@ Claude can adapt to various summarization styles. You can change the details of 
 
 Here’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:
 
+Python
+
 ```shiki
 # Initialize the Anthropic client
 client = anthropic.Anthropic()
@@ -224,6 +226,8 @@ In complex scenarios, it may be helpful to consider additional strategies to imp
 Legal summarization often involves handling long documents or many related documents at once, such that you surpass Claude’s context window. You can use a chunking method known as meta-summarization in order to handle this use case. This technique involves breaking down documents into smaller, manageable chunks and then processing each chunk separately. You can then combine the summaries of each chunk to create a meta-summary of the entire document.
 
 Here's an example of how to perform meta-summarization:
+
+Python
 
 ```shiki
 # Initialize the Anthropic client

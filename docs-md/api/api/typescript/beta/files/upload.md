@@ -6,7 +6,7 @@ TypeScript
 
 # Upload File
 
-client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+client.beta.files.upload(FileUploadParams { file, betas } params, RequestOptionsoptions?): [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 POST/v1/files
 
@@ -28,7 +28,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 18 more
 
 "message-batches-2024-09-24"
 
@@ -72,11 +72,9 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
-FileMetadata { id, created\_at, filename, 4 more }
+FileMetadata { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -110,6 +108,18 @@ downloadable?: boolean
 
 Whether the file can be downloaded.
 
+scope?: [BetaFileScope](api/beta.md) { id, type }  | null
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
+
 Upload File
 
 TypeScript
@@ -136,7 +146,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 
@@ -152,7 +166,11 @@ Response 200
   "mime_type": "application/pdf",
   "size_bytes": 102400,
   "type": "file",
-  "downloadable": false
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```
 

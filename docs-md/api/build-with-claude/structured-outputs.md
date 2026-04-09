@@ -78,6 +78,8 @@ curl https://api.anthropic.com/v1/messages \
 
 **Response format:** Valid JSON matching your schema in `response.content[0].text`
 
+Output
+
 ```shiki
 {
   "name": "John Smith",
@@ -119,41 +121,47 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 - **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
 - **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
 - **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
-- **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
+- **CLI**, **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
 
-Python
+CLI
 
 ```shiki
-from pydantic import BaseModel
-from anthropic import Anthropic
-
-class ContactInfo(BaseModel):
-    name: str
-    email: str
-    plan_interest: str
-    demo_requested: bool
-
-client = Anthropic()
-
-response = client.messages.parse(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
-        }
-    ],
-    output_format=ContactInfo,
+{ read -r _ NAME; read -r _ EMAIL; } < <(
+  ant messages create \
+    --transform 'content.0.text|@fromstr|{name,email}' --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content: >-
+      Extract the key information from this email: John Smith
+      (john@example.com) is interested in our Enterprise plan and wants
+      to schedule a demo for next Tuesday at 2pm.
+output_config:
+  format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        name: {type: string}
+        email: {type: string}
+        plan_interest: {type: string}
+        demo_requested: {type: boolean}
+      required: [name, email, plan_interest, demo_requested]
+      additionalProperties: false
+YAML
 )
-
-print(response.parsed_output)
+printf '%s (%s)\n' "$NAME" "$EMAIL"
 ```
 
 #### SDK-specific methods
 
 Each SDK provides helpers that make working with structured outputs easier. See individual SDK pages for full details.
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -182,15 +190,9 @@ Ruby
 
 Ruby
 
-**`client.messages.parse()` (Recommended)**
+**Raw JSON schemas via heredoc body**
 
-The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
-
-### Example usage
-
-**`transform_schema()` helper**
-
-For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
+The CLI passes raw JSON schemas as a YAML heredoc body. Use the GJSON `@fromstr` modifier with `--transform` to parse the JSON string returned in `content[0].text` and project specific fields.
 
 ### Example usage
 
@@ -229,50 +231,45 @@ JSON outputs and strict tool use solve different problems and can be used togeth
 
 When combined, Claude can call tools with guaranteed-valid parameters AND return structured JSON responses. This is useful for agentic workflows where you need both reliable tool calls and structured final outputs.
 
-Python
+CLI
 
 ```shiki
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user",
-            "content": "Help me plan a trip to Paris departing May 15, 2026",
-        }
-    ],
-    # JSON outputs: structured response format
-    output_config={
-        "format": {
-            "type": "json_schema",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "summary": {"type": "string"},
-                    "next_steps": {"type": "array", "items": {"type": "string"}},
-                },
-                "required": ["summary", "next_steps"],
-                "additionalProperties": False,
-            },
-        }
-    },
-    # Strict tool use: guaranteed tool parameters
-    tools=[
-        {
-            "name": "search_flights",
-            "strict": True,
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "destination": {"type": "string"},
-                    "date": {"type": "string", "format": "date"},
-                },
-                "required": ["destination", "date"],
-                "additionalProperties": False,
-            },
-        }
-    ],
-)
+ant messages create <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content: Help me plan a trip to Paris departing May 15, 2026
+# JSON outputs: structured response format
+output_config:
+  format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        summary:
+          type: string
+        next_steps:
+          type: array
+          items:
+            type: string
+      required: [summary, next_steps]
+      additionalProperties: false
+# Strict tool use: guaranteed tool parameters
+tools:
+  - name: search_flights
+    strict: true
+    input_schema:
+      type: object
+      properties:
+        destination:
+          type: string
+        date:
+          type: string
+          format: date
+      required: [destination, date]
+      additionalProperties: false
+YAML
 ```
 
 ## Important considerations

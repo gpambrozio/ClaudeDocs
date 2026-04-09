@@ -13,6 +13,10 @@ cURL
 
 cURL
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -34,6 +38,8 @@ Java
    ```shiki
    export ANTHROPIC_API_KEY='your-api-key-here'
    ```
+
+   To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
 2. 2
 
    Make your first API call
@@ -58,6 +64,8 @@ Java
    ```
 
    **Example output:**
+
+   Output
 
    ```shiki
    {

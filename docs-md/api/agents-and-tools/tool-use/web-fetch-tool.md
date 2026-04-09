@@ -155,6 +155,8 @@ When displaying API outputs directly to end users, citations must be included to
 
 Here's an example response structure:
 
+Output
+
 ```shiki
 {
   "role": "assistant",
@@ -237,6 +239,8 @@ The web fetch tool caches results to improve performance and reduce redundant re
 
 For PDF documents, content is returned as base64-encoded data:
 
+Output
+
 ```shiki
 {
   "type": "web_fetch_tool_result",
@@ -261,6 +265,8 @@ For PDF documents, content is returned as base64-encoded data:
 #### Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
+
+Output
 
 ```shiki
 {
@@ -297,6 +303,8 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 ## Combined search and fetch
 
 Web fetch works seamlessly with web search for comprehensive information gathering:
+
+Python
 
 ```shiki
 client = anthropic.Anthropic()
@@ -336,6 +344,8 @@ For caching tool definitions across turns, see [Tool use with prompt caching](ag
 ## Streaming
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
+
+Output
 
 ```shiki
 event: message_start

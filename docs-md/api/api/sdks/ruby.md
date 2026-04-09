@@ -8,10 +8,10 @@ For API feature documentation with code examples, see the [API reference](api/ov
 
 ## Installation
 
-To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
+Add the gem to your application's `Gemfile` with Bundler:
 
 ```shiki
-gem "anthropic", "~> 1.25.0"
+bundle add anthropic
 ```
 
 ## Requirements

@@ -38,6 +38,16 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
+class BetaFileScope:
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
+
 class DeletedFile:
 
 required string ID
@@ -83,6 +93,18 @@ For files, this is always `"file"`.
 Boolean Downloadable
 
 Whether the file can be downloaded.
+
+[BetaFileScope](api/beta.md)? Scope
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+required string ID
+
+The ID of the scoping resource (e.g., the session ID).
+
+JsonElement Type "session"constant
+
+The type of scope (e.g., `"session"`).
 
 ---
 

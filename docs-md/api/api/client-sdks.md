@@ -4,7 +4,9 @@ Copy page
 
 Anthropic provides official client SDKs in multiple languages to make it easier to work with the Claude API. Each SDK provides idiomatic interfaces, type safety, and built-in support for features like streaming, retries, and error handling.
 
-[Python
+[CLI
+
+Shell scripting, typed flags, response transforms](api/sdks/cli.md)[Python
 
 Sync and async clients, Pydantic models](api/sdks/python.md)[TypeScript
 
@@ -22,6 +24,10 @@ Value objects, builder pattern](api/sdks/php.md)
 
 ## Quick installation
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -51,24 +57,19 @@ Ruby
 Ruby
 
 ```shiki
-pip install anthropic
+brew install anthropics/tap/ant
 ```
 
 ## Quick start
 
-Python
+CLI
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello, Claude"}],
-)
-print(message.content)
+ant messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}' \
+  --transform content
 ```
 
 ## Platform support
@@ -88,15 +89,14 @@ See individual SDK pages for platform-specific setup instructions.
 
 Access beta features using the `beta` namespace in any SDK:
 
-Python
+CLI
 
 ```shiki
-message = client.beta.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello"}],
-    betas=["feature-name"],
-)
+ant beta:messages create \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello"}' \
+  --beta feature-name
 ```
 
 See [Beta headers](api/beta-headers.md) for available beta features.

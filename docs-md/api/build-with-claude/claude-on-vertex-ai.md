@@ -2,7 +2,7 @@
 
 Copy page
 
-The Vertex API for accessing Claude is nearly-identical to the [Messages API](api/messages.md) and supports all of the same options, with two key differences:
+The Vertex API for accessing Claude is nearly-identical to the [Messages API](api/messages/create.md) and supports all of the same options, with two key differences:
 
 - In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 - In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
@@ -161,27 +161,10 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 Set the `region` parameter to `"global"` when initializing the client:
 
-Python
+CLI
 
 ```shiki
-from anthropic import AnthropicVertex
-
-project_id = "MY_PROJECT_ID"
-region = "global"
-
-client = AnthropicVertex(project_id=project_id, region=region)
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=100,
-    messages=[
-        {
-            "role": "user",
-            "content": "Hey Claude!",
-        }
-    ],
-)
-print(message)
+# The ant CLI does not yet support Vertex AI.
 ```
 
 **Using multi-region endpoints:**
@@ -215,27 +198,10 @@ print(message)
 
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
-Python
+CLI
 
 ```shiki
-from anthropic import AnthropicVertex
-
-project_id = "MY_PROJECT_ID"
-region = "us-east1"  # Specify a specific region
-
-client = AnthropicVertex(project_id=project_id, region=region)
-
-message = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=100,
-    messages=[
-        {
-            "role": "user",
-            "content": "Hey Claude!",
-        }
-    ],
-)
-print(message)
+# The ant CLI does not yet support Vertex AI.
 ```
 
 Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).

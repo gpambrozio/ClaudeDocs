@@ -106,6 +106,10 @@ Shell
 
 Shell
 
+CLI
+
+CLI
+
 Python
 
 Python
@@ -224,7 +228,7 @@ Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](build-wit
 
 ## API responses
 
-API responses from Claude on Foundry follow the standard [Claude API response format](api/messages.md). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (first-party API, Foundry, Amazon Bedrock, and Google Vertex AI).
+API responses from Claude on Foundry follow the standard [Claude API response format](api/messages/create.md). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (first-party API, Foundry, Amazon Bedrock, and Google Vertex AI).
 
 For details on response headers specific to Foundry, see the [correlation request IDs section](#correlation-request-ids).
 

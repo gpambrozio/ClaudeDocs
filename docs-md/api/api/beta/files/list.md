@@ -30,6 +30,10 @@ maximum1000
 
 minimum1
 
+scope\_id: optional string
+
+Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
 ##### Header ParametersExpand Collapse
 
 "anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
@@ -40,7 +44,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
 
 Accepts one of the following:
 
@@ -86,11 +90,9 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
-data: array of [FileMetadata](api/beta.md) { id, created\_at, filename, 4 more }
+data: array of [FileMetadata](api/beta.md) { id, created\_at, filename, 5 more }
 
 List of file metadata objects.
 
@@ -125,6 +127,18 @@ For files, this is always `"file"`.
 downloadable: optional boolean
 
 Whether the file can be downloaded.
+
+scope: optional [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 first\_id: optional string
 
@@ -161,7 +175,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -184,7 +202,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",

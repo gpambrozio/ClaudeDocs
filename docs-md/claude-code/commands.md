@@ -8,6 +8,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | --- | --- |
 | `/add-dir <path>` | Add a working directory for file access during the current session. Most `.claude/` configuration is [not discovered](permissions.md) from the added directory |
 | `/agents` | Manage [agent](sub-agents.md) configurations |
+| `/autofix-pr [prompt]` | Spawn a [Claude Code on the web](claude-code-on-the-web.md) session that watches the current branch’s PR and pushes fixes when CI fails or reviewers leave comments. Detects the open PR from your checked-out branch with `gh pr view`; to watch a different PR, check out its branch first. By default the remote session is told to fix every CI failure and review comment; pass a prompt to give it different instructions, for example `/autofix-pr only fix lint and type errors`. Requires the `gh` CLI and access to [Claude Code on the web](claude-code-on-the-web.md) |
 | `/btw <question>` | Ask a quick [side question](interactive-mode.md) without adding to the conversation |
 | `/chrome` | Configure [Claude in Chrome](chrome.md) settings |
 | `/clear` | Clear conversation history and free up context. Aliases: `/reset`, `/new` |
@@ -66,6 +67,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/statusline` | Configure Claude Code’s [status line](statusline.md). Describe what you want, or run without arguments to auto-configure from your shell prompt |
 | `/stickers` | Order Claude Code stickers |
 | `/tasks` | List and manage background tasks. Also available as `/bashes` |
+| `/teleport` | Pull a [Claude Code on the web](claude-code-on-the-web.md) session into this terminal: opens a picker, then fetches the branch and conversation. Also available as `/tp`. Requires a claude.ai subscription |
 | `/terminal-setup` | Configure terminal keybindings for Shift+Enter and other shortcuts. Only visible in terminals that need it, like VS Code, Alacritty, or Warp |
 | `/theme` | Change the color theme. Includes light and dark variants, colorblind-accessible (daltonized) themes, and ANSI themes that use your terminal’s color palette |
 | `/ultraplan <prompt>` | Draft a plan in an [ultraplan](ultraplan.md) session, review it in your browser, then execute remotely or send it back to your terminal |
@@ -73,6 +75,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/usage` | Show plan usage limits and rate limit status |
 | `/vim` | Removed in v2.1.92. To toggle between Vim and Normal editing modes, use `/config` → Editor mode |
 | `/voice` | Toggle push-to-talk [voice dictation](voice-dictation.md). Requires a Claude.ai account |
+| `/web-setup` | Connect your GitHub account to [Claude Code on the web](web-quickstart.md) using your local `gh` CLI credentials. `/schedule` prompts for this automatically if GitHub isn’t connected |
 
 ## [​](#mcp-prompts) MCP prompts
 

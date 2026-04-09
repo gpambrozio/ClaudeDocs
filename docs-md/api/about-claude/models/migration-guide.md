@@ -2,6 +2,8 @@
 
 Copy page
 
+This guide covers migrating [Messages API](build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](managed-agents/overview.md), see [Migrating between model versions](managed-agents/migration.md). The Managed Agents runtime handles most of the request-shape changes described here.
+
 ## Migrating to Claude 4.6
 
 Claude Opus 4.6 is a near drop-in replacement for Claude 4.5, with a few breaking changes to be aware of. For a full list of new features, see [What's new in Claude 4.6](about-claude/models/whats-new-claude-4-6.md).
@@ -69,6 +71,8 @@ model = "claude-opus-4-6"  # After
 
    Use only `temperature` OR `top_p`, not both:
 
+   Python
+
    ```shiki
    # Before - This will error in Claude 4+ models
    response = client.messages.create(
@@ -105,6 +109,8 @@ model = "claude-opus-4-6"  # After
 
    Update your application to [handle `refusal` stop reasons](test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md):
 
+   Python
+
    ```shiki
    response = client.messages.create(...)
 
@@ -115,6 +121,8 @@ model = "claude-opus-4-6"  # After
 4. **Handle the `model_context_window_exceeded` stop reason**
 
    Claude 4.5+ models return a `model_context_window_exceeded` stop reason when generation stops due to hitting the context window limit, rather than the requested `max_tokens` limit. Update your application to handle this new stop reason:
+
+   Python
 
    ```shiki
    response = client.messages.create(...)

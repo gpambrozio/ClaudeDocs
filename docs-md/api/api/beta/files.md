@@ -28,6 +28,16 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
+BetaFileScope = object { id, type }
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
+
 DeletedFile = object { id, type }
 
 id: string
@@ -40,7 +50,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata = object { id, created\_at, filename, 4 more }
+FileMetadata = object { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -73,6 +83,18 @@ For files, this is always `"file"`.
 downloadable: optional boolean
 
 Whether the file can be downloaded.
+
+scope: optional [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
 
 ---
 

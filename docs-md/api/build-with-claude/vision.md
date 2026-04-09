@@ -224,7 +224,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-See [Messages API examples](api/messages.md) for more example code and parameter details.
+See [Messages API examples](api/messages/create.md) for more example code and parameter details.
 
 ### Example: One image
 
@@ -279,7 +279,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 Ready to start building with images using Claude? Here are a few helpful resources:
 
 - [Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision): This cookbook has tips on [getting started with images](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision) and [best practice techniques](https://platform.claude.com/cookbook/multimodal-best-practices-for-vision) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/cookbook/multimodal-reading-charts-graphs-powerpoints) or [extracting content from forms](https://platform.claude.com/cookbook/multimodal-how-to-transcribe-text).
-- [API reference](api/messages.md): Documentation for the Messages API, including example [API calls involving images](build-with-claude/working-with-messages.md).
+- [API reference](api/messages/create.md): Documentation for the Messages API, including example [API calls involving images](build-with-claude/working-with-messages.md).
 
 If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.
 

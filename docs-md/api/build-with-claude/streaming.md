@@ -8,37 +8,37 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming via `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
-Python
+CLI
 
 ```shiki
-client = anthropic.Anthropic()
-
-with client.messages.stream(
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello"}],
-    model="claude-opus-4-6",
-) as stream:
-    for text in stream.text_stream:
-        print(text, end="", flush=True)
+ant messages create --stream --format jsonl \
+  --model claude-opus-4-6 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello"}' \
+  | while IFS= read -r event; do
+      [[ $event == *'"text_delta"'* ]] || continue
+      text=${event#*'"text":"'}
+      printf '%b' "${text%\"*}"
+    done
 ```
 
 ## Get the final message without handling events
 
 If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
-Python
+CLI
 
 ```shiki
-client = anthropic.Anthropic()
-
-with client.messages.stream(
-    max_tokens=128000,
-    messages=[{"role": "user", "content": "Write a detailed analysis..."}],
-    model="claude-opus-4-6",
-) as stream:
-    message = stream.get_final_message()
-
-print(message.content[0].text)
+# The ant CLI's --stream flag emits one event per line and does not
+# accumulate into a final Message. For long generations, stream the
+# raw events:
+ant messages create --stream --format jsonl <<'YAML'
+model: claude-opus-4-6
+max_tokens: 128000
+messages:
+  - role: user
+    content: Write a detailed analysis...
+YAML
 ```
 
 The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.

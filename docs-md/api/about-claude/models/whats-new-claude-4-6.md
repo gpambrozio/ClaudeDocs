@@ -23,6 +23,8 @@ For complete pricing and specs, see the [models overview](about-claude/models/ov
 
 `thinking: {type: "enabled"}` and `budget_tokens` are **deprecated** on Opus 4.6 and Sonnet 4.6. They remain functional but will be removed in a future model release. Use adaptive thinking and the [effort parameter](build-with-claude/effort.md) to control thinking depth instead. Adaptive thinking also automatically enables interleaved thinking.
 
+Python
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-6",
@@ -65,6 +67,8 @@ The following tools are now generally available:
 
 [Fast mode](build-with-claude/fast-mode.md) (`speed: "fast"`) delivers significantly faster output token generation for Opus models. Fast mode is up to 2.5x as fast at premium pricing ($30/$150 per MTok). This is the same model running with faster inference (no change to intelligence or capabilities).
 
+Python
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -104,6 +108,8 @@ On **Sonnet 4.6**, the `interleaved-thinking-2025-05-14` beta header is still fu
 ### `output_format`
 
 The `output_format` parameter for [structured outputs](build-with-claude/structured-outputs.md) has been moved to `output_config.format`. The old parameter remains functional but is deprecated and will be removed in a future model release.
+
+Python
 
 ```shiki
 # Before

@@ -42,6 +42,8 @@ curl https://api.anthropic.com/v1/messages \
 
 The response `usage` object includes an `inference_geo` field indicating where inference ran:
 
+Output
+
 ```shiki
 {
   "usage": {

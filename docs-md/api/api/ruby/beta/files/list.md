@@ -6,7 +6,7 @@ Ruby
 
 # List Files
 
-beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 4 more } >
+beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta.md) { id, created\_at, filename, 5 more } >
 
 GET/v1/files
 
@@ -32,6 +32,10 @@ maximum1000
 
 minimum1
 
+scope\_id: String
+
+Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
 betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
@@ -40,7 +44,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more
 
 Accepts one of the following:
 
@@ -86,11 +90,9 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
-:"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
-class FileMetadata { id, created\_at, filename, 4 more }
+class FileMetadata { id, created\_at, filename, 5 more }
 
 id: String
 
@@ -124,6 +126,18 @@ downloadable: bool
 
 Whether the file can be downloaded.
 
+scope: [BetaFileScope](api/beta.md) { id, type }
+
+The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: String
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: :session
+
+The type of scope (e.g., `"session"`).
+
 List Files
 
 Ruby
@@ -150,7 +164,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -173,7 +191,11 @@ Response 200
       "mime_type": "application/pdf",
       "size_bytes": 102400,
       "type": "file",
-      "downloadable": false
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
     }
   ],
   "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
