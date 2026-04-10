@@ -84,7 +84,7 @@ These plugins bundle pre-configured [MCP servers](mcp.md) so you can connect Cla
 
 ### [​](#development-workflows) Development workflows
 
-Plugins that add commands and agents for common development tasks:
+Plugins that add skills and agents for common development tasks:
 
 - **commit-commands**: Git commit workflows including commit, push, and PR creation
 - **pr-review-toolkit**: Specialized agents for reviewing pull requests
@@ -137,7 +137,7 @@ Select a plugin to view its details, then choose an installation scope:
 - **Project scope**: install for all collaborators on this repository
 - **Local scope**: install for yourself in this repository only
 
-For example, select **commit-commands** (a plugin that adds git workflow commands) and install it to your user scope.You can also install directly from the command line:
+For example, select **commit-commands** (a plugin that adds git workflow skills) and install it to your user scope.You can also install directly from the command line:
 
 ```shiki
 /plugin install commit-commands@anthropics-claude-code
@@ -149,13 +149,13 @@ See [Configuration scopes](settings.md) to learn more about scopes.
 
 Use your new plugin
 
-After installing, run `/reload-plugins` to activate the plugin. Plugin commands are namespaced by the plugin name, so **commit-commands** provides commands like `/commit-commands:commit`.Try it out by making a change to a file and running:
+After installing, run `/reload-plugins` to activate the plugin. Plugin skills are namespaced by the plugin name, so **commit-commands** provides skills like `/commit-commands:commit`.Try it out by making a change to a file and running:
 
 ```shiki
 /commit-commands:commit
 ```
 
-This stages your changes, generates a commit message, and creates the commit.Each plugin works differently. Check the plugin’s description in the **Discover** tab or its homepage to learn what commands and capabilities it provides.
+This stages your changes, generates a commit message, and creates the commit.Each plugin works differently. Check the plugin’s description in the **Discover** tab or its homepage to learn what skills and capabilities it provides.
 
 The rest of this guide covers all the ways you can add marketplaces, install plugins, and manage your configuration.
 
@@ -371,7 +371,7 @@ If you see “unknown command” or the `/plugin` command doesn’t appear:
 
 1. **Check your version**: Run `claude --version` to see what’s installed.
 2. **Update Claude Code**:
-   - **Homebrew**: `brew upgrade claude-code`
+   - **Homebrew**: `brew upgrade claude-code` (or `brew upgrade claude-code@latest` if you installed that cask)
    - **npm**: `npm update -g @anthropic-ai/claude-code`
    - **Native installer**: Re-run the install command from [Setup](setup.md)
 3. **Restart Claude Code**: After updating, restart your terminal and run `claude` again.

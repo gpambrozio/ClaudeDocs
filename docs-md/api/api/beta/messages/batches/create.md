@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -69,6 +69,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"advisor-tool-2026-03-01"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -1408,9 +1410,11 @@ id: string
 
 input: map[unknown]
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
 Accepts one of the following:
+
+"advisor"
 
 "web\_search"
 
@@ -1907,6 +1911,73 @@ BetaServerToolCaller20260120 = object { tool\_id, type }
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+BetaAdvisorToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+
+content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+BetaAdvisorToolResultErrorParam = object { error\_code, type }
+
+error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"
+
+"prompt\_too\_long"
+
+"too\_many\_requests"
+
+"overloaded"
+
+"unavailable"
+
+"execution\_time\_exceeded"
+
+type: "advisor\_tool\_result\_error"
+
+BetaAdvisorResultBlockParam = object { text, type }
+
+text: string
+
+type: "advisor\_result"
+
+BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+
+encrypted\_content: string
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+type: "advisor\_redacted\_result"
+
+tool\_use\_id: string
+
+type: "advisor\_tool\_result"
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
 
 BetaCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
 
@@ -4353,6 +4424,166 @@ When true, guarantees schema validation on tool names and inputs
 use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+BetaAdvisorTool20260301 = object { model, name, type, 6 more }
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+UnionMember1 = string
+
+name: "advisor"
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+type: "advisor\_20260301"
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
+
+Accepts one of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+cache\_control: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+caching: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
+
+Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"
+
+"1h"
+
+defer\_loading: optional boolean
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_uses: optional number
+
+Maximum number of times the tool can be used in the API request.
+
+strict: optional boolean
+
+When true, guarantees schema validation on tool names and inputs
 
 BetaToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
 

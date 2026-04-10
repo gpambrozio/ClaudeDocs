@@ -465,6 +465,8 @@ Name BetaServerToolUseBlockName
 
 Accepts one of the following:
 
+const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
+
 const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
 
 const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
@@ -680,6 +682,50 @@ type BetaServerToolCaller20260120 struct{…}
 ToolID string
 
 Type CodeExecution20260120
+
+type BetaAdvisorToolResultBlock struct{…}
+
+Content BetaAdvisorToolResultBlockContentUnion
+
+Accepts one of the following:
+
+type BetaAdvisorToolResultError struct{…}
+
+ErrorCode BetaAdvisorToolResultErrorErrorCode
+
+Accepts one of the following:
+
+const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
+
+const BetaAdvisorToolResultErrorErrorCodePromptTooLong BetaAdvisorToolResultErrorErrorCode = "prompt\_too\_long"
+
+const BetaAdvisorToolResultErrorErrorCodeTooManyRequests BetaAdvisorToolResultErrorErrorCode = "too\_many\_requests"
+
+const BetaAdvisorToolResultErrorErrorCodeOverloaded BetaAdvisorToolResultErrorErrorCode = "overloaded"
+
+const BetaAdvisorToolResultErrorErrorCodeUnavailable BetaAdvisorToolResultErrorErrorCode = "unavailable"
+
+const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution\_time\_exceeded"
+
+Type AdvisorToolResultError
+
+type BetaAdvisorResultBlock struct{…}
+
+Text string
+
+Type AdvisorResult
+
+type BetaAdvisorRedactedResultBlock struct{…}
+
+EncryptedContent string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Type AdvisorRedactedResult
+
+ToolUseID string
+
+Type AdvisorToolResult
 
 type BetaCodeExecutionToolResultBlock struct{…}
 
@@ -1359,6 +1405,124 @@ The number of output tokens which were used.
 Type Compaction
 
 Usage for a compaction iteration
+
+type BetaAdvisorMessageIterationUsage struct{…}
+
+Token usage for an advisor sub-inference iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+Type AdvisorMessage
+
+Usage for an advisor sub-inference iteration
 
 OutputTokens int64
 
@@ -1739,6 +1903,8 @@ Name BetaServerToolUseBlockName
 
 Accepts one of the following:
 
+const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
+
 const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
 
 const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
@@ -1954,6 +2120,50 @@ type BetaServerToolCaller20260120 struct{…}
 ToolID string
 
 Type CodeExecution20260120
+
+type BetaAdvisorToolResultBlock struct{…}
+
+Content BetaAdvisorToolResultBlockContentUnion
+
+Accepts one of the following:
+
+type BetaAdvisorToolResultError struct{…}
+
+ErrorCode BetaAdvisorToolResultErrorErrorCode
+
+Accepts one of the following:
+
+const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
+
+const BetaAdvisorToolResultErrorErrorCodePromptTooLong BetaAdvisorToolResultErrorErrorCode = "prompt\_too\_long"
+
+const BetaAdvisorToolResultErrorErrorCodeTooManyRequests BetaAdvisorToolResultErrorErrorCode = "too\_many\_requests"
+
+const BetaAdvisorToolResultErrorErrorCodeOverloaded BetaAdvisorToolResultErrorErrorCode = "overloaded"
+
+const BetaAdvisorToolResultErrorErrorCodeUnavailable BetaAdvisorToolResultErrorErrorCode = "unavailable"
+
+const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution\_time\_exceeded"
+
+Type AdvisorToolResultError
+
+type BetaAdvisorResultBlock struct{…}
+
+Text string
+
+Type AdvisorResult
+
+type BetaAdvisorRedactedResultBlock struct{…}
+
+EncryptedContent string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Type AdvisorRedactedResult
+
+ToolUseID string
+
+Type AdvisorToolResult
 
 type BetaCodeExecutionToolResultBlock struct{…}
 
@@ -2633,6 +2843,124 @@ The number of output tokens which were used.
 Type Compaction
 
 Usage for a compaction iteration
+
+type BetaAdvisorMessageIterationUsage struct{…}
+
+Token usage for an advisor sub-inference iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+Type AdvisorMessage
+
+Usage for an advisor sub-inference iteration
 
 OutputTokens int64
 
@@ -2975,6 +3303,8 @@ Name BetaServerToolUseBlockName
 
 Accepts one of the following:
 
+const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
+
 const BetaServerToolUseBlockNameWebSearch BetaServerToolUseBlockName = "web\_search"
 
 const BetaServerToolUseBlockNameWebFetch BetaServerToolUseBlockName = "web\_fetch"
@@ -3190,6 +3520,50 @@ type BetaServerToolCaller20260120 struct{…}
 ToolID string
 
 Type CodeExecution20260120
+
+type BetaAdvisorToolResultBlock struct{…}
+
+Content BetaAdvisorToolResultBlockContentUnion
+
+Accepts one of the following:
+
+type BetaAdvisorToolResultError struct{…}
+
+ErrorCode BetaAdvisorToolResultErrorErrorCode
+
+Accepts one of the following:
+
+const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
+
+const BetaAdvisorToolResultErrorErrorCodePromptTooLong BetaAdvisorToolResultErrorErrorCode = "prompt\_too\_long"
+
+const BetaAdvisorToolResultErrorErrorCodeTooManyRequests BetaAdvisorToolResultErrorErrorCode = "too\_many\_requests"
+
+const BetaAdvisorToolResultErrorErrorCodeOverloaded BetaAdvisorToolResultErrorErrorCode = "overloaded"
+
+const BetaAdvisorToolResultErrorErrorCodeUnavailable BetaAdvisorToolResultErrorErrorCode = "unavailable"
+
+const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution\_time\_exceeded"
+
+Type AdvisorToolResultError
+
+type BetaAdvisorResultBlock struct{…}
+
+Text string
+
+Type AdvisorResult
+
+type BetaAdvisorRedactedResultBlock struct{…}
+
+EncryptedContent string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Type AdvisorRedactedResult
+
+ToolUseID string
+
+Type AdvisorToolResult
 
 type BetaCodeExecutionToolResultBlock struct{…}
 
@@ -3869,6 +4243,124 @@ The number of output tokens which were used.
 Type Compaction
 
 Usage for a compaction iteration
+
+type BetaAdvisorMessageIterationUsage struct{…}
+
+Token usage for an advisor sub-inference iteration.
+
+CacheCreation [BetaCacheCreation](api/beta.md)
+
+Breakdown of cached tokens by TTL
+
+Ephemeral1hInputTokens int64
+
+The number of input tokens used to create the 1 hour cache entry.
+
+Ephemeral5mInputTokens int64
+
+The number of input tokens used to create the 5 minute cache entry.
+
+CacheCreationInputTokens int64
+
+The number of input tokens used to create the cache entry.
+
+CacheReadInputTokens int64
+
+The number of input tokens read from the cache.
+
+InputTokens int64
+
+The number of input tokens which were used.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+OutputTokens int64
+
+The number of output tokens which were used.
+
+Type AdvisorMessage
+
+Usage for an advisor sub-inference iteration
 
 OutputTokens int64
 

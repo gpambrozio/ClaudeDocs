@@ -92,7 +92,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 
 A Message Batch is composed of a list of requests to create a Message. The shape of an individual request is comprised of:
 
-- A unique `custom_id` for identifying the Messages request
+- A unique `custom_id` for identifying the Messages request. Must be 1 to 64 characters and contain only alphanumeric characters, hyphens, and underscores (matching `^[a-zA-Z0-9_-]{1,64}$`).
 - A `params` object with the standard [Messages API](api/messages/create.md) parameters
 
 You can [create a batch](api/creating-message-batches.md) by passing this list into the `requests` parameter:

@@ -13,6 +13,7 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 | [Web search tool](agents-and-tools/tool-use/web-search-tool.md) | `web_search_20260209` `web_search_20250305` | Server | GA |
 | [Web fetch tool](agents-and-tools/tool-use/web-fetch-tool.md) | `web_fetch_20260209` `web_fetch_20250910` | Server | GA |
 | [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) | `code_execution_20260120` `code_execution_20250825` | Server | GA |
+| [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | `advisor_20260301` | Server | Beta: `advisor-tool-2026-03-01` |
 | [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md) | `tool_search_tool_regex_20251119` `tool_search_tool_bm25_20251119` | Server | GA |
 | [MCP connector](agents-and-tools/mcp-connector.md) | `mcp_toolset` | Server | Beta: `mcp-client-2025-11-20` |
 | [Memory tool](agents-and-tools/tool-use/memory-tool.md) | `memory_20250818` | Client | GA |
@@ -22,7 +23,9 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 
 For model compatibility, see each tool's page. Supported models vary by tool and by tool version.
 
-The tool search `type` values also accept undated aliases: `tool_search_tool_regex` and `tool_search_tool_bm25`. These resolve to the latest dated version.
+The tool search `type` values also accept undated aliases:
+`tool_search_tool_regex` and `tool_search_tool_bm25`. These resolve to the
+latest dated version.
 
 ### Tool versioning
 

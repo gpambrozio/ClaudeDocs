@@ -20,7 +20,7 @@ Body param: Human-readable name for the vault. 1-255 characters.
 
 --metadata: optional map[string]
 
-Body param: Arbitrary key-value metadata to attach to the vault.
+Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 --beta: optional array of [AnthropicBeta](api/beta.md)
 

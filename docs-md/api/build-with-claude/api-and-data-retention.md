@@ -129,6 +129,7 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 | [Token counting](build-with-claude/token-counting.md) | `/v1/messages/count_tokens` | Yes | Yes | Count tokens before sending requests. |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | `/v1/messages` (with `web_search` tool) | Yes1 | Yes1 | Real-time web search results returned in the API response. |
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes1 2 | No | Fetched web content returned in the API response. |
+| [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | `/v1/messages` (with `advisor` tool) | Yes | No | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
 | [Memory tool](agents-and-tools/tool-use/memory-tool.md) | `/v1/messages` (with `memory` tool) | Yes | Yes | Client-side memory storage where you control data retention. |
 | [Context management (compaction)](build-with-claude/compaction.md) | `/v1/messages` (with `context_management`) | Yes | No | Server-side compaction results are returned/round-tripped statelessly through the API response. |
 | [Context editing](build-with-claude/context-editing.md) | `/v1/messages` (with `context_management`) | Yes | No | Context edits (tool use clearing + thinking clearing) are applied in real time. |

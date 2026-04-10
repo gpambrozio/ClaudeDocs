@@ -62,6 +62,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+
 Optional<String> displayTitle
 
 Display title for the skill.

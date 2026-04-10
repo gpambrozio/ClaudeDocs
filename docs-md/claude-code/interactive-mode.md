@@ -63,7 +63,7 @@ Shift+Enter works without configuration in iTerm2, WezTerm, Ghostty, and Kitty. 
 
 | Shortcut | Description | Notes |
 | --- | --- | --- |
-| `/` at start | Command or skill | See [built-in commands](#built-in-commands) and [skills](skills.md) |
+| `/` at start | Command or skill | See [commands](#commands) and [skills](skills.md) |
 | `!` at start | Bash mode | Run commands directly and add execution output to the session |
 | `@` | File path mention | Trigger file path autocomplete |
 
@@ -82,10 +82,10 @@ When the transcript viewer is open (toggled with `Ctrl+O`), these shortcuts are 
 | --- | --- | --- |
 | Hold `Space` | Push-to-talk dictation | Requires [voice dictation](voice-dictation.md) to be enabled. Transcript inserts at cursor. [Rebindable](voice-dictation.md) |
 
-## [​](#built-in-commands) Built-in commands
+## [​](#commands) Commands
 
-Type `/` in Claude Code to see all available commands, or type `/` followed by any letters to filter. The `/` menu shows both built-in commands and [bundled skills](skills.md) like `/simplify`. Not all commands are visible to every user since some depend on your platform or plan.
-See the [commands reference](commands.md) for the full list of built-in commands. To create your own commands, see [skills](skills.md).
+Type `/` in Claude Code to see all available commands, or type `/` followed by any letters to filter. The `/` menu shows everything you can invoke: built-in commands, bundled and user-authored [skills](skills.md), and commands contributed by [plugins](plugins.md) and [MCP servers](mcp.md). Not all built-in commands are visible to every user since some depend on your platform or plan.
+See the [commands reference](commands.md) for the full list of commands included in Claude Code.
 
 ## [​](#vim-editor-mode) Vim editor mode
 
@@ -123,7 +123,7 @@ Enable vim-style editing via `/config` → Editor mode.
 | `;` | Repeat last f/F/t/T motion |
 | `,` | Repeat last f/F/t/T motion in reverse |
 
-In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, the arrow keys navigate command history instead.
+In vim normal mode, if the cursor is at the beginning or end of input and cannot move further, `j`/`k` and the arrow keys navigate command history instead.
 
 ### [​](#editing-normal-mode) Editing (NORMAL mode)
 

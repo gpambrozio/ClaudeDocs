@@ -22,7 +22,7 @@ Body param: Human-readable name for the vault. 1-255 characters.
 
 IReadOnlyDictionary<string, string> metadata
 
-Body param: Arbitrary key-value metadata to attach to the vault.
+Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
@@ -69,6 +69,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "fast-mode-2026-02-01"FastMode2026\_02\_01
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
+
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 

@@ -65,7 +65,24 @@ The session walks through a realistic flow with representative token counts:
 - **Before you type anything**: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an [output style](output-styles.md) or text from [`--append-system-prompt`](cli-reference.md), which both go into the system prompt the same way.
 - **As Claude works**: each file read adds to context, [path-scoped rules](memory.md) load automatically alongside matching files, and a [PostToolUse hook](hooks-guide.md) fires after each edit.
 - **The follow-up prompt**: a [subagent](sub-agents.md) handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.
-- **At the end**: `/compact` replaces the conversation with a structured summary. Most startup content reloads automatically. The [skill](skills.md) listing is the one exception.
+- **At the end**: `/compact` replaces the conversation with a structured summary. Most startup content reloads automatically; the table below shows what happens to each mechanism.
+
+## [​](#what-survives-compaction) What survives compaction
+
+When a long session compacts, Claude Code summarizes the conversation history to fit the context window. What happens to your instructions depends on how they were loaded:
+
+| Mechanism | After compaction |
+| --- | --- |
+| System prompt and output style | Unchanged; not part of message history |
+| Project-root CLAUDE.md and unscoped rules | Re-injected from disk |
+| Auto memory | Re-injected from disk |
+| Rules with `paths:` frontmatter | Lost until a matching file is read again |
+| Nested CLAUDE.md in subdirectories | Lost until a file in that subdirectory is read again |
+| Invoked skill bodies | Re-injected, capped at 5,000 tokens per skill and 25,000 tokens total; oldest dropped first |
+| Hooks | Not applicable; hooks run as code, not context |
+
+Path-scoped rules and nested CLAUDE.md files load into message history when their trigger file is read, so compaction summarizes them away with everything else. They reload the next time Claude reads a matching file. If a rule must persist across compaction, drop the `paths:` frontmatter or move it to the project-root CLAUDE.md.
+Skill bodies are re-injected after compaction, but large skills are truncated to fit the per-skill cap, and the oldest invoked skills are dropped once the total budget is exceeded. Truncation keeps the start of the file, so put the most important instructions near the top of `SKILL.md`.
 
 ## [​](#check-your-own-session) Check your own session
 

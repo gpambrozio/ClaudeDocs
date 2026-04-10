@@ -116,7 +116,7 @@ Body param: Human-readable name for the credential. Up to 255 characters.
 
 Metadata param.Field[map[string, string]]optional
 
-Body param: Arbitrary key-value metadata to attach to the credential.
+Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -169,6 +169,8 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 

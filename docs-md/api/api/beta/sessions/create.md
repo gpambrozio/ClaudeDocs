@@ -20,7 +20,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -66,6 +66,8 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
+"advisor-tool-2026-03-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 agent: string or [BetaManagedAgentsAgentParams](api/beta.md) { id, type, version }
@@ -96,7 +98,7 @@ ID of the `environment` defining the container configuration for this session.
 
 metadata: optional map[string]
 
-Arbitrary key-value metadata attached to the session.
+Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 resources: optional array of [BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md) { authorization\_token, type, url, 2 more }  or [BetaManagedAgentsFileResourceParams](api/beta.md) { file\_id, type, mount\_path }
 

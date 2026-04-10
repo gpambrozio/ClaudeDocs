@@ -1,6 +1,7 @@
 # Connect Claude Code to tools via MCP
 
 Claude Code can connect to hundreds of external tools and data sources through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction), an open source standard for AI-tool integrations. MCP servers give Claude Code access to your tools, databases, and APIs.
+Connect a server when you find yourself copying data into chat from another tool, like an issue tracker or a monitoring dashboard. Once connected, Claude can read and act on that system directly instead of working from what you paste.
 
 ## [​](#what-you-can-do-with-mcp) What you can do with MCP
 
@@ -159,7 +160,7 @@ Search your context lake and safely run actionsRequires user-specific URL. [Get 
 
 [**Aiwyn Tax (formerly Column Tax)**](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
 
-Prepare your federal & state tax return 100% accuratelyCommand
+Estimate your federal & state taxes with Aiwyn's tax engineCommand
 
 `claude mcp add --transport http aiwyn-tax https://mcp.columnapi.com/mcp`
 
@@ -307,6 +308,12 @@ Power AI Workflows with Customer ContextCommand
 
 `claude mcp add --transport http gainsight-staircase-ai https://mcp.staircase.ai/mcp`
 
+[**Sybill**](https://api.sybill.ai/docs/mcp.html)
+
+Ask AI about your sales calls, deals & pipelineCommand
+
+`claude mcp add sybill --transport http https://mcp.sybill.ai/mcp`
+
 [**Vibe Prospecting**](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
 
 Find company & contact dataCommand
@@ -434,12 +441,6 @@ Predictive intelligence on private companiesCommand
 Managed MCP platform for 350 sourcesCommand
 
 `claude mcp add cdata-connect-ai --transport http https://mcp.cloud.cdata.com/mcp`
-
-[**Microsoft 365**](https://support.claude.com/en/articles/12542951-enabling-and-using-the-microsoft-365-connector)
-
-Access your company's SharePoint, OneDrive, Outlook, and Teams directly in ClaudeCommand
-
-`claude mcp add microsoft-365 --transport http https://microsoft365.mcp.claude.com/mcp`
 
 [**PubMed**](https://support.claude.com/en/)
 
@@ -687,7 +688,7 @@ Real time web, mobile app, and market data.Command
 
 Send messages, create canvases, and fetch Slack dataCommand
 
-`claude mcp add slack --transport http https://mcp.slack.com/mcp`
+`claude mcp add --transport http --client-id 1601185624273.8899143856786 --callback-port 3118 slack https://mcp.slack.com/mcp`
 
 [**Smartsheet**](https://help.smartsheet.com/articles/2483663-use-smartsheet-connector-claude)
 
@@ -819,6 +820,12 @@ Notes & second brainCommand
 
 `claude mcp add --transport http craft https://mcp.craft.do/my/mcp`
 
+[**MoSPI**](https://www.datainnovation.mospi.gov.in/mospi-mcp)
+
+India's official statistics via natural languageCommand
+
+`claude mcp add --transport http mospi https://mcp.mospi.gov.in/`
+
 [**GraphOS MCP Tools**](https://www.apollographql.com/docs/graphos/platform/graphos-mcp-tools)
 
 Search Apollo docs, specs, and best practicesCommand
@@ -840,6 +847,12 @@ Query, analyze, and manage your PostHog insightsCommand
 Query and explore observability data and SLOsCommand
 
 `claude mcp add --transport http honeycomb https://mcp.honeycomb.io/mcp`
+
+[**incident.io**](https://docs.incident.io/ai/remote-mcp)
+
+See and manage everything in incident.ioCommand
+
+`claude mcp add incident-io --transport http https://mcp.incident.io/mcp`
 
 [**n8n**](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/)
 
@@ -864,6 +877,12 @@ Create, query, and manage structured content in SanityCommand
 [**Starburst**](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
 
 Securely retrieve data from your federated data sourcesRequires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html).
+
+[**Unthread**](https://docs.unthread.io/docs/unthread-ai/unthread-mcp)
+
+Manage and automate your support ticketsCommand
+
+`claude mcp add --transport http unthread https://app.unthread.io/api/mcp`
 
 [**Zocks**](https://help.zocks.io/en/articles/14075856-connect-to-the-zocks-mcp-server)
 

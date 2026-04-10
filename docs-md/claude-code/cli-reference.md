@@ -20,6 +20,7 @@ You can start sessions, pipe content, resume conversations, and manage updates w
 | `claude mcp` | Configure Model Context Protocol (MCP) servers | See the [Claude Code MCP documentation](mcp.md). |
 | `claude plugin` | Manage Claude Code [plugins](plugins.md). Alias: `claude plugins`. See [plugin reference](plugins-reference.md) for subcommands | `claude plugin install code-review@claude-plugins-official` |
 | `claude remote-control` | Start a [Remote Control](remote-control.md) server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See [Server mode flags](remote-control.md) | `claude remote-control --name "My Project"` |
+| `claude setup-token` | Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See [Generate a long-lived token](authentication.md) | `claude setup-token` |
 
 ## [​](#cli-flags) CLI flags
 
@@ -46,6 +47,7 @@ Customize Claude Code’s behavior with these command-line flags. `claude --help
 | `--disable-slash-commands` | Disable all skills and commands for this session | `claude --disable-slash-commands` |
 | `--disallowedTools` | Tools that are removed from the model’s context and cannot be used | `"Bash(git log *)" "Bash(git diff *)" "Edit"` |
 | `--effort` | Set the [effort level](model-config.md) for the current session. Options: `low`, `medium`, `high`, `max` (Opus 4.6 only). Session-scoped and does not persist to settings | `claude --effort high` |
+| `--exclude-dynamic-system-prompt-sections` | Move per-machine sections from the system prompt (working directory, environment info, memory paths, git status) into the first user message. Improves prompt-cache reuse across different users and machines running the same task. Only applies with the default system prompt; ignored when `--system-prompt` or `--system-prompt-file` is set. Use with `-p` for scripted, multi-user workloads | `claude -p --exclude-dynamic-system-prompt-sections "query"` |
 | `--fallback-model` | Enable automatic fallback to specified model when default model is overloaded (print mode only) | `claude -p --fallback-model sonnet "query"` |
 | `--fork-session` | When resuming, create a new session ID instead of reusing the original (use with `--resume` or `--continue`) | `claude --resume abc123 --fork-session` |
 | `--from-pr` | Resume sessions linked to a specific GitHub PR. Accepts a PR number or URL. Sessions are automatically linked when created via `gh pr create` | `claude --from-pr 123` |

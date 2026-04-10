@@ -20,7 +20,7 @@ Human-readable name for the vault. 1-255 characters.
 
 metadata: Hash[Symbol, String]
 
-Arbitrary key-value metadata to attach to the vault.
+Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 betas: Array[[AnthropicBeta](api/beta.md)]
 
@@ -30,7 +30,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 18 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
@@ -75,6 +75,8 @@ Accepts one of the following:
 :"fast-mode-2026-02-01"
 
 :"output-300k-2026-03-24"
+
+:"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 

@@ -70,6 +70,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -315,6 +317,8 @@ required Name Name
 
 Accepts one of the following:
 
+"advisor"Advisor
+
 "web\_search"WebSearch
 
 "web\_fetch"WebFetch
@@ -530,6 +534,50 @@ class BetaServerToolCaller20260120:
 required string ToolID
 
 JsonElement Type "code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+required Content Content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+required ErrorCode ErrorCode
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"prompt\_too\_long"PromptTooLong
+
+"too\_many\_requests"TooManyRequests
+
+"overloaded"Overloaded
+
+"unavailable"Unavailable
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+required string Text
+
+JsonElement Type "advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+required string EncryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonElement Type "advisor\_redacted\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -1199,6 +1247,114 @@ The number of output tokens which were used.
 JsonElement Type "compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+required [BetaCacheCreation](api/beta.md)? CacheCreation
+
+Breakdown of cached tokens by TTL
+
+required Long Ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+required Long Ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+required Long CacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+required Long CacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+required Long InputTokens
+
+The number of input tokens which were used.
+
+required [Model](api/messages.md) Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"ClaudeOpus4\_1
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"ClaudeOpus4\_0
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"ClaudeOpus4\_20250514
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"ClaudeSonnet4\_0
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
+
+Fast and cost-effective model
+
+required Long OutputTokens
+
+The number of output tokens which were used.
+
+JsonElement Type "advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 required Long OutputTokens
 

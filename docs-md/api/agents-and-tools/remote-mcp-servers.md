@@ -188,7 +188,7 @@ Requires user-specific URL. [Get your URL here](https://docs.port.io/ai-interfac
 
 [Aiwyn Tax (formerly Column Tax)](https://docs.columntax.com/page/aiwyn-tax-mcp-server)
 
-Prepare your federal & state tax return 100% accurately
+Estimate your federal & state taxes with Aiwyn's tax engine
 
 URL
 
@@ -345,6 +345,14 @@ From query to qualified lead in seconds.
 URL
 
 `https://sprouts-mcp-server.kartikay-dhar.workers.dev`
+
+[Sybill](https://api.sybill.ai/docs/mcp.html)
+
+Ask AI about your sales calls, deals & pipeline
+
+URL
+
+`https://mcp.sybill.ai/mcp`
 
 [Vibe Prospecting](https://developers.explorium.ai/mcp-docs/agentsource-mcp)
 
@@ -547,14 +555,6 @@ Managed MCP platform for 350 sources
 URL
 
 `https://mcp.cloud.cdata.com/mcp`
-
-[Microsoft 365](https://support.claude.com/en/articles/12542951-enabling-and-using-the-microsoft-365-connector)
-
-Access your company's SharePoint, OneDrive, Outlook, and Teams directly in Claude
-
-URL
-
-`https://microsoft365.mcp.claude.com/mcp`
 
 [PubMed](https://support.claude.com/en/)
 
@@ -1118,6 +1118,12 @@ URL
 
 `https://mcp.tavily.com/mcp`
 
+[Tines](https://www.tines.com/docs/actions/templates/mcp-server/)
+
+Securely deploy servers in a matter of seconds in Tines
+
+Requires user-specific URL. [Get your URL here](https://www.tines.com/docs/actions/templates/mcp-server/)
+
 [tldraw](https://tldraw.notion.site/tldraw-mcp-app)
 
 Let Claude sketch, draw, and diagram with you
@@ -1258,6 +1264,14 @@ URL
 
 `https://mcp.craft.do/my/mcp`
 
+[MoSPI](https://www.datainnovation.mospi.gov.in/mospi-mcp)
+
+India's official statistics via natural language
+
+URL
+
+`https://mcp.mospi.gov.in/`
+
 [Common Room](https://www.commonroom.io/docs/using-common-room/common-room-for-claude-connector-and-plugin/)
 
 Your GTM Copilot
@@ -1279,6 +1293,14 @@ Query and explore observability data and SLOs
 URL
 
 `https://mcp.honeycomb.io/mcp`
+
+[incident.io](https://docs.incident.io/ai/remote-mcp)
+
+See and manage everything in incident.io
+
+URL
+
+`https://mcp.incident.io/mcp`
 
 [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/)
 
@@ -1305,6 +1327,14 @@ URL
 Securely retrieve data from your federated data sources
 
 Requires user-specific URL. [Get your URL here](https://docs.starburst.io/starburst-galaxy/ai-workflows/mcp-server.html)
+
+[Unthread](https://docs.unthread.io/docs/unthread-ai/unthread-mcp)
+
+Manage and automate your support tickets
+
+URL
+
+`https://app.unthread.io/api/mcp`
 
 [Zocks](https://help.zocks.io/en/articles/14075856-connect-to-the-zocks-mcp-server)
 
@@ -1359,6 +1389,14 @@ URL
 Answer questions with the Hex agent
 
 Requires user-specific URL. [Get your URL here](https://learn.hex.tech/docs/administration/mcp-server#connect-to-claude)
+
+[Zoom for Claude](https://developers.zoom.us/docs/mcp/zoom/)
+
+Search, recap, and act on your Zoom meetings
+
+URL
+
+`https://mcp.zoom.us/mcp/zoom/streamable`
 
 **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 

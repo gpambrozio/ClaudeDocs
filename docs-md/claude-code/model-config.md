@@ -213,9 +213,9 @@ Note: `ANTHROPIC_SMALL_FAST_MODEL` is deprecated in favor of
 ### [​](#pin-models-for-third-party-deployments) Pin models for third-party deployments
 
 When deploying Claude Code through [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), or [Foundry](microsoft-foundry.md), pin model versions before rolling out to users.
-Without pinning, Claude Code uses model aliases (`sonnet`, `opus`, `haiku`) that resolve to the latest version. When Anthropic releases a new model, users whose accounts don’t have the new version enabled will break silently.
+Without pinning, Claude Code uses model aliases (`sonnet`, `opus`, `haiku`) that resolve to the latest version. When Anthropic releases a new model that isn’t yet enabled in a user’s account, Bedrock and Vertex AI users see a notice and fall back to the previous version for that session, while Foundry users see errors because Foundry has no equivalent startup check.
 
-Set all three model environment variables to specific version IDs as part of your initial setup. Skipping this step means a Claude Code update can break your users without any action on your part.
+Set all three model environment variables to specific version IDs as part of your initial setup. Pinning lets you control when your users move to a new model.
 
 Use the following environment variables with version-specific model IDs for your provider:
 

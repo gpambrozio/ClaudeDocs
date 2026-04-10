@@ -24,7 +24,7 @@ Body param: ID of the `environment` defining the container configuration for thi
 
 --metadata: optional map[string]
 
-Body param: Arbitrary key-value metadata attached to the session.
+Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 --resource: optional array of [BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md) { authorization\_token, type, url, 2 more }  or [BetaManagedAgentsFileResourceParams](api/beta.md) { file\_id, type, mount\_path }
 

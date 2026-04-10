@@ -64,6 +64,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+
 Auth auth
 
 Authentication details for creating a credential.
@@ -162,7 +164,7 @@ Human-readable name for the credential. Up to 255 characters.
 
 Optional<Metadata> metadata
 
-Arbitrary key-value metadata to attach to the credential.
+Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 ##### ReturnsExpand Collapse
 

@@ -52,6 +52,7 @@ Built-in tools that Claude invokes via `tool_use`. Server-side tools are run by 
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
+| [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation for long-horizon agentic workloads. | ZDR eligible | Claude API (Beta) |
 | [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Not ZDR eligible | Claude API (GA)  Microsoft Foundry (Beta) |
 | [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | ZDR eligible\* | Claude API (GA)  Microsoft Foundry (Beta) |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | ZDR eligible\* | Claude API (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |

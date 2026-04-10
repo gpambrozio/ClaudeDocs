@@ -25,7 +25,7 @@ Use **cloud tasks** for work that should run reliably without your machine. Use 
 
 ## [​](#schedule-a-recurring-prompt-with-/loop) Schedule a recurring prompt with /loop
 
-The `/loop` [bundled skill](skills.md) is the quickest way to schedule a recurring prompt. Pass an optional interval and a prompt, and Claude sets up a cron job that fires in the background while the session stays open.
+The `/loop` [bundled skill](commands.md) is the quickest way to schedule a recurring prompt. Pass an optional interval and a prompt, and Claude sets up a cron job that fires in the background while the session stays open.
 
 ```shiki
 /loop 5m check if the deployment finished and tell me what happened

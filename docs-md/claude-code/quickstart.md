@@ -2,20 +2,6 @@
 
 This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
-TerminalDesktopVS CodeJetBrains
-
-I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
-
-macOS / LinuxWindowsHomebrewWinGet
-
-$
-
-curl -fsSL https://claude.ai/install.sh | bash
-
-Copy
-
-[Troubleshooting](troubleshooting.md)
-
 ## [​](#before-you-begin) Before you begin
 
 Make sure you have:
@@ -61,7 +47,9 @@ Native installations automatically update in the background to keep you on the l
 brew install --cask claude-code
 ```
 
-Homebrew installations do not auto-update. Run `brew upgrade claude-code` periodically to get the latest features and security fixes.
+Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
+
+Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
 
 ```shiki
 winget install Anthropic.ClaudeCode

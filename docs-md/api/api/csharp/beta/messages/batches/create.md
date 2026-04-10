@@ -1360,6 +1360,8 @@ required Name Name
 
 Accepts one of the following:
 
+"advisor"Advisor
+
 "web\_search"WebSearch
 
 "web\_fetch"WebFetch
@@ -1855,6 +1857,73 @@ class BetaServerToolCaller20260120:
 required string ToolID
 
 JsonElement Type "code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlockParam:
+
+required Content Content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultErrorParam:
+
+required ErrorCode ErrorCode
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"MaxUsesExceeded
+
+"prompt\_too\_long"PromptTooLong
+
+"too\_many\_requests"TooManyRequests
+
+"overloaded"Overloaded
+
+"unavailable"Unavailable
+
+"execution\_time\_exceeded"ExecutionTimeExceeded
+
+JsonElement Type "advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlockParam:
+
+required string Text
+
+JsonElement Type "advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlockParam:
+
+required string EncryptedContent
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+JsonElement Type "advisor\_redacted\_result"constant
+
+required string ToolUseID
+
+JsonElement Type "advisor\_tool\_result"constant
+
+[BetaCacheControlEphemeral](api/beta.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
 
 class BetaCodeExecutionToolResultBlockParam:
 
@@ -4292,6 +4361,156 @@ Boolean UseCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+class BetaAdvisorTool20260301:
+
+required [Model](api/messages.md) Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"ClaudeMythosPreview
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"ClaudeOpus4\_1
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"ClaudeOpus4\_1\_20250805
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"ClaudeOpus4\_0
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"ClaudeOpus4\_20250514
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"ClaudeSonnet4\_0
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"ClaudeSonnet4\_20250514
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"Claude\_3\_Haiku\_20240307
+
+Fast and cost-effective model
+
+JsonElement Name "advisor"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonElement Type "advisor\_20260301"constant
+
+IReadOnlyList<AllowedCaller> AllowedCallers
+
+Accepts one of the following:
+
+"direct"Direct
+
+"code\_execution\_20250825"CodeExecution20250825
+
+"code\_execution\_20260120"CodeExecution20260120
+
+[BetaCacheControlEphemeral](api/beta.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+[BetaCacheControlEphemeral](api/beta.md)? Caching
+
+Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+Boolean DeferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Long? MaxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Boolean Strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119:
 
 JsonElement Name "tool\_search\_tool\_bm25"constant
@@ -4529,6 +4748,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "fast-mode-2026-02-01"FastMode2026\_02\_01
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
+
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 

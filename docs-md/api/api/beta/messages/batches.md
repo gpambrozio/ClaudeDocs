@@ -449,9 +449,11 @@ id: string
 
 input: map[unknown]
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
 Accepts one of the following:
+
+"advisor"
 
 "web\_search"
 
@@ -668,6 +670,50 @@ BetaServerToolCaller20260120 = object { tool\_id, type }
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+BetaAdvisorToolResultError = object { error\_code, type }
+
+error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"
+
+"prompt\_too\_long"
+
+"too\_many\_requests"
+
+"overloaded"
+
+"unavailable"
+
+"execution\_time\_exceeded"
+
+type: "advisor\_tool\_result\_error"
+
+BetaAdvisorResultBlock = object { text, type }
+
+text: string
+
+type: "advisor\_result"
+
+BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+
+encrypted\_content: string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: "advisor\_redacted\_result"
+
+tool\_use\_id: string
+
+type: "advisor\_tool\_result"
 
 BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
 
@@ -1264,7 +1310,7 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -1347,6 +1393,124 @@ The number of output tokens which were used.
 type: "compaction"
 
 Usage for a compaction iteration
+
+BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+UnionMember1 = string
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "advisor\_message"
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: number
 
@@ -1723,9 +1887,11 @@ id: string
 
 input: map[unknown]
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
 Accepts one of the following:
+
+"advisor"
 
 "web\_search"
 
@@ -1942,6 +2108,50 @@ BetaServerToolCaller20260120 = object { tool\_id, type }
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+BetaAdvisorToolResultError = object { error\_code, type }
+
+error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"
+
+"prompt\_too\_long"
+
+"too\_many\_requests"
+
+"overloaded"
+
+"unavailable"
+
+"execution\_time\_exceeded"
+
+type: "advisor\_tool\_result\_error"
+
+BetaAdvisorResultBlock = object { text, type }
+
+text: string
+
+type: "advisor\_result"
+
+BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+
+encrypted\_content: string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: "advisor\_redacted\_result"
+
+tool\_use\_id: string
+
+type: "advisor\_tool\_result"
 
 BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
 
@@ -2538,7 +2748,7 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -2621,6 +2831,124 @@ The number of output tokens which were used.
 type: "compaction"
 
 Usage for a compaction iteration
+
+BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+UnionMember1 = string
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "advisor\_message"
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: number
 
@@ -2959,9 +3287,11 @@ id: string
 
 input: map[unknown]
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
 Accepts one of the following:
+
+"advisor"
 
 "web\_search"
 
@@ -3178,6 +3508,50 @@ BetaServerToolCaller20260120 = object { tool\_id, type }
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+BetaAdvisorToolResultError = object { error\_code, type }
+
+error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
+
+Accepts one of the following:
+
+"max\_uses\_exceeded"
+
+"prompt\_too\_long"
+
+"too\_many\_requests"
+
+"overloaded"
+
+"unavailable"
+
+"execution\_time\_exceeded"
+
+type: "advisor\_tool\_result\_error"
+
+BetaAdvisorResultBlock = object { text, type }
+
+text: string
+
+type: "advisor\_result"
+
+BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+
+encrypted\_content: string
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: "advisor\_redacted\_result"
+
+tool\_use\_id: string
+
+type: "advisor\_tool\_result"
 
 BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
 
@@ -3774,7 +4148,7 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -3857,6 +4231,124 @@ The number of output tokens which were used.
 type: "compaction"
 
 Usage for a compaction iteration
+
+BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+UnionMember1 = string
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "advisor\_message"
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: number
 

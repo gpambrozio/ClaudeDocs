@@ -1356,6 +1356,8 @@ Name BetaServerToolUseBlockParamName
 
 Accepts one of the following:
 
+const BetaServerToolUseBlockParamNameAdvisor BetaServerToolUseBlockParamName = "advisor"
+
 const BetaServerToolUseBlockParamNameWebSearch BetaServerToolUseBlockParamName = "web\_search"
 
 const BetaServerToolUseBlockParamNameWebFetch BetaServerToolUseBlockParamName = "web\_fetch"
@@ -1851,6 +1853,73 @@ type BetaServerToolCaller20260120 struct{…}
 ToolID string
 
 Type CodeExecution20260120
+
+type BetaAdvisorToolResultBlockParamResp struct{…}
+
+Content BetaAdvisorToolResultBlockParamContentUnionResp
+
+Accepts one of the following:
+
+type BetaAdvisorToolResultErrorParamResp struct{…}
+
+ErrorCode BetaAdvisorToolResultErrorParamErrorCode
+
+Accepts one of the following:
+
+const BetaAdvisorToolResultErrorParamErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorParamErrorCode = "max\_uses\_exceeded"
+
+const BetaAdvisorToolResultErrorParamErrorCodePromptTooLong BetaAdvisorToolResultErrorParamErrorCode = "prompt\_too\_long"
+
+const BetaAdvisorToolResultErrorParamErrorCodeTooManyRequests BetaAdvisorToolResultErrorParamErrorCode = "too\_many\_requests"
+
+const BetaAdvisorToolResultErrorParamErrorCodeOverloaded BetaAdvisorToolResultErrorParamErrorCode = "overloaded"
+
+const BetaAdvisorToolResultErrorParamErrorCodeUnavailable BetaAdvisorToolResultErrorParamErrorCode = "unavailable"
+
+const BetaAdvisorToolResultErrorParamErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorParamErrorCode = "execution\_time\_exceeded"
+
+Type AdvisorToolResultError
+
+type BetaAdvisorResultBlockParamResp struct{…}
+
+Text string
+
+Type AdvisorResult
+
+type BetaAdvisorRedactedResultBlockParamResp struct{…}
+
+EncryptedContent string
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+Type AdvisorRedactedResult
+
+ToolUseID string
+
+Type AdvisorToolResult
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 type BetaCodeExecutionToolResultBlockParamResp struct{…}
 
@@ -4296,6 +4365,166 @@ UseCache booloptional
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+type BetaAdvisorTool20260301 struct{…}
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+Name Advisor
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+Type Advisor20260301
+
+AllowedCallers []stringoptional
+
+Accepts one of the following:
+
+const BetaAdvisorTool20260301AllowedCallerDirect BetaAdvisorTool20260301AllowedCaller = "direct"
+
+const BetaAdvisorTool20260301AllowedCallerCodeExecution20250825 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20250825"
+
+const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20260120"
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Caching [BetaCacheControlEphemeral](api/beta.md)optional
+
+Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLoptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+DeferLoading booloptional
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxUses int64optional
+
+Maximum number of times the tool can be used in the API request.
+
+Strict booloptional
+
+When true, guarantees schema validation on tool names and inputs
+
 type BetaToolSearchToolBm25\_20251119 struct{…}
 
 Name ToolSearchToolBm25
@@ -4539,6 +4768,8 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 

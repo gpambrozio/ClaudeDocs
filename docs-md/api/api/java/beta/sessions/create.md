@@ -62,6 +62,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+
 Agent agent
 
 Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
@@ -88,7 +90,7 @@ ID of the `environment` defining the container configuration for this session.
 
 Optional<Metadata> metadata
 
-Arbitrary key-value metadata attached to the session.
+Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 Optional<List<Resource>> resources
 

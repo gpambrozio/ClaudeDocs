@@ -461,9 +461,11 @@ id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
+name: :advisor | :web\_search | :web\_fetch | 5 more
 
 Accepts one of the following:
+
+:advisor
 
 :web\_search
 
@@ -680,6 +682,50 @@ class BetaServerToolCaller20260120 { tool\_id, type }
 tool\_id: String
 
 type: :code\_execution\_20260120
+
+class BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError { error\_code, type }
+
+error\_code: :max\_uses\_exceeded | :prompt\_too\_long | :too\_many\_requests | 3 more
+
+Accepts one of the following:
+
+:max\_uses\_exceeded
+
+:prompt\_too\_long
+
+:too\_many\_requests
+
+:overloaded
+
+:unavailable
+
+:execution\_time\_exceeded
+
+type: :advisor\_tool\_result\_error
+
+class BetaAdvisorResultBlock { text, type }
+
+text: String
+
+type: :advisor\_result
+
+class BetaAdvisorRedactedResultBlock { encrypted\_content, type }
+
+encrypted\_content: String
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: :advisor\_redacted\_result
+
+tool\_use\_id: String
+
+type: :advisor\_tool\_result
 
 class BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
@@ -1276,7 +1322,7 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -1359,6 +1405,124 @@ The number of output tokens which were used.
 type: :compaction
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+:"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+:"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+:"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+:"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+:"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+:"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+:"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+:"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+:"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+:"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+String
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+type: :advisor\_message
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: Integer
 
@@ -1735,9 +1899,11 @@ id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
+name: :advisor | :web\_search | :web\_fetch | 5 more
 
 Accepts one of the following:
+
+:advisor
 
 :web\_search
 
@@ -1954,6 +2120,50 @@ class BetaServerToolCaller20260120 { tool\_id, type }
 tool\_id: String
 
 type: :code\_execution\_20260120
+
+class BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError { error\_code, type }
+
+error\_code: :max\_uses\_exceeded | :prompt\_too\_long | :too\_many\_requests | 3 more
+
+Accepts one of the following:
+
+:max\_uses\_exceeded
+
+:prompt\_too\_long
+
+:too\_many\_requests
+
+:overloaded
+
+:unavailable
+
+:execution\_time\_exceeded
+
+type: :advisor\_tool\_result\_error
+
+class BetaAdvisorResultBlock { text, type }
+
+text: String
+
+type: :advisor\_result
+
+class BetaAdvisorRedactedResultBlock { encrypted\_content, type }
+
+encrypted\_content: String
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: :advisor\_redacted\_result
+
+tool\_use\_id: String
+
+type: :advisor\_tool\_result
 
 class BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
@@ -2550,7 +2760,7 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -2633,6 +2843,124 @@ The number of output tokens which were used.
 type: :compaction
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+:"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+:"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+:"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+:"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+:"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+:"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+:"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+:"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+:"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+:"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+String
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+type: :advisor\_message
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: Integer
 
@@ -2971,9 +3299,11 @@ id: String
 
 input: Hash[Symbol, untyped]
 
-name: :web\_search | :web\_fetch | :code\_execution | 4 more
+name: :advisor | :web\_search | :web\_fetch | 5 more
 
 Accepts one of the following:
+
+:advisor
 
 :web\_search
 
@@ -3190,6 +3520,50 @@ class BetaServerToolCaller20260120 { tool\_id, type }
 tool\_id: String
 
 type: :code\_execution\_20260120
+
+class BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
+
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError { error\_code, type }
+
+error\_code: :max\_uses\_exceeded | :prompt\_too\_long | :too\_many\_requests | 3 more
+
+Accepts one of the following:
+
+:max\_uses\_exceeded
+
+:prompt\_too\_long
+
+:too\_many\_requests
+
+:overloaded
+
+:unavailable
+
+:execution\_time\_exceeded
+
+type: :advisor\_tool\_result\_error
+
+class BetaAdvisorResultBlock { text, type }
+
+text: String
+
+type: :advisor\_result
+
+class BetaAdvisorRedactedResultBlock { encrypted\_content, type }
+
+encrypted\_content: String
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+type: :advisor\_redacted\_result
+
+tool\_use\_id: String
+
+type: :advisor\_tool\_result
 
 class BetaCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
@@ -3786,7 +4160,7 @@ input\_tokens: Integer
 
 The number of input tokens which were used.
 
-iterations: [BetaIterationsUsage](api/beta.md) { ,  }
+iterations: [BetaIterationsUsage](api/beta.md) { , ,  }
 
 Per-iteration token usage breakdown.
 
@@ -3869,6 +4243,124 @@ The number of output tokens which were used.
 type: :compaction
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for an advisor sub-inference iteration.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: Integer
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: Integer
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: Integer
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: Integer
+
+The number of input tokens read from the cache.
+
+input\_tokens: Integer
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 13 more
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+:"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+:"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+:"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+:"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+:"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+:"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+:"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+:"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+:"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+:"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+:"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+:"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+:"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+:"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+String
+
+output\_tokens: Integer
+
+The number of output tokens which were used.
+
+type: :advisor\_message
+
+Usage for an advisor sub-inference iteration
 
 output\_tokens: Integer
 

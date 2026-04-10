@@ -103,7 +103,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    ```shiki
    ant beta:agents create \
      --name "Coding Assistant" \
-     --model claude-sonnet-4-6 \
+     --model '{id: claude-sonnet-4-6}' \
      --system "You are a helpful coding assistant. Write clean, well-documented code." \
      --tool '{type: agent_toolset_20260401}'
    ```

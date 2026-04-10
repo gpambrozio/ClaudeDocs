@@ -20,6 +20,443 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+class BetaAdvisorRedactedResultBlockParam:
+
+String encryptedContent
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorResultBlockParam:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorTool20260301:
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; name "advisor"constant"advisor"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
+
+Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+
+class BetaAdvisorToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultErrorParam:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlockParam:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlockParam:
+
+String encryptedContent
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorToolResultErrorParam:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
 class BetaAllThinkingTurns:
 
 JsonValue; type "all"constant"all"constant
@@ -1483,6 +1920,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -1698,6 +2137,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -3310,6 +3793,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -3805,6 +4290,73 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultErrorParam:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlockParam:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlockParam:
+
+String encryptedContent
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 class BetaCodeExecutionToolResultBlockParam:
 
@@ -5727,6 +6279,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -5942,6 +6496,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -6612,6 +7210,114 @@ JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
+
 long outputTokens
 
 The number of output tokens which were used.
@@ -6747,6 +7453,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -8061,6 +8875,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -8556,6 +9372,73 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlockParam:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultErrorParam:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlockParam:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlockParam:
+
+String encryptedContent
+
+Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 class BetaCodeExecutionToolResultBlockParam:
 
@@ -9598,6 +10481,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -9813,6 +10698,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -10414,6 +11343,114 @@ JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
+
 long outputTokens
 
 The cumulative number of output tokens which were used.
@@ -10655,6 +11692,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -10870,6 +11909,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -11539,6 +12622,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -11811,6 +13002,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -12026,6 +13219,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -12695,6 +13932,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -12968,6 +14313,114 @@ JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
 
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
+
 long outputTokens
 
 The cumulative number of output tokens which were used.
@@ -13145,6 +14598,8 @@ Input input
 Name name
 
 Accepts one of the following:
+
+ADVISOR("advisor")
 
 WEB\_SEARCH("web\_search")
 
@@ -13361,6 +14816,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -14469,6 +15968,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -14520,6 +16021,8 @@ Input input
 Name name
 
 Accepts one of the following:
+
+ADVISOR("advisor")
 
 WEB\_SEARCH("web\_search")
 
@@ -18284,6 +19787,156 @@ Optional<Boolean> useCache
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
+class BetaAdvisorTool20260301:
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; name "advisor"constant"advisor"constant
+
+Name of the tool.
+
+This is how the tool will be called by the model and in `tool_use` blocks.
+
+JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
+
+Optional<List<AllowedCaller>> allowedCallers
+
+Accepts one of the following:
+
+DIRECT("direct")
+
+CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+
+CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> caching
+
+Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+Accepts one of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<Boolean> deferLoading
+
+If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxUses
+
+Maximum number of times the tool can be used in the API request.
+
+Optional<Boolean> strict
+
+When true, guarantees schema validation on tool names and inputs
+
 class BetaToolSearchToolBm25\_20251119:
 
 JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
@@ -18682,6 +20335,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -20717,6 +22478,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -20932,6 +22695,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -21601,6 +23408,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -21979,6 +23894,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -22194,6 +24111,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -22863,6 +24824,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
@@ -23205,6 +25274,8 @@ Name name
 
 Accepts one of the following:
 
+ADVISOR("advisor")
+
 WEB\_SEARCH("web\_search")
 
 WEB\_FETCH("web\_fetch")
@@ -23420,6 +25491,50 @@ class BetaServerToolCaller20260120:
 String toolId
 
 JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+
+class BetaAdvisorToolResultBlock:
+
+Content content
+
+Accepts one of the following:
+
+class BetaAdvisorToolResultError:
+
+ErrorCode errorCode
+
+Accepts one of the following:
+
+MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+
+PROMPT\_TOO\_LONG("prompt\_too\_long")
+
+TOO\_MANY\_REQUESTS("too\_many\_requests")
+
+OVERLOADED("overloaded")
+
+UNAVAILABLE("unavailable")
+
+EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+
+JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+
+class BetaAdvisorResultBlock:
+
+String text
+
+JsonValue; type "advisor\_result"constant"advisor\_result"constant
+
+class BetaAdvisorRedactedResultBlock:
+
+String encryptedContent
+
+Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+String toolUseId
+
+JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
 
 class BetaCodeExecutionToolResultBlock:
 
@@ -24089,6 +26204,114 @@ The number of output tokens which were used.
 JsonValue; type "compaction"constant"compaction"constant
 
 Usage for a compaction iteration
+
+class BetaAdvisorMessageIterationUsage:
+
+Token usage for an advisor sub-inference iteration.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "advisor\_message"constant"advisor\_message"constant
+
+Usage for an advisor sub-inference iteration
 
 long outputTokens
 
