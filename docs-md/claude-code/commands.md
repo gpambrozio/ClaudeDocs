@@ -14,7 +14,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/batch <instruction>` | **[Skill](skills.md).** Orchestrate large-scale changes across a codebase in parallel. Researches the codebase, decomposes the work into 5 to 30 independent units, and presents a plan. Once approved, spawns one background agent per unit in an isolated [git worktree](common-workflows.md). Each agent implements its unit, runs tests, and opens a pull request. Requires a git repository. Example: `/batch migrate src/ from Solid to React` |
 | `/btw <question>` | Ask a quick [side question](interactive-mode.md) without adding to the conversation |
 | `/chrome` | Configure [Claude in Chrome](chrome.md) settings |
-| `/claude-api` | **[Skill](skills.md).** Load Claude API reference material for your project’s language (Python, TypeScript, Java, Go, Ruby, C#, PHP, or cURL). Covers tool use, streaming, batches, structured outputs, Managed Agents, and common pitfalls. Also activates automatically when your code imports `anthropic` or `@anthropic-ai/sdk` |
+| `/claude-api` | **[Skill](skills.md).** Load Claude API reference material for your project’s language (Python, TypeScript, Java, Go, Ruby, C#, PHP, or cURL) and Managed Agents reference. Covers tool use, streaming, batches, structured outputs, and common pitfalls. Also activates automatically when your code imports `anthropic` or `@anthropic-ai/sdk` |
 | `/clear` | Clear conversation history and free up context. Aliases: `/reset`, `/new` |
 | `/color [color|default]` | Set the prompt bar color for the current session. Available colors: `red`, `blue`, `green`, `yellow`, `purple`, `orange`, `pink`, `cyan`. Use `default` to reset |
 | `/compact [instructions]` | Compact conversation with optional focus instructions |
@@ -43,7 +43,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/keybindings` | Open or create your keybindings configuration file |
 | `/login` | Sign in to your Anthropic account |
 | `/logout` | Sign out from your Anthropic account |
-| `/loop [interval] <prompt>` | **[Skill](skills.md).** Run a prompt repeatedly on an interval while the session stays open. Useful for polling a deployment, babysitting a PR, or periodically re-running another skill. Example: `/loop 5m check if the deploy finished`. See [Run prompts on a schedule](scheduled-tasks.md) |
+| `/loop [interval] [prompt]` | **[Skill](skills.md).** Run a prompt repeatedly while the session stays open. Omit the interval and Claude self-paces between iterations. Omit the prompt and Claude runs an autonomous maintenance check, or the prompt in `.claude/loop.md` if present. Example: `/loop 5m check if the deploy finished`. See [Run prompts on a schedule](scheduled-tasks.md) |
 | `/mcp` | Manage MCP server connections and OAuth authentication |
 | `/memory` | Edit `CLAUDE.md` memory files, enable or disable [auto-memory](memory.md), and view auto-memory entries |
 | `/mobile` | Show QR code to download the Claude mobile app. Aliases: `/ios`, `/android` |

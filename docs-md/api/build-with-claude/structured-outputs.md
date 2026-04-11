@@ -2,12 +2,12 @@
 
 Copy page
 
-Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Two complementary features are available:
+Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
 - **JSON outputs** (`output_config.format`): Get Claude's response in a specific JSON format
 - **Strict tool use** (`strict: true`): Guarantee schema validation on tool names and inputs
 
-These features can be used independently or together in the same request.
+You can use these features independently or together in the same request.
 
 Structured outputs are generally available on the Claude API and Amazon Bedrock for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
 
@@ -111,17 +111,18 @@ Output
 
 The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
-SDK helper methods (like `.parse()` and Pydantic/Zod integration) still accept `output_format` as a convenience parameter. The SDK handles the translation to `output_config.format` internally. The examples below show the SDK helper syntax.
+The Python SDK's `client.messages.parse()` still accepts `output_format` as a convenience parameter and translates it to `output_config.format` internally. Other SDKs require `output_config` directly. The examples below show the SDK helper syntax.
 
 #### Using native schema definitions
 
 Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
 - **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
-- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()`
+- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()` or typed JSON Schema literals with `jsonSchemaOutputFormat()`
 - **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
 - **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
-- **CLI**, **C#**, **Go**, **PHP**: Raw JSON schemas passed via `output_config`
+- **PHP**: Classes implementing `StructuredOutputModel` with `outputConfig: ['format' => MyClass::class]`
+- **CLI**, **C#**, **Go**: Raw JSON schemas passed via `output_config`
 
 CLI
 
@@ -194,11 +195,41 @@ Ruby
 
 The CLI passes raw JSON schemas as a YAML heredoc body. Use the GJSON `@fromstr` modifier with `--transform` to parse the JSON string returned in `content[0].text` and project specific fields.
 
-### Example usage
+```shiki
+ant messages create \
+  --transform 'content.0.text|@fromstr|{name,email}' \
+  --format yaml <<'YAML'
+model: claude-opus-4-6
+max_tokens: 1024
+messages:
+  - role: user
+    content: >-
+      Extract contact info: John Smith, john@example.com,
+      interested in the Pro plan
+output_config:
+  format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        name: {type: string}
+        email: {type: string}
+        plan_interest: {type: string}
+      required: [name, email, plan_interest]
+      additionalProperties: false
+YAML
+```
+
+Output
+
+```shiki
+name: John Smith
+email: john@example.com
+```
 
 #### How SDK transformation works
 
-The Python and TypeScript SDKs automatically transform schemas with unsupported features:
+The Python, TypeScript, Ruby, and PHP SDKs automatically transform schemas with unsupported features:
 
 1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)
 2. **Update descriptions** with constraint info (e.g., "Must be at least 100"), when the constraint is not directly supported with structured outputs
@@ -208,7 +239,7 @@ The Python and TypeScript SDKs automatically transform schemas with unsupported 
 
 This means Claude receives a simplified schema, but your code still enforces all constraints through validation.
 
-**Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the description is updated to "Must be at least 100", and the SDK validates the response against the original constraint.
+**Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the SDK updates the description to "Must be at least 100" and validates the response against the original constraint.
 
 ### Common use cases
 
@@ -224,7 +255,7 @@ For enforcing JSON Schema compliance on tool inputs with grammar-constrained sam
 
 ## Using both features together
 
-JSON outputs and strict tool use solve different problems and can be used together:
+JSON outputs and strict tool use solve different problems and work together:
 
 - **JSON outputs** control Claude's response format (what Claude says)
 - **Strict tool use** validates tool parameters (how Claude calls your functions)
@@ -303,7 +334,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 ### Pattern support (regex)
 
-The Python and TypeScript SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.
+The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.
 
 ### Property ordering
 
@@ -343,7 +374,7 @@ This means the output might look like:
 }
 ```
 
-If property order in the output is important to your application, ensure all properties are marked as required, or account for this reordering in your parsing logic.
+If property order in the output is important to your application, mark all properties as required, or account for this reordering in your parsing logic.
 
 ### Invalid outputs
 

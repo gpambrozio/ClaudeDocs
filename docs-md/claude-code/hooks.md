@@ -161,7 +161,7 @@ Where you define a hook determines its scope:
 | [Plugin](plugins.md) `hooks/hooks.json` | When plugin is enabled | Yes, bundled with the plugin |
 | [Skill](skills.md) or [agent](sub-agents.md) frontmatter | While the component is active | Yes, defined in the component file |
 
-For details on settings file resolution, see [settings](settings.md). Enterprise administrators can use `allowManagedHooksOnly` to block user, project, and plugin hooks. See [Hook configuration](settings.md).
+For details on settings file resolution, see [settings](settings.md). Enterprise administrators can use `allowManagedHooksOnly` to block user, project, and plugin hooks. Hooks from plugins force-enabled in managed settings `enabledPlugins` are exempt, so administrators can distribute vetted hooks through an organization marketplace. See [Hook configuration](settings.md).
 
 ### [​](#matcher-patterns) Matcher patterns
 

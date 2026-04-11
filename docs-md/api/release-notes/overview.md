@@ -18,7 +18,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 ### April 7, 2026
 
 - We announced [Claude Mythos Preview](https://anthropic.com/glasswing) is available as a gated research preview for defensive cybersecurity work as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only.
-- The [Messages API](api/messages.md) is now available on Amazon Bedrock as a research preview. The new Claude in Amazon Bedrock endpoint at `/anthropic/v1/messages` uses the same request shape as the first-party Claude API and runs on AWS-managed infrastructure with zero operator access. Available in `us-east-1`; contact your Anthropic account executive to request access. Learn more in [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md).
+- The [Messages API](api/messages.md) is now available on Amazon Bedrock as a research preview. The new Claude in Amazon Bedrock endpoint at `/anthropic/v1/messages` uses the same request shape as the first-party Claude API and runs on AWS-managed infrastructure with zero operator access. Available in `us-east-1`; contact your Anthropic account executive to request access. Learn more in [Claude in Amazon Bedrock (research preview)](build-with-claude/claude-in-amazon-bedrock-research-preview.md).
 
 ### March 30, 2026
 
