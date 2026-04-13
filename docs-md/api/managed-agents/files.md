@@ -104,16 +104,16 @@ curl
 
 ```shiki
 # List files associated with a session
-curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sess_abc123" \
+curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14"
+  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14"
 
 # Download a file
 curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
+  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
   -o output.txt
 ```
 
