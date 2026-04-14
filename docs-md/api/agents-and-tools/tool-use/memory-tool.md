@@ -113,7 +113,7 @@ For working examples, see:
 
 ## Basic usage
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

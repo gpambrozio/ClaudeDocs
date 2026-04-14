@@ -19,7 +19,7 @@ Specify MCP servers in the `mcp_servers` array when creating an agent. Each serv
 
 The `name` you assign in the MCP server array is used to reference the `mcp_toolset` entries in the tools array.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 AGENT_ID=$(ant beta:agents create \
@@ -37,7 +37,7 @@ The MCP toolset defaults to a permission policy of `always_ask`, which requires 
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and manage credentials.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \

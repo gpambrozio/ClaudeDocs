@@ -26,7 +26,7 @@ For model support, see the [Tool reference](agents-and-tools/tool-use/tool-refer
 
 ## Quick start
 
-Shell
+ShellCLIPython
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

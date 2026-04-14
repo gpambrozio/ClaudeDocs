@@ -49,7 +49,7 @@ Sonnet 4.6 defaults to `high` effort. Explicitly set effort when using Sonnet 4.
 
 ## Basic usage
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

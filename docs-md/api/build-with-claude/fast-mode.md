@@ -24,7 +24,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 ## Basic usage
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -79,7 +79,7 @@ For tier-specific rate limits, see the [rate limits page](api/rate-limits.md).
 
 The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -127,7 +127,7 @@ Falling back from fast to standard speed will result in a [prompt cache](build-w
 
 Since setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the examples below re-issue the original request with default retries for those cases.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # `ant` retries 429/5xx automatically and has no per-request max_retries

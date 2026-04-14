@@ -2,6 +2,16 @@
 
 The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the [changelog](changelog.md).
 
+[​](#week-15)
+
+Week 15
+
+v2.1.92–v2.1.101
+
+April 6–10, 2026
+
+**Ultraplan** enters early preview: draft a plan in the cloud from your CLI, review and comment on it in a web editor, then run it remotely or pull it back local. The first run now auto-creates a cloud environment for you.Also this week: the **Monitor** tool streams background events into the conversation so Claude can tail logs and react live, `/loop` self-paces when you omit the interval, `/team-onboarding` packages your setup into a replayable guide, and `/autofix-pr` turns on PR auto-fix from your terminal.[Read the Week 15 digest →](whats-new/2026-w15.md)
+
 [​](#week-14)
 
 Week 14

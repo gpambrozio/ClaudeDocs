@@ -10,7 +10,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string starts the session with the latest agent version.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -30,7 +30,7 @@ SESSION_ID=$(jq -r '.id' <<< "$session")
 
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -54,7 +54,7 @@ The agent defines how Claude behaves within the session, including the model, sy
 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and register credentials.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -77,7 +77,7 @@ VAULT_SESSION_ID=$(jq -r '.id' <<< "$vault_session")
 
 Creating a session provisions the environment and agent but does not start any work. To delegate a task, send events to the session using a [user event](managed-agents/events-and-streaming.md). The session acts as a state machine that tracks progress while events drive the actual execution.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
@@ -114,7 +114,7 @@ Sessions progress through these statuses:
 
 ### Retrieving a session
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 retrieved=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
@@ -126,7 +126,7 @@ echo "Status: $(jq -r '.status' <<< "$retrieved")"
 
 ### Listing sessions
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -140,7 +140,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
 
 Archive a session to prevent new events from being sent while preserving its history:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
@@ -155,7 +155,7 @@ Delete a session to permanently remove its record, events, and associated contai
 
 Files, memory stores, environments, and agents are independent resources and are not affected by session deletion.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \

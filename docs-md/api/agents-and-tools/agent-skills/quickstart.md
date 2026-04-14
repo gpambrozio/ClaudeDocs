@@ -25,7 +25,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
-CLI
+ShellCLIPythonTypeScript
 
 ```shiki
 ant beta:skills list --source anthropic
@@ -39,7 +39,7 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -85,7 +85,7 @@ When you make this request, Claude automatically matches your task to the releva
 
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 # Extract file_id from response (using jq)
@@ -109,7 +109,7 @@ Now that you've created your first document with Skills, try these variations:
 
 ### Create a spreadsheet
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -142,7 +142,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ### Create a Word document
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -175,7 +175,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ### Generate a PDF
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

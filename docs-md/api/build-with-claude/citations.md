@@ -12,7 +12,7 @@ Share your feedback and suggestions about the citations feature using this [form
 
 Here's an example of how to use citations with the Messages API:
 
-Shell
+ShellCLIPythonJava
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -128,7 +128,7 @@ Citations and prompt caching can be used together effectively.
 
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

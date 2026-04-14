@@ -13,7 +13,7 @@ There are two ways to enable prompt caching:
 
 The simplest way to start is with automatic caching:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -104,7 +104,7 @@ Prompt caching (both automatic and explicit) is supported on all [active Claude 
 
 Automatic caching is the simplest way to enable prompt caching. Instead of placing `cache_control` on individual content blocks, add a single `cache_control` field at the top level of your request body. The system automatically applies the cache breakpoint to the last cacheable block.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

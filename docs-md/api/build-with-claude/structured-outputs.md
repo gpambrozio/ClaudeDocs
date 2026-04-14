@@ -41,7 +41,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
 ### Quick start
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -124,7 +124,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 - **PHP**: Classes implementing `StructuredOutputModel` with `outputConfig: ['format' => MyClass::class]`
 - **CLI**, **C#**, **Go**: Raw JSON schemas passed via `output_config`
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 { read -r _ NAME; read -r _ EMAIL; } < <(
@@ -262,7 +262,7 @@ JSON outputs and strict tool use solve different problems and work together:
 
 When combined, Claude can call tools with guaranteed-valid parameters AND return structured JSON responses. This is useful for agentic workflows where you need both reliable tool calls and structured final outputs.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant messages create <<'YAML'

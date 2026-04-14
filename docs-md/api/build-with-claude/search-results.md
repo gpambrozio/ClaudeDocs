@@ -86,7 +86,7 @@ The most powerful use case is returning search results from your custom tools. T
 
 ### Example: Knowledge base tool
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 from anthropic.types import (
@@ -188,7 +188,7 @@ You can also provide search results directly in user messages. This is useful fo
 
 ### Example: Direct search results
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 #!/bin/sh

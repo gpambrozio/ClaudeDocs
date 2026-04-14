@@ -10,7 +10,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 First, upload a file using the [Files API](build-with-claude/files.md):
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 file=$(curl --fail-with-body -sS "${auth[@]}" \
@@ -26,7 +26,7 @@ Mount uploaded files into the container by adding them to the `resources` array 
 
 The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent knows what it is looking for.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(
@@ -55,7 +55,7 @@ A new `file_id` will be created that references the instance of the file in the 
 
 Mount multiple files by adding entries to the `resources` array:
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 "resources": [
@@ -71,7 +71,7 @@ A maximum of 100 files is supported per session.
 
 You can add or remove files from a session after creation using the session resources API. Each resource has an `id` returned when it is added (or listed), which you use for deletes.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 resource=$(
@@ -85,7 +85,7 @@ printf '%s\n' "${resource_id}"  # "sesrsc_01ABC..."
 
 List all resources on a session with `resources.list`. To remove a file, call `resources.delete` with the resource ID:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl --fail-with-body -sS "${auth[@]}" \
@@ -100,20 +100,20 @@ curl --fail-with-body -sS "${auth[@]}" -X DELETE \
 
 Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List files associated with a session
 curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14"
+  -H "anthropic-beta: managed-agents-2026-04-01"
 
 # Download a file
 curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01,files-api-2025-04-14" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
   -o output.txt
 ```
 

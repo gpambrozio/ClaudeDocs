@@ -98,7 +98,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Create an agent that defines the model, system prompt, and available tools.
 
-   CLI
+   curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
    ant beta:agents create \
@@ -117,7 +117,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    An environment defines the container where your agent runs.
 
-   CLI
+   curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
    ant beta:environments create \
@@ -132,7 +132,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Create a session that references your agent and environment.
 
-   curl
+   curlPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
    session=$(
@@ -160,7 +160,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Open a stream, send a user event, then process events as they arrive:
 
-   curl
+   curlPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
    # Send the user message first; the API buffers events until the stream attaches

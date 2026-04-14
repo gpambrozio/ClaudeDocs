@@ -60,7 +60,7 @@ Context editing is available on all supported Claude models.
 
 The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -95,7 +95,7 @@ curl https://api.anthropic.com/v1/messages \
 
 You can customize the tool result clearing behavior with additional parameters:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -151,7 +151,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Enable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -218,7 +218,7 @@ You can use both thinking block clearing and tool result clearing together:
 
 When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
@@ -321,7 +321,7 @@ Streaming Response
 
 The [token counting](build-with-claude/token-counting.md) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -383,7 +383,7 @@ For example, in a file editing workflow where Claude performs many operations, C
 
 To use both features together, enable them in your API request:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
@@ -510,7 +510,7 @@ Claude continues working from this summary as if it were the original conversati
 
 The threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.
 
-Python
+PythonTypeScript
 
 ```shiki
 # More frequent compaction for memory-constrained scenarios
@@ -524,7 +524,7 @@ compaction_control = {"enabled": True, "context_token_threshold": 150000}
 
 You can use a faster or cheaper model for generating summaries:
 
-Python
+PythonTypeScript
 
 ```shiki
 compaction_control = {
@@ -538,7 +538,7 @@ compaction_control = {
 
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
-Python
+PythonTypeScript
 
 ```shiki
 compaction_control = {

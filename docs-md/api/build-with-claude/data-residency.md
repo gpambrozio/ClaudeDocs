@@ -20,7 +20,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
 ### API usage
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

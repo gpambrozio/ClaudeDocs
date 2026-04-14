@@ -39,7 +39,7 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 
 Here's how to detect and handle streaming refusals in your application:
 
-Shell
+ShellPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Stream request and check for refusal

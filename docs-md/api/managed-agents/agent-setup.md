@@ -26,7 +26,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 The following example defines a coding agent that uses Claude Sonnet 4.6 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create \
@@ -73,7 +73,7 @@ The response echoes your configuration and adds `id`, `version`, `created_at`, `
 
 Updating an agent generates a new version. Pass the current `version` to ensure you're updating from a known state.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents update \
@@ -102,7 +102,7 @@ ant beta:agents update \
 
 Fetch the full version history to track how an agent has changed over time.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents:versions list --agent-id "$AGENT_ID"
@@ -112,7 +112,7 @@ ant beta:agents:versions list --agent-id "$AGENT_ID"
 
 Archiving makes the agent read-only. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents archive --agent-id "$AGENT_ID"

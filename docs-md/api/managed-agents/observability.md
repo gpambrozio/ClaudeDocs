@@ -16,7 +16,7 @@ The Console provides a visual timeline view of your agent sessions. Navigate to 
 
 For programmatic debugging, retrieve raw events via the API:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
@@ -40,7 +40,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
 
 Use the same event stream to surface errors and track token consumption:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \

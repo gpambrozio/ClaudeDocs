@@ -43,7 +43,7 @@ On subsequent requests, append the response to your messages. The API automatica
 
 Enable compaction by adding the `compact_20260112` strategy to `context_management.edits` in your Messages API request.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -84,7 +84,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Configure when compaction triggers using the `trigger` parameter:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
@@ -112,7 +112,7 @@ You have written a partial transcript for the initial task above. Please write a
 
 You can provide custom instructions via the `instructions` parameter to replace this prompt entirely. Custom instructions don't supplement the default; they completely replace it:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
@@ -136,7 +136,7 @@ Use `pause_after_compaction` to pause the API after generating the compaction su
 
 When enabled, the API returns a message with the `compaction` stop reason after generating the compaction block:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta compact-2026-01-12 \
@@ -245,7 +245,7 @@ Output
 
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta compact-2026-01-12 \
@@ -287,7 +287,7 @@ When the API receives a `compaction` block, all content blocks before it are ign
 
 When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --stream --format jsonl \
@@ -333,7 +333,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 - The system prompt cache remains valid and is read from cache
 - Only the compaction summary needs to be written as a new cache entry
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
@@ -398,7 +398,7 @@ When using server tools (like web search), the compaction trigger is checked at 
 
 The token counting endpoint (`/v1/messages/count_tokens`) applies existing `compaction` blocks in your prompt but does not trigger new compactions. Use it to check your effective token count after previous compactions:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 cat > request.yaml <<'YAML'
@@ -428,7 +428,7 @@ printf 'Original tokens: %s\n' "$ORIGINAL"
 
 Here's a complete example of a long-running conversation with compaction:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The CLI handles individual turns; maintain the messages array in the
@@ -452,7 +452,7 @@ YAML
 
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The CLI handles individual turns; maintain the messages array in the

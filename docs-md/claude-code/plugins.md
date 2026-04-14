@@ -242,7 +242,7 @@ For complete LSP configuration options, see [LSP servers](plugins-reference.md).
 
 ### [​](#ship-default-settings-with-your-plugin) Ship default settings with your plugin
 
-Plugins can include a `settings.json` file at the plugin root to apply default configuration when the plugin is enabled. Currently, only the `agent` key is supported.
+Plugins can include a `settings.json` file at the plugin root to apply default configuration when the plugin is enabled. Currently, only the `agent` and `subagentStatusLine` keys are supported.
 Setting `agent` activates one of the plugin’s [custom agents](sub-agents.md) as the main thread, applying its system prompt, tool restrictions, and model. This lets a plugin change how Claude Code behaves by default when enabled.
 
 settings.json

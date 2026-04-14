@@ -48,7 +48,7 @@ For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is 
 
 Here's a simple example that asks Claude to perform a calculation:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -122,7 +122,7 @@ The Python environment can process various file types uploaded via the Files API
 2. **Reference the file** in your message using a `container_upload` content block
 3. **Include the code execution tool** in your API request
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First, upload a file
@@ -159,7 +159,7 @@ curl https://api.anthropic.com/v1/messages \
 
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Request code execution that creates files; extract file_ids from tool results
@@ -414,7 +414,7 @@ This allows you to maintain created files between requests.
 
 ### Example
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First request: Create a file with a random number

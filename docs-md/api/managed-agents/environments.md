@@ -8,7 +8,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Create an environment
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:environments create \
@@ -22,7 +22,7 @@ The `name` must be unique within your organization and workspace.
 
 Pass the environment ID as a string when creating a session.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -45,7 +45,7 @@ EOF
 
 The `packages` field pre-installs packages into the container before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:environments create <<'YAML'
@@ -84,7 +84,7 @@ The `networking` field controls the container's outbound network access. It does
 | `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default. |
 | `limited` | Restricts container network access to the `allowed_hosts` list. Further access is enabled via the `allow_package_managers` and `allow_mcp_servers` bool. |
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 config=$(cat <<'EOF'
@@ -118,7 +118,7 @@ When using `limited` networking:
 
 ## Manage environments
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List environments

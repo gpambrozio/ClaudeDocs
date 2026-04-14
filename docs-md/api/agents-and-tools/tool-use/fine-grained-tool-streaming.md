@@ -14,7 +14,7 @@ Fine-grained tool streaming is available on all models and all platforms (Claude
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -97,7 +97,7 @@ The accumulation contract:
 
 The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array; the delta strings build the real value.
 
-Python
+PythonTypeScript
 
 ```shiki
 import json

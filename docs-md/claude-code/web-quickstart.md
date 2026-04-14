@@ -178,9 +178,9 @@ Enterprise organizations may need an admin to enable Claude Code on the web. Con
 `/web-setup` runs inside the Claude Code CLI, not your shell. Launch `claude` first, then type `/web-setup` at the prompt.
 If you typed it inside Claude Code and still see the error, your CLI is older than v2.1.80 or you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `claude update`, then `/login` to sign in with your claude.ai account.
 
-### [​](#”no-cloud-environment-available”-when-using-remote) ”No cloud environment available” when using `--remote`
+### [​](#”could-not-create-a-cloud-environment”-or-“no-cloud-environment-available”-when-using-remote-or-ultraplan) ”Could not create a cloud environment” or “No cloud environment available” when using `--remote` or ultraplan
 
-You haven’t created a cloud environment yet. Run `/web-setup` in the Claude Code CLI to create one, or visit [claude.ai/code](https://claude.ai/code) and follow the **Create your environment** step above.
+Remote-session features create a default cloud environment automatically if you don’t have one. If you see “Could not create a cloud environment”, automatic creation failed. If you see “No cloud environment available”, your CLI predates automatic creation. In either case, run `/web-setup` in the Claude Code CLI to create one manually, or visit [claude.ai/code](https://claude.ai/code) and follow the **Create your environment** step above.
 
 ### [​](#setup-script-failed) Setup script failed
 

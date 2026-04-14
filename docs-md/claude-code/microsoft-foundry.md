@@ -1,9 +1,3 @@
-# Claude Code on Microsoft Foundry
-
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=foundry_view_plans#plans-business)[Contact sales](https://www.anthropic.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=foundry_contact_sales)
-
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Microsoft Foundry, ensure you have:

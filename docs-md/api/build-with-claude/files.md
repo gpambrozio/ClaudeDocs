@@ -31,7 +31,7 @@ To use the Files API, you'll need to include the beta feature header: `anthropic
 
 Upload a file to be referenced in future API calls:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -X POST https://api.anthropic.com/v1/files \
@@ -61,7 +61,7 @@ Output
 
 Once uploaded, reference the file using its `file_id`:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -X POST https://api.anthropic.com/v1/messages \
@@ -110,7 +110,7 @@ The Files API supports different file types that correspond to different content
 
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Example: Reading a text file and sending it as plain text
@@ -178,7 +178,7 @@ For images, use the `image` content block:
 
 Retrieve a list of your uploaded files:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/files \
@@ -191,7 +191,7 @@ curl https://api.anthropic.com/v1/files \
 
 Retrieve information about a specific file:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl "https://api.anthropic.com/v1/files/$FILE_ID" \
@@ -204,7 +204,7 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID" \
 
 Remove a file from your workspace:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
@@ -217,7 +217,7 @@ curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
 
 Download files that have been created by skills or the code execution tool:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
@@ -294,7 +294,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#e192808d8492a1808f9589938e918882cf828e8c) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#bdcedcd1d8cefddcd3c9d5cfd2cdd4de93ded2d0) if you need higher limits for your use case
 
 Was this page helpful?
 

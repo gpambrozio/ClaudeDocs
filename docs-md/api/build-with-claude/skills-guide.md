@@ -62,7 +62,7 @@ Skills are specified using the `container` parameter in the Messages API. You ca
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -190,7 +190,7 @@ echo "Downloaded: $FILENAME"
 
 **Additional Files API operations:**
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Get file metadata
@@ -218,7 +218,7 @@ For complete details on the Files API, see the [Files API documentation](api/fil
 
 Reuse the same container across multiple messages by specifying the container ID:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First request creates container
@@ -263,7 +263,7 @@ YAML
 
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Initial request
@@ -333,7 +333,7 @@ The response may include a `pause_turn` stop reason, which indicates that the AP
 
 Combine multiple Skills in a single request to handle complex workflows:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -382,7 +382,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
 
-CLI
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Option 1: Upload individual files (one --file flag per file)
@@ -414,7 +414,7 @@ For complete request/response schemas, see the [Create Skill API reference](api/
 
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
-CLI
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List all Skills
@@ -430,7 +430,7 @@ See the [List Skills API reference](api/skills/list-skills.md) for pagination an
 
 Get details about a specific Skill:
 
-CLI
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:skills retrieve \
@@ -441,7 +441,7 @@ ant beta:skills retrieve \
 
 To delete a Skill, you must first delete all its versions:
 
-CLI
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Step 1: Delete all versions
@@ -478,7 +478,7 @@ Skills support versioning to manage updates safely:
 - Use `"latest"` to always get the most recent version
 - Create new versions when updating Skill files
 
-CLI
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Create a new version
@@ -589,7 +589,7 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 
 Combine Excel and custom DCF analysis Skills:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Create custom DCF analysis Skill
@@ -712,7 +712,7 @@ container = {
 
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First request creates cache
@@ -759,7 +759,7 @@ For best caching performance, keep your Skills list consistent across requests.
 
 Handle Skill-related errors gracefully:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 if ! RESULT=$(ant beta:messages create \

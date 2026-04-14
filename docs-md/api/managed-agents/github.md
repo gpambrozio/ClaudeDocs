@@ -12,7 +12,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 AGENT_ID=$(ant beta:agents create \
@@ -27,7 +27,7 @@ AGENT_ID=$(ant beta:agents create \
 
 Then create a session that mounts the GitHub repository:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -71,7 +71,7 @@ Use fine-grained personal access tokens with minimum required permissions. Avoid
 
 Mount multiple repositories by adding entries to the `resources` array:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 resources='[
@@ -94,7 +94,7 @@ resources='[
 
 After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or via `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List resources on the session
@@ -120,7 +120,7 @@ JSON
 
 With the GitHub MCP server, the agent can create branches, commit changes, and push them:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/events" \

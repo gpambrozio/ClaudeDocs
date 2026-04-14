@@ -32,7 +32,7 @@ Adaptive thinking also automatically enables [interleaved thinking](build-with-c
 
 Set `thinking.type` to `"adaptive"` in your API request:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -66,7 +66,7 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -96,7 +96,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Adaptive thinking works seamlessly with [streaming](build-with-claude/streaming.md). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant messages create --stream --format jsonl \
@@ -169,7 +169,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#a9dac8c5ccdae9c8c7ddc1dbc6d9c0ca87cac6c4).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](mailto:sales@anthropic.com).
 
 ### Controlling thinking display
 

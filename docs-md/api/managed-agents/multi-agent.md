@@ -28,7 +28,7 @@ Multiagent sessions work best when there are multiple well-scoped, specialized t
 
 When [defining your agent](managed-agents/agent-setup.md), list additional IDs of agents it is permitted to call:
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create <<YAML
@@ -51,7 +51,7 @@ Each entry in `callable_agents` must be the ID of an existing agent. Only one le
 
 Then create a session referencing the orchestrator:
 
-curl
+curlCLIPythonTypeScript
 
 ```shiki
 session=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -72,7 +72,7 @@ The session status also is an aggregation of all agent activity; if at least one
 
 List all threads in a session as follows:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
@@ -84,7 +84,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
 
 Stream events from a specific thread:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream" \
@@ -107,7 +107,7 @@ curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID
 
 List past events for a thread:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
@@ -138,7 +138,7 @@ When a `callable_agent` thread needs something from your client ([permission](ma
 
 The example below extends the [tool confirmation handler](managed-agents/events-and-streaming.md) to route replies. The same pattern applies to `user.custom_tool_result`.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 while IFS= read -r event_id; do

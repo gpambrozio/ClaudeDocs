@@ -62,7 +62,7 @@ brew install anthropics/tap/ant
 
 ## Quick start
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant messages create \
@@ -89,7 +89,7 @@ See individual SDK pages for platform-specific setup instructions.
 
 Access beta features using the `beta` namespace in any SDK:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:messages create \

@@ -50,7 +50,7 @@ Pass the rubric as inline text on `user.define_outcome` (shown in the next secti
 
 **Requires beta header `files-api-2025-04-14`.**
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 rubric=$(curl -fsSL https://api.anthropic.com/v1/files \
@@ -66,7 +66,7 @@ printf 'Uploaded rubric: %s\n' "$rubric_id"
 
 After creating a session, send a `user.define_outcome` event. The agent begins work immediately; no additional user message event is required.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Create a session
@@ -192,7 +192,7 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 
 You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$session_id" \
@@ -208,7 +208,7 @@ jq -r '.outcome_evaluations[] | "\(.outcome_id): \(.result)"' <<<"$session"
 
 The agent writes output files to `/mnt/session/outputs/` inside the container. Once the session is idle, fetch them via the [Files API](build-with-claude/files.md) scoped to the session:
 
-curl
+curlPython
 
 ```shiki
 # List files produced by this session

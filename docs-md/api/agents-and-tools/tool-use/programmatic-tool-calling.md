@@ -29,7 +29,7 @@ For the full code execution tool version matrix, see the [code execution tool mo
 
 Here's a simple example where Claude programmatically queries a database multiple times and aggregates results:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -215,7 +215,7 @@ Output
 
 Include the full conversation history plus your tool result:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant messages create <<'YAML'

@@ -8,7 +8,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript) SDKs offer multiple ways of streaming. The [PHP](https://github.com/anthropics/anthropic-sdk-php) SDK provides streaming via `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant messages create --stream --format jsonl \
@@ -26,7 +26,7 @@ ant messages create --stream --format jsonl \
 
 If you don't need to process text as it arrives, the SDKs provide a way to use streaming under the hood while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The ant CLI's --stream flag emits one event per line and does not
@@ -151,7 +151,7 @@ There may be `ping` events dispersed throughout the response as well. See [Event
 
 ### Basic streaming request
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -201,7 +201,7 @@ Tool use supports [fine-grained streaming](agents-and-tools/tool-use/fine-graine
 
 This request asks Claude to use a tool to report the weather.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
   curl https://api.anthropic.com/v1/messages \
@@ -336,7 +336,7 @@ data: {"type":"message_stop"}
 
 This request enables extended thinking with streaming to see Claude's step-by-step reasoning.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -408,7 +408,7 @@ data: {"type": "message_stop"}
 
 This request asks Claude to search the web for current weather information.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

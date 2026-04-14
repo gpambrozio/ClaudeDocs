@@ -88,7 +88,7 @@ For more information about regional vs global model IDs, see the [Global vs regi
 
 The following examples show how to print a list of all the Claude models available through Bedrock:
 
-AWS CLI
+AWS CLIBoto3 (Python)TypeScriptC#GoJavaPHPRuby
 
 ```shiki
 aws bedrock list-foundation-models --region=us-west-2 --by-provider anthropic --query "modelSummaries[*].modelId"
@@ -98,7 +98,7 @@ aws bedrock list-foundation-models --region=us-west-2 --by-provider anthropic --
 
 The following examples show how to generate text from Claude on Bedrock:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRubyBoto3 (Python)
 
 ```shiki
 # The ant CLI does not yet support Amazon Bedrock.
@@ -116,7 +116,7 @@ The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment varia
 
 To provide a token programmatically:
 
-C#
+C#GoJava
 
 ```shiki
 using Anthropic.Bedrock;
@@ -201,7 +201,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 The model IDs for Claude Sonnet 4.5 and 4 already include the `global.` prefix:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The ant CLI does not yet support Amazon Bedrock.
@@ -211,7 +211,7 @@ CLI
 
 To use regional endpoints, remove the `global.` prefix from the model ID:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The ant CLI does not yet support Amazon Bedrock.

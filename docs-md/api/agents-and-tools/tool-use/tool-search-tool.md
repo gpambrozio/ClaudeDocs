@@ -46,7 +46,7 @@ This keeps your context window efficient while maintaining high tool selection a
 
 Here's a simple example with deferred tools:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

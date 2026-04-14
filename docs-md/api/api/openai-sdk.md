@@ -23,7 +23,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
 ### Quick start example
 
-Python
+PythonTypeScript
 
 ```shiki
 import os
@@ -71,7 +71,7 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 
 You can enable [extended thinking](build-with-claude/extended-thinking.md) capabilities by adding the `thinking` parameter. While this improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full extended thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
-Python
+PythonTypeScript
 
 ```shiki
 response = client.chat.completions.create(

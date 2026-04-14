@@ -37,7 +37,7 @@ Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/c
 
 To enable dynamic filtering, use the `web_search_20260209` tool version:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -66,7 +66,7 @@ Your organization's administrator must enable web search in the [Claude Console]
 
 Provide the web search tool in your API request:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

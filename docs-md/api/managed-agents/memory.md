@@ -20,7 +20,7 @@ Every change to a memory creates an immutable **memory version** to support audi
 
 Give the store a `name` and a `description`. The description is passed to the agent, telling it what the store contains.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 store=$(curl -fsS https://api.anthropic.com/v1/memory_stores \
@@ -45,7 +45,7 @@ The memory store `id` (`memstore_...`) is what you pass when attaching the store
 
 Pre-load a store with reference material before any agent runs:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
@@ -71,7 +71,7 @@ Optionally include a `prompt` if you want to provide session-specific instructio
 
 You can configure `access` as well. It defaults to `read_write`, but `read_only` is also supported (shown explicitly in the example below).
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -123,7 +123,7 @@ Memory stores can be managed directly via the API. Use this for building review 
 
 List does not return memory content, just object metadata. Use `path_prefix` for directory-scoped lists (include a trailing slash: `/notes/` matches `/notes/a.md` but not `/notes_backup/old.md`).
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 page=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
@@ -137,7 +137,7 @@ jq -r '.data[] | "\(.path)  (\(.size_bytes) bytes, sha=\(.content_sha256[0:8]))"
 
 Fetching an individual memory returns the full content.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 mem=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$memory_id" \
@@ -151,7 +151,7 @@ jq -r '.content' <<< "$mem"
 
 Use `memories.write` to upsert a memory **by path**. If nothing exists at the path, it is created; if a memory already exists there, its content is replaced. To mutate an existing memory **by `mem_...` ID** (for example, to rename its path or safely apply a content edit), use `memories.update` instead (see [Update a memory](#update-a-memory) below).
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 mem=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
@@ -172,7 +172,7 @@ EOF
 
 Pass `precondition={"type": "not_exists"}` to `memories.write` to make it a create-only guard. If a memory already exists at the path, the write returns `409 memory_precondition_failed` instead of replacing it. Use this when seeding a store and you want to avoid clobbering existing content.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
@@ -199,7 +199,7 @@ Renaming onto an occupied path returns `409 conflict`. The caller must delete or
 
 The example below renames a memory to an archive path:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS -X PATCH "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
@@ -214,7 +214,7 @@ curl -fsS -X PATCH "https://api.anthropic.com/v1/memory_stores/$store_id/memorie
 
 To edit a memory's content without clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored hash still matches the one you read; on mismatch it returns `409 memory_precondition_failed`, at which point you re-read the memory and retry against the fresh state.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS -X PATCH "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
@@ -232,7 +232,7 @@ EOF
 
 ### Delete a memory
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS -X DELETE "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
@@ -259,7 +259,7 @@ Use the version endpoints to audit which user or agent changed what and when, to
 
 List paginated version metadata for a store, newest-first. Filter by `memory_id`, `operation` (`created`, `modified`, or `deleted`), `session_id`, `api_key_id`, or a `created_at_gte`/`created_at_lte` time range. The list response does not include the `content` body; fetch individual versions with `retrieve` when you need the full content.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
@@ -273,7 +273,7 @@ curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?
 
 Fetching an individual version returns the same fields as the list response plus the full `content` body.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id" \
@@ -286,7 +286,7 @@ curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/
 
 Redact scrubs content out of a historical version while preserving the audit trail (who did what, when). Use it for compliance workflows such as removing leaked secrets, PII, or user deletion requests. Redact hard clears `content`, `content_sha256`, `content_size_bytes`, and `path`; all other fields, including the actor and timestamps, are preserved.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -fsS -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id/redact" \

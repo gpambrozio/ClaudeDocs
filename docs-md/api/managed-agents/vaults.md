@@ -14,7 +14,7 @@ Vaults and credentials are workspace-scoped, meaning anyone with API key access 
 
 A vault is the collection of `credentials` associated with an end-user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 VAULT_ID=$(ant beta:vaults create \
@@ -57,7 +57,7 @@ The `refresh.token_endpoint_auth.type` field indicates how to authenticate the r
 - `client_secret_basic`: HTTP Basic auth with the client secret
 - `client_secret_post`: client secret in the POST body
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 CREDENTIAL_ID=$(ant beta:vaults:credentials create \
@@ -95,7 +95,7 @@ Constraints:
 
 Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:vaults:credentials update \
@@ -114,7 +114,7 @@ EOF
 
 Pass `vault_ids` when creating a session:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \

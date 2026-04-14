@@ -90,7 +90,7 @@ The following examples demonstrate how to use Claude's vision capabilities using
 
 The base64 example prompts use these variables:
 
-Shell
+ShellPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
     # For URL-based images, you can use the URL directly in your JSON request
@@ -106,7 +106,7 @@ Below are examples of how to include images in a Messages API request using base
 
 ### Base64-encoded image example
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -142,7 +142,7 @@ EOF
 
 ### URL-based image example
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -184,7 +184,7 @@ request size and latency as the conversation grows. Uploading images to the
 Files API and referencing them by `file_id` keeps request payloads small
 regardless of how many images accumulate in the conversation history.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First, upload your image to the Files API

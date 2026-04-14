@@ -75,7 +75,7 @@ Before running requests you may need to run `gcloud auth application-default log
 
 The following examples show how to generate text from Claude on Vertex AI:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 MODEL_ID=claude-opus-4-6
@@ -124,7 +124,7 @@ Vertex AI limits request payloads to 30 MB. When sending large documents or many
 Google Vertex AI offers three endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
-- **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States) for data residency with high availability
+- **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States or the European Union) for data residency with high availability
 - **Regional endpoints:** Guaranteed data routing through specific geographic regions
 
 Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
@@ -143,7 +143,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 **Multi-region endpoints:**
 
-- Dynamically route requests across regions within a geographic area (currently `us`, with `eu` coming soon)
+- Dynamically route requests across regions within a geographic area (currently `us` and `eu`)
 - Useful when you need data residency within a broad geography but want higher availability than a single region
 - 10% pricing premium over global endpoints
 - Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)
@@ -161,7 +161,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 Set the `region` parameter to `"global"` when initializing the client:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The ant CLI does not yet support Vertex AI.
@@ -169,15 +169,15 @@ CLI
 
 **Using multi-region endpoints:**
 
-Set the `region` parameter to a multi-region identifier such as `"us"`. The SDK routes requests to the multi-region endpoint (for example, `https://aiplatform.us.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
+Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 from anthropic import AnthropicVertex
 
 project_id = "MY_PROJECT_ID"
-region = "us"  # Multi-region: routes within US regions
+region = "us"  # Multi-region identifier: "us" or "eu"
 
 client = AnthropicVertex(project_id=project_id, region=region)
 
@@ -198,7 +198,7 @@ print(message)
 
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # The ant CLI does not yet support Vertex AI.

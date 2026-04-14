@@ -50,7 +50,7 @@ For more information about the response format of extended thinking, see the [Me
 
 Here is an example of using extended thinking in the Messages API:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -99,7 +99,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](mailto:sales@anthropic.com).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ee9d8f828b9dae8f809a869c819e878dc08d8183).
 
 ### Controlling thinking display
 
@@ -220,7 +220,7 @@ For more documentation on streaming via the Messages API, see [Streaming Message
 
 Here's how to handle streaming with thinking:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

@@ -21,7 +21,7 @@ anthropic-beta: BETA_FEATURE_NAME
 
 When using the SDK, you can specify beta headers in the request options:
 
-Shell
+ShellCLIPythonTypeScript
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

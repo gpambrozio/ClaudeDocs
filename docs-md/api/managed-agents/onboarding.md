@@ -28,7 +28,7 @@ Once your agent works as expected:
 1. Copy the agent ID from Console output.
 2. Reference it in your code when [creating sessions](managed-agents/sessions.md):
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session=$(curl -fsSL https://api.anthropic.com/v1/sessions \

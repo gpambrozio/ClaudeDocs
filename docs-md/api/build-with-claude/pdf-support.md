@@ -86,7 +86,7 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 
 The simplest approach is to reference a PDF directly from a URL:
 
-Shell
+ShellCLIPythonTypeScriptJava
 
 ```shiki
  curl https://api.anthropic.com/v1/messages \
@@ -117,7 +117,7 @@ Shell
 
 If you need to send PDFs from your local system or when a URL isn't available:
 
-Shell
+ShellCLIPythonTypeScriptJava
 
 ```shiki
 # Method 1: Fetch and encode a remote PDF
@@ -159,7 +159,7 @@ curl https://api.anthropic.com/v1/messages \
 
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
 
-Shell
+ShellCLIPythonTypeScriptJava
 
 ```shiki
 # First, upload your PDF to the Files API
@@ -254,7 +254,7 @@ For high-volume processing, consider these approaches:
 
 Cache PDFs to improve performance on repeated queries:
 
-Shell
+ShellCLIPythonTypeScriptJava
 
 ```shiki
 # Create a JSON request file using the pdf_base64.txt content
@@ -293,7 +293,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Use the Message Batches API for high-volume workflows:
 
-Shell
+ShellCLIPythonTypeScriptJava
 
 ```shiki
 # Create a JSON request file using the pdf_base64.txt content

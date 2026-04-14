@@ -26,7 +26,7 @@ All [active models](about-claude/models/overview.md) support token counting.
 
 ### Count tokens in basic messages
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -53,7 +53,7 @@ Output
 
 [Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -95,7 +95,7 @@ Output
 
 ### Count tokens in messages with images
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 #!/bin/sh
@@ -138,7 +138,7 @@ See [how the context window is calculated with extended thinking](build-with-cla
 - Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
 - **Current** assistant turn thinking **does** count toward your input tokens
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -188,7 +188,7 @@ Output
 
 Token counting supports PDFs with the same [limitations](build-with-claude/pdf-support.md) as the Messages API.
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/count_tokens \

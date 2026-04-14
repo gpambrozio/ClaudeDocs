@@ -59,7 +59,7 @@ Listing past events
 
 Send a `user.message` event to start or continue the agent's work:
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
@@ -83,7 +83,7 @@ EOF
 
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Agent is currently analyzing a file...
@@ -121,7 +121,7 @@ When the agent invokes a [custom tool](managed-agents/tools.md):
 3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` param along with the result content.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 exec {fd}< <(curl -sS -N --fail-with-body \
@@ -170,7 +170,7 @@ When a [permission policy](managed-agents/permission-policies.md) requires confi
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curl
+curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 exec {fd}< <(curl -sS -N --fail-with-body \

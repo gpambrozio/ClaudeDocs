@@ -165,7 +165,7 @@ if response.stop_reason == "max_tokens":
 
 If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-CLI
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 RESPONSE=$(ant messages create --max-tokens 1024 \

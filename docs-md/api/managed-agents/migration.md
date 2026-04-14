@@ -23,7 +23,7 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
 
 **Before** (Messages API loop, simplified):
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 messages = [{"role": "user", "content": task}]
@@ -56,7 +56,7 @@ while True:
 
 **After** (Claude Managed Agents):
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 agent=$(
@@ -256,7 +256,7 @@ The tradeoff for Anthropic running the agent loop is that a few things the SDK h
 
 When a new Claude model is released, migrating a Claude Managed Agents integration is typically a one-field change: update `model` on your [agent definition](managed-agents/agent-setup.md) and the change takes effect on the next session you create.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents update \

@@ -50,7 +50,7 @@ Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/c
 
 To enable dynamic filtering, use the `web_fetch_20260209` tool version:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -77,7 +77,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Provide the web fetch tool in your API request:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

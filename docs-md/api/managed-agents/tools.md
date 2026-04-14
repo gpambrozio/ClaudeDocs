@@ -27,7 +27,7 @@ The agent toolset includes the following tools. All are enabled by default when 
 
 Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create <<'YAML'
@@ -77,7 +77,7 @@ In addition to built-in tools, you can define custom tools. Custom tools are ana
 
 Custom tools allow you to extend Claude's capabilities to perform a wider variety of tasks. Each tool defines a contract: you specify what operations are available and what they return; Claude decides when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation.
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create <<'YAML'

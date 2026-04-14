@@ -55,7 +55,7 @@ Get started quickly with the computer use reference implementation that includes
 
 Here's how to get started with computer use:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \
@@ -440,7 +440,7 @@ This can cause Claude's click coordinates to miss their targets unless you handl
 
 To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 
-Python
+PythonTypeScript
 
 ```shiki
 import math

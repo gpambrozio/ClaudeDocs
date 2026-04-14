@@ -17,7 +17,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 Attach skills when creating an agent. A maximum of 20 skills per session is supported - this includes skills across all agents for the session, if you are working with [multiple agents](managed-agents/multi-agent.md).
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 agent=$(curl -sS https://api.anthropic.com/v1/agents \

@@ -226,7 +226,7 @@ URL
 
 `https://day.ai/api/mcp`
 
-[ICD-10 Codes](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
+[ICD-10 Codes](https://claude.com/resources/tutorials/using-the-icd-10-connector-in-claude)
 
 Access ICD-10-CM and ICD-10-PCS code sets
 
@@ -415,6 +415,14 @@ Discover, evaluate, and buy solutions for the cloud
 URL
 
 `https://marketplace-mcp.us-east-1.api.aws/mcp`
+
+[Kindora Funder Discovery](https://kindora.co/mcp)
+
+Find funders who support causes like yours
+
+URL
+
+`https://kindora-mcp.azurewebsites.net/mcp/`
 
 [Omni Analytics](https://docs.omni.co/ai/mcp)
 
@@ -1093,6 +1101,14 @@ Requires user-specific URL. [Get your URL here](https://help.smartsheet.com/arti
 Retrieve both structured and unstructured data
 
 Requires user-specific URL. [Get your URL here](https://docs.snowflake.com/en/user-guide/admin-account-identifier#label-account-name-find)
+
+[AdisInsight](https://adisinsight-mcp.springer.com)
+
+Pharmaceutical drug & clinical trial intelligence
+
+URL
+
+`https://adisinsight-mcp.springer.com/mcp`
 
 [Square](https://developer.squareup.com/docs/mcp)
 

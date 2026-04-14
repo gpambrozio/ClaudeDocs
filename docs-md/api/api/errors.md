@@ -61,7 +61,7 @@ Every API response includes a unique `request-id` header. This header contains a
 
 The official SDKs provide this value as a property on top-level response objects, containing the value of the `request-id` header:
 
-CLI
+CLIPythonTypeScript
 
 ```shiki
 # The request-id header is printed to stderr with --debug:
@@ -90,7 +90,7 @@ also will set a socket option for TCP keep-alive.
 
 If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:
 
-Python
+PythonTypeScript
 
 ```shiki
 with client.messages.stream(

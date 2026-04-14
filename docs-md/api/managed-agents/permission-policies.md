@@ -19,7 +19,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 When creating an agent, you may optionally apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy`:
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create <<'YAML'
@@ -43,7 +43,7 @@ The `mcp_server_name` must match the `name` referenced in the `mcp_servers` arra
 
 This example connects a GitHub MCP server and allows its tools to run without confirmation:
 
-CLI
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create <<'YAML'
@@ -67,7 +67,7 @@ YAML
 
 Use the `configs` array to override the default for individual tools. This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 tools='[
@@ -97,7 +97,7 @@ When the agent invokes a tool with an `always_ask` policy:
 
 Learn more about event handling in the [session event stream](managed-agents/events-and-streaming.md) guide.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Allow the tool to execute

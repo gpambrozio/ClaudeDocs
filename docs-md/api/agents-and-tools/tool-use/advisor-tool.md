@@ -41,7 +41,7 @@ The advisor tool is available in beta on the Claude API (Anthropic).
 
 ## Quick start
 
-Shell
+ShellCLIPythonTypeScriptC#GoPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

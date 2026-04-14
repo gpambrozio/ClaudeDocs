@@ -36,7 +36,7 @@ The MCP connector uses two components:
 
 This example enables all tools from an MCP server with default configuration:
 
-Shell
+ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 curl https://api.anthropic.com/v1/messages \

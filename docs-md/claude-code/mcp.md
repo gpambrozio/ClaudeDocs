@@ -188,37 +188,37 @@ Know everything about your prospects & customers with CRMxCommand
 
 `claude mcp add day-ai --transport http https://day.ai/api/mcp`
 
-[**bioRxiv**](https://docs.mcp.deepsense.ai/guides/biorxiv.html)
+[**bioRxiv**](https://claude.com/resources/tutorials/using-the-biorxiv-and-medrxiv-connector-in-claude)
 
 Access bioRxiv and medRxiv preprint dataCommand
 
 `claude mcp add biorxiv --transport http https://hcls.mcp.claude.com/biorxiv/mcp`
 
-[**ChEMBL**](https://docs.mcp.deepsense.ai/guides/chembl.html)
+[**ChEMBL**](https://claude.com/resources/tutorials/using-the-chembl-connector-in-claude)
 
 Access the ChEMBL DatabaseCommand
 
 `claude mcp add chembl --transport http https://hcls.mcp.claude.com/chembl/mcp`
 
-[**Clinical Trials**](https://docs.mcp.deepsense.ai/guides/clinical_trials.html)
+[**Clinical Trials**](https://claude.com/resources/tutorials/using-the-clinicaltrials-gov-connector-in-claude)
 
 Access ClinicalTrials.gov dataCommand
 
 `claude mcp add clinical-trials --transport http https://hcls.mcp.claude.com/clinical_trials/mcp`
 
-[**CMS Coverage**](https://docs.mcp.deepsense.ai/guides/cms_coverage.html)
+[**CMS Coverage**](https://claude.com/resources/tutorials/using-the-cms-coverage-connector-in-claude)
 
 Access the CMS Coverage DatabaseCommand
 
 `claude mcp add cms-coverage --transport http https://hcls.mcp.claude.com/cms_coverage/mcp`
 
-[**ICD-10 Codes**](https://docs.mcp.deepsense.ai/guides/icd10_codes.html)
+[**ICD-10 Codes**](https://claude.com/resources/tutorials/using-the-icd-10-connector-in-claude)
 
 Access ICD-10-CM and ICD-10-PCS code setsCommand
 
 `claude mcp add icd-10-codes --transport http https://hcls.mcp.claude.com/icd10_codes/mcp`
 
-[**NPI Registry**](https://docs.mcp.deepsense.ai/guides/npi_registry.html)
+[**NPI Registry**](https://claude.com/resources/tutorials/using-the-npi-registry-connector-in-claude)
 
 Access US National Provider Identifier (NPI) RegistryCommand
 
@@ -350,6 +350,12 @@ Discover, evaluate, and buy solutions for the cloudCommand
 
 `claude mcp add aws-marketplace --transport http https://marketplace-mcp.us-east-1.api.aws/mcp`
 
+[**Kindora Funder Discovery**](https://kindora.co/mcp)
+
+Find funders who support causes like yoursCommand
+
+`claude mcp add --transport http kindora-funder-discovery https://kindora-mcp.azurewebsites.net/mcp/`
+
 [**Omni Analytics**](https://docs.omni.co/ai/mcp)
 
 Query your data using natural language through Omni's semantic modelCommand
@@ -382,7 +388,7 @@ Integrate with the Airwallex Platform using ClaudeCommand
 
 Connect to Asana to coordinate tasks, projects, and goalsCommand
 
-`claude mcp add --transport streamable-http asana https://mcp.asana.com/v2/mcp`
+`claude mcp add --transport http asana https://mcp.asana.com/v2/mcp`
 
 [**Attio**](https://docs.attio.com/mcp/overview)
 
@@ -697,6 +703,12 @@ Analyze and manage Smartsheet data with ClaudeRequires user-specific URL. [Get y
 [**Snowflake**](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp)
 
 Retrieve both structured and unstructured dataRequires user-specific URL. [Get your URL here](https://docs.snowflake.com/en/user-guide/admin-account-identifier#label-account-name-find).
+
+[**AdisInsight**](https://adisinsight-mcp.springer.com)
+
+Pharmaceutical drug & clinical trial intelligenceCommand
+
+`claude mcp add --transport http adisinsight https://adisinsight-mcp.springer.com/mcp`
 
 [**Square**](https://developer.squareup.com/docs/mcp)
 
