@@ -3,13 +3,13 @@
 Scheduled tasks require Claude Code v2.1.72 or later. Check your version with `claude --version`.
 
 Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](channels.md): your CI can push the failure into the session directly.
-Tasks are session-scoped: they live in the current Claude Code process and are gone when you exit. For durable scheduling that survives restarts, use [Cloud](web-scheduled-tasks.md) or [Desktop](desktop-scheduled-tasks.md) scheduled tasks, or [GitHub Actions](github-actions.md).
+Tasks are session-scoped: they live in the current Claude Code process and are gone when you exit. For durable scheduling that survives restarts, use [Routines](routines.md), [Desktop scheduled tasks](desktop-scheduled-tasks.md), or [GitHub Actions](github-actions.md).
 
 ## [​](#compare-scheduling-options) Compare scheduling options
 
 Claude Code offers three ways to schedule recurring work:
 
-|  | [Cloud](web-scheduled-tasks.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
+|  | [Cloud](routines.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
 | --- | --- | --- | --- |
 | Runs on | Anthropic cloud | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
@@ -153,7 +153,7 @@ The offset is derived from the task ID, so the same task always gets the same of
 
 ### [​](#seven-day-expiry) Seven-day expiry
 
-Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Cloud scheduled tasks](web-scheduled-tasks.md) or [Desktop scheduled tasks](desktop-scheduled-tasks.md) for durable scheduling.
+Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Routines](routines.md) or [Desktop scheduled tasks](desktop-scheduled-tasks.md) for durable scheduling.
 
 ## [​](#cron-expression-reference) Cron expression reference
 
@@ -185,7 +185,7 @@ Session-scoped scheduling has inherent constraints:
 
 For cron-driven automation that needs to run unattended:
 
-- [Cloud scheduled tasks](web-scheduled-tasks.md): run on Anthropic-managed infrastructure
+- [Routines](routines.md): run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events
 - [GitHub Actions](github-actions.md): use a `schedule` trigger in CI
 - [Desktop scheduled tasks](desktop-scheduled-tasks.md): run locally on your machine
 

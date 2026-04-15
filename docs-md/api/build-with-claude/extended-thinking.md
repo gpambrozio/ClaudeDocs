@@ -99,7 +99,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ee9d8f828b9dae8f809a869c819e878dc08d8183).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#f182909d9482b1909f8599839e819892df929e9c).
 
 ### Controlling thinking display
 
@@ -405,14 +405,14 @@ With interleaved thinking, Claude can:
 - **[Claude Mythos Preview](https://anthropic.com/glasswing)**: Interleaved thinking happens automatically. Every inter-tool reasoning step moves into a thinking block instead of plain text, and thinking blocks are preserved across turns by default. No beta header is needed or supported.
 - **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md). No beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
 - **Claude Sonnet 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) (recommended). The `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`) is still functional but deprecated.
-- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4, Sonnet 4.5, Sonnet 4): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
+- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, Sonnet 4 (deprecated)): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
 - Direct calls to the Claude API allow you to pass `interleaved-thinking-2025-05-14` in requests to any model, with no effect (except Opus 4.6, where it's deprecated and safely ignored).
-- On 3rd-party platforms (for example, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4, Sonnet 4.5, or Sonnet 4, your request will fail.
+- On 3rd-party platforms (for example, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, or Sonnet 4 (deprecated), your request will fail.
 
 ### Tool use without interleaved thinking
 

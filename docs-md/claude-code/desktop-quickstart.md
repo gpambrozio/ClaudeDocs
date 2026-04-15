@@ -1,6 +1,6 @@
 # Get started with the desktop app
 
-The desktop app gives you Claude Code with a graphical interface: visual diff review, live app preview, GitHub PR monitoring with auto-merge, parallel sessions with Git worktree isolation, scheduled tasks, and the ability to run tasks remotely. No terminal required.
+The desktop app gives you Claude Code with a graphical interface built for running multiple sessions side by side: a sidebar for managing parallel work, a drag-and-drop layout with an integrated terminal and file editor, visual diff review, live app preview, GitHub PR monitoring with auto-merge, and scheduled tasks. No terminal required.
 Download Claude for your platform:
 
 [## macOS
@@ -67,7 +67,7 @@ You can also select:
 
 Choose a model
 
-Select a model from the dropdown next to the send button. See [models](model-config.md) for a comparison of Opus, Sonnet, and Haiku. You cannot change the model after the session starts.
+Select a model from the dropdown next to the send button. See [models](model-config.md) for a comparison of Opus, Sonnet, and Haiku. You can change the model later from the same dropdown.
 
 3
 
@@ -102,10 +102,11 @@ You’ve made your first edit. For the full reference on everything Desktop can 
 **Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.
 **Adjust how much control you have.** Your [permission mode](desktop.md) controls the balance. Ask permissions (default) requires approval before every edit. Auto accept edits auto-accepts file edits for faster iteration. Plan mode lets Claude map out an approach without touching any files, which is useful before a large refactor.
 **Add plugins for more capabilities.** Click the **+** button next to the prompt box and select **Plugins** to browse and install [plugins](desktop.md) that add skills, agents, MCP servers, and more.
+**Arrange your workspace.** Drag the chat, diff, terminal, file, and preview panes into whatever layout you want. Open the terminal with **Ctrl+`** to run commands alongside your session, or click a file path to open it in the file pane. See [Arrange your workspace](desktop.md).
 **Preview your app.** Click the **Preview** dropdown to run your dev server directly in the desktop. Claude can view the running app, test endpoints, inspect logs, and iterate on what it sees. See [Preview your app](desktop.md).
 **Track your pull request.** After opening a PR, Claude Code monitors CI check results and can automatically fix failures or merge the PR once all checks pass. See [Monitor pull request status](desktop.md).
 **Put Claude on a schedule.** Set up [scheduled tasks](desktop-scheduled-tasks.md) to run Claude automatically on a recurring basis: a daily code review every morning, a weekly dependency audit, or a briefing that pulls from your connected tools.
-**Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in your IDE](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.
+**Scale up when you’re ready.** Open [parallel sessions](desktop.md) from the sidebar to work on multiple tasks at once, each in its own Git worktree, and open the [tasks pane](desktop.md) to watch the subagents and background commands a session has running. Open a [side chat](desktop.md) to ask a question without derailing the main thread. Send [long-running work to the cloud](desktop.md) so it continues even if you close the app, or [continue a session on the web or in your IDE](desktop.md) if a task takes longer than expected. [Connect external tools](desktop.md) like GitHub, Slack, and Linear to bring your workflow together.
 
 ## [​](#coming-from-the-cli) Coming from the CLI?
 

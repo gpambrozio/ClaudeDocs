@@ -6,7 +6,7 @@ By default, scheduled tasks start a new session automatically at a time and freq
 
 Claude Code offers three ways to schedule recurring work:
 
-|  | [Cloud](web-scheduled-tasks.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
+|  | [Cloud](routines.md) | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md) |
 | --- | --- | --- | --- |
 | Runs on | Anthropic cloud | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
@@ -25,7 +25,7 @@ The Schedule page supports two kinds of tasks:
 - **Local tasks**: run on your machine. They have direct access to your local files and tools, but the desktop app must be open and your computer awake for them to run.
 - **Remote tasks**: run on Anthropic-managed cloud infrastructure. They keep running even when your computer is off, but work against a fresh clone of your repository rather than your local checkout.
 
-Both kinds appear in the same task grid. Click **New task** to pick which kind to create. The rest of this page covers local tasks; for remote tasks, see [Cloud scheduled tasks](web-scheduled-tasks.md).
+Both kinds appear in the same task grid. Click **New task** to pick which kind to create. The rest of this page covers local tasks; for remote tasks, see [Routines](routines.md).
 See [How scheduled tasks run](#how-scheduled-tasks-run) for details on missed runs and catch-up behavior for local tasks.
 
 By default, local scheduled tasks run against whatever state your working directory is in, including uncommitted changes. Enable the worktree toggle in the prompt input to give each run its own isolated Git worktree, the same way [parallel sessions](desktop.md) work.
@@ -59,7 +59,7 @@ For intervals the picker doesn’t offer (every 15 minutes, first of each month,
 
 Local scheduled tasks run on your machine. Desktop checks the schedule every minute while the app is open and starts a fresh session when a task is due, independent of any manual sessions you have open. Each task gets a fixed delay of up to 10 minutes after the scheduled time to stagger API traffic. The delay is deterministic: the same task always starts at the same offset.
 When a task fires, you get a desktop notification and a new session appears under a **Scheduled** section in the sidebar. Open it to see what Claude did, review changes, or respond to permission prompts. The session works like any other: Claude can edit files, run commands, create commits, and open pull requests.
-Tasks only run while the desktop app is running and your computer is awake. If your computer sleeps through a scheduled time, the run is skipped. To prevent idle-sleep, enable **Keep computer awake** in Settings under **Desktop app → General**. Closing the laptop lid still puts it to sleep. For tasks that need to run even when your computer is off, use a [remote task](web-scheduled-tasks.md) instead.
+Tasks only run while the desktop app is running and your computer is awake. If your computer sleeps through a scheduled time, the run is skipped. To prevent idle-sleep, enable **Keep computer awake** in Settings under **Desktop app → General**. Closing the laptop lid still puts it to sleep. For tasks that need to run even when your computer is off, or that should trigger automatically on an API call or GitHub event, use a [routine](routines.md) instead.
 
 ## [​](#missed-runs) Missed runs
 
@@ -87,7 +87,7 @@ To edit a task’s prompt on disk, open `~/.claude/scheduled-tasks/<task-name>/S
 
 ## [​](#related-resources) Related resources
 
-- [Cloud scheduled tasks](web-scheduled-tasks.md): schedule tasks that run on Anthropic-managed infrastructure even when your computer is off
+- [Routines](routines.md): run tasks on Anthropic-managed infrastructure on a schedule, via API call, or in response to GitHub events, even when your computer is off
 - [Run prompts on a schedule](scheduled-tasks.md): session-scoped scheduling with `/loop` in the CLI
 - [Claude Code GitHub Actions](github-actions.md): run Claude on a schedule in CI instead of on your machine
 - [Use Claude Code Desktop](desktop.md): the full Desktop app guide

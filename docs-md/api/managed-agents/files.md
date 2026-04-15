@@ -55,7 +55,7 @@ A new `file_id` will be created that references the instance of the file in the 
 
 Mount multiple files by adding entries to the `resources` array:
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 "resources": [
@@ -100,7 +100,7 @@ curl --fail-with-body -sS "${auth[@]}" -X DELETE \
 
 Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them.
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List files associated with a session

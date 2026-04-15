@@ -2,20 +2,6 @@
 
 This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
-TerminalDesktopVS CodeJetBrains
-
-I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
-
-macOS / LinuxWindowsHomebrewWinGet
-
-$
-
-curl -fsSL https://claude.ai/install.sh | bash
-
-Copy
-
-[Troubleshooting](troubleshooting.md)
-
 ## [​](#before-you-begin) Before you begin
 
 Make sure you have:
@@ -53,7 +39,7 @@ irm https://claude.ai/install.ps1 | iex
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
-If you see `The token '&&' is not a valid statement separator`, you’re in PowerShell, not CMD. Use the PowerShell command above instead. Your prompt shows `PS C:\` when you’re in PowerShell.**Native Windows setups require [Git for Windows](https://git-scm.com/downloads/win).** Install it first if you don’t have it. WSL setups do not need it.
+If you see `The token '&&' is not a valid statement separator`, you’re in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you’re in CMD, not PowerShell. Your prompt shows `PS C:\` when you’re in PowerShell and `C:\` without the `PS` when you’re in CMD.**Native Windows setups require [Git for Windows](https://git-scm.com/downloads/win).** Install it first if you don’t have it. WSL setups do not need it.
 
 Native installations automatically update in the background to keep you on the latest version.
 
