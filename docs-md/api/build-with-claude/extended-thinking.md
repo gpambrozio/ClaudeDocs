@@ -99,7 +99,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#f182909d9482b1909f8599839e819892df929e9c).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#7c0f1d10190f3c1d1208140e130c151f521f1311).
 
 ### Controlling thinking display
 
@@ -222,6 +222,8 @@ Here's how to handle streaming with thinking:
 
 ShellCLIPythonTypeScriptC#GoJavaPHPRuby
 
+[Try in Console](/workbench/new?user=What+is+the+greatest+common+divisor+of+1071+and+462%3F&thinking.budget_tokens=16000)
+
 ```shiki
 curl https://api.anthropic.com/v1/messages \
      --header "x-api-key: $ANTHROPIC_API_KEY" \
@@ -244,8 +246,6 @@ curl https://api.anthropic.com/v1/messages \
     ]
 }'
 ```
-
-[Try in Console](/workbench/new?user=What+is+the+greatest+common+divisor+of+1071+and+462%3F&thinking.budget_tokens=16000)
 
 Example streaming output:
 

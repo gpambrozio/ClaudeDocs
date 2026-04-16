@@ -2,6 +2,16 @@
 
 This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
+TerminalDesktopVS CodeJetBrains
+
+I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
+
+Claude Code for Desktop
+
+The full agent in a native app for macOS and Windows.
+
+[Download the app](https://claude.com/download?utm_source=claude_code&utm_medium=docs&utm_content=configurator_desktop_download) [Desktop guide](desktop-quickstart.md)
+
 ## [​](#before-you-begin) Before you begin
 
 Make sure you have:
