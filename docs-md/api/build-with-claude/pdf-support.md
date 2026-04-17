@@ -86,113 +86,110 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 
 The simplest approach is to reference a PDF directly from a URL:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
- curl https://api.anthropic.com/v1/messages \
-   -H "content-type: application/json" \
-   -H "x-api-key: $ANTHROPIC_API_KEY" \
-   -H "anthropic-version: 2023-06-01" \
-   -d '{
-     "model": "claude-opus-4-6",
-     "max_tokens": 1024,
-     "messages": [{
-         "role": "user",
-         "content": [{
-             "type": "document",
-             "source": {
-                 "type": "url",
-                 "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-             }
-         },
-         {
-             "type": "text",
-             "text": "What are the key findings in this document?"
-         }]
-     }]
- }'
+client = anthropic.Anthropic()
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "url",
+                        "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+                    },
+                },
+                {"type": "text", "text": "What are the key findings in this document?"},
+            ],
+        }
+    ],
+)
+
+print(message.content)
 ```
 
 #### Option 2: Base64-encoded PDF document
 
 If you need to send PDFs from your local system or when a URL isn't available:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-# Method 1: Fetch and encode a remote PDF
-curl -s "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
+import base64
+import httpx
 
-# Method 2: Encode a local PDF file
-# base64 document.pdf | tr -d '\n' > pdf_base64.txt
+# First, load and encode the PDF
+pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+pdf_data = base64.standard_b64encode(httpx.get(pdf_url).content).decode("utf-8")
 
-# Create a JSON request file using the pdf_base64.txt content
-jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [{
-        "role": "user",
-        "content": [{
-            "type": "document",
-            "source": {
-                "type": "base64",
-                "media_type": "application/pdf",
-                "data": $PDF_BASE64
-            }
-        },
+# Alternative: Load from a local file
+# with open("document.pdf", "rb") as f:
+#     pdf_data = base64.standard_b64encode(f.read()).decode("utf-8")
+
+# Send to Claude using base64 encoding
+client = anthropic.Anthropic()
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {
-            "type": "text",
-            "text": "What are the key findings in this document?"
-        }]
-    }]
-}' > request.json
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "application/pdf",
+                        "data": pdf_data,
+                    },
+                },
+                {"type": "text", "text": "What are the key findings in this document?"},
+            ],
+        }
+    ],
+)
 
-# Send the API request using the JSON file
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @request.json
+print(message.content)
 ```
 
 #### Option 3: Files API
 
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-# First, upload your PDF to the Files API
-curl -X POST https://api.anthropic.com/v1/files \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -F "file=@document.pdf"
+client = anthropic.Anthropic()
 
-# Then use the returned file_id in your message
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [{
-      "role": "user",
-      "content": [{
-        "type": "document",
-        "source": {
-          "type": "file",
-          "file_id": "file_abc123"
+# Upload the PDF file
+with open("document.pdf", "rb") as f:
+    file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
+
+# Use the uploaded file in a message
+message = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    betas=["files-api-2025-04-14"],
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {"type": "file", "file_id": file_upload.id},
+                },
+                {"type": "text", "text": "What are the key findings in this document?"},
+            ],
         }
-      },
-      {
-        "type": "text",
-        "text": "What are the key findings in this document?"
-      }]
-    }]
-  }'
+    ],
+)
+
+print(message.content)
 ```
 
 ### How PDF support works
@@ -254,114 +251,70 @@ For high-volume processing, consider these approaches:
 
 Cache PDFs to improve performance on repeated queries:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-# Create a JSON request file using the pdf_base64.txt content
-jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [{
-        "role": "user",
-        "content": [{
-            "type": "document",
-            "source": {
-                "type": "base64",
-                "media_type": "application/pdf",
-                "data": $PDF_BASE64
-            },
-            "cache_control": {
-              "type": "ephemeral"
-            }
-        },
+client = anthropic.Anthropic()
+# ...
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {
-            "type": "text",
-            "text": "Which model has the highest human preference win rates across each use-case?"
-        }]
-    }]
-}' > request.json
-
-# Then make the API call using the JSON file
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @request.json
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "application/pdf",
+                        "data": pdf_data,
+                    },
+                    "cache_control": {"type": "ephemeral"},
+                },
+                {"type": "text", "text": "Analyze this document."},
+            ],
+        }
+    ],
+)
 ```
 
 #### Process document batches
 
 Use the Message Batches API for high-volume workflows:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-# Create a JSON request file using the pdf_base64.txt content
-jq -n --rawfile PDF_BASE64 pdf_base64.txt '
-{
-  "requests": [
-      {
-          "custom_id": "my-first-request",
-          "params": {
-              "model": "claude-opus-4-6",
-              "max_tokens": 1024,
-              "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "document",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "application/pdf",
-                                "data": $PDF_BASE64
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": "Which model has the highest human preference win rates across each use-case?"
-                        }
-                    ]
-                }
-              ]
-          }
-      },
-      {
-          "custom_id": "my-second-request",
-          "params": {
-              "model": "claude-opus-4-6",
-              "max_tokens": 1024,
-              "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "document",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "application/pdf",
-                                "data": $PDF_BASE64
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "text": "Extract 5 key insights from this document."
-                        }
-                    ]
-                }
-              ]
-          }
-      }
-  ]
-}
-' > request.json
-
-# Then make the API call using the JSON file
-curl https://api.anthropic.com/v1/messages/batches \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @request.json
+client = anthropic.Anthropic()
+# ...
+message_batch = client.messages.batches.create(
+    requests=[
+        {
+            "custom_id": "doc1",
+            "params": {
+                "model": "claude-opus-4-7",
+                "max_tokens": 1024,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "document",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "application/pdf",
+                                    "data": pdf_data,
+                                },
+                            },
+                            {"type": "text", "text": "Summarize this document."},
+                        ],
+                    }
+                ],
+            },
+        }
+    ]
+)
 ```
 
 ## Next steps

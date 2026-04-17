@@ -57,7 +57,7 @@ Ruby
 Ruby
 
 ```shiki
-brew install anthropics/tap/ant
+pip install anthropic
 ```
 
 ## Quick start
@@ -65,11 +65,16 @@ brew install anthropics/tap/ant
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant messages create \
-  --model claude-opus-4-6 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello, Claude"}' \
-  --transform content
+import anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+print(message.content)
 ```
 
 ## Platform support
@@ -92,11 +97,12 @@ Access beta features using the `beta` namespace in any SDK:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create \
-  --model claude-opus-4-6 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello"}' \
-  --beta feature-name
+message = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+    betas=["feature-name"],
+)
 ```
 
 See [Beta headers](api/beta-headers.md) for available beta features.

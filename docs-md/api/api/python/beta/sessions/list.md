@@ -68,7 +68,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
 
 Accepts one of the following:
 
@@ -116,6 +116,8 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsSession: …
@@ -152,12 +154,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5", 5 more]
+Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
 - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
@@ -168,6 +171,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -613,7 +620,7 @@ Response 200
         "type": "agent",
         "version": 1
       },
-      "archived_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},
@@ -725,7 +732,7 @@ Response 200
         "type": "agent",
         "version": 1
       },
-      "archived_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},

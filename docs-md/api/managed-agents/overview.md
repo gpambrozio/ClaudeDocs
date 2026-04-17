@@ -16,7 +16,7 @@ Claude Managed Agents provides the harness and infrastructure for running Claude
 
 Create your first agent session](managed-agents/quickstart.md)[API Reference
 
-Full endpoint documentation](api/beta/sessions.md)
+Full endpoint documentation](managed-agents/sessions.md)
 
 ## Core concepts
 

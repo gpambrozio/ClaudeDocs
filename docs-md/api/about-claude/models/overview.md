@@ -4,34 +4,36 @@ Copy page
 
 ## Choosing a model
 
-If you're unsure which model to use, consider starting with **Claude Opus 4.6** for the most complex tasks. It is the most intelligent broadly available model with exceptional performance in coding and reasoning.
+If you're unsure which model to use, consider starting with **Claude Opus 4.7** for the most complex tasks. It is our most capable generally available model, with a step-change improvement in agentic coding over Claude Opus 4.6.
 
-All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Claude API, AWS Bedrock, and Google Vertex AI.
+All current Claude models support text and image input, text output, multilingual capabilities, and vision. Models are available via the Claude API, Amazon Bedrock, Vertex AI, and Microsoft Foundry.
 
 Once you've picked a model, [learn how to make your first API call](get-started.md).
 
 ### Latest models comparison
 
-| Feature | Claude Opus 4.6 | Claude Sonnet 4.6 | Claude Haiku 4.5 |
+| Feature | Claude Opus 4.7 | Claude Sonnet 4.6 | Claude Haiku 4.5 |
 | --- | --- | --- | --- |
-| **Description** | The most intelligent broadly available model for agents and coding | The best combination of speed and intelligence | The fastest model with near-frontier intelligence |
-| **Claude API ID** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5-20251001 |
-| **Claude API alias** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5 |
-| **AWS Bedrock ID** | anthropic.claude-opus-4-6-v1 | anthropic.claude-sonnet-4-6 | anthropic.claude-haiku-4-5-20251001-v1:0 |
-| **GCP Vertex AI ID** | claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5@20251001 |
+| **Description** | Our most capable generally available model for complex reasoning and agentic coding | The best combination of speed and intelligence | The fastest model with near-frontier intelligence |
+| **Claude API ID** | claude-opus-4-7 | claude-sonnet-4-6 | claude-haiku-4-5-20251001 |
+| **Claude API alias** | claude-opus-4-7 | claude-sonnet-4-6 | claude-haiku-4-5 |
+| **AWS Bedrock ID** | anthropic.claude-opus-4-73 | anthropic.claude-sonnet-4-6 | anthropic.claude-haiku-4-5-20251001-v1:0 |
+| **GCP Vertex AI ID** | claude-opus-4-7 | claude-sonnet-4-6 | claude-haiku-4-5@20251001 |
 | **Pricing**1 | $5 / input MTok $25 / output MTok | $3 / input MTok $15 / output MTok | $1 / input MTok $5 / output MTok |
-| **[Extended thinking](build-with-claude/extended-thinking.md)** | Yes | Yes | Yes |
+| **[Extended thinking](build-with-claude/extended-thinking.md)** | No | Yes | Yes |
 | **[Adaptive thinking](build-with-claude/adaptive-thinking.md)** | Yes | Yes | No |
 | **[Priority Tier](api/service-tiers.md)** | Yes | Yes | Yes |
 | **Comparative latency** | Moderate | Fast | Fastest |
 | **Context window** | 1M tokens | 1M tokens | 200k tokens |
 | **Max output** | 128k tokens | 64k tokens | 64k tokens |
-| **Reliable knowledge cutoff** | May 20252 | Aug 20252 | Feb 2025 |
-| **Training data cutoff** | Aug 2025 | Jan 2026 | Jul 2025 |
+| **Reliable knowledge cutoff** | Jan 20262 | Aug 20252 | Feb 2025 |
+| **Training data cutoff** | Jan 2026 | Jan 2026 | Jul 2025 |
 
 *1 - See the [pricing page](about-claude/pricing.md) for complete pricing information including batch API discounts, prompt caching rates, extended thinking costs, and vision processing fees.*
 
 *2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).*
+
+*3 - Claude Opus 4.7 on AWS is available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock-research-preview.md), currently in research preview.*
 
 [Claude Mythos Preview](https://anthropic.com/glasswing) is offered separately as a research preview model for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only and there is no self-serve sign-up.
 
@@ -41,7 +43,7 @@ Starting with **Claude Sonnet 4.5 and all subsequent models** (including Claude 
 
 You can query model capabilities and token limits programmatically with the [Models API](api/models/list.md). The response includes `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
 
-The Max output values above apply to the synchronous Messages API. On the [Message Batches API](build-with-claude/batch-processing.md), Opus 4.6 and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
+The Max output values above apply to the synchronous Messages API. On the [Message Batches API](build-with-claude/batch-processing.md), Opus 4.7, Opus 4.6, and Sonnet 4.6 support up to 300k output tokens by using the `output-300k-2026-03-24` beta header.
 
 ### Legacy models
 
@@ -56,9 +58,9 @@ Claude 4 models excel in:
   - For prompting best practices, see the [prompting best practices guide](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 - **Output quality**: When migrating from previous model generations to Claude 4, you may notice larger improvements in overall performance.
 
-## Migrating to Claude 4.6
+## Migrating to Claude Opus 4.7
 
-If you're currently using older Claude models, consider migrating to Claude Opus 4.6 to take advantage of improved intelligence and enhanced capabilities. For detailed migration instructions, see [Migrating to Claude 4.6](about-claude/models/migration-guide.md).
+If you're currently using Claude Opus 4.6 or older Claude models, consider migrating to Claude Opus 4.7 to take advantage of improved intelligence and a step-change jump in agentic coding. For detailed migration instructions, see [Migrating to Claude Opus 4.7](about-claude/models/migration-guide.md).
 
 ## Get started with Claude
 

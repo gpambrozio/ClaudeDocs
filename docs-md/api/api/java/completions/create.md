@@ -68,6 +68,8 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 long maxTokensToSample
 
 The maximum number of tokens to generate before stopping.
@@ -172,6 +174,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -270,6 +276,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -371,7 +381,7 @@ public final class Main {
 
         CompletionCreateParams params = CompletionCreateParams.builder()
             .maxTokensToSample(256L)
-            .model(Model.CLAUDE_MYTHOS_PREVIEW)
+            .model(Model.CLAUDE_OPUS_4_7)
             .prompt("\n\nHuman: Hello, world!\n\nAssistant:")
             .build();
         Completion completion = client.completions().create(params);

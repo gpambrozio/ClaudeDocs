@@ -236,7 +236,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-beta\_effort\_capability: object { high, low, max, 2 more }
+beta\_effort\_capability: object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -271,6 +271,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: object { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -336,7 +344,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: object { high, low, max, 2 more }
+effort: object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -371,6 +379,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: object { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -494,7 +510,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: object { high, low, max, 2 more }
+effort: object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -529,6 +545,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: object { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -700,11 +724,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -808,11 +836,15 @@ type: "advisor\_result"
 
 beta\_advisor\_tool\_20260301: object { model, name, type, 6 more }
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -2139,7 +2171,7 @@ type: "input\_tokens"
 
 value: number
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2151,9 +2183,13 @@ content: string
 
 Summary of compacted content, or null if compaction failed
 
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type: "compaction"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control }
+beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2190,9 +2226,17 @@ Defaults to `5m`.
 
 "1h"
 
-beta\_compaction\_content\_block\_delta: object { content, type }
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
+beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -3042,7 +3086,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3053,6 +3097,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -5242,7 +5290,7 @@ Defaults to `5m`.
 
 "1h"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control }
+beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -5278,6 +5326,10 @@ Defaults to `5m`.
 "5m"
 
 "1h"
+
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 beta\_content\_block\_source: object { content, type }
 
@@ -6004,11 +6056,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7311,7 +7367,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -7322,6 +7378,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -7363,11 +7423,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7654,11 +7718,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7890,11 +7958,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -10206,7 +10278,7 @@ Defaults to `5m`.
 
 "1h"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control }
+beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -10243,6 +10315,10 @@ Defaults to `5m`.
 
 "1h"
 
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: "user" or "assistant"
 
 "user"
@@ -10271,9 +10347,9 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-beta\_output\_config: object { effort, format }
+beta\_output\_config: object { effort, format, task\_budget }
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -10282,6 +10358,8 @@ All possible effort levels.
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -10294,6 +10372,22 @@ schema: map[unknown]
 The JSON schema of the format
 
 type: "json\_schema"
+
+task\_budget: optional object { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: optional number
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 beta\_plain\_text\_source: object { data, media\_type, type }
 
@@ -10411,9 +10505,13 @@ signature: string
 
 type: "signature\_delta"
 
-beta\_compaction\_content\_block\_delta: object { content, type }
+beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -10527,9 +10625,13 @@ signature: string
 
 type: "signature\_delta"
 
-beta\_compaction\_content\_block\_delta: object { content, type }
+beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -11251,7 +11353,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -11262,6 +11364,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -11525,11 +11631,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -12398,7 +12508,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -12409,6 +12519,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -12450,11 +12564,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -12741,11 +12859,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -13640,7 +13762,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13651,6 +13773,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -13692,11 +13818,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -13983,11 +14113,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -14347,11 +14481,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -15159,7 +15297,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -15170,6 +15308,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -15287,9 +15429,13 @@ signature: string
 
 type: "signature\_delta"
 
-beta\_compaction\_content\_block\_delta: object { content, type }
+beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -16778,6 +16924,22 @@ beta\_thinking\_turns: object { type, value }
 type: "thinking\_turns"
 
 value: number
+
+beta\_token\_task\_budget: object { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: optional number
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 beta\_tool: object { input\_schema, name, allowed\_callers, 7 more }
 
@@ -19453,11 +19615,15 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 beta\_advisor\_tool\_20260301: object { model, name, type, 6 more }
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -19998,11 +20164,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -22552,7 +22722,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -22563,6 +22733,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -22604,11 +22778,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -22895,11 +23073,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -23898,7 +24080,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -23909,6 +24091,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -23950,11 +24136,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -24241,11 +24431,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -25208,7 +25402,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -25219,6 +25413,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -25260,11 +25458,15 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -25551,11 +25753,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -25731,11 +25937,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -26711,11 +26921,15 @@ beta\_managed\_agents\_model\_config: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -26761,11 +26975,15 @@ beta\_managed\_agents\_model\_config\_params: object { id, speed }
 
 An object that defines additional configuration control over model use
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -27492,11 +27710,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -27906,11 +28128,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -35059,6 +35285,110 @@ GET/v1/skills/{skill\_id}/versions/{version}
 $ ant beta:skills:versions delete
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+$ ant beta:user-profiles create
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+$ ant beta:user-profiles list
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+$ ant beta:user-profiles retrieve
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+$ ant beta:user-profiles update
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+$ ant beta:user-profiles create-enrollment-url
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+beta\_user\_profile: object { id, created\_at, metadata, 4 more }
+
+id: string
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+metadata: map[string]
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+"active"
+
+"pending"
+
+"rejected"
+
+type: "user\_profile"
+
+Object type. Always `user_profile`.
+
+"user\_profile"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+external\_id: optional string
+
+Platform's own identifier for this user. Not enforced unique.
+
+beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url }
+
+expires\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "enrollment\_url"
+
+Object type. Always `enrollment_url`.
+
+"enrollment\_url"
+
+url: string
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+beta\_user\_profile\_trust\_grant: object { status }
+
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+"active"
+
+"pending"
+
+"rejected"
 
 ---
 

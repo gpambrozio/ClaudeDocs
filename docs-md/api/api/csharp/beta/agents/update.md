@@ -56,6 +56,10 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
@@ -99,6 +103,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"ClaudeOpus4\_6
 
@@ -410,6 +418,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent:
@@ -449,6 +459,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"ClaudeOpus4\_6
 
@@ -707,7 +721,7 @@ Response 200
 ```shiki
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
   "mcp_servers": [
@@ -771,7 +785,7 @@ Response 200
 ```shiki
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
   "mcp_servers": [

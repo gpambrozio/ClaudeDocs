@@ -25,30 +25,30 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
 `max_characters` is only compatible with `text_editor_20250728` and later versions of the text editor tool.
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool",
-        "max_characters": 10000
-      }
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[
+        {
+            "type": "text_editor_20250728",
+            "name": "str_replace_based_edit_tool",
+            "max_characters": 10000,
+        }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      }
-    ]
-  }'
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        }
+    ],
+)
+
+print(response)
 ```
 
 The text editor tool can be used in the following way:
@@ -152,29 +152,24 @@ This example demonstrates how Claude uses the text editor tool to fix a syntax e
 
 First, your application provides Claude with the text editor tool and a prompt to fix a syntax error:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool"
-      }
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      }
-    ]
-  }'
+)
+
+print(response)
 ```
 
 Claude uses the text editor tool first to view the file:
@@ -184,7 +179,7 @@ Output
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -207,44 +202,32 @@ Output
 
 Your application should then read the file and return its contents to Claude:
 
-ShellCLIPythonTypeScriptJava
+cURLCLIPythonTypeScriptJava
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [
-      {
-        "type": "text_editor_20250728",
-        "name": "str_replace_based_edit_tool"
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "There'\''s a syntax error in my primes.py file. Can you help me fix it?"
-      },
-      {
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "There's a syntax error in my primes.py file. Can you help me fix it?",
+        },
+        {
             "role": "assistant",
             "content": [
                 {
                     "type": "text",
-                    "text": "I'\''ll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue."
+                    "text": "I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.",
                 },
                 {
                     "type": "tool_use",
                     "id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
                     "name": "str_replace_based_edit_tool",
-                    "input": {
-                        "command": "view",
-                        "path": "primes.py"
-                    }
-                }
-            ]
+                    "input": {"command": "view", "path": "primes.py"},
+                },
+            ],
         },
         {
             "role": "user",
@@ -252,12 +235,14 @@ curl https://api.anthropic.com/v1/messages \
                 {
                     "type": "tool_result",
                     "tool_use_id": "toolu_01AbCdEfGhIjKlMnOpQrStU",
-                    "content": "1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()"
+                    "content": '1: def is_prime(n):\n2:     """Check if a number is prime."""\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     """Generate a list of prime numbers up to the given limit."""\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     """Main function to demonstrate prime number generation."""\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f"Prime numbers up to {limit}:")\n29:     print(prime_list)\n30:     print(f"Found {len(prime_list)} prime numbers.")\n31: \n32: if __name__ == "__main__":\n33:     main()',
                 }
-            ]
-        }
-    ]
-  }'
+            ],
+        },
+    ],
+)
+
+print(response)
 ```
 
 **Line numbers**
@@ -271,7 +256,7 @@ Output
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -299,35 +284,46 @@ Your application should then make the edit and return the result:
 CLIPythonTypeScriptJava
 
 ```shiki
-ant messages create <<'YAML'
-model: claude-opus-4-6
-max_tokens: 1024
-tools:
-  - type: text_editor_20250728
-    name: str_replace_based_edit_tool
-messages:
-  # Previous messages...
-  - role: assistant
-    content:
-      - type: text
-        text: >-
-          I found the syntax error in your primes.py file. In the `get_primes`
-          function, there is a missing colon (:) at the end of the for loop
-          line. Let me fix that for you.
-      - type: tool_use
-        id: toolu_01PqRsTuVwXyZAbCdEfGh
-        name: str_replace_based_edit_tool
-        input:
-          command: str_replace
-          path: primes.py
-          old_str: "    for num in range(2, limit + 1)"
-          new_str: "    for num in range(2, limit + 1):"
-  - role: user
-    content:
-      - type: tool_result
-        tool_use_id: toolu_01PqRsTuVwXyZAbCdEfGh
-        content: Successfully replaced text at exactly one location.
-YAML
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
+    messages=[
+        # Previous messages...
+        {
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you.",
+                },
+                {
+                    "type": "tool_use",
+                    "id": "toolu_01PqRsTuVwXyZAbCdEfGh",
+                    "name": "str_replace_based_edit_tool",
+                    "input": {
+                        "command": "str_replace",
+                        "path": "primes.py",
+                        "old_str": "    for num in range(2, limit + 1)",
+                        "new_str": "    for num in range(2, limit + 1):",
+                    },
+                },
+            ],
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "tool_result",
+                    "tool_use_id": "toolu_01PqRsTuVwXyZAbCdEfGh",
+                    "content": "Successfully replaced text at exactly one location.",
+                }
+            ],
+        },
+    ],
+)
+
+print(response)
 ```
 
 Finally, Claude provides a complete explanation of the fix:
@@ -337,7 +333,7 @@ Output
 ```shiki
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [

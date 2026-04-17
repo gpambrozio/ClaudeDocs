@@ -117,19 +117,11 @@ Pass `vault_ids` when creating a session:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<EOF | jq -r '.id'
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"],
-  "title": "Alice's Slack digest"
-}
-EOF
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    vault_ids=[vault.id],
+    title="Alice's Slack digest",
 )
 ```
 

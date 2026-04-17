@@ -8,7 +8,7 @@ C#
 
 [BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
 
-POST/v1/user\_profiles/{id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 Create Enrollment URL
 
@@ -16,9 +16,9 @@ Create Enrollment URL
 
 UserProfileCreateEnrollmentUrlParams parameters
 
-required string id
+required string userProfileID
 
-Path parameter id
+Path parameter user\_profile\_id
 
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
@@ -66,6 +66,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
 "user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 ##### ReturnsExpand Collapse
@@ -76,16 +78,23 @@ required DateTimeOffset ExpiresAt
 
 A timestamp in RFC 3339 format
 
-required string Type
+required Type Type
+
+Object type. Always `enrollment_url`.
 
 required string Url
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
 C#
 
 ```shiki
-UserProfileCreateEnrollmentUrlParams parameters = new() { ID = "id" };
+UserProfileCreateEnrollmentUrlParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
 
 var betaUserProfileEnrollmentUrl = await client.Beta.UserProfiles.CreateEnrollmentUrl(parameters);
 
@@ -96,9 +105,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 
@@ -108,9 +117,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 

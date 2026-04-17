@@ -6,21 +6,21 @@ Go
 
 # Update User Profile
 
-client.Beta.UserProfiles.Update(ctx, id, params) (\*[BetaUserProfile](api/beta.md), error)
+client.Beta.UserProfiles.Update(ctx, userProfileID, params) (\*[BetaUserProfile](api/beta.md), error)
 
-POST/v1/user\_profiles/{id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 Update User Profile
 
 ##### ParametersExpand Collapse
 
-id string
+userProfileID string
 
 params BetaUserProfileUpdateParams
 
 ExternalID param.Field[string]optional
 
-Body param
+Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
 
 Metadata param.Field[map[string, string]]optional
 
@@ -78,6 +78,8 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+
 const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
@@ -86,23 +88,43 @@ type BetaUserProfile struct{…}
 
 ID string
 
+Unique identifier for this user profile, prefixed `uprof_`.
+
 CreatedAt Time
 
 A timestamp in RFC 3339 format
 
 Metadata map[string, string]
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
 
-Status string
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Type string
+Status BetaUserProfileTrustGrantStatus
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
+
+const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
+
+const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
+
+Type BetaUserProfileType
+
+Object type. Always `user_profile`.
 
 UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
 ExternalID stringoptional
+
+Platform's own identifier for this user. Not enforced unique.
 
 Update User Profile
 
@@ -125,7 +147,7 @@ func main() {
   )
   betaUserProfile, err := client.Beta.UserProfiles.Update(
     context.TODO(),
-    "id",
+    "uprof_011CZkZCu8hGbp5mYRQgUmz9",
     anthropic.BetaUserProfileUpdateParams{
 
     },
@@ -141,19 +163,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 
@@ -163,19 +183,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 

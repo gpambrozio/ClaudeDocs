@@ -164,7 +164,7 @@ The `--plugin-dir` flag is useful for development and testing. When you’re rea
 
 ## [​](#plugin-structure-overview) Plugin structure overview
 
-You’ve created a plugin with a skill, but plugins can include much more: custom agents, hooks, MCP servers, and LSP servers.
+You’ve created a plugin with a skill, but plugins can include much more: custom agents, hooks, MCP servers, LSP servers, and background monitors.
 
 **Common mistake**: Don’t put `commands/`, `agents/`, `skills/`, or `hooks/` inside the `.claude-plugin/` directory. Only `plugin.json` goes inside `.claude-plugin/`. All other directories must be at the plugin root level.
 
@@ -177,6 +177,7 @@ You’ve created a plugin with a skill, but plugins can include much more: custo
 | `hooks/` | Plugin root | Event handlers in `hooks.json` |
 | `.mcp.json` | Plugin root | MCP server configurations |
 | `.lsp.json` | Plugin root | LSP server configurations for code intelligence |
+| `monitors/` | Plugin root | Background monitor configurations in `monitors.json` |
 | `bin/` | Plugin root | Executables added to the Bash tool’s `PATH` while the plugin is enabled |
 | `settings.json` | Plugin root | Default [settings](settings.md) applied when the plugin is enabled |
 
@@ -238,6 +239,25 @@ LSP (Language Server Protocol) plugins give Claude real-time code intelligence. 
 
 Users installing your plugin must have the language server binary installed on their machine.
 For complete LSP configuration options, see [LSP servers](plugins-reference.md).
+
+### [​](#add-background-monitors-to-your-plugin) Add background monitors to your plugin
+
+Background monitors let your plugin watch logs, files, or external status in the background and notify Claude as events arrive. Claude Code starts each monitor automatically when the plugin is active, so you don’t need to instruct Claude to start the watch.
+Add a `monitors/monitors.json` file at the plugin root with an array of monitor entries:
+
+monitors/monitors.json
+
+```shiki
+[
+  {
+    "name": "error-log",
+    "command": "tail -F ./logs/error.log",
+    "description": "Application error log"
+  }
+]
+```
+
+Each stdout line from `command` is delivered to Claude as a notification during the session. For the full schema, including the `when` trigger and variable substitution, see [Monitors](plugins-reference.md).
 
 ### [​](#ship-default-settings-with-your-plugin) Ship default settings with your plugin
 
@@ -304,6 +324,8 @@ To submit a plugin to the official Anthropic marketplace, use one of the in-app 
 
 - **Claude.ai**: [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit)
 - **Console**: [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit)
+
+Once your plugin is listed, you can have your own CLI prompt Claude Code users to install it. See [Recommend your plugin from your CLI](plugin-hints.md).
 
 For complete technical specifications, debugging techniques, and distribution strategies, see [Plugins reference](plugins-reference.md).
 

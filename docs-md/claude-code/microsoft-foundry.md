@@ -1,9 +1,3 @@
-# Claude Code on Microsoft Foundry
-
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=foundry_view_plans#plans-business)[Contact sales](https://www.anthropic.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=foundry_contact_sales)
-
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Microsoft Foundry, ensure you have:
@@ -70,10 +64,11 @@ export ANTHROPIC_FOUNDRY_RESOURCE={resource}
 
 Pin specific model versions for every deployment. If you use model aliases (`sonnet`, `opus`, `haiku`) without pinning, Claude Code may attempt to use a newer model version that isn’t available in your Foundry account, breaking existing users when Anthropic releases updates. When you create Azure deployments, select a specific model version rather than “auto-update to latest.”
 
-Set the model variables to match the deployment names you created in step 1:
+Set the model variables to match the deployment names you created in step 1.
+Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Foundry resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:
 
 ```shiki
-export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-6'
+export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'
 export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'
 ```

@@ -14,8 +14,6 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
 3. Verify that your credentials are working:
 
-Shell
-
 ```shiki
 aws sts get-caller-identity
 ```
@@ -68,6 +66,11 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 #### API model IDs
 
+Claude Opus 4.7 is available on AWS through
+[Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock-research-preview.md),
+currently in research preview. It is not available through the standard
+Bedrock model catalog documented on this page.
+
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
@@ -91,7 +94,13 @@ The following examples show how to print a list of all the Claude models availab
 AWS CLIBoto3 (Python)TypeScriptC#GoJavaPHPRuby
 
 ```shiki
-aws bedrock list-foundation-models --region=us-west-2 --by-provider anthropic --query "modelSummaries[*].modelId"
+import boto3
+
+bedrock = boto3.client(service_name="bedrock")
+response = bedrock.list_foundation_models(byProvider="anthropic")
+
+for summary in response["modelSummaries"]:
+    print(summary["modelId"])
 ```
 
 ### Making requests
@@ -101,7 +110,27 @@ The following examples show how to generate text from Claude on Bedrock:
 CLIPythonTypeScriptC#GoJavaPHPRubyBoto3 (Python)
 
 ```shiki
-# The ant CLI does not yet support Amazon Bedrock.
+from anthropic import AnthropicBedrock
+
+client = AnthropicBedrock(
+    # Authenticate by either providing the keys below or use the default AWS credential providers, such as
+    # using ~/.aws/credentials or the "AWS_SECRET_ACCESS_KEY" and "AWS_ACCESS_KEY_ID" environment variables.
+    aws_access_key="<access key>",
+    aws_secret_key="<secret key>",
+    # Temporary credentials can be used with aws_session_token.
+    # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
+    aws_session_token="<session_token>",
+    # aws_region changes the aws region to which the request is made. By default, we read AWS_REGION,
+    # and if that's not present, we default to us-east-1. Note that we do not read ~/.aws/config for the region.
+    aws_region="us-west-2",
+)
+
+message = client.messages.create(
+    model="global.anthropic.claude-opus-4-6-v1",
+    max_tokens=256,
+    messages=[{"role": "user", "content": "Hello, world"}],
+)
+print(message.content)
 ```
 
 See the [client SDKs](api/client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
@@ -204,7 +233,15 @@ The model IDs for Claude Sonnet 4.5 and 4 (deprecated) already include the `glob
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The ant CLI does not yet support Amazon Bedrock.
+from anthropic import AnthropicBedrock
+
+client = AnthropicBedrock(aws_region="us-west-2")
+
+message = client.messages.create(
+    model="global.anthropic.claude-opus-4-6-v1",
+    max_tokens=256,
+    messages=[{"role": "user", "content": "Hello, world"}],
+)
 ```
 
 **Using regional endpoints (CRIS):**
@@ -214,7 +251,16 @@ To use regional endpoints, remove the `global.` prefix from the model ID:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The ant CLI does not yet support Amazon Bedrock.
+from anthropic import AnthropicBedrock
+
+client = AnthropicBedrock(aws_region="us-west-2")
+
+# Using US regional endpoint (CRIS)
+message = client.messages.create(
+    model="anthropic.claude-opus-4-6-v1",  # No global. prefix
+    max_tokens=256,
+    messages=[{"role": "user", "content": "Hello, world"}],
+)
 ```
 
 **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).

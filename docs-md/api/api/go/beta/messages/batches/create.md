@@ -2498,6 +2498,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -2521,6 +2525,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -2807,6 +2815,8 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
+const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
+
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
@@ -2818,6 +2828,22 @@ Schema map[string, any]
 The JSON schema of the format
 
 Type JSONSchema
+
+TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
+
+User-configurable total token budget across contexts.
+
+Total int64
+
+Total token budget across all contexts in the session.
+
+Type Tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+Remaining int64optional
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta.md)optional
 
@@ -4383,6 +4409,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4717,6 +4747,10 @@ maximum1
 
 minimum0
 
+UserProfileID stringoptional
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4770,6 +4804,8 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

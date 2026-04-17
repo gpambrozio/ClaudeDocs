@@ -52,13 +52,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -172,13 +176,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -1589,7 +1597,7 @@ type: "input\_tokens"
 
 value: number
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1601,9 +1609,13 @@ content: string
 
 Summary of compacted content, or null if compaction failed
 
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type: "compaction"
 
-BetaCompactionBlockParam = object { content, type, cache\_control }
+BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -1642,9 +1654,17 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionContentBlockDelta = object { content, type }
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
+BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -2550,7 +2570,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2561,6 +2581,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -4922,7 +4946,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control }
+BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -4960,6 +4984,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 BetaContentBlockSource = object { content, type }
 
@@ -5740,13 +5768,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7117,7 +7149,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -7128,6 +7160,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -7179,13 +7215,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7488,13 +7528,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7742,13 +7786,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -10240,7 +10288,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control }
+BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -10279,6 +10327,10 @@ Accepts one of the following:
 
 "1h"
 
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: "user" or "assistant"
 
 Accepts one of the following:
@@ -10311,9 +10363,9 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-BetaOutputConfig = object { effort, format }
+BetaOutputConfig = object { effort, format, task\_budget }
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -10324,6 +10376,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -10336,6 +10390,22 @@ schema: map[unknown]
 The JSON schema of the format
 
 type: "json\_schema"
+
+task\_budget: optional [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: optional number
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 BetaPlainTextSource = object { data, media\_type, type }
 
@@ -10457,9 +10527,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, type }
+BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -10577,9 +10651,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, type }
+BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -11351,7 +11429,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -11362,6 +11440,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -11643,13 +11725,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -12572,7 +12658,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -12583,6 +12669,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -12634,13 +12724,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -12943,13 +13037,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -13904,7 +14002,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13915,6 +14013,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -13966,13 +14068,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -14275,13 +14381,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -14665,13 +14775,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -15531,7 +15645,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -15542,6 +15656,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -15663,9 +15781,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, type }
+BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -17250,6 +17372,22 @@ BetaThinkingTurns = object { type, value }
 type: "thinking\_turns"
 
 value: number
+
+BetaTokenTaskBudget = object { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: optional number
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
 
@@ -20135,13 +20273,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -20720,13 +20862,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -23438,7 +23584,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -23449,6 +23595,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -23500,13 +23650,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -23809,13 +23963,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -24876,7 +25034,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -24887,6 +25045,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -24938,13 +25100,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -25247,13 +25413,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -26276,7 +26446,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -26287,6 +26457,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -26338,13 +26512,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -26647,13 +26825,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 

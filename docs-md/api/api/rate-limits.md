@@ -158,7 +158,7 @@ Custom
 | Claude Haiku 3 | 50 | 50,000† | 10,000 |
 | Claude Opus 4.x\* | 50 | 30,000 | 8,000 |
 
-*\* - Opus rate limit is a total limit that applies to combined traffic across Opus 4.6, Opus 4.5, Opus 4.1, and Opus 4.*
+*\* - Opus rate limit is a total limit that applies to combined traffic across Opus 4.7, Opus 4.6, Opus 4.5, Opus 4.1, and Opus 4.*
 
 *\*\* - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6, Sonnet 4.5, and Sonnet 4.*
 

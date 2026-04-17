@@ -4,7 +4,7 @@ Copy page
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
+The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
 
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock or Google Vertex AI.
 
@@ -50,55 +50,46 @@ Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/c
 
 To enable dynamic filtering, use the `web_fetch_20260209` tool version:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Fetch the content at https://example.com/research-paper and extract the key findings."
-            }
-        ],
-        "tools": [{
-            "type": "web_fetch_20260209",
-            "name": "web_fetch"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Fetch the content at https://example.com/research-paper and extract the key findings.",
+        }
+    ],
+    tools=[{"type": "web_fetch_20260209", "name": "web_fetch"}],
+)
+print(response)
 ```
 
 ## How to use web fetch
 
 Provide the web fetch tool in your API request:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Please analyze the content at https://example.com/article"
-            }
-        ],
-        "tools": [{
-            "type": "web_fetch_20250910",
-            "name": "web_fetch",
-            "max_uses": 5
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Please analyze the content at https://example.com/article",
+        }
+    ],
+    tools=[{"type": "web_fetch_20250910", "name": "web_fetch", "max_uses": 5}],
+)
+print(response)
 ```
 
 ### Tool definition
@@ -310,7 +301,7 @@ Python
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=[
         {

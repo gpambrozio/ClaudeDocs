@@ -15,7 +15,7 @@ Although this is provided as a server-side tool, you can also implement your own
 
 Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 
-This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
+This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
 On Amazon Bedrock, server-side tool search is available only via the [invoke
 API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
@@ -46,61 +46,47 @@ This keeps your context window efficient while maintaining high tool selection a
 
 Here's a simple example with deferred tools:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 2048,
-        "messages": [
-            {
-                "role": "user",
-                "content": "What is the weather in San Francisco?"
-            }
-        ],
-        "tools": [
-            {
-                "type": "tool_search_tool_regex_20251119",
-                "name": "tool_search_tool_regex"
-            },
-            {
-                "name": "get_weather",
-                "description": "Get the weather at a specific location",
-                "input_schema": {
-                    "type": "object",
-                    "properties": {
-                        "location": {"type": "string"},
-                        "unit": {
-                            "type": "string",
-                            "enum": ["celsius", "fahrenheit"]
-                        }
-                    },
-                    "required": ["location"]
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=2048,
+    messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
+    tools=[
+        {"type": "tool_search_tool_regex_20251119", "name": "tool_search_tool_regex"},
+        {
+            "name": "get_weather",
+            "description": "Get the weather at a specific location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string"},
+                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
                 },
-                "defer_loading": true
+                "required": ["location"],
             },
-            {
-                "name": "search_files",
-                "description": "Search through files in the workspace",
-                "input_schema": {
-                    "type": "object",
-                    "properties": {
-                        "query": {"type": "string"},
-                        "file_types": {
-                            "type": "array",
-                            "items": {"type": "string"}
-                        }
-                    },
-                    "required": ["query"]
+            "defer_loading": True,
+        },
+        {
+            "name": "search_files",
+            "description": "Search through files in the workspace",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "file_types": {"type": "array", "items": {"type": "string"}},
                 },
-                "defer_loading": true
-            }
-        ]
-    }'
+                "required": ["query"],
+            },
+            "defer_loading": True,
+        },
+    ],
+)
+
+print(response)
 ```
 
 ## Tool definition
@@ -349,12 +335,6 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 
 You can include the tool search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-## Data retention
-
-Server-side tool search (`tool_search` tool) indexes and stores tool catalog data (tool names, descriptions, and argument metadata) beyond the immediate API response; this catalog data is retained according to Anthropic's standard retention policy. Custom client-side tool search implementations that use the standard Messages API are fully ZDR-eligible.
-
-For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
-
 ## Limits and best practices
 
 ### Limits
@@ -362,7 +342,7 @@ For ZDR eligibility across all features, see [API and data retention](build-with
 - **Maximum tools:** 10,000 tools in your catalog
 - **Search results:** Returns 3-5 most relevant tools per search
 - **Pattern length:** Maximum 200 characters for regex patterns
-- **Model support:** [Claude Mythos Preview](https://anthropic.com/glasswing), Sonnet 4.0+, Opus 4.0+ only (no Haiku)
+- **Model support:** [Claude Mythos Preview](https://anthropic.com/glasswing), Sonnet 4.0+, Opus 4.0+, Haiku 4.5+
 
 ### When to use tool search
 

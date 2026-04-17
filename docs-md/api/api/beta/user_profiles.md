@@ -16,15 +16,15 @@ GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-GET/v1/user\_profiles/{id}
+GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-POST/v1/user\_profiles/{id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
 
-POST/v1/user\_profiles/{id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
@@ -32,17 +32,35 @@ BetaUserProfile = object { id, created\_at, metadata, 4 more }
 
 id: string
 
+Unique identifier for this user profile, prefixed `uprof_`.
+
 created\_at: string
 
 A timestamp in RFC 3339 format
 
 metadata: map[string]
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
-status: string
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-type: string
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"
+
+"pending"
+
+"rejected"
+
+type: "user\_profile"
+
+Object type. Always `user_profile`.
 
 updated\_at: string
 
@@ -50,19 +68,35 @@ A timestamp in RFC 3339 format
 
 external\_id: optional string
 
+Platform's own identifier for this user. Not enforced unique.
+
 BetaUserProfileEnrollmentURL = object { expires\_at, type, url }
 
 expires\_at: string
 
 A timestamp in RFC 3339 format
 
-type: string
+type: "enrollment\_url"
+
+Object type. Always `enrollment_url`.
 
 url: string
 
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
 BetaUserProfileTrustGrant = object { status }
 
-status: string
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"
+
+"pending"
+
+"rejected"
 
 ---
 

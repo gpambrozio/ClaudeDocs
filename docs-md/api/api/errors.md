@@ -64,11 +64,14 @@ The official SDKs provide this value as a property on top-level response objects
 CLIPythonTypeScript
 
 ```shiki
-# The request-id header is printed to stderr with --debug:
-ant --debug messages create \
-  --model claude-opus-4-6 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello, Claude"}'
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+print(f"Request ID: {message._request_id}")
 ```
 
 ## Long requests
@@ -96,7 +99,7 @@ PythonTypeScript
 with client.messages.stream(
     max_tokens=128000,
     messages=[{"role": "user", "content": "Write a detailed analysis..."}],
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
 ) as stream:
     message = stream.get_final_message()
 ```
@@ -107,7 +110,7 @@ See [Streaming Messages](build-with-claude/streaming.md) for more details.
 
 ### Prefill not supported
 
-[Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to either model returns a 400 `invalid_request_error`:
+[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
 ```shiki
 {

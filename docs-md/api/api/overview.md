@@ -30,9 +30,9 @@ The Claude API includes the following APIs:
 
 - **[Files API](api/files-create.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
 - **[Skills API](api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
-- **[Agents API](api/beta/agents/create.md)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
-- **[Sessions API](api/beta/sessions/create.md)**: Run stateful agent sessions in managed cloud containers (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
-- **[Environments API](api/beta/environments/create.md)**: Configure container templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
+- **[Agents API](managed-agents/agent-setup.md)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
+- **[Sessions API](managed-agents/sessions.md)**: Run stateful agent sessions in managed cloud containers (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
+- **[Environments API](managed-agents/environments.md)**: Configure container templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](api/beta-headers.md).
 
@@ -137,7 +137,7 @@ The Claude API is available in [many countries and regions](api/supported-region
 
 Complete API specification for direct model interactions](api/messages/create.md)[Claude Managed Agents reference
 
-Agents, Sessions, and Environments endpoints](api/beta/sessions.md)[Client SDKs
+Agents, Sessions, and Environments endpoints](managed-agents/sessions.md)[Client SDKs
 
 Python, TypeScript, Java, Go, C#, Ruby, and PHP](api/client-sdks.md)[Rate limits
 

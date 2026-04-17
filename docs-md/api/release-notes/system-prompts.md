@@ -4,6 +4,10 @@ Copy page
 
 Claude's web interface ([claude.ai](https://www.claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. The system prompt also encourages certain behaviors, such as always providing code snippets in Markdown. This prompt is periodically updated to improve Claude's responses. These system prompt updates do not apply to the Claude API. Updates between versions are bolded.
 
+## Claude Opus 4.7
+
+### April 16, 2026
+
 ## Claude Sonnet 4.6
 
 ### February 17, 2026

@@ -74,6 +74,8 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent:
@@ -113,6 +115,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
 
@@ -380,7 +386,7 @@ Response 200
   "data": [
     {
       "id": "agent_011CZkYpogX7uDKUyvBTophP",
-      "archived_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "description": "A general-purpose starter agent.",
       "mcp_servers": [
@@ -449,7 +455,7 @@ Response 200
   "data": [
     {
       "id": "agent_011CZkYpogX7uDKUyvBTophP",
-      "archived_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "description": "A general-purpose starter agent.",
       "mcp_servers": [

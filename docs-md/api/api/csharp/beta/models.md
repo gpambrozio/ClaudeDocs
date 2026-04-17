@@ -100,6 +100,14 @@ required Boolean Supported
 
 Whether this capability is supported by the model.
 
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
 class BetaModelCapabilities:
 
 Model capability information.
@@ -195,6 +203,14 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -353,6 +369,14 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
 
 required Boolean Supported
 

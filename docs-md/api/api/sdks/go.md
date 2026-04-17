@@ -46,7 +46,7 @@ func main() {
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
 		},
-		Model: anthropic.ModelClaudeOpus4_6,
+		Model: anthropic.ModelClaudeOpus4_7,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -306,7 +306,7 @@ _, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 		}},
 		Role: anthropic.MessageParamRoleUser,
 	}},
-	Model: anthropic.ModelClaudeOpus4_6,
+	Model: anthropic.ModelClaudeOpus4_7,
 })
 if err != nil {
 	var apierr *anthropic.Error
@@ -350,7 +350,7 @@ client := anthropic.NewClient(
 				}},
 				Role: anthropic.MessageParamRoleUser,
 			}},
-			Model: anthropic.ModelClaudeOpus4_6,
+			Model: anthropic.ModelClaudeOpus4_7,
 		},
 		option.WithMaxRetries(5),
 	)
@@ -380,7 +380,7 @@ defer cancel()
 				}},
 				Role: anthropic.MessageParamRoleUser,
 			}},
-			Model: anthropic.ModelClaudeOpus4_6,
+			Model: anthropic.ModelClaudeOpus4_7,
 		},
 		// This sets the per-retry timeout
 		option.WithRequestTimeout(20*time.Second),
@@ -555,7 +555,7 @@ message, err := client.Messages.New(
 			}},
 			Role: anthropic.MessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus4_6,
+		Model: anthropic.ModelClaudeOpus4_7,
 	},
 	option.WithResponseInto(&response),
 )

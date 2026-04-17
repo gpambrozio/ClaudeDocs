@@ -5148,12 +5148,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -5165,13 +5166,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -8520,7 +8525,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-Union[Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more], str]
+Union[Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more], str]
 
 The model that will complete your prompt.
 
@@ -8528,12 +8533,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -8545,13 +8551,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -8621,7 +8631,7 @@ str
 
 class OutputConfig: …
 
-effort: Optional[Literal["low", "medium", "high", "max"]]
+effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
@@ -8632,6 +8642,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -10242,12 +10254,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -10259,13 +10272,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -11133,12 +11150,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -11150,13 +11168,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -18259,12 +18281,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -18276,13 +18299,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -19256,12 +19283,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -19273,13 +19301,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -20215,12 +20247,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-Literal["claude-mythos-preview", "claude-opus-4-6", "claude-sonnet-4-6", 13 more]
+Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
 - `claude-sonnet-4-6` - Best combination of speed and intelligence
@@ -20232,13 +20265,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 - `claude-opus-4-1` - Exceptional model for specialized complex tasks
 - `claude-opus-4-1-20250805` - Exceptional model for specialized complex tasks
-- `claude-opus-4-0` - Powerful model for complex tasks
-- `claude-opus-4-20250514` - Powerful model for complex tasks
-- `claude-sonnet-4-0` - High-performance model with extended thinking
-- `claude-sonnet-4-20250514` - High-performance model with extended thinking
+- `claude-opus-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-opus-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-0` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+- `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 

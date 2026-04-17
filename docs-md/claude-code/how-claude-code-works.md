@@ -82,7 +82,7 @@ Claude Code saves your conversation locally as you work. Each message, tool use,
 
 ### [​](#work-across-branches) Work across branches
 
-Each Claude Code conversation is a session tied to your current directory. When you resume, you only see sessions from that directory.
+Each Claude Code conversation is a session tied to your current directory. The `/resume` picker shows sessions from the current worktree by default, with keyboard shortcuts to widen the list to other worktrees or projects. See [Resume previous conversations](common-workflows.md) for the full list of picker shortcuts and how name resolution works.
 Claude sees your current branch’s files. When you switch branches, Claude sees the new branch’s files, but your conversation history stays the same. Claude remembers what you discussed even after switching.
 Since sessions are tied to directories, you can run parallel Claude sessions by using [git worktrees](common-workflows.md), which create separate directories for individual branches.
 

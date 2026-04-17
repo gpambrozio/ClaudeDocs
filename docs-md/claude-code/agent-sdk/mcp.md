@@ -69,7 +69,7 @@ for await (const message of query({
 
 ### [​](#from-a-config-file) From a config file
 
-Create a `.mcp.json` file at your project root. The SDK does not load filesystem settings by default, so set `settingSources: ["project"]` (Python: `setting_sources=["project"]`) in your options for the file to be picked up:
+Create a `.mcp.json` file at your project root. The file is picked up when the `project` setting source is enabled, which it is for default `query()` options. If you set `settingSources` explicitly, include `"project"` for this file to load:
 
 ```shiki
 {

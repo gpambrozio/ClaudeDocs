@@ -11,15 +11,15 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant messages create --stream --format jsonl \
-  --model claude-opus-4-6 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello"}' \
-  | while IFS= read -r event; do
-      [[ $event == *'"text_delta"'* ]] || continue
-      text=${event#*'"text":"'}
-      printf '%b' "${text%\"*}"
-    done
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+    model="claude-opus-4-7",
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 ```
 
 ## Get the final message without handling events
@@ -29,16 +29,16 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The ant CLI's --stream flag emits one event per line and does not
-# accumulate into a final Message. For long generations, stream the
-# raw events:
-ant messages create --stream --format jsonl <<'YAML'
-model: claude-opus-4-6
-max_tokens: 128000
-messages:
-  - role: user
-    content: Write a detailed analysis...
-YAML
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    max_tokens=128000,
+    messages=[{"role": "user", "content": "Write a detailed analysis..."}],
+    model="claude-opus-4-7",
+) as stream:
+    message = stream.get_final_message()
+
+print(message.content[0].text)
 ```
 
 The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.
@@ -151,27 +151,25 @@ There may be `ping` events dispersed throughout the response as well. See [Event
 
 ### Basic streaming request
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --data \
-'{
-  "model": "claude-opus-4-6",
-  "messages": [{"role": "user", "content": "Hello"}],
-  "max_tokens": 256,
-  "stream": true
-}'
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    model="claude-opus-4-7",
+    messages=[{"role": "user", "content": "Hello"}],
+    max_tokens=256,
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 ```
 
 Response
 
 ```shiki
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
+data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-7", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}}
@@ -201,48 +199,46 @@ Tool use supports [fine-grained streaming](agents-and-tools/tool-use/fine-graine
 
 This request asks Claude to use a tool to report the weather.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-  curl https://api.anthropic.com/v1/messages \
-    -H "content-type: application/json" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -d '{
-      "model": "claude-opus-4-6",
-      "max_tokens": 1024,
-      "tools": [
-        {
-          "name": "get_weather",
-          "description": "Get the current weather in a given location",
-          "input_schema": {
+client = anthropic.Anthropic()
+
+tools = [
+    {
+        "name": "get_weather",
+        "description": "Get the current weather in a given location",
+        "input_schema": {
             "type": "object",
             "properties": {
-              "location": {
-                "type": "string",
-                "description": "The city and state, e.g. San Francisco, CA"
-              }
+                "location": {
+                    "type": "string",
+                    "description": "The city and state, e.g. San Francisco, CA",
+                }
             },
-            "required": ["location"]
-          }
-        }
-      ],
-      "tool_choice": {"type": "any"},
-      "messages": [
-        {
-          "role": "user",
-          "content": "What is the weather like in San Francisco?"
-        }
-      ],
-      "stream": true
-    }'
+            "required": ["location"],
+        },
+    }
+]
+
+with client.messages.stream(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=tools,
+    tool_choice={"type": "any"},
+    messages=[
+        {"role": "user", "content": "What is the weather like in San Francisco?"}
+    ],
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 ```
 
 Response
 
 ```shiki
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-6","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
+data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-7","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
@@ -336,36 +332,35 @@ data: {"type":"message_stop"}
 
 This request enables extended thinking with streaming to see Claude's step-by-step reasoning.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 20000,
-    "stream": true,
-    "thinking": {
-        "type": "enabled",
-        "budget_tokens": 16000
-    },
-    "messages": [
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    model="claude-opus-4-7",
+    max_tokens=20000,
+    thinking={"type": "adaptive", "display": "summarized"},
+    messages=[
         {
             "role": "user",
-            "content": "What is the greatest common divisor of 1071 and 462?"
+            "content": "What is the greatest common divisor of 1071 and 462?",
         }
-    ]
-}'
+    ],
+) as stream:
+    for event in stream:
+        if event.type == "content_block_delta":
+            if event.delta.type == "thinking_delta":
+                print(event.delta.thinking, end="", flush=True)
+            elif event.delta.type == "text_delta":
+                print(event.delta.text, end="", flush=True)
 ```
 
 Response
 
 ```shiki
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-6", "stop_reason": null, "stop_sequence": null}}
+data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-7", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": "", "signature": ""}}
@@ -408,39 +403,28 @@ data: {"type": "message_stop"}
 
 This request asks Claude to search the web for current weather information.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "stream": true,
-    "tools": [
-        {
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 5
-        }
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+    messages=[
+        {"role": "user", "content": "What is the weather like in New York City today?"}
     ],
-    "messages": [
-        {
-            "role": "user",
-            "content": "What is the weather like in New York City today?"
-        }
-    ]
-}'
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 ```
 
 Response
 
 ```shiki
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-6","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
+data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-7","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}

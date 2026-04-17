@@ -41,7 +41,7 @@ const client = new Anthropic({
 const message = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
-  model: "claude-opus-4-6"
+  model: "claude-opus-4-7"
 });
 
 console.log(message.content);
@@ -59,7 +59,7 @@ const client = new Anthropic({
 const params: Anthropic.MessageCreateParams = {
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
-  model: "claude-opus-4-6"
+  model: "claude-opus-4-7"
 };
 const message: Anthropic.Message = await client.messages.create(params);
 ```
@@ -86,7 +86,7 @@ const client = new Anthropic();
 const stream = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   stream: true
 });
 for await (const messageStreamEvent of stream) {
@@ -103,7 +103,7 @@ This library provides several conveniences for streaming messages, for example:
 ```shiki
 const stream = anthropic.messages
   .stream({
-    model: "claude-opus-4-6",
+    model: "claude-opus-4-7",
     max_tokens: 1024,
     messages: [
       {
@@ -148,7 +148,7 @@ const weatherTool = betaZodTool({
 });
 
 const finalMessage = await anthropic.beta.messages.toolRunner({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1000,
   messages: [{ role: "user", content: "What is the weather in San Francisco?" }],
   tools: [weatherTool]
@@ -222,7 +222,7 @@ await mcpClient.connect(transport);
 // Use MCP prompts
 const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: mcpMessages(messages)
 });
@@ -230,7 +230,7 @@ const response = await anthropic.beta.messages.create({
 // Use MCP tools with toolRunner
 const { tools } = await mcpClient.listTools();
 const runner = await anthropic.beta.messages.toolRunner({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Use the available tools" }],
   tools: mcpTools(tools, mcpClient)
@@ -239,7 +239,7 @@ const runner = await anthropic.beta.messages.toolRunner({
 // Use MCP resources as content
 const resource = await mcpClient.readResource({ uri: "file:///path/to/doc.txt" });
 await anthropic.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
     {
@@ -275,7 +275,7 @@ await client.messages.batches.create({
     {
       custom_id: "my-first-request",
       params: {
-        model: "claude-opus-4-6",
+        model: "claude-opus-4-7",
         max_tokens: 1024,
         messages: [{ role: "user", content: "Hello, world" }]
       }
@@ -283,7 +283,7 @@ await client.messages.batches.create({
     {
       custom_id: "my-second-request",
       params: {
-        model: "claude-opus-4-6",
+        model: "claude-opus-4-7",
         max_tokens: 1024,
         messages: [{ role: "user", content: "Hi again, friend" }]
       }
@@ -363,7 +363,7 @@ const message = await client.messages
   .create({
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   })
   .catch(async (err) => {
     if (err instanceof Anthropic.APIError) {
@@ -399,7 +399,7 @@ All object responses in the SDK provide a `_request_id` property which is added 
 const message = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
-  model: "claude-opus-4-6"
+  model: "claude-opus-4-7"
 });
 console.log(message._request_id); // req_018EeWyXxfu5pfWkrYcMdjWG
 ```
@@ -423,7 +423,7 @@ await client.messages.create(
   {
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   },
   { maxRetries: 5 }
 );
@@ -455,7 +455,7 @@ await client.messages.create(
   {
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   },
   { timeout: 5 * 1000 }
 );
@@ -529,7 +529,7 @@ const message = await client.messages.create(
   {
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   },
   { headers: { "anthropic-version": "My-Custom-Value" } }
 );
@@ -552,7 +552,7 @@ const response = await client.messages
   .create({
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   })
   .asResponse();
 console.log(response.headers.get("X-My-Header"));
@@ -562,7 +562,7 @@ const { data: message, response: raw } = await client.messages
   .create({
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    model: "claude-opus-4-6"
+    model: "claude-opus-4-7"
   })
   .withResponse();
 console.log(raw.headers.get("X-My-Header"));
@@ -732,7 +732,7 @@ For example, to use the [Files API](build-with-claude/files.md):
 ```shiki
 const client = new Anthropic();
 const response = await client.beta.messages.create({
-  model: "claude-opus-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
     {

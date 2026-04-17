@@ -68,6 +68,8 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 List<Request> requests
 
 List of requests for prompt completion. Each is an individual request to create a Message.
@@ -2550,6 +2552,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role role
 
 Accepts one of the following:
@@ -2565,6 +2571,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -2849,6 +2859,8 @@ MEDIUM("medium")
 
 HIGH("high")
 
+XHIGH("xhigh")
+
 MAX("max")
 
 Optional<[BetaJsonOutputFormat](api/beta.md)> format
@@ -2860,6 +2872,22 @@ Schema schema
 The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+
+User-configurable total token budget across contexts.
+
+long total
+
+Total token budget across all contexts in the session.
+
+JsonValue; type "tokens"constant"tokens"constant
+
+The budget type. Currently only 'tokens' is supported.
+
+Optional<Long> remaining
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
 
@@ -4419,6 +4447,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4750,6 +4782,10 @@ Recommended for advanced use cases only. You usually only need to use `temperatu
 maximum1
 
 minimum0
+
+Optional<String> userProfileId
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ##### ReturnsExpand Collapse
 

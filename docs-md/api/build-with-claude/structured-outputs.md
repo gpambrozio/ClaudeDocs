@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-Structured outputs are generally available on the Claude API and Amazon Bedrock for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
+Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Mythos Preview, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 is available through the [Amazon Bedrock research preview](build-with-claude/claude-in-amazon-bedrock-research-preview.md). Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
 
 This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 
@@ -41,39 +41,38 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
 ### Quick start
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm."
-      }
-    ],
-    "output_config": {
-      "format": {
-        "type": "json_schema",
-        "schema": {
-          "type": "object",
-          "properties": {
-            "name": {"type": "string"},
-            "email": {"type": "string"},
-            "plan_interest": {"type": "string"},
-            "demo_requested": {"type": "boolean"}
-          },
-          "required": ["name", "email", "plan_interest", "demo_requested"],
-          "additionalProperties": false
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
         }
-      }
-    }
-  }'
+    ],
+    output_config={
+        "format": {
+            "type": "json_schema",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "plan_interest": {"type": "string"},
+                    "demo_requested": {"type": "boolean"},
+                },
+                "required": ["name", "email", "plan_interest", "demo_requested"],
+                "additionalProperties": False,
+            },
+        }
+    },
+)
+print(response.content[0].text)
 ```
 
 **Response format:** Valid JSON matching your schema in `response.content[0].text`
@@ -127,32 +126,30 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-{ read -r _ NAME; read -r _ EMAIL; } < <(
-  ant messages create \
-    --transform 'content.0.text|@fromstr|{name,email}' --format yaml <<'YAML'
-model: claude-opus-4-6
-max_tokens: 1024
-messages:
-  - role: user
-    content: >-
-      Extract the key information from this email: John Smith
-      (john@example.com) is interested in our Enterprise plan and wants
-      to schedule a demo for next Tuesday at 2pm.
-output_config:
-  format:
-    type: json_schema
-    schema:
-      type: object
-      properties:
-        name: {type: string}
-        email: {type: string}
-        plan_interest: {type: string}
-        demo_requested: {type: boolean}
-      required: [name, email, plan_interest, demo_requested]
-      additionalProperties: false
-YAML
+from pydantic import BaseModel
+from anthropic import Anthropic
+
+class ContactInfo(BaseModel):
+    name: str
+    email: str
+    plan_interest: str
+    demo_requested: bool
+
+client = Anthropic()
+
+response = client.messages.parse(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.",
+        }
+    ],
+    output_format=ContactInfo,
 )
-printf '%s (%s)\n' "$NAME" "$EMAIL"
+
+print(response.parsed_output)
 ```
 
 #### SDK-specific methods
@@ -191,40 +188,57 @@ Ruby
 
 Ruby
 
-**Raw JSON schemas via heredoc body**
+**`client.messages.parse()` (Recommended)**
 
-The CLI passes raw JSON schemas as a YAML heredoc body. Use the GJSON `@fromstr` modifier with `--transform` to parse the JSON string returned in `content[0].text` and project specific fields.
+The `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.
 
 ```shiki
-ant messages create \
-  --transform 'content.0.text|@fromstr|{name,email}' \
-  --format yaml <<'YAML'
-model: claude-opus-4-6
-max_tokens: 1024
-messages:
-  - role: user
-    content: >-
-      Extract contact info: John Smith, john@example.com,
-      interested in the Pro plan
-output_config:
-  format:
-    type: json_schema
-    schema:
-      type: object
-      properties:
-        name: {type: string}
-        email: {type: string}
-        plan_interest: {type: string}
-      required: [name, email, plan_interest]
-      additionalProperties: false
-YAML
+from pydantic import BaseModel
+# ...
+class ContactInfo(BaseModel):
+    name: str
+    email: str
+    plan_interest: str
+# ...
+response = client.messages.parse(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Extract contact info: John Smith, john@example.com, interested in the Pro plan",
+        }
+    ],
+    output_format=ContactInfo,
+)
+
+# Access the parsed output directly
+contact = response.parsed_output
+print(contact.name, contact.email)
 ```
 
-Output
+**`transform_schema()` helper**
+
+For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
 
 ```shiki
-name: John Smith
-email: john@example.com
+from anthropic import transform_schema
+from pydantic import TypeAdapter
+
+# First convert Pydantic model to JSON schema, then transform
+schema = TypeAdapter(ContactInfo).json_schema()
+schema = transform_schema(schema)
+# Modify schema if needed
+schema["properties"]["custom_field"] = {"type": "string"}
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "..."}],
+    output_config={
+        "format": {"type": "json_schema", "schema": schema},
+    },
+)
 ```
 
 #### How SDK transformation works
@@ -265,42 +279,49 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant messages create <<'YAML'
-model: claude-opus-4-6
-max_tokens: 1024
-messages:
-  - role: user
-    content: Help me plan a trip to Paris departing May 15, 2026
-# JSON outputs: structured response format
-output_config:
-  format:
-    type: json_schema
-    schema:
-      type: object
-      properties:
-        summary:
-          type: string
-        next_steps:
-          type: array
-          items:
-            type: string
-      required: [summary, next_steps]
-      additionalProperties: false
-# Strict tool use: guaranteed tool parameters
-tools:
-  - name: search_flights
-    strict: true
-    input_schema:
-      type: object
-      properties:
-        destination:
-          type: string
-        date:
-          type: string
-          format: date
-      required: [destination, date]
-      additionalProperties: false
-YAML
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Help me plan a trip to Paris departing May 15, 2026",
+        }
+    ],
+    # JSON outputs: structured response format
+    output_config={
+        "format": {
+            "type": "json_schema",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "summary": {"type": "string"},
+                    "next_steps": {"type": "array", "items": {"type": "string"}},
+                },
+                "required": ["summary", "next_steps"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    # Strict tool use: guaranteed tool parameters
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {"type": "string"},
+                    "date": {"type": "string", "format": "date"},
+                },
+                "required": ["destination", "date"],
+                "additionalProperties": False,
+            },
+        }
+    ],
+)
+
+print(response)
 ```
 
 ## Important considerations

@@ -36,33 +36,28 @@ The MCP connector uses two components:
 
 This example enables all tools from an MCP server with default configuration:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "X-API-Key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: mcp-client-2025-11-20" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1000,
-    "messages": [{"role": "user", "content": "What tools do you have available?"}],
-    "mcp_servers": [
-      {
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse",
-        "name": "example-mcp",
-        "authorization_token": "YOUR_TOKEN"
-      }
+client = anthropic.Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1000,
+    messages=[{"role": "user", "content": "What tools do you have available?"}],
+    mcp_servers=[
+        {
+            "type": "url",
+            "url": "https://example-server.modelcontextprotocol.io/sse",
+            "name": "example-mcp",
+            "authorization_token": "YOUR_TOKEN",
+        }
     ],
-    "tools": [
-      {
-        "type": "mcp_toolset",
-        "mcp_server_name": "example-mcp"
-      }
-    ]
-  }'
+    tools=[{"type": "mcp_toolset", "mcp_server_name": "example-mcp"}],
+    betas=["mcp-client-2025-11-20"],
+)
+
+print(response)
 ```
 
 ## MCP server configuration
@@ -292,7 +287,7 @@ You can connect to multiple MCP servers by including multiple server definitions
 
 ```shiki
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "max_tokens": 1000,
   "messages": [
     {
@@ -426,7 +421,7 @@ await mcpClient.connect(transport);
 // List tools and convert them for the Claude API
 const { tools } = await mcpClient.listTools();
 const runner = await anthropic.beta.messages.toolRunner({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [{ role: "user", content: "What tools do you have available?" }],
   tools: mcpTools(tools, mcpClient)
@@ -442,7 +437,7 @@ import { mcpMessages } from "@anthropic-ai/sdk/helpers/beta/mcp";
 
 const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
 const response = await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: mcpMessages(messages)
 });
@@ -458,7 +453,7 @@ import { mcpResourceToContent, mcpResourceToFile } from "@anthropic-ai/sdk/helpe
 // As a content block in a message
 const resource = await mcpClient.readResource({ uri: "file:///path/to/doc.txt" });
 await anthropic.beta.messages.create({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
     {
@@ -502,7 +497,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "max_tokens": 1000,
   "messages": [
     // ...
@@ -526,7 +521,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "max_tokens": 1000,
   "messages": [
     // ...

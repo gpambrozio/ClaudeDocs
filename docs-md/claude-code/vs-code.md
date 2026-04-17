@@ -60,7 +60,7 @@ Here’s an example of asking about a particular line in a file:![VS Code editor
 
 Review changes
 
-When Claude wants to edit a file, it shows a side-by-side comparison of the original and proposed changes, then asks for permission. You can accept, reject, or tell Claude what to do instead.![VS Code showing a diff of Claude's proposed changes with a permission prompt asking whether to make the edit](https://mintcdn.com/claude-code/FVYz38sRY-VuoGHA/images/vs-code-edits.png?fit=max&auto=format&n=FVYz38sRY-VuoGHA&q=85&s=e005f9b41c541c5c7c59c082f7c4841c)
+When Claude wants to edit a file, it shows a side-by-side comparison of the original and proposed changes, then asks for permission. You can accept, reject, or tell Claude what to do instead. If you edit the proposed content directly in the diff view before accepting, Claude is told that you modified it so it does not assume the file matches its original proposal.![VS Code showing a diff of Claude's proposed changes with a permission prompt asking whether to make the edit](https://mintcdn.com/claude-code/FVYz38sRY-VuoGHA/images/vs-code-edits.png?fit=max&auto=format&n=FVYz38sRY-VuoGHA&q=85&s=e005f9b41c541c5c7c59c082f7c4841c)
 
 For more ideas on what you can do with Claude Code, see [Common workflows](common-workflows.md).
 
@@ -91,7 +91,7 @@ You can also hold `Shift` while dragging files into the prompt box to add them a
 
 ### [​](#resume-past-conversations) Resume past conversations
 
-Click the dropdown at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see [Common workflows](common-workflows.md).
+Click the **Session history** button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see [Common workflows](common-workflows.md).
 
 ### [​](#resume-remote-sessions-from-claude-ai) Resume remote sessions from Claude.ai
 
@@ -99,9 +99,9 @@ If you use [Claude Code on the web](claude-code-on-the-web.md), you can resume t
 
 1
 
-Open Past Conversations
+Open session history
 
-Click the **Past Conversations** dropdown at the top of the Claude Code panel.
+Click the **Session history** button at the top of the Claude Code panel.
 
 2
 

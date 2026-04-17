@@ -24,7 +24,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 tools:
   - type: agent_toolset_20260401
     default_config:
@@ -48,7 +48,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Dev Assistant
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 mcp_servers:
   - type: url
     name: github
@@ -70,20 +70,20 @@ Use the `configs` array to override the default for individual tools. This examp
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-tools='[
-  {
-    "type": "agent_toolset_20260401",
-    "default_config": {
-      "permission_policy": {"type": "always_allow"}
+tools = [
+    {
+        "type": "agent_toolset_20260401",
+        "default_config": {
+            "permission_policy": {"type": "always_allow"},
+        },
+        "configs": [
+            {
+                "name": "bash",
+                "permission_policy": {"type": "always_ask"},
+            },
+        ],
     },
-    "configs": [
-      {
-        "name": "bash",
-        "permission_policy": {"type": "always_ask"}
-      }
-    ]
-  }
-]'
+]
 ```
 
 ## Respond to confirmation requests
@@ -101,37 +101,29 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Allow the tool to execute
-curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "events": [
-      {
-        "type": "user.tool_confirmation",
-        "tool_use_id": "'$AGENT_TOOL_USE_EVENT_ID'",
-        "result": "allow"
-      }
-    ]
-  }'
+client.beta.sessions.events.send(
+    session.id,
+    events=[
+        {
+            "type": "user.tool_confirmation",
+            "tool_use_id": agent_tool_use_event.id,
+            "result": "allow",
+        },
+    ],
+)
 
 # Or deny it with an explanation
-curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "events": [
-      {
-        "type": "user.tool_confirmation",
-        "tool_use_id": "'$MCP_TOOL_USE_EVENT_ID'",
-        "result": "deny",
-        "deny_message": "Don'\''t create issues in the production project. Use the staging project."
-      }
-    ]
-  }'
+client.beta.sessions.events.send(
+    session.id,
+    events=[
+        {
+            "type": "user.tool_confirmation",
+            "tool_use_id": mcp_tool_use_event.id,
+            "result": "deny",
+            "deny_message": "Don't create issues in the production project. Use the staging project.",
+        },
+    ],
+)
 ```
 
 ## Custom tools

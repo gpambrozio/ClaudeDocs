@@ -72,6 +72,8 @@ const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-2
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsAgent struct{…}
@@ -119,6 +121,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
@@ -396,7 +402,7 @@ Response 200
 ```shiki
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
   "mcp_servers": [
@@ -460,7 +466,7 @@ Response 200
 ```shiki
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
   "mcp_servers": [

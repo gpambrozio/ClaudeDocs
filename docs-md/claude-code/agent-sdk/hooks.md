@@ -22,7 +22,7 @@ Something happens during agent execution and the SDK fires an event: a tool is a
 
 The SDK collects registered hooks
 
-The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files, but only if you explicitly load them with [`settingSources`](agent-sdk/typescript.md) or [`setting_sources`](agent-sdk/python.md).
+The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files when the corresponding [`settingSources`](agent-sdk/typescript.md) or [`setting_sources`](agent-sdk/python.md) entry is enabled, which it is for default `query()` options.
 
 3
 

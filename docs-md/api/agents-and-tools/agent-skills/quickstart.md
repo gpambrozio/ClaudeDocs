@@ -25,7 +25,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
 ant beta:skills list --source anthropic
@@ -39,35 +39,31 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {
-          "type": "anthropic",
-          "skill_id": "pptx",
-          "version": "latest"
-        }
-      ]
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Create a message with the PowerPoint Skill
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
-    "messages": [{
-      "role": "user",
-      "content": "Create a presentation about renewable energy with 5 slides"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }'
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a presentation about renewable energy with 5 slides",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response.content)
 ```
 
 Let's break down what each part does:
@@ -85,20 +81,33 @@ When you make this request, Claude automatically matches your task to the releva
 
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-# Extract file_id from response (using jq)
-FILE_ID=$(echo "$RESPONSE" | jq -r '.content[] | select(.type=="tool_use" and .name=="code_execution") | .content[] | select(.file_id) | .file_id')
+from typing import Any
 
-# Download the file
-curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  --output renewable_energy.pptx
+response: Any = None
+# Extract file ID from response
+file_id = None
+for block in response.content:
+    if block.type == "tool_use" and block.name == "code_execution":
+        # File ID is in the tool result
+        for result_block in block.content:
+            if hasattr(result_block, "file_id"):
+                file_id = result_block.file_id
+                break
 
-echo "Presentation saved to renewable_energy.pptx"
+if file_id:
+    # Download the file
+    file_content = client.beta.files.download(
+        file_id=file_id, betas=["files-api-2025-04-14"]
+    )
+
+    # Save to disk
+    with open("renewable_energy.pptx", "wb") as f:
+        file_content.write_to_file(f.name)
+
+    print(f"Presentation saved to renewable_energy.pptx")
 ```
 
 For complete details on working with generated files, see the [code execution tool documentation](agents-and-tools/tool-use/code-execution-tool.md).
@@ -109,101 +118,63 @@ Now that you've created your first document with Skills, try these variations:
 
 ### Create a spreadsheet
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {
-          "type": "anthropic",
-          "skill_id": "xlsx",
-          "version": "latest"
-        }
-      ]
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
-    "messages": [{
-      "role": "user",
-      "content": "Create a quarterly sales tracking spreadsheet with sample data"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }'
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a quarterly sales tracking spreadsheet with sample data",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
 ```
 
 ### Create a Word document
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {
-          "type": "anthropic",
-          "skill_id": "docx",
-          "version": "latest"
-        }
-      ]
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
-    "messages": [{
-      "role": "user",
-      "content": "Write a 2-page report on the benefits of renewable energy"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }'
+    messages=[
+        {
+            "role": "user",
+            "content": "Write a 2-page report on the benefits of renewable energy",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
 ```
 
 ### Generate a PDF
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "container": {
-      "skills": [
-        {
-          "type": "anthropic",
-          "skill_id": "pdf",
-          "version": "latest"
-        }
-      ]
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
-    "messages": [{
-      "role": "user",
-      "content": "Generate a PDF invoice template"
-    }],
-    "tools": [{
-      "type": "code_execution_20250825",
-      "name": "code_execution"
-    }]
-  }'
+    messages=[{"role": "user", "content": "Generate a PDF invoice template"}],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
 ```
 
 ## Next steps

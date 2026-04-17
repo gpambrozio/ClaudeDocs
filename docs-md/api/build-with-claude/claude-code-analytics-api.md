@@ -22,6 +22,8 @@ This API is part of the [Admin API](build-with-claude/administration-api.md). Th
 
 Get your organization's Claude Code analytics for a specific day:
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
@@ -57,6 +59,8 @@ For complete parameter details and response schemas, see the [Claude Code Analyt
 
 #### Get analytics for a specific day
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08" \
@@ -65,6 +69,8 @@ starting_at=2025-09-08" \
 ```
 
 #### Get analytics with pagination
+
+cURL
 
 ```shiki
 # First request
@@ -122,7 +128,7 @@ Breakdown of tool action acceptance and rejection rates by tool type:
 
 For each Claude model used:
 
-- **model**: Claude model identifier (e.g., `claude-opus-4-6`)
+- **model**: Claude model identifier (e.g., `claude-opus-4-7`)
 - **tokens.input/output**: Input and output token counts for this model
 - **tokens.cache\_read/cache\_creation**: Cache-related token usage for this model
 - **estimated\_cost.amount**: Estimated cost in cents USD for this model
@@ -173,7 +179,7 @@ The API returns data in the following format:
       },
       "model_breakdown": [
         {
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-4-7",
           "tokens": {
             "input": 100000,
             "output": 35000,

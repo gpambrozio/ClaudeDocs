@@ -2472,6 +2472,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 required Role Role
 
 Accepts one of the following:
@@ -3932,6 +3936,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4286,6 +4294,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageTokensCount:
@@ -4313,11 +4323,11 @@ MessageCountTokensParams parameters = new()
     [
         new()
         {
-            Content = "string",
+            Content = "Hello, world",
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeMythosPreview,
+    Model = Model.ClaudeOpus4_6,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);

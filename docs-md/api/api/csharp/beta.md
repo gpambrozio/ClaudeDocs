@@ -278,6 +278,14 @@ required Boolean Supported
 
 Whether this capability is supported by the model.
 
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
 class BetaModelCapabilities:
 
 Model capability information.
@@ -373,6 +381,14 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -531,6 +547,14 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
+
+required Boolean Supported
+
+Whether this capability is supported by the model.
+
+required [BetaCapabilitySupport](api/beta.md)? Xhigh
+
+Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -710,6 +734,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -819,6 +847,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -2233,6 +2265,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 class BetaCompactionBlockParam:
@@ -2274,9 +2310,17 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 class BetaCompactionContentBlockDelta:
 
 required string? Content
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -3191,6 +3235,10 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -5589,6 +5637,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 class BetaContentBlockSource:
 
 required Content Content
@@ -7551,6 +7603,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -7600,6 +7656,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -7900,6 +7960,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -8143,6 +8207,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -10671,6 +10739,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 required Role Role
 
 Accepts one of the following:
@@ -10717,6 +10789,8 @@ Accepts one of the following:
 
 "high"High
 
+"xhigh"Xhigh
+
 "max"Max
 
 [BetaJsonOutputFormat](api/beta.md)? Format
@@ -10728,6 +10802,22 @@ required IReadOnlyDictionary<string, JsonElement> Schema
 The JSON schema of the format
 
 JsonElement Type "json\_schema"constant
+
+[BetaTokenTaskBudget](api/beta.md)? TaskBudget
+
+User-configurable total token budget across contexts.
+
+required Long Total
+
+Total token budget across all contexts in the session.
+
+JsonElement Type "tokens"constant
+
+The budget type. Currently only 'tokens' is supported.
+
+Long? Remaining
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource:
 
@@ -10851,6 +10941,10 @@ class BetaCompactionContentBlockDelta:
 
 required string? Content
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction\_delta"constant
 
 class BetaRawContentBlockDeltaEvent:
@@ -10970,6 +11064,10 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -11753,6 +11851,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -12032,6 +12134,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -12964,6 +13070,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -13013,6 +13123,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -13312,6 +13426,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -14274,6 +14392,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -14323,6 +14445,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -14622,6 +14748,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -15002,6 +15132,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -15871,6 +16005,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -15994,6 +16132,10 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -17570,6 +17712,22 @@ class BetaThinkingTurns:
 JsonElement Type "thinking\_turns"constant
 
 required Long Value
+
+class BetaTokenTaskBudget:
+
+User-configurable total token budget across contexts.
+
+required Long Total
+
+Total token budget across all contexts in the session.
+
+JsonElement Type "tokens"constant
+
+The budget type. Currently only 'tokens' is supported.
+
+Long? Remaining
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool:
 
@@ -20451,6 +20609,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -21025,6 +21187,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -23750,6 +23916,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -23799,6 +23969,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -24098,6 +24272,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -25166,6 +25344,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -25215,6 +25397,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -25514,6 +25700,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -26546,6 +26736,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -26595,6 +26789,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -26895,6 +27093,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -27078,6 +27280,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"ClaudeOpus4\_6
 
@@ -27991,6 +28197,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
@@ -28044,6 +28254,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"ClaudeOpus4\_6
 
@@ -28754,6 +28968,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-6"ClaudeOpus4\_6
 
 Most intelligent model for building agents and coding
@@ -29149,6 +29367,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"ClaudeOpus4\_6
 
@@ -35581,6 +35803,110 @@ GET/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+[BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+class BetaUserProfile:
+
+required string ID
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required IReadOnlyDictionary<string, string> Metadata
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+required Status Status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"Active
+
+"pending"Pending
+
+"rejected"Rejected
+
+required Type Type
+
+Object type. Always `user_profile`.
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+string? ExternalID
+
+Platform's own identifier for this user. Not enforced unique.
+
+class BetaUserProfileEnrollmentUrl:
+
+required DateTimeOffset ExpiresAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+Object type. Always `enrollment_url`.
+
+required string Url
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+class BetaUserProfileTrustGrant:
+
+required Status Status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"Active
+
+"pending"Pending
+
+"rejected"Rejected
 
 ---
 

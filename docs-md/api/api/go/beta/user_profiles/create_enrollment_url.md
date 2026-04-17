@@ -6,15 +6,15 @@ Go
 
 # Create Enrollment URL
 
-client.Beta.UserProfiles.NewEnrollmentURL(ctx, id, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
+client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
 
-POST/v1/user\_profiles/{id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 Create Enrollment URL
 
 ##### ParametersExpand Collapse
 
-id string
+userProfileID string
 
 body BetaUserProfileNewEnrollmentURLParams
 
@@ -70,6 +70,8 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+
 const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
@@ -80,9 +82,13 @@ ExpiresAt Time
 
 A timestamp in RFC 3339 format
 
-Type string
+Type BetaUserProfileEnrollmentURLType
+
+Object type. Always `enrollment_url`.
 
 URL string
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
@@ -105,7 +111,7 @@ func main() {
   )
   betaUserProfileEnrollmentURL, err := client.Beta.UserProfiles.NewEnrollmentURL(
     context.TODO(),
-    "id",
+    "uprof_011CZkZCu8hGbp5mYRQgUmz9",
     anthropic.BetaUserProfileNewEnrollmentURLParams{
 
     },
@@ -121,9 +127,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 
@@ -133,9 +139,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 

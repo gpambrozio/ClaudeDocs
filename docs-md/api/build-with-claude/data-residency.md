@@ -20,22 +20,23 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
 ### API usage
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 1024,
-        "inference_geo": "us",
-        "messages": [{
-            "role": "user",
-            "content": "Summarize the key points of this document."
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    inference_geo="us",
+    messages=[
+        {"role": "user", "content": "Summarize the key points of this document."}
+    ],
+)
+
+print(response.content[0].text)
+# Check where inference actually ran
+print(f"Inference geo: {response.usage.inference_geo}")
 ```
 
 ### Response

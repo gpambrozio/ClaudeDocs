@@ -26,21 +26,18 @@ All [active models](about-claude/models/overview.md) support token counting.
 
 ### Count tokens in basic messages
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "content-type: application/json" \
-    --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-opus-4-6",
-      "system": "You are a scientist",
-      "messages": [{
-        "role": "user",
-        "content": "Hello, Claude"
-      }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-7",
+    system="You are a scientist",
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+
+print(response.json())
 ```
 
 Output
@@ -53,38 +50,33 @@ Output
 
 [Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "content-type: application/json" \
-    --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-opus-4-6",
-      "tools": [
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-7",
+    tools=[
         {
-          "name": "get_weather",
-          "description": "Get the current weather in a given location",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "location": {
-                "type": "string",
-                "description": "The city and state, e.g. San Francisco, CA"
-              }
+            "name": "get_weather",
+            "description": "Get the current weather in a given location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    }
+                },
+                "required": ["location"],
             },
-            "required": ["location"]
-          }
         }
-      ],
-      "messages": [
-        {
-          "role": "user",
-          "content": "What'\''s the weather like in San Francisco?"
-        }
-      ]
-    }'
+    ],
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
+)
+
+print(response.json())
 ```
 
 Output
@@ -95,34 +87,38 @@ Output
 
 ### Count tokens in messages with images
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
+import base64
+import httpx
 
-IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-IMAGE_MEDIA_TYPE="image/jpeg"
-IMAGE_BASE64=$(curl -s "$IMAGE_URL" | base64 | tr -d '\n')
+image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image_media_type = "image/jpeg"
+image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
-curl https://api.anthropic.com/v1/messages/count_tokens \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data @- <<EOF
-{
-    "model": "claude-opus-4-6",
-    "messages": [
-        {"role": "user", "content": [
-            {"type": "image", "source": {
-                "type": "base64",
-                "media_type": "$IMAGE_MEDIA_TYPE",
-                "data": "$IMAGE_BASE64"
-            }},
-            {"type": "text", "text": "Describe this image"}
-        ]}
-    ]
-}
-EOF
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-7",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image_media_type,
+                        "data": image_data,
+                    },
+                },
+                {"type": "text", "text": "Describe this image"},
+            ],
+        }
+    ],
+)
+print(response.json())
 ```
 
 Output
@@ -138,44 +134,38 @@ See [how the context window is calculated with extended thinking](build-with-cla
 - Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
 - **Current** assistant turn thinking **does** count toward your input tokens
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "content-type: application/json" \
-    --header "anthropic-version: 2023-06-01" \
-    --data '{
-      "model": "claude-sonnet-4-6",
-      "thinking": {
-        "type": "enabled",
-        "budget_tokens": 16000
-      },
-      "messages": [
+client = anthropic.Anthropic()
+
+response = client.messages.count_tokens(
+    model="claude-sonnet-4-6",
+    thinking={"type": "enabled", "budget_tokens": 16000},
+    messages=[
         {
-          "role": "user",
-          "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+            "role": "user",
+            "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?",
         },
         {
-          "role": "assistant",
-          "content": [
-            {
-              "type": "thinking",
-              "thinking": "This is a nice number theory question. Lets think about it step by step...",
-              "signature": "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
-            },
-            {
-              "type": "text",
-              "text": "Yes, there are infinitely many prime numbers p such that p mod 4 = 3..."
-            }
-          ]
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "thinking",
+                    "thinking": "This is a nice number theory question. Let's think about it step by step...",
+                    "signature": "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV...",
+                },
+                {
+                    "type": "text",
+                    "text": "Yes, there are infinitely many prime numbers p such that p mod 4 = 3...",
+                },
+            ],
         },
-        {
-          "role": "user",
-          "content": "Can you write a formal proof?"
-        }
-      ]
-    }'
+        {"role": "user", "content": "Can you write a formal proof?"},
+    ],
+)
+
+print(response.json())
 ```
 
 Output
@@ -188,35 +178,38 @@ Output
 
 Token counting supports PDFs with the same [limitations](build-with-claude/pdf-support.md) as the Messages API.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "content-type: application/json" \
-    --header "anthropic-version: 2023-06-01" \
-    --data @- <<EOF
-{
-  "model": "claude-opus-4-6",
-  "messages": [{
-    "role": "user",
-    "content": [
-      {
-        "type": "document",
-        "source": {
-          "type": "base64",
-          "media_type": "application/pdf",
-          "data": "$PDF_BASE64"
+import base64
+import anthropic
+
+client = anthropic.Anthropic()
+
+with open("document.pdf", "rb") as pdf_file:
+    pdf_base64 = base64.standard_b64encode(pdf_file.read()).decode("utf-8")
+
+response = client.messages.count_tokens(
+    model="claude-opus-4-7",
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "application/pdf",
+                        "data": pdf_base64,
+                    },
+                },
+                {"type": "text", "text": "Please summarize this document."},
+            ],
         }
-      },
-      {
-        "type": "text",
-        "text": "Please summarize this document."
-      }
-    ]
-  }]
-}
-EOF
+    ],
+)
+
+print(response.json())
 ```
 
 Output

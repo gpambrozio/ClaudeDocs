@@ -25,17 +25,9 @@ Pass the environment ID as a string when creating a session.
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session=$(curl -fsS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id"
-}
-EOF
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
 )
 ```
 
@@ -87,18 +79,15 @@ The `networking` field controls the container's outbound network access. It does
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-config=$(cat <<'EOF'
-{
-  "type": "cloud",
-  "networking": {
-    "type": "limited",
-    "allowed_hosts": ["api.example.com"],
-    "allow_mcp_servers": true,
-    "allow_package_managers": true
-  }
+config = {
+    "type": "cloud",
+    "networking": {
+        "type": "limited",
+        "allowed_hosts": ["api.example.com"],
+        "allow_mcp_servers": True,
+        "allow_package_managers": True,
+    },
 }
-EOF
-)
 ```
 
 For production deployments, use `limited` networking with an explicit `allowed_hosts` list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed domains.

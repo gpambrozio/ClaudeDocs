@@ -8,21 +8,21 @@ To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reus
 | `Agent` | Spawns a [subagent](sub-agents.md) with its own context window to handle a task | No |
 | `AskUserQuestion` | Asks multiple-choice questions to gather requirements or clarify ambiguity | No |
 | `Bash` | Executes shell commands in your environment. See [Bash tool behavior](#bash-tool-behavior) | Yes |
-| `CronCreate` | Schedules a recurring or one-shot prompt within the current session (gone when Claude exits). See [scheduled tasks](scheduled-tasks.md) | No |
+| `CronCreate` | Schedules a recurring or one-shot prompt within the current session. Tasks are session-scoped and restored on `--resume` or `--continue` if unexpired. See [scheduled tasks](scheduled-tasks.md) | No |
 | `CronDelete` | Cancels a scheduled task by ID | No |
 | `CronList` | Lists all scheduled tasks in the session | No |
 | `Edit` | Makes targeted edits to specific files | Yes |
 | `EnterPlanMode` | Switches to plan mode to design an approach before coding | No |
-| `EnterWorktree` | Creates an isolated [git worktree](common-workflows.md) and switches into it. Pass a `path` to switch into an existing worktree of the current repository instead of creating a new one | No |
+| `EnterWorktree` | Creates an isolated [git worktree](common-workflows.md) and switches into it. Pass a `path` to switch into an existing worktree of the current repository instead of creating a new one. Not available to subagents | No |
 | `ExitPlanMode` | Presents a plan for approval and exits plan mode | Yes |
-| `ExitWorktree` | Exits a worktree session and returns to the original directory | No |
+| `ExitWorktree` | Exits a worktree session and returns to the original directory. Not available to subagents | No |
 | `Glob` | Finds files based on pattern matching | No |
 | `Grep` | Searches for patterns in file contents | No |
 | `ListMcpResourcesTool` | Lists resources exposed by connected [MCP servers](mcp.md) | No |
 | `LSP` | Code intelligence via language servers: jump to definitions, find references, report type errors and warnings. See [LSP tool behavior](#lsp-tool-behavior) | No |
 | `Monitor` | Runs a command in the background and feeds each output line back to Claude, so it can react to log entries, file changes, or polled status mid-conversation. See [Monitor tool](#monitor-tool) | Yes |
 | `NotebookEdit` | Modifies Jupyter notebook cells | Yes |
-| `PowerShell` | Executes PowerShell commands on Windows. Opt-in preview. See [PowerShell tool](#powershell-tool) | Yes |
+| `PowerShell` | Executes PowerShell commands natively. See [PowerShell tool](#powershell-tool) for availability | Yes |
 | `Read` | Reads the contents of files | No |
 | `ReadMcpResourceTool` | Reads a specific MCP resource by URI | No |
 | `SendMessage` | Sends a message to an [agent team](agent-teams.md) teammate, or [resumes a subagent](sub-agents.md) by its agent ID. Stopped subagents auto-resume in the background. Only available when `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set | No |
@@ -80,10 +80,11 @@ The Monitor tool lets Claude watch something in the background and react when it
 
 Claude writes a small script for the watch, runs it in the background, and receives each output line as it arrives. You keep working in the same session and Claude interjects when an event lands. Stop a monitor by asking Claude to cancel it or by ending the session.
 Monitor uses the same [permission rules as Bash](permissions.md), so `allow` and `deny` patterns you have set for Bash apply here too. It is not available on Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. It is also not available when `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is set.
+Plugins can declare monitors that start automatically when the plugin is active, instead of asking Claude to start them. See [plugin monitors](plugins-reference.md).
 
 ## [​](#powershell-tool) PowerShell tool
 
-On Windows, Claude Code can run PowerShell commands natively instead of routing through Git Bash. This is an opt-in preview.
+The PowerShell tool lets Claude run PowerShell commands natively. On Windows, this means commands run in PowerShell instead of routing through Git Bash. The tool is rolling out progressively on Windows and is opt-in on Linux, macOS, and WSL.
 
 ### [​](#enable-the-powershell-tool) Enable the PowerShell tool
 
@@ -97,7 +98,8 @@ Set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` in your environment or in `settings.json
 }
 ```
 
-Claude Code auto-detects `pwsh.exe` (PowerShell 7+) with a fallback to `powershell.exe` (PowerShell 5.1). The Bash tool remains registered alongside the PowerShell tool, so you may need to ask Claude to use PowerShell.
+On Windows, set the variable to `0` to opt out of the rollout. On Linux, macOS, and WSL, the tool requires PowerShell 7 or later: install `pwsh` and ensure it is on your `PATH`.
+On Windows, Claude Code auto-detects `pwsh.exe` for PowerShell 7+ with a fallback to `powershell.exe` for PowerShell 5.1. The Bash tool remains registered alongside the PowerShell tool, so you may need to ask Claude to use PowerShell.
 
 ### [​](#shell-selection-in-settings-hooks-and-skills) Shell selection in settings, hooks, and skills
 
@@ -115,9 +117,8 @@ The PowerShell tool has the following known limitations during the preview:
 
 - Auto mode does not work with the PowerShell tool yet
 - PowerShell profiles are not loaded
-- Sandboxing is not supported
-- Only supported on native Windows, not WSL
-- Git Bash is still required to start Claude Code
+- On Windows, sandboxing is not supported
+- On Windows, Git Bash is still required to start Claude Code
 
 ## [​](#check-which-tools-are-available) Check which tools are available
 

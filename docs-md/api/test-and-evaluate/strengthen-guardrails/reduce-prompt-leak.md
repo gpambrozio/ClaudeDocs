@@ -17,7 +17,7 @@ Try monitoring techniques first, like output screening and post-processing, to t
 ## Strategies to reduce prompt leak
 
 - **Separate context from queries:**
-  You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Sonnet 4.6.)
+  You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Sonnet 4.6.)
 
 ### Example: Safeguarding proprietary analytics
 

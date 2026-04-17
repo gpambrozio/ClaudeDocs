@@ -31,16 +31,11 @@ Once your agent works as expected:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "agent": "agent_01XXXXXXXXXXXXXXXXXXXXXX",
-    "environment_id": "env_01XXXXXXXXXXXXXXXXXXXXXX",
-    "title": "My first session"
-  }')
+session = client.beta.sessions.create(
+    agent="agent_01J8XkN5uT3vHpLqRfWdY2",
+    environment_id="env_01K2mPsT7hNwR4jXuLvCqD8",
+    title="My first session",
+)
 ```
 
 Was this page helpful?

@@ -6,9 +6,13 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### April 16, 2026
+
+- We've launched [Claude Opus 4.7](https://www.anthropic.com/news/claude-opus-4-7), our most capable generally available model for complex reasoning and agentic coding, at the same $5 / $25 per MTok pricing as Opus 4.6. See [What's new in Claude Opus 4.7](about-claude/models/whats-new-claude-4-7.md) for capability improvements, new features, and the updated tokenizer. Opus 4.7 includes API breaking changes versus Opus 4.6; see [Migrating to Claude Opus 4.7](about-claude/models/migration-guide.md) before upgrading.
+
 ### April 14, 2026
 
-- We announced the deprecation of the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`), with retirement on the Claude API scheduled for June 15, 2026. We recommend migrating to [Claude Sonnet 4.6](about-claude/models/overview.md) and [Claude Opus 4.6](about-claude/models/overview.md) respectively. Read more in [model deprecations](about-claude/model-deprecations.md).
+- We announced the deprecation of the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`), with retirement on the Claude API scheduled for June 15, 2026. We recommend migrating to [Claude Sonnet 4.6](about-claude/models/overview.md) and [Claude Opus 4.7](about-claude/models/overview.md) respectively. Read more in [model deprecations](about-claude/model-deprecations.md).
 
 ### April 9, 2026
 

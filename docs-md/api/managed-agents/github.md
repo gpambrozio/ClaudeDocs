@@ -17,7 +17,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "Code Reviewer" \
-  --model '{id: claude-sonnet-4-6}' \
+  --model '{id: claude-opus-4-7}' \
   --system "You are a code review assistant with access to GitHub." \
   --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
   --tool '{type: agent_toolset_20260401}' \
@@ -30,25 +30,17 @@ Then create a session that mounts the GitHub repository:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<JSON | jq -r '.id'
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "https://github.com/org/repo",
-      "mount_path": "/workspace/repo",
-      "authorization_token": "ghp_your_github_token"
-    }
-  ]
-}
-JSON
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    resources=[
+        {
+            "type": "github_repository",
+            "url": "https://github.com/org/repo",
+            "mount_path": "/workspace/repo",
+            "authorization_token": "ghp_your_github_token",
+        },
+    ],
 )
 ```
 
@@ -74,20 +66,20 @@ Mount multiple repositories by adding entries to the `resources` array:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-resources='[
-  {
-    "type": "github_repository",
-    "url": "https://github.com/org/frontend",
-    "mount_path": "/workspace/frontend",
-    "authorization_token": "ghp_your_github_token"
-  },
-  {
-    "type": "github_repository",
-    "url": "https://github.com/org/backend",
-    "mount_path": "/workspace/backend",
-    "authorization_token": "ghp_your_github_token"
-  }
-]'
+resources = [
+    {
+        "type": "github_repository",
+        "url": "https://github.com/org/frontend",
+        "mount_path": "/workspace/frontend",
+        "authorization_token": "ghp_your_github_token",
+    },
+    {
+        "type": "github_repository",
+        "url": "https://github.com/org/backend",
+        "mount_path": "/workspace/backend",
+        "authorization_token": "ghp_your_github_token",
+    },
+]
 ```
 
 ## Managing repositories on a running session
@@ -98,22 +90,16 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List resources on the session
-repo_resource_id=$(curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/resources" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" | jq -r '.data[0].id')
-echo "$repo_resource_id"  # "sesrsc_01ABC..."
+listed = client.beta.sessions.resources.list(session.id)
+repo_resource_id = listed.data[0].id
+print(repo_resource_id)  # "sesrsc_01ABC..."
 
 # Rotate the authorization token
-curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/resources/$repo_resource_id" \
-# ...
-  -o /dev/null \
-  --data @- <<JSON
-{
-  "authorization_token": "ghp_your_new_github_token"
-}
-JSON
+client.beta.sessions.resources.update(
+    repo_resource_id,
+    session_id=session.id,
+    authorization_token="ghp_your_new_github_token",
+)
 ```
 
 ## Creating pull requests
@@ -123,27 +109,20 @@ With the GitHub MCP server, the agent can create branches, commit changes, and p
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -o /dev/null \
-  --data @- <<JSON
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [
+client.beta.sessions.events.send(
+    session.id,
+    events=[
         {
-          "type": "text",
-          "text": "Fix the type error in src/utils.ts, commit it to a new branch, and push it."
-        }
-      ]
-    }
-  ]
-}
-JSON
+            "type": "user.message",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Fix the type error in src/utils.ts, commit it to a new branch, and push it.",
+                },
+            ],
+        },
+    ],
+)
 ```
 
 Was this page helpful?

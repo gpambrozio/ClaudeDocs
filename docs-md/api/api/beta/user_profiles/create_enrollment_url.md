@@ -6,13 +6,13 @@ cURL
 
 # Create Enrollment URL
 
-POST/v1/user\_profiles/{id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 Create Enrollment URL
 
 ##### Path ParametersExpand Collapse
 
-id: string
+user\_profile\_id: string
 
 ##### Header ParametersExpand Collapse
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -70,6 +70,8 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
+"advisor-tool-2026-03-01"
+
 "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
@@ -80,16 +82,20 @@ expires\_at: string
 
 A timestamp in RFC 3339 format
 
-type: string
+type: "enrollment\_url"
+
+Object type. Always `enrollment_url`.
 
 url: string
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
 cURL
 
 ```shiki
-curl https://api.anthropic.com/v1/user_profiles/$ID/enrollment_url \
+curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-03-24' \
@@ -100,9 +106,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 
@@ -112,9 +118,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 

@@ -60,7 +60,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-class EffortCapability { high, low, max, 2 more }
+class EffortCapability { high, low, max, 3 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -95,6 +95,14 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+xhigh: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: bool
 
@@ -160,7 +168,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [EffortCapability](api/models.md) { high, low, max, 2 more }
+effort: [EffortCapability](api/models.md) { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -195,6 +203,14 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+xhigh: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: bool
 
@@ -318,7 +334,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [EffortCapability](api/models.md) { high, low, max, 2 more }
+effort: [EffortCapability](api/models.md) { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -353,6 +369,14 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+xhigh: [CapabilitySupport](api/models.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: bool
 

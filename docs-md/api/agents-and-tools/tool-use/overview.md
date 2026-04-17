@@ -6,19 +6,19 @@ Tool use lets Claude call functions you define or that Anthropic provides. Claud
 
 Here's the simplest example using a server tool, where Anthropic handles execution:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "tools": [{"type": "web_search_20260209", "name": "web_search"}],
-    "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
-  }'
+import anthropic
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[{"type": "web_search_20260209", "name": "web_search"}],
+    messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
+)
+print(response.content)
 ```
 
 ---
@@ -67,6 +67,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model | Tool choice | Tool use system prompt token count |
 | --- | --- | --- |
+| Claude Opus 4.7 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.6 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.5 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.1 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |

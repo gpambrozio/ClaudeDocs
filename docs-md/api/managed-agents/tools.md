@@ -32,7 +32,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 tools:
   - type: agent_toolset_20260401
     configs:
@@ -82,7 +82,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<'YAML'
 name: Weather Agent
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 tools:
   - type: agent_toolset_20260401
   - type: custom

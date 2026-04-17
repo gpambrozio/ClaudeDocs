@@ -94,7 +94,7 @@ Actions available in the `Chat` context:
 | Action | Default | Description |
 | --- | --- | --- |
 | `chat:cancel` | Escape | Cancel current input |
-| `chat:clearInput` | Ctrl+L | Clear prompt input |
+| `chat:clearInput` | Ctrl+L | Clear prompt input and force a full screen redraw |
 | `chat:killAgents` | Ctrl+X Ctrl+K | Kill all background agents |
 | `chat:cycleMode` | Shift+Tab\* | Cycle permission modes |
 | `chat:modelPicker` | Cmd+P / Meta+P | Open model picker |
@@ -275,6 +275,7 @@ Actions available in the `Plugin` context:
 | --- | --- | --- |
 | `plugin:toggle` | Space | Toggle plugin selection |
 | `plugin:install` | I | Install selected plugins |
+| `plugin:favorite` | F | Favorite the selected plugin so it sorts near the top of the Installed tab |
 
 ### [​](#settings-actions) Settings actions
 

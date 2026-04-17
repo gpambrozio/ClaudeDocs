@@ -45,7 +45,7 @@ There are five organization-level roles. See more details in the [API Console ro
 
 You can list [organization members](api/admin-api/users/get-user.md), update member roles, and remove members.
 
-Shell
+cURL
 
 ```shiki
 # List organization members
@@ -69,7 +69,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id
 
 You can invite users to organizations and manage those [invites](api/admin-api/invites/get-invite.md).
 
-Shell
+cURL
 
 ```shiki
 # Create invite
@@ -100,7 +100,7 @@ For a comprehensive guide to workspaces, including Console and API examples, see
 
 Manage [user access to specific workspaces](api/admin-api/workspace_members/get-workspace-member.md):
 
-Shell
+cURL
 
 ```shiki
 # Add member to workspace
@@ -135,7 +135,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{wo
 
 Monitor and manage [API keys](api/admin-api/apikeys/get-api-key.md):
 
-Shell
+cURL
 
 ```shiki
 # List API keys
@@ -158,6 +158,8 @@ curl --request POST "https://api.anthropic.com/v1/organizations/api_keys/{api_ke
 Get information about your organization programmatically with the `/v1/organizations/me` endpoint.
 
 For example:
+
+cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/me" \

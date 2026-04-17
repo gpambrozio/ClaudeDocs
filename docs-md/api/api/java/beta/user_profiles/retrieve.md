@@ -8,7 +8,7 @@ Java
 
 [BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
-GET/v1/user\_profiles/{id}
+GET/v1/user\_profiles/{user\_profile\_id}
 
 Get User Profile
 
@@ -16,7 +16,7 @@ Get User Profile
 
 UserProfileRetrieveParams params
 
-Optional<String> id
+Optional<String> userProfileId
 
 Optional<List<AnthropicBeta>> betas
 
@@ -64,6 +64,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+
 USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
 ##### ReturnsExpand Collapse
@@ -72,23 +74,43 @@ class BetaUserProfile:
 
 String id
 
+Unique identifier for this user profile, prefixed `uprof_`.
+
 LocalDateTime createdAt
 
 A timestamp in RFC 3339 format
 
 Metadata metadata
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 TrustGrants trustGrants
 
-String status
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-String type
+Status status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+ACTIVE("active")
+
+PENDING("pending")
+
+REJECTED("rejected")
+
+Type type
+
+Object type. Always `user_profile`.
 
 LocalDateTime updatedAt
 
 A timestamp in RFC 3339 format
 
 Optional<String> externalId
+
+Platform's own identifier for this user. Not enforced unique.
 
 Get User Profile
 
@@ -108,7 +130,7 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().retrieve("id");
+        BetaUserProfile betaUserProfile = client.beta().userProfiles().retrieve("uprof_011CZkZCu8hGbp5mYRQgUmz9");
     }
 }
 ```
@@ -117,19 +139,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 
@@ -139,19 +159,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 

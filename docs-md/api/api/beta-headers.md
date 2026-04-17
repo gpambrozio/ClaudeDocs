@@ -21,21 +21,17 @@ anthropic-beta: BETA_FEATURE_NAME
 
 When using the SDK, you can specify beta headers in the request options:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello, Claude"}
-    ]
-  }'
+client = Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+    betas=["files-api-2025-04-14"],
+)
 ```
 
 Beta features are experimental and may:

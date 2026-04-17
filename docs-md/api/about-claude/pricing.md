@@ -12,6 +12,7 @@ The following table shows pricing for all Claude models across different usage t
 
 | Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | --- | --- | --- | --- | --- | --- |
+| Claude Opus 4.7 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.1 | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
@@ -26,6 +27,8 @@ The following table shows pricing for all Claude models across different usage t
 | Claude Haiku 3 | $0.25 / MTok | $0.30 / MTok | $0.50 / MTok | $0.03 / MTok | $1.25 / MTok |
 
 MTok = Million tokens. The "Base Input Tokens" column shows standard input pricing, "Cache Writes" and "Cache Hits" are specific to [prompt caching](#prompt-caching), and "Output Tokens" shows output pricing. See [prompt caching pricing](#prompt-caching) below for an explanation of the cache columns and pricing multipliers.
+
+Opus 4.7 uses a new tokenizer compared to previous models, contributing to its improved performance on a wide range of tasks. This new tokenizer may use up to 35% more tokens for the same fixed text.
 
 ## Third-party platform pricing
 
@@ -78,7 +81,7 @@ For implementation details, supported models, and code examples, see the [prompt
 
 ### Data residency pricing
 
-For Claude Opus 4.6 and newer models, specifying US-only inference via the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
+For Claude Opus 4.7, Claude Opus 4.6, and newer models, specifying US-only inference via the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
 
 This applies to the Claude API (1P) only. Third-party platforms have their own regional pricing. See [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) and [Google Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/pricing#claude-models) for details. Earlier models retain their existing pricing regardless of `inference_geo` settings.
 
@@ -107,6 +110,7 @@ The Batch API allows asynchronous processing of large volumes of requests with a
 
 | Model | Batch input | Batch output |
 | --- | --- | --- |
+| Claude Opus 4.7 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.5 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.1 | $7.50 / MTok | $37.50 / MTok |
@@ -124,7 +128,7 @@ For more information about batch processing, see the [batch processing documenta
 
 ### Long context pricing
 
-[Claude Mythos Preview](https://anthropic.com/glasswing), Opus 4.6 and Sonnet 4.6 include the full [1M token context window](build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
+[Claude Mythos Preview](https://anthropic.com/glasswing), Opus 4.7, Opus 4.6, and Sonnet 4.6 include the full [1M token context window](build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
 ### Tool use pricing
 
@@ -146,6 +150,7 @@ When you use `tools`, we also automatically include a special system prompt for 
 
 | Model | Tool choice | Tool use system prompt token count |
 | --- | --- | --- |
+| Claude Opus 4.7 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.6 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.5 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
 | Claude Opus 4.1 | `auto`, `none`  ---  `any`, `tool` | 346 tokens  ---  313 tokens |
@@ -312,7 +317,7 @@ Session runtime replaces the [Code Execution](#code-execution-tool) container-ho
 
 ### Worked example
 
-A one-hour coding session using Claude Opus 4.6 that consumes 50,000 input tokens and 15,000 output tokens:
+A one-hour coding session using Claude Opus 4.7 that consumes 50,000 input tokens and 15,000 output tokens:
 
 | Line item | Calculation | Cost |
 | --- | --- | --- |
@@ -334,7 +339,7 @@ If prompt caching is active and 40,000 of the input tokens are cache reads:
 Example calculation for processing 10,000 support tickets:
 
 - Average ~3,700 tokens per conversation
-- Using Claude Opus 4.6 at $5/MTok input, $25/MTok output
+- Using Claude Haiku 4.5 at $1/MTok input, $5/MTok output
 - Total cost: ~$37.00 per 10,000 tickets
 
 For a detailed walkthrough of this calculation, see the [customer support agent guide](about-claude/use-case-guides/customer-support-chat.md).

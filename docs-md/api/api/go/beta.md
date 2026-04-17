@@ -62,6 +62,8 @@ const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-2
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 type BetaAPIError struct{…}
 
 Message string
@@ -334,6 +336,14 @@ Supported bool
 
 Whether this capability is supported by the model.
 
+Xhigh [BetaCapabilitySupport](api/beta.md)
+
+Indicates whether a capability is supported.
+
+Supported bool
+
+Whether this capability is supported by the model.
+
 type BetaModelCapabilities struct{…}
 
 Model capability information.
@@ -429,6 +439,14 @@ Whether the model supports medium effort level.
 Supported bool
 
 Whether this capability is supported by the model.
+
+Supported bool
+
+Whether this capability is supported by the model.
+
+Xhigh [BetaCapabilitySupport](api/beta.md)
+
+Indicates whether a capability is supported.
 
 Supported bool
 
@@ -587,6 +605,14 @@ Whether the model supports medium effort level.
 Supported bool
 
 Whether this capability is supported by the model.
+
+Supported bool
+
+Whether this capability is supported by the model.
+
+Xhigh [BetaCapabilitySupport](api/beta.md)
+
+Indicates whether a capability is supported.
 
 Supported bool
 
@@ -774,6 +800,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -893,6 +923,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -2315,6 +2349,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 type BetaCompactionBlockParamResp struct{…}
@@ -2356,9 +2394,17 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -3275,6 +3321,10 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -5673,6 +5723,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
@@ -6459,6 +6513,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -7841,6 +7899,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -7898,6 +7960,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -8208,6 +8274,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -8461,6 +8531,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -10987,6 +11061,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -11033,6 +11111,8 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
+const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
+
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
@@ -11044,6 +11124,22 @@ Schema map[string, any]
 The JSON schema of the format
 
 Type JSONSchema
+
+TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
+
+User-configurable total token budget across contexts.
+
+Total int64
+
+Total token budget across all contexts in the session.
+
+Type Tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+Remaining int64optional
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 type BetaPlainTextSource struct{…}
 
@@ -11169,6 +11265,10 @@ type BetaCompactionContentBlockDelta struct{…}
 
 Content string
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type CompactionDelta
 
 type BetaRawContentBlockDeltaEvent struct{…}
@@ -11288,6 +11388,10 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -12071,6 +12175,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 Index int64
@@ -12358,6 +12466,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -13292,6 +13404,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -13349,6 +13465,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -13658,6 +13778,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -14624,6 +14748,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -14681,6 +14809,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -14990,6 +15122,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -15380,6 +15516,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -16251,6 +16391,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 Index int64
@@ -16374,6 +16518,10 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -17958,6 +18106,22 @@ type BetaThinkingTurns struct{…}
 Type ThinkingTurns
 
 Value int64
+
+type BetaTokenTaskBudget struct{…}
+
+User-configurable total token budget across contexts.
+
+Total int64
+
+Total token budget across all contexts in the session.
+
+Type Tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+Remaining int64optional
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 type BetaTool struct{…}
 
@@ -20849,6 +21013,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -21433,6 +21601,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -24168,6 +24340,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -24225,6 +24401,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -24534,6 +24714,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -25606,6 +25790,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -25663,6 +25851,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -25972,6 +26164,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -27006,6 +27202,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -27063,6 +27263,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -27373,6 +27577,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -27566,6 +27774,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
@@ -28485,6 +28697,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
@@ -28538,6 +28754,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
@@ -28602,6 +28822,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
@@ -29324,6 +29548,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
 Most intelligent model for building agents and coding
@@ -29729,6 +29957,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
 
@@ -36171,6 +36403,110 @@ GET/v1/skills/{skill\_id}/versions/{version}
 client.Beta.Skills.Versions.Delete(ctx, version, params) (\*[BetaSkillVersionDeleteResponse](api/beta.md), error)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
+
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+client.Beta.UserProfiles.New(ctx, params) (\*[BetaUserProfile](api/beta.md), error)
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+client.Beta.UserProfiles.List(ctx, params) (\*PageCursor[[BetaUserProfile](api/beta.md)], error)
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+client.Beta.UserProfiles.Get(ctx, userProfileID, query) (\*[BetaUserProfile](api/beta.md), error)
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+client.Beta.UserProfiles.Update(ctx, userProfileID, params) (\*[BetaUserProfile](api/beta.md), error)
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (\*[BetaUserProfileEnrollmentURL](api/beta.md), error)
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+type BetaUserProfile struct{…}
+
+ID string
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+CreatedAt Time
+
+A timestamp in RFC 3339 format
+
+Metadata map[string, string]
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+Status BetaUserProfileTrustGrantStatus
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
+
+const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
+
+const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
+
+Type BetaUserProfileType
+
+Object type. Always `user_profile`.
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
+
+ExternalID stringoptional
+
+Platform's own identifier for this user. Not enforced unique.
+
+type BetaUserProfileEnrollmentURL struct{…}
+
+ExpiresAt Time
+
+A timestamp in RFC 3339 format
+
+Type BetaUserProfileEnrollmentURLType
+
+Object type. Always `enrollment_url`.
+
+URL string
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+type BetaUserProfileTrustGrant struct{…}
+
+Status BetaUserProfileTrustGrantStatus
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
+
+const BetaUserProfileTrustGrantStatusPending BetaUserProfileTrustGrantStatus = "pending"
+
+const BetaUserProfileTrustGrantStatusRejected BetaUserProfileTrustGrantStatus = "rejected"
 
 ---
 

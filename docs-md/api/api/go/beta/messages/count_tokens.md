@@ -2468,6 +2468,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -3936,6 +3940,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4298,6 +4306,8 @@ const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-2
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessageTokensCount struct{…}
@@ -4342,7 +4352,7 @@ func main() {
       }},
       Role: anthropic.BetaMessageParamRoleUser,
     }},
-    Model: anthropic.ModelClaudeMythosPreview,
+    Model: anthropic.ModelClaudeOpus4_6,
   })
   if err != nil {
     panic(err.Error())

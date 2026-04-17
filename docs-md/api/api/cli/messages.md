@@ -4784,11 +4784,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -7893,7 +7897,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 output\_config: object { effort, format }
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -7902,6 +7906,8 @@ All possible effort levels.
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -9408,11 +9414,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -10220,11 +10230,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -16851,11 +16865,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -17767,11 +17785,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -18647,11 +18669,15 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more or string
+model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 

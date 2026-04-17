@@ -2482,6 +2482,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 required Role Role
 
 Accepts one of the following:
@@ -4018,6 +4022,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4350,6 +4358,10 @@ maximum1
 
 minimum0
 
+string? userProfileID
+
+Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4397,6 +4409,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 ##### ReturnsExpand Collapse
 
@@ -5241,6 +5255,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -5290,6 +5308,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -5589,6 +5611,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -6545,6 +6571,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -6594,6 +6624,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -6893,6 +6927,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -7273,6 +7311,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"ClaudeMythosPreview
 
@@ -8142,6 +8184,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -8265,6 +8311,10 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 

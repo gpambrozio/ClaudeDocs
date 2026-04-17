@@ -8,6 +8,7 @@ Search result content blocks enable natural citations with proper source attribu
 
 The search results feature is available on the following models:
 
+- Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
@@ -142,7 +143,7 @@ def search_knowledge_base(query):
 
 # Create a message with the tool
 response = client.messages.create(
-    model="claude-opus-4-6",  # Works with all supported models
+    model="claude-opus-4-7",  # Works with all supported models
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
@@ -156,7 +157,7 @@ if response.content[0].type == "tool_use":
 
     # Send the tool result back
     final_response = client.messages.create(
-        model="claude-opus-4-6",  # Works with all supported models
+        model="claude-opus-4-7",  # Works with all supported models
         max_tokens=1024,
         messages=[
             MessageParam(
@@ -188,58 +189,55 @@ You can also provide search results directly in user messages. This is useful fo
 
 ### Example: Direct search results
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "search_result",
-                    "source": "https://docs.company.com/api-reference",
-                    "title": "API Reference - Authentication",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
-                        }
+from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
+
+client = Anthropic()
+
+# Provide search results directly in the user message
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        MessageParam(
+            role="user",
+            content=[
+                SearchResultBlockParam(
+                    type="search_result",
+                    source="https://docs.company.com/api-reference",
+                    title="API Reference - Authentication",
+                    content=[
+                        TextBlockParam(
+                            type="text",
+                            text="All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.",
+                        )
                     ],
-                    "citations": {
-                        "enabled": true
-                    }
-                },
-                {
-                    "type": "search_result",
-                    "source": "https://docs.company.com/quickstart",
-                    "title": "Getting Started Guide",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
-                        }
+                    citations={"enabled": True},
+                ),
+                SearchResultBlockParam(
+                    type="search_result",
+                    source="https://docs.company.com/quickstart",
+                    title="Getting Started Guide",
+                    content=[
+                        TextBlockParam(
+                            type="text",
+                            text="To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.",
+                        )
                     ],
-                    "citations": {
-                        "enabled": true
-                    }
-                },
-                {
-                    "type": "text",
-                    "text": "Based on these search results, how do I authenticate API requests and what are the rate limits?"
-                }
-            ]
-        }
-    ]
-}'
+                    citations={"enabled": True},
+                ),
+                TextBlockParam(
+                    type="text",
+                    text="Based on these search results, how do I authenticate API requests and what are the rate limits?",
+                ),
+            ],
+        )
+    ],
+)
+
+print(response.model_dump_json(indent=2))
 ```
 
 ## Claude's response with citations

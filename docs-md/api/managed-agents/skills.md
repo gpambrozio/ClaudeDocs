@@ -20,21 +20,21 @@ Attach skills when creating an agent. A maximum of 20 skills per session is supp
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-agent=$(curl -sS https://api.anthropic.com/v1/agents \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json @- <<'EOF'
-{
-  "name": "Financial Analyst",
-  "model": "claude-sonnet-4-6",
-  "system": "You are a financial analysis agent.",
-  "skills": [
-    {"type": "anthropic", "skill_id": "xlsx"},
-    {"type": "custom", "skill_id": "skill_abc123", "version": "latest"}
-  ]
-}
-EOF
+agent = client.beta.agents.create(
+    name="Financial Analyst",
+    model="claude-opus-4-7",
+    system="You are a financial analysis agent.",
+    skills=[
+        {
+            "type": "anthropic",
+            "skill_id": "xlsx",
+        },
+        {
+            "type": "custom",
+            "skill_id": "skill_abc123",
+            "version": "latest",
+        },
+    ],
 )
 ```
 

@@ -12,39 +12,35 @@ Share your feedback and suggestions about the citations feature using this [form
 
 Here's an example of how to use citations with the Messages API:
 
-ShellCLIPythonJava
+cURLCLIPythonJava
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "document",
-            "source": {
-              "type": "text",
-              "media_type": "text/plain",
-              "data": "The grass is green. The sky is blue."
-            },
-            "title": "My Document",
-            "context": "This is a trustworthy document.",
-            "citations": {"enabled": true}
-          },
-          {
-            "type": "text",
-            "text": "What color is the grass and sky?"
-          }
-        ]
-      }
-    ]
-  }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "text",
+                        "media_type": "text/plain",
+                        "data": "The grass is green. The sky is blue.",
+                    },
+                    "title": "My Document",
+                    "context": "This is a trustworthy document.",
+                    "citations": {"enabled": True},
+                },
+                {"type": "text", "text": "What color is the grass and sky?"},
+            ],
+        }
+    ],
+)
+print(response)
 ```
 
 **Comparison with prompt-based approaches**
@@ -128,17 +124,20 @@ Citations and prompt caching can be used together effectively.
 
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
+client = anthropic.Anthropic()
+
+# Long document content (e.g., technical documentation)
+long_document = (
+    "This is a very long document with thousands of words..." + " ... " * 1000
+)  # Minimum cacheable length
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {
             "role": "user",
             "content": [
@@ -147,19 +146,22 @@ curl https://api.anthropic.com/v1/messages \
                     "source": {
                         "type": "text",
                         "media_type": "text/plain",
-                        "data": "This is a very long document with thousands of words..."
+                        "data": long_document,
                     },
-                    "citations": {"enabled": true},
-                    "cache_control": {"type": "ephemeral"}
+                    "citations": {"enabled": True},
+                    "cache_control": {
+                        "type": "ephemeral"
+                    },  # Cache the document content
                 },
                 {
                     "type": "text",
-                    "text": "What does this document say about API features?"
-                }
-            ]
+                    "text": "What does this document say about API features?",
+                },
+            ],
         }
-    ]
-}'
+    ],
+)
+print(response)
 ```
 
 In this example:

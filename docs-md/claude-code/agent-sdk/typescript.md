@@ -35,6 +35,44 @@ function query({
 
 Returns a [`Query`](#query-object) object that extends `AsyncGenerator<`[`SDKMessage`](#sdk-message)`, void>` with additional methods.
 
+### [​](#startup) `startup()`
+
+Pre-warms the CLI subprocess by spawning it and completing the initialize handshake before a prompt is available. The returned [`WarmQuery`](#warm-query) handle accepts a prompt later and writes it to an already-ready process, so the first `query()` call resolves without paying subprocess spawn and initialization cost inline.
+
+```shiki
+function startup(params?: {
+  options?: Options;
+  initializeTimeoutMs?: number;
+}): Promise<WarmQuery>;
+```
+
+#### [​](#parameters-2) Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `options` | [`Options`](#options) | Optional configuration object. Same as the `options` parameter to `query()` |
+| `initializeTimeoutMs` | `number` | Maximum time in milliseconds to wait for subprocess initialization. Defaults to `60000`. If initialization does not complete in time, the promise rejects with a timeout error |
+
+#### [​](#returns-2) Returns
+
+Returns a `Promise<`[`WarmQuery`](#warm-query)`>` that resolves once the subprocess has spawned and completed its initialize handshake.
+
+#### [​](#example) Example
+
+Call `startup()` early, for example on application boot, then call `.query()` on the returned handle once a prompt is ready. This moves subprocess spawn and initialization out of the critical path.
+
+```shiki
+import { startup } from "@anthropic-ai/claude-agent-sdk";
+
+// Pay startup cost upfront
+const warm = await startup({ options: { maxTurns: 3 } });
+
+// Later, when a prompt is ready, this is immediate
+for await (const message of warm.query("What files are here?")) {
+  console.log(message);
+}
+```
+
 ### [​](#tool) `tool()`
 
 Creates a type-safe MCP tool definition for use with SDK MCP servers.
@@ -49,7 +87,7 @@ function tool<Schema extends AnyZodRawShape>(
 ): SdkMcpToolDefinition<Schema>;
 ```
 
-#### [​](#parameters-2) Parameters
+#### [​](#parameters-3) Parameters
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -98,7 +136,7 @@ function createSdkMcpServer(options: {
 }): McpSdkServerConfigWithInstance;
 ```
 
-#### [​](#parameters-3) Parameters
+#### [​](#parameters-4) Parameters
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -114,7 +152,7 @@ Discovers and lists past sessions with light metadata. Filter by project directo
 function listSessions(options?: ListSessionsOptions): Promise<SDKSessionInfo[]>;
 ```
 
-#### [​](#parameters-4) Parameters
+#### [​](#parameters-5) Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -137,7 +175,7 @@ function listSessions(options?: ListSessionsOptions): Promise<SDKSessionInfo[]>;
 | `tag` | `string | undefined` | User-set session tag (see [`tagSession()`](#tag-session)) |
 | `createdAt` | `number | undefined` | Creation time in milliseconds since epoch, from the first entry’s timestamp |
 
-#### [​](#example) Example
+#### [​](#example-2) Example
 
 Print the 10 most recent sessions for a project. Results are sorted by `lastModified` descending, so the first item is the newest. Omit `dir` to search across all projects.
 
@@ -162,7 +200,7 @@ function getSessionMessages(
 ): Promise<SessionMessage[]>;
 ```
 
-#### [​](#parameters-5) Parameters
+#### [​](#parameters-6) Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -181,7 +219,7 @@ function getSessionMessages(
 | `message` | `unknown` | Raw message payload from the transcript |
 | `parent_tool_use_id` | `null` | Reserved |
 
-#### [​](#example-2) Example
+#### [​](#example-3) Example
 
 ```shiki
 import { listSessions, getSessionMessages } from "@anthropic-ai/claude-agent-sdk";
@@ -211,7 +249,7 @@ function getSessionInfo(
 ): Promise<SDKSessionInfo | undefined>;
 ```
 
-#### [​](#parameters-6) Parameters
+#### [​](#parameters-7) Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -232,7 +270,7 @@ function renameSession(
 ): Promise<void>;
 ```
 
-#### [​](#parameters-7) Parameters
+#### [​](#parameters-8) Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -252,7 +290,7 @@ function tagSession(
 ): Promise<void>;
 ```
 
-#### [​](#parameters-8) Parameters
+#### [​](#parameters-9) Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -281,7 +319,7 @@ Configuration object for the `query()` function.
 | `debug` | `boolean` | `false` | Enable debug mode for the Claude Code process |
 | `debugFile` | `string` | `undefined` | Write debug logs to a specific file path. Implicitly enables debug mode |
 | `disallowedTools` | `string[]` | `[]` | Tools to always deny. Deny rules are checked first and override `allowedTools` and `permissionMode` (including `bypassPermissions`) |
-| `effort` | `'low' | 'medium' | 'high' | 'max'` | `'high'` | Controls how much effort Claude puts into its response. Works with adaptive thinking to guide thinking depth |
+| `effort` | `'low' | 'medium' | 'high' | 'xhigh' | 'max'` | `'high'` | Controls how much effort Claude puts into its response. Works with adaptive thinking to guide thinking depth |
 | `enableFileCheckpointing` | `boolean` | `false` | Enable file change tracking for rewinding. See [File checkpointing](agent-sdk/file-checkpointing.md) |
 | `env` | `Record<string, string | undefined>` | `process.env` | Environment variables. Set `CLAUDE_AGENT_SDK_CLIENT_APP` to identify your app in the User-Agent header |
 | `executable` | `'bun' | 'deno' | 'node'` | Auto-detected | JavaScript runtime to use |
@@ -291,7 +329,7 @@ Configuration object for the `query()` function.
 | `forkSession` | `boolean` | `false` | When resuming with `resume`, fork to a new session ID instead of continuing the original session |
 | `hooks` | `Partial<Record<`[`HookEvent`](#hook-event)`,` [`HookCallbackMatcher`](#hook-callback-matcher)`[]>>` | `{}` | Hook callbacks for events |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
-| `maxBudgetUsd` | `number` | `undefined` | Maximum budget in USD for the query |
+| `maxBudgetUsd` | `number` | `undefined` | Stop the query when the client-side cost estimate reaches this USD value. Compared against the same estimate as `total_cost_usd`; see [Track cost and usage](agent-sdk/cost-tracking.md) for accuracy caveats |
 | `maxThinkingTokens` | `number` | `undefined` | *Deprecated:* Use `thinking` instead. Maximum tokens for thinking process |
 | `maxTurns` | `number` | `undefined` | Maximum agentic turns (tool-use round trips) |
 | `mcpServers` | `Record<string, [`McpServerConfig`](#mcp-server-config)>` | `{}` | MCP server configurations |
@@ -307,7 +345,7 @@ Configuration object for the `query()` function.
 | `resumeSessionAt` | `string` | `undefined` | Resume session at a specific message UUID |
 | `sandbox` | [`SandboxSettings`](#sandbox-settings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandbox-settings) for details |
 | `sessionId` | `string` | Auto-generated | Use a specific UUID for the session instead of auto-generating one |
-| `settingSources` | [`SettingSource`](#setting-source)`[]` | `[]` (no settings) | Control which filesystem settings to load. When omitted, no settings are loaded. **Note:** Must include `'project'` to load CLAUDE.md files |
+| `settingSources` | [`SettingSource`](#setting-source)`[]` | CLI defaults (all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. Managed policy settings load regardless. See [Use Claude Code features](agent-sdk/claude-code-features.md) |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Enforce strict MCP validation |
@@ -366,6 +404,26 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `streamInput(stream)` | Stream input messages to the query for multi-turn conversations |
 | `stopTask(taskId)` | Stop a running background task by ID |
 | `close()` | Close the query and terminate the underlying process. Forcefully ends the query and cleans up all resources |
+
+### [​](#warmquery) `WarmQuery`
+
+Handle returned by [`startup()`](#startup). The subprocess is already spawned and initialized, so calling `query()` on this handle writes the prompt directly to a ready process with no startup latency.
+
+```shiki
+interface WarmQuery extends AsyncDisposable {
+  query(prompt: string | AsyncIterable<SDKUserMessage>): Query;
+  close(): void;
+}
+```
+
+#### [​](#methods-2) Methods
+
+| Method | Description |
+| --- | --- |
+| `query(prompt)` | Send a prompt to the pre-warmed subprocess and return a [`Query`](#query-object). Can only be called once per `WarmQuery` |
+| `close()` | Close the subprocess without sending a prompt. Use this to discard a warm query that is no longer needed |
+
+`WarmQuery` implements `AsyncDisposable`, so it can be used with `await using` for automatic cleanup.
 
 ### [​](#sdkcontrolinitializeresponse) `SDKControlInitializeResponse`
 
@@ -439,14 +497,23 @@ type SettingSource = "user" | "project" | "local";
 
 #### [​](#default-behavior) Default behavior
 
-When `settingSources` is **omitted** or **undefined**, the SDK does **not** load any filesystem settings. This provides isolation for SDK applications.
+When `settingSources` is omitted or `undefined`, `query()` loads the same filesystem settings as the Claude Code CLI: user, project, and local. Managed policy settings are loaded in all cases. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read regardless of this option, and how to disable them.
 
 #### [​](#why-use-settingsources) Why use settingSources
 
-**Load all filesystem settings (legacy behavior):**
+**Disable filesystem settings:**
 
 ```shiki
-// Load all settings like SDK v0.0.x did
+// Do not load user, project, or local settings from disk
+const result = query({
+  prompt: "Analyze this code",
+  options: { settingSources: [] }
+});
+```
+
+**Load all filesystem settings explicitly:**
+
+```shiki
 const result = query({
   prompt: "Analyze this code",
   options: {
@@ -483,12 +550,12 @@ const result = query({
 **SDK-only applications:**
 
 ```shiki
-// Define everything programmatically (default behavior)
-// No filesystem dependencies - settingSources defaults to []
+// Define everything programmatically.
+// Pass [] to opt out of filesystem setting sources.
 const result = query({
   prompt: "Review this PR",
   options: {
-    // settingSources: [] is the default, no need to specify
+    settingSources: [],
     agents: {
       /* ... */
     },
@@ -509,7 +576,7 @@ const result = query({
   options: {
     systemPrompt: {
       type: "preset",
-      preset: "claude_code" // Required to use CLAUDE.md
+      preset: "claude_code" // Use Claude Code's system prompt
     },
     settingSources: ["project"], // Loads CLAUDE.md from project directory
     allowedTools: ["Read", "Write", "Edit"]
@@ -525,7 +592,7 @@ When multiple sources are loaded, settings are merged with this precedence (high
 2. Project settings (`.claude/settings.json`)
 3. User settings (`~/.claude/settings.json`)
 
-Programmatic options (like `agents`, `allowedTools`) always override filesystem settings.
+Programmatic options such as `agents` and `allowedTools` override user, project, and local filesystem settings. Managed policy settings take precedence over programmatic options.
 
 ### [​](#permissionmode) `PermissionMode`
 
@@ -713,6 +780,7 @@ type SDKMessage =
   | SDKHookStartedMessage
   | SDKHookProgressMessage
   | SDKHookResponseMessage
+  | SDKPluginInstallMessage
   | SDKToolProgressMessage
   | SDKAuthStatusMessage
   | SDKTaskNotificationMessage
@@ -754,9 +822,12 @@ type SDKUserMessage = {
   message: MessageParam; // From Anthropic SDK
   parent_tool_use_id: string | null;
   isSynthetic?: boolean;
+  shouldQuery?: boolean;
   tool_use_result?: unknown;
 };
 ```
+
+Set `shouldQuery` to `false` to append the message to the transcript without triggering an assistant turn. The message is held and merged into the next user message that does trigger a turn. Use this to inject context, such as the output of a command you ran out of band, without spending a model call on it.
 
 ### [​](#sdkusermessagereplay) `SDKUserMessageReplay`
 
@@ -877,6 +948,22 @@ type SDKCompactBoundaryMessage = {
     trigger: "manual" | "auto";
     pre_tokens: number;
   };
+};
+```
+
+### [​](#sdkplugininstallmessage) `SDKPluginInstallMessage`
+
+Plugin installation progress event. Emitted when [`CLAUDE_CODE_SYNC_PLUGIN_INSTALL`](env-vars.md) is set, so your Agent SDK application can track marketplace plugin installation before the first turn. The `started` and `completed` statuses bracket the overall install. The `installed` and `failed` statuses report individual marketplaces and include `name`.
+
+```shiki
+type SDKPluginInstallMessage = {
+  type: "system";
+  subtype: "plugin_install";
+  status: "started" | "installed" | "failed" | "completed";
+  name?: string;
+  error?: string;
+  uuid: UUID;
+  session_id: string;
 };
 ```
 
@@ -2149,7 +2236,7 @@ Available beta features that can be enabled via the `betas` option. See [Beta he
 type SdkBeta = "context-1m-2025-08-07";
 ```
 
-The `context-1m-2025-08-07` beta is retired as of April 30, 2026. Passing this value with Claude Sonnet 4.5 or Sonnet 4 has no effect, and requests that exceed the standard 200k-token context window return an error. To use a 1M-token context window, migrate to [Claude Sonnet 4.6 or Claude Opus 4.6](about-claude/models/overview.md), which include 1M context at standard pricing with no beta header required.
+The `context-1m-2025-08-07` beta is retired as of April 30, 2026. Passing this value with Claude Sonnet 4.5 or Sonnet 4 has no effect, and requests that exceed the standard 200k-token context window return an error. To use a 1M-token context window, migrate to [Claude Sonnet 4.6, Claude Opus 4.6, or Claude Opus 4.7](about-claude/models/overview.md), which include 1M context at standard pricing with no beta header required.
 
 ### [​](#slashcommand) `SlashCommand`
 
@@ -2173,7 +2260,7 @@ type ModelInfo = {
   displayName: string;
   description: string;
   supportsEffort?: boolean;
-  supportedEffortLevels?: ("low" | "medium" | "high" | "max")[];
+  supportedEffortLevels?: ("low" | "medium" | "high" | "xhigh" | "max")[];
   supportsAdaptiveThinking?: boolean;
   supportsFastMode?: boolean;
 };

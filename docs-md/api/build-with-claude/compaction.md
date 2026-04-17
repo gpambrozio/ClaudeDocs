@@ -23,6 +23,7 @@ Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2
 Compaction is supported on the following models:
 
 - [Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`)
+- Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
 
@@ -43,32 +44,23 @@ On subsequent requests, append the response to your messages. The API automatica
 
 Enable compaction by adding the `compact_20260112` strategy to `context_management.edits` in your Messages API request.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "anthropic-beta: compact-2026-01-12" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 4096,
-    "messages": [
-        {
-            "role": "user",
-            "content": "Help me build a website"
-        }
-    ],
-    "context_management": {
-        "edits": [
-            {
-                "type": "compact_20260112"
-            }
-        ]
-    }
-}'
+client = anthropic.Anthropic()
+
+messages = [{"role": "user", "content": "Help me build a website"}]
+
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
+
+# Append the response (including any compaction block) to continue the conversation
+messages.append({"role": "assistant", "content": response.content})
 ```
 
 ## Parameters
@@ -87,19 +79,22 @@ Configure when compaction triggers using the `trigger` parameter:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-      trigger:
-        type: input_tokens
-        value: 150000
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={
+        "edits": [
+            {
+                "type": "compact_20260112",
+                "trigger": {"type": "input_tokens", "value": 150000},
+            }
+        ]
+    },
+)
 ```
 
 ### Custom summarization instructions
@@ -115,19 +110,22 @@ You can provide custom instructions via the `instructions` parameter to replace 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-      instructions: >-
-        Focus on preserving code snippets, variable names, and
-        technical decisions.
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={
+        "edits": [
+            {
+                "type": "compact_20260112",
+                "instructions": "Focus on preserving code snippets, variable names, and technical decisions.",
+            }
+        ]
+    },
+)
 ```
 
 ### Pausing after compaction
@@ -139,40 +137,31 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta compact-2026-01-12 \
-  --transform '{stop_reason,content}' --format jsonl <<'YAML' > resp.json
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: "Hello, Claude"
-context_management:
-  edits:
-    - type: compact_20260112
-      pause_after_compaction: true
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={
+        "edits": [{"type": "compact_20260112", "pause_after_compaction": True}]
+    },
+)
 
 # Check if compaction triggered a pause
-if grep -q '"stop_reason":"compaction"' resp.json; then
-  # Response contains only the compaction block
-  RESP=$(cat resp.json)
-  CONTENT="${RESP#*\"content\":}"
-  printf '%s' "${CONTENT%\}}" > content.json
+if response.stop_reason == "compaction":
+    # Response contains only the compaction block
+    messages.append({"role": "assistant", "content": response.content})
 
-  # Continue the request
-  ant beta:messages create --beta compact-2026-01-12 <<YAML > /dev/null
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: "Hello, Claude"
-  - role: assistant
-    content: $(cat content.json)
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
-fi
+    # Continue the request
+    response = client.beta.messages.create(
+        betas=["compact-2026-01-12"],
+        model="claude-opus-4-7",
+        max_tokens=4096,
+        messages=messages,
+        context_management={"edits": [{"type": "compact_20260112"}]},
+    )
 ```
 
 #### Enforcing a total token budget
@@ -190,7 +179,7 @@ n_compactions = 0
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -248,34 +237,28 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta compact-2026-01-12 \
-  --transform content --format jsonl <<'YAML' > content.json
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
+# After receiving a response with a compaction block
+messages.append({"role": "assistant", "content": response.content})
 
-# After receiving a response with a compaction block, append it as the
-# assistant turn and continue the conversation
-ant beta:messages create --beta compact-2026-01-12 <<YAML
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello, Claude
-  - role: assistant
-    content: $(cat content.json)
-  - role: user
-    content: Now add error handling
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
+# Continue the conversation
+messages.append({"role": "user", "content": "Now add error handling"})
+
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
 ```
 
 When the API receives a `compaction` block, all content blocks before it are ignored. You can either:
@@ -290,17 +273,32 @@ When streaming responses with compaction enabled, you'll receive a `content_bloc
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --stream --format jsonl \
-  --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+
+with client.beta.messages.stream(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+) as stream:
+    for event in stream:
+        if event.type == "content_block_start":
+            if event.content_block.type == "compaction":
+                print("Compaction started...")
+            elif event.content_block.type == "text":
+                print("Text response started...")
+
+        elif event.type == "content_block_delta":
+            if event.delta.type == "compaction_delta":
+                print(f"Compaction complete: {len(event.delta.content)} chars")
+            elif event.delta.type == "text_delta":
+                print(event.delta.text, end="", flush=True)
+
+    # Get the final accumulated message
+    message = stream.get_final_message()
+    messages.append({"role": "assistant", "content": message.content})
 ```
 
 ### Prompt caching
@@ -336,21 +334,24 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-system:
-  - type: text
-    text: You are a helpful coding assistant...
-    cache_control:
-      type: ephemeral
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+response = client.beta.messages.create(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    system=[
+        {
+            "type": "text",
+            "text": "You are a helpful coding assistant...",
+            "cache_control": {
+                "type": "ephemeral"
+            },  # Cache the system prompt separately
+        }
+    ],
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
 ```
 
 This approach is particularly beneficial for long system prompts, as they remain cached even across multiple compaction events throughout a conversation.
@@ -401,27 +402,17 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-cat > request.yaml <<'YAML'
-model: claude-opus-4-6
-messages:
-  - role: user
-    content: Hello, Claude
-context_management:
-  edits:
-    - type: compact_20260112
-YAML
+client = anthropic.Anthropic()
+messages = [{"role": "user", "content": "Hello, Claude"}]
+count_response = client.beta.messages.count_tokens(
+    betas=["compact-2026-01-12"],
+    model="claude-opus-4-7",
+    messages=messages,
+    context_management={"edits": [{"type": "compact_20260112"}]},
+)
 
-CURRENT=$(ant beta:messages count-tokens \
-  --beta compact-2026-01-12 \
-  --transform input_tokens --format yaml < request.yaml)
-
-ORIGINAL=$(ant beta:messages count-tokens \
-  --beta compact-2026-01-12 \
-  --transform context_management.original_input_tokens \
-  --format yaml < request.yaml)
-
-printf 'Current tokens: %s\n' "$CURRENT"
-printf 'Original tokens: %s\n' "$ORIGINAL"
+print(f"Current tokens: {count_response.input_tokens}")
+print(f"Original tokens: {count_response.context_management.original_input_tokens}")
 ```
 
 ## Examples
@@ -431,23 +422,39 @@ Here's a complete example of a long-running conversation with compaction:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The CLI handles individual turns; maintain the messages array in the
-# calling script. See the SDK tabs for the full chat() loop. Single-turn
-# request shape:
-ant beta:messages create --beta compact-2026-01-12 \
-  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Help me build a Python web scraper
-context_management:
-  edits:
-    - type: compact_20260112
-      trigger:
-        type: input_tokens
-        value: 100000
-YAML
+client = anthropic.Anthropic()
+
+messages: list[dict] = []
+
+def chat(user_message: str) -> str:
+    messages.append({"role": "user", "content": user_message})
+
+    response = client.beta.messages.create(
+        betas=["compact-2026-01-12"],
+        model="claude-opus-4-7",
+        max_tokens=4096,
+        messages=messages,
+        context_management={
+            "edits": [
+                {
+                    "type": "compact_20260112",
+                    "trigger": {"type": "input_tokens", "value": 100000},
+                }
+            ]
+        },
+    )
+
+    # Append response (compaction blocks are automatically included)
+    messages.append({"role": "assistant", "content": response.content})
+
+    # Return the text content
+    return next(block.text for block in response.content if block.type == "text")
+
+# Run a long conversation
+print(chat("Help me build a Python web scraper"))
+print(chat("Add support for JavaScript-rendered pages"))
+print(chat("Now add rate limiting and error handling"))
+# ... continue as long as needed
 ```
 
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
@@ -455,24 +462,70 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The CLI handles individual turns; maintain the messages array in the
-# calling script. See the SDK tabs for the full chat() loop with
-# pause-and-preserve handling. Single-turn request shape:
-ant beta:messages create --beta compact-2026-01-12 \
-  --transform 'content.#(type=="text").text' --format yaml <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Help me build a Python web scraper
-context_management:
-  edits:
-    - type: compact_20260112
-      trigger:
-        type: input_tokens
-        value: 100000
-      pause_after_compaction: true
-YAML
+from typing import Any
+
+client = anthropic.Anthropic()
+
+messages: list[dict[str, Any]] = []
+
+def chat(user_message: str) -> str:
+    messages.append({"role": "user", "content": user_message})
+
+    response = client.beta.messages.create(
+        betas=["compact-2026-01-12"],
+        model="claude-opus-4-7",
+        max_tokens=4096,
+        messages=messages,
+        context_management={
+            "edits": [
+                {
+                    "type": "compact_20260112",
+                    "trigger": {"type": "input_tokens", "value": 100000},
+                    "pause_after_compaction": True,
+                }
+            ]
+        },
+    )
+
+    # Check if compaction occurred and paused
+    if response.stop_reason == "compaction":
+        # Get the compaction block from the response
+        compaction_block = response.content[0]
+
+        # Preserve the prior exchange + current user message (3 messages)
+        # by including them after the compaction block
+        preserved_messages = messages[-3:] if len(messages) >= 3 else messages
+
+        # Build new message list: compaction + preserved messages
+        new_assistant_content = [compaction_block]
+        messages_after_compaction = [
+            {"role": "assistant", "content": new_assistant_content}
+        ] + preserved_messages
+
+        # Continue the request with the compacted context + preserved messages
+        response = client.beta.messages.create(
+            betas=["compact-2026-01-12"],
+            model="claude-opus-4-7",
+            max_tokens=4096,
+            messages=messages_after_compaction,
+            context_management={"edits": [{"type": "compact_20260112"}]},
+        )
+
+        # Update our message list to reflect the compaction
+        messages.clear()
+        messages.extend(messages_after_compaction)
+
+    # Append the final response
+    messages.append({"role": "assistant", "content": response.content})
+
+    # Return the text content
+    return next(block.text for block in response.content if block.type == "text")
+
+# Run a long conversation
+print(chat("Help me build a Python web scraper"))
+print(chat("Add support for JavaScript-rendered pages"))
+print(chat("Now add rate limiting and error handling"))
+# ... continue as long as needed
 ```
 
 ## Current limitations

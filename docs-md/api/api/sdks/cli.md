@@ -67,7 +67,7 @@ With the binary installed and `ANTHROPIC_API_KEY` set, call the [Messages API](a
 
 ```shiki
 ant messages create \
-  --model claude-opus-4-6 \
+  --model claude-opus-4-7 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
@@ -76,7 +76,7 @@ Output
 
 ```shiki
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "id": "msg_01YMmR5XodC5nTqMxLZMKaq6",
   "type": "message",
   "role": "assistant",
@@ -107,7 +107,7 @@ Resources currently in beta — including agents, sessions, deployments, environ
 
 ```shiki
 ant models list
-ant messages create --model claude-opus-4-6 --max-tokens 1024 ...
+ant messages create --model claude-opus-4-7 --max-tokens 1024 ...
 ant beta:agents retrieve --agent-id agent_01...
 ant beta:sessions:events list --session-id session_01...
 ```
@@ -127,15 +127,15 @@ ant beta:sessions:events list --session-id session_01...
 The default `auto` format pretty-prints JSON when writing to a terminal and emits compact JSON when piped. Override it with `--format`:
 
 ```shiki
-ant models retrieve --model-id claude-opus-4-6 --format yaml
+ant models retrieve --model-id claude-opus-4-7 --format yaml
 ```
 
 Output
 
 ```shiki
 type: model
-id: claude-opus-4-6
-display_name: Claude Opus 4.6
+id: claude-opus-4-7
+display_name: Claude Opus 4.7
 created_at: "2026-02-04T00:00:00Z"
 ...
 ```
@@ -209,7 +209,7 @@ Repeatable flags build arrays. Each `--tool` or `--event` appends one element:
 ```shiki
 ant beta:agents create \
   --name "Research Agent" \
-  --model '{id: claude-opus-4-6}' \
+  --model '{id: claude-opus-4-7}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: custom, name: search_docs, input_schema: {type: object, properties: {query: {type: string}}}}'
 ```
@@ -228,7 +228,7 @@ Heredocs work the same way and are convenient for multi-line YAML. Quote the del
 ```shiki
 ant beta:agents create <<'YAML'
 name: Research Agent
-model: claude-opus-4-6
+model: claude-opus-4-7
 system: |
   You are a research assistant. Cite sources for every claim.
 tools:
@@ -256,7 +256,7 @@ Inside structured flag values, wrap the path in quotes. To send a PDF to the Mes
 
 ```shiki
 ant messages create \
-  --model claude-opus-4-6 \
+  --model claude-opus-4-7 \
   --max-tokens 1024 \
   --message '{role: user, content: [
     {type: document, source: {type: base64, media_type: application/pdf, data: "@./scan.pdf"}},

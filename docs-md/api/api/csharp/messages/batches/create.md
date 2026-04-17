@@ -2185,6 +2185,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
 "claude-mythos-preview"ClaudeMythosPreview
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -2307,6 +2311,8 @@ Accepts one of the following:
 "medium"Medium
 
 "high"High
+
+"xhigh"Xhigh
 
 "max"Max
 

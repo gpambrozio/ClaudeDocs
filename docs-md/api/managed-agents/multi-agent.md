@@ -33,7 +33,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<YAML
 name: Engineering Lead
-model: claude-sonnet-4-6
+model: claude-opus-4-7
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
@@ -54,12 +54,10 @@ Then create a session referencing the orchestrator:
 curlCLIPythonTypeScript
 
 ```shiki
-session=$(curl -fsS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{"agent": "'$ORCHESTRATOR_ID'", "environment_id": "'$ENVIRONMENT_ID'"}')
+session = client.beta.sessions.create(
+    agent=orchestrator.id,
+    environment_id=environment.id,
+)
 ```
 
 The callable agents are resolved from the orchestrator's configuration. You don't need to reference them at session creation.
@@ -75,11 +73,8 @@ List all threads in a session as follows:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "[\(.agent_name)] \(.status)"'
+for thread in client.beta.sessions.threads.list(session.id):
+    print(f"[{thread.agent_name}] {thread.status}")
 ```
 
 Stream events from a specific thread:
@@ -87,22 +82,18 @@ Stream events from a specific thread:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" |
-  while IFS= read -r line; do
-    [[ $line == data:* ]] || continue
-    json=${line#data: }
-    case $(jq -r '.type' <<<"$json") in
-      agent.message)
-        printf '%s' "$(jq -j '.content[] | select(.type == "text") | .text' <<<"$json")"
-        ;;
-      session.thread_idle)
-        break
-        ;;
-    esac
-  done
+with client.beta.sessions.threads.stream(
+    thread.id,
+    session_id=session.id,
+) as stream:
+    for event in stream:
+        match event.type:
+            case "agent.message":
+                for block in event.content:
+                    if block.type == "text":
+                        print(block.text, end="")
+            case "session.thread_idle":
+                break
 ```
 
 List past events for a thread:
@@ -110,11 +101,11 @@ List past events for a thread:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+for event in client.beta.sessions.threads.events.list(
+    thread.id,
+    session_id=session.id,
+):
+    print(f"[{event.type}] {event.processed_at}")
 ```
 
 ## Multiagent event types
@@ -141,21 +132,17 @@ The example below extends the [tool confirmation handler](managed-agents/events-
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-while IFS= read -r event_id; do
-  pending=$(jq -r --arg id "$event_id" '.[$id]' <<<"$events_by_id")
-  thread_id=$(jq -r '.session_thread_id // empty' <<<"$pending")
-  jq -n --arg id "$event_id" --arg thread "$thread_id" '
-    {events: [
-      {type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}
-      + (if $thread != "" then {session_thread_id: $thread} else {} end)
-    ]}' |
-    curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" \
-      -d @-
-done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
+for event_id in stop.event_ids:
+    pending = events_by_id[event_id]
+    confirmation = {
+        "type": "user.tool_confirmation",
+        "tool_use_id": event_id,
+        "result": "allow",
+    }
+    # Echo session_thread_id when the request came from a subagent thread
+    if pending.session_thread_id is not None:
+        confirmation["session_thread_id"] = pending.session_thread_id
+    client.beta.sessions.events.send(session.id, events=[confirmation])
 ```
 
 Was this page helpful?

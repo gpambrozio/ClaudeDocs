@@ -19,23 +19,20 @@ For programmatic debugging, retrieve raw events via the API:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-| jq -r '
-  .data[]
-  | "Type: \(.type)",
-    "Processed: \(.processed_at)",
-    ( if .type | IN("user.message", "agent.message") then
-        .content[]
-        | "  Block: \(.type)",
-          (select(.type == "text") | "  Text: \(.text[:100])...")
-      elif .type | IN("agent.tool_use", "agent.custom_tool_use", "agent.mcp_tool_use") then
-        "  Tool: \(.name)"
-      else empty end ),
-    "---"
-'
+events = client.beta.sessions.events.list(session.id)
+
+for event in events:
+    print(f"Type: {event.type}")
+    print(f"Processed: {event.processed_at}")
+    match event.type:
+        case "user.message" | "agent.message":
+            for block in event.content:
+                print(f"  Block: {block.type}")
+                if block.type == "text":
+                    print(f"  Text: {block.text[:100]}...")
+        case "agent.tool_use" | "agent.custom_tool_use" | "agent.mcp_tool_use":
+            print(f"  Tool: {event.name}")
+    print("---")
 ```
 
 Use the same event stream to surface errors and track token consumption:
@@ -43,16 +40,18 @@ Use the same event stream to surface errors and track token consumption:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-| jq -r '
-  (.data[] | select(.type == "session.error") | "[\(.error.type)] \(.error.message)"),
-  (reduce (.data[] | select(.type == "span.model_request_end") | .model_usage) as $u
-     ({input: 0, output: 0}; .input += $u.input_tokens | .output += $u.output_tokens)
-   | "Total input tokens: \(.input), output tokens: \(.output)")
-'
+events = client.beta.sessions.events.list(session.id)
+
+input_tokens, output_tokens = 0, 0
+for event in events:
+    match event.type:
+        case "session.error":
+            print(f"[{event.error.type}] {event.error.message}")
+        case "span.model_request_end":
+            input_tokens += event.model_usage.input_tokens
+            output_tokens += event.model_usage.output_tokens
+
+print(f"Total input tokens: {input_tokens}, output tokens: {output_tokens}")
 ```
 
 ## Debugging tips

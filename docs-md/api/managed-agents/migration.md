@@ -29,7 +29,7 @@ PythonTypeScriptC#GoJavaPHPRuby
 messages = [{"role": "user", "content": task}]
 while True:
     response = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=messages,
         tools=tools,
@@ -59,56 +59,25 @@ while True:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-agent=$(
-  curl --fail-with-body -sS "https://api.anthropic.com/v1/agents?beta=true" \
-    -H "x-api-key: ${ANTHROPIC_API_KEY}" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    --json '{
-      "name": "Task Runner",
-      "model": "claude-sonnet-4-6",
-      "tools": [{"type": "agent_toolset_20260401"}]
-    }'
-)
-agent_id=$(jq -r '.id' <<< "${agent}")
-
-session_id=$(
-  curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions?beta=true" \
-    -H "x-api-key: ${ANTHROPIC_API_KEY}" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    --json "$(jq -n --argjson a "${agent}" --arg env "${environment_id}" \
-      '{agent: {type: "agent", id: $a.id, version: $a.version}, environment_id: $env}')" \
-  | jq -r '.id'
+agent = client.beta.agents.create(
+    name="Task Runner",
+    model="claude-opus-4-7",
+    tools=[{"type": "agent_toolset_20260401"}],
 )
 
-# Open the SSE stream in the background, then send the user message.
-stream_log=$(mktemp)
-curl --fail-with-body -sS -N \
-  "https://api.anthropic.com/v1/sessions/${session_id}/stream?beta=true" \
-  -H "x-api-key: ${ANTHROPIC_API_KEY}" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  > "${stream_log}" &
-stream_pid=$!
+session = client.beta.sessions.create(
+    agent={"type": "agent", "id": agent.id, "version": agent.version},
+    environment_id=environment.id,
+)
 
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/sessions/${session_id}/events?beta=true" \
-  -H "x-api-key: ${ANTHROPIC_API_KEY}" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json "$(jq -n --arg text "${task}" \
-    '{events: [{type: "user.message", content: [{type: "text", text: $text}]}]}')" \
-  > /dev/null
-
-# Read events until the session goes idle.
-while IFS= read -r line; do
-  [[ ${line} == data:* ]] || continue
-  event_type=$(jq -r '.type // empty' 2>/dev/null <<< "${line#data: }" || true)
-  [[ ${event_type} == "session.status_idle" ]] && break
-done < <(tail -f -n +1 "${stream_log}")
-
-kill "${stream_pid}" 2>/dev/null || true
+with client.beta.sessions.events.stream(session.id) as stream:
+    client.beta.sessions.events.send(
+        session.id,
+        events=[{"type": "user.message", "content": [{"type": "text", "text": task}]}],
+    )
+    for event in stream:
+        if event.type == "session.status_idle":
+            break
 ```
 
 ### What you still control
@@ -151,7 +120,7 @@ async def get_weather(args: dict) -> dict:
     return {"content": [{"type": "text", "text": f"{args['city']}: 18°C, clear"}]}
 
 options = ClaudeAgentOptions(
-    model="claude-sonnet-4-6",
+    model="claude-opus-4-7",
     system_prompt="You are a concise weather assistant.",
     mcp_servers={
         "weather": create_sdk_mcp_server("weather", "1.0", tools=[get_weather])
@@ -173,7 +142,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="weather-agent",
-    model="claude-sonnet-4-6",
+    model="claude-opus-4-7",
     system="You are a concise weather assistant.",
     tools=[
         {
@@ -262,7 +231,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents update \
   --agent-id "$AGENT_ID" \
   --version "$AGENT_VERSION" \
-  --model claude-sonnet-4-6
+  --model claude-opus-4-7
 ```
 
 Most model-level behavior changes documented in the [Messages API migration guide](about-claude/models/migration-guide.md) do not require action on your side:

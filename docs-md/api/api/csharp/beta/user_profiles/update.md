@@ -8,7 +8,7 @@ C#
 
 [BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
 
-POST/v1/user\_profiles/{id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 Update User Profile
 
@@ -16,13 +16,13 @@ Update User Profile
 
 UserProfileUpdateParams parameters
 
-required string id
+required string userProfileID
 
-Path param: Path parameter id
+Path param: Path parameter user\_profile\_id
 
 string? externalID
 
-Body param
+Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
 
 IReadOnlyDictionary<string, string> metadata
 
@@ -74,6 +74,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
 "user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 ##### ReturnsExpand Collapse
@@ -82,17 +84,35 @@ class BetaUserProfile:
 
 required string ID
 
+Unique identifier for this user profile, prefixed `uprof_`.
+
 required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
 
 required IReadOnlyDictionary<string, string> Metadata
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
 
-required string Status
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-required string Type
+required Status Status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"Active
+
+"pending"Pending
+
+"rejected"Rejected
+
+required Type Type
+
+Object type. Always `user_profile`.
 
 required DateTimeOffset UpdatedAt
 
@@ -100,12 +120,17 @@ A timestamp in RFC 3339 format
 
 string? ExternalID
 
+Platform's own identifier for this user. Not enforced unique.
+
 Update User Profile
 
 C#
 
 ```shiki
-UserProfileUpdateParams parameters = new() { ID = "id" };
+UserProfileUpdateParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
 
 var betaUserProfile = await client.Beta.UserProfiles.Update(parameters);
 
@@ -116,19 +141,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 
@@ -138,19 +161,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 

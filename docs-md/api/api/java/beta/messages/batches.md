@@ -1083,6 +1083,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -1132,6 +1136,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -1431,6 +1439,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -2499,6 +2511,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -2548,6 +2564,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -2847,6 +2867,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -3879,6 +3903,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -3928,6 +3956,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -4227,6 +4259,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 

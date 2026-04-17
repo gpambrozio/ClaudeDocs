@@ -4,6 +4,8 @@ Copy page
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
+**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
+
 ## Core concepts
 
 | Concept | Description |
@@ -103,7 +105,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    ```shiki
    ant beta:agents create \
      --name "Coding Assistant" \
-     --model '{id: claude-sonnet-4-6}' \
+     --model '{id: claude-opus-4-7}' \
      --system "You are a helpful coding assistant. Write clean, well-documented code." \
      --tool '{type: agent_toolset_20260401}'
    ```
@@ -135,24 +137,13 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    curlPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
-   session=$(
-     curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
-       -H "x-api-key: $ANTHROPIC_API_KEY" \
-       -H "anthropic-version: 2023-06-01" \
-       -H "anthropic-beta: managed-agents-2026-04-01" \
-       -H "content-type: application/json" \
-       -d @- <<EOF
-   {
-     "agent": "$AGENT_ID",
-     "environment_id": "$ENVIRONMENT_ID",
-     "title": "Quickstart session"
-   }
-   EOF
+   session = client.beta.sessions.create(
+       agent=agent.id,
+       environment_id=environment.id,
+       title="Quickstart session",
    )
 
-   SESSION_ID=$(jq -er '.id' <<<"$session")
-
-   echo "Session ID: $SESSION_ID"
+   print(f"Session ID: {session.id}")
    ```
 4. 4
 
@@ -163,53 +154,34 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    curlPythonTypeScriptC#GoJavaPHPRuby
 
    ```shiki
-   # Send the user message first; the API buffers events until the stream attaches
-   curl -sS --fail-with-body \
-     "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-     -H "x-api-key: $ANTHROPIC_API_KEY" \
-     -H "anthropic-version: 2023-06-01" \
-     -H "anthropic-beta: managed-agents-2026-04-01" \
-     -H "content-type: application/json" \
-     -d @- >/dev/null <<'EOF'
-   {
-     "events": [
-       {
-         "type": "user.message",
-         "content": [
-           {
-             "type": "text",
-             "text": "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt"
-           }
-         ]
-       }
-     ]
-   }
-   EOF
+   with client.beta.sessions.events.stream(session.id) as stream:
+       # Send the user message after the stream opens
+       client.beta.sessions.events.send(
+           session.id,
+           events=[
+               {
+                   "type": "user.message",
+                   "content": [
+                       {
+                           "type": "text",
+                           "text": "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt",
+                       },
+                   ],
+               },
+           ],
+       )
 
-   # Open the SSE stream and process events as they arrive
-   while IFS= read -r line; do
-     [[ $line == data:* ]] || continue
-     json=${line#data: }
-     case $(jq -r '.type' <<<"$json") in
-       agent.message)
-         jq -j '.content[] | select(.type == "text") | .text' <<<"$json"
-         ;;
-       agent.tool_use)
-         printf '\n[Using tool: %s]\n' "$(jq -r '.name' <<<"$json")"
-         ;;
-       session.status_idle)
-         printf '\n\nAgent finished.\n'
-         break
-         ;;
-     esac
-   done < <(
-     curl -sS -N --fail-with-body \
-       "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream" \
-       -H "x-api-key: $ANTHROPIC_API_KEY" \
-       -H "anthropic-version: 2023-06-01" \
-       -H "anthropic-beta: managed-agents-2026-04-01" \
-       -H "Accept: text/event-stream"
-   )
+       # Process streaming events
+       for event in stream:
+           match event.type:
+               case "agent.message":
+                   for block in event.content:
+                       print(block.text, end="")
+               case "agent.tool_use":
+                   print(f"\n[Using tool: {event.name}]")
+               case "session.status_idle":
+                   print("\n\nAgent finished.")
+                   break
    ```
 
    The agent will write a Python script, execute it in the container, and verify the output file was created. Your output will look similar to this:

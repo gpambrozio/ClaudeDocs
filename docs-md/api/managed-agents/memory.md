@@ -23,20 +23,11 @@ Give the store a `name` and a `description`. The description is passed to the ag
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-store=$(curl -fsS https://api.anthropic.com/v1/memory_stores \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "name": "User Preferences",
-  "description": "Per-user preferences and project context."
-}
-EOF
+store = client.beta.memory_stores.create(
+    name="User Preferences",
+    description="Per-user preferences and project context.",
 )
-store_id=$(jq -r '.id' <<< "$store")
-echo "$store_id"  # memstore_01Hx...
+print(store.id)  # memstore_01Hx...
 ```
 
 The memory store `id` (`memstore_...`) is what you pass when attaching the store to a session.
@@ -48,17 +39,11 @@ Pre-load a store with reference material before any agent runs:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- > /dev/null <<EOF
-{
-  "path": "/formatting_standards.md",
-  "content": "All reports use GAAP formatting. Dates are ISO-8601..."
-}
-EOF
+client.beta.memory_stores.memories.write(
+    memory_store_id=store.id,
+    path="/formatting_standards.md",
+    content="All reports use GAAP formatting. Dates are ISO-8601...",
+)
 ```
 
 Individual memories within the store are capped at 100KB (~25K tokens). Structure memory as many small focused files, not a few large ones.
@@ -74,25 +59,17 @@ You can configure `access` as well. It defaults to `read_write`, but `read_only`
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session=$(curl -fsS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "resources": [
-    {
-      "type": "memory_store",
-      "memory_store_id": "$store_id",
-      "access": "read_write",
-      "prompt": "User preferences and project context. Check before starting any task."
-    }
-  ]
-}
-EOF
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    resources=[
+        {
+            "type": "memory_store",
+            "memory_store_id": store.id,
+            "access": "read_write",
+            "prompt": "User preferences and project context. Check before starting any task.",
+        }
+    ],
 )
 ```
 
@@ -126,11 +103,14 @@ List does not return memory content, just object metadata. Use `path_prefix` for
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-page=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01")
-jq -r '.data[] | "\(.path)  (\(.size_bytes) bytes, sha=\(.content_sha256[0:8]))"' <<< "$page"
+page = client.beta.memory_stores.memories.list(
+    store.id,
+    path_prefix="/",
+)
+for memory in page.data:
+    print(
+        f"{memory.path}  ({memory.size_bytes} bytes, sha={memory.content_sha256[:8]})"
+    )
 ```
 
 ### Read a memory
@@ -140,11 +120,11 @@ Fetching an individual memory returns the full content.
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-mem=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$memory_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01")
-jq -r '.content' <<< "$mem"
+mem = client.beta.memory_stores.memories.retrieve(
+    memory_id,
+    memory_store_id=store.id,
+)
+print(mem.content)
 ```
 
 ### Create a memory
@@ -154,17 +134,10 @@ Use `memories.write` to upsert a memory **by path**. If nothing exists at the pa
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-mem=$(curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "path": "/preferences/formatting.md",
-  "content": "Always use tabs, not spaces."
-}
-EOF
+mem = client.beta.memory_stores.memories.write(
+    memory_store_id=store.id,
+    path="/preferences/formatting.md",
+    content="Always use tabs, not spaces.",
 )
 ```
 
@@ -175,18 +148,12 @@ Pass `precondition={"type": "not_exists"}` to `memories.write` to make it a crea
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- > /dev/null <<EOF
-{
-  "path": "/preferences/formatting.md",
-  "content": "Always use 2-space indentation.",
-  "precondition": {"type": "not_exists"}
-}
-EOF
+client.beta.memory_stores.memories.write(
+    memory_store_id=store.id,
+    path="/preferences/formatting.md",
+    content="Always use 2-space indentation.",
+    precondition={"type": "not_exists"},
+)
 ```
 
 To safely edit an existing memory (read, modify, write back without clobbering a concurrent change), use `memories.update` with a `content_sha256` precondition instead. See [Update a memory](#update-a-memory) below.
@@ -202,12 +169,11 @@ The example below renames a memory to an archive path:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS -X PATCH "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{"path": "/archive/2026_q1_formatting.md"}' > /dev/null
+client.beta.memory_stores.memories.update(
+    mem.id,
+    memory_store_id=store.id,
+    path="/archive/2026_q1_formatting.md",
+)
 ```
 
 #### Safe content edits (optimistic concurrency)
@@ -217,17 +183,12 @@ To edit a memory's content without clobbering a concurrent write, pass a `conten
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS -X PATCH "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  --data @- > /dev/null <<EOF
-{
-  "content": "CORRECTED: Always use 2-space indentation.",
-  "precondition": {"type": "content_sha256", "content_sha256": "$mem_sha"}
-}
-EOF
+client.beta.memory_stores.memories.update(
+    memory_id=mem.id,
+    memory_store_id=store.id,
+    content="CORRECTED: Always use 2-space indentation.",
+    precondition={"type": "content_sha256", "content_sha256": mem.content_sha256},
+)
 ```
 
 ### Delete a memory
@@ -235,10 +196,10 @@ EOF
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS -X DELETE "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" > /dev/null
+client.beta.memory_stores.memories.delete(
+    mem.id,
+    memory_store_id=store.id,
+)
 ```
 
 Optionally pass `expected_content_sha256` for a conditional delete.
@@ -262,11 +223,11 @@ List paginated version metadata for a store, newest-first. Filter by `memory_id`
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "\(.id): \(.operation)"'
+for v in client.beta.memory_stores.memory_versions.list(
+    store.id,
+    memory_id=mem.id,
+):
+    print(f"{v.id}: {v.operation}")
 ```
 
 ### Retrieve a version
@@ -276,10 +237,11 @@ Fetching an individual version returns the same fields as the list response plus
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01"
+version = client.beta.memory_stores.memory_versions.retrieve(
+    version_id,
+    memory_store_id=store.id,
+)
+print(version.content)
 ```
 
 ### Redact a version
@@ -289,12 +251,10 @@ Redact scrubs content out of a historical version while preserving the audit tra
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsS -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id/redact" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{}'
+client.beta.memory_stores.memory_versions.redact(
+    version_id,
+    memory_store_id=store.id,
+)
 ```
 
 Was this page helpful?

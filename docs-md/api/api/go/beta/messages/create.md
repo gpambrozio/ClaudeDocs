@@ -2478,6 +2478,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -4020,6 +4024,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4354,6 +4362,10 @@ maximum1
 
 minimum0
 
+UserProfileID param.Field[string]optional
+
+Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4407,6 +4419,8 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -5251,6 +5265,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -5308,6 +5326,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -5617,6 +5639,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -6577,6 +6603,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -6634,6 +6664,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -6943,6 +6977,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -7333,6 +7371,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeMythosPreview Model = "claude-mythos-preview"
 
@@ -8204,6 +8246,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 Index int64
@@ -8327,6 +8373,10 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 

@@ -117,7 +117,7 @@ messages = [
 # If you still get empty responses after fixing the above:
 def handle_empty_response(client, messages):
     response = client.messages.create(
-        model="claude-opus-4-6", max_tokens=1024, messages=messages
+        model="claude-opus-4-7", max_tokens=1024, messages=messages
     )
 
     # Check if response is empty
@@ -129,7 +129,7 @@ def handle_empty_response(client, messages):
         messages.append({"role": "user", "content": "Please continue"})
 
         response = client.messages.create(
-            model="claude-opus-4-6", max_tokens=1024, messages=messages
+            model="claude-opus-4-7", max_tokens=1024, messages=messages
         )
 
     return response
@@ -150,7 +150,7 @@ Python
 ```shiki
 # Request with limited tokens
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=10,
     messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
@@ -168,16 +168,18 @@ If Claude's response is cut off due to hitting the `max_tokens` limit, and the t
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-RESPONSE=$(ant messages create --max-tokens 1024 \
-  --format jsonl < request.yaml)
-
-# Check if the response was truncated mid tool use
-STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
-LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
-if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
-  # Retry with a higher max_tokens
-  ant messages create --max-tokens 4096 < request.yaml
-fi
+# Check if response was truncated during tool use
+if response.stop_reason == "max_tokens":
+    # Check if the last content block is an incomplete tool_use
+    last_block = response.content[-1]
+    if last_block.type == "tool_use":
+        # Send the request with higher max_tokens
+        response = client.messages.create(
+            model="claude-opus-4-7",
+            max_tokens=4096,  # Increased limit
+            messages=messages,
+            tools=tools,
+        )
 ```
 
 ### stop\_sequence
@@ -188,7 +190,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
     messages=[{"role": "user", "content": "Generate text until you say END"}],
@@ -251,7 +253,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
@@ -264,7 +266,7 @@ if response.stop_reason == "pause_turn":
         {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
@@ -280,7 +282,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
@@ -304,8 +306,8 @@ Python
 ```shiki
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.6 supports 128K with streaming)
+    model="claude-opus-4-7",
+    max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -362,7 +364,7 @@ def handle_truncated_response(response):
             {"role": "assistant", "content": response.content[0].text},
         ]
         continuation = client.messages.create(
-            model="claude-opus-4-6",
+            model="claude-opus-4-7",
             max_tokens=1024,
             messages=messages + [{"role": "user", "content": "Please continue"}],
         )
@@ -386,7 +388,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-6", messages=messages, tools=tools
+            model="claude-opus-4-7", messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -485,7 +487,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-6", messages=messages, tools=tools
+            model="claude-opus-4-7", messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -507,7 +509,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-opus-4-6", messages=messages, max_tokens=4096
+            model="claude-opus-4-7", messages=messages, max_tokens=4096
         )
 
         full_response += response.content[0].text
@@ -536,9 +538,9 @@ def get_max_possible_tokens(client, prompt):
     without needing to calculate input token count
     """
     response = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.6 supports 128K with streaming)
+        max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
     )
 
     if response.stop_reason == "model_context_window_exceeded":

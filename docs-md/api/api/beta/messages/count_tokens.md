@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -71,6 +71,8 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
+
+"user-profiles-2026-03-24"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -2487,7 +2489,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control }
+BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2526,6 +2528,10 @@ Accepts one of the following:
 
 "1h"
 
+encrypted\_content: optional string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: "user" or "assistant"
 
 Accepts one of the following:
@@ -2542,13 +2548,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -2765,11 +2775,11 @@ allowed\_tools: optional array of string
 
 enabled: optional boolean
 
-output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format }
+output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }
 
 Configuration options for the model's output, such as the output format.
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -2780,6 +2790,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -2792,6 +2804,22 @@ schema: map[unknown]
 The JSON schema of the format
 
 type: "json\_schema"
+
+task\_budget: optional [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: optional number
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 Deprecatedoutput\_format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -4311,13 +4339,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-UnionMember0 = "claude-mythos-preview" or "claude-opus-4-6" or "claude-sonnet-4-6" or 13 more
+UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -4655,11 +4687,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     -d '{
           "messages": [
             {
-              "content": "string",
+              "content": "Hello, world",
               "role": "user"
             }
           ],
-          "model": "claude-mythos-preview"
+          "model": "claude-opus-4-6"
         }'
 ```
 

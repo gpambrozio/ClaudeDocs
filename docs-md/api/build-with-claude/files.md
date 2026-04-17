@@ -31,14 +31,12 @@ To use the Files API, you'll need to include the beta feature header: `anthropic
 
 Upload a file to be referenced in future API calls:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -X POST https://api.anthropic.com/v1/files \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -F "file=@/path/to/document.pdf"
+uploaded = client.beta.files.upload(
+    file=("document.pdf", open("/path/to/document.pdf", "rb"), "application/pdf"),
+)
 ```
 
 The response from uploading a file will include:
@@ -61,38 +59,30 @@ Output
 
 Once uploaded, reference the file using its `file_id`:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -X POST https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-4-6",
-  "max_tokens": 1024,
-  "messages": [
-    {
-      "role": "user",
-      "content": [
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    messages=[
         {
-          "type": "text",
-          "text": "Please summarize this document for me."
-        },
-        {
-          "type": "document",
-          "source": {
-            "type": "file",
-            "file_id": "$FILE_ID"
-          }
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "Please summarize this document for me."},
+                {
+                    "type": "document",
+                    "source": {
+                        "type": "file",
+                        "file_id": file_id,
+                    },
+                },
+            ],
         }
-      ]
-    }
-  ]
-}
-EOF
+    ],
+    betas=["files-api-2025-04-14"],
+)
+print(response)
 ```
 
 ### File types and content blocks
@@ -110,33 +100,33 @@ The Files API supports different file types that correspond to different content
 
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# Example: Reading a text file and sending it as plain text
-# Note: For files with special characters, consider base64 encoding
+import pandas as pd
 # ...
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-4-6",
-  "max_tokens": 1024,
-  "messages": [
-    {
-      "role": "user",
-      "content": [
+# Example: Reading a CSV file
+df = pd.read_csv("data.csv")
+csv_content = df.to_string()
+
+# Send as plain text in the message
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {
-          "type": "text",
-          "text": "Here's the document content:\n\n${TEXT_CONTENT}\n\nPlease summarize this document."
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"Here's the CSV data:\n\n{csv_content}\n\nPlease analyze this data.",
+                }
+            ],
         }
-      ]
-    }
-  ]
-}
-EOF
+    ],
+)
+
+print(response.content[0].text)
 ```
 
 For .docx files containing images, convert them to PDF format first, then use [PDF support](build-with-claude/pdf-support.md) to take advantage of the built-in image parsing. This allows using citations from the PDF document.
@@ -178,53 +168,44 @@ For images, use the `image` content block:
 
 Retrieve a list of your uploaded files:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/files \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14"
+client = anthropic.Anthropic()
+files = client.beta.files.list()
 ```
 
 #### Get file metadata
 
 Retrieve information about a specific file:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl "https://api.anthropic.com/v1/files/$FILE_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14"
+file = client.beta.files.retrieve_metadata(file_id)
 ```
 
 #### Delete a file
 
 Remove a file from your workspace:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14"
+result = client.beta.files.delete(file_id)
 ```
 
 ### Downloading a file
 
 Download files that have been created by skills or the code execution tool:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  --output downloaded_file.txt
+file_content = client.beta.files.download(file_id)
+
+# Save to file
+file_content.write_to_file("downloaded_file.txt")
 ```
 
 You can only download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files that you uploaded cannot be downloaded.
@@ -294,7 +275,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#88fbe9e4edfbc8e9e6fce0fae7f8e1eba6ebe7e5) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#deadbfb2bbad9ebfb0aab6acb1aeb7bdf0bdb1b3) if you need higher limits for your use case
 
 Was this page helpful?
 

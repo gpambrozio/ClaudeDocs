@@ -38,7 +38,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-mythos-preview" | "claude-opus-4-6" | "claude-sonnet-4-6" | 13 more
+"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -196,7 +200,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -242,6 +246,8 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"user-profiles-2026-03-24"
+
 CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase { max\_tokens\_to\_sample, model, prompt, 7 more }  { stream }
 
 stream?: false
@@ -280,7 +286,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-mythos-preview" | "claude-opus-4-6" | "claude-sonnet-4-6" | 13 more
+"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -383,7 +393,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-"claude-mythos-preview" | "claude-opus-4-6" | "claude-sonnet-4-6" | 13 more
+"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-mythos-preview"
 
@@ -479,7 +493,7 @@ const client = new Anthropic({
 
 const completion = await client.completions.create({
   max_tokens_to_sample: 256,
-  model: 'claude-mythos-preview',
+  model: 'claude-2.1',
   prompt: '\n\nHuman: Hello, world!\n\nAssistant:',
 });
 

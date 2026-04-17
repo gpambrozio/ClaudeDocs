@@ -41,8 +41,6 @@ Span events
 
 Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and will be handled after preceding events finish processing.
 
-See the [session events API reference](api/beta/sessions/events/stream.md) for the full schema of each event type.
-
 ## Integrating events
 
 Sending events
@@ -62,23 +60,20 @@ Send a `user.message` event to start or continue the agent's work:
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [
-        {"type": "text", "text": "Analyze the performance of the sort function in utils.py"}
-      ]
-    }
-  ]
-}
-EOF
+client.beta.sessions.events.send(
+    session.id,
+    events=[
+        {
+            "type": "user.message",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Analyze the performance of the sort function in utils.py",
+                },
+            ],
+        },
+    ],
+)
 ```
 
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
@@ -88,24 +83,21 @@ curlPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 # Agent is currently analyzing a file...
 # Interrupt with a new direction:
-curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {"type": "user.interrupt"},
-    {
-      "type": "user.message",
-      "content": [
-        {"type": "text", "text": "Instead, focus on fixing the bug in line 42."}
-      ]
-    }
-  ]
-}
-EOF
+client.beta.sessions.events.send(
+    session.id,
+    events=[
+        {"type": "user.interrupt"},
+        {
+            "type": "user.message",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Instead, focus on fixing the bug in line 42.",
+                },
+            ],
+        },
+    ],
+)
 ```
 
 The agent will acknowledge the interruption and switch to the new task.
@@ -124,41 +116,29 @@ When the agent invokes a [custom tool](managed-agents/tools.md):
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-exec {fd}< <(curl -sS -N --fail-with-body \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -H "Accept: text/event-stream")
+with client.beta.sessions.events.stream(session.id) as stream:
+    for event in stream:
+        if event.type == "session.status_idle" and (stop := event.stop_reason):
+            match stop.type:
+                case "requires_action":
+                    for event_id in stop.event_ids:
+                        # Look up the custom tool use event and execute it
+                        tool_event = events_by_id[event_id]
+                        result = call_tool(tool_event.name, tool_event.input)
 
-while IFS= read -r -u "$fd" line; do
-  [[ $line == data:* ]] || continue
-  data="${line#data: }"
-  [[ $(jq -r '.type' <<<"$data") == "session.status_idle" ]] || continue
-  case $(jq -r '.stop_reason.type // empty' <<<"$data") in
-    requires_action)
-      while IFS= read -r event_id; do
-        # Look up the custom tool use event and execute it
-        result=$(call_tool "$event_id")
-        # Send the result back
-        jq -n --arg id "$event_id" --arg result "$result" \
-          '{events: [{type: "user.custom_tool_result", custom_tool_use_id: $id, content: [{type: "text", text: $result}]}]}' |
-          curl -sS --fail-with-body \
-            "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d @-
-      done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
-      ;;
-    end_turn)
-      break
-      ;;
-  esac
-done
-exec {fd}<&-
+                        # Send the result back
+                        client.beta.sessions.events.send(
+                            session.id,
+                            events=[
+                                {
+                                    "type": "user.custom_tool_result",
+                                    "custom_tool_use_id": event_id,
+                                    "content": [{"type": "text", "text": result}],
+                                },
+                            ],
+                        )
+                case "end_turn":
+                    break
 ```
 
 ### Tool confirmation
@@ -173,39 +153,25 @@ When a [permission policy](managed-agents/permission-policies.md) requires confi
 curlPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-exec {fd}< <(curl -sS -N --fail-with-body \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -H "Accept: text/event-stream")
-
-while IFS= read -r -u "$fd" line; do
-  [[ $line == data:* ]] || continue
-  data="${line#data: }"
-  [[ $(jq -r '.type' <<<"$data") == "session.status_idle" ]] || continue
-  case $(jq -r '.stop_reason.type // empty' <<<"$data") in
-    requires_action)
-      while IFS= read -r event_id; do
-        # Approve the pending tool call
-        jq -n --arg id "$event_id" \
-          '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |
-          curl -sS --fail-with-body \
-            "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d @-
-      done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
-      ;;
-    end_turn)
-      break
-      ;;
-  esac
-done
-exec {fd}<&-
+with client.beta.sessions.events.stream(session.id) as stream:
+    for event in stream:
+        if event.type == "session.status_idle" and (stop := event.stop_reason):
+            match stop.type:
+                case "requires_action":
+                    for event_id in stop.event_ids:
+                        # Approve the pending tool call
+                        client.beta.sessions.events.send(
+                            session.id,
+                            events=[
+                                {
+                                    "type": "user.tool_confirmation",
+                                    "tool_use_id": event_id,
+                                    "result": "allow",
+                                },
+                            ],
+                        )
+                case "end_turn":
+                    break
 ```
 
 ### Tracking usage

@@ -13,25 +13,24 @@ There are two ways to enable prompt caching:
 
 The simplest way to start is with automatic caching:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "cache_control": {"type": "ephemeral"},
-    "system": "You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
-    "messages": [
-      {
-        "role": "user",
-        "content": "Analyze the major themes in Pride and Prejudice."
-      }
-    ]
-  }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    cache_control={"type": "ephemeral"},
+    system="You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
+    messages=[
+        {
+            "role": "user",
+            "content": "Analyze the major themes in 'Pride and Prejudice'.",
+        }
+    ],
+)
+print(response.usage.model_dump_json())
 ```
 
 With automatic caching, the system caches all content up to and including the last cacheable block. On subsequent requests with the same prefix, cached content is reused automatically.
@@ -71,6 +70,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 | Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | --- | --- | --- | --- | --- | --- |
+| Claude Opus 4.7 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.1 | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
@@ -104,24 +104,26 @@ Prompt caching (both automatic and explicit) is supported on all [active Claude 
 
 Automatic caching is the simplest way to enable prompt caching. Instead of placing `cache_control` on individual content blocks, add a single `cache_control` field at the top level of your request body. The system automatically applies the cache breakpoint to the last cacheable block.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "cache_control": {"type": "ephemeral"},
-    "system": "You are a helpful assistant that remembers our conversation.",
-    "messages": [
-      {"role": "user", "content": "My name is Alex. I work on machine learning."},
-      {"role": "assistant", "content": "Nice to meet you, Alex! How can I help with your ML work today?"},
-      {"role": "user", "content": "What did I say I work on?"}
-    ]
-  }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    cache_control={"type": "ephemeral"},
+    system="You are a helpful assistant that remembers our conversation.",
+    messages=[
+        {"role": "user", "content": "My name is Alex. I work on machine learning."},
+        {
+            "role": "assistant",
+            "content": "Nice to meet you, Alex! How can I help with your ML work today?",
+        },
+        {"role": "user", "content": "What did I say I work on?"},
+    ],
+)
+print(response.usage.model_dump_json())
 ```
 
 ### How automatic caching works in multi-turn conversations
@@ -152,7 +154,7 @@ This lets you combine both approaches. For example, use explicit breakpoints to 
 
 ```shiki
 {
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "max_tokens": 1024,
   "cache_control": { "type": "ephemeral" },
   "system": [
@@ -248,7 +250,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 The minimum cacheable prompt length is:
 
-- 4096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Opus 4.5
+- 4096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
 - 2048 tokens for Claude Sonnet 4.6
 - 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
 - 4096 tokens for Claude Haiku 4.5

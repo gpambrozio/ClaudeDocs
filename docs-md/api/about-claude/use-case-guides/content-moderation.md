@@ -94,7 +94,7 @@ When selecting a model, it’s important to consider the size of your data. If c
   - Input token cost: 2,860 MTok \* $0.25/MTok = $715
   - Output token cost: 1,500 MTok \* $1.25/MTok = $1,875
   - Monthly cost: $715 + $1,875 = $2,590
-- **Claude Opus 4.6 estimated cost**
+- **Claude Opus 4.7 estimated cost**
 
   - Input token cost: 2,860 MTok \* $5.00/MTok = $14,300
   - Output token cost: 1,500 MTok \* $25.00/MTok = $37,500

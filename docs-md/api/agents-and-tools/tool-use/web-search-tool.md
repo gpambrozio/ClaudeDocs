@@ -4,7 +4,7 @@ Copy page
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
-The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
+The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Google Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock.
 
@@ -37,27 +37,23 @@ Dynamic filtering requires the [code execution tool](agents-and-tools/tool-use/c
 
 To enable dynamic filtering, use the `web_search_20260209` tool version:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio."
-            }
-        ],
-        "tools": [{
-            "type": "web_search_20260209",
-            "name": "web_search"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio.",
+        }
+    ],
+    tools=[{"type": "web_search_20260209", "name": "web_search"}],
+)
+print(response)
 ```
 
 ## How to use web search
@@ -66,28 +62,18 @@ Your organization's administrator must enable web search in the [Claude Console]
 
 Provide the web search tool in your API request:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 1024,
-        "messages": [
-            {
-                "role": "user",
-                "content": "What is the weather in NYC?"
-            }
-        ],
-        "tools": [{
-            "type": "web_search_20250305",
-            "name": "web_search",
-            "max_uses": 5
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "What's the weather in NYC?"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+)
+print(response)
 ```
 
 ### Tool definition

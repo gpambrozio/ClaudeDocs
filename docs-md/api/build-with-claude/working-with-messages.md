@@ -16,22 +16,15 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 ## Basic request and response
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-        {"role": "user", "content": "Hello, Claude"}
-    ]
-}'
+message = anthropic.Anthropic().messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+print(message)
 ```
 
 Output
@@ -47,7 +40,7 @@ Output
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -61,25 +54,19 @@ Output
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
+message = anthropic.Anthropic().messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {"role": "user", "content": "Hello, Claude"},
         {"role": "assistant", "content": "Hello!"},
-        {"role": "user", "content": "Can you describe LLMs to me?"}
-
-    ]
-}'
+        {"role": "user", "content": "Can you describe LLMs to me?"},
+    ],
+)
+print(message)
 ```
 
 Output
@@ -108,23 +95,21 @@ Output
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-sonnet-4-5",
-    "max_tokens": 1,
-    "messages": [
-        {"role": "user", "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"},
-        {"role": "assistant", "content": "The answer is ("}
-    ]
-}'
+message = anthropic.Anthropic().messages.create(
+    model="claude-sonnet-4-5",
+    max_tokens=1,
+    messages=[
+        {
+            "role": "user",
+            "content": "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae",
+        },
+        {"role": "assistant", "content": "The answer is ("},
+    ],
+)
+print(message)
 ```
 
 Output
@@ -150,61 +135,66 @@ Output
 }
 ```
 
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 ## Vision
 
 Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-#!/bin/sh
+import base64
+import httpx
 
 # Option 1: Base64-encoded image
-IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-IMAGE_MEDIA_TYPE="image/jpeg"
-IMAGE_BASE64=$(curl "$IMAGE_URL" | base64 | tr -d '\n')
+image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image_media_type = "image/jpeg"
+image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-        {"role": "user", "content": [
-            {"type": "image", "source": {
-                "type": "base64",
-                "media_type": "'$IMAGE_MEDIA_TYPE'",
-                "data": "'$IMAGE_BASE64'"
-            }},
-            {"type": "text", "text": "What is in the above image?"}
-        ]}
-    ]
-}'
+message = anthropic.Anthropic().messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image_media_type,
+                        "data": image_data,
+                    },
+                },
+                {"type": "text", "text": "What is in the above image?"},
+            ],
+        }
+    ],
+)
+print(message)
 
 # Option 2: URL-referenced image
-curl https://api.anthropic.com/v1/messages \
-     --header "x-api-key: $ANTHROPIC_API_KEY" \
-     --header "anthropic-version: 2023-06-01" \
-     --header "content-type: application/json" \
-     --data \
-'{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-        {"role": "user", "content": [
-            {"type": "image", "source": {
-                "type": "url",
-                "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-            }},
-            {"type": "text", "text": "What is in the above image?"}
-        ]}
-    ]
-}'
+message_from_url = anthropic.Anthropic().messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                    },
+                },
+                {"type": "text", "text": "What is in the above image?"},
+            ],
+        }
+    ],
+)
+print(message_from_url)
 ```
 
 Output
@@ -220,7 +210,7 @@ Output
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

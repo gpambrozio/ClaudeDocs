@@ -38,6 +38,8 @@ FinOps platform for LLM cost & usage observability](https://docs.vantage.sh/conn
 
 Get your organization's daily usage for the last 7 days:
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-08T00:00:00Z&\
@@ -72,6 +74,8 @@ For complete parameter details and response schemas, see the [Usage API referenc
 
 #### Daily usage by model
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-01T00:00:00Z&\
@@ -84,11 +88,13 @@ bucket_width=1d" \
 
 #### Hourly usage with filtering
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-15T00:00:00Z&\
 ending_at=2025-01-15T23:59:59Z&\
-models[]=claude-opus-4-6&\
+models[]=claude-opus-4-7&\
 service_tiers[]=batch&\
 context_window[]=0-200k&\
 bucket_width=1h" \
@@ -97,6 +103,8 @@ bucket_width=1h" \
 ```
 
 #### Filter usage by API keys and workspaces
+
+cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -119,6 +127,8 @@ To retrieve your organization's workspace IDs, use the [List Workspaces](api/adm
 
 Track your [data residency controls](build-with-claude/data-residency.md) by grouping and filtering usage with the `inference_geo` dimension. This is useful for verifying geographic routing across your organization.
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2026-02-01T00:00:00Z&\
@@ -131,6 +141,8 @@ bucket_width=1d" \
 ```
 
 You can also filter to a specific geo. Valid values are `global`, `us`, and `not_available`:
+
+cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -149,6 +161,8 @@ Models released before February 2026 (prior to Claude Opus 4.6) don't support th
 
 Track [fast mode](build-with-claude/fast-mode.md) usage by grouping and filtering with the `speed` dimension. This is useful for monitoring standard vs. fast mode usage.
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2026-02-01T00:00:00Z&\
@@ -162,6 +176,8 @@ bucket_width=1d" \
 ```
 
 You can also filter to a specific speed. Valid values are `standard` and `fast`:
+
+cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -202,6 +218,8 @@ Priority Tier costs use a different billing model and are not included in the co
 
 ### Basic example
 
+cURL
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/cost_report?\
 starting_at=2025-01-01T00:00:00Z&\
@@ -219,6 +237,8 @@ Both endpoints support pagination for large datasets:
 1. Make your initial request
 2. If `has_more` is `true`, use the `next_page` value in your next request
 3. Continue until `has_more` is `false`
+
+cURL
 
 ```shiki
 # First request

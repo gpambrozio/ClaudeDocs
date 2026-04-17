@@ -12,17 +12,23 @@ Use Claude’s vision capabilities through:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
 - The [Console Workbench](/workbench). A button to add images appears at the top right of every User message block.
-- **API request**. See the examples in this guide.
+- API request. See the examples in this guide.
+
+Multiple images can be included in a single request, which Claude will analyze jointly when formulating its response. This can be helpful for comparing or contrasting images.
 
 ---
 
 ## Before you upload
 
-### Basics and limits
+### General limits
 
-You can include multiple images in a single request: up to 20 for [claude.ai](https://claude.ai/), and up to 600 for API requests (100 for models with a 200k-token context window). Claude analyzes all provided images when formulating its response. This can be helpful for comparing or contrasting images.
+The maximal number of images per message or request is:
 
-If you submit an image larger than 8000x8000 px, it is rejected. If you submit more than 20 images in one API request, this limit is 2000x2000 px.
+- 20 per message on [claude.ai](https://claude.ai/).
+- 100 per request on the API, for models with a 200k-token context window.
+- 600 per request on the API, for all other models.
+
+The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
 While the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
@@ -30,29 +36,22 @@ Even when using the Files API, requests with many large images can fail before r
 
 ### Evaluate image size
 
-For optimal performance, resize images before uploading if they are too large. If your image's long edge is more than 1568 pixels, or your image is more than ~1,600 tokens, it is first scaled down, preserving aspect ratio, until it's within the size limits.
+An image uses approximately `width * height / 750` tokens, where the width and height are expressed in pixels.
 
-If your input image is too large and needs to be resized, it increases latency of [time-to-first-token](about-claude/glossary.md), with no benefit to output quality. Very small images under 200 pixels on any given edge may degrade output quality.
+The maximal native image resolution is:
 
-To improve [time-to-first-token](about-claude/glossary.md), consider
-resizing images to no more than 1.15 megapixels (and within 1568 pixels in
-both dimensions).
+- For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
+- For other models: 1568 tokens, and at most 1568 pixels on the long edge.
 
-Here is a table of maximum image sizes accepted by the API that will not be resized for common aspect ratios. With Claude Sonnet 4.6, these images use approximately 1,600 tokens and around $4.80/1k images.
+If your input image is larger than this native resolution, it will first be resized to the largest possible size while preserving the aspect ratio. Moreover, images are padded on the bottom and right corners to a multiple of 28 pixels.
 
-| Aspect ratio | Image size |
-| --- | --- |
-| 1:1 | 1092x1092 px |
-| 3:4 | 951x1268 px |
-| 2:3 | 896x1344 px |
-| 9:16 | 819x1456 px |
-| 1:2 | 784x1568 px |
+When asking Claude to output coordinates (points, bounding boxes, etc.), they will be expressed with respect to the resized/padded image and will need to be rescaled/translated accordingly client-side based on the original and resized dimensions.
+
+To minimize latency and to simplify coordinate-based workflows, you should prefer resizing images before uploading them.
 
 ### Calculate image costs
 
-Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens by the [per-token price of the model](https://claude.com/pricing) you’re using.
-
-If your image does not need to be resized, you can estimate the number of tokens used through this algorithm: `tokens = (width px * height px)/750`
+Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you’re using.
 
 Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
@@ -60,15 +59,39 @@ Here are examples of approximate tokenization and costs for different image size
 | --- | --- | --- | --- |
 | 200x200 px(0.04 megapixels) | ~54 | ~$0.00016 | ~$0.16 |
 | 1000x1000 px(1 megapixel) | ~1334 | ~$0.004 | ~$4.00 |
-| 1092x1092 px(1.19 megapixels) | ~1590 | ~$0.0048 | ~$4.80 |
+| 1092x1092 px(1.19 megapixels) | ~1568 | ~$0.0047 | ~$4.70 |
+| 1920x1080 px(2.07 megapixels) | ~1568 | ~$0.0047 | ~$4.70 |
+| 2000x1500 px(3 megapixels) | ~1568 | ~$0.0047 | ~$4.70 |
+
+Note that the last three images are downscaled before processing.
+
+#### High-resolution image support on Claude Opus 4.7
+
+Claude Opus 4.7 is the first Claude model with high-resolution image support. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
+
+High-resolution support is automatic on Claude Opus 4.7 and requires no beta header or client-side opt-in.
+
+High-resolution images on Claude Opus 4.7 can use up to approximately 3x more image tokens than on prior models (4784 vs 1600 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
+
+Here are the same image sizes tokenized for Claude Opus 4.7, based on its per-token price of $5 per million input tokens:
+
+| Image size | # of Tokens | Cost / image | Cost / 1k images |
+| --- | --- | --- | --- |
+| 200x200 px(0.04 megapixels) | ~54 | ~$0.00027 | ~$0.27 |
+| 1000x1000 px(1 megapixel) | ~1334 | ~$0.0067 | ~$6.70 |
+| 1092x1092 px(1.19 megapixels) | ~1590 | ~$0.0080 | ~$8.00 |
+| 1920x1080 px(2.07 megapixels) | ~2765 | ~$0.014 | ~$14.00 |
+| 2000x1500 px(3 megapixels) | ~4000 | ~$0.020 | ~$20.00 |
 
 ### Ensuring image quality
 
 When providing images to Claude, keep the following in mind for best results:
 
-- **Image format**: Use a supported image format: JPEG, PNG, GIF, or WebP.
+- **Image format**: Use a supported image format: JPEG, PNG, GIF, or WebP.  
+  Animations are unsupported, and only the first frame will be used.
 - **Image clarity**: Ensure images are clear and not too blurry or pixelated.
 - **Text**: If the image contains important text, make sure it’s legible and not too small. Avoid cropping out key visual context just to enlarge the text.
+- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing and/or cropping your images.
 
 ---
 
@@ -90,87 +113,84 @@ The following examples demonstrate how to use Claude's vision capabilities using
 
 The base64 example prompts use these variables:
 
-ShellPythonTypeScriptC#GoJavaPHPRuby
+cURLPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-    # For URL-based images, you can use the URL directly in your JSON request
+import base64
+import httpx
 
-    # For base64-encoded images, you need to first encode the image
-    # Example of how to encode an image to base64 in bash:
-    BASE64_IMAGE_DATA=$(curl -s "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg" | base64)
+# For base64-encoded images
+image1_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+image1_media_type = "image/jpeg"
+image1_data = base64.standard_b64encode(httpx.get(image1_url).content).decode("utf-8")
 
-    # The encoded data can now be used in your API calls
+image2_url = "https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg"
+image2_media_type = "image/jpeg"
+image2_data = base64.standard_b64encode(httpx.get(image2_url).content).decode("utf-8")
+
+# For URL-based images, you can use the URLs directly in your requests
 ```
 
 Below are examples of how to include images in a Messages API request using base64-encoded images and URL references:
 
 ### Base64-encoded image example
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-4-6",
-  "max_tokens": 1024,
-  "messages": [
-    {
-      "role": "user",
-      "content": [
+image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+image1_media_type = "image/png"
+
+client = anthropic.Anthropic()
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
         {
-          "type": "image",
-          "source": {
-            "type": "base64",
-            "media_type": "image/jpeg",
-            "data": "$BASE64_IMAGE_DATA"
-          }
-        },
-        {
-          "type": "text",
-          "text": "Describe this image."
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": image1_media_type,
+                        "data": image1_data,
+                    },
+                },
+                {"type": "text", "text": "Describe this image."},
+            ],
         }
-      ]
-    }
-  ]
-}
-EOF
+    ],
+)
+print(message)
 ```
 
 ### URL-based image example
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "image",
-            "source": {
-              "type": "url",
-              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-            }
-          },
-          {
-            "type": "text",
-            "text": "Describe this image."
-          }
-        ]
-      }
-    ]
-  }'
+client = anthropic.Anthropic()
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "url",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                    },
+                },
+                {"type": "text", "text": "Describe this image."},
+            ],
+        }
+    ],
+)
+print(message)
 ```
 
 ### Files API image example
@@ -184,44 +204,35 @@ request size and latency as the conversation grows. Uploading images to the
 Files API and referencing them by `file_id` keeps request payloads small
 regardless of how many images accumulate in the conversation history.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# First, upload your image to the Files API
-curl -X POST https://api.anthropic.com/v1/files \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -F "file=@image.jpg"
+client = anthropic.Anthropic()
 
-# Then use the returned file_id in your message
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: files-api-2025-04-14" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "image",
-            "source": {
-              "type": "file",
-              "file_id": "file_abc123"
-            }
-          },
-          {
-            "type": "text",
-            "text": "Describe this image."
-          }
-        ]
-      }
-    ]
-  }'
+# Upload the image file
+with open("image.jpg", "rb") as f:
+    file_upload = client.beta.files.upload(file=("image.jpg", f, "image/jpeg"))
+
+# Use the uploaded file in a message
+message = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    betas=["files-api-2025-04-14"],
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "source": {"type": "file", "file_id": file_upload.id},
+                },
+                {"type": "text", "text": "Describe this image."},
+            ],
+        }
+    ],
+)
+
+print(message.content)
 ```
 
 See [Messages API examples](api/messages/create.md) for more example code and parameter details.

@@ -68,6 +68,8 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 long maxTokens
 
 The maximum number of tokens to generate before stopping.
@@ -2530,6 +2532,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role role
 
 Accepts one of the following:
@@ -4066,6 +4072,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
 New class of intelligence, strongest in coding and cybersecurity
@@ -4397,6 +4407,10 @@ Recommended for advanced use cases only. You usually only need to use `temperatu
 maximum1
 
 minimum0
+
+Optional<String> userProfileId
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ##### ReturnsExpand Collapse
 
@@ -5241,6 +5255,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -5290,6 +5308,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -5589,6 +5611,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -6545,6 +6571,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -6594,6 +6624,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -6893,6 +6927,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -7273,6 +7311,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
 
@@ -8142,6 +8184,10 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonValue; type "compaction"constant"compaction"constant
 
 long index
@@ -8265,6 +8311,10 @@ JsonValue; type "signature\_delta"constant"signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 Optional<String> content
+
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
 

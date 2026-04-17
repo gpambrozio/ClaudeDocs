@@ -18,6 +18,7 @@ The code execution tool is available on the following models:
 
 | Model | Tool versions |
 | --- | --- |
+| Claude Opus 4.7 (`claude-opus-4-7`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.6 (`claude-opus-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Sonnet 4.6 (`claude-sonnet-4-6`) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825`, `code_execution_20260120` |
@@ -48,27 +49,24 @@ For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is 
 
 Here's a simple example that asks Claude to perform a calculation:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-            }
-        ],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response)
 ```
 
 ## How code execution works
@@ -122,37 +120,34 @@ The Python environment can process various file types uploaded via the Files API
 2. **Reference the file** in your message using a `container_upload` content block
 3. **Include the code execution tool** in your API request
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# First, upload a file
-curl https://api.anthropic.com/v1/files \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --form 'file=@"data.csv"' \
+client = anthropic.Anthropic()
 
-# Then use the file_id with code execution
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: files-api-2025-04-14" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
+# Upload a file
+file_object = client.beta.files.upload(
+    file=open("data.csv", "rb"),
+)
+
+# Use the file_id with code execution
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    betas=["files-api-2025-04-14"],
+    max_tokens=4096,
+    messages=[
+        {
             "role": "user",
             "content": [
                 {"type": "text", "text": "Analyze this CSV data"},
-                {"type": "container_upload", "file_id": "file_abc123"}
-            ]
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
+                {"type": "container_upload", "file_id": file_object.id},
+            ],
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response)
 ```
 
 #### Retrieve generated files
@@ -162,30 +157,41 @@ When Claude creates files during code execution, you can retrieve these files us
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# Request code execution that creates files; extract file_ids from tool results
-TOOL_RESULT='content.#(type=="bash_code_execution_tool_result")#'
-FILE_IDS=$(ant beta:messages create \
-  --beta files-api-2025-04-14 \
-  --transform "${TOOL_RESULT}.content.content|@flatten|#.file_id" \
-  --format yaml \
-    --model claude-opus-4-6 \
-    --max-tokens 4096 \
-    --message '{role: user, content: Create a matplotlib visualization and save it as output.png}' \
-    --tool '{type: code_execution_20250825, name: code_execution}'
+# Initialize the client
+client = Anthropic()
+
+# Request code execution that creates files
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    betas=["files-api-2025-04-14"],
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a matplotlib visualization and save it as output.png",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
-# Download each created file
-while IFS= read -r LINE; do
-  [[ "$LINE" != "- "* ]] && continue
-  FILE_ID="${LINE#- }"
-  FILENAME=$(ant beta:files retrieve-metadata \
-    --file-id "$FILE_ID" \
-    --transform filename --format yaml)
-  ant beta:files download \
-    --file-id "$FILE_ID" \
-    --output "$FILENAME" > /dev/null
-  printf 'Downloaded: %s\n' "$FILENAME"
-done <<< "$FILE_IDS"
+# Extract file IDs from the response
+def extract_file_ids(response):
+    file_ids = []
+    for item in response.content:
+        if item.type == "bash_code_execution_tool_result":
+            content_item = item.content
+            if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
+                for file in content_item.content:
+                    file_ids.append(file.file_id)
+    return file_ids
+
+# Download the created files
+for file_id in extract_file_ids(response):
+    file_metadata = client.beta.files.retrieve_metadata(file_id)
+    file_content = client.beta.files.download(file_id)
+    file_content.write_to_file(file_metadata.filename)
+    print(f"Downloaded: {file_metadata.filename}")
 ```
 
 ## Tool definition
@@ -414,48 +420,40 @@ This allows you to maintain created files between requests.
 
 ### Example
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # First request: Create a file with a random number
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
+response1 = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
             "role": "user",
-            "content": "Write a file with a random number and save it to \"/tmp/number.txt\""
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }' > response1.json
+            "content": "Write a file with a random number and save it to '/tmp/number.txt'",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
 
-# Extract container ID from the response (using jq)
-CONTAINER_ID=$(jq -r '.container.id' response1.json)
+# Extract the container ID from the first response
+container_id = response1.container.id
 
 # Second request: Reuse the container to read the file
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "container": "'$CONTAINER_ID'",
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [{
+response2 = client.messages.create(
+    container=container_id,  # Reuse the same container
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
             "role": "user",
-            "content": "Read the number from \"/tmp/number.txt\" and calculate its square"
-        }],
-        "tools": [{
-            "type": "code_execution_20250825",
-            "name": "code_execution"
-        }]
-    }'
+            "content": "Read the number from '/tmp/number.txt' and calculate its square",
+        }
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+
+print(response2)
 ```
 
 ## Streaming

@@ -3,7 +3,7 @@
 Looking to install plugins? See [Discover and install plugins](discover-plugins.md). For creating plugins, see [Plugins](plugins.md). For distributing plugins, see [Plugin marketplaces](plugin-marketplaces.md).
 
 This reference provides complete technical specifications for the Claude Code plugin system, including component schemas, CLI commands, and development tools.
-A **plugin** is a self-contained directory of components that extends Claude Code with custom functionality. Plugin components include skills, agents, hooks, MCP servers, and LSP servers.
+A **plugin** is a self-contained directory of components that extends Claude Code with custom functionality. Plugin components include skills, agents, hooks, MCP servers, LSP servers, and monitors.
 
 ## [​](#plugin-components-reference) Plugin components reference
 
@@ -236,6 +236,51 @@ LSP integration provides:
 
 Install the language server first, then install the plugin from the marketplace.
 
+### [​](#monitors) Monitors
+
+Plugins can declare background monitors that Claude Code starts automatically when the plugin is active. Each monitor runs a shell command for the lifetime of the session and delivers every stdout line to Claude as a notification, so Claude can react to log entries, status changes, or polled events without being asked to start the watch itself.
+Plugin monitors use the same mechanism as the [Monitor tool](tools-reference.md) and share its availability constraints. They run only in interactive CLI sessions, run unsandboxed at the same trust level as [hooks](#hooks), and are skipped on hosts where the Monitor tool is unavailable.
+
+Plugin monitors require Claude Code v2.1.105 or later.
+
+**Location**: `monitors/monitors.json` in the plugin root, or inline in `plugin.json`
+**Format**: JSON array of monitor entries
+The following `monitors/monitors.json` watches a deployment status endpoint and a local error log:
+
+```shiki
+[
+  {
+    "name": "deploy-status",
+    "command": "${CLAUDE_PLUGIN_ROOT}/scripts/poll-deploy.sh ${user_config.api_endpoint}",
+    "description": "Deployment status changes"
+  },
+  {
+    "name": "error-log",
+    "command": "tail -F ./logs/error.log",
+    "description": "Application error log",
+    "when": "on-skill-invoke:debug"
+  }
+]
+```
+
+To declare monitors inline, set the `monitors` key in `plugin.json` to the same array. To load from a non-default path, set `monitors` to a relative path string such as `"./config/monitors.json"`.
+**Required fields:**
+
+| Field | Description |
+| --- | --- |
+| `name` | Identifier unique within the plugin. Prevents duplicate processes when the plugin reloads or a skill is invoked again |
+| `command` | Shell command run as a persistent background process in the session working directory |
+| `description` | Short summary of what is being watched. Shown in the task panel and in notification summaries |
+
+**Optional fields:**
+
+| Field | Description |
+| --- | --- |
+| `when` | Controls when the monitor starts. `"always"` starts it at session start and on plugin reload, and is the default. `"on-skill-invoke:<skill-name>"` starts it the first time the named skill in this plugin is dispatched |
+
+The `command` value supports the same [variable substitutions](#environment-variables) as MCP and LSP server configs: `${CLAUDE_PLUGIN_ROOT}`, `${CLAUDE_PLUGIN_DATA}`, `${user_config.*}`, and any `${ENV_VAR}` from the environment. Prefix the command with `cd "${CLAUDE_PLUGIN_ROOT}" &&`  if the script needs to run from the plugin’s own directory.
+Disabling a plugin mid-session does not stop monitors that are already running. They stop when the session ends.
+
 ---
 
 ## [​](#plugin-installation-scopes) Plugin installation scopes
@@ -281,7 +326,11 @@ The manifest is optional. If omitted, Claude Code auto-discovers components in [
   "mcpServers": "./mcp-config.json",
   "outputStyles": "./styles/",
   "lspServers": "./.lsp.json",
-  "monitors": "./monitors.json"
+  "monitors": "./monitors.json",
+  "dependencies": [
+    "helper-lib",
+    { "name": "secrets-vault", "version": "~2.1.0" }
+  ]
 }
 ```
 
@@ -320,9 +369,10 @@ agent `agent-creator` for the plugin with name `plugin-dev` will appear as
 | `mcpServers` | string|array|object | MCP config paths or inline config | `"./my-extra-mcp-config.json"` |
 | `outputStyles` | string|array | Custom output style files/directories (replaces default `output-styles/`) | `"./styles/"` |
 | `lspServers` | string|array|object | [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) configs for code intelligence (go to definition, find references, etc.) | `"./.lsp.json"` |
-| `monitors` | string|array|object | Background [Monitor](tools-reference.md) configurations that auto-arm when the plugin is enabled at session start or when a skill in this plugin is invoked | `"./monitors.json"` |
+| `monitors` | string|array | Background [Monitor](tools-reference.md) configurations that start automatically when the plugin is active. See [Monitors](#monitors) | `"./monitors.json"` |
 | `userConfig` | object | User-configurable values prompted at enable time. See [User configuration](#user-configuration) | See below |
 | `channels` | array | Channel declarations for message injection (Telegram, Slack, Discord style). See [Channels](#channels) | See below |
+| `dependencies` | array | Other plugins this plugin requires, optionally with semver version constraints. See [Constrain plugin dependency versions](plugin-dependencies.md) | `[{ "name": "secrets-vault", "version": "~2.1.0" }]` |
 
 ### [​](#user-configuration) User configuration
 
@@ -343,7 +393,7 @@ The `userConfig` field declares values that Claude Code prompts the user for whe
 }
 ```
 
-Keys must be valid identifiers. Each value is available for substitution as `${user_config.KEY}` in MCP and LSP server configs, hook commands, and (for non-sensitive values only) skill and agent content. Values are also exported to plugin subprocesses as `CLAUDE_PLUGIN_OPTION_<KEY>` environment variables.
+Keys must be valid identifiers. Each value is available for substitution as `${user_config.KEY}` in MCP and LSP server configs, hook commands, monitor commands, and (for non-sensitive values only) skill and agent content. Values are also exported to plugin subprocesses as `CLAUDE_PLUGIN_OPTION_<KEY>` environment variables.
 Non-sensitive values are stored in `settings.json` under `pluginConfigs[<plugin-id>].options`. Sensitive values go to the system keychain (or `~/.claude/.credentials.json` where the keychain is unavailable). Keychain storage is shared with OAuth tokens and has an approximately 2 KB total limit, so keep sensitive values small.
 
 ### [​](#channels) Channels
@@ -393,7 +443,7 @@ For `skills`, `commands`, `agents`, `outputStyles`, and `monitors`, a custom pat
 
 ### [​](#environment-variables) Environment variables
 
-Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.
+Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, monitor commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.
 **`${CLAUDE_PLUGIN_ROOT}`**: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates, so files you write here do not survive an update.
 **`${CLAUDE_PLUGIN_DATA}`**: a persistent directory for plugin state that survives updates. Use this for installed dependencies such as `node_modules` or Python virtual environments, generated code, caches, and any other files that should persist across plugin versions. The directory is created automatically the first time this variable is referenced.
 
@@ -663,6 +713,24 @@ claude plugin update <plugin> [options]
 | Option | Description | Default |
 | --- | --- | --- |
 | `-s, --scope <scope>` | Scope to update: `user`, `project`, `local`, or `managed` | `user` |
+| `-h, --help` | Display help for command |  |
+
+---
+
+### [​](#plugin-list) plugin list
+
+List installed plugins with their version, source marketplace, and enable status.
+
+```shiki
+claude plugin list [options]
+```
+
+**Options:**
+
+| Option | Description | Default |
+| --- | --- | --- |
+| `--json` | Output as JSON |  |
+| `--available` | Include available plugins from marketplaces. Requires `--json` |  |
 | `-h, --help` | Display help for command |  |
 
 ---

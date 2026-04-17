@@ -39,26 +39,32 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 
 Here's how to detect and handle streaming refusals in your application:
 
-ShellPythonTypeScriptC#GoJavaPHPRuby
+cURLPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# Stream request and check for refusal
-response=$(curl -N https://api.anthropic.com/v1/messages \
-  --header "anthropic-version: 2023-06-01" \
-  --header "content-type: application/json" \
-  --header "x-api-key: $ANTHROPIC_API_KEY" \
-  --data '{
-    "model": "claude-sonnet-4-6",
-    "messages": [{"role": "user", "content": "Hello"}],
-    "max_tokens": 256,
-    "stream": true
-  }')
+client = anthropic.Anthropic()
+messages = []
 
-# Check for refusal in the stream
-if echo "$response" | grep -q '"stop_reason":"refusal"'; then
-  echo "Response refused - resetting conversation context"
-  # Reset your conversation state here
-fi
+def reset_conversation():
+    """Reset conversation context after refusal"""
+    global messages
+    messages = []
+    print("Conversation reset due to refusal")
+
+try:
+    with client.messages.stream(
+        max_tokens=1024,
+        messages=messages + [{"role": "user", "content": "Hello"}],
+        model="claude-opus-4-7",
+    ) as stream:
+        for event in stream:
+            # Check for refusal in message delta
+            if hasattr(event, "type") and event.type == "message_delta":
+                if event.delta.stop_reason == "refusal":
+                    reset_conversation()
+                    break
+except Exception as e:
+    print(f"Error: {e}")
 ```
 
 ## Current refusal types

@@ -70,11 +70,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -1050,11 +1054,15 @@ beta\_managed\_agents\_model\_config: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 
@@ -1100,11 +1108,15 @@ beta\_managed\_agents\_model\_config\_params: object { id, speed }
 
 An object that defines additional configuration control over model use
 
-id: "claude-opus-4-6" or "claude-sonnet-4-6" or "claude-haiku-4-5" or 5 more or string
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-6"
 

@@ -30,7 +30,7 @@ $client = new Client(
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-6',
+  model: 'claude-opus-4-7',
 );
 
 var_dump($message->content);
@@ -54,7 +54,7 @@ $client = new Client(
 $stream = $client->messages->createStream(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-6',
+  model: 'claude-opus-4-7',
 );
 
 foreach ($stream as $message) {
@@ -77,7 +77,7 @@ try {
   $message = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
   );
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
@@ -124,7 +124,7 @@ $client = new Client(requestOptions: RequestOptions::with(maxRetries: 0));
 $result = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-6',
+  model: 'claude-opus-4-7',
   requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
@@ -170,7 +170,7 @@ use Anthropic\RequestOptions;
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-6',
+  model: 'claude-opus-4-7',
   requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],

@@ -6,15 +6,15 @@ Ruby
 
 # Create Enrollment URL
 
-beta.user\_profiles.create\_enrollment\_url(id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
+beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
 
-POST/v1/user\_profiles/{id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 Create Enrollment URL
 
 ##### ParametersExpand Collapse
 
-id: String
+user\_profile\_id: String
 
 betas: Array[[AnthropicBeta](api/beta.md)]
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -70,6 +70,8 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
+:"advisor-tool-2026-03-01"
+
 :"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
@@ -80,9 +82,13 @@ expires\_at: Time
 
 A timestamp in RFC 3339 format
 
-type: String
+type: :enrollment\_url
+
+Object type. Always `enrollment_url`.
 
 url: String
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
@@ -93,7 +99,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("id")
+beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollment_url("uprof_011CZkZCu8hGbp5mYRQgUmz9")
 
 puts(beta_user_profile_enrollment_url)
 ```
@@ -102,9 +108,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 
@@ -114,9 +120,9 @@ Response 200
 
 ```shiki
 {
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "type": "type",
-  "url": "url"
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
 

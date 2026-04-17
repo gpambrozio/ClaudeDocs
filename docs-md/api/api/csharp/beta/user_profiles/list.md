@@ -78,6 +78,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
 "user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 ##### ReturnsExpand Collapse
@@ -86,7 +88,11 @@ class UserProfileListPageResponse:
 
 required IReadOnlyList<[BetaUserProfile](api/beta.md)> Data
 
+User profiles on this page.
+
 required string ID
+
+Unique identifier for this user profile, prefixed `uprof_`.
 
 required DateTimeOffset CreatedAt
 
@@ -94,11 +100,27 @@ A timestamp in RFC 3339 format
 
 required IReadOnlyDictionary<string, string> Metadata
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
 
-required string Status
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-required string Type
+required Status Status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"Active
+
+"pending"Pending
+
+"rejected"Rejected
+
+required Type Type
+
+Object type. Always `user_profile`.
 
 required DateTimeOffset UpdatedAt
 
@@ -106,7 +128,11 @@ A timestamp in RFC 3339 format
 
 string? ExternalID
 
+Platform's own identifier for this user. Not enforced unique.
+
 string? NextPage
+
+Cursor for the next page, or `null` when there are no more results.
 
 List User Profiles
 
@@ -128,22 +154,20 @@ Response 200
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "metadata": {
-        "foo": "string"
-      },
+      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
       "trust_grants": {
-        "foo": {
-          "status": "status"
+        "cyber": {
+          "status": "active"
         }
       },
-      "type": "type",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "external_id": "external_id"
+      "type": "user_profile",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "external_id": "user_12345"
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -155,22 +179,20 @@ Response 200
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "metadata": {
-        "foo": "string"
-      },
+      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
       "trust_grants": {
-        "foo": {
-          "status": "status"
+        "cyber": {
+          "status": "active"
         }
       },
-      "type": "type",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "external_id": "external_id"
+      "type": "user_profile",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "external_id": "user_12345"
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 

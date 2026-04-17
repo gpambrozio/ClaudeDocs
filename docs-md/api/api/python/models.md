@@ -100,6 +100,14 @@ supported: bool
 
 Whether this capability is supported by the model.
 
+xhigh: Optional[CapabilitySupport]
+
+Indicates whether a capability is supported.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
 class ModelCapabilities: …
 
 Model capability information.
@@ -195,6 +203,14 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+xhigh: Optional[CapabilitySupport]
+
+Indicates whether a capability is supported.
 
 supported: bool
 
@@ -353,6 +369,14 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
+
+supported: bool
+
+Whether this capability is supported by the model.
+
+xhigh: Optional[CapabilitySupport]
+
+Indicates whether a capability is supported.
 
 supported: bool
 

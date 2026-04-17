@@ -24,7 +24,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "GitHub Assistant" \
-  --model claude-sonnet-4-6 \
+  --model claude-opus-4-7 \
   --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \
@@ -40,20 +40,11 @@ When starting a session, pass `vault_ids` to provide credentials for your MCP se
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"]
-}
-EOF
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    vault_ids=[vault.id],
 )
-session_id=$(jq -r '.id' <<<"$session_response")
 ```
 
 If the authorization credentials supplied in the vault are invalid, session creation will succeed and interaction is still possible. A `session.error` event is emitted describing the MCP auth failure. You can decide whether to block further interactions on this error, trigger a credential update, or allow the session to continue without the MCP. Authentication retries will happen on the following `session.status_idle` to `session.status_running` transition. See [Session event stream](managed-agents/events-and-streaming.md) for details on consuming `session.error` and other events.

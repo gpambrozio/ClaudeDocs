@@ -13,19 +13,10 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
 )
-SESSION_ID=$(jq -r '.id' <<< "$session")
 ```
 
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
@@ -33,19 +24,10 @@ To pin a session to a specific agent version, pass an object. This lets you cont
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": {"type": "agent", "id": "$AGENT_ID", "version": 1},
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+pinned_session = client.beta.sessions.create(
+    agent={"type": "agent", "id": agent.id, "version": 1},
+    environment_id=environment.id,
 )
-PINNED_SESSION_ID=$(jq -r '.id' <<< "$pinned_session")
 ```
 
 The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Agent setup](managed-agents/agent-setup.md) for details.
@@ -57,20 +39,11 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "vault_ids": ["$VAULT_ID"]
-}
-EOF
+vault_session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    vault_ids=[vault.id],
 )
-VAULT_SESSION_ID=$(jq -r '.id' <<< "$vault_session")
 ```
 
 ## Starting the session
@@ -80,21 +53,17 @@ Creating a session provisions the environment and agent but does not start any w
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [{"type": "text", "text": "List the files in the working directory."}]
-    }
-  ]
-}
-EOF
+client.beta.sessions.events.send(
+    session.id,
+    events=[
+        {
+            "type": "user.message",
+            "content": [
+                {"type": "text", "text": "List the files in the working directory."}
+            ],
+        },
+    ],
+)
 ```
 
 See [Events and streaming](managed-agents/events-and-streaming.md) for how to stream the agent's responses and handle tool confirmations.
@@ -117,11 +86,8 @@ Sessions progress through these statuses:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-retrieved=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01")
-echo "Status: $(jq -r '.status' <<< "$retrieved")"
+retrieved = client.beta.sessions.retrieve(session.id)
+print(f"Status: {retrieved.status}")
 ```
 
 ### Listing sessions
@@ -129,11 +95,8 @@ echo "Status: $(jq -r '.status' <<< "$retrieved")"
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "\(.id): \(.status)"'
+for session in client.beta.sessions.list():
+    print(f"{session.id}: {session.status}")
 ```
 
 ### Archiving a session
@@ -143,10 +106,7 @@ Archive a session to prevent new events from being sent while preserving its his
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01"
+client.beta.sessions.archive(session.id)
 ```
 
 ### Deleting a session
@@ -158,10 +118,7 @@ Files, memory stores, environments, and agents are independent resources and are
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01"
+client.beta.sessions.delete(session.id)
 ```
 
 Was this page helpful?

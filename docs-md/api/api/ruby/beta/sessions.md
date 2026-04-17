@@ -182,13 +182,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 5 more
+:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-6"
 
@@ -588,13 +592,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 Accepts one of the following:
 
-:"claude-opus-4-6" | :"claude-sonnet-4-6" | :"claude-haiku-4-5" | 5 more
+:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 Accepts one of the following:
+
+:"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-6"
 

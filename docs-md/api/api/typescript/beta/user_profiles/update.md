@@ -6,21 +6,21 @@ TypeScript
 
 # Update User Profile
 
-client.beta.userProfiles.update(stringid, UserProfileUpdateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
 
-POST/v1/user\_profiles/{id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 Update User Profile
 
 ##### ParametersExpand Collapse
 
-id: string
+userProfileID: string
 
 params: UserProfileUpdateParams { external\_id, metadata, betas }
 
 external\_id?: string | null
 
-Body param
+Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
 
 metadata?: Record<string, string>
 
@@ -34,7 +34,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -78,6 +78,8 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
+"advisor-tool-2026-03-01"
+
 "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
@@ -86,23 +88,43 @@ BetaUserProfile { id, created\_at, metadata, 4 more }
 
 id: string
 
+Unique identifier for this user profile, prefixed `uprof_`.
+
 created\_at: string
 
 A timestamp in RFC 3339 format
 
 metadata: Record<string, string>
 
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
 trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta.md) { status } >
 
-status: string
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-type: string
+status: "active" | "pending" | "rejected"
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"
+
+"pending"
+
+"rejected"
+
+type: "user\_profile"
+
+Object type. Always `user_profile`.
 
 updated\_at: string
 
 A timestamp in RFC 3339 format
 
 external\_id?: string | null
+
+Platform's own identifier for this user. Not enforced unique.
 
 Update User Profile
 
@@ -115,7 +137,7 @@ const client = new Anthropic({
   apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
 });
 
-const betaUserProfile = await client.beta.userProfiles.update('id');
+const betaUserProfile = await client.beta.userProfiles.update('uprof_011CZkZCu8hGbp5mYRQgUmz9');
 
 console.log(betaUserProfile.id);
 ```
@@ -124,19 +146,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 
@@ -146,19 +166,17 @@ Response 200
 
 ```shiki
 {
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "metadata": {
-    "foo": "string"
-  },
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
   "trust_grants": {
-    "foo": {
-      "status": "status"
+    "cyber": {
+      "status": "active"
     }
   },
-  "type": "type",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "external_id": "external_id"
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345"
 }
 ```
 

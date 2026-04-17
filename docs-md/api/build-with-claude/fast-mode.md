@@ -24,23 +24,22 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 ## Basic usage
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: fast-mode-2026-02-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "speed": "fast",
-        "messages": [{
-            "role": "user",
-            "content": "Refactor this module to use dependency injection"
-        }]
-    }'
+client = anthropic.Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=4096,
+    speed="fast",
+    betas=["fast-mode-2026-02-01"],
+    messages=[
+        {"role": "user", "content": "Refactor this module to use dependency injection"}
+    ],
+)
+
+print(response.content[0].text)
 ```
 
 ## Pricing
@@ -79,20 +78,18 @@ For tier-specific rate limits, see the [rate limits page](api/rate-limits.md).
 
 The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "anthropic-beta: fast-mode-2026-02-01" \
-    --header "content-type: application/json" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 1024,
-        "speed": "fast",
-        "messages": [{"role": "user", "content": "Hello"}]
-    }'
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    speed="fast",
+    betas=["fast-mode-2026-02-01"],
+    messages=[{"role": "user", "content": "Hello"}],
+)
+
+print(response.usage.speed)  # "fast" or "standard"
 ```
 
 Output
@@ -130,41 +127,34 @@ Since setting `max_retries` to `0` also disables retries for other transient err
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# `ant` retries 429/5xx automatically and has no per-request max_retries
-# override, so on a fast-mode 429 the fallback runs after the built-in
-# retries exhaust. --transform-error surfaces error.type for branching.
-create_message_with_fast_fallback() {
-  local speed="$1" max_attempts="${2:-3}" body out
-  body=${3:-$(cat)}
-  out=$(
-    ant beta:messages create --beta fast-mode-2026-02-01 \
-      ${speed:+--speed "$speed"} \
-      --transform-error error.type --format-error yaml <<<"$body" 2>/dev/null
-  ) && { printf '%s\n' "$out"; return; }
-  case "$out" in
-    rate_limit_error)
-      if [[ -n "$speed" ]]; then
-        create_message_with_fast_fallback "" "$max_attempts" "$body"
-        return
-      fi ;;
-    overloaded_error | api_error | "")
-      if (( max_attempts > 1 )); then
-        create_message_with_fast_fallback "$speed" $((max_attempts - 1)) "$body"
-        return
-      fi ;;
-  esac
-  printf '%s\n' "${out:-connection_error}" >&2
-  return 1
-}
+client = anthropic.Anthropic()
 
-MESSAGE=$(
-  create_message_with_fast_fallback fast <<'YAML'
-model: claude-opus-4-6
-max_tokens: 1024
-messages:
-  - role: user
-    content: Hello
-YAML
+def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params):
+    try:
+        return client.beta.messages.create(**params, max_retries=max_retries)
+    except anthropic.RateLimitError:
+        if params.get("speed") == "fast":
+            del params["speed"]
+            return create_message_with_fast_fallback(**params)
+        raise
+    except (
+        anthropic.InternalServerError,
+        anthropic.OverloadedError,
+        anthropic.APIConnectionError,
+    ):
+        if max_attempts > 1:
+            return create_message_with_fast_fallback(
+                max_attempts=max_attempts - 1, **params
+            )
+        raise
+
+message = create_message_with_fast_fallback(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello"}],
+    betas=["fast-mode-2026-02-01"],
+    speed="fast",
+    max_retries=0,
 )
 ```
 

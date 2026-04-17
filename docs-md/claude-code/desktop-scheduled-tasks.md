@@ -11,7 +11,7 @@ Claude Code offers three ways to schedule recurring work:
 | Runs on | Anthropic cloud | Your machine | Your machine |
 | Requires machine on | No | Yes | Yes |
 | Requires open session | No | No | Yes |
-| Persistent across restarts | Yes | Yes | No (session-scoped) |
+| Persistent across restarts | Yes | Yes | Restored on `--resume` if unexpired |
 | Access to local files | No (fresh clone) | Yes | Yes |
 | MCP servers | Connectors configured per task | [Config files](mcp.md) and connectors | Inherits from session |
 | Permission prompts | No (runs autonomously) | Configurable per task | Inherits from session |

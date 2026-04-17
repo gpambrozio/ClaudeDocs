@@ -146,19 +146,17 @@ Ruby
 Ruby
 
 ```shiki
-curl https://bedrock-mantle.us-east-1.api.aws/anthropic/v1/messages \
-  --aws-sigv4 "aws:amz:us-east-1:bedrock-mantle" \
-  --user "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
-  -H "x-amz-security-token: $AWS_SESSION_TOKEN" \
-  -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "anthropic.claude-mythos-preview",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "Hello, Claude"}
-    ]
-  }'
+from anthropic import AnthropicBedrockMantle
+
+client = AnthropicBedrockMantle(aws_region="us-east-1")
+
+message = client.messages.create(
+    model="anthropic.claude-mythos-preview",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+
+print(message.content[0].text)
 ```
 
 You can also use the standard `Anthropic` client: set `base_url` to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key`. This path supports bearer-token authentication only. SigV4 signing requires the dedicated client.
@@ -169,6 +167,7 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 
 | Model | Model ID |
 | --- | --- |
+| Claude Opus 4.7 | `anthropic.claude-opus-4-7` |
 | Claude Mythos Preview | `anthropic.claude-mythos-preview` |
 | Claude Haiku 4.5 | `anthropic.claude-haiku-4-5` |
 

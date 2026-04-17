@@ -60,125 +60,84 @@ Context editing is available on all supported Claude models.
 
 The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Search for recent developments in AI"
-            }
-        ],
-        "tools": [
-            {
-                "type": "web_search_20250305",
-                "name": "web_search"
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {"type": "clear_tool_uses_20250919"}
-            ]
-        }
-    }'
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[{"role": "user", "content": "Search for recent developments in AI"}],
+    tools=[{"type": "web_search_20250305", "name": "web_search"}],
+    betas=["context-management-2025-06-27"],
+    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
+)
 ```
 
 ### Advanced configuration
 
 You can customize the tool result clearing behavior with additional parameters:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Create a simple command line calculator app using Python"
-            }
-        ],
-        "tools": [
-            {
-                "type": "text_editor_20250728",
-                "name": "str_replace_based_edit_tool",
-                "max_characters": 10000
-            },
-            {
-                "type": "web_search_20250305",
-                "name": "web_search",
-                "max_uses": 3
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_tool_uses_20250919",
-                    "trigger": {
-                        "type": "input_tokens",
-                        "value": 30000
-                    },
-                    "keep": {
-                        "type": "tool_uses",
-                        "value": 3
-                    },
-                    "clear_at_least": {
-                        "type": "input_tokens",
-                        "value": 5000
-                    },
-                    "exclude_tools": ["web_search"]
-                }
-            ]
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[
+        {
+            "role": "user",
+            "content": "Create a simple command line calculator app using Python",
         }
-    }'
+    ],
+    tools=[
+        {
+            "type": "text_editor_20250728",
+            "name": "str_replace_based_edit_tool",
+            "max_characters": 10000,
+        },
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 3},
+    ],
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_tool_uses_20250919",
+                # Trigger clearing when threshold is exceeded
+                "trigger": {"type": "input_tokens", "value": 30000},
+                # Number of tool uses to keep after clearing
+                "keep": {"type": "tool_uses", "value": 3},
+                # Optional: Clear at least this many tokens
+                "clear_at_least": {"type": "input_tokens", "value": 5000},
+                # Exclude these tools from being cleared
+                "exclude_tools": ["web_search"],
+            }
+        ]
+    },
+)
 ```
 
 ## Thinking block clearing usage
 
 Enable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "max_tokens": 16000,
-        "messages": [{"role": "user", "content": "Hello"}],
-        "thinking": {
-            "type": "enabled",
-            "budget_tokens": 10000
-        },
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_thinking_20251015",
-                    "keep": {
-                        "type": "thinking_turns",
-                        "value": 2
-                    }
-                }
-            ]
-        }
-    }'
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=16000,
+    messages=[...],
+    thinking={"type": "enabled", "budget_tokens": 10000},
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": {"type": "thinking_turns", "value": 2},
+            }
+        ]
+    },
+)
 ```
 
 ### Configuration options for thinking block clearing
@@ -221,32 +180,27 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 16000
-thinking:
-  type: enabled
-  budget_tokens: 10000
-messages:
-  - role: user
-    content: Hello
-tools:
-  - type: web_search_20250305
-    name: web_search
-context_management:
-  edits:
-    - type: clear_thinking_20251015
-      keep:
-        type: thinking_turns
-        value: 2
-    - type: clear_tool_uses_20250919
-      trigger:
-        type: input_tokens
-        value: 50000
-      keep:
-        type: tool_uses
-        value: 5
-YAML
+response = client.beta.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=16000,
+    messages=[...],
+    thinking={"type": "enabled", "budget_tokens": 10000},
+    tools=[...],
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
+            {
+                "type": "clear_thinking_20251015",
+                "keep": {"type": "thinking_turns", "value": 2},
+            },
+            {
+                "type": "clear_tool_uses_20250919",
+                "trigger": {"type": "input_tokens", "value": 50000},
+                "keep": {"type": "tool_uses", "value": 5},
+            },
+        ]
+    },
+)
 ```
 
 ## Configuration options for tool result clearing
@@ -321,39 +275,30 @@ Streaming Response
 
 The [token counting](build-with-claude/token-counting.md) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-4-6",
-        "messages": [
+response = client.beta.messages.count_tokens(
+    model="claude-opus-4-7",
+    messages=[{"role": "user", "content": "Continue our conversation..."}],
+    tools=[...],  # Your tool definitions
+    betas=["context-management-2025-06-27"],
+    context_management={
+        "edits": [
             {
-                "role": "user",
-                "content": "Continue our conversation..."
+                "type": "clear_tool_uses_20250919",
+                "trigger": {"type": "input_tokens", "value": 30000},
+                "keep": {"type": "tool_uses", "value": 5},
             }
-        ],
-        "tools": [],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_tool_uses_20250919",
-                    "trigger": {
-                        "type": "input_tokens",
-                        "value": 30000
-                    },
-                    "keep": {
-                        "type": "tool_uses",
-                        "value": 5
-                    }
-                }
-            ]
-        }
-    }'
+        ]
+    },
+)
+
+print(f"Original tokens: {response.context_management['original_input_tokens']}")
+print(f"After clearing: {response.input_tokens}")
+print(
+    f"Savings: {response.context_management['original_input_tokens'] - response.input_tokens} tokens"
+)
 ```
 
 Output
@@ -386,19 +331,17 @@ To use both features together, enable them in your API request:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-4-6
-max_tokens: 4096
-messages:
-  - role: user
-    content: Hello
-tools:
-  - type: memory_20250818
-    name: memory
-context_management:
-  edits:
-    - type: clear_tool_uses_20250919
-YAML
+response = client.beta.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[...],
+    tools=[
+        {"type": "memory_20250818", "name": "memory"},
+        # Your other tools
+    ],
+    betas=["context-management-2025-06-27"],
+    context_management={"edits": [{"type": "clear_tool_uses_20250919"}]},
+)
 ```
 
 For the full memory tool reference including commands and examples, see [Memory tool](agents-and-tools/tool-use/memory-tool.md).
@@ -456,7 +399,22 @@ Ruby
 
 Ruby
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](build-with-claude/compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+Python
+
+```shiki
+client = anthropic.Anthropic()
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    tools=[read_file],
+    messages=[{"role": "user", "content": "What's in config.json?"}],
+    compaction_control={"enabled": True, "context_token_threshold": 100000},
+)
+
+for message in runner:
+    print(f"Tokens used: {message.usage.input_tokens}")
+```
 
 #### What happens during compaction
 

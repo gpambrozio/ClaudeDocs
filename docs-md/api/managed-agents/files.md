@@ -13,11 +13,8 @@ First, upload a file using the [Files API](build-with-claude/files.md):
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-file=$(curl --fail-with-body -sS "${auth[@]}" \
-  "${base_url}/files" \
-  -F file=@data.csv)
-file_id=$(jq -er '.id' <<<"${file}")
-printf 'File ID: %s\n' "${file_id}"
+file = client.beta.files.upload(file=Path("data.csv"))
+print(f"File ID: {file.id}")
 ```
 
 ## Mounting files in a session
@@ -29,24 +26,17 @@ The `mount_path` is optional, but make sure the uploaded file has a descriptive 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session=$(
-  jq -n \
-    --arg agent_id "${agent_id}" \
-    --arg environment_id "${environment_id}" \
-    --arg file_id "${file_id}" \
-    '{
-      agent: $agent_id,
-      environment_id: $environment_id,
-      resources: [
+session = client.beta.sessions.create(
+    agent=agent.id,
+    environment_id=environment.id,
+    resources=[
         {
-          type: "file",
-          file_id: $file_id,
-          mount_path: "/workspace/data.csv"
-        }
-      ]
-    }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
+            "type": "file",
+            "file_id": file.id,
+            "mount_path": "/workspace/data.csv",
+        },
+    ],
 )
-session_id=$(jq -er '.id' <<<"${session}")
 ```
 
 A new `file_id` will be created that references the instance of the file in the session. These copies do not count against your [storage limits](build-with-claude/files.md).
@@ -58,10 +48,10 @@ Mount multiple files by adding entries to the `resources` array:
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-"resources": [
-  { "type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv" },
-  { "type": "file", "file_id": "file_def456", "mount_path": "/workspace/config.json" },
-  { "type": "file", "file_id": "file_ghi789", "mount_path": "/workspace/src/main.py" }
+resources = [
+    {"type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv"},
+    {"type": "file", "file_id": "file_def456", "mount_path": "/workspace/config.json"},
+    {"type": "file", "file_id": "file_ghi789", "mount_path": "/workspace/src/main.py"},
 ]
 ```
 
@@ -74,13 +64,12 @@ You can add or remove files from a session after creation using the session reso
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-resource=$(
-  jq -n --arg file_id "${file_id}" '{type: "file", file_id: $file_id}' \
-    | curl --fail-with-body -sS "${auth[@]}" \
-        "${base_url}/sessions/${session_id}/resources" --json @-
+resource = client.beta.sessions.resources.add(
+    session.id,
+    type="file",
+    file_id=file.id,
 )
-resource_id=$(jq -er '.id' <<<"${resource}")
-printf '%s\n' "${resource_id}"  # "sesrsc_01ABC..."
+print(resource.id)  # "sesrsc_01ABC..."
 ```
 
 List all resources on a session with `resources.list`. To remove a file, call `resources.delete` with the resource ID:
@@ -88,12 +77,11 @@ List all resources on a session with `resources.list`. To remove a file, call `r
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl --fail-with-body -sS "${auth[@]}" \
-  "${base_url}/sessions/${session_id}/resources" \
-  | jq -r '.data[] | "\(.id) \(.type)"'
+listed = client.beta.sessions.resources.list(session.id)
+for entry in listed.data:
+    print(entry.id, entry.type)
 
-curl --fail-with-body -sS "${auth[@]}" -X DELETE \
-  "${base_url}/sessions/${session_id}/resources/${resource_id}" >/dev/null
+client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 ```
 
 ## Listing and downloading session files
@@ -104,17 +92,16 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List files associated with a session
-curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01"
+files = client.beta.files.list(
+    scope_id="sesn_abc123",
+    betas=["managed-agents-2026-04-01"],
+)
+for f in files:
+    print(f.id, f.filename)
 
 # Download a file
-curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -o output.txt
+content = client.beta.files.download(files.data[0].id)
+content.write_to_file("output.txt")
 ```
 
 ## Supported file types

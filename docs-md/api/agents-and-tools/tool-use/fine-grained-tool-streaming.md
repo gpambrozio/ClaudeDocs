@@ -14,45 +14,47 @@ Fine-grained tool streaming is available on all models and all platforms (Claude
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
-ShellCLIPythonTypeScript
+cURLCLIPythonTypeScript
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 65536,
-    "tools": [
-      {
-        "name": "make_file",
-        "description": "Write text to a file",
-        "eager_input_streaming": true,
-        "input_schema": {
-          "type": "object",
-          "properties": {
-            "filename": {
-              "type": "string",
-              "description": "The filename to write text to"
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    max_tokens=65536,
+    model="claude-opus-4-7",
+    tools=[
+        {
+            "name": "make_file",
+            "description": "Write text to a file",
+            "eager_input_streaming": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "description": "The filename to write text to",
+                    },
+                    "lines_of_text": {
+                        "type": "array",
+                        "description": "An array of lines of text to write to the file",
+                    },
+                },
+                "required": ["filename", "lines_of_text"],
             },
-            "lines_of_text": {
-              "type": "array",
-              "description": "An array of lines of text to write to the file"
-            }
-          },
-          "required": ["filename", "lines_of_text"]
         }
-      }
     ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "Can you write a long poem and make a file called poem.txt?"
-      }
+    messages=[
+        {
+            "role": "user",
+            "content": "Can you write a long poem and make a file called poem.txt?",
+        }
     ],
-    "stream": true
-  }'
+) as stream:
+    for event in stream:
+        pass
+    final_message = stream.get_final_message()
+
+print(final_message.usage)
 ```
 
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
@@ -108,7 +110,7 @@ client = anthropic.Anthropic()
 tool_inputs = {}  # index -> accumulated JSON string
 
 with client.messages.stream(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[
         {

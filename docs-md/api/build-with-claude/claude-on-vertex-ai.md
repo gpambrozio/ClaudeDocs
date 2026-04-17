@@ -57,6 +57,7 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 
 | Model | Vertex AI API model ID |
 | --- | --- |
+| Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |
 | Claude Sonnet 4.5 | claude-sonnet-4-5@20250929 |
@@ -75,26 +76,27 @@ Before running requests you may need to run `gcloud auth application-default log
 
 The following examples show how to generate text from Claude on Vertex AI:
 
-ShellCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-MODEL_ID=claude-opus-4-6
-LOCATION=global
-PROJECT_ID=MY_PROJECT_ID
+from anthropic import AnthropicVertex
 
-curl \
--X POST \
--H "Authorization: Bearer $(gcloud auth print-access-token)" \
--H "Content-Type: application/json" \
-https://$LOCATION-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/anthropic/models/${MODEL_ID}:streamRawPredict -d \
-'{
-  "anthropic_version": "vertex-2023-10-16",
-  "messages": [{
-    "role": "user",
-    "content": "Hey Claude!"
-  }],
-  "max_tokens": 100,
-}'
+project_id = "MY_PROJECT_ID"
+region = "global"
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
 ```
 
 See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
@@ -115,7 +117,7 @@ For all currently supported features on Vertex AI, see [API features overview](a
 
 ### Context window
 
-Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -164,7 +166,24 @@ Set the `region` parameter to `"global"` when initializing the client:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The ant CLI does not yet support Vertex AI.
+from anthropic import AnthropicVertex
+
+project_id = "MY_PROJECT_ID"
+region = "global"
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
 ```
 
 **Using multi-region endpoints:**
@@ -182,7 +201,7 @@ region = "us"  # Multi-region identifier: "us" or "eu"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=100,
     messages=[
         {
@@ -201,7 +220,24 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-# The ant CLI does not yet support Vertex AI.
+from anthropic import AnthropicVertex
+
+project_id = "MY_PROJECT_ID"
+region = "us-east1"  # Specify a specific region
+
+client = AnthropicVertex(project_id=project_id, region=region)
+
+message = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=100,
+    messages=[
+        {
+            "role": "user",
+            "content": "Hey Claude!",
+        }
+    ],
+)
+print(message)
 ```
 
 Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
