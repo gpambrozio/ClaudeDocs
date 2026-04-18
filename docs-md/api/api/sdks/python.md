@@ -712,17 +712,21 @@ response = client.beta.messages.create(
 
 For detailed platform setup guides with code examples, see:
 
-- [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 - [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
-All three client classes are included in the base `anthropic` package:
+All four client classes are included in the base `anthropic` package:
 
 | Provider | Client | Extra dependencies |
 | --- | --- | --- |
-| Bedrock | `from anthropic import AnthropicBedrock` | `pip install anthropic[bedrock]` |
+| Bedrock | `from anthropic import AnthropicBedrockMantle` | `pip install anthropic[bedrock]` |
+| Bedrock (`bedrock-runtime` path) | `from anthropic import AnthropicBedrock` | `pip install anthropic[bedrock]` |
 | Vertex AI | `from anthropic import AnthropicVertex` | `pip install anthropic[vertex]` |
 | Foundry | `from anthropic import AnthropicFoundry` | None |
+
+Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
 
 ## Semantic versioning
 

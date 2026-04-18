@@ -33,7 +33,7 @@ Once you've picked a model, [learn how to make your first API call](get-started.
 
 *2 - **Reliable knowledge cutoff** indicates the date through which a model's knowledge is most extensive and reliable. **Training data cutoff** is the broader date range of training data used. For more information, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).*
 
-*3 - Claude Opus 4.7 on AWS is available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock-research-preview.md), currently in research preview.*
+*3 - Claude Opus 4.7 on AWS is available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint).*
 
 [Claude Mythos Preview](https://anthropic.com/glasswing) is offered separately as a research preview model for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only and there is no self-serve sign-up.
 

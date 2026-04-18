@@ -133,6 +133,7 @@ The `opusplan` model alias provides an automated hybrid approach:
 
 This gives you the best of both worlds: Opus’s superior reasoning for planning,
 and Sonnet’s efficiency for execution.
+The plan-mode Opus phase runs with the standard 200K context window. The automatic 1M upgrade described in [Extended context](#extended-context) applies to the `opus` model setting and does not extend to `opusplan`.
 
 ### [​](#adjust-effort-level) Adjust effort level
 

@@ -32,7 +32,7 @@ Opus 4.7 uses a new tokenizer compared to previous models, contributing to its i
 
 ## Third-party platform pricing
 
-Claude models are available on [AWS Bedrock](build-with-claude/claude-on-amazon-bedrock.md), [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). For official pricing, visit:
+Claude models are available on [AWS Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). For official pricing, visit:
 
 - [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)
 - [Google Vertex AI pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing#claude-models)
@@ -51,7 +51,7 @@ Regional and multi-region endpoints include a 10% premium over global endpoints.
 
 For implementation details and code examples:
 
-- [AWS Bedrock global vs regional endpoints](build-with-claude/claude-on-amazon-bedrock.md)
+- [AWS Bedrock global vs regional endpoints](build-with-claude/claude-in-amazon-bedrock.md) for Opus 4.7, Haiku 4.5, and newer models, or [the legacy integration](build-with-claude/claude-on-amazon-bedrock.md) for all other models on Bedrock
 - [Google Vertex AI global, multi-region, and regional endpoints](build-with-claude/claude-on-vertex-ai.md)
 
 ## Feature-specific pricing

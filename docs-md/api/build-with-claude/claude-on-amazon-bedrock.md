@@ -1,8 +1,8 @@
-# Claude on Amazon Bedrock
+# Claude on Amazon Bedrock (legacy)
 
 Copy page
 
-This page covers the Amazon Bedrock integration available today (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding). A research preview of a new AWS-managed offering, with the Messages API at `/anthropic/v1/messages` and SSE streaming, is documented at [Claude in Amazon Bedrock (research preview)](build-with-claude/claude-in-amazon-bedrock-research-preview.md).
+This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming.
 
 Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](api/client-sdks.md).
 
@@ -66,10 +66,12 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 #### API model IDs
 
-Claude Opus 4.7 is available on AWS through
-[Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock-research-preview.md),
-currently in research preview. It is not available through the standard
-Bedrock model catalog documented on this page.
+Claude Opus 4.7 is reachable through `InvokeModel` on `bedrock-runtime`.
+These requests are served by the same infrastructure as the
+[Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+endpoint. For the native Messages API request shape and full feature
+parity, use that page. Claude Opus 4.7 is omitted from the model table
+on this page because it does not have an ARN-versioned model ID.
 
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | --- | --- | --- | --- | --- | --- | --- |

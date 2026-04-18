@@ -101,7 +101,7 @@ print(message)
 
 See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
-Claude is also available through [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ## Activity logging
 

@@ -178,7 +178,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#b5c6d4d9d0c6f5d4dbc1ddc7dac5dcd69bd6dad8).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#691a08050c1a2908071d011b0619000a470a0604).
 
 ### Controlling thinking display
 
@@ -228,7 +228,7 @@ Here are some important considerations on thinking encryption:
 - When [streaming responses](build-with-claude/extended-thinking.md), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 - `signature` values are significantly longer in Claude 4 models than in previous models.
 - The `signature` field is an opaque field and should not be interpreted or parsed.
-- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md), and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
+- `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
 
 ### Pricing
 

@@ -372,13 +372,16 @@ response = anthropic.request(
 
 For detailed platform setup guides with code examples, see:
 
-- [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 
 The Ruby SDK supports Bedrock and Vertex AI through dedicated client classes:
 
-- **Bedrock:** `Anthropic::BedrockClient`. Requires the `aws-sdk-bedrockruntime` gem.
+- **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 - **Vertex AI:** `Anthropic::VertexClient`. Requires the `googleauth` gem.
+
+Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
 ## Semantic versioning
 

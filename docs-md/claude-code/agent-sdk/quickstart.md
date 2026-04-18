@@ -53,6 +53,8 @@ python3 -m venv .venv && source .venv/bin/activate
 pip3 install claude-agent-sdk
 ```
 
+The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.
+
 3
 
 Set your API key

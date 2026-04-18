@@ -761,15 +761,18 @@ const response = await client.beta.messages.create({
 
 For detailed platform setup guides with code examples, see:
 
-- [Amazon Bedrock](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 - [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The TypeScript SDK supports Bedrock, Vertex AI, and Foundry through separate npm packages:
 
-- **Bedrock:** `npm install @anthropic-ai/bedrock-sdk`: Provides `AnthropicBedrock` client
+- **Bedrock:** `npm install @anthropic-ai/bedrock-sdk`: Provides `AnthropicBedrockMantle` client, and `AnthropicBedrock` for the `bedrock-runtime` path
 - **Vertex AI:** `npm install @anthropic-ai/vertex-sdk`: Provides `AnthropicVertex` client
 - **Foundry:** `npm install @anthropic-ai/foundry-sdk`: Provides `AnthropicFoundry` client
+
+Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
 
 ## Semantic versioning
 
