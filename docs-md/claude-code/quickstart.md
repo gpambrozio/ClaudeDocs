@@ -6,11 +6,15 @@ TerminalDesktopVS CodeJetBrains
 
 I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
 
-Claude Code for Desktop
+macOS / LinuxWindowsHomebrewWinGet
 
-The full agent in a native app for macOS and Windows.
+$
 
-[Download the app](https://claude.com/download?utm_source=claude_code&utm_medium=docs&utm_content=configurator_desktop_download) [Desktop guide](desktop-quickstart.md)
+curl -fsSL https://claude.ai/install.sh | bash
+
+Copy
+
+[Troubleshooting](troubleshooting.md)
 
 ## [​](#before-you-begin) Before you begin
 
