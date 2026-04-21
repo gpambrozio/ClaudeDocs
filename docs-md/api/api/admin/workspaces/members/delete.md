@@ -43,7 +43,27 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "type": "workspace_member_deleted",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "type": "workspace_member_deleted",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
 
 ---
 

@@ -76,7 +76,43 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
+  "name": "Developer Key",
+  "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "status": "active",
+  "type": "api_key",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
+  "name": "Developer Key",
+  "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "status": "active",
+  "type": "api_key",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
 
 ---
 

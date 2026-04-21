@@ -64,6 +64,18 @@ Object type.
 
 For Users, this is always `"user"`.
 
+UserDeleteResponse = object { id, type }
+
+id: string
+
+ID of the User.
+
+type: "user\_deleted"
+
+Deleted object type.
+
+For Users, this is always `"user_deleted"`.
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

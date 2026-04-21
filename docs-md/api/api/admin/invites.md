@@ -78,6 +78,18 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
+InviteDeleteResponse = object { id, type }
+
+id: string
+
+ID of the Invite.
+
+type: "invite\_deleted"
+
+Deleted object type.
+
+For Invites, this is always `"invite_deleted"`.
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

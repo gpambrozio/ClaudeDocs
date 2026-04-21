@@ -74,7 +74,43 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "type": "workspace"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "type": "workspace"
+}
+```
 
 ---
 

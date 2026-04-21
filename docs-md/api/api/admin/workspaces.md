@@ -64,7 +64,7 @@ workspace\_id: string
 
 ID of the Workspace.
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_admin" or "workspace\_billing"
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 Role of the Workspace Member.
 
@@ -74,9 +74,27 @@ Accepts one of the following:
 
 "workspace\_developer"
 
+"workspace\_restricted\_developer"
+
 "workspace\_admin"
 
 "workspace\_billing"
+
+MemberDeleteResponse = object { type, user\_id, workspace\_id }
+
+type: "workspace\_member\_deleted"
+
+Deleted object type.
+
+For Workspace Members, this is always `"workspace_member_deleted"`.
+
+user\_id: string
+
+ID of the User.
+
+workspace\_id: string
+
+ID of the Workspace.
 
 ---
 

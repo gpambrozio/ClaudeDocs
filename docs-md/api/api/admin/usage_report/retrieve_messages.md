@@ -257,7 +257,79 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "ending_at": "2025-08-02T00:00:00Z",
+      "results": [
+        {
+          "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 1000,
+            "ephemeral_5m_input_tokens": 500
+          },
+          "cache_read_input_tokens": 200,
+          "context_window": "0-200k",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
+          "output_tokens": 500,
+          "server_tool_use": {
+            "web_search_requests": 10
+          },
+          "service_tier": "standard",
+          "speed": "standard",
+          "uncached_input_tokens": 1500,
+          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        }
+      ],
+      "starting_at": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "2019-12-27T18:11:19.117Z"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "ending_at": "2025-08-02T00:00:00Z",
+      "results": [
+        {
+          "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 1000,
+            "ephemeral_5m_input_tokens": 500
+          },
+          "cache_read_input_tokens": 200,
+          "context_window": "0-200k",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
+          "output_tokens": 500,
+          "server_tool_use": {
+            "web_search_requests": 10
+          },
+          "service_tier": "standard",
+          "speed": "standard",
+          "uncached_input_tokens": 1500,
+          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        }
+      ],
+      "starting_at": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "2019-12-27T18:11:19.117Z"
+}
+```
 
 ---
 

@@ -81,11 +81,11 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/tasks` | List and manage background tasks. Also available as `/bashes` |
 | `/team-onboarding` | Generate a team onboarding guide from your Claude Code usage history. Claude analyzes your sessions, commands, and MCP server usage from the past 30 days and produces a markdown guide a teammate can paste as a first message to get set up quickly |
 | `/teleport` | Pull a [Claude Code on the web](claude-code-on-the-web.md) session into this terminal: opens a picker, then fetches the branch and conversation. Also available as `/tp`. Requires a claude.ai subscription |
-| `/terminal-setup` | Configure terminal keybindings for Shift+Enter and other shortcuts. Only visible in terminals that need it, like VS Code, Alacritty, or Warp |
-| `/theme` | Change the color theme. Includes an `auto` option that follows your terminal’s dark or light mode, light and dark variants, colorblind-accessible (daltonized) themes, and ANSI themes that use your terminal’s color palette |
+| `/terminal-setup` | Configure terminal keybindings for Shift+Enter and other shortcuts. Only visible in terminals that need it, like VS Code, Cursor, Windsurf, Alacritty, or Zed |
+| `/theme` | Change the color theme. Includes an `auto` option that matches your terminal’s light or dark background, light and dark variants, colorblind-accessible (daltonized) themes, and ANSI themes that use your terminal’s color palette |
 | `/tui [default|fullscreen]` | Set the terminal UI renderer and relaunch into it with your conversation intact. `fullscreen` enables the [flicker-free alt-screen renderer](fullscreen.md). With no argument, prints the active renderer |
 | `/ultraplan <prompt>` | Draft a plan in an [ultraplan](ultraplan.md) session, review it in your browser, then execute remotely or send it back to your terminal |
-| `/ultrareview [PR]` | Run a deep, multi-agent code review in a cloud sandbox with [ultrareview](ultrareview.md). Includes 3 free runs on Pro and Max, then requires [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
+| `/ultrareview [PR]` | Run a deep, multi-agent code review in a cloud sandbox with [ultrareview](ultrareview.md). Includes 3 free runs on Pro and Max through May 5, 2026, then requires [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
 | `/upgrade` | Open the upgrade page to switch to a higher plan tier |
 | `/usage` | Show plan usage limits and rate limit status |
 | `/vim` | Removed in v2.1.92. To toggle between Vim and Normal editing modes, use `/config` → Editor mode |

@@ -34,7 +34,27 @@ curl https://api.anthropic.com/v1/organizations/me \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
 
 ---
 

@@ -35,7 +35,25 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```
 
 ---
 

@@ -254,7 +254,7 @@ The minimum cacheable prompt length is:
 - 2048 tokens for Claude Sonnet 4.6
 - 1024 tokens for Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4, and Claude Sonnet 3.7 ([deprecated](about-claude/model-deprecations.md))
 - 4096 tokens for Claude Haiku 4.5
-- 2048 tokens for Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md)) and Claude Haiku 3
+- 2048 tokens for Claude Haiku 3.5 ([deprecated](about-claude/model-deprecations.md))
 
 Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](build-with-claude/prompt-caching.md): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
 

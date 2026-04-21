@@ -106,7 +106,49 @@ curl https://api.anthropic.com/v1/organizations/invites \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "email": "user@emaildomain.com",
+      "expires_at": "2024-11-20T23:58:27.427722Z",
+      "invited_at": "2024-10-30T23:58:27.427722Z",
+      "role": "user",
+      "status": "pending",
+      "type": "invite"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
 ##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "data": [
+    {
+      "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "email": "user@emaildomain.com",
+      "expires_at": "2024-11-20T23:58:27.427722Z",
+      "invited_at": "2024-10-30T23:58:27.427722Z",
+      "role": "user",
+      "status": "pending",
+      "type": "invite"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
 
 ---
 

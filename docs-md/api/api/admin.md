@@ -106,6 +106,18 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
+InviteDeleteResponse = object { id, type }
+
+id: string
+
+ID of the Invite.
+
+type: "invite\_deleted"
+
+Deleted object type.
+
+For Invites, this is always `"invite_deleted"`.
+
 #### AdminUsers
 
 ##### [Get User](api/admin/users/retrieve.md)
@@ -167,6 +179,18 @@ type: "user"
 Object type.
 
 For Users, this is always `"user"`.
+
+UserDeleteResponse = object { id, type }
+
+id: string
+
+ID of the User.
+
+type: "user\_deleted"
+
+Deleted object type.
+
+For Users, this is always `"user_deleted"`.
 
 #### AdminWorkspaces
 
@@ -230,7 +254,7 @@ workspace\_id: string
 
 ID of the Workspace.
 
-workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_admin" or "workspace\_billing"
+workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_restricted\_developer" or 2 more
 
 Role of the Workspace Member.
 
@@ -240,9 +264,27 @@ Accepts one of the following:
 
 "workspace\_developer"
 
+"workspace\_restricted\_developer"
+
 "workspace\_admin"
 
 "workspace\_billing"
+
+MemberDeleteResponse = object { type, user\_id, workspace\_id }
+
+type: "workspace\_member\_deleted"
+
+Deleted object type.
+
+For Workspace Members, this is always `"workspace_member_deleted"`.
+
+user\_id: string
+
+ID of the User.
+
+workspace\_id: string
+
+ID of the Workspace.
 
 #### AdminAPI Keys
 
