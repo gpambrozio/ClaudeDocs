@@ -535,7 +535,7 @@ Tips:
 
 ## [​](#use-extended-thinking-thinking-mode) Use extended thinking (thinking mode)
 
-[Extended thinking](build-with-claude/extended-thinking.md) is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`. During extended thinking, progress hints appear below the indicator to show that Claude is actively working.
+[Extended thinking](build-with-claude/extended-thinking.md) is enabled by default, giving Claude space to reason through complex problems step-by-step before responding. This reasoning is visible in verbose mode, which you can toggle on with `Ctrl+O`. During extended thinking, the spinner shows inline progress hints such as “still thinking” and “almost done thinking” to indicate Claude is actively working.
 Additionally, [models that support effort](model-config.md) use adaptive reasoning: instead of a fixed thinking token budget, the model dynamically decides whether and how much to think based on your effort level setting and the task at hand. Adaptive reasoning lets Claude respond faster to routine prompts and reserve deeper thinking for steps that benefit from it.
 Extended thinking is particularly valuable for complex architectural decisions, challenging bugs, multi-step implementation planning, and evaluating tradeoffs between different approaches.
 
