@@ -71,6 +71,8 @@ winget install Anthropic.ClaudeCode
 
 WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
+You can also install with [apt, dnf, or apk](setup.md) on Debian, Fedora, RHEL, and Alpine.
+
 ## [​](#step-2-log-in-to-your-account) Step 2: Log in to your account
 
 Claude Code requires an account to use. When you start an interactive session with the `claude` command, you’ll need to log in:

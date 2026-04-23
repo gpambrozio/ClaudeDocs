@@ -84,7 +84,7 @@ To configure the [auto mode](permission-modes.md) classifier so it knows which r
 }
 ```
 
-Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they’re applied. See [Configure the auto mode classifier](permissions.md) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `allow` and `soft_deny` fields.
+Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they’re applied. See [Configure auto mode](auto-mode-config.md) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `allow` and `soft_deny` fields.
 
 3
 

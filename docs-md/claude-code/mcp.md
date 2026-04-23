@@ -1254,14 +1254,11 @@ Which deployment introduced these new errors?
 
 ### [​](#example-connect-to-github-for-code-reviews) Example: Connect to GitHub for code reviews
 
-```shiki
-claude mcp add --transport http github https://api.githubcopilot.com/mcp/
-```
-
-Authenticate if needed by selecting “Authenticate” for GitHub:
+GitHub’s remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your [GitHub token settings](https://github.com/settings/personal-access-tokens), generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:
 
 ```shiki
-/mcp
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer YOUR_GITHUB_PAT"
 ```
 
 Then work with GitHub:

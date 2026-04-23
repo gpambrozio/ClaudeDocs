@@ -128,7 +128,7 @@ If Claude Code reports auto mode as unavailable, one of these requirements is un
 
 ### [​](#what-the-classifier-blocks-by-default) What the classifier blocks by default
 
-The classifier trusts your working directory and your repo’s configured remotes. Everything else is treated as external until you [configure trusted infrastructure](permissions.md).
+The classifier trusts your working directory and your repo’s configured remotes. Everything else is treated as external until you [configure trusted infrastructure](auto-mode-config.md).
 **Blocked by default**:
 
 - Downloading and executing code, like `curl | bash`
@@ -148,7 +148,7 @@ The classifier trusts your working directory and your repo’s configured remote
 - Read-only HTTP requests
 - Pushing to the branch you started on or one Claude created
 
-Sandbox network access requests are routed through the classifier rather than allowed by default. Run `claude auto-mode defaults` to see the full rule lists. If routine actions get blocked, an administrator can add trusted repos, buckets, and services via the `autoMode.environment` setting: see [Configure the auto mode classifier](permissions.md).
+Sandbox network access requests are routed through the classifier rather than allowed by default. Run `claude auto-mode defaults` to see the full rule lists. If routine actions get blocked, an administrator can add trusted repos, buckets, and services via the `autoMode.environment` setting: see [Configure auto mode](auto-mode-config.md).
 
 ### [​](#boundaries-you-state-in-conversation) Boundaries you state in conversation
 
@@ -160,7 +160,7 @@ Boundaries are not stored as rules. The classifier re-reads them from the transc
 Each denied action shows a notification and appears in `/permissions` under the Recently denied tab, where you can press `r` to retry it with a manual approval.
 If the classifier blocks an action 3 times in a row or 20 times total, auto mode pauses and Claude Code resumes prompting. Approving the prompted action resumes auto mode. These thresholds are not configurable. Any allowed action resets the consecutive counter, while the total counter persists for the session and resets only when its own limit triggers a fallback.
 In [non-interactive mode](headless.md) with the `-p` flag, repeated blocks abort the session since there is no user to prompt.
-Repeated blocks usually mean the classifier is missing context about your infrastructure. Use `/feedback` to report false positives, or have an administrator [configure trusted infrastructure](permissions.md).
+Repeated blocks usually mean the classifier is missing context about your infrastructure. Use `/feedback` to report false positives, or have an administrator [configure trusted infrastructure](auto-mode-config.md).
 
 How the classifier evaluates actions
 
@@ -234,7 +234,8 @@ Protected files:
 
 ## [​](#see-also) See also
 
-- [Permissions](permissions.md): allow, ask, and deny rules; auto mode classifier configuration; managed policies
+- [Permissions](permissions.md): allow, ask, and deny rules; managed policies
+- [Configure auto mode](auto-mode-config.md): tell the classifier which infrastructure your organization trusts
 - [Hooks](hooks.md): custom permission logic via `PreToolUse` and `PermissionRequest` hooks
 - [Ultraplan](ultraplan.md): run plan mode in a Claude Code on the web session with browser-based review
 - [Security](security.md): safeguards and best practices

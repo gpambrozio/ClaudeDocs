@@ -9,7 +9,7 @@ Don’t want to use the terminal? The Claude Code desktop app lets you skip the 
 
 ## [​](#macos-and-linux) macOS and Linux
 
-Follow these three steps to install and start Claude Code from a macOS or Linux terminal.
+Follow these steps to install and start Claude Code from a macOS or Linux terminal. Claude Code requires macOS 13.0 or later. See the [system requirements](setup.md) for supported Linux distributions.
 
 1
 
@@ -56,7 +56,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 ## [​](#windows) Windows
 
-Follow these four steps to install Git, set up PowerShell, and start Claude Code on Windows.
+Follow these steps to install Git, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md) for full details.
 
 1
 
@@ -205,6 +205,10 @@ If you see `bash: line 1: syntax error near unexpected token '<'` or HTML code l
 ```shiki
 brew install --cask claude-code
 ```
+
+'dyld' error or 'built for Mac OS X 13.0'
+
+If you see `dyld: cannot load`, `dyld: Symbol not found`, or `built for Mac OS X 13.0`, your macOS version is likely older than Claude Code supports.Open the Apple menu and select About This Mac to check your version. If it’s older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshooting.md) for more details.
 
 For other errors, see the full [installation troubleshooting guide](troubleshooting.md).
 
