@@ -148,6 +148,30 @@ mount\_path: Optional[str]
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam: …
+
+Parameters for attaching a memory store to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 class BetaManagedAgentsSession: …
 
 A Managed Agents `session`.
@@ -507,6 +531,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 stats: [BetaManagedAgentsSessionStats](api/beta.md)
 
@@ -6194,7 +6254,45 @@ Full commit SHA to check out.
 
 type: Literal["commit"]
 
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 [BetaManagedAgentsSessionResource](api/beta.md)
+
+A memory store attached to an agent session.
 
 Accepts one of the following:
 
@@ -6253,6 +6351,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 [ResourceRetrieveResponse](api/beta.md)
 
@@ -6316,6 +6450,42 @@ updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 [ResourceUpdateResponse](api/beta.md)
 
 The updated session resource.
@@ -6377,6 +6547,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ---
 

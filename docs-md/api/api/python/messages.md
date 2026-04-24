@@ -8631,7 +8631,7 @@ str
 
 class OutputConfig: …
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
 All possible effort levels.
 
@@ -8642,8 +8642,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 

@@ -174,6 +174,27 @@ The Agent SDK automatically uses [prompt caching](build-with-claude/prompt-cachi
 
 Track these separately from `input_tokens` to understand caching savings. In TypeScript, these fields are typed on the [`Usage`](agent-sdk/typescript.md) object. In Python, they appear as keys in the [`ResultMessage.usage`](agent-sdk/python.md) dict (for example, `message.usage.get("cache_read_input_tokens", 0)`).
 
+### [​](#extend-the-prompt-cache-ttl-to-one-hour) Extend the prompt cache TTL to one hour
+
+Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud Vertex AI, or Microsoft Foundry. If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
+To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](env-vars.md) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
+The following example enables 1-hour TTL for an agent running on Bedrock:
+
+Python
+
+TypeScript
+
+```shiki
+options = ClaudeAgentOptions(
+    env={
+        "CLAUDE_CODE_USE_BEDROCK": "1",
+        "ENABLE_PROMPT_CACHING_1H": "1",
+    },
+)
+```
+
+Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details. Claude subscription users already receive 1-hour TTL automatically and do not need to set this variable.
+
 ## [​](#related-documentation) Related documentation
 
 - [TypeScript SDK Reference](agent-sdk/typescript.md) - Complete API documentation

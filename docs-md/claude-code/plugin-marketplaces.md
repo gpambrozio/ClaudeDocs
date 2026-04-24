@@ -67,6 +67,8 @@ my-marketplace/plugins/quality-review-plugin/.claude-plugin/plugin.json
 }
 ```
 
+Setting `version` means users only receive updates when you change this field, so bump it on every release. If you omit `version` and host this marketplace in git, every commit automatically counts as a new version. See [Version resolution](#version-resolution-and-release-channels) to choose the right approach.
+
 4
 
 Create the marketplace file
@@ -196,7 +198,7 @@ Each plugin entry in the `plugins` array describes a plugin and where to find it
 | Field | Type | Description |
 | --- | --- | --- |
 | `description` | string | Brief plugin description |
-| `version` | string | Plugin version |
+| `version` | string | Plugin version. If set (here or in `plugin.json`), the plugin is pinned to this string and users only receive updates when it changes. Omit to fall back to the git commit SHA. See [Version resolution](#version-resolution-and-release-channels). |
 | `author` | object | Plugin author information (`name` required, `email` optional) |
 | `homepage` | string | Plugin homepage or documentation URL |
 | `repository` | string | Source code repository URL |
@@ -674,15 +676,22 @@ For complete configuration details including all supported source types and comp
 
 ### [​](#version-resolution-and-release-channels) Version resolution and release channels
 
-Plugin versions determine cache paths and update detection. You can specify the version in the plugin manifest (`plugin.json`) or in the marketplace entry (`marketplace.json`).
+Plugin versions determine cache paths and update detection: if the resolved version matches what a user already has, `/plugin update` and auto-update skip the plugin.
+Claude Code resolves a plugin’s version from the first of these that is set:
 
-When possible, avoid setting the version in both places. The plugin manifest always wins silently, which can cause the marketplace version to be ignored. For relative-path plugins, set the version in the marketplace entry. For all other plugin sources, set it in the plugin manifest.
+1. `version` in the plugin’s `plugin.json`
+2. `version` in the plugin’s marketplace entry
+3. The git commit SHA of the plugin’s source
+
+For the git-based source types `github`, `url`, `git-subdir`, and relative paths inside a git-hosted marketplace, you can omit `version` entirely and every new commit is treated as a new version. This is the simplest setup for internal or actively-developed plugins.
+
+Setting `version` pins the plugin. If `plugin.json` declares `"version": "1.0.0"`, pushing new commits without changing that string does nothing for existing users, because Claude Code sees the same version and keeps the cached copy. Bump the field on every release, or omit it to use the commit SHA.Avoid setting `version` in both `plugin.json` and the marketplace entry. The `plugin.json` value always wins silently, so a stale manifest version can mask a version you set in `marketplace.json`.
 
 #### [​](#set-up-release-channels) Set up release channels
 
 To support “stable” and “latest” release channels for your plugins, you can set up two marketplaces that point to different refs or SHAs of the same repo. You can then assign the two marketplaces to different user groups through [managed settings](settings.md).
 
-The plugin’s `plugin.json` must declare a different `version` at each pinned ref or commit. If two refs or commits have the same manifest version, Claude Code treats them as identical and skips the update.
+Each channel must resolve to a different version. If you use explicit versions, `plugin.json` must declare a different `version` at each pinned ref. If you omit `version`, the distinct commit SHAs already distinguish the channels. If two refs resolve to the same version string, Claude Code treats them as identical and skips the update.
 
 ##### Example
 
@@ -749,6 +758,10 @@ The early-access group receives `latest-tools` instead:
   }
 }
 ```
+
+#### [​](#pin-dependency-versions) Pin dependency versions
+
+A plugin can constrain its dependencies to a semver range so that updates to a dependency do not break the dependent plugin. See [Constrain plugin dependency versions](plugin-dependencies.md) for the `{plugin-name}--v{version}` git-tag convention, range syntax, and how multiple constraints on the same dependency are combined.
 
 ## [​](#validation-and-testing) Validation and testing
 

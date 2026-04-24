@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -71,8 +71,6 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
-
-"user-profiles-2026-03-24"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -218,9 +216,11 @@ Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/streaming) for details.
 
-temperature: optional number
+Deprecatedtemperature: optional number
 
 Amount of randomness injected into the response.
+
+Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
 Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -230,23 +230,27 @@ maximum1
 
 minimum0
 
-top\_k: optional number
+Deprecatedtop\_k: optional number
 
 Only sample from the top K options for each subsequent token.
 
+Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
-top\_p: optional number
+Deprecatedtop\_p: optional number
 
 Use nucleus sampling.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+
+Recommended for advanced use cases only.
 
 maximum1
 

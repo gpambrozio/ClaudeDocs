@@ -148,6 +148,30 @@ string? MountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam:
+
+Parameters for attaching a memory store to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 class BetaManagedAgentsSession:
 
 A Managed Agents `session`.
@@ -487,6 +511,42 @@ required Type Type
 required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 required [BetaManagedAgentsSessionStats](api/beta.md) Stats
 
@@ -6148,7 +6208,45 @@ Full commit SHA to check out.
 
 required Type Type
 
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 class BetaManagedAgentsSessionResource: A class that can be one of several variants.union
+
+A memory store attached to an agent session.
 
 class BetaManagedAgentsGitHubRepositoryResource:
 
@@ -6205,6 +6303,42 @@ required Type Type
 required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ---
 

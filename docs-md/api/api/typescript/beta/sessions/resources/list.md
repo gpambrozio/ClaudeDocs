@@ -34,7 +34,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
 
 "message-batches-2024-09-24"
 
@@ -80,11 +80,11 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
-"user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
 
 Accepts one of the following:
 
@@ -143,6 +143,42 @@ type: "file"
 updated\_at: string
 
 A timestamp in RFC 3339 format
+
+BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+access?: "read\_write" | "read\_only" | null
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description?: string
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions?: string | null
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path?: string | null
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name?: string | null
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 List Session Resources
 

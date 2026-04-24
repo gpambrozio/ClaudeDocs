@@ -100,14 +100,6 @@ Supported bool
 
 Whether this capability is supported by the model.
 
-Xhigh [CapabilitySupport](api/models.md)
-
-Indicates whether a capability is supported.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
 type ModelCapabilities struct{…}
 
 Model capability information.
@@ -203,14 +195,6 @@ Whether the model supports medium effort level.
 Supported bool
 
 Whether this capability is supported by the model.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-Xhigh [CapabilitySupport](api/models.md)
-
-Indicates whether a capability is supported.
 
 Supported bool
 
@@ -369,14 +353,6 @@ Whether the model supports medium effort level.
 Supported bool
 
 Whether this capability is supported by the model.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-Xhigh [CapabilitySupport](api/models.md)
-
-Indicates whether a capability is supported.
 
 Supported bool
 

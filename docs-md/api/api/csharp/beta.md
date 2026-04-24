@@ -278,14 +278,6 @@ required Boolean Supported
 
 Whether this capability is supported by the model.
 
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
-
-Indicates whether a capability is supported.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
 class BetaModelCapabilities:
 
 Model capability information.
@@ -381,14 +373,6 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
-
-Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -547,14 +531,6 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-required [BetaCapabilitySupport](api/beta.md)? Xhigh
-
-Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -2265,10 +2241,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 class BetaCompactionBlockParam:
@@ -2310,17 +2282,9 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -3235,10 +3199,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -5637,10 +5597,6 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaContentBlockSource:
 
 required Content Content
@@ -7602,10 +7558,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -10739,10 +10691,6 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 required Role Role
 
 Accepts one of the following:
@@ -10789,8 +10737,6 @@ Accepts one of the following:
 
 "high"High
 
-"xhigh"Xhigh
-
 "max"Max
 
 [BetaJsonOutputFormat](api/beta.md)? Format
@@ -10802,22 +10748,6 @@ required IReadOnlyDictionary<string, JsonElement> Schema
 The JSON schema of the format
 
 JsonElement Type "json\_schema"constant
-
-[BetaTokenTaskBudget](api/beta.md)? TaskBudget
-
-User-configurable total token budget across contexts.
-
-required Long Total
-
-Total token budget across all contexts in the session.
-
-JsonElement Type "tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Long? Remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource:
 
@@ -10941,10 +10871,6 @@ class BetaCompactionContentBlockDelta:
 
 required string? Content
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction\_delta"constant
 
 class BetaRawContentBlockDeltaEvent:
@@ -11064,10 +10990,6 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -11850,10 +11772,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -13069,10 +12987,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -14392,10 +14306,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -16005,10 +15915,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -16132,10 +16038,6 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -17712,22 +17614,6 @@ class BetaThinkingTurns:
 JsonElement Type "thinking\_turns"constant
 
 required Long Value
-
-class BetaTokenTaskBudget:
-
-User-configurable total token budget across contexts.
-
-required Long Total
-
-Total token budget across all contexts in the session.
-
-JsonElement Type "tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Long? Remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool:
 
@@ -23916,10 +23802,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -25344,10 +25226,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -26735,10 +26613,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -28934,6 +28808,30 @@ string? MountPath
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam:
+
+Parameters for attaching a memory store to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 class BetaManagedAgentsSession:
 
 A Managed Agents `session`.
@@ -29273,6 +29171,42 @@ required Type Type
 required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 required [BetaManagedAgentsSessionStats](api/beta.md) Stats
 
@@ -34934,7 +34868,45 @@ Full commit SHA to check out.
 
 required Type Type
 
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 class BetaManagedAgentsSessionResource: A class that can be one of several variants.union
+
+A memory store attached to an agent session.
 
 class BetaManagedAgentsGitHubRepositoryResource:
 
@@ -34991,6 +34963,42 @@ required Type Type
 required DateTimeOffset UpdatedAt
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource:
+
+A memory store attached to an agent session.
+
+required string MemoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+required Type Type
+
+Access? Access
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"ReadWrite
+
+"read\_only"ReadOnly
+
+string Description
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+string? Instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+string? MountPath
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+string? Name
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 #### BetaVaults
 
@@ -35650,6 +35658,370 @@ string? ClientSecret
 
 Updated OAuth client secret.
 
+#### BetaMemory Stores
+
+##### [CreateMemoryStore](api/beta/memory_stores/create.md)
+
+[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores
+
+##### [ListMemoryStores](api/beta/memory_stores/list.md)
+
+[MemoryStoreListPageResponse](api/beta.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores
+
+##### [GetMemoryStore](api/beta/memory_stores/retrieve.md)
+
+[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores/{memory\_store\_id}
+
+##### [UpdateMemoryStore](api/beta/memory_stores/update.md)
+
+[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores/{memory\_store\_id}
+
+##### [DeleteMemoryStore](api/beta/memory_stores/delete.md)
+
+[BetaManagedAgentsDeletedMemoryStore](api/beta.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/memory\_stores/{memory\_store\_id}
+
+##### [ArchiveMemoryStore](api/beta/memory_stores/archive.md)
+
+[BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores/{memory\_store\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeletedMemoryStore:
+
+required string ID
+
+required Type Type
+
+class BetaManagedAgentsMemoryStore:
+
+required string ID
+
+required Type Type
+
+DateTimeOffset? ArchivedAt
+
+A timestamp in RFC 3339 format
+
+DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+string Description
+
+IReadOnlyDictionary<string, string> Metadata
+
+string Name
+
+DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+#### BetaMemory StoresMemories
+
+##### [CreateMemory](api/beta/memory_stores/memories/create.md)
+
+[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [ListMemories](api/beta/memory_stores/memories/list.md)
+
+[MemoryListPageResponse](api/beta.md) Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [GetMemory](api/beta/memory_stores/memories/retrieve.md)
+
+[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [UpdateMemory](api/beta/memory_stores/memories/update.md)
+
+[BetaManagedAgentsMemory](api/beta.md) Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [DeleteMemory](api/beta/memory_stores/memories/delete.md)
+
+[BetaManagedAgentsDeletedMemory](api/beta.md) Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)
+
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsContentSha256Precondition:
+
+required Type Type
+
+string ContentSha256
+
+class BetaManagedAgentsDeletedMemory:
+
+required string ID
+
+required Type Type
+
+class BetaManagedAgentsMemory:
+
+required string ID
+
+required string ContentSha256
+
+required Int ContentSizeBytes
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MemoryStoreID
+
+required string MemoryVersionID
+
+required string Path
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+string? Content
+
+class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union
+
+class BetaManagedAgentsMemory:
+
+required string ID
+
+required string ContentSha256
+
+required Int ContentSizeBytes
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MemoryStoreID
+
+required string MemoryVersionID
+
+required string Path
+
+required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
+
+string? Content
+
+class BetaManagedAgentsMemoryPrefix:
+
+required string Path
+
+required Type Type
+
+class BetaManagedAgentsMemoryPathConflictError:
+
+required Type Type
+
+string ConflictingMemoryID
+
+string ConflictingPath
+
+string Message
+
+class BetaManagedAgentsMemoryPreconditionFailedError:
+
+required Type Type
+
+string Message
+
+class BetaManagedAgentsMemoryPrefix:
+
+required string Path
+
+required Type Type
+
+enum BetaManagedAgentsMemoryView:
+
+MemoryView enum
+
+"basic"Basic
+
+"full"Full
+
+class BetaManagedAgentsPrecondition:
+
+required Type Type
+
+string ContentSha256
+
+#### BetaMemory StoresMemory Versions
+
+##### [ListMemoryVersions](api/beta/memory_stores/memory_versions/list.md)
+
+[MemoryVersionListPageResponse](api/beta.md) Beta.MemoryStores.MemoryVersions.List(MemoryVersionListParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+
+##### [GetMemoryVersion](api/beta/memory_stores/memory_versions/retrieve.md)
+
+[BetaManagedAgentsMemoryVersion](api/beta.md) Beta.MemoryStores.MemoryVersions.Retrieve(MemoryVersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+
+##### [RedactMemoryVersion](api/beta/memory_stores/memory_versions/redact.md)
+
+[BetaManagedAgentsMemoryVersion](api/beta.md) Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsActor: A class that can be one of several variants.union
+
+class BetaManagedAgentsSessionActor:
+
+required string SessionID
+
+required Type Type
+
+class BetaManagedAgentsApiActor:
+
+required string ApiKeyID
+
+required Type Type
+
+class BetaManagedAgentsUserActor:
+
+required Type Type
+
+required string UserID
+
+class BetaManagedAgentsApiActor:
+
+required string ApiKeyID
+
+required Type Type
+
+class BetaManagedAgentsMemoryVersion:
+
+required string ID
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string MemoryID
+
+required string MemoryStoreID
+
+required [BetaManagedAgentsMemoryVersionOperation](api/beta.md) Operation
+
+MemoryVersionOperation enum
+
+Accepts one of the following:
+
+"created"Created
+
+"modified"Modified
+
+"deleted"Deleted
+
+required Type Type
+
+string? Content
+
+string? ContentSha256
+
+Int? ContentSizeBytes
+
+[BetaManagedAgentsActor](api/beta.md) CreatedBy
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor:
+
+required string SessionID
+
+required Type Type
+
+class BetaManagedAgentsApiActor:
+
+required string ApiKeyID
+
+required Type Type
+
+class BetaManagedAgentsUserActor:
+
+required Type Type
+
+required string UserID
+
+string? Path
+
+DateTimeOffset? RedactedAt
+
+A timestamp in RFC 3339 format
+
+[BetaManagedAgentsActor](api/beta.md) RedactedBy
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor:
+
+required string SessionID
+
+required Type Type
+
+class BetaManagedAgentsApiActor:
+
+required string ApiKeyID
+
+required Type Type
+
+class BetaManagedAgentsUserActor:
+
+required Type Type
+
+required string UserID
+
+enum BetaManagedAgentsMemoryVersionOperation:
+
+MemoryVersionOperation enum
+
+"created"Created
+
+"modified"Modified
+
+"deleted"Deleted
+
+class BetaManagedAgentsSessionActor:
+
+required string SessionID
+
+required Type Type
+
+class BetaManagedAgentsUserActor:
+
+required Type Type
+
+required string UserID
+
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
@@ -35803,110 +36175,6 @@ GET/v1/skills/{skill\_id}/versions/{version}
 [VersionDeleteResponse](api/beta.md) Beta.Skills.Versions.Delete(VersionDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-[UserProfileListPageResponse](api/beta.md) Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-[BetaUserProfile](api/beta.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-[BetaUserProfileEnrollmentUrl](api/beta.md) Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile:
-
-required string ID
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-required DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
-required IReadOnlyDictionary<string, string> Metadata
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-required Status Status
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"Active
-
-"pending"Pending
-
-"rejected"Rejected
-
-required Type Type
-
-Object type. Always `user_profile`.
-
-required DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
-
-string? ExternalID
-
-Platform's own identifier for this user. Not enforced unique.
-
-class BetaUserProfileEnrollmentUrl:
-
-required DateTimeOffset ExpiresAt
-
-A timestamp in RFC 3339 format
-
-required Type Type
-
-Object type. Always `enrollment_url`.
-
-required string Url
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-class BetaUserProfileTrustGrant:
-
-required Status Status
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"Active
-
-"pending"Pending
-
-"rejected"Rejected
 
 ---
 

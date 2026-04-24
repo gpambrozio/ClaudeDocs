@@ -1,3 +1,9 @@
+# Claude Code on Amazon Bedrock
+
+**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
+
+[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_contact_sales)
+
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Bedrock, ensure you have:
@@ -175,9 +181,12 @@ export ANTHROPIC_MODEL='arn:aws:bedrock:us-east-2:your-account-id:application-in
 
 # Optional: Disable prompt caching if needed
 export DISABLE_PROMPT_CACHING=1
+
+# Optional: Request 1-hour prompt cache TTL instead of the 5-minute default
+export ENABLE_PROMPT_CACHING_1H=1
 ```
 
-[Prompt caching](build-with-claude/prompt-caching.md) may not be available in all regions.
+[Prompt caching](build-with-claude/prompt-caching.md) may not be available in all regions. Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes.
 
 #### [​](#map-each-model-version-to-an-inference-profile) Map each model version to an inference profile
 

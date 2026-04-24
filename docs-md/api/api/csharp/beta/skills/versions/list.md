@@ -80,8 +80,6 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
-
 ##### ReturnsExpand Collapse
 
 class VersionListPageResponse:

@@ -1587,10 +1587,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 class BetaCompactionBlockParam:
@@ -1632,17 +1628,9 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaCompactionContentBlockDelta:
 
 Optional<String> content
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
 
@@ -2557,10 +2545,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
@@ -4959,10 +4943,6 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaContentBlockSource:
 
 Content content
@@ -6924,10 +6904,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
@@ -10061,10 +10037,6 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Role role
 
 Accepts one of the following:
@@ -10111,8 +10083,6 @@ MEDIUM("medium")
 
 HIGH("high")
 
-XHIGH("xhigh")
-
 MAX("max")
 
 Optional<[BetaJsonOutputFormat](api/beta.md)> format
@@ -10124,22 +10094,6 @@ Schema schema
 The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
-
-Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
-
-User-configurable total token budget across contexts.
-
-long total
-
-Total token budget across all contexts in the session.
-
-JsonValue; type "tokens"constant"tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Optional<Long> remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource:
 
@@ -10263,10 +10217,6 @@ class BetaCompactionContentBlockDelta:
 
 Optional<String> content
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
 
 class BetaRawContentBlockDeltaEvent:
@@ -10386,10 +10336,6 @@ JsonValue; type "signature\_delta"constant"signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 Optional<String> content
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
 
@@ -11172,10 +11118,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
@@ -12391,10 +12333,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
@@ -13714,10 +13652,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -15327,10 +15261,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 long index
@@ -15454,10 +15384,6 @@ JsonValue; type "signature\_delta"constant"signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 Optional<String> content
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
 
@@ -17034,22 +16960,6 @@ class BetaThinkingTurns:
 JsonValue; type "thinking\_turns"constant"thinking\_turns"constant
 
 long value
-
-class BetaTokenTaskBudget:
-
-User-configurable total token budget across contexts.
-
-long total
-
-Total token budget across all contexts in the session.
-
-JsonValue; type "tokens"constant"tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Optional<Long> remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool:
 
@@ -23238,10 +23148,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -24666,10 +24572,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -26057,10 +25959,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 

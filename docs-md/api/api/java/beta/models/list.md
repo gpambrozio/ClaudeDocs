@@ -84,8 +84,6 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
-
 ##### ReturnsExpand Collapse
 
 class BetaModelInfo:
@@ -189,14 +187,6 @@ Whether the model supports medium effort level.
 boolean supported
 
 Whether this capability is supported by the model.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-Optional<[BetaCapabilitySupport](api/beta.md)> xhigh
-
-Indicates whether a capability is supported.
 
 boolean supported
 
@@ -341,10 +331,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true
@@ -424,10 +411,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true

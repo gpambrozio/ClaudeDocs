@@ -1,3 +1,9 @@
+# Claude Code on Microsoft Foundry
+
+**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
+
+[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=foundry_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=foundry_contact_sales)
+
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Microsoft Foundry, ensure you have:
@@ -74,6 +80,11 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'
 ```
 
 For current and legacy model IDs, see [Models overview](about-claude/models/overview.md). See [Model configuration](model-config.md) for the full list of environment variables.
+[Prompt caching](build-with-claude/prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:
+
+```shiki
+export ENABLE_PROMPT_CACHING_1H=1
+```
 
 ## [​](#azure-rbac-configuration) Azure RBAC configuration
 

@@ -34,7 +34,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -81,8 +81,6 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
-
-"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -147,6 +145,42 @@ type: "file"
 updated\_at: string
 
 A timestamp in RFC 3339 format
+
+BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+access: optional "read\_write" or "read\_only"
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: optional string
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: optional string
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: optional string
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: optional string
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 next\_page: optional string
 

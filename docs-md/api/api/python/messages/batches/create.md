@@ -2326,7 +2326,7 @@ output\_config: Optional[[OutputConfigParam](api/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
 All possible effort levels.
 
@@ -2337,8 +2337,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 
@@ -3695,7 +3693,7 @@ Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any valu
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
@@ -3705,9 +3703,9 @@ Use nucleus sampling.
 
 Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 maximum1
 

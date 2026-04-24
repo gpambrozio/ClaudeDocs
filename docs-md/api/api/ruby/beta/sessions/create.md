@@ -44,7 +44,7 @@ metadata: Hash[Symbol, String]
 
 Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-resources: Array[[BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md) { authorization\_token, type, url, 2 more }  | [BetaManagedAgentsFileResourceParams](api/beta.md) { file\_id, type, mount\_path } ]
+resources: Array[[BetaManagedAgentsGitHubRepositoryResourceParams](api/beta.md) { authorization\_token, type, url, 2 more }  | [BetaManagedAgentsFileResourceParams](api/beta.md) { file\_id, type, mount\_path }  | [BetaManagedAgentsMemoryStoreResourceParam](api/beta.md) { memory\_store\_id, type, access, instructions } ]
 
 Resources (e.g. repositories, files) to mount into the session's container.
 
@@ -104,6 +104,30 @@ mount\_path: String
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam { memory\_store\_id, type, access, instructions }
+
+Parameters for attaching a memory store to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 title: String
 
 Human-readable session title.
@@ -120,7 +144,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
@@ -167,8 +191,6 @@ Accepts one of the following:
 :"output-300k-2026-03-24"
 
 :"advisor-tool-2026-03-01"
-
-:"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -521,6 +543,42 @@ type: :file
 updated\_at: Time
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 stats: [BetaManagedAgentsSessionStats](api/beta.md) { active\_seconds, duration\_seconds }
 

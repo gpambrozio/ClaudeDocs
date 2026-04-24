@@ -8495,8 +8495,6 @@ Accepts one of the following:
 
 "high"High
 
-"xhigh"Xhigh
-
 "max"Max
 
 [JsonOutputFormat](api/messages.md)? Format

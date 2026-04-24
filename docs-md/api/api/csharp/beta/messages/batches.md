@@ -1083,10 +1083,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -2511,10 +2507,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -3902,10 +3894,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 

@@ -96,8 +96,40 @@ The `allow-passthrough` line lets notifications and progress updates reach iTerm
 
 ## [​](#match-the-color-theme) Match the color theme
 
-Use the `/theme` command, or the theme picker in `/config`, to choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. The available themes are built in; there is no custom theme file. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.
+Use the `/theme` command, or the theme picker in `/config`, to choose a Claude Code theme that matches your terminal. Selecting the auto option detects your terminal’s light or dark background, so the theme follows OS appearance changes whenever your terminal does. Claude Code does not control the terminal’s own color scheme, which is set by the terminal application.
 To customize what appears at the bottom of the interface, configure a [custom status line](statusline.md) that shows the current model, working directory, git branch, or other context.
+
+### [​](#create-a-custom-theme) Create a custom theme
+
+Custom themes require Claude Code v2.1.118 or later.
+
+In addition to the built-in presets, `/theme` lists any custom themes you have defined and any themes contributed by installed [plugins](plugins-reference.md). Select **New custom theme…** at the end of the list to create one interactively: you name the theme, then pick individual color tokens to override. Press `Ctrl+E` while a custom theme is highlighted to edit it.
+Each custom theme is a JSON file in `~/.claude/themes/`. The filename without the `.json` extension is the theme’s slug, and selecting the theme stores `custom:<slug>` as your theme preference. The file has three optional fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `name` | string | Display label shown in `/theme`. Defaults to the filename slug |
+| `base` | string | Built-in preset the theme starts from: `dark`, `light`, `dark-daltonized`, `light-daltonized`, `dark-ansi`, or `light-ansi`. Defaults to `dark` |
+| `overrides` | object | Map of color token names to color values. Tokens not listed here fall through to the base preset |
+
+Color values accept `#rrggbb`, `#rgb`, `rgb(r,g,b)`, `ansi256(n)`, or `ansi:<name>` where `<name>` is one of the 16 standard ANSI color names such as `red` or `cyanBright`. Unknown tokens and invalid color values are ignored, so a typo cannot break rendering.
+The following example defines a theme that keeps the dark preset but recolors the prompt accent, error text, and success text:
+
+~/.claude/themes/dracula.json
+
+```shiki
+{
+  "name": "Dracula",
+  "base": "dark",
+  "overrides": {
+    "claude": "#bd93f9",
+    "error": "#ff5555",
+    "success": "#50fa7b"
+  }
+}
+```
+
+Claude Code watches `~/.claude/themes/` and reloads when a file changes, so edits made in your editor apply to a running session without a restart.
 
 ## [​](#switch-to-fullscreen-rendering) Switch to fullscreen rendering
 
@@ -122,7 +154,7 @@ The VS Code integrated terminal can drop characters from very large pastes befor
 ## [​](#edit-prompts-with-vim-keybindings) Edit prompts with Vim keybindings
 
 Claude Code includes a Vim-style editing mode for the prompt input. Enable it through `/config` → Editor mode, or by setting the [`editorMode`](settings.md) global config key to `"vim"` in `~/.claude.json`. Set Editor mode back to `normal` to turn it off.
-Vim mode supports a subset of NORMAL-mode motions and operators, such as `hjkl` navigation and `d`/`c`/`y` with text objects. See the [Vim editor mode reference](interactive-mode.md) for the full key table. Vim motions are not remappable through the keybindings file.
+Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as `hjkl` navigation, `v`/`V` selection, and `d`/`c`/`y` with text objects. See the [Vim editor mode reference](interactive-mode.md) for the full key table. Vim motions are not remappable through the keybindings file.
 Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use `o` or `O` in NORMAL mode, or Ctrl+J, to insert a newline instead.
 
 ## [​](#related-resources) Related resources

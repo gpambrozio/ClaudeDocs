@@ -1083,10 +1083,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -2569,10 +2565,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -4016,10 +4008,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 

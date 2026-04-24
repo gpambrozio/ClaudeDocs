@@ -166,12 +166,8 @@ def extract_file_ids(response):
 
 # Step 3: Download the file using Files API
 for file_id in extract_file_ids(response):
-    file_metadata = client.beta.files.retrieve_metadata(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
-    file_content = client.beta.files.download(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
+    file_metadata = client.beta.files.retrieve_metadata(file_id=file_id)
+    file_content = client.beta.files.download(file_id=file_id)
 
     # Step 4: Save to disk
     file_content.write_to_file(file_metadata.filename)
@@ -186,18 +182,16 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 file_id = "file_abc123"
 # Get file metadata
-file_info = client.beta.files.retrieve_metadata(
-    file_id=file_id, betas=["files-api-2025-04-14"]
-)
+file_info = client.beta.files.retrieve_metadata(file_id=file_id)
 print(f"Filename: {file_info.filename}, Size: {file_info.size_bytes} bytes")
 
 # List all files
-files = client.beta.files.list(betas=["files-api-2025-04-14"])
+files = client.beta.files.list()
 for file in files.data:
     print(f"{file.filename} - {file.created_at}")
 
 # Delete a file
-client.beta.files.delete(file_id=file_id, betas=["files-api-2025-04-14"])
+client.beta.files.delete(file_id=file_id)
 ```
 
 For complete details on the Files API, see the [Files API documentation](api/files-content.md).
@@ -548,7 +542,6 @@ from anthropic.lib import files_from_dir
 dcf_skill = client.beta.skills.create(
     display_title="DCF Analysis",
     files=files_from_dir("/path/to/dcf_skill"),
-    betas=["skills-2025-10-02"],
 )
 
 # Use with Excel to create financial model

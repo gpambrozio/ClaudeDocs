@@ -100,14 +100,6 @@ boolean supported
 
 Whether this capability is supported by the model.
 
-Optional<[CapabilitySupport](api/models.md)> xhigh
-
-Indicates whether a capability is supported.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
 class ModelCapabilities:
 
 Model capability information.
@@ -203,14 +195,6 @@ Whether the model supports medium effort level.
 boolean supported
 
 Whether this capability is supported by the model.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-Optional<[CapabilitySupport](api/models.md)> xhigh
-
-Indicates whether a capability is supported.
 
 boolean supported
 
@@ -369,14 +353,6 @@ Whether the model supports medium effort level.
 boolean supported
 
 Whether this capability is supported by the model.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-Optional<[CapabilitySupport](api/models.md)> xhigh
-
-Indicates whether a capability is supported.
 
 boolean supported
 

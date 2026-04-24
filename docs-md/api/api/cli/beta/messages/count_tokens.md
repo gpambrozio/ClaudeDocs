@@ -89,7 +89,7 @@ This allows you to control how Claude manages context across multiple requests, 
 
 Body param: MCP servers to be utilized in this request
 
---output-config: optional object { effort, format, task\_budget }
+--output-config: optional object { effort, format }
 
 Body param: Configuration options for the model's output, such as the output format.
 

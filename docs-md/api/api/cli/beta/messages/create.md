@@ -109,7 +109,7 @@ Body param: MCP servers to be utilized in this request
 
 Body param: An object describing metadata about the request.
 
---output-config: optional object { effort, format, task\_budget }
+--output-config: optional object { effort, format }
 
 Body param: Configuration options for the model's output, such as the output format.
 
@@ -237,7 +237,7 @@ Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any valu
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 Deprecated--top-p: optional number
 
@@ -245,13 +245,9 @@ Body param: Use nucleus sampling.
 
 Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
-
---user-profile-id: optional string
-
-Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+Recommended for advanced use cases only.
 
 --beta: optional array of [AnthropicBeta](api/beta.md)
 
@@ -1036,7 +1032,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, encrypted\_content, type }
+beta\_compaction\_block: object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1047,10 +1043,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -2284,7 +2276,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, encrypted\_content, type }
+beta\_compaction\_block: object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2295,10 +2287,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -3819,7 +3807,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, encrypted\_content, type }
+beta\_compaction\_block: object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3830,10 +3818,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -3951,13 +3935,9 @@ signature: string
 
 type: "signature\_delta"
 
-beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
+beta\_compaction\_content\_block\_delta: object { content, type }
 
 content: string
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 

@@ -99,9 +99,7 @@ for block in response.content:
 
 if file_id:
     # Download the file
-    file_content = client.beta.files.download(
-        file_id=file_id, betas=["files-api-2025-04-14"]
-    )
+    file_content = client.beta.files.download(file_id=file_id)
 
     # Save to disk
     with open("renewable_energy.pptx", "wb") as f:

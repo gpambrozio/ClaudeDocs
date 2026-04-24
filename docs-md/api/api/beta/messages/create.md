@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
 
 Accepts one of the following:
 
@@ -71,8 +71,6 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
-
-"user-profiles-2026-03-24"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -2499,7 +2497,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
+BetaCompactionBlockParam = object { content, type, cache\_control }
 
 A compaction block containing summary of previous context.
 
@@ -2537,10 +2535,6 @@ Accepts one of the following:
 "5m"
 
 "1h"
-
-encrypted\_content: optional string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: "user" or "assistant"
 
@@ -2839,11 +2833,11 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }
+output\_config: optional [BetaOutputConfig](api/beta.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort: optional "low" or "medium" or "high" or 2 more
+effort: optional "low" or "medium" or "high" or "max"
 
 All possible effort levels.
 
@@ -2854,8 +2848,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 
@@ -2868,22 +2860,6 @@ schema: map[unknown]
 The JSON schema of the format
 
 type: "json\_schema"
-
-task\_budget: optional [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
-
-User-configurable total token budget across contexts.
-
-total: number
-
-Total token budget across all contexts in the session.
-
-type: "tokens"
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: optional number
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 Deprecatedoutput\_format: optional [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -4771,7 +4747,7 @@ Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any valu
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
@@ -4781,17 +4757,13 @@ Use nucleus sampling.
 
 Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 maximum1
 
 minimum0
-
-user\_profile\_id: optional string
-
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ##### ReturnsExpand Collapse
 
@@ -5624,7 +5596,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock = object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -5635,10 +5607,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -6962,7 +6930,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock = object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -6973,10 +6941,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -8605,7 +8569,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock = object { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -8616,10 +8580,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -8741,13 +8701,9 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
+BetaCompactionContentBlockDelta = object { content, type }
 
 content: string
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 

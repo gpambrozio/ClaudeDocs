@@ -66,8 +66,6 @@ OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
-
 [BetaManagedAgentsFileResourceParams](api/beta.md) betaManagedAgentsFileResourceParams
 
 Mount a file uploaded via the Files API into the session.

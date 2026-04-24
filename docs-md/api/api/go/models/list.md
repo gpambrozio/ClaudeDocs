@@ -90,8 +90,6 @@ const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-2
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
-
 ##### ReturnsExpand Collapse
 
 type ModelInfo struct{…}
@@ -195,14 +193,6 @@ Whether the model supports medium effort level.
 Supported bool
 
 Whether this capability is supported by the model.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-Xhigh [CapabilitySupport](api/models.md)
-
-Indicates whether a capability is supported.
 
 Supported bool
 
@@ -353,10 +343,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true
@@ -436,10 +423,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true

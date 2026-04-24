@@ -28,7 +28,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -75,8 +75,6 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
-
-"user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -181,14 +179,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: Optional[CapabilitySupport]
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -325,10 +315,7 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
+      "supported": true
     },
     "image_input": {
       "supported": true
@@ -401,10 +388,7 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
+      "supported": true
     },
     "image_input": {
       "supported": true

@@ -8601,8 +8601,6 @@ const OutputConfigEffortMedium OutputConfigEffort = "medium"
 
 const OutputConfigEffortHigh OutputConfigEffort = "high"
 
-const OutputConfigEffortXhigh OutputConfigEffort = "xhigh"
-
 const OutputConfigEffortMax OutputConfigEffort = "max"
 
 Format [JSONOutputFormat](api/messages.md)optional

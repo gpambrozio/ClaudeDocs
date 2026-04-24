@@ -38,12 +38,6 @@ Go
 brew install anthropics/tap/ant
 ```
 
-On macOS, unquarantine the binary:
-
-```shiki
-xattr -d com.apple.quarantine "$(brew --prefix)/bin/ant"
-```
-
 Check the installation:
 
 ```shiki

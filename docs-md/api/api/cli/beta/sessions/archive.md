@@ -382,6 +382,42 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
+beta\_managed\_agents\_memory\_store\_resource: object { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+"memory\_store"
+
+access: optional "read\_write" or "read\_only"
+
+Access mode for an attached memory store.
+
+"read\_write"
+
+"read\_only"
+
+description: optional string
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: optional string
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: optional string
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: optional string
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 stats: object { active\_seconds, duration\_seconds }
 
 Timing statistics for a session.

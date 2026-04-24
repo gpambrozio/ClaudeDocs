@@ -8,13 +8,13 @@ Ruby
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
 
 Accepts one of the following:
 
@@ -61,8 +61,6 @@ Accepts one of the following:
 :"output-300k-2026-03-24"
 
 :"advisor-tool-2026-03-01"
-
-:"user-profiles-2026-03-24"
 
 class BetaAPIError { message, type }
 
@@ -296,7 +294,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-class BetaEffortCapability { high, low, max, 3 more }
+class BetaEffortCapability { high, low, max, 2 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -331,14 +329,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -404,7 +394,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [BetaEffortCapability](api/beta.md) { high, low, max, 3 more }
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -439,14 +429,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -570,7 +552,7 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-effort: [BetaEffortCapability](api/beta.md) { high, low, max, 3 more }
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -605,14 +587,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -2337,7 +2311,7 @@ type: :input\_tokens
 
 value: Integer
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2349,13 +2323,9 @@ content: String
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: :compaction
 
-class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
+class BetaCompactionBlockParam { content, type, cache\_control }
 
 A compaction block containing summary of previous context.
 
@@ -2394,17 +2364,9 @@ Accepts one of the following:
 
 :"1h"
 
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
+class BetaCompactionContentBlockDelta { content, type }
 
 content: String
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -3310,7 +3272,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3321,10 +3283,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -5686,7 +5644,7 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
+class BetaCompactionBlockParam { content, type, cache\_control }
 
 A compaction block containing summary of previous context.
 
@@ -5724,10 +5682,6 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 class BetaContentBlockSource { content, type }
 
@@ -7889,7 +7843,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -7900,10 +7854,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -11028,7 +10978,7 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
+class BetaCompactionBlockParam { content, type, cache\_control }
 
 A compaction block containing summary of previous context.
 
@@ -11067,10 +11017,6 @@ Accepts one of the following:
 
 :"1h"
 
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 role: :user | :assistant
 
 Accepts one of the following:
@@ -11103,9 +11049,9 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-class BetaOutputConfig { effort, format\_, task\_budget }
+class BetaOutputConfig { effort, format\_ }
 
-effort: :low | :medium | :high | 2 more
+effort: :low | :medium | :high | :max
 
 All possible effort levels.
 
@@ -11116,8 +11062,6 @@ Accepts one of the following:
 :medium
 
 :high
-
-:xhigh
 
 :max
 
@@ -11130,22 +11074,6 @@ schema: Hash[Symbol, untyped]
 The JSON schema of the format
 
 type: :json\_schema
-
-task\_budget: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
-
-User-configurable total token budget across contexts.
-
-total: Integer
-
-Total token budget across all contexts in the session.
-
-type: :tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Integer
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource { data, media\_type, type }
 
@@ -11267,13 +11195,9 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
+class BetaCompactionContentBlockDelta { content, type }
 
 content: String
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -11391,13 +11315,9 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
+class BetaCompactionContentBlockDelta { content, type }
 
 content: String
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -12169,7 +12089,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -12180,10 +12100,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -13398,7 +13314,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13409,10 +13325,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -14742,7 +14654,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -14753,10 +14665,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -16385,7 +16293,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -16396,10 +16304,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -16521,13 +16425,9 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
+class BetaCompactionContentBlockDelta { content, type }
 
 content: String
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -18112,22 +18012,6 @@ class BetaThinkingTurns { type, value }
 type: :thinking\_turns
 
 value: Integer
-
-class BetaTokenTaskBudget { total, type, remaining }
-
-User-configurable total token budget across contexts.
-
-total: Integer
-
-Total token budget across all contexts in the session.
-
-type: :tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Integer
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
@@ -24336,7 +24220,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -24347,10 +24231,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -25786,7 +25666,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -25797,10 +25677,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -27198,7 +27074,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, encrypted\_content, type }
+class BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -27209,10 +27085,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -29514,6 +29386,30 @@ mount\_path: String
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam { memory\_store\_id, type, access, instructions }
+
+Parameters for attaching a memory store to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 class BetaManagedAgentsSession { id, agent, archived\_at, 11 more }
 
 A Managed Agents `session`.
@@ -29863,6 +29759,42 @@ type: :file
 updated\_at: Time
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 stats: [BetaManagedAgentsSessionStats](api/beta.md) { active\_seconds, duration\_seconds }
 
@@ -35540,7 +35472,45 @@ Full commit SHA to check out.
 
 type: :commit
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
 
 Accepts one of the following:
 
@@ -35600,7 +35570,43 @@ updated\_at: Time
 
 A timestamp in RFC 3339 format
 
-ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more }
 
 The requested session resource.
 
@@ -35662,7 +35668,43 @@ updated\_at: Time
 
 A timestamp in RFC 3339 format
 
-ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta.md) { memory\_store\_id, type, access, 4 more }
 
 The updated session resource.
 
@@ -35723,6 +35765,42 @@ type: :file
 updated\_at: Time
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more }
+
+A memory store attached to an agent session.
+
+memory\_store\_id: String
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: :memory\_store
+
+access: :read\_write | :read\_only
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+:read\_write
+
+:read\_only
+
+description: String
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: String
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: String
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: String
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 #### BetaVaults
 
@@ -36382,6 +36460,378 @@ client\_secret: String
 
 Updated OAuth client secret.
 
+#### BetaMemory Stores
+
+##### [CreateMemoryStore](api/beta/memory_stores/create.md)
+
+beta.memory\_stores.create(\*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more }
+
+POST/v1/memory\_stores
+
+##### [ListMemoryStores](api/beta/memory_stores/list.md)
+
+beta.memory\_stores.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more } >
+
+GET/v1/memory\_stores
+
+##### [GetMemoryStore](api/beta/memory_stores/retrieve.md)
+
+beta.memory\_stores.retrieve(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more }
+
+GET/v1/memory\_stores/{memory\_store\_id}
+
+##### [UpdateMemoryStore](api/beta/memory_stores/update.md)
+
+beta.memory\_stores.update(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more }
+
+POST/v1/memory\_stores/{memory\_store\_id}
+
+##### [DeleteMemoryStore](api/beta/memory_stores/delete.md)
+
+beta.memory\_stores.delete(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemoryStore](api/beta.md) { id, type }
+
+DELETE/v1/memory\_stores/{memory\_store\_id}
+
+##### [ArchiveMemoryStore](api/beta/memory_stores/archive.md)
+
+beta.memory\_stores.archive(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more }
+
+POST/v1/memory\_stores/{memory\_store\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeletedMemoryStore { id, type }
+
+id: String
+
+type: :memory\_store\_deleted
+
+class BetaManagedAgentsMemoryStore { id, type, archived\_at, 5 more }
+
+id: String
+
+type: :memory\_store
+
+archived\_at: Time
+
+A timestamp in RFC 3339 format
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+description: String
+
+metadata: Hash[Symbol, String]
+
+name: String
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+#### BetaMemory StoresMemories
+
+##### [CreateMemory](api/beta/memory_stores/memories/create.md)
+
+beta.memory\_stores.memories.create(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [ListMemories](api/beta/memory_stores/memories/list.md)
+
+beta.memory\_stores.memories.list(memory\_store\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryListItem](api/beta.md)>
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [GetMemory](api/beta/memory_stores/memories/retrieve.md)
+
+beta.memory\_stores.memories.retrieve(memory\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [UpdateMemory](api/beta/memory_stores/memories/update.md)
+
+beta.memory\_stores.memories.update(memory\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [DeleteMemory](api/beta/memory_stores/memories/delete.md)
+
+beta.memory\_stores.memories.delete(memory\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemory](api/beta.md) { id, type }
+
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsContentSha256Precondition { type, content\_sha256 }
+
+type: :content\_sha256
+
+content\_sha256: String
+
+class BetaManagedAgentsDeletedMemory { id, type }
+
+id: String
+
+type: :memory\_deleted
+
+class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
+
+id: String
+
+content\_sha256: String
+
+content\_size\_bytes: Integer
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+memory\_store\_id: String
+
+memory\_version\_id: String
+
+path: String
+
+type: :memory
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+content: String
+
+BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta.md) { path, type }
+
+Accepts one of the following:
+
+class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
+
+id: String
+
+content\_sha256: String
+
+content\_size\_bytes: Integer
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+memory\_store\_id: String
+
+memory\_version\_id: String
+
+path: String
+
+type: :memory
+
+updated\_at: Time
+
+A timestamp in RFC 3339 format
+
+content: String
+
+class BetaManagedAgentsMemoryPrefix { path, type }
+
+path: String
+
+type: :memory\_prefix
+
+class BetaManagedAgentsMemoryPathConflictError { type, conflicting\_memory\_id, conflicting\_path, message }
+
+type: :memory\_path\_conflict\_error
+
+conflicting\_memory\_id: String
+
+conflicting\_path: String
+
+message: String
+
+class BetaManagedAgentsMemoryPreconditionFailedError { type, message }
+
+type: :memory\_precondition\_failed\_error
+
+message: String
+
+class BetaManagedAgentsMemoryPrefix { path, type }
+
+path: String
+
+type: :memory\_prefix
+
+BetaManagedAgentsMemoryView = :basic | :full
+
+MemoryView enum
+
+Accepts one of the following:
+
+:basic
+
+:full
+
+class BetaManagedAgentsPrecondition { type, content\_sha256 }
+
+type: :content\_sha256
+
+content\_sha256: String
+
+#### BetaMemory StoresMemory Versions
+
+##### [ListMemoryVersions](api/beta/memory_stores/memory_versions/list.md)
+
+beta.memory\_stores.memory\_versions.list(memory\_store\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more } >
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+
+##### [GetMemoryVersion](api/beta/memory_stores/memory_versions/retrieve.md)
+
+beta.memory\_stores.memory\_versions.retrieve(memory\_version\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more }
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+
+##### [RedactMemoryVersion](api/beta/memory_stores/memory_versions/redact.md)
+
+beta.memory\_stores.memory\_versions.redact(memory\_version\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryVersion](api/beta.md) { id, created\_at, memory\_id, 10 more }
+
+POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta.md) { session\_id, type }  | [BetaManagedAgentsAPIActor](api/beta.md) { api\_key\_id, type }  | [BetaManagedAgentsUserActor](api/beta.md) { type, user\_id }
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor { session\_id, type }
+
+session\_id: String
+
+type: :session\_actor
+
+class BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+api\_key\_id: String
+
+type: :api\_actor
+
+class BetaManagedAgentsUserActor { type, user\_id }
+
+type: :user\_actor
+
+user\_id: String
+
+class BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+api\_key\_id: String
+
+type: :api\_actor
+
+class BetaManagedAgentsMemoryVersion { id, created\_at, memory\_id, 10 more }
+
+id: String
+
+created\_at: Time
+
+A timestamp in RFC 3339 format
+
+memory\_id: String
+
+memory\_store\_id: String
+
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+
+MemoryVersionOperation enum
+
+Accepts one of the following:
+
+:created
+
+:modified
+
+:deleted
+
+type: :memory\_version
+
+content: String
+
+content\_sha256: String
+
+content\_size\_bytes: Integer
+
+created\_by: [BetaManagedAgentsActor](api/beta.md)
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor { session\_id, type }
+
+session\_id: String
+
+type: :session\_actor
+
+class BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+api\_key\_id: String
+
+type: :api\_actor
+
+class BetaManagedAgentsUserActor { type, user\_id }
+
+type: :user\_actor
+
+user\_id: String
+
+path: String
+
+redacted\_at: Time
+
+A timestamp in RFC 3339 format
+
+redacted\_by: [BetaManagedAgentsActor](api/beta.md)
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor { session\_id, type }
+
+session\_id: String
+
+type: :session\_actor
+
+class BetaManagedAgentsAPIActor { api\_key\_id, type }
+
+api\_key\_id: String
+
+type: :api\_actor
+
+class BetaManagedAgentsUserActor { type, user\_id }
+
+type: :user\_actor
+
+user\_id: String
+
+BetaManagedAgentsMemoryVersionOperation = :created | :modified | :deleted
+
+MemoryVersionOperation enum
+
+Accepts one of the following:
+
+:created
+
+:modified
+
+:deleted
+
+class BetaManagedAgentsSessionActor { session\_id, type }
+
+session\_id: String
+
+type: :session\_actor
+
+class BetaManagedAgentsUserActor { type, user\_id }
+
+type: :user\_actor
+
+user\_id: String
+
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
@@ -36834,110 +37284,6 @@ type: String
 Deleted object type.
 
 For Skill Versions, this is always `"skill_version_deleted"`.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more } >
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-beta.user\_profiles.retrieve(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-beta.user\_profiles.update(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-beta.user\_profiles.create\_enrollment\_url(user\_profile\_id, \*\*kwargs) -> [BetaUserProfileEnrollmentURL](api/beta.md) { expires\_at, type, url }
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile { id, created\_at, metadata, 4 more }
-
-id: String
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-created\_at: Time
-
-A timestamp in RFC 3339 format
-
-metadata: Hash[Symbol, String]
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-status: :active | :pending | :rejected
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-:active
-
-:pending
-
-:rejected
-
-type: :user\_profile
-
-Object type. Always `user_profile`.
-
-updated\_at: Time
-
-A timestamp in RFC 3339 format
-
-external\_id: String
-
-Platform's own identifier for this user. Not enforced unique.
-
-class BetaUserProfileEnrollmentURL { expires\_at, type, url }
-
-expires\_at: Time
-
-A timestamp in RFC 3339 format
-
-type: :enrollment\_url
-
-Object type. Always `enrollment_url`.
-
-url: String
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-class BetaUserProfileTrustGrant { status }
-
-status: :active | :pending | :rejected
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-:active
-
-:pending
-
-:rejected
 
 ---
 

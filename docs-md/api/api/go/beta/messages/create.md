@@ -2478,10 +2478,6 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -4344,7 +4340,7 @@ Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any valu
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
@@ -4354,17 +4350,13 @@ Body param: Use nucleus sampling.
 
 Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 maximum1
 
 minimum0
-
-UserProfileID param.Field[string]optional
-
-Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -4419,8 +4411,6 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
-
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -5264,10 +5254,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -6602,10 +6588,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -8246,10 +8228,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 Index int64
@@ -8373,10 +8351,6 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 

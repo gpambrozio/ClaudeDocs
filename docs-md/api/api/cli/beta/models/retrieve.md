@@ -92,7 +92,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: object { high, low, max, 3 more }
+effort: object { high, low, max, 2 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -127,14 +127,6 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
-
-supported: boolean
-
-Whether this capability is supported by the model.
-
-xhigh: object { supported }
-
-Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -264,10 +256,7 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
+      "supported": true
     },
     "image_input": {
       "supported": true
@@ -340,10 +329,7 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
+      "supported": true
     },
     "image_input": {
       "supported": true

@@ -102,6 +102,30 @@ MountPath stringoptional
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
+type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}
+
+Parameters for attaching a memory store to an agent session.
+
+MemoryStoreID string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+Type BetaManagedAgentsMemoryStoreResourceParamType
+
+Access BetaManagedAgentsMemoryStoreResourceParamAccessoptional
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+const BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_write"
+
+const BetaManagedAgentsMemoryStoreResourceParamAccessReadOnly BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_only"
+
+Instructions stringoptional
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 Title param.Field[string]optional
 
 Body param: Human-readable session title.
@@ -163,8 +187,6 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
-
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 
@@ -517,6 +539,42 @@ Type BetaManagedAgentsFileResourceType
 UpdatedAt Time
 
 A timestamp in RFC 3339 format
+
+type BetaManagedAgentsMemoryStoreResource struct{…}
+
+A memory store attached to an agent session.
+
+MemoryStoreID string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+Type BetaManagedAgentsMemoryStoreResourceType
+
+Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
+
+const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
+
+Description stringoptional
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+Instructions stringoptional
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+MountPath stringoptional
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+Name stringoptional
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 Stats [BetaManagedAgentsSessionStats](api/beta.md)
 

@@ -2498,10 +2498,6 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -2815,8 +2811,6 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
-const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
-
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
@@ -2828,22 +2822,6 @@ Schema map[string, any]
 The JSON schema of the format
 
 Type JSONSchema
-
-TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
-
-User-configurable total token budget across contexts.
-
-Total int64
-
-Total token budget across all contexts in the session.
-
-Type Tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-Remaining int64optional
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta.md)optional
 
@@ -4729,7 +4707,7 @@ Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any valu
 
 Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 minimum0
 
@@ -4739,17 +4717,13 @@ Use nucleus sampling.
 
 Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only. You usually only need to use `temperature`.
+Recommended for advanced use cases only.
 
 maximum1
 
 minimum0
-
-UserProfileID stringoptional
-
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -4804,8 +4778,6 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
-
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 ##### ReturnsExpand Collapse
 

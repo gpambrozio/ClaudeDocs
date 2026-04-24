@@ -1649,10 +1649,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 class BetaCompactionBlockParam: …
@@ -1694,17 +1690,9 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -2621,10 +2609,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -5025,10 +5009,6 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
@@ -7218,10 +7198,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -10439,10 +10415,6 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 role: Literal["user", "assistant"]
 
 Accepts one of the following:
@@ -10477,7 +10449,7 @@ maxLength512
 
 class BetaOutputConfig: …
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
 All possible effort levels.
 
@@ -10488,8 +10460,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 
@@ -10502,22 +10472,6 @@ schema: Dict[str, object]
 The JSON schema of the format
 
 type: Literal["json\_schema"]
-
-task\_budget: Optional[BetaTokenTaskBudget]
-
-User-configurable total token budget across contexts.
-
-total: int
-
-Total token budget across all contexts in the session.
-
-type: Literal["tokens"]
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Optional[int]
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource: …
 
@@ -10643,10 +10597,6 @@ class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction\_delta"]
 
 class BetaRawContentBlockDeltaEvent: …
@@ -10766,10 +10716,6 @@ type: Literal["signature\_delta"]
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -11552,10 +11498,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -12799,10 +12741,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -14180,10 +14118,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -15877,10 +15811,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 index: int
@@ -16004,10 +15934,6 @@ type: Literal["signature\_delta"]
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -17592,22 +17518,6 @@ class BetaThinkingTurns: …
 type: Literal["thinking\_turns"]
 
 value: int
-
-class BetaTokenTaskBudget: …
-
-User-configurable total token budget across contexts.
-
-total: int
-
-Total token budget across all contexts in the session.
-
-type: Literal["tokens"]
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Optional[int]
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool: …
 
@@ -23864,10 +23774,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -25350,10 +25256,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -26797,10 +26699,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 

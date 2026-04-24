@@ -2276,7 +2276,7 @@ output\_config: Optional[[OutputConfigParam](api/messages.md)]
 
 Configuration options for the model's output, such as the output format.
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
 All possible effort levels.
 
@@ -2287,8 +2287,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 

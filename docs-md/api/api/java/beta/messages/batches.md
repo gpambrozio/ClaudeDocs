@@ -1083,10 +1083,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -2511,10 +2507,6 @@ Optional<String> content
 
 Summary of compacted content, or null if compaction failed
 
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
@@ -3902,10 +3894,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Optional<String> content
 
 Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 

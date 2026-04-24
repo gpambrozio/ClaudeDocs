@@ -8,13 +8,13 @@ Python
 
 ##### ModelsExpand Collapse
 
-Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]]
+Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]]
 
 Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
 
 Accepts one of the following:
 
@@ -61,8 +61,6 @@ Accepts one of the following:
 "output-300k-2026-03-24"
 
 "advisor-tool-2026-03-01"
-
-"user-profiles-2026-03-24"
 
 class BetaAPIError: …
 
@@ -336,14 +334,6 @@ supported: bool
 
 Whether this capability is supported by the model.
 
-xhigh: Optional[BetaCapabilitySupport]
-
-Indicates whether a capability is supported.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
 class BetaModelCapabilities: …
 
 Model capability information.
@@ -439,14 +429,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: Optional[BetaCapabilitySupport]
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -605,14 +587,6 @@ Whether the model supports medium effort level.
 supported: bool
 
 Whether this capability is supported by the model.
-
-supported: bool
-
-Whether this capability is supported by the model.
-
-xhigh: Optional[BetaCapabilitySupport]
-
-Indicates whether a capability is supported.
 
 supported: bool
 
@@ -2385,10 +2359,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 class BetaCompactionBlockParam: …
@@ -2430,17 +2400,9 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -3357,10 +3319,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -5761,10 +5719,6 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
@@ -7954,10 +7908,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -11175,10 +11125,6 @@ Accepts one of the following:
 
 "1h"
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 role: Literal["user", "assistant"]
 
 Accepts one of the following:
@@ -11213,7 +11159,7 @@ maxLength512
 
 class BetaOutputConfig: …
 
-effort: Optional[Literal["low", "medium", "high", 2 more]]
+effort: Optional[Literal["low", "medium", "high", "max"]]
 
 All possible effort levels.
 
@@ -11224,8 +11170,6 @@ Accepts one of the following:
 "medium"
 
 "high"
-
-"xhigh"
 
 "max"
 
@@ -11238,22 +11182,6 @@ schema: Dict[str, object]
 The JSON schema of the format
 
 type: Literal["json\_schema"]
-
-task\_budget: Optional[BetaTokenTaskBudget]
-
-User-configurable total token budget across contexts.
-
-total: int
-
-Total token budget across all contexts in the session.
-
-type: Literal["tokens"]
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Optional[int]
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource: …
 
@@ -11379,10 +11307,6 @@ class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction\_delta"]
 
 class BetaRawContentBlockDeltaEvent: …
@@ -11502,10 +11426,6 @@ type: Literal["signature\_delta"]
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -12288,10 +12208,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -13535,10 +13451,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -14916,10 +14828,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -16613,10 +16521,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 index: int
@@ -16740,10 +16644,6 @@ type: Literal["signature\_delta"]
 class BetaCompactionContentBlockDelta: …
 
 content: Optional[str]
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction\_delta"]
 
@@ -18328,22 +18228,6 @@ class BetaThinkingTurns: …
 type: Literal["thinking\_turns"]
 
 value: int
-
-class BetaTokenTaskBudget: …
-
-User-configurable total token budget across contexts.
-
-total: int
-
-Total token budget across all contexts in the session.
-
-type: Literal["tokens"]
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Optional[int]
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool: …
 
@@ -24600,10 +24484,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -26086,10 +25966,6 @@ content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
 
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type: Literal["compaction"]
 
 context\_management: Optional[BetaContextManagementResponse]
@@ -27533,10 +27409,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: Optional[str]
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: Literal["compaction"]
 
@@ -29914,6 +29786,30 @@ mount\_path: Optional[str]
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
+class BetaManagedAgentsMemoryStoreResourceParam: …
+
+Parameters for attaching a memory store to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
 class BetaManagedAgentsSession: …
 
 A Managed Agents `session`.
@@ -30273,6 +30169,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 stats: [BetaManagedAgentsSessionStats](api/beta.md)
 
@@ -35960,7 +35892,45 @@ Full commit SHA to check out.
 
 type: Literal["commit"]
 
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 [BetaManagedAgentsSessionResource](api/beta.md)
+
+A memory store attached to an agent session.
 
 Accepts one of the following:
 
@@ -36019,6 +35989,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 [ResourceRetrieveResponse](api/beta.md)
 
@@ -36082,6 +36088,42 @@ updated\_at: datetime
 
 A timestamp in RFC 3339 format
 
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 [ResourceUpdateResponse](api/beta.md)
 
 The updated session resource.
@@ -36143,6 +36185,42 @@ type: Literal["file"]
 updated\_at: datetime
 
 A timestamp in RFC 3339 format
+
+class BetaManagedAgentsMemoryStoreResource: …
+
+A memory store attached to an agent session.
+
+memory\_store\_id: str
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: Literal["memory\_store"]
+
+access: Optional[Literal["read\_write", "read\_only"]]
+
+Access mode for an attached memory store.
+
+Accepts one of the following:
+
+"read\_write"
+
+"read\_only"
+
+description: Optional[str]
+
+Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+instructions: Optional[str]
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+mount\_path: Optional[str]
+
+Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+name: Optional[str]
+
+Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 #### BetaVaults
 
@@ -36802,6 +36880,378 @@ client\_secret: Optional[str]
 
 Updated OAuth client secret.
 
+#### BetaMemory Stores
+
+##### [CreateMemoryStore](api/beta/memory_stores/create.md)
+
+beta.memory\_stores.create(MemoryStoreCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+
+POST/v1/memory\_stores
+
+##### [ListMemoryStores](api/beta/memory_stores/list.md)
+
+beta.memory\_stores.list(MemoryStoreListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryStore](api/beta.md)]
+
+GET/v1/memory\_stores
+
+##### [GetMemoryStore](api/beta/memory_stores/retrieve.md)
+
+beta.memory\_stores.retrieve(strmemory\_store\_id, MemoryStoreRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+
+GET/v1/memory\_stores/{memory\_store\_id}
+
+##### [UpdateMemoryStore](api/beta/memory_stores/update.md)
+
+beta.memory\_stores.update(strmemory\_store\_id, MemoryStoreUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+
+POST/v1/memory\_stores/{memory\_store\_id}
+
+##### [DeleteMemoryStore](api/beta/memory_stores/delete.md)
+
+beta.memory\_stores.delete(strmemory\_store\_id, MemoryStoreDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemoryStore](api/beta.md)
+
+DELETE/v1/memory\_stores/{memory\_store\_id}
+
+##### [ArchiveMemoryStore](api/beta/memory_stores/archive.md)
+
+beta.memory\_stores.archive(strmemory\_store\_id, MemoryStoreArchiveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta.md)
+
+POST/v1/memory\_stores/{memory\_store\_id}/archive
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsDeletedMemoryStore: …
+
+id: str
+
+type: Literal["memory\_store\_deleted"]
+
+class BetaManagedAgentsMemoryStore: …
+
+id: str
+
+type: Literal["memory\_store"]
+
+archived\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
+created\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
+description: Optional[str]
+
+metadata: Optional[Dict[str, str]]
+
+name: Optional[str]
+
+updated\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
+#### BetaMemory StoresMemories
+
+##### [CreateMemory](api/beta/memory_stores/memories/create.md)
+
+beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [ListMemories](api/beta/memory_stores/memories/list.md)
+
+beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta.md)]
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories
+
+##### [GetMemory](api/beta/memory_stores/memories/retrieve.md)
+
+beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [UpdateMemory](api/beta/memory_stores/memories/update.md)
+
+beta.memory\_stores.memories.update(strmemory\_id, MemoryUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta.md)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### [DeleteMemory](api/beta/memory_stores/memories/delete.md)
+
+beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta.md)
+
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+
+##### ModelsExpand Collapse
+
+class BetaManagedAgentsContentSha256Precondition: …
+
+type: Literal["content\_sha256"]
+
+content\_sha256: Optional[str]
+
+class BetaManagedAgentsDeletedMemory: …
+
+id: str
+
+type: Literal["memory\_deleted"]
+
+class BetaManagedAgentsMemory: …
+
+id: str
+
+content\_sha256: str
+
+content\_size\_bytes: int
+
+created\_at: datetime
+
+A timestamp in RFC 3339 format
+
+memory\_store\_id: str
+
+memory\_version\_id: str
+
+path: str
+
+type: Literal["memory"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+content: Optional[str]
+
+[BetaManagedAgentsMemoryListItem](api/beta.md)
+
+Accepts one of the following:
+
+class BetaManagedAgentsMemory: …
+
+id: str
+
+content\_sha256: str
+
+content\_size\_bytes: int
+
+created\_at: datetime
+
+A timestamp in RFC 3339 format
+
+memory\_store\_id: str
+
+memory\_version\_id: str
+
+path: str
+
+type: Literal["memory"]
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+content: Optional[str]
+
+class BetaManagedAgentsMemoryPrefix: …
+
+path: str
+
+type: Literal["memory\_prefix"]
+
+class BetaManagedAgentsMemoryPathConflictError: …
+
+type: Literal["memory\_path\_conflict\_error"]
+
+conflicting\_memory\_id: Optional[str]
+
+conflicting\_path: Optional[str]
+
+message: Optional[str]
+
+class BetaManagedAgentsMemoryPreconditionFailedError: …
+
+type: Literal["memory\_precondition\_failed\_error"]
+
+message: Optional[str]
+
+class BetaManagedAgentsMemoryPrefix: …
+
+path: str
+
+type: Literal["memory\_prefix"]
+
+Literal["basic", "full"]
+
+MemoryView enum
+
+Accepts one of the following:
+
+"basic"
+
+"full"
+
+class BetaManagedAgentsPrecondition: …
+
+type: Literal["content\_sha256"]
+
+content\_sha256: Optional[str]
+
+#### BetaMemory StoresMemory Versions
+
+##### [ListMemoryVersions](api/beta/memory_stores/memory_versions/list.md)
+
+beta.memory\_stores.memory\_versions.list(strmemory\_store\_id, MemoryVersionListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryVersion](api/beta.md)]
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+
+##### [GetMemoryVersion](api/beta/memory_stores/memory_versions/retrieve.md)
+
+beta.memory\_stores.memory\_versions.retrieve(strmemory\_version\_id, MemoryVersionRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta.md)
+
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+
+##### [RedactMemoryVersion](api/beta/memory_stores/memory_versions/redact.md)
+
+beta.memory\_stores.memory\_versions.redact(strmemory\_version\_id, MemoryVersionRedactParams\*\*kwargs)  -> [BetaManagedAgentsMemoryVersion](api/beta.md)
+
+POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+
+##### ModelsExpand Collapse
+
+[BetaManagedAgentsActor](api/beta.md)
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor: …
+
+session\_id: str
+
+type: Literal["session\_actor"]
+
+class BetaManagedAgentsAPIActor: …
+
+api\_key\_id: str
+
+type: Literal["api\_actor"]
+
+class BetaManagedAgentsUserActor: …
+
+type: Literal["user\_actor"]
+
+user\_id: str
+
+class BetaManagedAgentsAPIActor: …
+
+api\_key\_id: str
+
+type: Literal["api\_actor"]
+
+class BetaManagedAgentsMemoryVersion: …
+
+id: str
+
+created\_at: datetime
+
+A timestamp in RFC 3339 format
+
+memory\_id: str
+
+memory\_store\_id: str
+
+operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
+
+MemoryVersionOperation enum
+
+Accepts one of the following:
+
+"created"
+
+"modified"
+
+"deleted"
+
+type: Literal["memory\_version"]
+
+content: Optional[str]
+
+content\_sha256: Optional[str]
+
+content\_size\_bytes: Optional[int]
+
+created\_by: Optional[BetaManagedAgentsActor]
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor: …
+
+session\_id: str
+
+type: Literal["session\_actor"]
+
+class BetaManagedAgentsAPIActor: …
+
+api\_key\_id: str
+
+type: Literal["api\_actor"]
+
+class BetaManagedAgentsUserActor: …
+
+type: Literal["user\_actor"]
+
+user\_id: str
+
+path: Optional[str]
+
+redacted\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
+redacted\_by: Optional[BetaManagedAgentsActor]
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionActor: …
+
+session\_id: str
+
+type: Literal["session\_actor"]
+
+class BetaManagedAgentsAPIActor: …
+
+api\_key\_id: str
+
+type: Literal["api\_actor"]
+
+class BetaManagedAgentsUserActor: …
+
+type: Literal["user\_actor"]
+
+user\_id: str
+
+Literal["created", "modified", "deleted"]
+
+MemoryVersionOperation enum
+
+Accepts one of the following:
+
+"created"
+
+"modified"
+
+"deleted"
+
+class BetaManagedAgentsSessionActor: …
+
+session\_id: str
+
+type: Literal["session\_actor"]
+
+class BetaManagedAgentsUserActor: …
+
+type: Literal["user\_actor"]
+
+user\_id: str
+
 #### BetaFiles
 
 ##### [Upload File](api/beta/files/upload.md)
@@ -37254,110 +37704,6 @@ type: str
 Deleted object type.
 
 For Skill Versions, this is always `"skill_version_deleted"`.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta.md)]
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta.md)
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile: …
-
-id: str
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-created\_at: datetime
-
-A timestamp in RFC 3339 format
-
-metadata: Dict[str, str]
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-status: Literal["active", "pending", "rejected"]
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"
-
-"pending"
-
-"rejected"
-
-type: Literal["user\_profile"]
-
-Object type. Always `user_profile`.
-
-updated\_at: datetime
-
-A timestamp in RFC 3339 format
-
-external\_id: Optional[str]
-
-Platform's own identifier for this user. Not enforced unique.
-
-class BetaUserProfileEnrollmentURL: …
-
-expires\_at: datetime
-
-A timestamp in RFC 3339 format
-
-type: Literal["enrollment\_url"]
-
-Object type. Always `enrollment_url`.
-
-url: str
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-class BetaUserProfileTrustGrant: …
-
-status: Literal["active", "pending", "rejected"]
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"
-
-"pending"
-
-"rejected"
 
 ---
 

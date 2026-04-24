@@ -1071,7 +1071,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1082,10 +1082,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string | null
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -2509,7 +2505,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2520,10 +2516,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string | null
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -3909,7 +3901,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, encrypted\_content, type }
+BetaCompactionBlock { content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3920,10 +3912,6 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string | null
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 

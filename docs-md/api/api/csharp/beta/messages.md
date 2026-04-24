@@ -1587,10 +1587,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 class BetaCompactionBlockParam:
@@ -1632,17 +1628,9 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -2557,10 +2545,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -4959,10 +4943,6 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 class BetaContentBlockSource:
 
 required Content Content
@@ -6924,10 +6904,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -10061,10 +10037,6 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
-string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 required Role Role
 
 Accepts one of the following:
@@ -10111,8 +10083,6 @@ Accepts one of the following:
 
 "high"High
 
-"xhigh"Xhigh
-
 "max"Max
 
 [BetaJsonOutputFormat](api/beta.md)? Format
@@ -10124,22 +10094,6 @@ required IReadOnlyDictionary<string, JsonElement> Schema
 The JSON schema of the format
 
 JsonElement Type "json\_schema"constant
-
-[BetaTokenTaskBudget](api/beta.md)? TaskBudget
-
-User-configurable total token budget across contexts.
-
-required Long Total
-
-Total token budget across all contexts in the session.
-
-JsonElement Type "tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Long? Remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource:
 
@@ -10263,10 +10217,6 @@ class BetaCompactionContentBlockDelta:
 
 required string? Content
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction\_delta"constant
 
 class BetaRawContentBlockDeltaEvent:
@@ -10386,10 +10336,6 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -11172,10 +11118,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -12391,10 +12333,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -13714,10 +13652,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -15327,10 +15261,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -15454,10 +15384,6 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 
@@ -17034,22 +16960,6 @@ class BetaThinkingTurns:
 JsonElement Type "thinking\_turns"constant
 
 required Long Value
-
-class BetaTokenTaskBudget:
-
-User-configurable total token budget across contexts.
-
-required Long Total
-
-Total token budget across all contexts in the session.
-
-JsonElement Type "tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Long? Remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool:
 
@@ -23238,10 +23148,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -24666,10 +24572,6 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 JsonElement Type "compaction"constant
 
 required [BetaContextManagementResponse](api/beta.md)? ContextManagement
@@ -26057,10 +25959,6 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
-
-required string? EncryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 

@@ -1613,10 +1613,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 type BetaCompactionBlockParamResp struct{…}
@@ -1658,17 +1654,9 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -2585,10 +2573,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -4987,10 +4971,6 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
@@ -7162,10 +7142,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -10325,10 +10301,6 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -10375,8 +10347,6 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
-const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
-
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
@@ -10388,22 +10358,6 @@ Schema map[string, any]
 The JSON schema of the format
 
 Type JSONSchema
-
-TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
-
-User-configurable total token budget across contexts.
-
-Total int64
-
-Total token budget across all contexts in the session.
-
-Type Tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-Remaining int64optional
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 type BetaPlainTextSource struct{…}
 
@@ -10529,10 +10483,6 @@ type BetaCompactionContentBlockDelta struct{…}
 
 Content string
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type CompactionDelta
 
 type BetaRawContentBlockDeltaEvent struct{…}
@@ -10652,10 +10602,6 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -11438,10 +11384,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -12667,10 +12609,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 
@@ -14012,10 +13950,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -15655,10 +15589,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 Index int64
@@ -15782,10 +15712,6 @@ Type SignatureDelta
 type BetaCompactionContentBlockDelta struct{…}
 
 Content string
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type CompactionDelta
 
@@ -17370,22 +17296,6 @@ type BetaThinkingTurns struct{…}
 Type ThinkingTurns
 
 Value int64
-
-type BetaTokenTaskBudget struct{…}
-
-User-configurable total token budget across contexts.
-
-Total int64
-
-Total token budget across all contexts in the session.
-
-Type Tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-Remaining int64optional
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 type BetaTool struct{…}
 
@@ -23604,10 +23514,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -25054,10 +24960,6 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -26465,10 +26367,6 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
-
-EncryptedContent string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 

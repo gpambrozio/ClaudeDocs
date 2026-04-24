@@ -84,8 +84,6 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
-
 ##### ReturnsExpand Collapse
 
 class ModelListPageResponse:
@@ -191,14 +189,6 @@ Whether the model supports medium effort level.
 required Boolean Supported
 
 Whether this capability is supported by the model.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-required [CapabilitySupport](api/models.md)? Xhigh
-
-Indicates whether a capability is supported.
 
 required Boolean Supported
 
@@ -346,10 +336,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true
@@ -429,10 +416,7 @@ Response 200
           "medium": {
             "supported": true
           },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
+          "supported": true
         },
         "image_input": {
           "supported": true
