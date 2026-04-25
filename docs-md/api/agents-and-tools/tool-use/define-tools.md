@@ -4,7 +4,7 @@ Copy page
 
 ## Choosing a model
 
-Use the latest Claude Opus (4.6) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
+Use the latest Claude Opus (4.7) model for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
@@ -69,7 +69,7 @@ You can provide concrete examples of valid tool inputs to help Claude understand
 
 Add an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:
 
-Python
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 import anthropic
@@ -77,7 +77,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[
         {

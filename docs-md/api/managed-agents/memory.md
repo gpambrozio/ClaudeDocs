@@ -203,11 +203,14 @@ List version history for a store, newest first. The example filters to a single 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-for v in client.beta.memory_stores.memory_versions.list(
+versions = client.beta.memory_stores.memory_versions.list(
     store.id,
     memory_id=mem.id,
-):
+)
+for v in versions:
     print(f"{v.id}: {v.operation}")
+
+version_id = versions.data[1].id
 ```
 
 See the [List memory versions reference](api/beta/memory_stores/memory_versions/list.md) for full parameters and response schema.

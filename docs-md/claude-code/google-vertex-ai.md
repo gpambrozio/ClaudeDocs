@@ -1,9 +1,3 @@
-# Claude Code on Google Vertex AI
-
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=vertex_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=vertex_contact_sales)
-
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Vertex AI, ensure you have:
@@ -106,6 +100,7 @@ export VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1
 
 Most model versions have a corresponding `VERTEX_REGION_CLAUDE_*` variable. See the [Environment variables reference](env-vars.md) for the full list. Check [Vertex Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) to determine which models support global endpoints versus regional only.
 [Prompt caching](build-with-claude/prompt-caching.md) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Vertex AI, the `/login` and `/logout` commands are disabled since authentication is handled through Google Cloud credentials.
+[MCP tool search](mcp.md) is disabled by default on Vertex AI because the endpoint does not accept the required beta header. All MCP tool definitions load upfront instead. To opt in, set `ENABLE_TOOL_SEARCH=true`.
 
 ### [​](#5-pin-model-versions) 5. Pin model versions
 

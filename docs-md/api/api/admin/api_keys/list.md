@@ -32,7 +32,7 @@ maximum1000
 
 minimum1
 
-status: optional "active" or "inactive" or "archived"
+status: optional "active" or "inactive" or "archived" or "expired"
 
 Filter by API key status.
 
@@ -44,13 +44,15 @@ Accepts one of the following:
 
 "archived"
 
+"expired"
+
 workspace\_id: optional string
 
 Filter by Workspace ID.
 
 ##### ReturnsExpand Collapse
 
-data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 5 more }
+data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 6 more }
 
 id: string
 
@@ -72,6 +74,10 @@ type: string
 
 Type of the actor that created the object.
 
+expires\_at: string
+
+RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
 name: string
 
 Name of the API key.
@@ -80,7 +86,7 @@ partial\_key\_hint: string
 
 Partially redacted hint for the API key.
 
-status: "active" or "inactive" or "archived"
+status: "active" or "inactive" or "archived" or "expired"
 
 Status of the API key.
 
@@ -91,6 +97,8 @@ Accepts one of the following:
 "inactive"
 
 "archived"
+
+"expired"
 
 type: "api\_key"
 
@@ -134,6 +142,7 @@ Response 200
         "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
         "type": "user"
       },
+      "expires_at": "2024-10-30T23:58:27.427722Z",
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "status": "active",
@@ -161,6 +170,7 @@ Response 200
         "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
         "type": "user"
       },
+      "expires_at": "2024-10-30T23:58:27.427722Z",
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "status": "active",

@@ -66,7 +66,7 @@ def calculate_sum(a: int, b: int) -> str:
     return str(a + b)
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -132,7 +132,7 @@ Use `runner.until_done()` to get the final message.
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -166,7 +166,7 @@ Use `generate_tool_call_response()` to optionally inspect the tool result (the r
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[get_weather],
     messages=[{"role": "user", "content": "What's the weather in San Francisco?"}],
@@ -227,7 +227,7 @@ Ruby
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[my_tool],
     messages=[{"role": "user", "content": "Run the tool"}],
@@ -271,7 +271,7 @@ Ruby
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[search_documents],
     messages=[
@@ -321,7 +321,7 @@ Set `stream=True` and use `get_final_message()` to get the accumulated message.
 
 ```shiki
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     tools=[calculate_sum],
     messages=[{"role": "user", "content": "What is 15 + 27?"}],

@@ -68,7 +68,7 @@ invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
-role: "user" or "developer" or "billing" or 3 more
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
@@ -83,8 +83,6 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
-
-"managed"
 
 status: "accepted" or "expired" or "deleted" or "pending"
 
@@ -156,7 +154,7 @@ name: string
 
 Name of the User.
 
-role: "user" or "developer" or "billing" or 3 more
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
@@ -171,8 +169,6 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
-
-"managed"
 
 type: "user"
 
@@ -285,6 +281,66 @@ ID of the User.
 workspace\_id: string
 
 ID of the Workspace.
+
+#### AdminWorkspacesRate Limits
+
+##### [List Workspace Rate Limits](api/admin/workspaces/rate_limits/list.md)
+
+GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+
+##### ModelsExpand Collapse
+
+RateLimitListResponse = object { data, next\_page }
+
+data: array of object { group\_type, limits, models, type }
+
+Rate-limit entries for the workspace, one per group that has at least one override.
+
+group\_type: "model\_group" or "batch" or "token\_count" or 3 more
+
+The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+Accepts one of the following:
+
+"model\_group"
+
+"batch"
+
+"token\_count"
+
+"files"
+
+"skills"
+
+"web\_search"
+
+limits: array of object { org\_limit, type, value }
+
+The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
+
+org\_limit: number
+
+The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+
+type: string
+
+The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+value: number
+
+The workspace-level override value for this limiter type.
+
+models: array of string
+
+Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+type: "workspace\_rate\_limit"
+
+Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+next\_page: string
+
+Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
 #### AdminAPI Keys
 
@@ -468,9 +524,13 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { api\_key\_id, cache\_creation, cache\_read\_input\_tokens, 9 more }
+results: array of object { account\_id, api\_key\_id, cache\_creation, 10 more }
 
 List of usage items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
+
+account\_id: string
+
+ID of the user account that made the request. `null` if not grouping by account or for non-OAuth requests.
 
 api\_key\_id: string
 
@@ -523,6 +583,10 @@ web\_search\_requests: number
 
 The number of web search requests made.
 
+service\_account\_id: string
+
+ID of the service account that made the request. `null` if not grouping by service account or for non-OIDC-federation requests.
+
 service\_tier: "standard" or "batch" or "priority" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
@@ -540,17 +604,6 @@ Accepts one of the following:
 "flex"
 
 "flex\_discount"
-
-speed: "standard" or "fast"
-
-Speed of the usage (research preview). `null` if not grouping by speed.
-Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 uncached\_input\_tokens: number
 
@@ -588,7 +641,7 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { amount, context\_window, cost\_type, 8 more }
+results: array of object { amount, context\_window, cost\_type, 7 more }
 
 List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -606,7 +659,7 @@ Accepts one of the following:
 
 "200k-1M"
 
-cost\_type: "tokens" or "web\_search" or "code\_execution"
+cost\_type: "tokens" or "web\_search" or "code\_execution" or "session\_usage"
 
 Type of cost. `null` if not grouping by description.
 
@@ -617,6 +670,8 @@ Accepts one of the following:
 "web\_search"
 
 "code\_execution"
+
+"session\_usage"
 
 currency: string
 
@@ -645,17 +700,6 @@ Accepts one of the following:
 
 "batch"
 
-speed: "standard" or "fast"
-
-Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
-
 token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
 Type of token. `null` if not grouping by description or for non-token costs.
@@ -683,6 +727,62 @@ Start of the time bucket (inclusive) in RFC 3339 format.
 has\_more: boolean
 
 Indicates if there are more results.
+
+next\_page: string
+
+Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+#### AdminRate Limits
+
+##### [List Organization Rate Limits](api/admin/rate_limits/list.md)
+
+GET/v1/organizations/rate\_limits
+
+##### ModelsExpand Collapse
+
+RateLimitListResponse = object { data, next\_page }
+
+data: array of object { group\_type, limits, models, type }
+
+Rate-limit entries for the organization, one per group.
+
+group\_type: "model\_group" or "batch" or "token\_count" or 3 more
+
+The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+Accepts one of the following:
+
+"model\_group"
+
+"batch"
+
+"token\_count"
+
+"files"
+
+"skills"
+
+"web\_search"
+
+limits: array of object { type, value }
+
+The limiter values that apply to this group.
+
+type: string
+
+The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+value: number
+
+The configured limit value for this limiter type.
+
+models: array of string
+
+Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+type: "rate\_limit"
+
+Object type. Always `rate_limit` for organization rate-limit entries.
 
 next\_page: string
 

@@ -14,7 +14,7 @@ The smallest possible tool-using program: one tool, one user message, one tool c
 
 The request sends a `tools` array alongside the user message. When Claude decides to call a tool, the response comes back with `stop_reason: "tool_use"` and a `tool_use` content block containing the tool name, a unique `id`, and the structured `input`. Your code executes the tool, then sends the result back in a `tool_result` block whose `tool_use_id` matches the `id` from the call.
 
-Python
+cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 1: Single tool, single turn.
@@ -123,6 +123,8 @@ print(final_text.text)
 
 **What to expect**
 
+Output
+
 ```inline-block
 stop_reason: tool_use
 Tool: create_calendar_event
@@ -139,7 +141,7 @@ Ring 1 assumed Claude would call the tool exactly once. Real tasks often need se
 
 The other change is conversation history. Instead of rebuilding the `messages` array from scratch on each request, keep a running list and append to it. Every turn sees the complete prior context.
 
-Python
+cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 2: The agentic loop.
@@ -233,6 +235,8 @@ print(final_text.text)
 
 **What to expect**
 
+Output
+
 ```inline-block
 I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
 ```
@@ -245,7 +249,7 @@ Agents rarely have just one capability. Add a second tool, `list_calendar_events
 
 When Claude has multiple independent tool calls to make, it may return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
 
-Python
+cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 3: Multiple tools, parallel calls.
@@ -347,6 +351,8 @@ print(final_text.text)
 
 **What to expect**
 
+Output
+
 ```inline-block
 I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
@@ -357,7 +363,7 @@ For more on concurrent execution and ordering guarantees, see [Parallel tool use
 
 Tools fail. A calendar API might reject an event with too many attendees, or a date might be malformed. When a tool raises an error, send the error message back with `is_error: true` instead of crashing. Claude reads the error and can retry with corrected input, ask the user for clarification, or explain the limitation.
 
-Python
+cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 4: Error handling.
@@ -466,6 +472,8 @@ print(final_text.text)
 
 **What to expect**
 
+Output
+
 ```inline-block
 I tried to schedule the all-hands but the calendar only allows 10 attendees per event. I can split this into two sessions, or you can let me know which 10 people to prioritize.
 ```
@@ -478,9 +486,9 @@ Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`
 
 The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema.
 
-Tool Runner is available in the Python, TypeScript, and Ruby SDKs. The Shell tab shows a note instead of code; keep the Ring 4 loop for curl-based scripts.
+Tool Runner is available in the Python, TypeScript, and Ruby SDKs. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
 
-Python
+cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 5: The Tool Runner SDK abstraction.
@@ -541,6 +549,8 @@ for block in final_message.content:
 ```
 
 **What to expect**
+
+Output
 
 ```inline-block
 I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.

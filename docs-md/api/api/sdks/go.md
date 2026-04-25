@@ -17,7 +17,7 @@ import (
 Or to pin the version:
 
 ```shiki
-go get -u 'github.com/anthropics/anthropic-sdk-go@v1.27.1'
+go get -u 'github.com/anthropics/anthropic-sdk-go@v1.38.0'
 ```
 
 ## Requirements
@@ -524,7 +524,7 @@ middleware has been applied.
 For detailed platform setup guides with code examples, see:
 
 - [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 
 The Go SDK supports Amazon Bedrock and Google Vertex AI through subpackages:

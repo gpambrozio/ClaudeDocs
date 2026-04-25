@@ -59,7 +59,7 @@ ending\_at: string
 
 End of the time bucket (exclusive) in RFC 3339 format.
 
-results: array of object { amount, context\_window, cost\_type, 8 more }
+results: array of object { amount, context\_window, cost\_type, 7 more }
 
 List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -77,7 +77,7 @@ Accepts one of the following:
 
 "200k-1M"
 
-cost\_type: "tokens" or "web\_search" or "code\_execution"
+cost\_type: "tokens" or "web\_search" or "code\_execution" or "session\_usage"
 
 Type of cost. `null` if not grouping by description.
 
@@ -88,6 +88,8 @@ Accepts one of the following:
 "web\_search"
 
 "code\_execution"
+
+"session\_usage"
 
 currency: string
 
@@ -115,17 +117,6 @@ Accepts one of the following:
 "standard"
 
 "batch"
-
-speed: "standard" or "fast"
-
-Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-Accepts one of the following:
-
-"standard"
-
-"fast"
 
 token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_input\_tokens" or 2 more
 
@@ -184,7 +175,6 @@ Response 200
           "inference_geo": "global",
           "model": "claude-opus-4-6",
           "service_tier": "standard",
-          "speed": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
         }
@@ -216,7 +206,6 @@ Response 200
           "inference_geo": "global",
           "model": "claude-opus-4-6",
           "service_tier": "standard",
-          "speed": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
         }

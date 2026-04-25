@@ -12,8 +12,6 @@ Archive Workspace
 
 workspace\_id: string
 
-ID of the Workspace.
-
 ##### ReturnsExpand Collapse
 
 Workspace = object { id, archived\_at, created\_at, 4 more }

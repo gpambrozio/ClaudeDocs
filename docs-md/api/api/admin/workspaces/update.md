@@ -12,8 +12,6 @@ Update Workspace
 
 workspace\_id: string
 
-ID of the Workspace.
-
 ##### Body ParametersJSONExpand Collapse
 
 name: string

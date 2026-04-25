@@ -15,7 +15,7 @@ By default, Claude may use multiple tools to answer a user query. You can disabl
 
 Here's a complete, runnable script to test and verify parallel tool calls are working correctly:
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Define tools
@@ -61,7 +61,7 @@ messages = [
 # Make initial request
 print("Requesting parallel tool calls...")
 response = client.messages.create(
-    model="claude-opus-4-6", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
 )
 
 # Check for parallel tool calls
@@ -104,7 +104,7 @@ messages.extend(
 # Get final response
 print("\nGetting final response...")
 final_response = client.messages.create(
-    model="claude-opus-4-6", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
 )
 
 print(f"\nClaude's response:\n{final_response.content[0].text}")

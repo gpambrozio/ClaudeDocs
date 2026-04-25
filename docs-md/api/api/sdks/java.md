@@ -17,7 +17,7 @@ Maven
 Maven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.22.0")
+implementation("com.anthropic:anthropic-java:2.27.0")
 ```
 
 ## Requirements
@@ -1057,7 +1057,7 @@ To use a completely custom HTTP client:
 For detailed platform setup guides with code examples, see:
 
 - [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 - [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 

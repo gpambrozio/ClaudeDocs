@@ -75,7 +75,7 @@ Claude can assist with many tasks that involve text, code, and images.
 
 [Text and code generation
 
-Summarize text, answer questions, extract data, translate text, and explain and generate code.](build-with-claude/text-generation.md)[Vision
+Summarize text, answer questions, extract data, translate text, and explain and generate code.](build-with-claude/overview.md)[Vision
 
 Process and analyze visual input and generate text and code from images.](build-with-claude/vision.md)
 

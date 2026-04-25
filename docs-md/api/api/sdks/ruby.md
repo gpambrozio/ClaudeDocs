@@ -373,7 +373,7 @@ response = anthropic.request(
 For detailed platform setup guides with code examples, see:
 
 - [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
 - [Google Vertex AI](build-with-claude/claude-on-vertex-ai.md)
 
 The Ruby SDK supports Bedrock and Vertex AI through dedicated client classes:

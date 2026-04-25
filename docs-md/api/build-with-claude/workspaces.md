@@ -193,7 +193,7 @@ Workspace limits can be set lower than (but not higher than) your organization's
 - If not set, workspace limits match the organization's limits
 - Organization-wide limits always apply, even if workspace limits add up to more
 
-For detailed information on rate limits and how they work, see [Rate limits](api/rate-limits.md).
+For detailed information on rate limits and how they work, see [Rate limits](api/rate-limits.md). You can also read your current organization and workspace rate limits programmatically with the [Rate Limits API](build-with-claude/rate-limits-api.md).
 
 ## Usage and cost tracking
 

@@ -25,43 +25,45 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
 ## Quick start
 
-Shell
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-curl https://api.anthropic.com/v1/messages \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "claude-opus-4-6",
-    "max_tokens": 1024,
-    "messages": [
-      {"role": "user", "content": "What is the weather in San Francisco?"}
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
+    tools=[
+        {
+            "name": "get_weather",
+            "description": "Get the current weather in a given location",
+            "strict": True,  # Enable strict mode
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": ["celsius", "fahrenheit"],
+                        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'",
+                    },
+                },
+                "required": ["location"],
+                "additionalProperties": False,
+            },
+        }
     ],
-    "tools": [{
-      "name": "get_weather",
-      "description": "Get the current weather in a given location",
-      "strict": true,
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "location": {
-            "type": "string",
-            "description": "The city and state, e.g. San Francisco, CA"
-          },
-          "unit": {
-            "type": "string",
-            "enum": ["celsius", "fahrenheit"]
-          }
-        },
-        "required": ["location"],
-        "additionalProperties": false
-      }
-    }]
-  }'
+)
+print(response.content)
 ```
 
 **Response format:** Tool use blocks with validated inputs in `response.content[x].input`
+
+Output
 
 ```shiki
 {

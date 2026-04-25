@@ -51,7 +51,7 @@ Regional and multi-region endpoints include a 10% premium over global endpoints.
 
 For implementation details and code examples:
 
-- [AWS Bedrock global vs regional endpoints](build-with-claude/claude-in-amazon-bedrock.md) for Opus 4.7, Haiku 4.5, and newer models, or [the legacy integration](build-with-claude/claude-on-amazon-bedrock.md) for all other models on Bedrock
+- [AWS Bedrock global vs regional endpoints](build-with-claude/claude-in-amazon-bedrock.md) for Opus 4.7, Haiku 4.5, and newer models, or [the legacy integration](build-with-claude/claude-on-amazon-bedrock-legacy.md) for all other models on Bedrock
 - [Google Vertex AI global, multi-region, and regional endpoints](build-with-claude/claude-on-vertex-ai.md)
 
 ## Feature-specific pricing

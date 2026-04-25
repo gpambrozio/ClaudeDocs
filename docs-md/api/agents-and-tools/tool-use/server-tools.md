@@ -25,12 +25,12 @@ When using server tools like web search, the API may return a `pause_turn` stop 
 
 Here's how to handle the `pause_turn` stop reason:
 
-Python
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Initial request with web search
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[
         {
@@ -54,7 +54,7 @@ if response.stop_reason == "pause_turn":
 
     # Send the continuation request
     continuation = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-7",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],

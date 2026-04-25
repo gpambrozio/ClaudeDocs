@@ -407,7 +407,7 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 For detailed platform setup guides with code examples, see:
 
 - [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
 - [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The C# SDK supports Bedrock and Foundry through separate NuGet packages:

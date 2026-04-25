@@ -14,7 +14,7 @@ email: string
 
 Email of the User.
 
-role: "user" or "developer" or "billing" or 2 more
+role: "user" or "developer" or "billing" or "claude\_code\_user"
 
 Role for the invited User. Cannot be "admin".
 
@@ -27,8 +27,6 @@ Accepts one of the following:
 "billing"
 
 "claude\_code\_user"
-
-"managed"
 
 ##### ReturnsExpand Collapse
 
@@ -50,7 +48,7 @@ invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
-role: "user" or "developer" or "billing" or 3 more
+role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
@@ -65,8 +63,6 @@ Accepts one of the following:
 "admin"
 
 "claude\_code\_user"
-
-"managed"
 
 status: "accepted" or "expired" or "deleted" or "pending"
 
