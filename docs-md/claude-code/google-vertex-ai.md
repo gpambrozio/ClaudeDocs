@@ -1,9 +1,3 @@
-# Claude Code on Google Vertex AI
-
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
-
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=vertex_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=vertex_contact_sales)
-
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Vertex AI, ensure you have:
