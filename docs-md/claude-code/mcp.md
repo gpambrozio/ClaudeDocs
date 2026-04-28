@@ -1019,6 +1019,7 @@ Claude Code supports MCP `list_changed` notifications, allowing MCP servers to d
 ### [​](#automatic-reconnection) Automatic reconnection
 
 If an HTTP or SSE server disconnects mid-session, Claude Code automatically reconnects with exponential backoff: up to five attempts, starting at a one-second delay and doubling each time. The server appears as pending in `/mcp` while reconnection is in progress. After five failed attempts the server is marked as failed and you can retry manually from `/mcp`. Stdio servers are local processes and are not reconnected automatically.
+The same backoff applies when an HTTP or SSE server fails its initial connection at startup. As of v2.1.121, Claude Code retries the initial connection up to three times on transient errors such as a 5xx response, a connection refused, or a timeout, then marks the server as failed if it still cannot connect. Authentication and not-found errors are not retried because they require a configuration change to resolve.
 
 ### [​](#push-messages-with-channels) Push messages with channels
 
@@ -1800,6 +1801,25 @@ You can also disable the `ToolSearch` tool specifically:
   }
 }
 ```
+
+### [​](#exempt-a-server-from-deferral) Exempt a server from deferral
+
+If a server’s tools should always be visible to Claude without a search step, set `alwaysLoad` to `true` in that server’s configuration. Every tool from that server then loads into context at session start regardless of the `ENABLE_TOOL_SEARCH` setting. Use this for a small number of tools that Claude needs on every turn, since each upfront tool consumes context that would otherwise be available for your conversation.
+The following `.mcp.json` entry exempts one HTTP server while leaving other servers deferred:
+
+```shiki
+{
+  "mcpServers": {
+    "core-tools": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "alwaysLoad": true
+    }
+  }
+}
+```
+
+The `alwaysLoad` field is available on all server types and requires Claude Code v2.1.121 or later. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool’s `_meta` object, which has the same effect for that tool only.
 
 ## [​](#use-mcp-prompts-as-commands) Use MCP prompts as commands
 

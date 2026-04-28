@@ -14,10 +14,10 @@ import (
 )
 ```
 
-Or to pin the version:
+Install with `go get`:
 
 ```shiki
-go get -u 'github.com/anthropics/anthropic-sdk-go@v1.38.0'
+go get github.com/anthropics/anthropic-sdk-go
 ```
 
 ## Requirements

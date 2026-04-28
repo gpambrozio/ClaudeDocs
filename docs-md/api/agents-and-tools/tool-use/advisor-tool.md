@@ -319,8 +319,10 @@ value other than `"all"` shifts the advisor's quoted transcript each turn,
 causing advisor-side cache misses. This is a cost degradation only; advice
 quality is unaffected. When extended thinking is enabled without explicit
 `clear_thinking` configuration, the API defaults to
-`keep: {type: "thinking_turns", value: 1}`, which triggers this behavior.
-Set `keep: "all"` to preserve advisor cache stability.
+`keep: {type: "thinking_turns", value: 1}`, which triggers this behavior
+(the default on earlier Opus/Sonnet models and all Haiku models; on Opus
+4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"`
+to preserve advisor cache stability.
 
 ## Combining with other tools
 

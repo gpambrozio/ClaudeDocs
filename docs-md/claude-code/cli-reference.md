@@ -22,6 +22,7 @@ You can start sessions, pipe content, resume conversations, and manage updates w
 | `claude plugin` | Manage Claude Code [plugins](plugins.md). Alias: `claude plugins`. See [plugin reference](plugins-reference.md) for subcommands | `claude plugin install code-review@claude-plugins-official` |
 | `claude remote-control` | Start a [Remote Control](remote-control.md) server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See [Server mode flags](remote-control.md) | `claude remote-control --name "My Project"` |
 | `claude setup-token` | Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See [Generate a long-lived token](authentication.md) | `claude setup-token` |
+| `claude ultrareview [target]` | Run [ultrareview](ultrareview.md) non-interactively. Prints findings to stdout and exits 0 on success or 1 on failure. Use `--json` for the raw payload and `--timeout <minutes>` to override the 30-minute default | `claude ultrareview 1234 --json` |
 
 If you mistype a subcommand, Claude Code suggests the closest match and exits without starting a session. For example, `claude udpate` prints `Did you mean claude update?`.
 

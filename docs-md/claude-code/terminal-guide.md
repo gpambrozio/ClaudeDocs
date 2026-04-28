@@ -233,11 +233,11 @@ This usually happens on older Windows 10 systems. Run this line first, then retr
 irm https://claude.ai/install.ps1 | iex
 ```
 
-'Claude Code on Windows requires git-bash'
+'Claude Code on Windows requires either Git for Windows (for bash) or PowerShell'
 
-Git for Windows isn’t installed or Claude Code can’t find it.
+Neither Git for Windows nor PowerShell was found. Claude Code needs at least one shell. If only PowerShell is found, Claude Code uses the PowerShell tool instead of Bash.
 
-1. If you haven’t installed Git yet, go back to the [first step in the Windows section](#windows).
+1. If you haven’t installed Git yet, go back to the [first step in the Windows section](#windows). Alternatively, install [PowerShell 7](https://aka.ms/powershell).
 2. If Git is installed but Claude Code can’t find it, tell it where to look:
 
    ```shiki

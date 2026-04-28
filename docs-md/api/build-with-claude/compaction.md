@@ -292,7 +292,7 @@ with client.beta.messages.stream(
 
         elif event.type == "content_block_delta":
             if event.delta.type == "compaction_delta":
-                print(f"Compaction complete: {len(event.delta.content)} chars")
+                print(f"Compaction complete: {len(event.delta.content or '')} chars")
             elif event.delta.type == "text_delta":
                 print(event.delta.text, end="", flush=True)
 

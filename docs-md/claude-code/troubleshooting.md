@@ -14,7 +14,7 @@ Find the error message or symptom you’re seeing:
 | `Failed to fetch version` or can’t reach download server | [Check network and proxy settings](#check-network-connectivity) |
 | `irm is not recognized` or `&& is not valid` | [Use the right command for your shell](#windows-wrong-install-command) |
 | `'bash' is not recognized as the name of a cmdlet` | [Use the Windows installer command](#windows-wrong-install-command) |
-| `Claude Code on Windows requires git-bash` | [Install or configure Git Bash](#windows-claude-code-on-windows-requires-git-bash) |
+| `Claude Code on Windows requires either Git for Windows (for bash) or PowerShell` | [Install a shell](#windows-claude-code-on-windows-requires-either-git-for-windows-for-bash-or-powershell) |
 | `Claude Code does not support 32-bit Windows` | [Open Windows PowerShell, not the x86 entry](#windows-claude-code-does-not-support-32-bit-windows) |
 | `Error loading shared library` | [Wrong binary variant for your system](#linux-wrong-binary-variant-installed-musl/glibc-mismatch) |
 | `Illegal instruction` on Linux | [Architecture mismatch](#illegal-instruction-on-linux) |
@@ -414,11 +414,15 @@ When installing Claude Code in a Docker container, installing as root into `/` c
 If you installed an older version of Claude Desktop, it may register a `Claude.exe` in the `WindowsApps` directory that takes PATH priority over Claude Code CLI. Running `claude` opens the Desktop app instead of the CLI.
 Update Claude Desktop to the latest version to fix this issue.
 
-### [​](#windows-claude-code-on-windows-requires-git-bash) Windows: Claude Code on Windows requires git-bash
+### [​](#windows-“claude-code-on-windows-requires-either-git-for-windows-for-bash-or-powershell”) Windows: “Claude Code on Windows requires either Git for Windows (for bash) or PowerShell”
 
-Claude Code on native Windows needs [Git for Windows](https://git-scm.com/downloads/win), which includes Git Bash.
-**If Git is not installed**, download and install it from [git-scm.com/downloads/win](https://git-scm.com/downloads/win). During setup, select “Add to PATH.” Restart your terminal after installing.
-**If Git is already installed** but Claude Code still can’t find it, set the path in your [settings.json file](settings.md):
+Claude Code on native Windows needs at least one shell: either [Git for Windows](https://git-scm.com/downloads/win) for Bash, or PowerShell. When neither is found, this error appears at startup. If only PowerShell is found, Claude Code uses the PowerShell tool instead of Bash.
+**If neither is installed**, install one:
+
+- Git for Windows: download from [git-scm.com/downloads/win](https://git-scm.com/downloads/win). During setup, select “Add to PATH.” Restart your terminal after installing.
+- PowerShell 7: download from [aka.ms/powershell](https://aka.ms/powershell).
+
+**If Git is already installed** but Claude Code can’t find it, set the path in your [settings.json file](settings.md):
 
 ```shiki
 {
@@ -474,20 +478,13 @@ If the installer prints `Illegal instruction` instead of the OOM `Killed` messag
 bash: line 142: 2238232 Illegal instruction    "$binary_path" install ${TARGET:+"$TARGET"}
 ```
 
-**Solutions:**
+**Verify your architecture**:
 
-1. **Verify your architecture**:
+```shiki
+uname -m
+```
 
-   ```shiki
-   uname -m
-   ```
-
-   `x86_64` means 64-bit Intel/AMD, `aarch64` means ARM64. If the binary doesn’t match, [file a GitHub issue](https://github.com/anthropics/claude-code/issues) with the output.
-2. **Try an alternative install method** while the architecture issue is resolved:
-
-   ```shiki
-   brew install --cask claude-code
-   ```
+`x86_64` means 64-bit Intel/AMD, `aarch64` means ARM64. If the binary doesn’t match, [file a GitHub issue](https://github.com/anthropics/claude-code/issues) with the output. Alternative install methods download the same architecture-specific binary and won’t resolve this error.
 
 ### [​](#dyld-cannot-load-on-macos) `dyld: cannot load` on macOS
 
@@ -509,12 +506,7 @@ dyld: Symbol not found: _ubrk_clone
 **Solutions:**
 
 1. **Check your macOS version**: Claude Code requires macOS 13.0 or later. Open the Apple menu and select About This Mac to check your version.
-2. **Update macOS** if you’re on an older version. The binary uses load commands that older macOS versions don’t support.
-3. **Try Homebrew** as an alternative install method:
-
-   ```shiki
-   brew install --cask claude-code
-   ```
+2. **Update macOS** if you’re on an older version. The binary uses load commands and system libraries that older macOS versions don’t support. Alternative install methods like Homebrew download the same binary and won’t resolve this error.
 
 ### [​](#windows-installation-issues-errors-in-wsl) Windows installation issues: errors in WSL
 
