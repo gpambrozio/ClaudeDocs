@@ -1,5 +1,11 @@
 # Set up Claude Code for your organization
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Claude Code enforces organization policy through managed settings that take precedence over local developer configuration. You deliver those settings from the Claude admin console, your mobile device management (MDM) system, or a file on disk. The settings control which tools, commands, servers, and network destinations Claude can reach.
 This page walks through the deployment decisions in order. Each row links to the section below and to the reference page for that area.
 
@@ -97,7 +103,7 @@ Share these resources to help developers get started:
 - [Common workflows](common-workflows.md): patterns for everyday tasks like code review, refactoring, and debugging
 - [Claude 101](https://anthropic.skilljar.com/claude-101) and [Claude Code in Action](https://anthropic.skilljar.com/claude-code-in-action): self-paced Anthropic Academy courses
 
-For login issues, point developers to [authentication troubleshooting](troubleshooting.md). The most common fixes are:
+For login issues, point developers to [authentication troubleshooting](troubleshoot-install.md). The most common fixes are:
 
 - Run `/logout` then `/login` to switch accounts
 - Run `claude update` if the enterprise auth option is missing

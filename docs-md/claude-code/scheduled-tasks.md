@@ -1,5 +1,11 @@
 # Run prompts on a schedule
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Scheduled tasks require Claude Code v2.1.72 or later. Check your version with `claude --version`.
 
 Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](channels.md): your CI can push the failure into the session directly.

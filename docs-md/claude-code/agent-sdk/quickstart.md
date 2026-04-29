@@ -1,5 +1,11 @@
 # Quickstart
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fixes them, all without manual intervention.
 **What you’ll do:**
 

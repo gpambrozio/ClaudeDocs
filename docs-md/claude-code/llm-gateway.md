@@ -1,5 +1,11 @@
 # LLM gateway configuration
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 LLM gateways provide a centralized proxy layer between Claude Code and model providers, often providing:
 
 - **Centralized authentication** - Single point for API key management
@@ -31,6 +37,8 @@ Claude Code includes the following headers on every API request:
 | Header | Description |
 | --- | --- |
 | `X-Claude-Code-Session-Id` | A unique identifier for the current Claude Code session. Proxies can use this to aggregate all API requests from a single session without parsing the request body. |
+
+Claude Code also prepends a short attribution block to the system prompt containing the client version and a fingerprint derived from the conversation. The Anthropic API strips this block before processing, so it does not affect first-party prompt caching. If your gateway implements its own prompt cache keyed on the full request body, set [`CLAUDE_CODE_ATTRIBUTION_HEADER=0`](env-vars.md) to omit it.
 
 ## [​](#configuration) Configuration
 

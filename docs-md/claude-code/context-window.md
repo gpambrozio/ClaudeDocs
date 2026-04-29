@@ -1,5 +1,11 @@
 # Explore the context window
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Claude Code’s context window holds everything Claude knows about your session: your instructions, the files it reads, its own responses, and content that never appears in your terminal. The timeline below walks through what loads and when. See [the written breakdown](#what-the-timeline-shows) for the same content as a list.
 
 This interactive timeline works best on a larger screen. See [the written breakdown below](#what-the-timeline-shows) for the same concepts.

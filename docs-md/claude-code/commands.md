@@ -1,5 +1,11 @@
 # Commands
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Commands control Claude Code from inside a session. They provide a quick way to switch models, manage permissions, clear context, run a workflow, and more.
 Type `/` to see every command available to you, or type `/` followed by letters to filter.
 The table below lists all the commands included in Claude Code. Entries marked **[Skill](skills.md)** are bundled skills. They use the same mechanism as skills you write yourself: a prompt handed to Claude, which Claude can also invoke automatically when relevant. Everything else is a built-in command whose behavior is coded into the CLI. To add your own commands, see [skills](skills.md).
@@ -35,7 +41,7 @@ In the table below, `<arg>` indicates a required argument and `[arg]` indicates 
 | `/feedback [report]` | Submit feedback about Claude Code. Alias: `/bug` |
 | `/fewer-permission-prompts` | **[Skill](skills.md).** Scan your transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project `.claude/settings.json` to reduce permission prompts |
 | `/focus` | Toggle the focus view, which shows only your last prompt, a one-line tool-call summary with edit diffstats, and the final response. The selection persists across sessions. Only available in [fullscreen rendering](fullscreen.md) |
-| `/heapdump` | Write a JavaScript heap snapshot and a memory breakdown to `~/Desktop` for diagnosing high memory usage. See [troubleshooting](troubleshooting.md) |
+| `/heapdump` | Write a JavaScript heap snapshot and a memory breakdown to `~/Desktop`, or your home directory on Linux without a Desktop folder, for diagnosing high memory usage. See [troubleshooting](troubleshooting.md) |
 | `/help` | Show help and available commands |
 | `/hooks` | View [hook](hooks.md) configurations for tool events |
 | `/ide` | Manage IDE integrations and show status |

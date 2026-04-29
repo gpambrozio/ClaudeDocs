@@ -1,5 +1,11 @@
 # Terminal guide for new users
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 You can use Claude Code even if you’ve never used a terminal before. This guide walks you through opening a terminal, installing Claude Code, and your first interactions.
 
 - [macOS and Linux](#macos-and-linux)
@@ -196,7 +202,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Then try `claude` again. For more details, see [fix your PATH](troubleshooting.md).
+Then try `claude` again. For more details, see [fix your PATH](troubleshoot-install.md).
 
 Error with HTML code or 'syntax error near unexpected token'
 
@@ -208,9 +214,9 @@ brew install --cask claude-code
 
 'dyld' error or 'built for Mac OS X 13.0'
 
-If you see `dyld: cannot load`, `dyld: Symbol not found`, or `built for Mac OS X 13.0`, your macOS version is likely older than Claude Code supports.Open the Apple menu and select About This Mac to check your version. If it’s older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshooting.md) for more details.
+If you see `dyld: cannot load`, `dyld: Symbol not found`, or `built for Mac OS X 13.0`, your macOS version is likely older than Claude Code supports.Open the Apple menu and select About This Mac to check your version. If it’s older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshoot-install.md) for more details.
 
-For other errors, see the full [installation troubleshooting guide](troubleshooting.md).
+For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 
 ### [​](#windows-troubleshooting) Windows troubleshooting
 
@@ -252,7 +258,7 @@ Neither Git for Windows nor PowerShell was found. Claude Code needs at least one
 
    Look for the `Git\bin` folder in that path and use it instead.
 
-To make this permanent so you don’t have to set it every time, see [configure Git Bash path](troubleshooting.md).
+To make this permanent so you don’t have to set it every time, see [configure Git Bash path](troubleshoot-install.md).
 
 'claude is not recognized'
 
@@ -263,9 +269,9 @@ $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
 [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
 ```
 
-Close PowerShell, open a new window, and try `claude` again. See [verify your PATH](troubleshooting.md) for more details.
+Close PowerShell, open a new window, and try `claude` again. See [verify your PATH](troubleshoot-install.md) for more details.
 
-For other errors, see the full [installation troubleshooting guide](troubleshooting.md).
+For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 
 ---
 

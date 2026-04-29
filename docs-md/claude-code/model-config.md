@@ -1,3 +1,11 @@
+# Model configuration
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 ## [​](#available-models) Available models
 
 For the `model` setting in Claude Code, you can configure either:

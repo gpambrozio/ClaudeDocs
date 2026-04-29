@@ -1,5 +1,11 @@
 # Track cost and usage
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 The Claude Agent SDK provides detailed token usage information for each interaction with Claude. This guide explains how to properly track usage and understand cost reporting, especially when dealing with parallel tool uses and multi-step conversations.
 For complete API documentation, see the [TypeScript SDK reference](agent-sdk/typescript.md) and [Python SDK reference](agent-sdk/python.md).
 

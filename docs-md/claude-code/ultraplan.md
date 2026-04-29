@@ -1,5 +1,11 @@
 # Plan in the cloud with ultraplan
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Ultraplan is in research preview and requires Claude Code v2.1.91 or later. Behavior and capabilities may change based on feedback.
 
 Ultraplan hands a planning task from your local CLI to a [Claude Code on the web](claude-code-on-the-web.md) session running in [plan mode](permission-modes.md). Claude drafts the plan in the cloud while you keep working in your terminal. When the plan is ready, you open it in your browser to comment on specific sections, ask for revisions, and choose where to execute it.

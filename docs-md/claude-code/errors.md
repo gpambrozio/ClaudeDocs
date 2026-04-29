@@ -1,6 +1,12 @@
 # Error reference
 
-This page lists runtime errors Claude Code displays and how to recover from each one, plus what to check when responses seem off without an error. For installation errors such as `command not found` or TLS failures during setup, see [Troubleshooting](troubleshooting.md).
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
+This page lists runtime errors Claude Code displays and how to recover from each one, plus what to check when responses seem off without an error. For installation errors such as `command not found` or TLS failures during setup, see [Troubleshoot installation and login](troubleshoot-install.md).
 These errors and recovery commands apply across the CLI, the [Desktop app](desktop.md), and [Claude Code on the web](claude-code-on-the-web.md), since all three wrap the same Claude Code CLI. For surface-specific issues, see the troubleshooting section on that surface’s page.
 
 Claude Code calls the Claude API for model responses, so most runtime errors map to an underlying API error code. This page covers what each error means inside Claude Code and how to recover. For the raw HTTP status code definitions, see the [Claude Platform error reference](api/errors.md).
@@ -200,7 +206,7 @@ Not logged in · Please run /login
 - For CI or automation where interactive login is not possible, configure an [`apiKeyHelper`](settings.md) script that fetches a key at startup
 - See [Authentication precedence](authentication.md) to understand which credential wins when several are present
 
-If you are prompted to log in repeatedly, see [Not logged in or token expired](troubleshooting.md) for system clock and macOS Keychain fixes.
+If you are prompted to log in repeatedly, see [Not logged in or token expired](troubleshoot-install.md) for system clock and macOS Keychain fixes.
 
 ### [​](#invalid-api-key) Invalid API key
 
@@ -248,8 +254,8 @@ API Error: 401 ... authentication_error
 
 - Run `/login` to sign in again
 - If the error returns within the same session after re-authenticating, run `/logout` first to fully clear the stored token, then `/login`
-- For repeated prompts to log in across launches, see the system clock and macOS Keychain checks in [Troubleshooting](troubleshooting.md)
-- For other failures including `403 Forbidden` and OAuth browser issues, see [Permissions and authentication](troubleshooting.md)
+- For repeated prompts to log in across launches, see the system clock and macOS Keychain checks in [Troubleshooting](troubleshoot-install.md)
+- For other failures including `403 Forbidden` and OAuth browser issues, see [Login and authentication](troubleshoot-install.md)
 
 ### [​](#oauth-scope-requirement) OAuth scope requirement
 
@@ -421,7 +427,8 @@ There's an issue with the selected model (claude-...). It may not exist or you m
 
 - Run `/model` to pick from models available to your account
 - Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases track the latest release so they do not go stale. See [Model configuration](model-config.md).
-- See [Model not found](troubleshooting.md) to locate where a stale ID is set across `--model`, `ANTHROPIC_MODEL`, and settings files
+- If the wrong model keeps coming back, a stale ID is set somewhere. Check in [priority order](model-config.md): the `--model` flag, the `ANTHROPIC_MODEL` environment variable, then the `model` field in `.claude/settings.local.json`, your project’s `.claude/settings.json`, and `~/.claude/settings.json`. Remove the stale value and Claude Code falls back to your account default.
+- For Vertex AI deployments, see [Vertex AI troubleshooting](google-vertex-ai.md).
 
 ### [​](#claude-opus-is-not-available-with-the-claude-pro-plan) Claude Opus is not available with the Claude Pro plan
 
@@ -499,7 +506,7 @@ This page covers errors from the Claude API. For errors from other Claude Code c
 
 - MCP server failed to connect or authenticate: [MCP](mcp.md)
 - Hook script failed or blocked a tool: [Debug hooks](hooks.md)
-- Permission denied or filesystem errors during install: [Troubleshooting](troubleshooting.md)
+- Permission denied or filesystem errors during install: [Troubleshoot installation and login](troubleshoot-install.md)
 
 If an error is not listed here or the suggested fix does not help:
 

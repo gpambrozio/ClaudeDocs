@@ -1,5 +1,11 @@
 # Quickstart
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 This quickstart guide will have you using AI-powered coding assistance in a few minutes. By the end, you’ll understand how to use Claude Code for common development tasks.
 
 TerminalDesktopVS CodeJetBrains
@@ -14,7 +20,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 Copy
 
-[Troubleshooting](troubleshooting.md)
+[Installation troubleshooting](troubleshoot-install.md)
 
 ## [​](#before-you-begin) Before you begin
 

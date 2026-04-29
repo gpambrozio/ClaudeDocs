@@ -1,5 +1,11 @@
 # Plugins in the SDK
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add custom slash commands, agents, skills, hooks, and MCP servers to your agent sessions.
 
 ## [​](#what-are-plugins) What are plugins?
@@ -17,7 +23,7 @@ For complete information on plugin structure and how to create plugins, see [Plu
 
 ## [​](#loading-plugins) Loading plugins
 
-Load plugins by providing their local file system paths in your options configuration. The SDK supports loading multiple plugins from different locations.
+Load plugins by providing their local file system paths in your options configuration. The `type` field must be `"local"`, the only value the SDK accepts. To use a plugin distributed through a [marketplace](plugin-marketplaces.md) or remote repository, download it first and provide the local directory path. The SDK supports loading multiple plugins from different locations.
 
 TypeScript
 

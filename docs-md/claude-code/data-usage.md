@@ -1,3 +1,11 @@
+# Data usage
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 ## [​](#data-policies) Data policies
 
 ### [​](#data-training-policy) Data training policy

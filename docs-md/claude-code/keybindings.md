@@ -1,5 +1,11 @@
 # Customize keyboard shortcuts
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Customizable keyboard shortcuts require Claude Code v2.1.18 or later. Check your version with `claude --version`.
 
 Claude Code supports customizable keyboard shortcuts. Run `/keybindings` to create or open your configuration file at `~/.claude/keybindings.json`.
@@ -94,7 +100,8 @@ Actions available in the `Chat` context:
 | Action | Default | Description |
 | --- | --- | --- |
 | `chat:cancel` | Escape | Cancel current input |
-| `chat:clearInput` | Ctrl+L | Clear prompt input and force a full screen redraw |
+| `chat:clearInput` | Ctrl+L | Clear prompt input and force a full screen redraw. In [fullscreen rendering](fullscreen.md), press twice within two seconds to run `/clear` |
+| `chat:clearScreen` | Cmd+K | In [fullscreen rendering](fullscreen.md), press twice within two seconds to run `/clear` |
 | `chat:killAgents` | Ctrl+X Ctrl+K | Kill all background agents |
 | `chat:cycleMode` | Shift+Tab\* | Cycle permission modes |
 | `chat:modelPicker` | Meta+P | Open model picker |
@@ -416,6 +423,7 @@ These shortcuts cannot be rebound:
 | Ctrl+C | Hardcoded interrupt/cancel |
 | Ctrl+D | Hardcoded exit |
 | Ctrl+M | Identical to Enter in terminals (both send CR) |
+| Caps Lock | Not delivered to terminal applications |
 
 ## [​](#terminal-conflicts) Terminal conflicts
 

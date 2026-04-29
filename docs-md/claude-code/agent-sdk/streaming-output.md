@@ -1,5 +1,11 @@
 # Stream responses in real-time
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 By default, the Agent SDK yields complete `AssistantMessage` objects after Claude finishes generating each response. To receive incremental updates as text and tool calls are generated, enable partial message streaming by setting `include_partial_messages` (Python) or `includePartialMessages` (TypeScript) to `true` in your options.
 
 This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](agent-sdk/streaming-vs-single-mode.md). You can also [stream responses using the Agent SDK via the CLI](headless.md).

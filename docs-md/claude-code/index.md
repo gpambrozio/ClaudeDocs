@@ -1,6 +1,26 @@
 # Claude Code overview
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
+
+TerminalDesktopVS CodeJetBrains
+
+I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
+
+macOS / LinuxWindowsHomebrewWinGet
+
+$
+
+curl -fsSL https://claude.ai/install.sh | bash
+
+Copy
+
+[Installation troubleshooting](troubleshoot-install.md)
 
 ## [​](#get-started) Get started
 
@@ -63,7 +83,7 @@ claude
 
 You’ll be prompted to log in on first use. That’s it! [Continue with the Quickstart →](quickstart.md)
 
-See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [troubleshooting](troubleshooting.md) if you hit issues.
+See [advanced setup](setup.md) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](troubleshoot-install.md) if you hit issues.
 
 The VS Code extension provides inline diffs, @-mentions, plan review, and conversation history directly in your editor.
 

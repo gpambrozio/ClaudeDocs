@@ -1,3 +1,15 @@
+# Claude Code on Amazon Bedrock
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
+**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
+
+[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_contact_sales)
+
 ## [​](#prerequisites) Prerequisites
 
 Before configuring Claude Code with Bedrock, ensure you have:
@@ -258,6 +270,16 @@ Create a dedicated AWS account for Claude Code to simplify cost tracking and acc
 
 Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the [1M token context window](build-with-claude/context-windows.md) on Amazon Bedrock. Claude Code automatically enables the extended context window when you select a 1M model variant.
 The [setup wizard](#sign-in-with-bedrock) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](model-config.md) for details.
+
+## [​](#service-tiers) Service tiers
+
+[Amazon Bedrock service tiers](https://docs.aws.amazon.com/bedrock/latest/userguide/service-tiers-inference.html) let you trade off cost against latency. Set `ANTHROPIC_BEDROCK_SERVICE_TIER` to `default`, `flex`, or `priority`:
+
+```shiki
+export ANTHROPIC_BEDROCK_SERVICE_TIER=priority
+```
+
+Claude Code sends this as the `X-Amzn-Bedrock-Service-Tier` header on each request. Tier availability varies by model and region. Reserved capacity uses a [provisioned throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) ARN as the model ID instead of this setting.
 
 ## [​](#aws-guardrails) AWS Guardrails
 

@@ -1,5 +1,11 @@
 # Tools reference
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md). To disable a tool entirely, add its name to the `deny` array in your [permission settings](permissions.md).
 To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reusable prompt-based workflows, write a [skill](skills.md), which runs through the existing `Skill` tool rather than adding a new tool entry.
 
@@ -84,7 +90,7 @@ Plugins can declare monitors that start automatically when the plugin is active,
 
 ## [​](#powershell-tool) PowerShell tool
 
-The PowerShell tool lets Claude run PowerShell commands natively. On Windows, this means commands run in PowerShell instead of routing through Git Bash. The tool is rolling out progressively on Windows and is opt-in on Linux, macOS, and WSL.
+The PowerShell tool lets Claude run PowerShell commands natively. On Windows, this means commands run in PowerShell instead of routing through Git Bash. On Windows without Git Bash, the tool is enabled automatically. On Windows with Git Bash installed, the tool is rolling out progressively. On Linux, macOS, and WSL, the tool is opt-in.
 
 ### [​](#enable-the-powershell-tool) Enable the PowerShell tool
 

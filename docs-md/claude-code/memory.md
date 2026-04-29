@@ -1,5 +1,11 @@
 # How Claude remembers your project
 
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
 Each Claude Code session begins with a fresh context window. Two mechanisms carry knowledge across sessions:
 
 - **CLAUDE.md files**: instructions you write to give Claude persistent context
