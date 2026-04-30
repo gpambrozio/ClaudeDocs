@@ -498,6 +498,144 @@ Here are 3 examples. This depicts the input tokens of 3 requests, each of which 
 
 ---
 
+## Pre-warming the cache
+
+Cache pre-warming lets you load your system prompt or tool definitions into the prompt cache before a user triggers a real request. This eliminates the cache-miss latency penalty on the first user interaction, reducing time-to-first-token (TTFT) for latency-sensitive applications.
+
+### How it works
+
+Set `max_tokens: 0` in your request. The API runs the full prefill phase (reading your prompt into the model and writing the cache at any `cache_control` breakpoint), then returns immediately without generating any output. The response has an empty `content` array, `stop_reason: "max_tokens"`, and a fully populated `usage` block.
+
+Place the `cache_control` breakpoint on the last block that is shared with the follow-up request (typically your system prompt or tool definitions), not on the placeholder user message. Otherwise the cache entry is keyed to the placeholder and the follow-up request won't hit it. This means using an [explicit cache breakpoint](#explicit-cache-breakpoints) rather than [automatic caching](#automatic-caching), since automatic caching places the breakpoint on the last block, which here is the placeholder. The placeholder user message can be any string with non-whitespace content (the examples here use `"warmup"`); its content is read during prefill but never answered.
+
+A pre-warm request incurs a **cache write** charge if the prefix is not already cached, the same as any other request. Check `usage.cache_creation_input_tokens` in the response to confirm a write occurred. Zero output tokens are billed.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+client = anthropic.Anthropic()
+
+# Fire this before users arrive to warm the shared system-prompt cache.
+prewarm = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=0,
+    system=[
+        {
+            "type": "text",
+            "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+            "cache_control": {"type": "ephemeral"},
+        }
+    ],
+    messages=[{"role": "user", "content": "warmup"}],
+)
+print(prewarm.stop_reason)  # "max_tokens"
+print(prewarm.content)  # []
+print(prewarm.usage)
+```
+
+The API returns an empty `content` array:
+
+Output
+
+```shiki
+{
+  "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
+  "type": "message",
+  "role": "assistant",
+  "content": [],
+  "model": "claude-opus-4-7-20251101",
+  "stop_reason": "max_tokens",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 5120,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 5120,
+      "ephemeral_1h_input_tokens": 0
+    },
+    "iterations": [
+      {
+        "input_tokens": 8,
+        "output_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 5120,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 5120,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "type": "message"
+      }
+    ],
+    "output_tokens": 0,
+    "service_tier": "standard",
+    "inference_geo": "global"
+  }
+}
+```
+
+### Typical usage pattern
+
+Fire a pre-warm request when your application starts (or on a scheduled interval), then send real user requests after the pre-warm completes:
+
+Python
+
+```shiki
+client = anthropic.Anthropic()
+
+SYSTEM_PROMPT = [
+    {
+        "type": "text",
+        "text": "You are an expert software engineer with deep knowledge of distributed systems...",
+        "cache_control": {"type": "ephemeral"},
+    }
+]
+
+def prewarm_cache() -> None:
+    """Call this at application startup or on a scheduled interval."""
+    client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=0,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": "warmup"}],
+    )
+
+def respond(user_message: str) -> anthropic.types.Message:
+    """The real user request; benefits from a warm cache."""
+    return client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=1024,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": user_message}],
+    )
+
+# Warm the cache before any user traffic arrives.
+prewarm_cache()
+
+# Later, when the user submits a message, the system-prompt prefix is already cached.
+response = respond("How do I implement a binary search tree?")
+print(response.content[0].text)
+```
+
+Keep in mind that the cache TTL still applies. For the default 5-minute cache, send a new pre-warm request at least every 5 minutes to keep the cache warm. For longer gaps between user requests, use the [1-hour cache duration](#1-hour-cache-duration) instead.
+
+### Limitations
+
+A `max_tokens: 0` request is rejected with an `invalid_request_error` if any of the following are set, since each implies output that a zero-token budget cannot produce:
+
+- `stream: true`
+- [Extended thinking](build-with-claude/extended-thinking.md) (`thinking.type: "enabled"`)
+- [Structured outputs](build-with-claude/structured-outputs.md) (`output_config.format`)
+- `tool_choice` of `{"type": "tool", ...}` or `{"type": "any"}`
+
+`max_tokens: 0` is also rejected inside a [Message Batches](build-with-claude/batch-processing.md) request. Pre-warming targets time-to-first-token, which does not apply to batch processing, and a cache entry written during batch processing would likely expire before the follow-up request runs.
+
+### Replacing the max\_tokens=1 workaround
+
+Before `max_tokens: 0` was available, some applications used `max_tokens: 1` warm-up calls to achieve the same effect. The `max_tokens: 0` approach is preferred: no output is produced, so there is no single-token reply to discard, no output tokens are billed, and the intent of the request is unambiguous.
+
+---
+
 ## Prompt caching examples
 
 To help you get started with prompt caching, the [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching) provides detailed examples and best practices.
