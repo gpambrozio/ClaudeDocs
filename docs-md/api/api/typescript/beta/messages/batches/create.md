@@ -34,7 +34,7 @@ maxLength64
 
 minLength1
 
-params: Params { max\_tokens, messages, model, 19 more }
+params: Params { max\_tokens, messages, model, 20 more }
 
 Messages API creation parameters for the individual request.
 
@@ -46,9 +46,11 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 messages: Array<[BetaMessageParam](api/beta.md) { content, role } >
 
@@ -2453,7 +2455,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam { content, type, cache\_control }
+BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2491,6 +2493,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+encrypted\_content?: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: "user" | "assistant"
 
@@ -2785,11 +2791,11 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-output\_config?: [BetaOutputConfig](api/beta.md) { effort, format }
+output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }
 
 Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | "max" | null
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
@@ -2800,6 +2806,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -2812,6 +2820,22 @@ schema: Record<string, unknown>
 The JSON schema of the format
 
 type: "json\_schema"
+
+task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining?: number | null
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 Deprecatedoutput\_format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
 
@@ -4711,6 +4735,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id?: string | null
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4719,7 +4747,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -4762,6 +4790,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 

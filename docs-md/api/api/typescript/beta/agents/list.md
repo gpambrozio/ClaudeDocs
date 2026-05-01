@@ -6,7 +6,7 @@ TypeScript
 
 # List Agents
 
-client.beta.agents.list(AgentListParams { createdAtGte, createdAtLte, include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+client.beta.agents.list(AgentListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
 
 GET/v1/agents
 
@@ -14,13 +14,13 @@ List Agents
 
 ##### ParametersExpand Collapse
 
-params: AgentListParams { createdAtGte, createdAtLte, include\_archived, 3 more }
+params: AgentListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more }
 
-createdAtGte?: string
+"created\_at[gte]"?: string
 
 Query param: Return agents created at or after this time (inclusive).
 
-createdAtLte?: string
+"created\_at[lte]"?: string
 
 Query param: Return agents created at or before this time (inclusive).
 
@@ -44,7 +44,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -87,6 +87,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 

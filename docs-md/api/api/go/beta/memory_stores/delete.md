@@ -1,16 +1,16 @@
-# DeleteMemoryStore
+# Delete a memory store
 
 Copy page
 
 Go
 
-# DeleteMemoryStore
+# Delete a memory store
 
 client.Beta.MemoryStores.Delete(ctx, memoryStoreID, body) (\*[BetaManagedAgentsDeletedMemoryStore](api/beta.md), error)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
-DeleteMemoryStore
+Delete a memory store
 
 ##### ParametersExpand Collapse
 
@@ -70,17 +70,23 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsDeletedMemoryStore struct{…}
 
+Confirmation that a `memory_store` was deleted.
+
 ID string
+
+ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 Type BetaManagedAgentsDeletedMemoryStoreType
 
-DeleteMemoryStore
+Delete a memory store
 
 Go
 

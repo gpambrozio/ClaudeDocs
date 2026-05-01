@@ -8569,6 +8569,8 @@ MEDIUM("medium")
 
 HIGH("high")
 
+XHIGH("xhigh")
+
 MAX("max")
 
 Optional<[JsonOutputFormat](api/messages.md)> format

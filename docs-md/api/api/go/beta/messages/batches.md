@@ -1083,6 +1083,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -2529,6 +2533,10 @@ Content string
 
 Summary of compacted content, or null if compaction failed
 
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Type Compaction
 
 ContextManagement [BetaContextManagementResponse](api/beta.md)
@@ -3936,6 +3944,10 @@ compaction blocks with null content; the server treats them as no-ops.
 Content string
 
 Summary of compacted content, or null if compaction failed
+
+EncryptedContent string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Type Compaction
 

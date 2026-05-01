@@ -78,9 +78,9 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
-
 "user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
+"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 
@@ -130,7 +130,7 @@ string? ExternalID
 
 Platform's own identifier for this user. Not enforced unique.
 
-string? NextPage
+required string? NextPage
 
 Cursor for the next page, or `null` when there are no more results.
 

@@ -1,16 +1,16 @@
-# DeleteMemory
+# Delete a memory
 
 Copy page
 
 Ruby
 
-# DeleteMemory
+# Delete a memory
 
 beta.memory\_stores.memories.delete(memory\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemory](api/beta.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
-DeleteMemory
+Delete a memory
 
 ##### ParametersExpand Collapse
 
@@ -30,7 +30,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -76,17 +76,23 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
+:"user-profiles-2026-03-24"
+
 :"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsDeletedMemory { id, type }
 
+Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
+
 id: String
+
+ID of the deleted memory (a `mem_...` value).
 
 type: :memory\_deleted
 
-DeleteMemory
+Delete a memory
 
 Ruby
 

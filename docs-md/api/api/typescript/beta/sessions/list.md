@@ -6,7 +6,7 @@ TypeScript
 
 # List Sessions
 
-client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, createdAtGt, 8 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 11 more } >
+client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 9 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 11 more } >
 
 GET/v1/sessions
 
@@ -14,7 +14,7 @@ List Sessions
 
 ##### ParametersExpand Collapse
 
-params: SessionListParams { agent\_id, agent\_version, createdAtGt, 8 more }
+params: SessionListParams { agent\_id, agent\_version, created\_at[gt], 9 more }
 
 agent\_id?: string
 
@@ -24,19 +24,19 @@ agent\_version?: number
 
 Query param: Filter by agent version. Only applies when agent\_id is also set.
 
-createdAtGt?: string
+"created\_at[gt]"?: string
 
 Query param: Return sessions created after this time (exclusive).
 
-createdAtGte?: string
+"created\_at[gte]"?: string
 
 Query param: Return sessions created at or after this time (inclusive).
 
-createdAtLt?: string
+"created\_at[lt]"?: string
 
 Query param: Return sessions created before this time (exclusive).
 
-createdAtLte?: string
+"created\_at[lte]"?: string
 
 Query param: Return sessions created at or before this time (inclusive).
 
@@ -47,6 +47,10 @@ Query param: When true, includes archived sessions. Default: false (exclude arch
 limit?: number
 
 Query param: Maximum number of results to return.
+
+memory\_store\_id?: string
+
+Query param: Filter sessions whose resources contain a memory\_store with this memory store ID.
 
 order?: "asc" | "desc"
 
@@ -70,7 +74,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -113,6 +117,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 

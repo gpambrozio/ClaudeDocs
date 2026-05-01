@@ -1,16 +1,16 @@
-# DeleteMemoryStore
+# Delete a memory store
 
 Copy page
 
 Java
 
-# DeleteMemoryStore
+# Delete a memory store
 
 [BetaManagedAgentsDeletedMemoryStore](api/beta.md) beta().memoryStores().delete(MemoryStoreDeleteParamsparams = MemoryStoreDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
-DeleteMemoryStore
+Delete a memory store
 
 ##### ParametersExpand Collapse
 
@@ -64,17 +64,23 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsDeletedMemoryStore:
 
+Confirmation that a `memory_store` was deleted.
+
 String id
+
+ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 Type type
 
-DeleteMemoryStore
+Delete a memory store
 
 Java
 

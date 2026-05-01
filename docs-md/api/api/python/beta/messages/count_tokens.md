@@ -2470,6 +2470,10 @@ Accepts one of the following:
 
 "1h"
 
+encrypted\_content: Optional[str]
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: Literal["user", "assistant"]
 
 Accepts one of the following:
@@ -2735,7 +2739,7 @@ output\_config: Optional[[BetaOutputConfigParam](api/beta.md)]
 
 Configuration options for the model's output, such as the output format.
 
-effort: Optional[Literal["low", "medium", "high", "max"]]
+effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
@@ -2746,6 +2750,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -2758,6 +2764,22 @@ schema: Dict[str, object]
 The JSON schema of the format
 
 type: Literal["json\_schema"]
+
+task\_budget: Optional[BetaTokenTaskBudget]
+
+User-configurable total token budget across contexts.
+
+total: int
+
+Total token budget across all contexts in the session.
+
+type: Literal["tokens"]
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: Optional[int]
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 Deprecatedoutput\_format: Optional[BetaJSONOutputFormatParam]
 
@@ -4623,7 +4645,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
 
 Accepts one of the following:
 
@@ -4668,6 +4690,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 

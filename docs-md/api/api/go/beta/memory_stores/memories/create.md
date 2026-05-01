@@ -1,16 +1,16 @@
-# CreateMemory
+# Create a memory
 
 Copy page
 
 Go
 
-# CreateMemory
+# Create a memory
 
 client.Beta.MemoryStores.Memories.New(ctx, memoryStoreID, params) (\*[BetaManagedAgentsMemory](api/beta.md), error)
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
-CreateMemory
+Create a memory
 
 ##### ParametersExpand Collapse
 
@@ -20,11 +20,11 @@ params BetaMemoryStoreMemoryNewParams
 
 Content param.Field[string]
 
-Body param
+Body param: UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
 
 Path param.Field[string]
 
-Body param
+Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
 View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]optional
 
@@ -82,17 +82,27 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsMemory struct{…}
 
+A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
 ID string
+
+Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
 ContentSha256 string
 
+Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
 ContentSizeBytes int64
+
+Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
 CreatedAt Time
 
@@ -100,9 +110,15 @@ A timestamp in RFC 3339 format
 
 MemoryStoreID string
 
+ID of the memory store this memory belongs to (a `memstore_...` value).
+
 MemoryVersionID string
 
+ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
 Path string
+
+Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
 Type BetaManagedAgentsMemoryType
 
@@ -112,7 +128,9 @@ A timestamp in RFC 3339 format
 
 Content stringoptional
 
-CreateMemory
+The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+Create a memory
 
 Go
 

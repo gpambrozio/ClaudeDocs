@@ -105,7 +105,7 @@ Press `Esc` or `q` to return to the prompt.
 
 ## [​](#clear-the-conversation) Clear the conversation
 
-Press `Ctrl+L` twice within two seconds to run `/clear` and start a new conversation. The first press clears the input box and shows a hint; the second press clears the conversation. On macOS, double-pressing `Cmd+K` also runs `/clear`.
+Press `Ctrl+L` twice within two seconds to run `/clear` and start a new conversation. The first press redraws the screen and shows a hint; the second press clears the conversation. On macOS, double-pressing `Cmd+K` also runs `/clear`.
 
 ## [​](#use-with-tmux) Use with tmux
 

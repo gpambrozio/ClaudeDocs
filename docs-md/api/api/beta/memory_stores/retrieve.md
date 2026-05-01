@@ -1,14 +1,14 @@
-# GetMemoryStore
+# Retrieve a memory store
 
 Copy page
 
 cURL
 
-# GetMemoryStore
+# Retrieve a memory store
 
 GET/v1/memory\_stores/{memory\_store\_id}
 
-GetMemoryStore
+Retrieve a memory store
 
 ##### Path ParametersExpand Collapse
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -70,35 +70,47 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
+"user-profiles-2026-03-24"
+
 "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemoryStore = object { id, type, archived\_at, 5 more }
+BetaManagedAgentsMemoryStore = object { id, created\_at, name, 5 more }
+
+A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
 id: string
 
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+name: string
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
 type: "memory\_store"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
 
 archived\_at: optional string
 
 A timestamp in RFC 3339 format
 
-created\_at: optional string
-
-A timestamp in RFC 3339 format
-
 description: optional string
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
 metadata: optional map[string]
 
-name: optional string
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-updated\_at: optional string
-
-A timestamp in RFC 3339 format
-
-GetMemoryStore
+Retrieve a memory store
 
 cURL
 
@@ -114,15 +126,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 
@@ -133,15 +145,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 

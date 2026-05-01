@@ -66,6 +66,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 List<Request> requests
@@ -94,9 +96,11 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 List<[BetaMessageParam](api/beta.md)> messages
 
@@ -2550,6 +2554,10 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<String> encryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role role
 
 Accepts one of the following:
@@ -2853,6 +2861,8 @@ MEDIUM("medium")
 
 HIGH("high")
 
+XHIGH("xhigh")
+
 MAX("max")
 
 Optional<[BetaJsonOutputFormat](api/beta.md)> format
@@ -2864,6 +2874,22 @@ Schema schema
 The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+
+User-configurable total token budget across contexts.
+
+long total
+
+Total token budget across all contexts in the session.
+
+JsonValue; type "tokens"constant"tokens"constant
+
+The budget type. Currently only 'tokens' is supported.
+
+Optional<Long> remaining
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 DeprecatedOptional<[BetaJsonOutputFormat](api/beta.md)> outputFormat
 
@@ -4758,6 +4784,10 @@ Recommended for advanced use cases only.
 maximum1
 
 minimum0
+
+Optional<String> userProfileId
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 ##### ReturnsExpand Collapse
 

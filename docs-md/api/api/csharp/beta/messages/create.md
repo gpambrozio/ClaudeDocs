@@ -26,9 +26,11 @@ Body param: The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 required IReadOnlyList<[BetaMessageParam](api/beta.md)> messages
 
@@ -2482,6 +2484,10 @@ Accepts one of the following:
 
 "1h"Ttl1h
 
+string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 required Role Role
 
 Accepts one of the following:
@@ -4354,6 +4360,10 @@ maximum1
 
 minimum0
 
+string? userProfileID
+
+Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4399,6 +4409,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "fast-mode-2026-02-01"FastMode2026\_02\_01
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
+
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
@@ -5244,6 +5256,10 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -6556,6 +6572,10 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 
@@ -8166,6 +8186,10 @@ required string? Content
 
 Summary of compacted content, or null if compaction failed
 
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 JsonElement Type "compaction"constant
 
 required Long Index
@@ -8289,6 +8313,10 @@ JsonElement Type "signature\_delta"constant
 class BetaCompactionContentBlockDelta:
 
 required string? Content
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction\_delta"constant
 

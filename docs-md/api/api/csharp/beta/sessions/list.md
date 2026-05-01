@@ -48,6 +48,10 @@ Int limit
 
 Query param: Maximum number of results to return.
 
+string memoryStoreID
+
+Query param: Filter sessions whose resources contain a memory\_store with this memory store ID.
+
 [Order](api/beta/sessions/list.md) order
 
 Query param: Sort direction for results, ordered by created\_at. Defaults to desc (newest first).
@@ -105,6 +109,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "fast-mode-2026-02-01"FastMode2026\_02\_01
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
+
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 

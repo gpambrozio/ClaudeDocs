@@ -1,16 +1,16 @@
-# DeleteMemory
+# Delete a memory
 
 Copy page
 
 Java
 
-# DeleteMemory
+# Delete a memory
 
 [BetaManagedAgentsDeletedMemory](api/beta.md) beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
-DeleteMemory
+Delete a memory
 
 ##### ParametersExpand Collapse
 
@@ -70,17 +70,23 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsDeletedMemory:
 
+Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
+
 String id
+
+ID of the deleted memory (a `mem_...` value).
 
 Type type
 
-DeleteMemory
+Delete a memory
 
 Java
 

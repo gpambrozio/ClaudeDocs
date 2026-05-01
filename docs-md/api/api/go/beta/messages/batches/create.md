@@ -46,9 +46,11 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 Messages [][BetaMessageParamResp](api/beta.md)
 
@@ -2498,6 +2500,10 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+EncryptedContent stringoptional
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 Role BetaMessageParamRole
 
 Accepts one of the following:
@@ -2811,6 +2817,8 @@ const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
 
 const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
 
+const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
+
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
 Format [BetaJSONOutputFormat](api/beta.md)optional
@@ -2822,6 +2830,22 @@ Schema map[string, any]
 The JSON schema of the format
 
 Type JSONSchema
+
+TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
+
+User-configurable total token budget across contexts.
+
+Total int64
+
+Total token budget across all contexts in the session.
+
+Type Tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+Remaining int64optional
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 DeprecatedOutputFormat [BetaJSONOutputFormat](api/beta.md)optional
 
@@ -4725,6 +4749,10 @@ maximum1
 
 minimum0
 
+UserProfileID stringoptional
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -4776,6 +4804,8 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 

@@ -86,9 +86,9 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
-"advisor-tool-2026-03-01"
-
 "user-profiles-2026-03-24"
+
+"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
@@ -136,7 +136,7 @@ external\_id: optional string
 
 Platform's own identifier for this user. Not enforced unique.
 
-next\_page: optional string
+next\_page: string
 
 Cursor for the next page, or `null` when there are no more results.
 

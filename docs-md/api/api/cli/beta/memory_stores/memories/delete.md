@@ -1,16 +1,16 @@
-# DeleteMemory
+# Delete a memory
 
 Copy page
 
 CLI
 
-# DeleteMemory
+# Delete a memory
 
 $ ant beta:memory-stores:memories delete
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
-DeleteMemory
+Delete a memory
 
 ##### ParametersExpand Collapse
 
@@ -34,13 +34,17 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 beta\_managed\_agents\_deleted\_memory: object { id, type }
 
+Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
+
 id: string
+
+ID of the deleted memory (a `mem_...` value).
 
 type: "memory\_deleted"
 
 "memory\_deleted"
 
-DeleteMemory
+Delete a memory
 
 CLI
 

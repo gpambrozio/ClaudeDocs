@@ -48,6 +48,10 @@ Limit param.Field[int64]optional
 
 Query param: Maximum number of results to return.
 
+MemoryStoreID param.Field[string]optional
+
+Query param: Filter sessions whose resources contain a memory\_store with this memory store ID.
+
 Order param.Field[[BetaSessionListParamsOrder](api/beta/sessions/list.md)]optional
 
 Query param: Sort direction for results, ordered by created\_at. Defaults to desc (newest first).
@@ -111,6 +115,8 @@ const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
 const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 

@@ -14,7 +14,7 @@ POST/v1/agents
 
 ##### [List Agents](api/beta/agents/list.md)
 
-client.beta.agents.list(AgentListParams { createdAtGte, createdAtLte, include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+client.beta.agents.list(AgentListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
 
 GET/v1/agents
 

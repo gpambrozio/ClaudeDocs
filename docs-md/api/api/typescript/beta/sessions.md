@@ -14,7 +14,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, createdAtGt, 8 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 11 more } >
+client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 9 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 11 more } >
 
 GET/v1/sessions
 

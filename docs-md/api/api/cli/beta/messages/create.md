@@ -24,6 +24,8 @@ Body param: The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
 --message: array of [BetaMessageParam](api/beta.md) { content, role }
@@ -109,7 +111,7 @@ Body param: MCP servers to be utilized in this request
 
 Body param: An object describing metadata about the request.
 
---output-config: optional object { effort, format }
+--output-config: optional object { effort, format, task\_budget }
 
 Body param: Configuration options for the model's output, such as the output format.
 
@@ -248,6 +250,10 @@ Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p.
 In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
 Recommended for advanced use cases only.
+
+--user-profile-id: optional string
+
+Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 --beta: optional array of [AnthropicBeta](api/beta.md)
 
@@ -1032,7 +1038,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1043,6 +1049,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -2276,7 +2286,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2287,6 +2297,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -3807,7 +3821,7 @@ file\_id: string
 
 type: "container\_upload"
 
-beta\_compaction\_block: object { content, type }
+beta\_compaction\_block: object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3818,6 +3832,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -3935,9 +3953,13 @@ signature: string
 
 type: "signature\_delta"
 
-beta\_compaction\_content\_block\_delta: object { content, type }
+beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type }
 
 content: string
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 

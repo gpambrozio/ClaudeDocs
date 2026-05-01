@@ -1601,7 +1601,7 @@ type: :input\_tokens
 
 value: Integer
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1613,9 +1613,13 @@ content: String
 
 Summary of compacted content, or null if compaction failed
 
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type: :compaction
 
-class BetaCompactionBlockParam { content, type, cache\_control }
+class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -1654,9 +1658,17 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionContentBlockDelta { content, type }
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
+class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: String
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -2562,7 +2574,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2573,6 +2585,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -4934,7 +4950,7 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionBlockParam { content, type, cache\_control }
+class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -4972,6 +4988,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 class BetaContentBlockSource { content, type }
 
@@ -7133,7 +7153,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -7144,6 +7164,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -10268,7 +10292,7 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionBlockParam { content, type, cache\_control }
+class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -10307,6 +10331,10 @@ Accepts one of the following:
 
 :"1h"
 
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: :user | :assistant
 
 Accepts one of the following:
@@ -10339,9 +10367,9 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-class BetaOutputConfig { effort, format\_ }
+class BetaOutputConfig { effort, format\_, task\_budget }
 
-effort: :low | :medium | :high | :max
+effort: :low | :medium | :high | 2 more
 
 All possible effort levels.
 
@@ -10352,6 +10380,8 @@ Accepts one of the following:
 :medium
 
 :high
+
+:xhigh
 
 :max
 
@@ -10364,6 +10394,22 @@ schema: Hash[Symbol, untyped]
 The JSON schema of the format
 
 type: :json\_schema
+
+task\_budget: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: Integer
+
+Total token budget across all contexts in the session.
+
+type: :tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: Integer
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaPlainTextSource { data, media\_type, type }
 
@@ -10485,9 +10531,13 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, type }
+class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: String
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -10605,9 +10655,13 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, type }
+class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: String
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -11379,7 +11433,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -11390,6 +11444,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -12604,7 +12662,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -12615,6 +12673,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -13944,7 +14006,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13955,6 +14017,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -15583,7 +15649,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -15594,6 +15660,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -15715,9 +15785,13 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, type }
+class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: String
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 
@@ -17302,6 +17376,22 @@ class BetaThinkingTurns { type, value }
 type: :thinking\_turns
 
 value: Integer
+
+class BetaTokenTaskBudget { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: Integer
+
+Total token budget across all contexts in the session.
+
+type: :tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: Integer
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 class BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
@@ -23510,7 +23600,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -23521,6 +23611,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -24956,7 +25050,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -24967,6 +25061,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -26364,7 +26462,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -26375,6 +26473,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 

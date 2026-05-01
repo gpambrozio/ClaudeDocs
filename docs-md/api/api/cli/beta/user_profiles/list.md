@@ -78,7 +78,7 @@ external\_id: optional string
 
 Platform's own identifier for this user. Not enforced unique.
 
-next\_page: optional string
+next\_page: string
 
 Cursor for the next page, or `null` when there are no more results.
 

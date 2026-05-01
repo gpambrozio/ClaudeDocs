@@ -1,16 +1,16 @@
-# DeleteMemoryStore
+# Delete a memory store
 
 Copy page
 
 C#
 
-# DeleteMemoryStore
+# Delete a memory store
 
 [BetaManagedAgentsDeletedMemoryStore](api/beta.md) Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
-DeleteMemoryStore
+Delete a memory store
 
 ##### ParametersExpand Collapse
 
@@ -66,17 +66,23 @@ Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsDeletedMemoryStore:
 
+Confirmation that a `memory_store` was deleted.
+
 required string ID
+
+ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 required Type Type
 
-DeleteMemoryStore
+Delete a memory store
 
 C#
 

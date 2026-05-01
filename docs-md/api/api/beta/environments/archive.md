@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -70,13 +70,15 @@ Accepts one of the following:
 
 "output-300k-2026-03-24"
 
+"user-profiles-2026-03-24"
+
 "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 BetaEnvironment = object { id, archived\_at, config, 6 more }
 
-Unified Environment resource for both cloud and BYOC environments.
+Unified Environment resource for both cloud and self-hosted environments.
 
 id: string
 

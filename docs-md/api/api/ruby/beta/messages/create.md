@@ -24,9 +24,11 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 messages: Array[[BetaMessageParam](api/beta.md) { content, role } ]
 
@@ -2441,7 +2443,7 @@ Accepts one of the following:
 
 :"1h"
 
-class BetaCompactionBlockParam { content, type, cache\_control }
+class BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2479,6 +2481,10 @@ Accepts one of the following:
 :"5m"
 
 :"1h"
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: :user | :assistant
 
@@ -2777,11 +2783,11 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-output\_config: [BetaOutputConfig](api/beta.md) { effort, format\_ }
+output\_config: [BetaOutputConfig](api/beta.md) { effort, format\_, task\_budget }
 
 Configuration options for the model's output, such as the output format.
 
-effort: :low | :medium | :high | :max
+effort: :low | :medium | :high | 2 more
 
 All possible effort levels.
 
@@ -2792,6 +2798,8 @@ Accepts one of the following:
 :medium
 
 :high
+
+:xhigh
 
 :max
 
@@ -2804,6 +2812,22 @@ schema: Hash[Symbol, untyped]
 The JSON schema of the format
 
 type: :json\_schema
+
+task\_budget: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: Integer
+
+Total token budget across all contexts in the session.
+
+type: :tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining: Integer
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 Deprecatedoutput\_format: [BetaJSONOutputFormat](api/beta.md) { schema, type }
 
@@ -4709,6 +4733,10 @@ maximum1
 
 minimum0
 
+user\_profile\_id: String
+
+The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
@@ -4717,7 +4745,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -4762,6 +4790,8 @@ Accepts one of the following:
 :"fast-mode-2026-02-01"
 
 :"output-300k-2026-03-24"
+
+:"user-profiles-2026-03-24"
 
 :"advisor-tool-2026-03-01"
 
@@ -5596,7 +5626,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -5607,6 +5637,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -6930,7 +6964,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -6941,6 +6975,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -8569,7 +8607,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -8580,6 +8618,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -8701,9 +8743,13 @@ signature: String
 
 type: :signature\_delta
 
-class BetaCompactionContentBlockDelta { content, type }
+class BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: String
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction\_delta
 

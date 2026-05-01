@@ -1,16 +1,16 @@
-# DeleteMemoryStore
+# Delete a memory store
 
 Copy page
 
 CLI
 
-# DeleteMemoryStore
+# Delete a memory store
 
 $ ant beta:memory-stores delete
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
-DeleteMemoryStore
+Delete a memory store
 
 ##### ParametersExpand Collapse
 
@@ -26,13 +26,17 @@ Optional header to specify the beta version(s) you want to use.
 
 beta\_managed\_agents\_deleted\_memory\_store: object { id, type }
 
+Confirmation that a `memory_store` was deleted.
+
 id: string
+
+ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 type: "memory\_store\_deleted"
 
 "memory\_store\_deleted"
 
-DeleteMemoryStore
+Delete a memory store
 
 CLI
 

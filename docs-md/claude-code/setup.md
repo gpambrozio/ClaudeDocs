@@ -426,7 +426,7 @@ In addition to the signed manifest, individual binaries carry platform-native co
 
 ## [​](#uninstall-claude-code) Uninstall Claude Code
 
-To remove Claude Code, follow the instructions for your installation method.
+To remove Claude Code, follow the instructions for your installation method. If `claude` still runs afterward, you likely have a second installation or a leftover shell alias from an older installer. See [Check for conflicting installations](troubleshoot-install.md) to find and remove it.
 
 ### [​](#native-installation) Native installation
 

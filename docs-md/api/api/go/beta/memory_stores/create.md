@@ -1,16 +1,16 @@
-# CreateMemoryStore
+# Create a memory store
 
 Copy page
 
 Go
 
-# CreateMemoryStore
+# Create a memory store
 
 client.Beta.MemoryStores.New(ctx, params) (\*[BetaManagedAgentsMemoryStore](api/beta.md), error)
 
 POST/v1/memory\_stores
 
-CreateMemoryStore
+Create a memory store
 
 ##### ParametersExpand Collapse
 
@@ -18,15 +18,15 @@ params BetaMemoryStoreNewParams
 
 Name param.Field[string]
 
-Body param
+Body param: Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
 Description param.Field[string]optional
 
-Body param
+Body param: Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
 Metadata param.Field[map[string, string]]optional
 
-Body param
+Body param: Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -80,35 +80,47 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsMemoryStore struct{…}
 
+A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
 ID string
 
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+CreatedAt Time
+
+A timestamp in RFC 3339 format
+
+Name string
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
 Type BetaManagedAgentsMemoryStoreType
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
 
 ArchivedAt Timeoptional
 
 A timestamp in RFC 3339 format
 
-CreatedAt Timeoptional
-
-A timestamp in RFC 3339 format
-
 Description stringoptional
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
 Metadata map[string, string]optional
 
-Name stringoptional
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-UpdatedAt Timeoptional
-
-A timestamp in RFC 3339 format
-
-CreateMemoryStore
+Create a memory store
 
 Go
 
@@ -142,15 +154,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 
@@ -161,15 +173,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 

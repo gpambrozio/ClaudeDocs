@@ -1,38 +1,38 @@
-# ListMemoryStores
+# List memory stores
 
 Copy page
 
 Ruby
 
-# ListMemoryStores
+# List memory stores
 
-beta.memory\_stores.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md) { id, type, archived\_at, 5 more } >
+beta.memory\_stores.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryStore](api/beta.md) { id, created\_at, name, 5 more } >
 
 GET/v1/memory\_stores
 
-ListMemoryStores
+List memory stores
 
 ##### ParametersExpand Collapse
 
 created\_at\_gte: Time
 
-Return stores created at or after this time (inclusive).
+Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
 created\_at\_lte: Time
 
-Return stores created at or before this time (inclusive).
+Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
 include\_archived: bool
 
-Query parameter for include\_archived
+When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
 limit: Integer
 
-Query parameter for limit
+Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
 page: String
 
-Query parameter for page
+Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 betas: Array[[AnthropicBeta](api/beta.md)]
 
@@ -42,7 +42,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -88,35 +88,47 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
+:"user-profiles-2026-03-24"
+
 :"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsMemoryStore { id, type, archived\_at, 5 more }
+class BetaManagedAgentsMemoryStore { id, created\_at, name, 5 more }
+
+A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
 id: String
 
-type: :memory\_store
-
-archived\_at: Time
-
-A timestamp in RFC 3339 format
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
 created\_at: Time
 
 A timestamp in RFC 3339 format
 
-description: String
-
-metadata: Hash[Symbol, String]
-
 name: String
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
+type: :memory\_store
 
 updated\_at: Time
 
 A timestamp in RFC 3339 format
 
-ListMemoryStores
+archived\_at: Time
+
+A timestamp in RFC 3339 format
+
+description: String
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
+metadata: Hash[Symbol, String]
+
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+
+List memory stores
 
 Ruby
 
@@ -137,15 +149,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"
@@ -161,15 +173,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"

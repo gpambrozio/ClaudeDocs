@@ -70,6 +70,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
@@ -934,6 +936,10 @@ compaction blocks with null content; the server treats them as no-ops.
 required string? Content
 
 Summary of compacted content, or null if compaction failed
+
+required string? EncryptedContent
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonElement Type "compaction"constant
 

@@ -1,16 +1,16 @@
-# DeleteMemory
+# Delete a memory
 
 Copy page
 
 Go
 
-# DeleteMemory
+# Delete a memory
 
 client.Beta.MemoryStores.Memories.Delete(ctx, memoryID, params) (\*[BetaManagedAgentsDeletedMemory](api/beta.md), error)
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
-DeleteMemory
+Delete a memory
 
 ##### ParametersExpand Collapse
 
@@ -78,17 +78,23 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsDeletedMemory struct{…}
 
+Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
+
 ID string
+
+ID of the deleted memory (a `mem_...` value).
 
 Type BetaManagedAgentsDeletedMemoryType
 
-DeleteMemory
+Delete a memory
 
 Go
 

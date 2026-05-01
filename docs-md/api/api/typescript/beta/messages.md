@@ -1591,7 +1591,7 @@ type: "input\_tokens"
 
 value: number
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1603,9 +1603,13 @@ content: string | null
 
 Summary of compacted content, or null if compaction failed
 
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 type: "compaction"
 
-BetaCompactionBlockParam { content, type, cache\_control }
+BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -1644,9 +1648,17 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionContentBlockDelta { content, type }
+encrypted\_content?: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
+BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: string | null
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -2552,7 +2564,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2563,6 +2575,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -4916,7 +4932,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam { content, type, cache\_control }
+BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -4954,6 +4970,10 @@ Accepts one of the following:
 "5m"
 
 "1h"
+
+encrypted\_content?: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 BetaContentBlockSource { content, type }
 
@@ -7109,7 +7129,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -7120,6 +7140,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -10216,7 +10240,7 @@ Accepts one of the following:
 
 "1h"
 
-BetaCompactionBlockParam { content, type, cache\_control }
+BetaCompactionBlockParam { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -10255,6 +10279,10 @@ Accepts one of the following:
 
 "1h"
 
+encrypted\_content?: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
+
 role: "user" | "assistant"
 
 Accepts one of the following:
@@ -10287,9 +10315,9 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-BetaOutputConfig { effort, format }
+BetaOutputConfig { effort, format, task\_budget }
 
-effort?: "low" | "medium" | "high" | "max" | null
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
@@ -10300,6 +10328,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 
@@ -10312,6 +10342,22 @@ schema: Record<string, unknown>
 The JSON schema of the format
 
 type: "json\_schema"
+
+task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining?: number | null
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 BetaPlainTextSource { data, media\_type, type }
 
@@ -10433,9 +10479,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta { content, type }
+BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: string | null
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -10553,9 +10603,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta { content, type }
+BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: string | null
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -11327,7 +11381,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -11338,6 +11392,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -12546,7 +12604,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -12557,6 +12615,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -13874,7 +13936,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13885,6 +13947,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -15495,7 +15561,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -15506,6 +15572,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -15627,9 +15697,13 @@ signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta { content, type }
+BetaCompactionContentBlockDelta { content, encrypted\_content, type }
 
 content: string | null
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
@@ -17212,6 +17286,22 @@ BetaThinkingTurns { type, value }
 type: "thinking\_turns"
 
 value: number
+
+BetaTokenTaskBudget { total, type, remaining }
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining?: number | null
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
@@ -23400,7 +23490,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -23411,6 +23501,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -24834,7 +24928,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -24845,6 +24939,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
@@ -26230,7 +26328,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -26241,6 +26339,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 

@@ -41,7 +41,7 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 beta\_environment: object { id, archived\_at, config, 6 more }
 
-Unified Environment resource for both cloud and BYOC environments.
+Unified Environment resource for both cloud and self-hosted environments.
 
 id: string
 

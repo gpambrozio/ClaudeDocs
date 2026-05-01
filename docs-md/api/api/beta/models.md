@@ -56,7 +56,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaEffortCapability = object { high, low, max, 2 more }
+BetaEffortCapability = object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -91,6 +91,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -156,7 +164,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -191,6 +199,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -314,7 +330,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -349,6 +365,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 

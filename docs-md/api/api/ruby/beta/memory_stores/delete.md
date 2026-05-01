@@ -1,16 +1,16 @@
-# DeleteMemoryStore
+# Delete a memory store
 
 Copy page
 
 Ruby
 
-# DeleteMemoryStore
+# Delete a memory store
 
 beta.memory\_stores.delete(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsDeletedMemoryStore](api/beta.md) { id, type }
 
 DELETE/v1/memory\_stores/{memory\_store\_id}
 
-DeleteMemoryStore
+Delete a memory store
 
 ##### ParametersExpand Collapse
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -70,17 +70,23 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
+:"user-profiles-2026-03-24"
+
 :"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsDeletedMemoryStore { id, type }
 
+Confirmation that a `memory_store` was deleted.
+
 id: String
+
+ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 type: :memory\_store\_deleted
 
-DeleteMemoryStore
+Delete a memory store
 
 Ruby
 

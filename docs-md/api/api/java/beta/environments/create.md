@@ -62,6 +62,8 @@ FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
 
 OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
 
+USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 String name
@@ -87,7 +89,7 @@ User-provided metadata key-value pairs
 
 class BetaEnvironment:
 
-Unified Environment resource for both cloud and BYOC environments.
+Unified Environment resource for both cloud and self-hosted environments.
 
 String id
 

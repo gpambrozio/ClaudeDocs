@@ -1,16 +1,16 @@
-# ListMemoryStores
+# List memory stores
 
 Copy page
 
 Go
 
-# ListMemoryStores
+# List memory stores
 
 client.Beta.MemoryStores.List(ctx, params) (\*PageCursor[[BetaManagedAgentsMemoryStore](api/beta.md)], error)
 
 GET/v1/memory\_stores
 
-ListMemoryStores
+List memory stores
 
 ##### ParametersExpand Collapse
 
@@ -18,23 +18,23 @@ params BetaMemoryStoreListParams
 
 CreatedAtGte param.Field[[Time](api/beta/memory_stores/list.md)]optional
 
-Query param: Return stores created at or after this time (inclusive).
+Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
 CreatedAtLte param.Field[[Time](api/beta/memory_stores/list.md)]optional
 
-Query param: Return stores created at or before this time (inclusive).
+Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
 IncludeArchived param.Field[bool]optional
 
-Query param: Query parameter for include\_archived
+Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
 Limit param.Field[int64]optional
 
-Query param: Query parameter for limit
+Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
 Page param.Field[string]optional
 
-Query param: Query parameter for page
+Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -88,35 +88,47 @@ const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
 
 const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
 
+const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsMemoryStore struct{…}
 
+A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
 ID string
 
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+CreatedAt Time
+
+A timestamp in RFC 3339 format
+
+Name string
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
 Type BetaManagedAgentsMemoryStoreType
+
+UpdatedAt Time
+
+A timestamp in RFC 3339 format
 
 ArchivedAt Timeoptional
 
 A timestamp in RFC 3339 format
 
-CreatedAt Timeoptional
-
-A timestamp in RFC 3339 format
-
 Description stringoptional
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
 Metadata map[string, string]optional
 
-Name stringoptional
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-UpdatedAt Timeoptional
-
-A timestamp in RFC 3339 format
-
-ListMemoryStores
+List memory stores
 
 Go
 
@@ -152,15 +164,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"
@@ -176,15 +188,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"

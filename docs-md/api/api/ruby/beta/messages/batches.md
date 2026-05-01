@@ -1071,7 +1071,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -1082,6 +1082,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -2517,7 +2521,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2528,6 +2532,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 
@@ -3925,7 +3933,7 @@ file\_id: String
 
 type: :container\_upload
 
-class BetaCompactionBlock { content, type }
+class BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3936,6 +3944,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: String
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: String
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: :compaction
 

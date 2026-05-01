@@ -8591,7 +8591,7 @@ UnionMember1 = string
 
 OutputConfig = object { effort, format }
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -8602,6 +8602,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 

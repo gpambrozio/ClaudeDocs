@@ -8561,7 +8561,7 @@ Fast and cost-effective model
 
 OutputConfig { effort, format }
 
-effort?: "low" | "medium" | "high" | "max" | null
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
@@ -8572,6 +8572,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 

@@ -8595,7 +8595,7 @@ String
 
 class OutputConfig { effort, format\_ }
 
-effort: :low | :medium | :high | :max
+effort: :low | :medium | :high | 2 more
 
 All possible effort levels.
 
@@ -8606,6 +8606,8 @@ Accepts one of the following:
 :medium
 
 :high
+
+:xhigh
 
 :max
 

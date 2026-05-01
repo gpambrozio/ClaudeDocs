@@ -28,7 +28,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -73,6 +73,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 
@@ -144,7 +146,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-effort: [BetaEffortCapability](api/beta.md) { high, low, max, 2 more }
+effort: [BetaEffortCapability](api/beta.md) { high, low, max, 3 more }
 
 Effort (reasoning\_effort) support and available levels.
 
@@ -179,6 +181,14 @@ Whether the model supports medium effort level.
 supported: boolean
 
 Whether this capability is supported by the model.
+
+supported: boolean
+
+Whether this capability is supported by the model.
+
+xhigh: [BetaCapabilitySupport](api/beta.md) { supported }
+
+Indicates whether a capability is supported.
 
 supported: boolean
 
@@ -308,7 +318,10 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
     },
     "image_input": {
       "supported": true
@@ -381,7 +394,10 @@ Response 200
       "medium": {
         "supported": true
       },
-      "supported": true
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
     },
     "image_input": {
       "supported": true

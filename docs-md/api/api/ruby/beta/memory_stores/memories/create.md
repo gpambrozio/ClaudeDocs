@@ -1,16 +1,16 @@
-# CreateMemory
+# Create a memory
 
 Copy page
 
 Ruby
 
-# CreateMemory
+# Create a memory
 
 beta.memory\_stores.memories.create(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta.md) { id, content\_sha256, content\_size\_bytes, 7 more }
 
 POST/v1/memory\_stores/{memory\_store\_id}/memories
 
-CreateMemory
+Create a memory
 
 ##### ParametersExpand Collapse
 
@@ -18,7 +18,11 @@ memory\_store\_id: String
 
 content: String
 
+UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+
 path: String
+
+Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
 view: [BetaManagedAgentsMemoryView](api/beta.md)
 
@@ -38,7 +42,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
 
 Accepts one of the following:
 
@@ -84,17 +88,27 @@ Accepts one of the following:
 
 :"output-300k-2026-03-24"
 
+:"user-profiles-2026-03-24"
+
 :"advisor-tool-2026-03-01"
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
 
+A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
 id: String
+
+Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
 content\_sha256: String
 
+Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
 content\_size\_bytes: Integer
+
+Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
 created\_at: Time
 
@@ -102,9 +116,15 @@ A timestamp in RFC 3339 format
 
 memory\_store\_id: String
 
+ID of the memory store this memory belongs to (a `memstore_...` value).
+
 memory\_version\_id: String
 
+ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
 path: String
+
+Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
 type: :memory
 
@@ -114,7 +134,9 @@ A timestamp in RFC 3339 format
 
 content: String
 
-CreateMemory
+The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+Create a memory
 
 Ruby
 

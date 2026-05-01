@@ -46,9 +46,11 @@ The maximum number of tokens to generate before stopping.
 
 Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
+Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+
 Different models have different maximum values for this parameter. See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
-minimum1
+minimum0
 
 messages: Array<[MessageParam](api/messages.md) { content, role } >
 
@@ -2294,7 +2296,7 @@ output\_config?: [OutputConfig](api/messages.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | "max" | null
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
@@ -2305,6 +2307,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 

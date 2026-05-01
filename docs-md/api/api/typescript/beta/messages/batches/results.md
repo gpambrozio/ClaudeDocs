@@ -32,7 +32,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
 
 "message-batches-2024-09-24"
 
@@ -75,6 +75,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 
@@ -929,7 +931,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock { content, type }
+BetaCompactionBlock { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -940,6 +942,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string | null
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string | null
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 

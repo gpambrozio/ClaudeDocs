@@ -1,16 +1,16 @@
-# ListMemoryStores
+# List memory stores
 
 Copy page
 
 C#
 
-# ListMemoryStores
+# List memory stores
 
 [MemoryStoreListPageResponse](api/beta.md) Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores
 
-ListMemoryStores
+List memory stores
 
 ##### ParametersExpand Collapse
 
@@ -18,23 +18,23 @@ MemoryStoreListParams parameters
 
 DateTimeOffset createdAtGte
 
-Query param: Return stores created at or after this time (inclusive).
+Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
 DateTimeOffset createdAtLte
 
-Query param: Return stores created at or before this time (inclusive).
+Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
 Boolean includeArchived
 
-Query param: Query parameter for include\_archived
+Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
 Int limit
 
-Query param: Query parameter for limit
+Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
 string page
 
-Query param: Query parameter for page
+Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
@@ -82,39 +82,55 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 
 class MemoryStoreListPageResponse:
 
+A page of `memory_store` results, ordered by `created_at` descending (newest first).
+
 IReadOnlyList<[BetaManagedAgentsMemoryStore](api/beta.md)> Data
+
+Memory stores on this page, newest first. Empty when there are no stores matching the filters.
 
 required string ID
 
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string Name
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
 required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
 
 DateTimeOffset? ArchivedAt
 
 A timestamp in RFC 3339 format
 
-DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
 string Description
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
 IReadOnlyDictionary<string, string> Metadata
 
-string Name
-
-DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
 string? NextPage
 
-ListMemoryStores
+Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
+
+List memory stores
 
 C#
 
@@ -135,15 +151,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"
@@ -159,15 +175,15 @@ Response 200
   "data": [
     {
       "id": "id",
-      "type": "memory_store",
-      "archived_at": "2019-12-27T18:11:19.117Z",
       "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "metadata": {
         "foo": "string"
-      },
-      "name": "name",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      }
     }
   ],
   "next_page": "next_page"

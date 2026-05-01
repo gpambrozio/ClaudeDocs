@@ -7897,7 +7897,7 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 output\_config: object { effort, format }
 
-effort: optional "low" or "medium" or "high" or "max"
+effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
@@ -7906,6 +7906,8 @@ All possible effort levels.
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 

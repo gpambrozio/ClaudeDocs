@@ -2244,7 +2244,7 @@ output\_config?: [OutputConfig](api/messages.md) { effort, format }
 
 Configuration options for the model's output, such as the output format.
 
-effort?: "low" | "medium" | "high" | "max" | null
+effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
@@ -2255,6 +2255,8 @@ Accepts one of the following:
 "medium"
 
 "high"
+
+"xhigh"
 
 "max"
 

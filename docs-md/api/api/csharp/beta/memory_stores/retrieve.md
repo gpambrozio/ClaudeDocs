@@ -1,16 +1,16 @@
-# GetMemoryStore
+# Retrieve a memory store
 
 Copy page
 
 C#
 
-# GetMemoryStore
+# Retrieve a memory store
 
 [BetaManagedAgentsMemoryStore](api/beta.md) Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)
 
 GET/v1/memory\_stores/{memory\_store\_id}
 
-GetMemoryStore
+Retrieve a memory store
 
 ##### ParametersExpand Collapse
 
@@ -66,35 +66,47 @@ Optional header to specify the beta version(s) you want to use.
 
 "output-300k-2026-03-24"Output300k2026\_03\_24
 
+"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsMemoryStore:
 
+A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
 required string ID
 
+Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+
+required DateTimeOffset CreatedAt
+
+A timestamp in RFC 3339 format
+
+required string Name
+
+Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
 required Type Type
+
+required DateTimeOffset UpdatedAt
+
+A timestamp in RFC 3339 format
 
 DateTimeOffset? ArchivedAt
 
 A timestamp in RFC 3339 format
 
-DateTimeOffset CreatedAt
-
-A timestamp in RFC 3339 format
-
 string Description
+
+Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
 IReadOnlyDictionary<string, string> Metadata
 
-string Name
+Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-DateTimeOffset UpdatedAt
-
-A timestamp in RFC 3339 format
-
-GetMemoryStore
+Retrieve a memory store
 
 C#
 
@@ -114,15 +126,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 
@@ -133,15 +145,15 @@ Response 200
 ```shiki
 {
   "id": "id",
-  "type": "memory_store",
-  "archived_at": "2019-12-27T18:11:19.117Z",
   "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "metadata": {
     "foo": "string"
-  },
-  "name": "name",
-  "updated_at": "2019-12-27T18:11:19.117Z"
+  }
 }
 ```
 

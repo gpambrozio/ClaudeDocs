@@ -30,7 +30,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
 
 Accepts one of the following:
 
@@ -75,6 +75,8 @@ Accepts one of the following:
 "fast-mode-2026-02-01"
 
 "output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
 
@@ -929,7 +931,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, type }
+BetaCompactionBlock = object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -940,6 +942,10 @@ compaction blocks with null content; the server treats them as no-ops.
 content: string
 
 Summary of compacted content, or null if compaction failed
+
+encrypted\_content: string
+
+Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 

@@ -46,6 +46,10 @@ Query param: When true, includes archived sessions. Default: false (exclude arch
 
 Query param: Maximum number of results to return.
 
+--memory-store-id: optional string
+
+Query param: Filter sessions whose resources contain a memory\_store with this memory store ID.
+
 --order: optional "asc" or "desc"
 
 Query param: Sort direction for results, ordered by created\_at. Defaults to desc (newest first).

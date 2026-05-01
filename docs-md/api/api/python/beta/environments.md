@@ -202,7 +202,7 @@ Package configuration type
 
 class BetaEnvironment: …
 
-Unified Environment resource for both cloud and BYOC environments.
+Unified Environment resource for both cloud and self-hosted environments.
 
 id: str
 
