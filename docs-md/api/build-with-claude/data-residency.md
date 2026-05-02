@@ -9,6 +9,8 @@ Data residency controls let you manage where your data is processed and stored. 
 - **Inference geo:** Controls where model inference runs, on a per-request basis. Set via the `inference_geo` API parameter or as a workspace default.
 - **Workspace geo:** Controls where data is stored at rest and where endpoint processing (image transcoding, code execution, etc.) happens. Configured at the workspace level in the [Console](https://platform.claude.com).
 
+[Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console.
+
 ## Inference geo
 
 The `inference_geo` parameter controls where model inference runs for a specific API request. Add it to any `POST /v1/messages` call.
