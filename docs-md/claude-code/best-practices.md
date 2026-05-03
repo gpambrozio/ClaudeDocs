@@ -1,4 +1,4 @@
-# Best Practices for Claude Code
+# Best practices for Claude Code
 
 > ## Documentation Index
 >
@@ -41,16 +41,16 @@ Your verification can also be a test suite, a linter, or a Bash command that che
 
 Separate research and planning from implementation to avoid solving the wrong problem.
 
-Letting Claude jump straight to coding can produce code that solves the wrong problem. Use [Plan Mode](common-workflows.md) to separate exploration from execution.
+Letting Claude jump straight to coding can produce code that solves the wrong problem. Use [plan mode](permission-modes.md) to separate exploration from execution.
 The recommended workflow has four phases:
 
 1
 
 Explore
 
-Enter Plan Mode. Claude reads files and answers questions without making changes.
+Enter plan mode. Claude reads files and answers questions without making changes.
 
-claude (Plan Mode)
+claude (plan mode)
 
 ```shiki
 read /src/auth and understand how we handle sessions and login.
@@ -63,7 +63,7 @@ Plan
 
 Ask Claude to create a detailed implementation plan.
 
-claude (Plan Mode)
+claude (plan mode)
 
 ```shiki
 I want to add Google OAuth. What files need to change?
@@ -76,9 +76,9 @@ Press `Ctrl+G` to open the plan in your text editor for direct editing before Cl
 
 Implement
 
-Switch back to Normal Mode and let Claude code, verifying against its plan.
+Switch out of plan mode and let Claude code, verifying against its plan.
 
-claude (Normal Mode)
+claude (default mode)
 
 ```shiki
 implement the OAuth flow from your plan. write tests for the
@@ -91,13 +91,13 @@ Commit
 
 Ask Claude to commit with a descriptive message and create a PR.
 
-claude (Normal Mode)
+claude (default mode)
 
 ```shiki
 commit with a descriptive message and open a PR
 ```
 
-Plan Mode is useful, but also adds overhead.For tasks where the scope is clear and the fix is small (like fixing a typo, adding a log line, or renaming a variable) ask Claude to do it directly.Planning is most useful when you’re uncertain about the approach, when the change modifies multiple files, or when you’re unfamiliar with the code being modified. If you could describe the diff in one sentence, skip the plan.
+Plan mode is useful, but also adds overhead.For tasks where the scope is clear and the fix is small (like fixing a typo, adding a log line, or renaming a variable) ask Claude to do it directly.Planning is most useful when you’re uncertain about the approach, when the change modifies multiple files, or when you’re unfamiliar with the code being modified. If you could describe the diff in one sentence, skip the plan.
 
 ---
 
@@ -397,16 +397,9 @@ Checkpoints only track changes made *by Claude*, not external processes. This is
 
 ### [​](#resume-conversations) Resume conversations
 
-Run `claude --continue` to pick up where you left off, or `--resume` to choose from recent sessions.
+Name sessions with `/rename` and treat them like branches: each workstream gets its own persistent context.
 
-Claude Code saves conversations locally. When a task spans multiple sessions, you don’t have to re-explain the context:
-
-```shiki
-claude --continue    # Resume the most recent conversation
-claude --resume      # Select from recent conversations
-```
-
-Use `/rename` to give sessions descriptive names like `"oauth-migration"` or `"debugging-memory-leak"` so you can find them later. Treat sessions like branches: different workstreams can have separate, persistent contexts.
+Claude Code saves conversations locally, so when a task spans multiple sittings you don’t have to re-explain the context. Run `claude --continue` to pick up the most recent session, or `claude --resume` to choose from a list. Give sessions descriptive names like `oauth-migration` so you can find them later. See [Manage sessions](sessions.md) for the full set of resume, branch, and naming controls.
 
 ---
 
@@ -419,7 +412,7 @@ Everything so far assumes one human, one Claude, and one conversation. But Claud
 
 Use `claude -p "prompt"` in CI, pre-commit hooks, or scripts. Add `--output-format stream-json` for streaming JSON output.
 
-With `claude -p "your prompt"`, you can run Claude non-interactively, without a session. Non-interactive mode is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.
+With `claude -p "your prompt"`, you can run Claude non-interactively, without a session. [Non-interactive mode](headless.md) is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.
 
 ```shiki
 # One-off queries
@@ -436,11 +429,12 @@ claude -p "Analyze this log file" --output-format stream-json
 
 Run multiple Claude sessions in parallel to speed up development, run isolated experiments, or start complex workflows.
 
-There are three main ways to run parallel sessions:
+Pick the parallel approach that fits how much coordination you want to do yourself:
 
-- [Claude Code desktop app](desktop.md): Manage multiple local sessions visually. Each session gets its own isolated worktree.
-- [Claude Code on the web](claude-code-on-the-web.md): Run on Anthropic’s secure cloud infrastructure in isolated VMs.
-- [Agent teams](agent-teams.md): Automated coordination of multiple sessions with shared tasks, messaging, and a team lead.
+- [Worktrees](worktrees.md): run separate CLI sessions in isolated git checkouts so edits don’t collide
+- [Desktop app](desktop.md): manage multiple local sessions visually, each in its own worktree
+- [Claude Code on the web](claude-code-on-the-web.md): run sessions on Anthropic-managed cloud infrastructure in isolated VMs
+- [Agent teams](agent-teams.md): automated coordination of multiple sessions with shared tasks, messaging, and a team lead
 
 Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won’t be biased toward code it just wrote.
 For example, use a Writer/Reviewer pattern:

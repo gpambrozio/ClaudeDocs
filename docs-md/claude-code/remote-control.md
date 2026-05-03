@@ -50,7 +50,7 @@ The process stays running in your terminal in server mode, waiting for remote co
 | --- | --- |
 | `--name "My Project"` | Set a custom session title visible in the session list at claude.ai/code. |
 | `--remote-control-session-name-prefix <prefix>` | Prefix for auto-generated session names when no explicit name is set. Defaults to your machine’s hostname, producing names like `myhost-graceful-unicorn`. Set `CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX` for the same effect. |
-| `--spawn <mode>` | How the server creates sessions. • `same-dir` (default): all sessions share the current working directory, so they can conflict if editing the same files. • `worktree`: each on-demand session gets its own [git worktree](common-workflows.md). Requires a git repository. • `session`: single-session mode. Serves exactly one session and rejects additional connections. Set at startup only. Press `w` at runtime to toggle between `same-dir` and `worktree`. |
+| `--spawn <mode>` | How the server creates sessions. • `same-dir` (default): all sessions share the current working directory, so they can conflict if editing the same files. • `worktree`: each on-demand session gets its own [git worktree](worktrees.md). Requires a git repository. • `session`: single-session mode. Serves exactly one session and rejects additional connections. Set at startup only. Press `w` at runtime to toggle between `same-dir` and `worktree`. |
 | `--capacity <N>` | Maximum number of concurrent sessions. Default is 32. Cannot be used with `--spawn=session`. |
 | `--verbose` | Show detailed connection and session logs. |
 | `--sandbox` / `--no-sandbox` | Enable or disable [sandboxing](sandboxing.md) for filesystem and network isolation. Off by default. |

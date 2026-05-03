@@ -161,7 +161,7 @@ Click a filename to open that node in the explorer above.
 | [`settings.json`](#ce-settings-json) | Project and global | ✓ | Permissions, hooks, env vars, model defaults | [Settings](settings.md) |
 | [`settings.local.json`](#ce-settings-local-json) | Project only |  | Your personal overrides, auto-gitignored | [Settings scopes](settings.md) |
 | [`.mcp.json`](#ce-mcp-json) | Project only | ✓ | Team-shared MCP servers | [MCP scopes](mcp.md) |
-| [`.worktreeinclude`](#ce-worktreeinclude) | Project only | ✓ | Gitignored files to copy into new worktrees | [Worktrees](common-workflows.md) |
+| [`.worktreeinclude`](#ce-worktreeinclude) | Project only | ✓ | Gitignored files to copy into new worktrees | [Worktrees](worktrees.md) |
 | [`skills/<name>/SKILL.md`](#ce-skills) | Project and global | ✓ | Reusable prompts invoked with `/name` or auto-invoked | [Skills](skills.md) |
 | [`commands/*.md`](#ce-commands) | Project and global | ✓ | Single-file prompts; same mechanism as skills | [Skills](skills.md) |
 | [`output-styles/*.md`](#ce-output-styles) | Project and global | ✓ | Custom system-prompt sections | [Output styles](output-styles.md) |

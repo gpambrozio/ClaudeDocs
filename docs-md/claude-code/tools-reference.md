@@ -19,7 +19,7 @@ To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reus
 | `CronList` | Lists all scheduled tasks in the session | No |
 | `Edit` | Makes targeted edits to specific files | Yes |
 | `EnterPlanMode` | Switches to plan mode to design an approach before coding | No |
-| `EnterWorktree` | Creates an isolated [git worktree](common-workflows.md) and switches into it. Pass a `path` to switch into an existing worktree of the current repository instead of creating a new one. Not available to subagents | No |
+| `EnterWorktree` | Creates an isolated [git worktree](worktrees.md) and switches into it. Pass a `path` to switch into an existing worktree of the current repository instead of creating a new one. Not available to subagents | No |
 | `ExitPlanMode` | Presents a plan for approval and exits plan mode | Yes |
 | `ExitWorktree` | Exits a worktree session and returns to the original directory. Not available to subagents | No |
 | `Glob` | Finds files based on pattern matching | No |

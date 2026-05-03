@@ -43,7 +43,7 @@ The three restore options revert state: they undo code changes, conversation his
 
 This is similar to `/compact`, but targeted: instead of summarizing the entire conversation, you keep early context in full detail and only compress the parts that are using up space. You can type optional instructions to guide what the summary focuses on.
 
-Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use [fork](how-claude-code-works.md) instead (`claude --continue --fork-session`).
+Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use [fork](sessions.md) instead (`claude --continue --fork-session`).
 
 ## [​](#common-use-cases) Common use cases
 

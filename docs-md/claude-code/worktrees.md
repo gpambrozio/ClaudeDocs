@@ -1,0 +1,164 @@
+# Run parallel sessions with worktrees
+
+> ## Documentation Index
+>
+> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
+>
+> Use this file to discover all available pages before exploring further.
+
+A [git worktree](https://git-scm.com/docs/git-worktree) is a separate working directory with its own files and branch, sharing the same repository history and remote as your main checkout. Running each Claude Code session in its own worktree means edits in one session never touch files in another, so you can have Claude building a feature in one terminal while fixing a bug in a second.
+This page covers worktree isolation in the CLI. Everything below assumes a git repository. For other version control systems, see [Non-git version control](#non-git-version-control). The [desktop app](desktop.md) creates a worktree for every new session automatically.
+
+## [​](#choose-a-parallelism-approach) Choose a parallelism approach
+
+Worktrees are one of several ways to run Claude in parallel. Pick based on who is coordinating the work:
+
+| Approach | What it gives you | When to use it |
+| --- | --- | --- |
+| Worktrees | Separate checkouts you drive yourself, one terminal per task | You want to work on unrelated tasks side by side |
+| [Subagents](sub-agents.md) | Delegated tasks inside a single session, results returned to your main conversation | You want Claude to fan out research or edits within one task |
+| [Agent teams](agent-teams.md) | Multiple coordinated sessions that message each other and share a task list | You want Claude to manage the parallelism for you |
+
+Subagents and agent teams can also use worktree isolation. See [Isolate subagents with worktrees](#isolate-subagents-with-worktrees).
+
+## [​](#start-claude-in-a-worktree) Start Claude in a worktree
+
+Pass `--worktree` or `-w` to create an isolated worktree and start Claude in it. By default, the worktree is created under `.claude/worktrees/<value>/` at your repository root, on a new branch named `worktree-<value>`:
+
+```shiki
+claude --worktree feature-auth
+```
+
+To put worktrees somewhere else, configure a [`WorktreeCreate` hook](#non-git-version-control). Run the command again with a different name in another terminal to start a second isolated session:
+
+```shiki
+claude --worktree bugfix-123
+```
+
+If you omit the name, Claude generates one such as `bright-running-fox`:
+
+```shiki
+claude --worktree
+```
+
+You can also ask Claude to “work in a worktree” during a session, and it will create one with the [`EnterWorktree`](tools-reference.md) tool.
+
+Add `.claude/worktrees/` to your `.gitignore` so worktree contents don’t appear as untracked files in your main checkout.
+
+### [​](#choose-the-base-branch) Choose the base branch
+
+Worktrees branch from your default branch: `origin/HEAD` if the repository has a remote, otherwise the current local `HEAD`. The `origin/HEAD` reference is stored in your local `.git` directory and was set when you cloned. If the repository’s default branch later changed on the remote, your local `origin/HEAD` still points at the old one. Re-sync it with the remote’s current default:
+
+```shiki
+git remote set-head origin -a
+```
+
+To base worktrees off a specific branch instead, set it explicitly:
+
+```shiki
+git remote set-head origin your-branch-name
+```
+
+Both commands update only your local `.git` directory and change nothing on the remote. For per-invocation control over the base, configure a [`WorktreeCreate` hook](hooks.md), which replaces the default `git worktree` logic entirely.
+
+## [​](#copy-gitignored-files-into-worktrees) Copy gitignored files into worktrees
+
+A worktree is a fresh checkout, so untracked files like `.env` or `.env.local` from your main repository are not present. To copy them automatically when Claude creates a worktree, add a `.worktreeinclude` file to your project root.
+The file uses `.gitignore` syntax. Only files that match a pattern and are also gitignored are copied, so tracked files are never duplicated.
+This `.worktreeinclude` copies two env files and a secrets config into each new worktree:
+
+.worktreeinclude
+
+```shiki
+.env
+.env.local
+config/secrets.json
+```
+
+This applies to worktrees created with `--worktree`, [subagent worktrees](#isolate-subagents-with-worktrees), and parallel sessions in the [desktop app](desktop.md).
+
+## [​](#isolate-subagents-with-worktrees) Isolate subagents with worktrees
+
+Subagents can run in their own worktrees so parallel edits don’t conflict. Ask Claude to “use worktrees for your agents”, or set it permanently on a [custom subagent](sub-agents.md) by adding `isolation: worktree` to the frontmatter. Each subagent gets a temporary worktree that is removed automatically when the subagent finishes without changes.
+
+## [​](#clean-up-worktrees) Clean up worktrees
+
+When you exit a worktree session, cleanup depends on whether you made changes:
+
+- **No changes**: the worktree and its branch are removed automatically
+- **Changes or commits exist**: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch so you can return later. Removing deletes the worktree directory and its branch, discarding all uncommitted changes and commits
+- **Non-interactive runs**: worktrees created with `--worktree` alongside `-p` are not cleaned up automatically since there is no exit prompt. Remove them with `git worktree remove`
+
+Subagent worktrees orphaned by a crash or interrupted run are removed at startup once they are older than your [`cleanupPeriodDays`](settings.md) setting, provided they have no uncommitted changes, no untracked files, and no unpushed commits. Worktrees you create with `--worktree` are never removed by this sweep.
+
+## [​](#manage-worktrees-manually) Manage worktrees manually
+
+For full control over worktree location and branch configuration, create worktrees with Git directly. This is useful when you need to check out a specific existing branch or place the worktree outside the repository.
+Create a worktree on a new branch:
+
+```shiki
+git worktree add ../project-feature-a -b feature-a
+```
+
+Create a worktree from an existing branch:
+
+```shiki
+git worktree add ../project-bugfix bugfix-123
+```
+
+Start Claude in the worktree:
+
+```shiki
+cd ../project-feature-a && claude
+```
+
+List your worktrees:
+
+```shiki
+git worktree list
+```
+
+Remove one when you’re done with it:
+
+```shiki
+git worktree remove ../project-feature-a
+```
+
+See the [Git worktree documentation](https://git-scm.com/docs/git-worktree) for the full command reference. Remember to initialize your development environment in each new worktree: install dependencies, set up virtual environments, or run whatever your project’s setup requires.
+
+## [​](#non-git-version-control) Non-git version control
+
+Worktree isolation uses git by default. For SVN, Perforce, Mercurial, or other systems, configure [`WorktreeCreate` and `WorktreeRemove` hooks](hooks.md) to provide custom creation and cleanup logic. Because the hook replaces the default git behavior, [`.worktreeinclude`](#copy-gitignored-files-into-worktrees) is not processed when you use `--worktree`. Copy any local configuration files inside your hook script instead.
+This `WorktreeCreate` hook reads the worktree name from stdin, checks out a fresh SVN working copy, and prints the directory path so Claude Code can use it as the session’s working directory:
+
+```shiki
+{
+  "hooks": {
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'NAME=$(jq -r .name); DIR=\"$HOME/.claude/worktrees/$NAME\"; svn checkout https://svn.example.com/repo/trunk \"$DIR\" >&2 && echo \"$DIR\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Pair it with a `WorktreeRemove` hook to clean up when the session ends. See the [hooks reference](hooks.md) for the input schema and a removal example.
+
+## [​](#see-also) See also
+
+Worktrees handle file isolation. The related pages below cover delegating work into those isolated checkouts and switching between the sessions you create:
+
+- [Subagents](sub-agents.md): delegate work to isolated agents within a session
+- [Agent teams](agent-teams.md): coordinate multiple Claude sessions automatically
+- [Manage sessions](sessions.md): name, resume, and switch between conversations
+- [Desktop parallel sessions](desktop.md): worktree-backed sessions in the desktop app
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

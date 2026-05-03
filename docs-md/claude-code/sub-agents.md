@@ -46,7 +46,7 @@ A fast, read-only agent optimized for searching and analyzing codebases.
 
 Claude delegates to Explore when it needs to search or understand a codebase without making changes. This keeps exploration results out of your main conversation context.When invoking Explore, Claude specifies a thoroughness level: **quick** for targeted lookups, **medium** for balanced exploration, or **very thorough** for comprehensive analysis.
 
-A research agent used during [plan mode](common-workflows.md) to gather context before presenting a plan.
+A research agent used during [plan mode](permission-modes.md) to gather context before presenting a plan.
 
 - **Model**: Inherits from main conversation
 - **Tools**: Read-only tools (denied access to Write and Edit tools)
@@ -240,7 +240,7 @@ The following fields can be used in the YAML frontmatter. Only `name` and `descr
 | `memory` | No | [Persistent memory scope](#enable-persistent-memory): `user`, `project`, or `local`. Enables cross-session learning |
 | `background` | No | Set to `true` to always run this subagent as a [background task](#run-subagents-in-foreground-or-background). Default: `false` |
 | `effort` | No | Effort level when this subagent is active. Overrides the session effort level. Default: inherits from session. Options: `low`, `medium`, `high`, `xhigh`, `max`; available levels depend on the model |
-| `isolation` | No | Set to `worktree` to run the subagent in a temporary [git worktree](common-workflows.md), giving it an isolated copy of the repository. The worktree is automatically cleaned up if the subagent makes no changes |
+| `isolation` | No | Set to `worktree` to run the subagent in a temporary [git worktree](worktrees.md), giving it an isolated copy of the repository. The worktree is automatically cleaned up if the subagent makes no changes |
 | `color` | No | Display color for the subagent in the task list and transcript. Accepts `red`, `blue`, `green`, `yellow`, `purple`, `orange`, `pink`, or `cyan` |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main session agent (via `--agent` or the `agent` setting). [Commands](commands.md) and [skills](skills.md) are processed. Prepended to any user-provided prompt |
 
