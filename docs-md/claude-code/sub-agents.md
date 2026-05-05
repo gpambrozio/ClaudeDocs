@@ -67,7 +67,7 @@ Claude Code includes additional helper agents for specific tasks. These are typi
 | Agent | Model | When Claude uses it |
 | --- | --- | --- |
 | statusline-setup | Sonnet | When you run `/statusline` to configure your status line |
-| Claude Code Guide | Haiku | When you ask questions about Claude Code features |
+| claude-code-guide | Haiku | When you ask questions about Claude Code features |
 
 Beyond these built-in subagents, you can create your own with custom prompts, tool restrictions, permission modes, hooks, and skills. The following sections show how to get started and customize subagents.
 
@@ -177,6 +177,9 @@ Project subagents are discovered by walking up from the current working director
 **User subagents** (`~/.claude/agents/`) are personal subagents available in all your projects.
 **CLI-defined subagents** are passed as JSON when launching Claude Code. They exist only for that session and aren’t saved to disk, making them useful for quick testing or automation scripts. You can define multiple subagents in a single `--agents` call:
 
+- macOS, Linux, WSL
+- Windows PowerShell
+
 ```shiki
 claude --agents '{
   "code-reviewer": {
@@ -192,6 +195,23 @@ claude --agents '{
 }'
 ```
 
+```shiki
+claude --agents @'
+{
+  "code-reviewer": {
+    "description": "Expert code reviewer. Use proactively after code changes.",
+    "prompt": "You are a senior code reviewer. Focus on code quality, security, and best practices.",
+    "tools": ["Read", "Grep", "Glob", "Bash"],
+    "model": "sonnet"
+  },
+  "debugger": {
+    "description": "Debugging specialist for errors and test failures.",
+    "prompt": "You are an expert debugger. Analyze errors, identify root causes, and provide fixes."
+  }
+}
+'@
+```
+
 The `--agents` flag accepts JSON with the same [frontmatter](#supported-frontmatter-fields) fields as file-based subagents: `description`, `prompt`, `tools`, `disallowedTools`, `model`, `permissionMode`, `mcpServers`, `hooks`, `maxTurns`, `skills`, `initialPrompt`, `memory`, `effort`, `background`, `isolation`, and `color`. Use `prompt` for the system prompt, equivalent to the markdown body in file-based subagents.
 **Managed subagents** are deployed by organization administrators. Place markdown files in `.claude/agents/` inside the [managed settings directory](settings.md), using the same frontmatter format as project and user subagents. Managed definitions take precedence over project and user subagents with the same name.
 **Plugin subagents** come from [plugins](plugins.md) you’ve installed. They appear in `/agents` alongside your custom subagents. See the [plugin components reference](plugins-reference.md) for details on creating plugin subagents.
@@ -204,7 +224,7 @@ Subagent definitions from any of these scopes are also available to [agent teams
 
 Subagent files use YAML frontmatter for configuration, followed by the system prompt in Markdown:
 
-Subagents are loaded at session start. If you create a subagent by manually adding a file, restart your session or use `/agents` to load it immediately.
+Subagents are loaded at session start. If you add or edit a subagent file directly on disk, restart your session to load it. Subagents created through the `/agents` interface take effect immediately without a restart.
 
 ```shiki
 ---
@@ -463,7 +483,7 @@ fi
 exit 0
 ```
 
-See [Hook input](hooks.md) for the complete input schema and [exit codes](hooks.md) for how exit codes affect behavior.
+See [Hook input](hooks.md) for the complete input schema and [exit codes](hooks.md) for how exit codes affect behavior. On Windows, write hook scripts in PowerShell and add `shell: powershell` to the hook entry as shown in [running hooks in PowerShell](hooks.md).
 
 #### [​](#disable-specific-subagents) Disable specific subagents
 
@@ -946,12 +966,13 @@ fi
 exit 0
 ```
 
-Make the script executable:
+On macOS and Linux, make the script executable:
 
 ```shiki
 chmod +x ./scripts/validate-readonly-query.sh
 ```
 
+On Windows, write the validation script in PowerShell and add `shell: powershell` to the hook entry. See [running hooks in PowerShell](hooks.md).
 The hook receives JSON via stdin with the Bash command in `tool_input.command`. Exit code 2 blocks the operation and feeds the error message back to Claude. See [Hooks](hooks.md) for details on exit codes and [Hook input](hooks.md) for the complete input schema.
 
 ## [​](#next-steps) Next steps
