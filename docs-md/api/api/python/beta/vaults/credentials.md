@@ -42,6 +42,12 @@ beta.vaults.credentials.archive(strcredential\_id, CredentialArchiveParams\*\*kw
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
+##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
+
+beta.vaults.credentials.mcp\_oauth\_validate(strcredential\_id, CredentialMCPOAuthValidateParams\*\*kwargs)  -> [BetaManagedAgentsCredentialValidation](api/beta.md)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+
 ##### ModelsExpand Collapse
 
 class BetaManagedAgentsCredential: …
@@ -151,6 +157,118 @@ Identifier of the vault this credential belongs to.
 display\_name: Optional[str]
 
 Human-readable name for the credential.
+
+class BetaManagedAgentsCredentialValidation: …
+
+Result of live-probing a credential against its configured MCP server.
+
+credential\_id: str
+
+Unique identifier of the credential that was validated.
+
+has\_refresh\_token: bool
+
+Whether the credential has a refresh token configured.
+
+mcp\_probe: Optional[BetaManagedAgentsMCPProbe]
+
+The failing step of an MCP validation probe.
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+An HTTP response captured during a credential validation probe.
+
+body: str
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: bool
+
+Whether `body` was truncated.
+
+content\_type: str
+
+Value of the `Content-Type` response header.
+
+status\_code: int
+
+HTTP status code.
+
+method: str
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+refresh: Optional[BetaManagedAgentsRefreshObject]
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+An HTTP response captured during a credential validation probe.
+
+body: str
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: bool
+
+Whether `body` was truncated.
+
+content\_type: str
+
+Value of the `Content-Type` response header.
+
+status\_code: int
+
+HTTP status code.
+
+status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+Accepts one of the following:
+
+"succeeded"
+
+"failed"
+
+"connect\_error"
+
+"no\_refresh\_token"
+
+status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+
+Overall verdict of a credential validation probe.
+
+Accepts one of the following:
+
+"valid"
+
+"invalid"
+
+"unknown"
+
+type: Literal["vault\_credential\_validation"]
+
+validated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+vault\_id: str
+
+Identifier of the vault containing the credential.
+
+Literal["valid", "invalid", "unknown"]
+
+Overall verdict of a credential validation probe.
+
+Accepts one of the following:
+
+"valid"
+
+"invalid"
+
+"unknown"
 
 class BetaManagedAgentsDeletedCredential: …
 
@@ -483,6 +601,92 @@ type: Literal["client\_secret\_post"]
 client\_secret: Optional[str]
 
 Updated OAuth client secret.
+
+class BetaManagedAgentsMCPProbe: …
+
+The failing step of an MCP validation probe.
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+An HTTP response captured during a credential validation probe.
+
+body: str
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: bool
+
+Whether `body` was truncated.
+
+content\_type: str
+
+Value of the `Content-Type` response header.
+
+status\_code: int
+
+HTTP status code.
+
+method: str
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+class BetaManagedAgentsRefreshHTTPResponse: …
+
+An HTTP response captured during a credential validation probe.
+
+body: str
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: bool
+
+Whether `body` was truncated.
+
+content\_type: str
+
+Value of the `Content-Type` response header.
+
+status\_code: int
+
+HTTP status code.
+
+class BetaManagedAgentsRefreshObject: …
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+http\_response: Optional[BetaManagedAgentsRefreshHTTPResponse]
+
+An HTTP response captured during a credential validation probe.
+
+body: str
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: bool
+
+Whether `body` was truncated.
+
+content\_type: str
+
+Value of the `Content-Type` response header.
+
+status\_code: int
+
+HTTP status code.
+
+status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+Accepts one of the following:
+
+"succeeded"
+
+"failed"
+
+"connect\_error"
+
+"no\_refresh\_token"
 
 class BetaManagedAgentsStaticBearerAuthResponse: …
 

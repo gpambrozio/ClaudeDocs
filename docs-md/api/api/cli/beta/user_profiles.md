@@ -38,7 +38,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-beta\_user\_profile: object { id, created\_at, metadata, 4 more }
+beta\_user\_profile: object { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -51,6 +51,16 @@ A timestamp in RFC 3339 format
 metadata: map[string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: "external" or "resold" or "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+"external"
+
+"resold"
+
+"internal"
 
 trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
@@ -79,6 +89,10 @@ A timestamp in RFC 3339 format
 external\_id: optional string
 
 Platform's own identifier for this user. Not enforced unique.
+
+name: optional string
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url }
 

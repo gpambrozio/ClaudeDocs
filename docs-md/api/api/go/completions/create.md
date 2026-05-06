@@ -164,6 +164,8 @@ const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
 type Completion struct{…}

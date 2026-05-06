@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
 
 Accepts one of the following:
 
@@ -73,6 +73,8 @@ Accepts one of the following:
 "user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -218,11 +220,15 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserInterruptEventParams = object { type }
+BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
 type: "user.interrupt"
+
+session\_thread\_id: optional string
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
 BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
 
@@ -392,13 +398,53 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
+BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubricParams](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+BetaManagedAgentsFileRubricParams = object { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubricParams = object { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations: optional number
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 ##### ReturnsExpand Collapse
 
 BetaManagedAgentsSendSessionEvents = object { data }
 
 Events that were successfully sent to the session.
 
-data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  or [BetaManagedAgentsUserCustomToolResultEvent](api/beta.md) { id, custom\_tool\_use\_id, type, 3 more }
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 2 more
 
 Sent events
 
@@ -548,7 +594,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at }
+BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -562,7 +608,11 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 3 more }
+session\_thread\_id: optional string
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -594,7 +644,11 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 3 more }
+session\_thread\_id: optional string
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -745,6 +799,62 @@ Whether the tool execution resulted in an error.
 processed\_at: optional string
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: optional string
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: string
+
+Unique identifier for this event.
+
+description: string
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: number
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: string
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+BetaManagedAgentsFileRubric = object { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubric = object { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: "text"
+
+type: "user.define\_outcome"
 
 Send Events
 

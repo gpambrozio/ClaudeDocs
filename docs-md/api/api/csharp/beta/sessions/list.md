@@ -64,6 +64,18 @@ string page
 
 Query param: Opaque pagination cursor from a previous response's next\_page.
 
+IReadOnlyList<Status> statuses
+
+Query param: Filter by session status. Repeat the parameter to match any of multiple statuses.
+
+"rescheduling"Rescheduling
+
+"running"Running
+
+"idle"Idle
+
+"terminated"Terminated
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -114,6 +126,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
+"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+
 ##### ReturnsExpand Collapse
 
 class SessionListPageResponse:
@@ -129,6 +143,84 @@ required string ID
 required [BetaManagedAgentsSessionAgent](api/beta.md) Agent
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+required string ID
+
+required string? Description
+
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
+required string Name
+
+required Type Type
+
+required string Url
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)? Multiagent
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+required IReadOnlyList<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> Agents
+
+Full `agent` definitions the coordinator may spawn as session threads.
 
 required string ID
 
@@ -388,6 +480,196 @@ required Type Type
 
 required Int Version
 
+required Type Type
+
+required string Name
+
+required IReadOnlyList<Skill> Skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+required string? System
+
+required IReadOnlyList<Tool> Tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+required Type Type
+
+required Int Version
+
 required DateTimeOffset? ArchivedAt
 
 A timestamp in RFC 3339 format
@@ -399,6 +681,36 @@ A timestamp in RFC 3339 format
 required string EnvironmentID
 
 required IReadOnlyDictionary<string, string> Metadata
+
+required IReadOnlyList<[BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)> OutcomeEvaluations
+
+Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
+
+required DateTimeOffset? CompletedAt
+
+A timestamp in RFC 3339 format
+
+required string Description
+
+What the agent should produce.
+
+required string? Explanation
+
+Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+required Int Iteration
+
+0-indexed revision cycle the outcome is currently on.
+
+required string OutcomeID
+
+Server-generated outc\_ ID for this outcome.
+
+required string Result
+
+Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+
+required Type Type
 
 required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta.md)> Resources
 
@@ -601,6 +913,57 @@ Response 200
           "id": "claude-sonnet-4-6",
           "speed": "standard"
         },
+        "multiagent": {
+          "agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "description": "A focused research subagent.",
+              "mcp_servers": [
+                {
+                  "name": "example-mcp",
+                  "type": "url",
+                  "url": "https://example-server.modelcontextprotocol.io/sse"
+                }
+              ],
+              "model": {
+                "id": "claude-sonnet-4-6",
+                "speed": "standard"
+              },
+              "name": "Researcher",
+              "skills": [
+                {
+                  "skill_id": "xlsx",
+                  "type": "anthropic",
+                  "version": "1"
+                }
+              ],
+              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+              "tools": [
+                {
+                  "configs": [
+                    {
+                      "enabled": true,
+                      "name": "bash",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": true,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  },
+                  "type": "agent_toolset_20260401"
+                }
+              ],
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "coordinator"
+        },
         "name": "My First Agent",
         "skills": [
           {
@@ -642,6 +1005,17 @@ Response 200
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},
+      "outcome_evaluations": [
+        {
+          "completed_at": "2026-03-15T10:02:31Z",
+          "description": "Produce a 2-page summary as summary.md",
+          "explanation": "All five sections present with inline citations.",
+          "iteration": 0,
+          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+          "result": "satisfied",
+          "type": "outcome_evaluation"
+        }
+      ],
       "resources": [
         {
           "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -713,6 +1087,57 @@ Response 200
           "id": "claude-sonnet-4-6",
           "speed": "standard"
         },
+        "multiagent": {
+          "agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "description": "A focused research subagent.",
+              "mcp_servers": [
+                {
+                  "name": "example-mcp",
+                  "type": "url",
+                  "url": "https://example-server.modelcontextprotocol.io/sse"
+                }
+              ],
+              "model": {
+                "id": "claude-sonnet-4-6",
+                "speed": "standard"
+              },
+              "name": "Researcher",
+              "skills": [
+                {
+                  "skill_id": "xlsx",
+                  "type": "anthropic",
+                  "version": "1"
+                }
+              ],
+              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+              "tools": [
+                {
+                  "configs": [
+                    {
+                      "enabled": true,
+                      "name": "bash",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": true,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  },
+                  "type": "agent_toolset_20260401"
+                }
+              ],
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "coordinator"
+        },
         "name": "My First Agent",
         "skills": [
           {
@@ -754,6 +1179,17 @@ Response 200
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},
+      "outcome_evaluations": [
+        {
+          "completed_at": "2026-03-15T10:02:31Z",
+          "description": "Produce a 2-page summary as summary.md",
+          "explanation": "All five sections present with inline citations.",
+          "iteration": 0,
+          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+          "result": "satisfied",
+          "type": "outcome_evaluation"
+        }
+      ],
       "resources": [
         {
           "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",

@@ -24,7 +24,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
 
 Accepts one of the following:
 
@@ -73,6 +73,8 @@ Accepts one of the following:
 "user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
 
 ##### ReturnsExpand Collapse
 
@@ -240,6 +242,10 @@ processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
+session\_thread\_id: Optional[str]
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent: …
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -271,6 +277,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: Optional[str]
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent: …
 
@@ -424,6 +434,10 @@ processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
+session\_thread\_id: Optional[str]
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsAgentCustomToolUseEvent: …
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -445,6 +459,10 @@ processed\_at: datetime
 A timestamp in RFC 3339 format
 
 type: Literal["agent.custom\_tool\_use"]
+
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 class BetaManagedAgentsAgentMessageEvent: …
 
@@ -521,6 +539,10 @@ Accepts one of the following:
 "ask"
 
 "deny"
+
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentMCPToolResultEvent: …
 
@@ -708,6 +730,10 @@ Accepts one of the following:
 
 "deny"
 
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 class BetaManagedAgentsAgentToolResultEvent: …
 
 Event representing the result of an agent tool execution.
@@ -859,6 +885,310 @@ The title of the document.
 is\_error: Optional[bool]
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent: …
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[Content]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock: …
+
+Regular text content.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+class BetaManagedAgentsImageBlock: …
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource: …
+
+Base64-encoded image data.
+
+data: str
+
+Base64-encoded image data.
+
+media\_type: str
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsURLImageSource: …
+
+Image referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource: …
+
+Image referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["image"]
+
+class BetaManagedAgentsDocumentBlock: …
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource: …
+
+Base64-encoded document data.
+
+data: str
+
+Base64-encoded document data.
+
+media\_type: str
+
+MIME type of the document (e.g., "application/pdf").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsPlainTextDocumentSource: …
+
+Plain text document content.
+
+data: str
+
+The plain text content.
+
+media\_type: Literal["text/plain"]
+
+MIME type of the text content. Must be "text/plain".
+
+type: Literal["text"]
+
+class BetaManagedAgentsURLDocumentSource: …
+
+Document referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource: …
+
+Document referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["document"]
+
+context: Optional[str]
+
+Additional context about the document for the model.
+
+title: Optional[str]
+
+The title of the document.
+
+from\_session\_thread\_id: str
+
+Public `sthr_` ID of the thread that sent the message.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["agent.thread\_message\_received"]
+
+from\_agent\_name: Optional[str]
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent: …
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[Content]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock: …
+
+Regular text content.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+class BetaManagedAgentsImageBlock: …
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource: …
+
+Base64-encoded image data.
+
+data: str
+
+Base64-encoded image data.
+
+media\_type: str
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsURLImageSource: …
+
+Image referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource: …
+
+Image referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["image"]
+
+class BetaManagedAgentsDocumentBlock: …
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource: …
+
+Base64-encoded document data.
+
+data: str
+
+Base64-encoded document data.
+
+media\_type: str
+
+MIME type of the document (e.g., "application/pdf").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsPlainTextDocumentSource: …
+
+Plain text document content.
+
+data: str
+
+The plain text content.
+
+media\_type: Literal["text/plain"]
+
+MIME type of the text content. Must be "text/plain".
+
+type: Literal["text"]
+
+class BetaManagedAgentsURLDocumentSource: …
+
+Document referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource: …
+
+Document referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["document"]
+
+context: Optional[str]
+
+Additional context about the document for the model.
+
+title: Optional[str]
+
+The title of the document.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+to\_session\_thread\_id: str
+
+Public `sthr_` ID of the thread the message was sent to.
+
+type: Literal["agent.thread\_message\_sent"]
+
+to\_agent\_name: Optional[str]
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentThreadContextCompactedEvent: …
 
@@ -1224,6 +1554,114 @@ A timestamp in RFC 3339 format
 
 type: Literal["session.status\_terminated"]
 
+class BetaManagedAgentsSessionThreadCreatedEvent: …
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the callable agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public `sthr_` ID of the newly created thread.
+
+type: Literal["session.thread\_created"]
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …
+
+Emitted when an outcome evaluation cycle begins.
+
+id: str
+
+Unique identifier for this event.
+
+iteration: int
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["span.outcome\_evaluation\_start"]
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+id: str
+
+Unique identifier for this event.
+
+explanation: str
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+iteration: int
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_evaluation\_start\_id: str
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+result: str
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+type: Literal["span.outcome\_evaluation\_end"]
+
+usage: [BetaManagedAgentsSpanModelUsage](api/beta.md)
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: int
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: int
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: int
+
+Input tokens consumed by this request.
+
+output\_tokens: int
+
+Output tokens generated by this request.
+
+speed: Optional[Literal["standard", "fast"]]
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 class BetaManagedAgentsSpanModelRequestStartEvent: …
 
 Emitted when a model request is initiated by the agent.
@@ -1290,6 +1728,80 @@ A timestamp in RFC 3339 format
 
 type: Literal["span.model\_request\_end"]
 
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+id: str
+
+Unique identifier for this event.
+
+iteration: int
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["span.outcome\_evaluation\_ongoing"]
+
+class BetaManagedAgentsUserDefineOutcomeEvent: …
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: str
+
+Unique identifier for this event.
+
+description: str
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: Optional[int]
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: str
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+rubric: Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric: …
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: str
+
+ID of the rubric file.
+
+type: Literal["file"]
+
+class BetaManagedAgentsTextRubric: …
+
+Rubric content provided inline as text.
+
+content: str
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: Literal["text"]
+
+type: Literal["user.define\_outcome"]
+
 class BetaManagedAgentsSessionDeletedEvent: …
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -1303,6 +1815,122 @@ processed\_at: datetime
 A timestamp in RFC 3339 format
 
 type: Literal["session.deleted"]
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent: …
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that started running.
+
+type: Literal["session.thread\_status\_running"]
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent: …
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that went idle.
+
+stop\_reason: StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn: …
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: Literal["end\_turn"]
+
+class BetaManagedAgentsSessionRequiresAction: …
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: List[str]
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: Literal["requires\_action"]
+
+class BetaManagedAgentsSessionRetriesExhausted: …
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: Literal["retries\_exhausted"]
+
+type: Literal["session.thread\_status\_idle"]
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that terminated.
+
+type: Literal["session.thread\_status\_terminated"]
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that is retrying.
+
+type: Literal["session.thread\_status\_rescheduled"]
 
 [BetaManagedAgentsStreamSessionEvents](api/beta.md)
 
@@ -1468,6 +2096,10 @@ processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
+session\_thread\_id: Optional[str]
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent: …
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -1499,6 +2131,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: Optional[str]
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent: …
 
@@ -1652,6 +2288,10 @@ processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
+session\_thread\_id: Optional[str]
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsAgentCustomToolUseEvent: …
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -1673,6 +2313,10 @@ processed\_at: datetime
 A timestamp in RFC 3339 format
 
 type: Literal["agent.custom\_tool\_use"]
+
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 class BetaManagedAgentsAgentMessageEvent: …
 
@@ -1749,6 +2393,10 @@ Accepts one of the following:
 "ask"
 
 "deny"
+
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentMCPToolResultEvent: …
 
@@ -1936,6 +2584,10 @@ Accepts one of the following:
 
 "deny"
 
+session\_thread\_id: Optional[str]
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 class BetaManagedAgentsAgentToolResultEvent: …
 
 Event representing the result of an agent tool execution.
@@ -2087,6 +2739,310 @@ The title of the document.
 is\_error: Optional[bool]
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent: …
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[Content]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock: …
+
+Regular text content.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+class BetaManagedAgentsImageBlock: …
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource: …
+
+Base64-encoded image data.
+
+data: str
+
+Base64-encoded image data.
+
+media\_type: str
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsURLImageSource: …
+
+Image referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource: …
+
+Image referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["image"]
+
+class BetaManagedAgentsDocumentBlock: …
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource: …
+
+Base64-encoded document data.
+
+data: str
+
+Base64-encoded document data.
+
+media\_type: str
+
+MIME type of the document (e.g., "application/pdf").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsPlainTextDocumentSource: …
+
+Plain text document content.
+
+data: str
+
+The plain text content.
+
+media\_type: Literal["text/plain"]
+
+MIME type of the text content. Must be "text/plain".
+
+type: Literal["text"]
+
+class BetaManagedAgentsURLDocumentSource: …
+
+Document referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource: …
+
+Document referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["document"]
+
+context: Optional[str]
+
+Additional context about the document for the model.
+
+title: Optional[str]
+
+The title of the document.
+
+from\_session\_thread\_id: str
+
+Public `sthr_` ID of the thread that sent the message.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["agent.thread\_message\_received"]
+
+from\_agent\_name: Optional[str]
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent: …
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[Content]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock: …
+
+Regular text content.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+class BetaManagedAgentsImageBlock: …
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource: …
+
+Base64-encoded image data.
+
+data: str
+
+Base64-encoded image data.
+
+media\_type: str
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsURLImageSource: …
+
+Image referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource: …
+
+Image referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["image"]
+
+class BetaManagedAgentsDocumentBlock: …
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource: …
+
+Base64-encoded document data.
+
+data: str
+
+Base64-encoded document data.
+
+media\_type: str
+
+MIME type of the document (e.g., "application/pdf").
+
+type: Literal["base64"]
+
+class BetaManagedAgentsPlainTextDocumentSource: …
+
+Plain text document content.
+
+data: str
+
+The plain text content.
+
+media\_type: Literal["text/plain"]
+
+MIME type of the text content. Must be "text/plain".
+
+type: Literal["text"]
+
+class BetaManagedAgentsURLDocumentSource: …
+
+Document referenced by URL.
+
+type: Literal["url"]
+
+url: str
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource: …
+
+Document referenced by file ID.
+
+file\_id: str
+
+ID of a previously uploaded file.
+
+type: Literal["file"]
+
+type: Literal["document"]
+
+context: Optional[str]
+
+Additional context about the document for the model.
+
+title: Optional[str]
+
+The title of the document.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+to\_session\_thread\_id: str
+
+Public `sthr_` ID of the thread the message was sent to.
+
+type: Literal["agent.thread\_message\_sent"]
+
+to\_agent\_name: Optional[str]
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentThreadContextCompactedEvent: …
 
@@ -2452,6 +3408,114 @@ A timestamp in RFC 3339 format
 
 type: Literal["session.status\_terminated"]
 
+class BetaManagedAgentsSessionThreadCreatedEvent: …
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the callable agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public `sthr_` ID of the newly created thread.
+
+type: Literal["session.thread\_created"]
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …
+
+Emitted when an outcome evaluation cycle begins.
+
+id: str
+
+Unique identifier for this event.
+
+iteration: int
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["span.outcome\_evaluation\_start"]
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+id: str
+
+Unique identifier for this event.
+
+explanation: str
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+iteration: int
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_evaluation\_start\_id: str
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+result: str
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+type: Literal["span.outcome\_evaluation\_end"]
+
+usage: [BetaManagedAgentsSpanModelUsage](api/beta.md)
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: int
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: int
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: int
+
+Input tokens consumed by this request.
+
+output\_tokens: int
+
+Output tokens generated by this request.
+
+speed: Optional[Literal["standard", "fast"]]
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"
+
+"fast"
+
 class BetaManagedAgentsSpanModelRequestStartEvent: …
 
 Emitted when a model request is initiated by the agent.
@@ -2518,6 +3582,80 @@ A timestamp in RFC 3339 format
 
 type: Literal["span.model\_request\_end"]
 
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+id: str
+
+Unique identifier for this event.
+
+iteration: int
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_id: str
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["span.outcome\_evaluation\_ongoing"]
+
+class BetaManagedAgentsUserDefineOutcomeEvent: …
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: str
+
+Unique identifier for this event.
+
+description: str
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: Optional[int]
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: str
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+rubric: Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric: …
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: str
+
+ID of the rubric file.
+
+type: Literal["file"]
+
+class BetaManagedAgentsTextRubric: …
+
+Rubric content provided inline as text.
+
+content: str
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: Literal["text"]
+
+type: Literal["user.define\_outcome"]
+
 class BetaManagedAgentsSessionDeletedEvent: …
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -2531,6 +3669,122 @@ processed\_at: datetime
 A timestamp in RFC 3339 format
 
 type: Literal["session.deleted"]
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent: …
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that started running.
+
+type: Literal["session.thread\_status\_running"]
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent: …
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that went idle.
+
+stop\_reason: StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn: …
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: Literal["end\_turn"]
+
+class BetaManagedAgentsSessionRequiresAction: …
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: List[str]
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: Literal["requires\_action"]
+
+class BetaManagedAgentsSessionRetriesExhausted: …
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: Literal["retries\_exhausted"]
+
+type: Literal["session.thread\_status\_idle"]
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that terminated.
+
+type: Literal["session.thread\_status\_terminated"]
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: str
+
+Unique identifier for this event.
+
+agent\_name: str
+
+Name of the agent the thread runs.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: str
+
+Public sthr\_ ID of the thread that is retrying.
+
+type: Literal["session.thread\_status\_rescheduled"]
 
 Stream Events
 

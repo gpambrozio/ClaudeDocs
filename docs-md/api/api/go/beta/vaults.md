@@ -122,6 +122,12 @@ client.Beta.Vaults.Credentials.Archive(ctx, credentialID, params) (\*[BetaManage
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
+##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
+
+client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (\*[BetaManagedAgentsCredentialValidation](api/beta.md), error)
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+
 ##### ModelsExpand Collapse
 
 type BetaManagedAgentsCredential struct{…}
@@ -231,6 +237,118 @@ Identifier of the vault this credential belongs to.
 DisplayName stringoptional
 
 Human-readable name for the credential.
+
+type BetaManagedAgentsCredentialValidation struct{…}
+
+Result of live-probing a credential against its configured MCP server.
+
+CredentialID string
+
+Unique identifier of the credential that was validated.
+
+HasRefreshToken bool
+
+Whether the credential has a refresh token configured.
+
+MCPProbe [BetaManagedAgentsMCPProbe](api/beta.md)
+
+The failing step of an MCP validation probe.
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+An HTTP response captured during a credential validation probe.
+
+Body string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+BodyTruncated bool
+
+Whether `body` was truncated.
+
+ContentType string
+
+Value of the `Content-Type` response header.
+
+StatusCode int64
+
+HTTP status code.
+
+Method string
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+Refresh [BetaManagedAgentsRefreshObject](api/beta.md)
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+An HTTP response captured during a credential validation probe.
+
+Body string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+BodyTruncated bool
+
+Whether `body` was truncated.
+
+ContentType string
+
+Value of the `Content-Type` response header.
+
+StatusCode int64
+
+HTTP status code.
+
+Status BetaManagedAgentsRefreshObjectStatus
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+Accepts one of the following:
+
+const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
+
+const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
+
+const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
+
+const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
+
+Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
+
+Overall verdict of a credential validation probe.
+
+Accepts one of the following:
+
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
+
+Type BetaManagedAgentsCredentialValidationType
+
+ValidatedAt Time
+
+A timestamp in RFC 3339 format
+
+VaultID string
+
+Identifier of the vault containing the credential.
+
+type BetaManagedAgentsCredentialValidationStatus string
+
+Overall verdict of a credential validation probe.
+
+Accepts one of the following:
+
+const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
+
+const BetaManagedAgentsCredentialValidationStatusInvalid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "invalid"
+
+const BetaManagedAgentsCredentialValidationStatusUnknown [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "unknown"
 
 type BetaManagedAgentsDeletedCredential struct{…}
 
@@ -563,6 +681,92 @@ Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 ClientSecret stringoptional
 
 Updated OAuth client secret.
+
+type BetaManagedAgentsMCPProbe struct{…}
+
+The failing step of an MCP validation probe.
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+An HTTP response captured during a credential validation probe.
+
+Body string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+BodyTruncated bool
+
+Whether `body` was truncated.
+
+ContentType string
+
+Value of the `Content-Type` response header.
+
+StatusCode int64
+
+HTTP status code.
+
+Method string
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+type BetaManagedAgentsRefreshHTTPResponse struct{…}
+
+An HTTP response captured during a credential validation probe.
+
+Body string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+BodyTruncated bool
+
+Whether `body` was truncated.
+
+ContentType string
+
+Value of the `Content-Type` response header.
+
+StatusCode int64
+
+HTTP status code.
+
+type BetaManagedAgentsRefreshObject struct{…}
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+HTTPResponse [BetaManagedAgentsRefreshHTTPResponse](api/beta.md)
+
+An HTTP response captured during a credential validation probe.
+
+Body string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+BodyTruncated bool
+
+Whether `body` was truncated.
+
+ContentType string
+
+Value of the `Content-Type` response header.
+
+StatusCode int64
+
+HTTP status code.
+
+Status BetaManagedAgentsRefreshObjectStatus
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+Accepts one of the following:
+
+const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
+
+const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"
+
+const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect\_error"
+
+const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no\_refresh\_token"
 
 type BetaManagedAgentsStaticBearerAuthResponse struct{…}
 

@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
 
 Accepts one of the following:
 
@@ -74,9 +74,11 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsAgent = object { id, archived\_at, created\_at, 11 more }
+BetaManagedAgentsAgent = object { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -169,6 +171,22 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+type: "coordinator"
 
 name: string
 
@@ -398,6 +416,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -461,6 +489,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

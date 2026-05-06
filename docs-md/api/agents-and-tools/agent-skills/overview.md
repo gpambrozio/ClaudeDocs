@@ -267,7 +267,7 @@ For complete examples of custom Skills, see the [Skills cookbook](https://platfo
 
 Agent Skills is not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ## Limitations and constraints
 

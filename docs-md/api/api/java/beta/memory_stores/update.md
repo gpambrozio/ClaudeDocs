@@ -68,6 +68,8 @@ USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+
 Optional<String> description
 
 New description for the store, up to 1024 characters. Pass an empty string to clear it.

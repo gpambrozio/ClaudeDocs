@@ -132,6 +132,22 @@ const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpee
 
 const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
 
+Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
+
+Resolved coordinator topology with a concrete agent roster.
+
+Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+ID string
+
+Type BetaManagedAgentsAgentReferenceType
+
+Version int64
+
+Type BetaManagedAgentsMultiagentType
+
 Name string
 
 Skills []BetaManagedAgentsAgentSkillUnion
@@ -325,6 +341,16 @@ A timestamp in RFC 3339 format
 Version int64
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
+
+type BetaManagedAgentsAgentReference struct{…}
+
+A resolved agent reference with a concrete version.
+
+ID string
+
+Type BetaManagedAgentsAgentReferenceType
+
+Version int64
 
 type BetaManagedAgentsAgentToolConfig struct{…}
 
@@ -1179,6 +1205,62 @@ Accepts one of the following:
 const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"
 
 const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"
+
+type BetaManagedAgentsMultiagentCoordinator struct{…}
+
+Resolved coordinator topology with a concrete agent roster.
+
+Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+ID string
+
+Type BetaManagedAgentsAgentReferenceType
+
+Version int64
+
+Type BetaManagedAgentsMultiagentCoordinatorType
+
+type BetaManagedAgentsMultiagentCoordinatorParamsResp struct{…}
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+Agents [][BetaManagedAgentsMultiagentRosterEntryParamsUnionResp](api/beta.md)
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+Accepts one of the following:
+
+string
+
+type BetaManagedAgentsAgentParamsResp struct{…}
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+ID string
+
+The `agent` ID.
+
+Type BetaManagedAgentsAgentParamsType
+
+Version int64optional
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+type BetaManagedAgentsMultiagentSelfParamsResp struct{…}
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+Type BetaManagedAgentsMultiagentSelfParamsType
+
+Type BetaManagedAgentsMultiagentCoordinatorParamsType
+
+type BetaManagedAgentsMultiagentSelfParamsResp struct{…}
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+Type BetaManagedAgentsMultiagentSelfParamsType
 
 type BetaManagedAgentsSkillParamsUnionResp interface{…}
 

@@ -48,6 +48,10 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
 class BetaManagedAgentsAgentMcpToolResultEvent:
 
 Event representing the result of an MCP tool execution.
@@ -238,6 +242,10 @@ Accepts one of the following:
 
 "deny"Deny
 
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 class BetaManagedAgentsAgentMessageEvent:
 
 An agent response event in the session conversation.
@@ -289,6 +297,310 @@ required DateTimeOffset ProcessedAt
 A timestamp in RFC 3339 format
 
 required Type Type
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent:
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required string FromSessionThreadID
+
+Public `sthr_` ID of the thread that sent the message.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+string? FromAgentName
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent:
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToSessionThreadID
+
+Public `sthr_` ID of the thread the message was sent to.
+
+required Type Type
+
+string? ToAgentName
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentToolResultEvent:
 
@@ -475,6 +787,10 @@ Accepts one of the following:
 "ask"Ask
 
 "deny"Deny
+
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -752,6 +1068,10 @@ Parameters for sending an interrupt to pause the agent.
 
 required Type Type
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEventParams:
 
 Parameters for confirming or denying a tool execution request.
@@ -920,6 +1240,46 @@ Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsUserDefineOutcomeEventParams:
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+required string Description
+
+What the agent should produce. This is the task specification.
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubricParams:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubricParams:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+required Type Type
+
+required Type Type
+
+Int? MaxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 class BetaManagedAgentsFileDocumentSource:
 
 Document referenced by file ID.
@@ -937,6 +1297,26 @@ Image referenced by file ID.
 required string FileID
 
 ID of a previously uploaded file.
+
+required Type Type
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsFileRubricParams:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
 
 required Type Type
 
@@ -1364,6 +1744,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -1395,6 +1779,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent:
 
@@ -1547,6 +1935,62 @@ Whether the tool execution resulted in an error.
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Description
+
+What the agent should produce. Copied from the input event.
+
+required Int? MaxIterations
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+required string OutcomeID
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+required Type Type
 
 class BetaManagedAgentsSessionDeletedEvent:
 
@@ -1996,6 +2440,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -2027,6 +2475,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent:
 
@@ -2180,6 +2632,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsAgentCustomToolUseEvent:
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -2201,6 +2657,10 @@ required DateTimeOffset ProcessedAt
 A timestamp in RFC 3339 format
 
 required Type Type
+
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 class BetaManagedAgentsAgentMessageEvent:
 
@@ -2277,6 +2737,10 @@ Accepts one of the following:
 "ask"Ask
 
 "deny"Deny
+
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentMcpToolResultEvent:
 
@@ -2464,6 +2928,10 @@ Accepts one of the following:
 
 "deny"Deny
 
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 class BetaManagedAgentsAgentToolResultEvent:
 
 Event representing the result of an agent tool execution.
@@ -2615,6 +3083,310 @@ The title of the document.
 Boolean? IsError
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent:
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required string FromSessionThreadID
+
+Public `sthr_` ID of the thread that sent the message.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+string? FromAgentName
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent:
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToSessionThreadID
+
+Public `sthr_` ID of the thread the message was sent to.
+
+required Type Type
+
+string? ToAgentName
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentThreadContextCompactedEvent:
 
@@ -2980,6 +3752,114 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSessionThreadCreatedEvent:
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the callable agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public `sthr_` ID of the newly created thread.
+
+required Type Type
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
+
+Emitted when an outcome evaluation cycle begins.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Explanation
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeEvaluationStartID
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string Result
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+required Type Type
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
 class BetaManagedAgentsSpanModelRequestStartEvent:
 
 Emitted when a model request is initiated by the agent.
@@ -3046,6 +3926,80 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Description
+
+What the agent should produce. Copied from the input event.
+
+required Int? MaxIterations
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+required string OutcomeID
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+required Type Type
+
 class BetaManagedAgentsSessionDeletedEvent:
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -3057,6 +4011,122 @@ Unique identifier for this event.
 required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent:
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that started running.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent:
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that went idle.
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that terminated.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that is retrying.
 
 required Type Type
 
@@ -3160,6 +4230,144 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSessionThreadCreatedEvent:
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the callable agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public `sthr_` ID of the newly created thread.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent:
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that went idle.
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that is retrying.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent:
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that started running.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that terminated.
+
+required Type Type
+
 class BetaManagedAgentsSpanModelRequestEndEvent:
 
 Emitted when a model request completes.
@@ -3255,6 +4463,114 @@ Accepts one of the following:
 "standard"Standard
 
 "fast"Fast
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Explanation
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeEvaluationStartID
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string Result
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+required Type Type
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
+
+Emitted when an outcome evaluation cycle begins.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
 
 class BetaManagedAgentsStreamSessionEvents: A class that can be one of several variants.union
 
@@ -3418,6 +4734,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -3449,6 +4769,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent:
 
@@ -3602,6 +4926,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsAgentCustomToolUseEvent:
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -3623,6 +4951,10 @@ required DateTimeOffset ProcessedAt
 A timestamp in RFC 3339 format
 
 required Type Type
+
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 class BetaManagedAgentsAgentMessageEvent:
 
@@ -3699,6 +5031,10 @@ Accepts one of the following:
 "ask"Ask
 
 "deny"Deny
+
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentMcpToolResultEvent:
 
@@ -3886,6 +5222,10 @@ Accepts one of the following:
 
 "deny"Deny
 
+string? SessionThreadID
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 class BetaManagedAgentsAgentToolResultEvent:
 
 Event representing the result of an agent tool execution.
@@ -4037,6 +5377,310 @@ The title of the document.
 Boolean? IsError
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent:
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required string FromSessionThreadID
+
+Public `sthr_` ID of the thread that sent the message.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+string? FromAgentName
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent:
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<Content> Content
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+required Source Source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+required string Data
+
+Base64-encoded image data.
+
+required string MediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+required Type Type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+required Source Source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+required string Data
+
+Base64-encoded document data.
+
+required string MediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+required Type Type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+required string Data
+
+The plain text content.
+
+required MediaType MediaType
+
+MIME type of the text content. Must be "text/plain".
+
+required Type Type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+required Type Type
+
+required string Url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+required string FileID
+
+ID of a previously uploaded file.
+
+required Type Type
+
+required Type Type
+
+string? Context
+
+Additional context about the document for the model.
+
+string? Title
+
+The title of the document.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string ToSessionThreadID
+
+Public `sthr_` ID of the thread the message was sent to.
+
+required Type Type
+
+string? ToAgentName
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentThreadContextCompactedEvent:
 
@@ -4402,6 +6046,114 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSessionThreadCreatedEvent:
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the callable agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public `sthr_` ID of the newly created thread.
+
+required Type Type
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:
+
+Emitted when an outcome evaluation cycle begins.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Explanation
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeEvaluationStartID
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string Result
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+required Type Type
+
+required [BetaManagedAgentsSpanModelUsage](api/beta.md) Usage
+
+Token usage for a single model request.
+
+required Int CacheCreationInputTokens
+
+Tokens used to create prompt cache in this request.
+
+required Int CacheReadInputTokens
+
+Tokens read from prompt cache in this request.
+
+required Int InputTokens
+
+Input tokens consumed by this request.
+
+required Int OutputTokens
+
+Output tokens generated by this request.
+
+Speed? Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
 class BetaManagedAgentsSpanModelRequestStartEvent:
 
 Emitted when a model request is initiated by the agent.
@@ -4468,6 +6220,80 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+required string ID
+
+Unique identifier for this event.
+
+required Int Iteration
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+required string OutcomeID
+
+The `outc_` ID of the outcome being evaluated.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Type Type
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Description
+
+What the agent should produce. Copied from the input event.
+
+required Int? MaxIterations
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+required string OutcomeID
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+required Type Type
+
 class BetaManagedAgentsSessionDeletedEvent:
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -4482,6 +6308,122 @@ A timestamp in RFC 3339 format
 
 required Type Type
 
+class BetaManagedAgentsSessionThreadStatusRunningEvent:
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that started running.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent:
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that went idle.
+
+required StopReason StopReason
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn:
+
+The agent completed its turn naturally and is ready for the next user message.
+
+required Type Type
+
+class BetaManagedAgentsSessionRequiresAction:
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+required IReadOnlyList<string> EventIds
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+required Type Type
+
+class BetaManagedAgentsSessionRetriesExhausted:
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent:
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that terminated.
+
+required Type Type
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+required string ID
+
+Unique identifier for this event.
+
+required string AgentName
+
+Name of the agent the thread runs.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required string SessionThreadID
+
+Public sthr\_ ID of the thread that is retrying.
+
+required Type Type
+
 class BetaManagedAgentsTextBlock:
 
 Regular text content.
@@ -4489,6 +6431,26 @@ Regular text content.
 required string Text
 
 The text content.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+class BetaManagedAgentsTextRubricParams:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
 required Type Type
 
@@ -4698,6 +6660,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsUserCustomToolResultEventParams:
 
 Parameters for providing the result of a custom tool execution.
@@ -4842,6 +6808,98 @@ Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsUserDefineOutcomeEvent:
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Description
+
+What the agent should produce. Copied from the input event.
+
+required Int? MaxIterations
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+required string OutcomeID
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsUserDefineOutcomeEventParams:
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+required string Description
+
+What the agent should produce. This is the task specification.
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubricParams:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubricParams:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+required Type Type
+
+required Type Type
+
+Int? MaxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 class BetaManagedAgentsUserInterruptEvent:
 
 An interrupt event that pauses agent execution and returns control to the user.
@@ -4856,11 +6914,19 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserInterruptEventParams:
 
 Parameters for sending an interrupt to pause the agent.
 
 required Type Type
+
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
 class BetaManagedAgentsUserMessageEvent:
 
@@ -5173,6 +7239,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserToolConfirmationEventParams:
 

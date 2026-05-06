@@ -8,25 +8,25 @@ TypeScript
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more } >
+client.beta.userProfiles.list(UserProfileListParams { limit, order, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParams { external\_id, metadata, betas } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
@@ -38,7 +38,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-BetaUserProfile { id, created\_at, metadata, 4 more }
+BetaUserProfile { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -51,6 +51,18 @@ A timestamp in RFC 3339 format
 metadata: Record<string, string>
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: "external" | "resold" | "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"
+
+"resold"
+
+"internal"
 
 trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta.md) { status } >
 
@@ -79,6 +91,10 @@ A timestamp in RFC 3339 format
 external\_id?: string | null
 
 Platform's own identifier for this user. Not enforced unique.
+
+name?: string | null
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 BetaUserProfileEnrollmentURL { expires\_at, type, url }
 

@@ -16,6 +16,22 @@ List Events
 
 session\_id: String
 
+created\_at\_gt: Time
+
+Return events created after this time (exclusive).
+
+created\_at\_gte: Time
+
+Return events created at or after this time (inclusive).
+
+created\_at\_lt: Time
+
+Return events created before this time (exclusive).
+
+created\_at\_lte: Time
+
+Return events created at or before this time (inclusive).
+
 limit: Integer
 
 Query parameter for limit
@@ -34,6 +50,10 @@ page: String
 
 Opaque pagination cursor from a previous response's next\_page.
 
+types: Array[String]
+
+Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
+
 betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
@@ -42,7 +62,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more
 
 Accepts one of the following:
 
@@ -92,9 +112,11 @@ Accepts one of the following:
 
 :"advisor-tool-2026-03-01"
 
+:"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  | 17 more
+BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 28 more
 
 Union type for all event types in a session.
 
@@ -244,7 +266,7 @@ processed\_at: Time
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserInterruptEvent { id, type, processed\_at }
+class BetaManagedAgentsUserInterruptEvent { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -258,7 +280,11 @@ processed\_at: Time
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserToolConfirmationEvent { id, result, tool\_use\_id, 3 more }
+session\_thread\_id: String
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+class BetaManagedAgentsUserToolConfirmationEvent { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -290,7 +316,11 @@ processed\_at: Time
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserCustomToolResultEvent { id, custom\_tool\_use\_id, type, 3 more }
+session\_thread\_id: String
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+class BetaManagedAgentsUserCustomToolResultEvent { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -442,7 +472,11 @@ processed\_at: Time
 
 A timestamp in RFC 3339 format
 
-class BetaManagedAgentsAgentCustomToolUseEvent { id, input, name, 2 more }
+session\_thread\_id: String
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsAgentCustomToolUseEvent { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -463,6 +497,10 @@ processed\_at: Time
 A timestamp in RFC 3339 format
 
 type: :"agent.custom\_tool\_use"
+
+session\_thread\_id: String
+
+When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 class BetaManagedAgentsAgentMessageEvent { id, content, processed\_at, type }
 
@@ -502,7 +540,7 @@ A timestamp in RFC 3339 format
 
 type: :"agent.thinking"
 
-class BetaManagedAgentsAgentMCPToolUseEvent { id, input, mcp\_server\_name, 4 more }
+class BetaManagedAgentsAgentMCPToolUseEvent { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -539,6 +577,10 @@ Accepts one of the following:
 :ask
 
 :deny
+
+session\_thread\_id: String
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentMCPToolResultEvent { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
@@ -692,7 +734,7 @@ is\_error: bool
 
 Whether the tool execution resulted in an error.
 
-class BetaManagedAgentsAgentToolUseEvent { id, input, name, 3 more }
+class BetaManagedAgentsAgentToolUseEvent { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -725,6 +767,10 @@ Accepts one of the following:
 :ask
 
 :deny
+
+session\_thread\_id: String
+
+When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 class BetaManagedAgentsAgentToolResultEvent { id, processed\_at, tool\_use\_id, 3 more }
 
@@ -877,6 +923,310 @@ The title of the document.
 is\_error: bool
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsAgentThreadMessageReceivedEvent { id, content, from\_session\_thread\_id, 3 more }
+
+Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+id: String
+
+Unique identifier for this event.
+
+content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } ]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: String
+
+The text content.
+
+type: :text
+
+class BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: String
+
+Base64-encoded image data.
+
+media\_type: String
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: :base64
+
+class BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: :url
+
+url: String
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: String
+
+ID of a previously uploaded file.
+
+type: :file
+
+type: :image
+
+class BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: String
+
+Base64-encoded document data.
+
+media\_type: String
+
+MIME type of the document (e.g., "application/pdf").
+
+type: :base64
+
+class BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: String
+
+The plain text content.
+
+media\_type: :"text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: :text
+
+class BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: :url
+
+url: String
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: String
+
+ID of a previously uploaded file.
+
+type: :file
+
+type: :document
+
+context: String
+
+Additional context about the document for the model.
+
+title: String
+
+The title of the document.
+
+from\_session\_thread\_id: String
+
+Public `sthr_` ID of the thread that sent the message.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+type: :"agent.thread\_message\_received"
+
+from\_agent\_name: String
+
+Name of the callable agent this message came from. Absent when received from the primary agent.
+
+class BetaManagedAgentsAgentThreadMessageSentEvent { id, content, processed\_at, 3 more }
+
+Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+id: String
+
+Unique identifier for this event.
+
+content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } ]
+
+Message content blocks.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: String
+
+The text content.
+
+type: :text
+
+class BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: String
+
+Base64-encoded image data.
+
+media\_type: String
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: :base64
+
+class BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: :url
+
+url: String
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: String
+
+ID of a previously uploaded file.
+
+type: :file
+
+type: :image
+
+class BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: String
+
+Base64-encoded document data.
+
+media\_type: String
+
+MIME type of the document (e.g., "application/pdf").
+
+type: :base64
+
+class BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: String
+
+The plain text content.
+
+media\_type: :"text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: :text
+
+class BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: :url
+
+url: String
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: String
+
+ID of a previously uploaded file.
+
+type: :file
+
+type: :document
+
+context: String
+
+Additional context about the document for the model.
+
+title: String
+
+The title of the document.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+to\_session\_thread\_id: String
+
+Public `sthr_` ID of the thread the message was sent to.
+
+type: :"agent.thread\_message\_sent"
+
+to\_agent\_name: String
+
+Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 class BetaManagedAgentsAgentThreadContextCompactedEvent { id, processed\_at, type }
 
@@ -1242,6 +1592,114 @@ A timestamp in RFC 3339 format
 
 type: :"session.status\_terminated"
 
+class BetaManagedAgentsSessionThreadCreatedEvent { id, agent\_name, processed\_at, 2 more }
+
+Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+id: String
+
+Unique identifier for this event.
+
+agent\_name: String
+
+Name of the callable agent the thread runs.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: String
+
+Public `sthr_` ID of the newly created thread.
+
+type: :"session.thread\_created"
+
+class BetaManagedAgentsSpanOutcomeEvaluationStartEvent { id, iteration, outcome\_id, 2 more }
+
+Emitted when an outcome evaluation cycle begins.
+
+id: String
+
+Unique identifier for this event.
+
+iteration: Integer
+
+0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+outcome\_id: String
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+type: :"span.outcome\_evaluation\_start"
+
+class BetaManagedAgentsSpanOutcomeEvaluationEndEvent { id, explanation, iteration, 6 more }
+
+Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+id: String
+
+Unique identifier for this event.
+
+explanation: String
+
+Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+iteration: Integer
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_evaluation\_start\_id: String
+
+The id of the corresponding `span.outcome_evaluation_start` event.
+
+outcome\_id: String
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+result: String
+
+Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+type: :"span.outcome\_evaluation\_end"
+
+usage: [BetaManagedAgentsSpanModelUsage](api/beta.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+
+Token usage for a single model request.
+
+cache\_creation\_input\_tokens: Integer
+
+Tokens used to create prompt cache in this request.
+
+cache\_read\_input\_tokens: Integer
+
+Tokens read from prompt cache in this request.
+
+input\_tokens: Integer
+
+Input tokens consumed by this request.
+
+output\_tokens: Integer
+
+Output tokens generated by this request.
+
+speed: :standard | :fast
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+:standard
+
+:fast
+
 class BetaManagedAgentsSpanModelRequestStartEvent { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
@@ -1308,6 +1766,80 @@ A timestamp in RFC 3339 format
 
 type: :"span.model\_request\_end"
 
+class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent { id, iteration, outcome\_id, 2 more }
+
+Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+id: String
+
+Unique identifier for this event.
+
+iteration: Integer
+
+0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+outcome\_id: String
+
+The `outc_` ID of the outcome being evaluated.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+type: :"span.outcome\_evaluation\_ongoing"
+
+class BetaManagedAgentsUserDefineOutcomeEvent { id, description, max\_iterations, 4 more }
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: String
+
+Unique identifier for this event.
+
+description: String
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: Integer
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: String
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: String
+
+ID of the rubric file.
+
+type: :file
+
+class BetaManagedAgentsTextRubric { content, type }
+
+Rubric content provided inline as text.
+
+content: String
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: :text
+
+type: :"user.define\_outcome"
+
 class BetaManagedAgentsSessionDeletedEvent { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -1321,6 +1853,122 @@ processed\_at: Time
 A timestamp in RFC 3339 format
 
 type: :"session.deleted"
+
+class BetaManagedAgentsSessionThreadStatusRunningEvent { id, agent\_name, processed\_at, 2 more }
+
+A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: String
+
+Unique identifier for this event.
+
+agent\_name: String
+
+Name of the agent the thread runs.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: String
+
+Public sthr\_ ID of the thread that started running.
+
+type: :"session.thread\_status\_running"
+
+class BetaManagedAgentsSessionThreadStatusIdleEvent { id, agent\_name, processed\_at, 3 more }
+
+A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: String
+
+Unique identifier for this event.
+
+agent\_name: String
+
+Name of the agent the thread runs.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: String
+
+Public sthr\_ ID of the thread that went idle.
+
+stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaManagedAgentsSessionRequiresAction](api/beta.md) { event\_ids, type }  | [BetaManagedAgentsSessionRetriesExhausted](api/beta.md) { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+Accepts one of the following:
+
+class BetaManagedAgentsSessionEndTurn { type }
+
+The agent completed its turn naturally and is ready for the next user message.
+
+type: :end\_turn
+
+class BetaManagedAgentsSessionRequiresAction { event\_ids, type }
+
+The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+event\_ids: Array[String]
+
+The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+type: :requires\_action
+
+class BetaManagedAgentsSessionRetriesExhausted { type }
+
+The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+type: :retries\_exhausted
+
+type: :"session.thread\_status\_idle"
+
+class BetaManagedAgentsSessionThreadStatusTerminatedEvent { id, agent\_name, processed\_at, 2 more }
+
+A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: String
+
+Unique identifier for this event.
+
+agent\_name: String
+
+Name of the agent the thread runs.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: String
+
+Public sthr\_ ID of the thread that terminated.
+
+type: :"session.thread\_status\_terminated"
+
+class BetaManagedAgentsSessionThreadStatusRescheduledEvent { id, agent\_name, processed\_at, 2 more }
+
+A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+id: String
+
+Unique identifier for this event.
+
+agent\_name: String
+
+Name of the agent the thread runs.
+
+processed\_at: Time
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id: String
+
+Public sthr\_ ID of the thread that is retrying.
+
+type: :"session.thread\_status\_rescheduled"
 
 List Events
 

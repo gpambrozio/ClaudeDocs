@@ -6,7 +6,7 @@ Ruby
 
 # List User Profiles
 
-beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more } >
+beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
@@ -40,7 +40,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more
 
 Accepts one of the following:
 
@@ -90,9 +90,11 @@ Accepts one of the following:
 
 :"advisor-tool-2026-03-01"
 
+:"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
-class BetaUserProfile { id, created\_at, metadata, 4 more }
+class BetaUserProfile { id, created\_at, metadata, 6 more }
 
 id: String
 
@@ -105,6 +107,18 @@ A timestamp in RFC 3339 format
 metadata: Hash[Symbol, String]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: :external | :resold | :internal
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+:external
+
+:resold
+
+:internal
 
 trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
@@ -134,6 +148,10 @@ external\_id: String
 
 Platform's own identifier for this user. Not enforced unique.
 
+name: String
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
 List User Profiles
 
 Ruby
@@ -157,6 +175,7 @@ Response 200
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
+      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -164,7 +183,8 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345"
+      "external_id": "user_12345",
+      "name": "Example User"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -182,6 +202,7 @@ Response 200
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
+      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -189,7 +210,8 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345"
+      "external_id": "user_12345",
+      "name": "Example User"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

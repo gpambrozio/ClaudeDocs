@@ -86,6 +86,8 @@ const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsSession struct{…}
@@ -177,6 +179,284 @@ Accepts one of the following:
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
 const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
+Type BetaManagedAgentsSessionMultiagentCoordinatorType
 
 Name string
 
@@ -377,6 +657,36 @@ A timestamp in RFC 3339 format
 EnvironmentID string
 
 Metadata map[string, string]
+
+OutcomeEvaluations [][BetaManagedAgentsOutcomeEvaluationResource](api/beta.md)
+
+Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
+
+CompletedAt Time
+
+A timestamp in RFC 3339 format
+
+Description string
+
+What the agent should produce.
+
+Explanation string
+
+Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+Iteration int64
+
+0-indexed revision cycle the outcome is currently on.
+
+OutcomeID string
+
+Server-generated outc\_ ID for this outcome.
+
+Result string
+
+Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+
+Type BetaManagedAgentsOutcomeEvaluationResourceType
 
 Resources [][BetaManagedAgentsSessionResourceUnion](api/beta.md)
 
@@ -592,6 +902,57 @@ Response 200
       "id": "claude-sonnet-4-6",
       "speed": "standard"
     },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
     "name": "My First Agent",
     "skills": [
       {
@@ -633,6 +994,17 @@ Response 200
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
   "resources": [
     {
       "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -699,6 +1071,57 @@ Response 200
       "id": "claude-sonnet-4-6",
       "speed": "standard"
     },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-sonnet-4-6",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  }
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
     "name": "My First Agent",
     "skills": [
       {
@@ -740,6 +1163,17 @@ Response 200
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
   "resources": [
     {
       "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",

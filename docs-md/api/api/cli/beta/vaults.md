@@ -126,6 +126,12 @@ $ ant beta:vaults:credentials archive
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
+##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
+
+$ ant beta:vaults:credentials mcp-oauth-validate
+
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+
 ##### ModelsExpand Collapse
 
 beta\_managed\_agents\_credential: object { id, archived\_at, auth, 6 more }
@@ -243,6 +249,114 @@ Identifier of the vault this credential belongs to.
 display\_name: optional string
 
 Human-readable name for the credential.
+
+beta\_managed\_agents\_credential\_validation: object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+
+Result of live-probing a credential against its configured MCP server.
+
+credential\_id: string
+
+Unique identifier of the credential that was validated.
+
+has\_refresh\_token: boolean
+
+Whether the credential has a refresh token configured.
+
+mcp\_probe: object { http\_response, method }
+
+The failing step of an MCP validation probe.
+
+http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+An HTTP response captured during a credential validation probe.
+
+body: string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: boolean
+
+Whether `body` was truncated.
+
+content\_type: string
+
+Value of the `Content-Type` response header.
+
+status\_code: number
+
+HTTP status code.
+
+method: string
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+refresh: object { http\_response, status }
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+An HTTP response captured during a credential validation probe.
+
+body: string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: boolean
+
+Whether `body` was truncated.
+
+content\_type: string
+
+Value of the `Content-Type` response header.
+
+status\_code: number
+
+HTTP status code.
+
+status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+"succeeded"
+
+"failed"
+
+"connect\_error"
+
+"no\_refresh\_token"
+
+status: "valid" or "invalid" or "unknown"
+
+Overall verdict of a credential validation probe.
+
+"valid"
+
+"invalid"
+
+"unknown"
+
+type: "vault\_credential\_validation"
+
+"vault\_credential\_validation"
+
+validated\_at: string
+
+A timestamp in RFC 3339 format
+
+vault\_id: string
+
+Identifier of the vault containing the credential.
+
+beta\_managed\_agents\_credential\_validation\_status: "valid" or "invalid" or "unknown"
+
+Overall verdict of a credential validation probe.
+
+"valid"
+
+"invalid"
+
+"unknown"
 
 beta\_managed\_agents\_deleted\_credential: object { id, type }
 
@@ -603,6 +717,90 @@ type: "client\_secret\_post"
 client\_secret: optional string
 
 Updated OAuth client secret.
+
+beta\_managed\_agents\_mcp\_probe: object { http\_response, method }
+
+The failing step of an MCP validation probe.
+
+http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+An HTTP response captured during a credential validation probe.
+
+body: string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: boolean
+
+Whether `body` was truncated.
+
+content\_type: string
+
+Value of the `Content-Type` response header.
+
+status\_code: number
+
+HTTP status code.
+
+method: string
+
+The MCP method that failed (for example `initialize` or `tools/list`).
+
+beta\_managed\_agents\_refresh\_http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+An HTTP response captured during a credential validation probe.
+
+body: string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: boolean
+
+Whether `body` was truncated.
+
+content\_type: string
+
+Value of the `Content-Type` response header.
+
+status\_code: number
+
+HTTP status code.
+
+beta\_managed\_agents\_refresh\_object: object { http\_response, status }
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+http\_response: object { body, body\_truncated, content\_type, status\_code }
+
+An HTTP response captured during a credential validation probe.
+
+body: string
+
+Response body. May be truncated and has sensitive values scrubbed.
+
+body\_truncated: boolean
+
+Whether `body` was truncated.
+
+content\_type: string
+
+Value of the `Content-Type` response header.
+
+status\_code: number
+
+HTTP status code.
+
+status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+
+Outcome of a refresh-token exchange attempted during credential validation.
+
+"succeeded"
+
+"failed"
+
+"connect\_error"
+
+"no\_refresh\_token"
 
 beta\_managed\_agents\_static\_bearer\_auth\_response: object { mcp\_server\_url, type }
 

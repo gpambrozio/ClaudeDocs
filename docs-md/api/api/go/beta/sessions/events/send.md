@@ -164,6 +164,10 @@ Parameters for sending an interrupt to pause the agent.
 
 Type BetaManagedAgentsUserInterruptEventParamsType
 
+SessionThreadID stringoptional
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}
 
 Parameters for confirming or denying a tool execution request.
@@ -332,6 +336,46 @@ IsError booloptional
 
 Whether the tool execution resulted in an error.
 
+type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+Description string
+
+What the agent should produce. This is the task specification.
+
+Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+type BetaManagedAgentsFileRubricParamsResp struct{…}
+
+Rubric referenced by a file uploaded via the Files API.
+
+FileID string
+
+ID of the rubric file.
+
+Type BetaManagedAgentsFileRubricParamsType
+
+type BetaManagedAgentsTextRubricParamsResp struct{…}
+
+Rubric content provided inline as text.
+
+Content string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+Type BetaManagedAgentsTextRubricParamsType
+
+Type BetaManagedAgentsUserDefineOutcomeEventParamsType
+
+MaxIterations int64optional
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -387,6 +431,8 @@ const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-2
 const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
 ##### ReturnsExpand Collapse
 
@@ -558,6 +604,10 @@ ProcessedAt Timeoptional
 
 A timestamp in RFC 3339 format
 
+SessionThreadID stringoptional
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 type BetaManagedAgentsUserToolConfirmationEvent struct{…}
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -589,6 +639,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 ProcessedAt Timeoptional
 
 A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 type BetaManagedAgentsUserCustomToolResultEvent struct{…}
 
@@ -741,6 +795,62 @@ Whether the tool execution resulted in an error.
 ProcessedAt Timeoptional
 
 A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+type BetaManagedAgentsUserDefineOutcomeEvent struct{…}
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+ID string
+
+Unique identifier for this event.
+
+Description string
+
+What the agent should produce. Copied from the input event.
+
+MaxIterations int64
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+OutcomeID string
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+ProcessedAt Time
+
+A timestamp in RFC 3339 format
+
+Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+type BetaManagedAgentsFileRubric struct{…}
+
+Rubric referenced by a file uploaded via the Files API.
+
+FileID string
+
+ID of the rubric file.
+
+Type BetaManagedAgentsFileRubricType
+
+type BetaManagedAgentsTextRubric struct{…}
+
+Rubric content provided inline as text.
+
+Content string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+Type BetaManagedAgentsTextRubricType
+
+Type BetaManagedAgentsUserDefineOutcomeEventType
 
 Send Events
 

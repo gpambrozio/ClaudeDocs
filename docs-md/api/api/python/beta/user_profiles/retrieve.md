@@ -24,7 +24,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
 
 Accepts one of the following:
 
@@ -74,6 +74,8 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
 class BetaUserProfile: …
@@ -89,6 +91,18 @@ A timestamp in RFC 3339 format
 metadata: Dict[str, str]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: Literal["external", "resold", "internal"]
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"
+
+"resold"
+
+"internal"
 
 trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
 
@@ -118,6 +132,10 @@ external\_id: Optional[str]
 
 Platform's own identifier for this user. Not enforced unique.
 
+name: Optional[str]
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
 Get User Profile
 
 Python
@@ -142,6 +160,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -149,7 +168,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 
@@ -162,6 +182,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -169,7 +190,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 

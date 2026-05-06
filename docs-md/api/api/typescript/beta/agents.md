@@ -8,37 +8,37 @@ TypeScript
 
 ##### [Create Agent](api/beta/agents/create.md)
 
-client.beta.agents.create(AgentCreateParams { model, name, description, 6 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+client.beta.agents.create(AgentCreateParams { model, name, description, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents
 
 ##### [List Agents](api/beta/agents/list.md)
 
-client.beta.agents.list(AgentListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+client.beta.agents.list(AgentListParams { created\_at[gte], created\_at[lte], include\_archived, 3 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more } >
 
 GET/v1/agents
 
 ##### [Get Agent](api/beta/agents/retrieve.md)
 
-client.beta.agents.retrieve(stringagentID, AgentRetrieveParams { version, betas } params?, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+client.beta.agents.retrieve(stringagentID, AgentRetrieveParams { version, betas } params?, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 GET/v1/agents/{agent\_id}
 
 ##### [Update Agent](api/beta/agents/update.md)
 
-client.beta.agents.update(stringagentID, AgentUpdateParams { version, description, mcp\_servers, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+client.beta.agents.update(stringagentID, AgentUpdateParams { version, description, mcp\_servers, 8 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}
 
 ##### [Archive Agent](api/beta/agents/archive.md)
 
-client.beta.agents.archive(stringagentID, AgentArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+client.beta.agents.archive(stringagentID, AgentArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsAgent { id, archived\_at, created\_at, 11 more }
+BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -125,6 +125,22 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }  | null
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array<[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } >
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+type: "coordinator"
 
 name: string
 
@@ -319,6 +335,16 @@ A timestamp in RFC 3339 format
 version: number
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
+
+BetaManagedAgentsAgentReference { id, type, version }
+
+A resolved agent reference with a concrete version.
+
+id: string
+
+type: "agent"
+
+version: number
 
 BetaManagedAgentsAgentToolConfig { enabled, name, permission\_policy }
 
@@ -1156,6 +1182,62 @@ Accepts one of the following:
 
 "fast"
 
+BetaManagedAgentsMultiagentCoordinator { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array<[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } >
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+type: "coordinator"
+
+BetaManagedAgentsMultiagentCoordinatorParams { agents, type }
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+agents: Array<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)>
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+Accepts one of the following:
+
+string
+
+BetaManagedAgentsAgentParams { id, type, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+id: string
+
+The `agent` ID.
+
+type: "agent"
+
+version?: number
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+BetaManagedAgentsMultiagentSelfParams { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+type: "coordinator"
+
+BetaManagedAgentsMultiagentSelfParams { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
 BetaManagedAgentsSkillParams = [BetaManagedAgentsAnthropicSkillParams](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkillParams](api/beta.md) { skill\_id, type, version }
 
 Skill to load in the session container.
@@ -1208,7 +1290,7 @@ Endpoint URL for the MCP server.
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-client.beta.agents.versions.list(stringagentID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+client.beta.agents.versions.list(stringagentID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more } >
 
 GET/v1/agents/{agent\_id}/versions
 

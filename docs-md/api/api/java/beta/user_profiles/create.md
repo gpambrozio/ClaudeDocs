@@ -66,6 +66,8 @@ USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+
 Optional<String> externalId
 
 Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
@@ -73,6 +75,20 @@ Platform's own identifier for this user. Not enforced unique. Maximum 255 charac
 Optional<Metadata> metadata
 
 Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+Optional<String> name
+
+Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+Optional<Relationship> relationship
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+EXTERNAL("external")
+
+RESOLD("resold")
+
+INTERNAL("internal")
 
 ##### ReturnsExpand Collapse
 
@@ -89,6 +105,18 @@ A timestamp in RFC 3339 format
 Metadata metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+Relationship relationship
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+EXTERNAL("external")
+
+RESOLD("resold")
+
+INTERNAL("internal")
 
 TrustGrants trustGrants
 
@@ -117,6 +145,10 @@ A timestamp in RFC 3339 format
 Optional<String> externalId
 
 Platform's own identifier for this user. Not enforced unique.
+
+Optional<String> name
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 Create User Profile
 
@@ -148,6 +180,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -155,7 +188,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 
@@ -168,6 +202,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -175,7 +210,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 

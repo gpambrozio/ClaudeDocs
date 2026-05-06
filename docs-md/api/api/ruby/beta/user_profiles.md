@@ -8,25 +8,25 @@ Ruby
 
 ##### [Create User Profile](api/beta/user_profiles/create.md)
 
-beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+beta.user\_profiles.create(\*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles
 
 ##### [List User Profiles](api/beta/user_profiles/list.md)
 
-beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more } >
+beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more } >
 
 GET/v1/user\_profiles
 
 ##### [Get User Profile](api/beta/user_profiles/retrieve.md)
 
-beta.user\_profiles.retrieve(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+beta.user\_profiles.retrieve(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/beta/user_profiles/update.md)
 
-beta.user\_profiles.update(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 4 more }
+beta.user\_profiles.update(user\_profile\_id, \*\*kwargs) -> [BetaUserProfile](api/beta.md) { id, created\_at, metadata, 6 more }
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
@@ -38,7 +38,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-class BetaUserProfile { id, created\_at, metadata, 4 more }
+class BetaUserProfile { id, created\_at, metadata, 6 more }
 
 id: String
 
@@ -51,6 +51,18 @@ A timestamp in RFC 3339 format
 metadata: Hash[Symbol, String]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: :external | :resold | :internal
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+:external
+
+:resold
+
+:internal
 
 trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
@@ -79,6 +91,10 @@ A timestamp in RFC 3339 format
 external\_id: String
 
 Platform's own identifier for this user. Not enforced unique.
+
+name: String
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 class BetaUserProfileEnrollmentURL { expires\_at, type, url }
 

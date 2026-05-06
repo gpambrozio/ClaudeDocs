@@ -6,7 +6,7 @@ TypeScript
 
 # Update Agent
 
-client.beta.agents.update(stringagentID, AgentUpdateParams { version, description, mcp\_servers, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+client.beta.agents.update(stringagentID, AgentUpdateParams { version, description, mcp\_servers, 8 more } params, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}
 
@@ -16,7 +16,7 @@ Update Agent
 
 agentID: string
 
-params: AgentUpdateParams { version, description, mcp\_servers, 7 more }
+params: AgentUpdateParams { version, description, mcp\_servers, 8 more }
 
 version: number
 
@@ -159,6 +159,40 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+multiagent?: [BetaManagedAgentsMultiagentParams](api/beta.md) { agents, type }  | null
+
+Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+agents: Array<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)>
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+Accepts one of the following:
+
+string
+
+BetaManagedAgentsAgentParams { id, type, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+id: string
+
+The `agent` ID.
+
+type: "agent"
+
+version?: number
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+BetaManagedAgentsMultiagentSelfParams { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+type: "coordinator"
 
 name?: string
 
@@ -392,7 +426,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more
 
 "message-batches-2024-09-24"
 
@@ -440,9 +474,11 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsAgent { id, archived\_at, created\_at, 11 more }
+BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -529,6 +565,22 @@ Accepts one of the following:
 "standard"
 
 "fast"
+
+multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }  | null
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array<[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } >
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+type: "coordinator"
 
 name: string
 
@@ -764,6 +816,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -827,6 +889,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

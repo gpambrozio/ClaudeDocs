@@ -8,37 +8,37 @@ Ruby
 
 ##### [Create Agent](api/beta/agents/create.md)
 
-beta.agents.create(\*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+beta.agents.create(\*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents
 
 ##### [List Agents](api/beta/agents/list.md)
 
-beta.agents.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+beta.agents.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more } >
 
 GET/v1/agents
 
 ##### [Get Agent](api/beta/agents/retrieve.md)
 
-beta.agents.retrieve(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+beta.agents.retrieve(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 GET/v1/agents/{agent\_id}
 
 ##### [Update Agent](api/beta/agents/update.md)
 
-beta.agents.update(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+beta.agents.update(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}
 
 ##### [Archive Agent](api/beta/agents/archive.md)
 
-beta.agents.archive(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+beta.agents.archive(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
 
-class BetaManagedAgentsAgent { id, archived\_at, created\_at, 11 more }
+class BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -131,6 +131,22 @@ Accepts one of the following:
 :standard
 
 :fast
+
+multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array[[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } ]
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: String
+
+type: :agent
+
+version: Integer
+
+type: :coordinator
 
 name: String
 
@@ -325,6 +341,16 @@ A timestamp in RFC 3339 format
 version: Integer
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
+
+class BetaManagedAgentsAgentReference { id, type, version }
+
+A resolved agent reference with a concrete version.
+
+id: String
+
+type: :agent
+
+version: Integer
 
 class BetaManagedAgentsAgentToolConfig { enabled, name, permission\_policy }
 
@@ -1180,6 +1206,62 @@ Accepts one of the following:
 
 :fast
 
+class BetaManagedAgentsMultiagentCoordinator { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array[[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } ]
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: String
+
+type: :agent
+
+version: Integer
+
+type: :coordinator
+
+class BetaManagedAgentsMultiagentCoordinatorParams { agents, type }
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+agents: Array[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+Accepts one of the following:
+
+String
+
+class BetaManagedAgentsAgentParams { id, type, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+id: String
+
+The `agent` ID.
+
+type: :agent
+
+version: Integer
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+class BetaManagedAgentsMultiagentSelfParams { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: :self
+
+type: :coordinator
+
+class BetaManagedAgentsMultiagentSelfParams { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: :self
+
 BetaManagedAgentsSkillParams = [BetaManagedAgentsAnthropicSkillParams](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkillParams](api/beta.md) { skill\_id, type, version }
 
 Skill to load in the session container.
@@ -1232,7 +1314,7 @@ Endpoint URL for the MCP server.
 
 ##### [List Agent Versions](api/beta/agents/versions/list.md)
 
-beta.agents.versions.list(agent\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more } >
+beta.agents.versions.list(agent\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more } >
 
 GET/v1/agents/{agent\_id}/versions
 

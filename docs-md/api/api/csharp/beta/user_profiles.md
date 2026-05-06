@@ -52,6 +52,18 @@ required IReadOnlyDictionary<string, string> Metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+required Relationship Relationship
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"External
+
+"resold"Resold
+
+"internal"Internal
+
 required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta.md)> TrustGrants
 
 Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -79,6 +91,10 @@ A timestamp in RFC 3339 format
 string? ExternalID
 
 Platform's own identifier for this user. Not enforced unique.
+
+string? Name
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 class BetaUserProfileEnrollmentUrl:
 

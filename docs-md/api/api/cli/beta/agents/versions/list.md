@@ -36,7 +36,7 @@ BetaManagedAgentsListAgentVersions: object { data, next\_page }
 
 Paginated list of agent versions.
 
-data: optional array of [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+data: optional array of [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 Agent versions.
 
@@ -117,6 +117,26 @@ Inference speed mode. `fast` provides significantly faster output token generati
 "standard"
 
 "fast"
+
+multiagent: object { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+"agent"
+
+version: number
+
+type: "coordinator"
+
+"coordinator"
 
 name: string
 
@@ -366,6 +386,16 @@ Response 200
         "id": "claude-sonnet-4-6",
         "speed": "standard"
       },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
       "name": "My First Agent",
       "skills": [
         {
@@ -434,6 +464,16 @@ Response 200
       "model": {
         "id": "claude-sonnet-4-6",
         "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
       },
       "name": "My First Agent",
       "skills": [

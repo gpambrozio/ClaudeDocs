@@ -38,6 +38,10 @@ Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
 
 Body param: Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
+--multiagent: optional object { agents, type }
+
+Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
 --name: optional string
 
 Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
@@ -60,7 +64,7 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 ##### ReturnsExpand Collapse
 
-beta\_managed\_agents\_agent: object { id, archived\_at, created\_at, 11 more }
+beta\_managed\_agents\_agent: object { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -141,6 +145,26 @@ Inference speed mode. `fast` provides significantly faster output token generati
 "standard"
 
 "fast"
+
+multiagent: object { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+"agent"
+
+version: number
+
+type: "coordinator"
+
+"coordinator"
 
 name: string
 
@@ -385,6 +409,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -448,6 +482,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

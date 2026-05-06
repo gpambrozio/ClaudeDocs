@@ -32,7 +32,7 @@ beta\_managed\_agents\_send\_session\_events: object { data }
 
 Events that were successfully sent to the session.
 
-data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 3 more }  or [BetaManagedAgentsUserCustomToolResultEvent](api/beta.md) { id, custom\_tool\_use\_id, type, 3 more }
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 2 more
 
 Sent events
 
@@ -198,7 +198,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-beta\_managed\_agents\_user\_interrupt\_event: object { id, type, processed\_at }
+beta\_managed\_agents\_user\_interrupt\_event: object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -214,7 +214,11 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-beta\_managed\_agents\_user\_tool\_confirmation\_event: object { id, result, tool\_use\_id, 3 more }
+session\_thread\_id: optional string
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+beta\_managed\_agents\_user\_tool\_confirmation\_event: object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -246,7 +250,11 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-beta\_managed\_agents\_user\_custom\_tool\_result\_event: object { id, custom\_tool\_use\_id, type, 3 more }
+session\_thread\_id: optional string
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+beta\_managed\_agents\_user\_custom\_tool\_result\_event: object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -415,6 +423,66 @@ Whether the tool execution resulted in an error.
 processed\_at: optional string
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: optional string
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+beta\_managed\_agents\_user\_define\_outcome\_event: object { id, description, max\_iterations, 4 more }
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: string
+
+Unique identifier for this event.
+
+description: string
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: number
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: string
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: string
+
+A timestamp in RFC 3339 format
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+beta\_managed\_agents\_file\_rubric: object { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+"file"
+
+beta\_managed\_agents\_text\_rubric: object { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: "text"
+
+"text"
+
+type: "user.define\_outcome"
+
+"user.define\_outcome"
 
 Send Events
 

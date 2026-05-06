@@ -114,6 +114,10 @@ Metadata param.Field[map[string, string]]optional
 
 Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+Multiagent param.Field[[BetaManagedAgentsMultiagentParamsResp](api/beta.md)]optional
+
+Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
 Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta.md)]optional
 
 Body param: Skills available to the agent. Maximum 20.
@@ -386,6 +390,8 @@ const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsAgent struct{…}
@@ -481,6 +487,22 @@ Accepts one of the following:
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
 const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsMultiagent](api/beta.md)
+
+Resolved coordinator topology with a concrete agent roster.
+
+Agents [][BetaManagedAgentsAgentReference](api/beta.md)
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+ID string
+
+Type BetaManagedAgentsAgentReferenceType
+
+Version int64
+
+Type BetaManagedAgentsMultiagentType
 
 Name string
 
@@ -730,6 +752,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -793,6 +825,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

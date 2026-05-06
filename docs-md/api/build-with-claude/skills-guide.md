@@ -94,43 +94,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 **Example: Creating and downloading an Excel file**
 
-cURL
-
-cURL
-
-CLI
-
-CLI
-
-Python
-
-Python
-
-TypeScript
-
-TypeScript
-
-C#
-
-C#
-
-Go
-
-Go
-
-Java
-
-Java
-
-PHP
-
-PHP
-
-Ruby
-
-Ruby
-
-Python
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
@@ -726,7 +690,7 @@ except anthropic.BadRequestError as e:
 
 Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ## Next Steps
 

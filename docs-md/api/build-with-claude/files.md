@@ -233,7 +233,7 @@ You can only download files that were created by [skills](build-with-claude/skil
 
 Files uploaded via the Files API are retained until explicitly deleted using the `DELETE /v1/files/{file_id}` endpoint. Files are stored for reuse across multiple API requests.
 
-For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ## Error handling
 
@@ -275,7 +275,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#96e5f7faf3e5d6f7f8e2fee4f9e6fff5b8f5f9fb) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#1a697b767f695a7b746e7268756a737934797577) if you need higher limits for your use case
 
 Was this page helpful?
 

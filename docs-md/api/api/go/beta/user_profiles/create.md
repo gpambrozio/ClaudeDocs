@@ -24,6 +24,20 @@ Metadata param.Field[map[string, string]]optional
 
 Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+Name param.Field[string]optional
+
+Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+Relationship param.Field[[BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md)]optional
+
+Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+const BetaUserProfileNewParamsRelationshipExternal [BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md) = "external"
+
+const BetaUserProfileNewParamsRelationshipResold [BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md) = "resold"
+
+const BetaUserProfileNewParamsRelationshipInternal [BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md) = "internal"
+
 Betas param.Field[[]AnthropicBeta]optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -80,6 +94,8 @@ const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-
 
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
+const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaUserProfile struct{…}
@@ -95,6 +111,18 @@ A timestamp in RFC 3339 format
 Metadata map[string, string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+Relationship BetaUserProfileRelationship
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
+
+const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"
+
+const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"
 
 TrustGrants map[string, [BetaUserProfileTrustGrant](api/beta.md)]
 
@@ -123,6 +151,10 @@ A timestamp in RFC 3339 format
 ExternalID stringoptional
 
 Platform's own identifier for this user. Not enforced unique.
+
+Name stringoptional
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 Create User Profile
 
@@ -160,6 +192,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -167,7 +200,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 
@@ -180,6 +214,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -187,7 +222,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 

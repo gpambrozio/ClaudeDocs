@@ -38,7 +38,7 @@ POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
 
-beta\_managed\_agents\_agent: object { id, archived\_at, created\_at, 11 more }
+beta\_managed\_agents\_agent: object { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -119,6 +119,26 @@ Inference speed mode. `fast` provides significantly faster output token generati
 "standard"
 
 "fast"
+
+multiagent: object { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+"agent"
+
+version: number
+
+type: "coordinator"
+
+"coordinator"
 
 name: string
 
@@ -329,6 +349,18 @@ A timestamp in RFC 3339 format
 version: number
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
+
+beta\_managed\_agents\_agent\_reference: object { id, type, version }
+
+A resolved agent reference with a concrete version.
+
+id: string
+
+type: "agent"
+
+"agent"
+
+version: number
 
 beta\_managed\_agents\_agent\_tool\_config: object { enabled, name, permission\_policy }
 
@@ -1157,6 +1189,72 @@ Inference speed mode. `fast` provides significantly faster output token generati
 "standard"
 
 "fast"
+
+beta\_managed\_agents\_multiagent\_coordinator: object { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: array of [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: string
+
+type: "agent"
+
+"agent"
+
+version: number
+
+type: "coordinator"
+
+"coordinator"
+
+beta\_managed\_agents\_multiagent\_coordinator\_params: object { agents, type }
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+agents: array of [BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+union\_member\_0: string
+
+beta\_managed\_agents\_agent\_params: object { id, type, version }
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+id: string
+
+The `agent` ID.
+
+type: "agent"
+
+"agent"
+
+version: optional number
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+beta\_managed\_agents\_multiagent\_self\_params: object { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+"self"
+
+type: "coordinator"
+
+"coordinator"
+
+beta\_managed\_agents\_multiagent\_self\_params: object { type }
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+type: "self"
+
+"self"
 
 beta\_managed\_agents\_skill\_params: [BetaManagedAgentsAnthropicSkillParams](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkillParams](api/beta.md) { skill\_id, type, version }
 

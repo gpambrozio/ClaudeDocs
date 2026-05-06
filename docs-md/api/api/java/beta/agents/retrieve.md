@@ -72,6 +72,8 @@ USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent:
@@ -157,6 +159,22 @@ Accepts one of the following:
 STANDARD("standard")
 
 FAST("fast")
+
+Optional<[BetaManagedAgentsMultiagent](api/beta.md)> multiagent
+
+Resolved coordinator topology with a concrete agent roster.
+
+List<[BetaManagedAgentsAgentReference](api/beta.md)> agents
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+String id
+
+Type type
+
+long version
+
+Type type
 
 String name
 
@@ -397,6 +415,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -460,6 +488,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

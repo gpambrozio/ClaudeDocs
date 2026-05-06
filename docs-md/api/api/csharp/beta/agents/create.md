@@ -146,6 +146,10 @@ IReadOnlyDictionary<string, string> metadata
 
 Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+[BetaManagedAgentsMultiagentParams](api/beta.md)? multiagent
+
+Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
 IReadOnlyList<[BetaManagedAgentsSkillParams](api/beta.md)> skills
 
 Body param: Skills available to the agent. Maximum 20.
@@ -412,6 +416,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
+"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent:
@@ -497,6 +503,22 @@ Accepts one of the following:
 "standard"Standard
 
 "fast"Fast
+
+required [BetaManagedAgentsMultiagent](api/beta.md)? Multiagent
+
+Resolved coordinator topology with a concrete agent roster.
+
+required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta.md)> Agents
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+required string ID
+
+required Type Type
+
+required Int Version
+
+required Type Type
 
 required string Name
 
@@ -730,6 +752,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -793,6 +825,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

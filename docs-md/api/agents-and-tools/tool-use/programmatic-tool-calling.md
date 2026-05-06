@@ -660,7 +660,7 @@ Consider using Anthropic's managed solution if you're using the Claude API.
 
 Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
 
-For ZDR eligibility across all features, see [API and data retention](build-with-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ## Related features
 

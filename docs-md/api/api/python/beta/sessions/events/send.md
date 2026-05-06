@@ -164,6 +164,10 @@ Parameters for sending an interrupt to pause the agent.
 
 type: Literal["user.interrupt"]
 
+session\_thread\_id: Optional[str]
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEventParams: …
 
 Parameters for confirming or denying a tool execution request.
@@ -332,6 +336,46 @@ is\_error: Optional[bool]
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsUserDefineOutcomeEventParams: …
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+description: str
+
+What the agent should produce. This is the task specification.
+
+rubric: Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubricParams: …
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: str
+
+ID of the rubric file.
+
+type: Literal["file"]
+
+class BetaManagedAgentsTextRubricParams: …
+
+Rubric content provided inline as text.
+
+content: str
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+type: Literal["text"]
+
+type: Literal["user.define\_outcome"]
+
+max\_iterations: Optional[int]
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
@@ -340,7 +384,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
 
 Accepts one of the following:
 
@@ -389,6 +433,8 @@ Accepts one of the following:
 "user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
 
 ##### ReturnsExpand Collapse
 
@@ -560,6 +606,10 @@ processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
 
+session\_thread\_id: Optional[str]
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent: …
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -591,6 +641,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: Optional[str]
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent: …
 
@@ -743,6 +797,62 @@ Whether the tool execution resulted in an error.
 processed\_at: Optional[datetime]
 
 A timestamp in RFC 3339 format
+
+session\_thread\_id: Optional[str]
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsUserDefineOutcomeEvent: …
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+id: str
+
+Unique identifier for this event.
+
+description: str
+
+What the agent should produce. Copied from the input event.
+
+max\_iterations: Optional[int]
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+outcome\_id: str
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+processed\_at: datetime
+
+A timestamp in RFC 3339 format
+
+rubric: Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric: …
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: str
+
+ID of the rubric file.
+
+type: Literal["file"]
+
+class BetaManagedAgentsTextRubric: …
+
+Rubric content provided inline as text.
+
+content: str
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: Literal["text"]
+
+type: Literal["user.define\_outcome"]
 
 Send Events
 

@@ -37,7 +37,7 @@ You can discover which capabilities a model supports programmatically. The [Mode
 | [Adaptive thinking](build-with-claude/adaptive-thinking.md) | Let Claude dynamically decide when and how much to think. The recommended thinking mode for Opus 4.7. Use the effort parameter to control thinking depth. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 | [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls cost 50% less than standard API calls. | Not ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA) |
 | [Citations](build-with-claude/citations.md) | Ground Claude's responses in source documents. With Citations, Claude can provide detailed references to the exact sentences and passages it uses to generate responses, leading to more verifiable, trustworthy outputs. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
-| [Data residency](build-with-claude/data-residency.md) | Control where model inference runs using geographic controls. Specify `"global"` or `"us"` routing per request via the `inference_geo` parameter. | ZDR eligible | Claude API (GA) |
+| [Data residency](manage-claude/data-residency.md) | Control where model inference runs using geographic controls. Specify `"global"` or `"us"` routing per request via the `inference_geo` parameter. | ZDR eligible | Claude API (GA) |
 | [Effort](build-with-claude/effort.md) | Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency. Supported on Opus 4.7, Opus 4.6, and Opus 4.5. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 | [Extended thinking](build-with-claude/extended-thinking.md) | Enhanced reasoning capabilities for complex tasks, providing transparency into Claude's step-by-step thought process before delivering its final answer. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 | [PDF support](build-with-claude/pdf-support.md) | Process and analyze text and visual content from PDF documents. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
@@ -99,7 +99,7 @@ Manage files and assets for use with Claude.
 | --- | --- | --- | --- |
 | [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API (Beta)  Microsoft Foundry (Beta) |
 
-\* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. See [ZDR details](build-with-claude/api-and-data-retention.md).
+\* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. See [ZDR details](manage-claude/api-and-data-retention.md).
 
 Was this page helpful?
 

@@ -6,7 +6,7 @@ Ruby
 
 # Archive Agent
 
-beta.agents.archive(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 11 more }
+beta.agents.archive(agent\_id, \*\*kwargs) -> [BetaManagedAgentsAgent](api/beta.md) { id, archived\_at, created\_at, 12 more }
 
 POST/v1/agents/{agent\_id}/archive
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more
 
 Accepts one of the following:
 
@@ -74,9 +74,11 @@ Accepts one of the following:
 
 :"advisor-tool-2026-03-01"
 
+:"managed-agents-2026-04-01"
+
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsAgent { id, archived\_at, created\_at, 11 more }
+class BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -169,6 +171,22 @@ Accepts one of the following:
 :standard
 
 :fast
+
+multiagent: [BetaManagedAgentsMultiagent](api/beta.md) { agents, type }
+
+Resolved coordinator topology with a concrete agent roster.
+
+agents: Array[[BetaManagedAgentsAgentReference](api/beta.md) { id, type, version } ]
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+id: String
+
+type: :agent
+
+version: Integer
+
+type: :coordinator
 
 name: String
 
@@ -400,6 +418,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -463,6 +491,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

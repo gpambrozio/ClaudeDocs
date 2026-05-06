@@ -166,6 +166,10 @@ Parameters for sending an interrupt to pause the agent.
 
 required Type Type
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEventParams:
 
 Parameters for confirming or denying a tool execution request.
@@ -334,6 +338,46 @@ Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsUserDefineOutcomeEventParams:
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+required string Description
+
+What the agent should produce. This is the task specification.
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubricParams:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubricParams:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+required Type Type
+
+required Type Type
+
+Int? MaxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -383,6 +427,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "user-profiles-2026-03-24"UserProfiles2026\_03\_24
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+
+"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
 ##### ReturnsExpand Collapse
 
@@ -554,6 +600,10 @@ DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
 
+string? SessionThreadID
+
+If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 class BetaManagedAgentsUserToolConfirmationEvent:
 
 A tool confirmation event that approves or denies a pending tool execution.
@@ -585,6 +635,10 @@ Optional message providing context for a 'deny' decision. Only allowed when resu
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
 class BetaManagedAgentsUserCustomToolResultEvent:
 
@@ -737,6 +791,62 @@ Whether the tool execution resulted in an error.
 DateTimeOffset? ProcessedAt
 
 A timestamp in RFC 3339 format
+
+string? SessionThreadID
+
+Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsUserDefineOutcomeEvent:
+
+Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+required string ID
+
+Unique identifier for this event.
+
+required string Description
+
+What the agent should produce. Copied from the input event.
+
+required Int? MaxIterations
+
+Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+required string OutcomeID
+
+Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+required DateTimeOffset ProcessedAt
+
+A timestamp in RFC 3339 format
+
+required Rubric Rubric
+
+Rubric for grading the quality of an outcome.
+
+Accepts one of the following:
+
+class BetaManagedAgentsFileRubric:
+
+Rubric referenced by a file uploaded via the Files API.
+
+required string FileID
+
+ID of the rubric file.
+
+required Type Type
+
+class BetaManagedAgentsTextRubric:
+
+Rubric content provided inline as text.
+
+required string Content
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+required Type Type
+
+required Type Type
 
 Send Events
 

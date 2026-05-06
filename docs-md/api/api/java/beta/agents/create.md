@@ -66,6 +66,8 @@ USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
 
 ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
+MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+
 Model model
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
@@ -195,6 +197,10 @@ Endpoint URL for the MCP server.
 Optional<Metadata> metadata
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+Optional<[BetaManagedAgentsMultiagentParams](api/beta.md)> multiagent
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
 Optional<List<[BetaManagedAgentsSkillParams](api/beta.md)>> skills
 
@@ -498,6 +504,22 @@ STANDARD("standard")
 
 FAST("fast")
 
+Optional<[BetaManagedAgentsMultiagent](api/beta.md)> multiagent
+
+Resolved coordinator topology with a concrete agent roster.
+
+List<[BetaManagedAgentsAgentReference](api/beta.md)> agents
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+String id
+
+Type type
+
+long version
+
+Type type
+
 String name
 
 List<Skill> skills
@@ -742,6 +764,16 @@ Response 200
     "id": "claude-sonnet-4-6",
     "speed": "standard"
   },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
   "name": "My First Agent",
   "skills": [
     {
@@ -805,6 +837,16 @@ Response 200
   "model": {
     "id": "claude-sonnet-4-6",
     "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
   },
   "name": "My First Agent",
   "skills": [

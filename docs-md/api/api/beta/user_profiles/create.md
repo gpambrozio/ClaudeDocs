@@ -20,7 +20,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
 
 Accepts one of the following:
 
@@ -70,6 +70,8 @@ Accepts one of the following:
 
 "advisor-tool-2026-03-01"
 
+"managed-agents-2026-04-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 external\_id: optional string
@@ -80,9 +82,25 @@ metadata: optional map[string]
 
 Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+name: optional string
+
+Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+relationship: optional "external" or "resold" or "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"
+
+"resold"
+
+"internal"
+
 ##### ReturnsExpand Collapse
 
-BetaUserProfile = object { id, created\_at, metadata, 4 more }
+BetaUserProfile = object { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -95,6 +113,18 @@ A timestamp in RFC 3339 format
 metadata: map[string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: "external" or "resold" or "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"
+
+"resold"
+
+"internal"
 
 trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
 
@@ -124,6 +154,10 @@ external\_id: optional string
 
 Platform's own identifier for this user. Not enforced unique.
 
+name: optional string
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
 Create User Profile
 
 cURL
@@ -144,6 +178,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -151,7 +186,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 
@@ -164,6 +200,7 @@ Response 200
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -171,7 +208,8 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345"
+  "external_id": "user_12345",
+  "name": "Example User"
 }
 ```
 

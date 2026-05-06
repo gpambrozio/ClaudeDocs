@@ -122,6 +122,22 @@ Accepts one of the following:
 
 "fast"Fast
 
+required [BetaManagedAgentsMultiagent](api/beta.md)? Multiagent
+
+Resolved coordinator topology with a concrete agent roster.
+
+required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta.md)> Agents
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+required string ID
+
+required Type Type
+
+required Int Version
+
+required Type Type
+
 required string Name
 
 required IReadOnlyList<Skill> Skills
@@ -315,6 +331,16 @@ A timestamp in RFC 3339 format
 required Int Version
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
+
+class BetaManagedAgentsAgentReference:
+
+A resolved agent reference with a concrete version.
+
+required string ID
+
+required Type Type
+
+required Int Version
 
 class BetaManagedAgentsAgentToolConfig:
 
@@ -1095,6 +1121,62 @@ Accepts one of the following:
 "standard"Standard
 
 "fast"Fast
+
+class BetaManagedAgentsMultiagentCoordinator:
+
+Resolved coordinator topology with a concrete agent roster.
+
+required IReadOnlyList<[BetaManagedAgentsAgentReference](api/beta.md)> Agents
+
+Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+required string ID
+
+required Type Type
+
+required Int Version
+
+required Type Type
+
+class BetaManagedAgentsMultiagentCoordinatorParams:
+
+A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+required IReadOnlyList<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)> Agents
+
+Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+Accepts one of the following:
+
+string
+
+class BetaManagedAgentsAgentParams:
+
+Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+required string ID
+
+The `agent` ID.
+
+required Type Type
+
+Int Version
+
+The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+class BetaManagedAgentsMultiagentSelfParams:
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMultiagentSelfParams:
+
+Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+required Type Type
 
 class BetaManagedAgentsSkillParams: A class that can be one of several variants.union
 

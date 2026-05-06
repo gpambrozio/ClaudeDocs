@@ -158,13 +158,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -184,13 +194,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -354,13 +380,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -380,13 +416,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -567,13 +619,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -593,13 +655,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -813,13 +891,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -839,13 +927,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -979,13 +1083,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -1005,13 +1119,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -1147,13 +1277,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -1173,13 +1313,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -1623,13 +1779,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -1649,13 +1815,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -2365,13 +2547,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -2391,13 +2583,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -2942,13 +3150,23 @@ BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -2968,13 +3186,29 @@ BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -4729,7 +4963,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more
 
 "message-batches-2024-09-24"
 
@@ -4776,6 +5010,8 @@ Accepts one of the following:
 "user-profiles-2026-03-24"
 
 "advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
 
 MessageCreateParamsNonStreaming extends MessageCreateParamsBase { max\_tokens, messages, model, 21 more }  { stream }
 
@@ -4914,15 +5150,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -4942,13 +5188,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -5566,15 +5828,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -5594,13 +5866,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -6240,15 +6528,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -6268,13 +6566,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -6892,15 +7206,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -6920,13 +7244,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -7865,15 +8205,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -7893,13 +8243,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -8517,15 +8883,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -8545,13 +8921,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 
@@ -8657,15 +9049,25 @@ BetaCitationContentBlockLocation { cited\_text, document\_index, document\_title
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 document\_index: number
 
 document\_title: string | null
 
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 file\_id: string | null
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 type: "content\_block\_location"
 
@@ -8685,13 +9087,29 @@ BetaCitationSearchResultLocation { cited\_text, end\_block\_index, search\_resul
 
 cited\_text: string
 
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
 end\_block\_index: number
 
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
 search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
 
 source: string
 
 start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
 
 title: string | null
 

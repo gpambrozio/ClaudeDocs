@@ -70,6 +70,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
+"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+
 ##### ReturnsExpand Collapse
 
 class DeletedFile:
