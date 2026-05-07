@@ -47,9 +47,9 @@ Sending events
 
 Sending events
 
-Streaming responses
+Streaming events
 
-Streaming responses
+Streaming events
 
 Listing past events
 
@@ -57,7 +57,7 @@ Listing past events
 
 Send a `user.message` event to start or continue the agent's work:
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client.beta.sessions.events.send(
@@ -78,7 +78,7 @@ client.beta.sessions.events.send(
 
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Agent is currently analyzing a file...
@@ -109,11 +109,11 @@ The agent will acknowledge the interruption and switch to the new task.
 When the agent invokes a [custom tool](managed-agents/tools.md):
 
 1. The session emits an `agent.custom_tool_use` event containing the tool name and input.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
+2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
 3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` param along with the result content.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -146,11 +146,11 @@ with client.beta.sessions.events.stream(session.id) as stream:
 When a [permission policy](managed-agents/permission-policies.md) requires confirmation before a tool executes:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
+2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-curlPythonTypeScriptC#GoJavaPHPRuby
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:

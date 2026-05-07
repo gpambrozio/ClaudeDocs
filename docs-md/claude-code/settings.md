@@ -71,6 +71,8 @@ Scopes apply to many Claude Code features:
 | **Plugins** | `~/.claude/settings.json` | `.claude/settings.json` | `.claude/settings.local.json` |
 | **CLAUDE.md** | `~/.claude/CLAUDE.md` | `CLAUDE.md` or `.claude/CLAUDE.md` | `CLAUDE.local.md` |
 
+On Windows, paths shown as `~/.claude` resolve to `%USERPROFILE%\.claude`.
+
 ---
 
 ## [​](#settings-files) Settings files
@@ -153,19 +155,20 @@ The published schema is updated periodically and may not include settings added 
 | `allowManagedHooksOnly` | (Managed settings only) Only managed hooks, SDK hooks, and hooks from plugins force-enabled in managed settings `enabledPlugins` are loaded. User, project, and all other plugin hooks are blocked. See [Hook configuration](#hook-configuration) | `true` |
 | `allowManagedMcpServersOnly` | (Managed settings only) Only `allowedMcpServers` from managed settings are respected. `deniedMcpServers` still merges from all sources. Users can still add MCP servers, but only the admin-defined allowlist applies. See [Managed MCP configuration](mcp.md) | `true` |
 | `allowManagedPermissionRulesOnly` | (Managed settings only) Prevent user and project settings from defining `allow`, `ask`, or `deny` permission rules. Only rules in managed settings apply. See [Managed-only settings](permissions.md) | `true` |
-| `alwaysThinkingEnabled` | Enable [extended thinking](model-config.md) by default for all sessions. Typically configured via the `/config` command rather than editing directly | `true` |
-| `apiKeyHelper` | Custom script, to be executed in `/bin/sh`, to generate an auth value. This value will be sent as `X-Api-Key` and `Authorization: Bearer` headers for model requests | `/bin/generate_temp_api_key.sh` |
+| `alwaysThinkingEnabled` | Enable [extended thinking](model-config.md) by default for all sessions. Typically configured via the `/config` command rather than editing directly. To force thinking off regardless of this setting, set [`CLAUDE_CODE_DISABLE_THINKING`](env-vars.md) in `env` | `true` |
+| `apiKeyHelper` | Custom script, to be executed in `/bin/sh`, to generate an auth value. This value will be sent as `X-Api-Key` and `Authorization: Bearer` headers for model requests. Set the refresh interval with [`CLAUDE_CODE_API_KEY_HELPER_TTL_MS`](env-vars.md) | `/bin/generate_temp_api_key.sh` |
 | `attribution` | Customize attribution for git commits and pull requests. See [Attribution settings](#attribution-settings) | `{"commit": "🤖 Generated with Claude Code", "pr": ""}` |
 | `autoMemoryDirectory` | Custom directory for [auto memory](memory.md) storage. Accepts an absolute path or a `~/`-prefixed path. Accepted from policy and user settings, and from the `--settings` flag. Not accepted from project or local settings, since a cloned repository could supply either file to redirect memory writes to sensitive locations | `"~/my-memory-dir"` |
+| `autoMemoryEnabled` | Enable [auto memory](memory.md). When `false`, Claude does not read from or write to the auto memory directory. Default: `true`. You can also toggle this with `/memory` during a session. To disable via environment variable, set [`CLAUDE_CODE_DISABLE_AUTO_MEMORY`](env-vars.md) in `env` | `false` |
 | `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, and `soft_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Not read from shared project settings | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
 | `autoScrollEnabled` | In [fullscreen rendering](fullscreen.md), follow new output to the bottom of the conversation. Default: `true`. Appears in `/config` as **Auto-scroll**. Permission prompts still scroll into view when this is off | `false` |
-| `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release | `"stable"` |
+| `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release. To disable auto-updates entirely, set [`DISABLE_AUTOUPDATER`](setup.md) in `env` | `"stable"` |
 | `availableModels` | Restrict which models users can select via `/model`, `--model`, or `ANTHROPIC_MODEL`. Does not affect the Default option. See [Restrict model selection](model-config.md) | `["sonnet", "haiku"]` |
 | `awaySummaryEnabled` | Show a one-line session recap when you return to the terminal after a few minutes away. Set to `false` or turn off Session recap in `/config` to disable. Same as [`CLAUDE_CODE_ENABLE_AWAY_SUMMARY`](env-vars.md) | `true` |
 | `awsAuthRefresh` | Custom script that modifies the `.aws` directory (see [advanced credential configuration](amazon-bedrock.md)) | `aws sso login --profile myprofile` |
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. Blocked sources are checked before downloading, so they never touch the filesystem. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
-| `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for Team and Enterprise users. Unset or `false` blocks channel message delivery regardless of what users pass to `--channels` | `true` |
+| `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for the organization. On claude.ai Team and Enterprise plans, channels are blocked when this is unset or `false`. For [Anthropic Console](authentication.md) accounts using API key authentication, channels are allowed by default unless your organization deploys managed settings, in which case this key must be set to `true` | `true` |
 | `cleanupPeriodDays` | Session files older than this period are deleted at startup (default: 30 days, minimum 1). Setting to `0` is rejected with a validation error. Also controls the age cutoff for automatic removal of [orphaned subagent worktrees](worktrees.md) at startup. To disable transcript writes entirely, set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable, or in non-interactive mode (`-p`) use the `--no-session-persistence` flag or the `persistSession: false` SDK option. | `20` |
 | `companyAnnouncements` | Announcement to display to users at startup. If multiple announcements are provided, they will be cycled through at random. | `["Welcome to Acme Corp! Review our code guidelines at docs.acme.com"]` |
 | `defaultShell` | Default shell for input-box `!` commands. Accepts `"bash"` (default) or `"powershell"`. Setting `"powershell"` routes interactive `!` commands through PowerShell on Windows. Requires `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`. See [PowerShell tool](tools-reference.md) | `"powershell"` |
@@ -174,14 +177,15 @@ The published schema is updated periodically and may not include settings added 
 | `disableAutoMode` | Set to `"disable"` to prevent [auto mode](permission-modes.md) from being activated. Removes `auto` from the `Shift+Tab` cycle and rejects `--permission-mode auto` at startup. Most useful in [managed settings](permissions.md) where users cannot override it | `"disable"` |
 | `disableDeepLinkRegistration` | Set to `"disable"` to prevent Claude Code from registering the `claude-cli://` protocol handler with the operating system on startup. [Deep links](deep-links.md) let external tools open a Claude Code session with a pre-filled prompt. Useful in environments where protocol handler registration is restricted or managed separately | `"disable"` |
 | `disabledMcpjsonServers` | List of specific MCP servers from `.mcp.json` files to reject | `["filesystem"]` |
+| `disableRemoteControl` | Disable [Remote Control](remote-control.md): blocks `claude remote-control`, the `--remote-control` flag, auto-start, and the in-session toggle. Typically placed in [managed settings](permissions.md) for per-device MDM enforcement, but works from any scope. Requires Claude Code v2.1.128 or later | `true` |
 | `disableSkillShellExecution` | Disable inline shell execution for `` !`...` `` and ```` ```! ```` blocks in [skills](skills.md) and custom commands from user, project, plugin, or additional-directory sources. Commands are replaced with `[shell command execution disabled by policy]` instead of being run. Bundled and managed skills are not affected. Most useful in [managed settings](permissions.md) where users cannot override it | `true` |
 | `editorMode` | Key binding mode for the input prompt: `"normal"` or `"vim"`. Default: `"normal"`. Appears in `/config` as **Editor mode** | `"vim"` |
-| `effortLevel` | Persist the [effort level](model-config.md) across sessions. Accepts `"low"`, `"medium"`, `"high"`, or `"xhigh"`. Written automatically when you run `/effort` with one of those values. See [Adjust effort level](model-config.md) for supported models | `"xhigh"` |
+| `effortLevel` | Persist the [effort level](model-config.md) across sessions. Accepts `"low"`, `"medium"`, `"high"`, or `"xhigh"`. Written automatically when you run `/effort` with one of those values. `--effort` and [`CLAUDE_CODE_EFFORT_LEVEL`](env-vars.md) override this for one session. See [Adjust effort level](model-config.md) for supported models | `"xhigh"` |
 | `enableAllProjectMcpServers` | Automatically approve all MCP servers defined in project `.mcp.json` files | `true` |
 | `enabledMcpjsonServers` | List of specific MCP servers from `.mcp.json` files to approve | `["memory", "github"]` |
 | `env` | Environment variables that will be applied to every session | `{"FOO": "bar"}` |
 | `fastModePerSessionOptIn` | When `true`, fast mode does not persist across sessions. Each session starts with fast mode off, requiring users to enable it with `/fast`. The user’s fast mode preference is still saved. See [Require per-session opt-in](fast-mode.md) | `true` |
-| `feedbackSurveyRate` | Probability (0–1) that the [session quality survey](data-usage.md) appears when eligible. Set to `0` to suppress entirely. Useful when using Bedrock, Vertex, or Foundry where the default sample rate does not apply | `0.05` |
+| `feedbackSurveyRate` | Probability (0–1) that the [session quality survey](data-usage.md) appears when eligible. Set to `0` to suppress entirely, or set [`CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY`](env-vars.md) in `env`. Useful when using Bedrock, Vertex, or Foundry where the default sample rate does not apply | `0.05` |
 | `fileSuggestion` | Configure a custom script for `@` file autocomplete. See [File suggestion settings](#file-suggestion-settings) | `{"type": "command", "command": "~/.claude/file-suggestion.sh"}` |
 | `forceLoginMethod` | Use `claudeai` to restrict login to Claude.ai accounts, `console` to restrict login to Claude Console (API usage billing) accounts | `claudeai` |
 | `forceLoginOrgUUID` | Require login to belong to a specific organization. Accepts a single UUID string, which also pre-selects that organization during login, or an array of UUIDs where any listed organization is accepted without pre-selection. When set in managed settings, login fails if the authenticated account does not belong to a listed organization; an empty array fails closed and blocks login with a misconfiguration message | `"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` or `["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy"]` |
@@ -192,9 +196,9 @@ The published schema is updated periodically and may not include settings added 
 | `includeGitInstructions` | Include built-in commit and PR workflow instructions and the git status snapshot in Claude’s system prompt (default: `true`). Set to `false` to remove both, for example when using your own git workflow skills. The `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` environment variable takes precedence over this setting when set | `false` |
 | `language` | Configure Claude’s preferred response language (e.g., `"japanese"`, `"spanish"`, `"french"`). Claude will respond in this language by default. Also sets the [voice dictation](voice-dictation.md) language | `"japanese"` |
 | `minimumVersion` | Floor that prevents background auto-updates and `claude update` from installing a version below this one. Switching from the `"latest"` channel to `"stable"` via `/config` prompts you to stay on the current version or allow the downgrade. Choosing to stay sets this value. Also useful in [managed settings](permissions.md) to pin an organization-wide minimum | `"2.1.100"` |
-| `model` | Override the default model to use for Claude Code | `"claude-sonnet-4-6"` |
+| `model` | Override the default model to use for Claude Code. `--model` and [`ANTHROPIC_MODEL`](model-config.md) override this for one session | `"claude-sonnet-4-6"` |
 | `modelOverrides` | Map Anthropic model IDs to provider-specific model IDs such as Bedrock inference profile ARNs. Each model picker entry uses its mapped value when calling the provider API. See [Override model IDs per version](model-config.md) | `{"claude-opus-4-6": "arn:aws:bedrock:..."}` |
-| `otelHeadersHelper` | Script to generate dynamic OpenTelemetry headers. Runs at startup and periodically (see [Dynamic headers](monitoring-usage.md)) | `/bin/generate_otel_headers.sh` |
+| `otelHeadersHelper` | Script to generate dynamic OpenTelemetry headers. Runs at startup and periodically. Set the refresh interval with [`CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS`](env-vars.md). See [Dynamic headers](monitoring-usage.md) | `/bin/generate_otel_headers.sh` |
 | `outputStyle` | Configure an output style to adjust the system prompt. See [output styles documentation](output-styles.md) | `"Explanatory"` |
 | `permissions` | See table below for structure of permissions. |  |
 | `plansDirectory` | Customize where plan files are stored. Path is relative to project root. Default: `~/.claude/plans` | `"./plans"` |
@@ -206,6 +210,7 @@ The published schema is updated periodically and may not include settings added 
 | `showClearContextOnPlanAccept` | Show the “clear context” option on the plan accept screen. Defaults to `false`. Set to `true` to restore the option | `true` |
 | `showThinkingSummaries` | Show [extended thinking](model-config.md) summaries in interactive sessions. When unset or `false` (default in interactive mode), thinking blocks are redacted by the API and shown as a collapsed stub. Redaction only changes what you see, not what the model generates: to reduce thinking spend, [lower the budget or disable thinking](model-config.md) instead. Non-interactive mode (`-p`) and SDK callers always receive summaries regardless of this setting | `true` |
 | `showTurnDuration` | Show turn duration messages after responses, e.g. “Cooked for 1m 6s”. Default: `true`. Appears in `/config` as **Show turn duration** | `false` |
+| `skillOverrides` | Per-skill visibility overrides keyed by skill name. Value is `"on"`, `"name-only"`, `"user-invocable-only"`, or `"off"`. Lets you hide or collapse a skill without editing its SKILL.md. Does not apply to plugin skills, which are managed through `/plugin`. The `/skills` menu writes these to `.claude/settings.local.json`. See [Override skill visibility from settings](skills.md). Requires Claude Code v2.1.129 or later | `{"legacy-context": "name-only", "deploy": "off"}` |
 | `skipWebFetchPreflight` | Skip the [WebFetch domain safety check](data-usage.md) that sends each requested hostname to `api.anthropic.com` before fetching. Set to `true` in environments that block traffic to Anthropic, such as Bedrock, Vertex AI, or Foundry deployments with restrictive egress. When skipped, WebFetch attempts any URL without consulting the blocklist | `true` |
 | `spinnerTipsEnabled` | Show tips in the spinner while Claude is working. Set to `false` to disable tips (default: `true`) | `false` |
 | `spinnerTipsOverride` | Override spinner tips with custom strings. `tips`: array of tip strings. `excludeDefault`: if `true`, only show custom tips; if `false` or absent, custom tips are merged with built-in tips | `{ "excludeDefault": true, "tips": ["Use our internal tool X"] }` |
@@ -213,11 +218,11 @@ The published schema is updated periodically and may not include settings added 
 | `sshConfigs` | SSH connections to show in the [Desktop](desktop.md) environment dropdown. Each entry requires `id`, `name`, and `sshHost`; `sshPort`, `sshIdentityFile`, and `startDirectory` are optional. When set in managed settings, connections are read-only for users. Read from managed and user settings only | `[{"id": "dev-vm", "name": "Dev VM", "sshHost": "user@dev.example.com"}]` |
 | `statusLine` | Configure a custom status line to display context. See [`statusLine` documentation](statusline.md) | `{"type": "command", "command": "~/.claude/statusline.sh"}` |
 | `strictKnownMarketplaces` | (Managed settings only) Allowlist of plugin marketplace sources. Undefined = no restrictions, empty array = lockdown. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "acme-corp/plugins" }]` |
-| `teammateMode` | How [agent team](agent-teams.md) teammates display: `auto` (picks split panes in tmux or iTerm2, in-process otherwise), `in-process`, or `tmux`. See [choose a display mode](agent-teams.md) | `"in-process"` |
+| `teammateMode` | How [agent team](agent-teams.md) teammates display: `auto` (picks split panes in tmux or iTerm2, in-process otherwise), `in-process`, or `tmux`. `--teammate-mode` overrides this for one session. See [choose a display mode](agent-teams.md) | `"in-process"` |
 | `terminalProgressBarEnabled` | Show the terminal progress bar in supported terminals: ConEmu, Ghostty 1.2.0+, and iTerm2 3.6.6+. Default: `true`. Appears in `/config` as **Terminal progress bar** | `false` |
-| `tui` | Terminal UI renderer. Use `"fullscreen"` for the flicker-free [alt-screen renderer](fullscreen.md) with virtualized scrollback. Use `"default"` for the classic main-screen renderer. Set via `/tui` | `"fullscreen"` |
+| `tui` | Terminal UI renderer. Use `"fullscreen"` for the flicker-free [alt-screen renderer](fullscreen.md) with virtualized scrollback. Use `"default"` for the classic main-screen renderer. Set via `/tui`. You can also set the [`CLAUDE_CODE_NO_FLICKER`](env-vars.md) environment variable | `"fullscreen"` |
 | `useAutoModeDuringPlan` | Whether plan mode uses auto mode semantics when auto mode is available. Default: `true`. Not read from shared project settings. Appears in `/config` as “Use auto mode during plan” | `false` |
-| `viewMode` | Default transcript view mode on startup: `"default"`, `"verbose"`, or `"focus"`. Overrides the sticky `/focus` selection when set | `"verbose"` |
+| `viewMode` | Default transcript view mode on startup: `"default"`, `"verbose"`, or `"focus"`. Overrides the sticky `/focus` selection when set. The `--verbose` flag overrides this for one session | `"verbose"` |
 | `voice` | [Voice dictation](voice-dictation.md) settings: `enabled` turns dictation on, `mode` selects `"hold"` or `"tap"`, and `autoSubmit` sends the prompt on key release in hold mode. Written automatically when you run `/voice`. Requires a Claude.ai account | `{ "enabled": true, "mode": "tap" }` |
 | `voiceEnabled` | Legacy alias for `voice.enabled`. Prefer the `voice` object | `true` |
 | `wslInheritsWindowsSettings` | (Windows managed settings only) When `true`, Claude Code on WSL reads managed settings from the Windows policy chain in addition to `/etc/claude-code`, with Windows sources taking priority. Only honored when set in the HKLM registry key or `C:\Program Files\ClaudeCode\managed-settings.json`, both of which require Windows admin to write. For HKCU policy to also apply on WSL, the flag must additionally be set in HKCU itself. Has no effect on native Windows | `true` |
@@ -230,7 +235,7 @@ Versions before v2.1.119 also store `autoScrollEnabled`, `editorMode`, `showTurn
 
 | Key | Description | Example |
 | --- | --- | --- |
-| `autoConnectIde` | Automatically connect to a running IDE when Claude Code starts from an external terminal. Default: `false`. Appears in `/config` as **Auto-connect to IDE (external terminal)** when running outside a VS Code or JetBrains terminal | `true` |
+| `autoConnectIde` | Automatically connect to a running IDE when Claude Code starts from an external terminal. Default: `false`. Appears in `/config` as **Auto-connect to IDE (external terminal)** when running outside a VS Code or JetBrains terminal. The [`CLAUDE_CODE_AUTO_CONNECT_IDE`](env-vars.md) environment variable overrides this when set | `true` |
 | `autoInstallIdeExtension` | Automatically install the Claude Code IDE extension when running from a VS Code terminal. Default: `true`. Appears in `/config` as **Auto-install IDE extension** when running inside a VS Code or JetBrains terminal. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](env-vars.md) environment variable | `false` |
 | `externalEditorContext` | Prepend Claude’s previous response as `#`-commented context when you open the external editor with `Ctrl+G`. Default: `false`. Appears in `/config` as **Show last response in external editor** | `true` |
 
@@ -423,7 +428,7 @@ These settings control which hooks are allowed to run and what HTTP hooks can ac
 - User hooks, project hooks, and all other plugin hooks are blocked
 
 **Restrict HTTP hook URLs:**
-Limit which URLs HTTP hooks can target. Supports `*` as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked.
+Limit which URLs HTTP hooks can target. Supports `*` as a wildcard for matching. When the array is defined, HTTP hooks targeting non-matching URLs are silently blocked. Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics.
 
 ```shiki
 {
@@ -449,7 +454,7 @@ Settings apply in order of precedence. From highest to lowest:
    - Cannot be overridden by any other level, including command line arguments
    - Within the managed tier, precedence is: server-managed > MDM/OS-level policies > file-based (`managed-settings.d/*.json` + `managed-settings.json`) > HKCU registry (Windows only). Only one managed source is used; sources do not merge across tiers. Within the file-based tier, drop-in files and the base file are merged together.
 2. **Command line arguments**
-   - Temporary overrides for a specific session
+   - Temporary overrides for a specific session. JSON passed via `--settings <file-or-json>` merges with file-based settings using the same rules as the other layers: a key set here overrides the same key in local, project, or user settings, and omitting a key leaves the lower-layer value in place
 3. **Local project settings** (`.claude/settings.local.json`)
    - Personal project-specific settings
 4. **Shared project settings** (`.claude/settings.json`)
@@ -525,8 +530,10 @@ Plugin-related settings in `settings.json`:
   },
   "extraKnownMarketplaces": {
     "acme-tools": {
-      "source": "github",
-      "repo": "acme-corp/claude-plugins"
+      "source": {
+        "source": "github",
+        "repo": "acme-corp/claude-plugins"
+      }
     }
   }
 }
@@ -541,6 +548,8 @@ Controls which plugins are enabled. Format: `"plugin-name@marketplace-name": tru
 - **Project settings** (`.claude/settings.json`): Project-specific plugins shared with team
 - **Local settings** (`.claude/settings.local.json`): Per-machine overrides (not committed)
 - **Managed settings** (`managed-settings.json`): Organization-wide policy overrides that block installation at all scopes and hide the plugin from the marketplace
+
+Project settings take precedence over user settings, so setting a plugin to `false` in `~/.claude/settings.json` does not disable a plugin that the project’s `.claude/settings.json` enables. To opt out of a project-enabled plugin on your machine, set it to `false` in `.claude/settings.local.json` instead.Plugins force-enabled by managed settings cannot be disabled this way, since managed settings override local settings.
 
 **Example**:
 
@@ -631,7 +640,7 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 - Only available in managed settings (`managed-settings.json`)
 - Cannot be overridden by user or project settings (highest precedence)
 - Enforced BEFORE network/filesystem operations (blocked sources never execute)
-- Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern`, which uses regex matching
+- Uses exact matching for source specifications (including `ref`, `path` for git sources), except `hostPattern` and `pathPattern`, which use regex matching
 
 **Allowlist behavior**:
 
@@ -640,7 +649,7 @@ Use `source: 'settings'` to declare a small set of plugins inline without settin
 - List of sources: Users can only add marketplaces that match exactly
 
 **All supported source types**:
-The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` uses regex matching against the marketplace host.
+The allowlist supports multiple marketplace source types. Most sources use exact matching, while `hostPattern` and `pathPattern` use regex matching against the marketplace host and filesystem path respectively.
 
 1. **GitHub repositories**:
 
@@ -716,6 +725,15 @@ Host extraction by source type:
 - `url`: extracts hostname from the URL
 - `npm`, `file`, `directory`: not supported for host pattern matching
 
+8. **Path pattern matching**:
+
+```shiki
+{ "source": "pathPattern", "pathPattern": "^/opt/approved/" }
+{ "source": "pathPattern", "pathPattern": ".*" }
+```
+
+Fields: `pathPattern` (required: regex pattern matched against the `path` field of `file` and `directory` sources)
+Use path pattern matching to allow filesystem-based marketplaces alongside `hostPattern` restrictions for network sources. Set `".*"` to allow all local paths, or a narrower pattern to restrict to specific directories.
 **Configuration examples**:
 Example: allow specific marketplaces only:
 

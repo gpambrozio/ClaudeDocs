@@ -6,6 +6,33 @@ Java
 
 # Webhooks
 
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+
+Possible `data.type` values:
+
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
+
 ##### ModelsExpand Collapse
 
 class BetaWebhookEvent:
@@ -106,7 +133,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -114,7 +141,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 
@@ -392,7 +419,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -400,7 +427,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 
@@ -696,6 +723,18 @@ JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
 
 String workspaceId
 
+class BetaWebhookSessionStatusRescheduledEventData:
+
+String id
+
+ID of the resource that triggered the event.
+
+String organizationId
+
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+
+String workspaceId
+
 class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
@@ -705,18 +744,6 @@ ID of the resource that triggered the event.
 String organizationId
 
 JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
-
-String workspaceId
-
-class BetaWebhookSessionStatusScheduledEventData:
-
-String id
-
-ID of the resource that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
 
 String workspaceId
 
@@ -966,7 +993,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -974,7 +1001,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 

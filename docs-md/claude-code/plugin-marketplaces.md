@@ -22,7 +22,7 @@ Once your marketplace is live, you can update it by pushing changes to your repo
 
 ## [​](#walkthrough-create-a-local-marketplace) Walkthrough: create a local marketplace
 
-This example creates a marketplace with one plugin: a `/quality-review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
+This example creates a marketplace with one plugin: a `quality-review` skill for code reviews. You’ll create the directory structure, add a skill, create the plugin manifest and marketplace catalog, then install and test it.
 
 1
 
@@ -38,7 +38,7 @@ mkdir -p my-marketplace/plugins/quality-review-plugin/skills/quality-review
 
 Create the skill
 
-Create a `SKILL.md` file that defines what the `/quality-review` skill does.
+Create a `SKILL.md` file that defines what the `quality-review` skill does.
 
 my-marketplace/plugins/quality-review-plugin/skills/quality-review/SKILL.md
 
@@ -68,7 +68,7 @@ my-marketplace/plugins/quality-review-plugin/.claude-plugin/plugin.json
 ```shiki
 {
   "name": "quality-review-plugin",
-  "description": "Adds a /quality-review skill for quick code reviews",
+  "description": "Adds a quality-review skill for quick code reviews",
   "version": "1.0.0"
 }
 ```
@@ -93,7 +93,7 @@ my-marketplace/.claude-plugin/marketplace.json
     {
       "name": "quality-review-plugin",
       "source": "./plugins/quality-review-plugin",
-      "description": "Adds a /quality-review skill for quick code reviews"
+      "description": "Adds a quality-review skill for quick code reviews"
     }
   ]
 }
@@ -114,10 +114,10 @@ Add the marketplace and install the plugin.
 
 Try it out
 
-Select some code in your editor and run your new skill.
+Select some code in your editor and run your new skill. Plugin skills are namespaced with the plugin name.
 
 ```shiki
-/quality-review
+/quality-review-plugin:quality-review
 ```
 
 To learn more about what plugins can do, including hooks, agents, MCP servers, and LSP servers, see [Plugins](plugins.md).
@@ -680,6 +680,7 @@ The allowlist uses exact matching for most source types. For a marketplace to be
 - For `hostPattern` sources: the marketplace host is matched against the regex pattern
 - For `pathPattern` sources: the marketplace’s filesystem path is matched against the regex pattern
 
+Exact matching does not normalize URLs: a trailing slash, `.git` suffix, or `ssh://` versus `https://` form are treated as different values. If your organization’s marketplace can be cloned by more than one URL form, prefer a `hostPattern` entry over a literal URL so all forms match.
 Because `strictKnownMarketplaces` is set in [managed settings](settings.md), individual users and project configurations cannot override these restrictions.
 For complete configuration details including all supported source types and comparison with `extraKnownMarketplaces`, see the [strictKnownMarketplaces reference](settings.md).
 

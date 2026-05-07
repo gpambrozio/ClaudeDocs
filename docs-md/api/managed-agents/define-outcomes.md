@@ -2,15 +2,13 @@
 
 Copy page
 
-Outcomes is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
-
 The `outcome` elevates a session from *conversation* to *work*. You define what the end result should look like and how to measure quality. The agent works toward that target, self-evaluating and iterating until the outcome is met.
 
 When you define an outcome, the harness automatically provisions a *grader* to evaluate the artifact against a rubric. It leverages a separate context window to avoid being influenced by the main agent's implementation choices.
 
 The grader returns a per-criterion breakdown: either confirmation that the artifact satisfies the rubric, or the specific gaps between the current work and the requirements. That feedback is handed back to the agent for the next iteration.
 
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. Research preview features additionally require `managed-agents-2026-04-01-research-preview`. The SDK sets these beta headers automatically.
+All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets this beta header automatically.
 
 ## Create a rubric
 
@@ -46,16 +44,14 @@ Example rubric:
 - Sensitivity analysis on WACC and terminal growth rate is included
 ```
 
-Pass the rubric as inline text on `user.define_outcome` (shown in the next section), or upload it via the Files API for reuse across sessions:
+Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it via the Files API for reuse across sessions:
 
 **Requires beta header `files-api-2025-04-14`.**
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-from pathlib import Path
-
-rubric = client.beta.files.upload(file=Path("/path/to/pr_review_rubric.md"))
+rubric = client.beta.files.upload(file=Path("/tmp/rubric.md"))
 print(f"Uploaded rubric: {rubric.id}")
 ```
 
@@ -189,15 +185,18 @@ for outcome in session.outcome_evaluations:
 
 The agent writes output files to `/mnt/session/outputs/` inside the container. Once the session is idle, fetch them via the [Files API](build-with-claude/files.md) scoped to the session:
 
-curlPython
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
+# List files produced by this session
 files = client.beta.files.list(scope_id=session.id)
-for f in files.data:
-    print(f"{f.id}: {f.filename} ({f.size_bytes} bytes)")
+for f in files:
+    print(f.id, f.filename)
 
-content = client.beta.files.download(files.data[0].id)
-content.write_to_file("costco_dcf.xlsx")
+# Download a file
+if files.data:
+    content = client.beta.files.download(files.data[0].id)
+    content.write_to_file("/tmp/output.txt")
 ```
 
 Was this page helpful?

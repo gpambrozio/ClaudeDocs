@@ -294,9 +294,10 @@ async def auto_approve_read_only(input_data, tool_use_id, context):
     return {}
 ```
 
-### [​](#chain-multiple-hooks) Chain multiple hooks
+### [​](#register-multiple-hooks) Register multiple hooks
 
-Hooks execute in the order they appear in the array. Keep each hook focused on a single responsibility and chain multiple hooks for complex logic:
+When an event fires, all matching hooks run in parallel. For permission decisions, the most restrictive result wins: a single `deny` blocks the tool call regardless of what the other hooks return. Because completion order is non-deterministic, write each hook to act independently rather than relying on another hook having run first.
+The example below registers three independent checks for every tool call:
 
 Python
 
@@ -306,10 +307,9 @@ TypeScript
 options = ClaudeAgentOptions(
     hooks={
         "PreToolUse": [
-            HookMatcher(hooks=[rate_limiter]),  # First: check rate limits
-            HookMatcher(hooks=[authorization_check]),  # Second: verify permissions
-            HookMatcher(hooks=[input_sanitizer]),  # Third: sanitize inputs
-            HookMatcher(hooks=[audit_logger]),  # Last: log the action
+            HookMatcher(hooks=[authorization_check]),
+            HookMatcher(hooks=[input_validator]),
+            HookMatcher(hooks=[audit_logger]),
         ]
     }
 )

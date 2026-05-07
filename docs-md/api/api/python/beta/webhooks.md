@@ -6,11 +6,32 @@ Python
 
 # Webhooks
 
-##### [Unwrap](api/beta/webhooks/unwrap.md)
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
 
-beta.webhooks.unwrap()
+Possible `data.type` values:
 
-Function
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
 
@@ -112,7 +133,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -120,7 +141,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 
@@ -400,7 +421,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -408,7 +429,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 
@@ -704,6 +725,18 @@ type: Literal["session.status\_idled"]
 
 workspace\_id: str
 
+class BetaWebhookSessionStatusRescheduledEventData: …
+
+id: str
+
+ID of the resource that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.status\_rescheduled"]
+
+workspace\_id: str
+
 class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
@@ -713,18 +746,6 @@ ID of the resource that triggered the event.
 organization\_id: str
 
 type: Literal["session.status\_run\_started"]
-
-workspace\_id: str
-
-class BetaWebhookSessionStatusScheduledEventData: …
-
-id: str
-
-ID of the resource that triggered the event.
-
-organization\_id: str
-
-type: Literal["session.status\_scheduled"]
 
 workspace\_id: str
 
@@ -974,7 +995,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -982,7 +1003,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 

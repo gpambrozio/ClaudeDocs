@@ -43724,7 +43724,152 @@ $ ant beta:skills:versions delete
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+$ ant beta:user-profiles create
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+$ ant beta:user-profiles list
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+$ ant beta:user-profiles retrieve
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+$ ant beta:user-profiles update
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+$ ant beta:user-profiles create-enrollment-url
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+beta\_user\_profile: object { id, created\_at, metadata, 6 more }
+
+id: string
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+metadata: map[string]
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: "external" or "resold" or "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+"external"
+
+"resold"
+
+"internal"
+
+trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+"active"
+
+"pending"
+
+"rejected"
+
+type: "user\_profile"
+
+Object type. Always `user_profile`.
+
+"user\_profile"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+external\_id: optional string
+
+Platform's own identifier for this user. Not enforced unique.
+
+name: optional string
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
+beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url }
+
+expires\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "enrollment\_url"
+
+Object type. Always `enrollment_url`.
+
+"enrollment\_url"
+
+url: string
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+beta\_user\_profile\_trust\_grant: object { status }
+
+status: "active" or "pending" or "rejected"
+
+Status of the trust grant.
+
+"active"
+
+"pending"
+
+"rejected"
+
 #### BetaWebhooks
+
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+
+Possible `data.type` values:
+
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
 
@@ -43824,7 +43969,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-beta\_webhook\_session\_status\_scheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -43832,7 +43977,7 @@ ID of the resource that triggered the event.
 
 organization\_id: string
 
-type: "session.status\_scheduled"
+type: "session.status\_rescheduled"
 
 workspace\_id: string
 
@@ -44110,7 +44255,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-beta\_webhook\_session\_status\_scheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -44118,7 +44263,7 @@ ID of the resource that triggered the event.
 
 organization\_id: string
 
-type: "session.status\_scheduled"
+type: "session.status\_rescheduled"
 
 workspace\_id: string
 
@@ -44414,6 +44559,18 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
+
+id: string
+
+ID of the resource that triggered the event.
+
+organization\_id: string
+
+type: "session.status\_rescheduled"
+
+workspace\_id: string
+
 beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
@@ -44423,18 +44580,6 @@ ID of the resource that triggered the event.
 organization\_id: string
 
 type: "session.status\_run\_started"
-
-workspace\_id: string
-
-beta\_webhook\_session\_status\_scheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
-
-id: string
-
-ID of the resource that triggered the event.
-
-organization\_id: string
-
-type: "session.status\_scheduled"
 
 workspace\_id: string
 
@@ -44682,7 +44827,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-beta\_webhook\_session\_status\_scheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -44690,7 +44835,7 @@ ID of the resource that triggered the event.
 
 organization\_id: string
 
-type: "session.status\_scheduled"
+type: "session.status\_rescheduled"
 
 workspace\_id: string
 
@@ -44881,124 +45026,6 @@ workspace\_id: string
 type: "event"
 
 Object type. Always `event` for webhook payloads.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-$ ant beta:user-profiles create
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-$ ant beta:user-profiles list
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-$ ant beta:user-profiles retrieve
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-$ ant beta:user-profiles update
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-$ ant beta:user-profiles create-enrollment-url
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-beta\_user\_profile: object { id, created\_at, metadata, 6 more }
-
-id: string
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-created\_at: string
-
-A timestamp in RFC 3339 format
-
-metadata: map[string]
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-relationship: "external" or "resold" or "internal"
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-"external"
-
-"resold"
-
-"internal"
-
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta.md) { status } ]
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-status: "active" or "pending" or "rejected"
-
-Status of the trust grant.
-
-"active"
-
-"pending"
-
-"rejected"
-
-type: "user\_profile"
-
-Object type. Always `user_profile`.
-
-"user\_profile"
-
-updated\_at: string
-
-A timestamp in RFC 3339 format
-
-external\_id: optional string
-
-Platform's own identifier for this user. Not enforced unique.
-
-name: optional string
-
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
-
-beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url }
-
-expires\_at: string
-
-A timestamp in RFC 3339 format
-
-type: "enrollment\_url"
-
-Object type. Always `enrollment_url`.
-
-"enrollment\_url"
-
-url: string
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-beta\_user\_profile\_trust\_grant: object { status }
-
-status: "active" or "pending" or "rejected"
-
-Status of the trust grant.
-
-"active"
-
-"pending"
-
-"rejected"
 
 ---
 

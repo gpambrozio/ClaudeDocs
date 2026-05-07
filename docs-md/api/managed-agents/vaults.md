@@ -68,7 +68,7 @@ auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
   access_token: xoxp-...
-  expires_at: "2026-04-15T00:00:00Z"
+  expires_at: "2099-12-31T23:59:59Z"
   refresh:
     token_endpoint: https://slack.com/api/oauth.v2.access
     client_id: "1234567890.0987654321"
@@ -91,25 +91,6 @@ Constraints:
 - **`mcp_server_url` is immutable.** To point at a different server, archive this credential and create a new one.
 - **Maximum 20 credentials per vault.** This matches the maximum amount of MCP servers per agent.
 
-## Rotate a credential
-
-Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
-
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
-
-```shiki
-ant beta:vaults:credentials update \
-  --vault-id "$VAULT_ID" \
-  --credential-id "$CREDENTIAL_ID" <<'EOF'
-auth:
-  type: mcp_oauth
-  access_token: xoxp-new-...
-  expires_at: "2026-05-15T00:00:00Z"
-  refresh:
-    refresh_token: xoxe-1-new-...
-EOF
-```
-
 ## Reference the vault at session creation
 
 Pass `vault_ids` when creating a session:
@@ -127,9 +108,89 @@ session = client.beta.sessions.create(
 
 Runtime behavior:
 
-- Credentials are re-resolved periodically during the session, so a rotation or archive propagates to running sessions without a restart.
-- When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error.
-- When multiple vaults cover the the MCP server, the first vault with a match wins.
+- When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error if the server requires authentication.
+- When multiple vaults cover the MCP server, the first vault with a match wins.
+
+## Credential refresh
+
+Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
+
+To be notified if a credential is archived, deleted, or fails to refresh you can subscribe to the vault and credential [webhooks](managed-agents/webhooks.md) associated with those lifecycle changes.
+
+| Event | Trigger |
+| --- | --- |
+| `vault.archived` | Vault archived. A `vault_credential.archived` event is also emitted for each underlying credential. |
+| `vault.deleted` | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential. |
+| `vault_credential.archived` | Credential archived, either directly or as a result of vault archival. |
+| `vault_credential.deleted` | Credential deleted, either directly or as a result of vault deletion. |
+| `vault_credential.refresh_failed` | A `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+
+This is a non-exhaustive list of webhooks; visit the [webhooks documentation](managed-agents/webhooks.md) for a complete list.
+
+### Diagnose an OAuth refresh failure
+
+To diagnose why a refresh failed, use the `/mcp_oauth_validate` endpoint. This enables you to determine how to handle the failure, which is distinct by error type.
+
+The top-level `status` tells you what to do next:
+
+- `valid`: the token works; no action needed.
+- `invalid`: the grant is gone or the OAuth server rejected the refresh with a 4xx. Prompt the end user to re-authorize.
+- `unknown`: a transient error (5xx, 429, or network failure). Wait and retry.
+
+curl
+
+```shiki
+curl --fail-with-body -sS -X POST \
+  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01"
+```
+
+The response is a `vault_credential_validation` object. `mcp_probe` includes the failed MCP handshake step; `refresh` includes the outcome of the attempted refresh.
+
+```shiki
+{
+  "type": "vault_credential_validation",
+  "credential_id": "vcrd_01ABC...",
+  "vault_id": "vlt_01XYZ...",
+  "validated_at": "2026-04-29T17:12:00Z",
+  "has_refresh_token": false,
+  "status": "invalid",
+  "mcp_probe": {
+    "method": "initialize",
+    "http_response": {
+      "status_code": 401,
+      "content_type": "application/json",
+      "body": "{\"error\":\"invalid_token\"}",
+      "body_truncated": false
+    }
+  },
+  "refresh": {
+    "status": "no_refresh_token",
+    "http_response": null
+  }
+}
+```
+
+## Rotate a credential
+
+Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
+
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+ant beta:vaults:credentials update \
+  --vault-id "$VAULT_ID" \
+  --credential-id "$CREDENTIAL_ID" <<'EOF'
+auth:
+  type: mcp_oauth
+  access_token: xoxp-new-...
+  expires_at: "2099-12-31T23:59:59Z"
+  refresh:
+    refresh_token: xoxe-1-new-...
+EOF
+```
 
 ## Other operations
 

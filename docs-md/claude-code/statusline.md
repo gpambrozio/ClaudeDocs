@@ -127,7 +127,7 @@ Your status line appears at the bottom of the interface. Settings reload automat
 
 Claude Code runs your script and pipes [JSON session data](#available-data) to it via stdin. Your script reads the JSON, extracts what it needs, and prints text to stdout. Claude Code displays whatever your script prints.
 **When it updates**
-Your script runs after each new assistant message, when the permission mode changes, or when vim mode toggles. Updates are debounced at 300ms, meaning rapid changes batch together and your script runs once things settle. If a new update triggers while your script is still running, the in-flight execution is cancelled. If you edit your script, the changes won’t appear until your next interaction with Claude Code triggers an update.
+Your script runs after each new assistant message, after `/compact` finishes, when the permission mode changes, or when vim mode toggles. Updates are debounced at 300ms, meaning rapid changes batch together and your script runs once things settle. If a new update triggers while your script is still running, the in-flight execution is cancelled. If you edit your script, the changes won’t appear until your next interaction with Claude Code triggers an update.
 These triggers can go quiet when the main session is idle, for example while a coordinator waits on background subagents. To keep time-based or externally-sourced segments current during idle periods, set [`refreshInterval`](#manually-configure-a-status-line) to also re-run the command on a fixed timer.
 **What your script can output**
 
@@ -152,7 +152,7 @@ Claude Code sends the following JSON fields to your script via stdin:
 | `cost.total_duration_ms` | Total wall-clock time since the session started, in milliseconds |
 | `cost.total_api_duration_ms` | Total time spent waiting for API responses in milliseconds |
 | `cost.total_lines_added`, `cost.total_lines_removed` | Lines of code changed |
-| `context_window.total_input_tokens`, `context_window.total_output_tokens` | Cumulative token counts across the session |
+| `context_window.total_input_tokens`, `context_window.total_output_tokens` | Token counts currently in the context window, from the most recent API response. Input includes cache reads and writes. Before v2.1.132 these were cumulative session totals |
 | `context_window.context_window_size` | Maximum context window size in tokens. 200000 by default, or 1000000 for models with extended context. |
 | `context_window.used_percentage` | Pre-calculated percentage of context window used |
 | `context_window.remaining_percentage` | Pre-calculated percentage of context window remaining |
@@ -207,8 +207,8 @@ Your status line command receives this JSON structure via stdin:
     "total_lines_removed": 23
   },
   "context_window": {
-    "total_input_tokens": 15234,
-    "total_output_tokens": 4521,
+    "total_input_tokens": 15500,
+    "total_output_tokens": 1200,
     "context_window_size": 200000,
     "used_percentage": 8,
     "remaining_percentage": 92,
@@ -264,17 +264,17 @@ Your status line command receives this JSON structure via stdin:
 
 **Fields that may be `null`**:
 
-- `context_window.current_usage`: `null` before the first API call in a session
+- `context_window.current_usage`: `null` before the first API call in a session, and again after `/compact` until the next API call repopulates it
 - `context_window.used_percentage`, `context_window.remaining_percentage`: may be `null` early in the session
 
 Handle missing fields with conditional access and null values with fallback defaults in your scripts.
 
 ### [​](#context-window-fields) Context window fields
 
-The `context_window` object provides two ways to track context usage:
+The `context_window` object describes the live context window from the most recent API response. As of v2.1.132, `total_input_tokens` and `total_output_tokens` reflect current context usage, not cumulative session totals.
 
-- **Cumulative totals** (`total_input_tokens`, `total_output_tokens`): sum of all tokens across the entire session, useful for tracking total consumption
-- **Current usage** (`current_usage`): token counts from the most recent API call, use this for accurate context percentage since it reflects the actual context state
+- **Combined totals** (`total_input_tokens`, `total_output_tokens`): tokens currently in the context window. `total_input_tokens` is the sum of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`; `total_output_tokens` is the output tokens from the most recent response. Both are `0` before the first API response.
+- **Per-component usage** (`current_usage`): the same token counts broken out by category. Use this when you need cache hits separate from fresh input.
 
 The `current_usage` object contains:
 
@@ -285,7 +285,7 @@ The `current_usage` object contains:
 
 The `used_percentage` field is calculated from input tokens only: `input_tokens + cache_creation_input_tokens + cache_read_input_tokens`. It does not include `output_tokens`.
 If you calculate context percentage manually from `current_usage`, use the same input-only formula to match `used_percentage`.
-The `current_usage` object is `null` before the first API call in a session.
+The `current_usage` object is `null` before the first API call in a session, and again immediately after `/compact` until the next API call repopulates it.
 
 ## [​](#examples) Examples
 
@@ -629,8 +629,7 @@ Community projects like [ccstatusline](https://github.com/sirmalloc/ccstatusline
 
 **Context percentage shows unexpected values**
 
-- Use `used_percentage` for accurate context state rather than cumulative totals
-- The `total_input_tokens` and `total_output_tokens` are cumulative across the session and may exceed the context window size
+- Use `used_percentage` for the simplest accurate context state
 - Context percentage may differ from `/context` output due to when each is calculated
 
 **OSC 8 links not clickable**

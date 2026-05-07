@@ -18,7 +18,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | MCP servers that provide standardized third-party capabilities. |
 | `skills` | [Skills](managed-agents/skills.md) that supply domain-specific context with progressive disclosure. |
-| `callable_agents` | Other agents this agent can invoke for [multi-agent orchestration](managed-agents/multi-agent.md). This is a research preview feature; [request access](https://claude.com/form/claude-managed-agents) to try it. |
+| `multiagent` | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent sessions](managed-agents/multi-agent.md). |
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
 
@@ -86,7 +86,8 @@ ant beta:agents update \
 
 - **Omitted fields are preserved.** You only need to include the fields you want to change.
 - **Scalar fields** (`model`, `system`, `name`, etc.) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
-- **Array fields** (`tools`, `mcp_servers`, `skills`, `callable_agents`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
+- **Array fields** (`tools`, `mcp_servers`, `skills`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
+- **`multiagent`** is replaced as a whole, including its `agents` roster. Pass `null` to clear it.
 - **Metadata** is merged at the key level. Keys you provide are added or updated. Keys you omit are preserved. To delete a specific key, set its value to an empty string.
 - **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 
@@ -95,8 +96,8 @@ ant beta:agents update \
 | Operation | Behavior |
 | --- | --- |
 | **Update** | Generates a new agent version. |
-| **List versions** | Fetch the full version history to track changes over time. |
-| **Archive** | The agent becomes read-only. New sessions cannot reference it, but existing sessions continue to run. |
+| **List versions** | Returns the full version history so you can track changes over time. |
+| **Archive** | Makes the agent read-only. New sessions cannot reference it, but existing sessions continue to run. |
 
 ### List versions
 

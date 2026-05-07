@@ -242,7 +242,7 @@ LSP integration provides:
 | --- | --- | --- |
 | `pyright-lsp` | Pyright (Python) | `pip install pyright` or `npm install -g pyright` |
 | `typescript-lsp` | TypeScript Language Server | `npm install -g typescript-language-server typescript` |
-| `rust-lsp` | rust-analyzer | [See rust-analyzer installation](https://rust-analyzer.github.io/manual.html#installation) |
+| `rust-analyzer-lsp` | rust-analyzer | [See rust-analyzer installation](https://rust-analyzer.github.io/manual.html#installation) |
 
 Install the language server first, then install the plugin from the marketplace.
 
@@ -273,7 +273,7 @@ The following `monitors/monitors.json` watches a deployment status endpoint and 
 ]
 ```
 
-To declare monitors inline, set the `monitors` key in `plugin.json` to the same array. To load from a non-default path, set `monitors` to a relative path string such as `"./config/monitors.json"`.
+To declare monitors inline, set `experimental.monitors` in `plugin.json` to the same array. To load from a non-default path, set `experimental.monitors` to a relative path string such as `"./config/monitors.json"`. Monitors are an [experimental component](#experimental-components).
 **Required fields:**
 
 | Field | Description |
@@ -293,7 +293,7 @@ Disabling a plugin mid-session does not stop monitors that are already running. 
 
 ### [​](#themes) Themes
 
-Plugins can ship color themes that appear in `/theme` alongside the built-in presets and the user’s local themes. A theme is a JSON file in `themes/` with a `base` preset and a sparse `overrides` map of color tokens.
+Plugins can ship color themes that appear in `/theme` alongside the built-in presets and the user’s local themes. A theme is a JSON file in `themes/` with a `base` preset and a sparse `overrides` map of color tokens. Themes are an [experimental component](#experimental-components).
 
 ```shiki
 {
@@ -353,9 +353,11 @@ The manifest is optional. If omitted, Claude Code auto-discovers components in [
   "hooks": "./config/hooks.json",
   "mcpServers": "./mcp-config.json",
   "outputStyles": "./styles/",
-  "themes": "./themes/",
   "lspServers": "./.lsp.json",
-  "monitors": "./monitors.json",
+  "experimental": {
+    "themes": "./themes/",
+    "monitors": "./monitors.json"
+  },
   "dependencies": [
     "helper-lib",
     { "name": "secrets-vault", "version": "~2.1.0" }
@@ -398,12 +400,16 @@ agent `agent-creator` for the plugin with name `plugin-dev` will appear as
 | `hooks` | string|array|object | Hook config paths or inline config | `"./my-extra-hooks.json"` |
 | `mcpServers` | string|array|object | MCP config paths or inline config | `"./my-extra-mcp-config.json"` |
 | `outputStyles` | string|array | Custom output style files/directories (replaces default `output-styles/`) | `"./styles/"` |
-| `themes` | string|array | Color theme files/directories (replaces default `themes/`). See [Themes](#themes) | `"./themes/"` |
 | `lspServers` | string|array|object | [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) configs for code intelligence (go to definition, find references, etc.) | `"./.lsp.json"` |
-| `monitors` | string|array | Background [Monitor](tools-reference.md) configurations that start automatically when the plugin is active. See [Monitors](#monitors) | `"./monitors.json"` |
+| `experimental.themes` | string|array | Color theme files/directories (replaces default `themes/`). See [Themes](#themes) | `"./themes/"` |
+| `experimental.monitors` | string|array | Background [Monitor](tools-reference.md) configurations that start automatically when the plugin is active. See [Monitors](#monitors) | `"./monitors.json"` |
 | `userConfig` | object | User-configurable values prompted at enable time. See [User configuration](#user-configuration) | See below |
 | `channels` | array | Channel declarations for message injection (Telegram, Slack, Discord style). See [Channels](#channels) | See below |
 | `dependencies` | array | Other plugins this plugin requires, optionally with semver version constraints. See [Constrain plugin dependency versions](plugin-dependencies.md) | `[{ "name": "secrets-vault", "version": "~2.1.0" }]` |
+
+### [​](#experimental-components) Experimental components
+
+Components under the `experimental` key, `themes` and `monitors`, have a manifest schema that may change between releases while they stabilize. Where you declare them is a separate migration: the top level still works, `claude plugin validate` warns, and a future release will require `experimental.*`.
 
 ### [​](#user-configuration) User configuration
 
@@ -474,7 +480,7 @@ The `server` field is required and must match a key in the plugin’s `mcpServer
 
 ### [​](#path-behavior-rules) Path behavior rules
 
-For `skills`, `commands`, `agents`, `outputStyles`, `themes`, and `monitors`, a custom path replaces the default. If the manifest specifies `skills`, the default `skills/` directory is not scanned; if it specifies `monitors`, the default `monitors/monitors.json` is not loaded. [Hooks](#hooks), [MCP servers](#mcp-servers), and [LSP servers](#lsp-servers) have different semantics for handling multiple sources.
+For `skills`, `commands`, `agents`, `outputStyles`, `experimental.themes`, and `experimental.monitors`, a custom path replaces the default. If the manifest specifies `skills`, the default `skills/` directory is not scanned; if it specifies `experimental.monitors`, the default `monitors/monitors.json` is not loaded. [Hooks](#hooks), [MCP servers](#mcp-servers), and [LSP servers](#lsp-servers) have different semantics for handling multiple sources.
 
 - All paths must be relative to the plugin root and start with `./`
 - Components from custom paths use the same naming and namespacing rules
@@ -500,7 +506,8 @@ For `skills`, `commands`, `agents`, `outputStyles`, `themes`, and `monitors`, a 
 ### [​](#environment-variables) Environment variables
 
 Claude Code provides two variables for referencing plugin paths. Both are substituted inline anywhere they appear in skill content, agent content, hook commands, monitor commands, and MCP or LSP server configs. Both are also exported as environment variables to hook processes and MCP or LSP server subprocesses.
-**`${CLAUDE_PLUGIN_ROOT}`**: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates, so files you write here do not survive an update.
+**`${CLAUDE_PLUGIN_ROOT}`**: the absolute path to your plugin’s installation directory. Use this to reference scripts, binaries, and config files bundled with the plugin. This path changes when the plugin updates. The previous version’s directory remains on disk for about seven days after an update before cleanup, but treat it as ephemeral and do not write state here.
+When a plugin updates mid-session, hook commands, monitors, MCP servers, and LSP servers keep using the previous version’s path. Run `/reload-plugins` to switch hooks, MCP servers, and LSP servers to the new path; monitors require a session restart.
 **`${CLAUDE_PLUGIN_DATA}`**: a persistent directory for plugin state that survives updates. Use this for installed dependencies such as `node_modules` or Python virtual environments, generated code, caches, and any other files that should persist across plugin versions. The directory is created automatically the first time this variable is referenced.
 
 ```shiki
@@ -568,7 +575,7 @@ The data directory is deleted automatically when you uninstall the plugin from t
 
 Plugins are specified in one of two ways:
 
-- Through `claude --plugin-dir`, for the duration of a session.
+- Through `claude --plugin-dir` or `claude --plugin-url`, for the duration of a session.
 - Through a marketplace, installed for future sessions.
 
 For security and verification purposes, Claude Code copies *marketplace* plugins to the user’s local **plugin cache** (`~/.claude/plugins/cache`) rather than using them in-place. Understanding this behavior is important when developing plugins that reference external files.
@@ -637,6 +644,8 @@ enterprise-plugin/
 ```
 
 The `.claude-plugin/` directory contains the `plugin.json` file. All other directories (commands/, agents/, skills/, output-styles/, themes/, monitors/, hooks/) must be at the plugin root, not inside `.claude-plugin/`.
+
+A `CLAUDE.md` file at the plugin root is not loaded as project context. Plugins contribute context through skills, agents, and hooks rather than CLAUDE.md. To ship instructions that load into Claude’s context, put them in a [skill](#skills).
 
 ### [​](#file-locations-reference) File locations reference
 

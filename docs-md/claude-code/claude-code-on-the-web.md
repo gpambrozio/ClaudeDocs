@@ -104,10 +104,10 @@ Add a `GH_TOKEN` environment variable to your [environment settings](#configure-
 ### [​](#link-artifacts-back-to-the-session) Link artifacts back to the session
 
 Each cloud session has a transcript URL on claude.ai, and the session can read its own ID from the `CLAUDE_CODE_REMOTE_SESSION_ID` environment variable. Use this to put a traceable link in PR bodies, commit messages, Slack posts, or generated reports so a reviewer can open the run that produced them.
-Ask Claude to construct the link from the environment variable. The following command prints the URL:
+The variable’s value uses a `cse_` prefix, while the transcript URL path takes the same ID with a `session_` prefix. Substitute the prefix when building the link. The following command prints the URL:
 
 ```shiki
-echo "https://claude.ai/code/${CLAUDE_CODE_REMOTE_SESSION_ID}"
+echo "https://claude.ai/code/${CLAUDE_CODE_REMOTE_SESSION_ID/#cse_/session_}"
 ```
 
 ### [​](#run-tests-start-services-and-add-packages) Run tests, start services, and add packages
@@ -169,6 +169,7 @@ apt update && apt install -y gh
 ```
 
 If the script exits non-zero, the session fails to start. Append `|| true` to non-critical commands to avoid blocking the session on an intermittent install failure.
+Keep the script’s total runtime under roughly five minutes so the [environment cache](#environment-caching) can build. Run independent installs in parallel with `&` and `wait`. If a single download won’t fit in the five-minute limit, move it to a [SessionStart hook](#setup-scripts-vs-sessionstart-hooks) that launches it in the background.
 
 Setup scripts that install packages need network access to reach registries. The default **Trusted** network access allows connections to [common package registries](#default-allowed-domains) including npm, PyPI, RubyGems, and crates.io. Scripts will fail to install packages if your environment uses **None** network access.
 

@@ -40,7 +40,7 @@ async for message in query(
         print(f"\nResult: {message.result}")
 ```
 
-Each source loads settings from a specific location, where `<cwd>` is the working directory you pass via the `cwd` option (or the process’s current directory if unset). For the full type definition, see [`SettingSource`](agent-sdk/typescript.md) (TypeScript) or [`SettingSource`](agent-sdk/python.md) (Python).
+Each source loads settings from a specific location, where `<cwd>` is the working directory you pass via the `cwd` option, or the process’s current directory if unset. For the full type definition, see [`SettingSource`](agent-sdk/typescript.md) (TypeScript) or [`SettingSource`](agent-sdk/python.md) (Python).
 
 | Source | What it loads | Location |
 | --- | --- | --- |

@@ -1018,6 +1018,9 @@ claude mcp remove github
 /mcp
 ```
 
+The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
+The server name `workspace` is reserved for internal use. If your configuration defines a server with that name, Claude Code skips it at load time and shows a warning asking you to rename it.
+
 ### [​](#dynamic-tool-updates) Dynamic tool updates
 
 Claude Code supports MCP `list_changed` notifications, allowing MCP servers to dynamically update their available tools, prompts, and resources without requiring you to disconnect and reconnect. When an MCP server sends a `list_changed` notification, Claude Code automatically refreshes the available capabilities from that server.
@@ -1827,6 +1830,7 @@ The following `.mcp.json` entry exempts one HTTP server while leaving other serv
 ```
 
 The `alwaysLoad` field is available on all server types and requires Claude Code v2.1.121 or later. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool’s `_meta` object, which has the same effect for that tool only.
+Setting `alwaysLoad: true` also blocks startup until the server connects, capped at the standard 5-second connect timeout. This applies even when [`MCP_CONNECTION_NONBLOCKING=1`](env-vars.md) is set, since the tools must be present when the first prompt is built. Other servers still connect in the background when nonblocking is enabled.
 
 ## [​](#use-mcp-prompts-as-commands) Use MCP prompts as commands
 
@@ -1992,6 +1996,7 @@ URL patterns support wildcards using `*` to match any sequence of characters. Th
 - `https://*.example.com/*` - Allow any subdomain of example.com
 - `http://localhost:*/*` - Allow any port on localhost
 
+Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics. A pattern like `*://Mcp.Example.com/*` matches `https://mcp.example.com/api`, and `https://mcp.example.com.` is treated the same as `https://mcp.example.com`. Paths remain case-sensitive.
 **Remote server behavior**:
 
 - When the allowlist contains **any** `serverUrl` entries, remote servers **must** match one of those URL patterns

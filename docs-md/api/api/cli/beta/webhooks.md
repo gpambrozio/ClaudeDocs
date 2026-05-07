@@ -2,7 +2,7 @@
 
 Copy page
 
-TypeScript
+CLI
 
 # Webhooks
 
@@ -35,7 +35,7 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-BetaWebhookEvent { id, created\_at, data, type }
+beta\_webhook\_event: object { id, created\_at, data, type }
 
 id: string
 
@@ -45,11 +45,9 @@ created\_at: string
 
 RFC 3339 timestamp when the event occurred.
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-Accepts one of the following:
-
-BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -61,7 +59,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -73,7 +71,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -85,7 +83,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -97,7 +95,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -109,7 +107,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -121,7 +119,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -133,7 +131,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -145,7 +143,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -157,7 +155,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -169,7 +167,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -181,7 +179,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -193,7 +191,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -205,7 +203,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -217,7 +215,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -229,7 +227,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -241,7 +239,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -253,7 +251,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -265,7 +263,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -281,7 +279,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -297,7 +295,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -313,7 +311,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -333,11 +331,9 @@ type: "event"
 
 Object type. Always `event` for webhook payloads.
 
-BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | 19 more
+beta\_webhook\_event\_data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-Accepts one of the following:
-
-BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -349,7 +345,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -361,7 +357,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -373,7 +369,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -385,7 +381,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -397,7 +393,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -409,7 +405,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -421,7 +417,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -433,7 +429,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -445,7 +441,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -457,7 +453,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -469,7 +465,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -481,7 +477,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -493,7 +489,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -505,7 +501,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -517,7 +513,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -529,7 +525,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -541,7 +537,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -553,7 +549,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -569,7 +565,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -585,7 +581,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -601,7 +597,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -617,7 +613,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -629,7 +625,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -641,7 +637,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -653,7 +649,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -665,7 +661,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -677,7 +673,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -689,7 +685,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -701,7 +697,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -713,7 +709,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -725,7 +721,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -737,7 +733,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -749,7 +745,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -761,7 +757,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -773,7 +769,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -785,7 +781,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -797,7 +793,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -809,7 +805,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -821,7 +817,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -837,7 +833,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -853,7 +849,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -869,7 +865,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -885,7 +881,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -897,7 +893,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-UnwrapWebhookEvent { id, created\_at, data, type }
+unwrap\_webhook\_event: object { id, created\_at, data, type }
 
 id: string
 
@@ -907,11 +903,9 @@ created\_at: string
 
 RFC 3339 timestamp when the event occurred.
 
-data: [BetaWebhookEventData](api/beta.md)
+data: [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-Accepts one of the following:
-
-BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -923,7 +917,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -935,7 +929,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -947,7 +941,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -959,7 +953,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -971,7 +965,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -983,7 +977,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -995,7 +989,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1007,7 +1001,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1019,7 +1013,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1031,7 +1025,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1043,7 +1037,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1055,7 +1049,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1067,7 +1061,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1079,7 +1073,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1091,7 +1085,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1103,7 +1097,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1115,7 +1109,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
+beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -1127,7 +1121,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -1143,7 +1137,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -1159,7 +1153,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -1175,7 +1169,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more }
+beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, organization\_id, type, 2 more }
 
 id: string
 

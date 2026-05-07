@@ -60,7 +60,7 @@ For all first party users, you can learn more about what data is logged for [loc
 ## [​](#local-claude-code-data-flow-and-dependencies) Local Claude Code: Data flow and dependencies
 
 The diagram below shows how Claude Code connects to external services during installation and normal operation. Solid lines indicate required connections, while dashed lines represent optional or user-initiated data flows.
-![Diagram showing Claude Code's external connections: install/update connects to the distribution server, and user requests connect to Anthropic services including Console auth, public-api, and optionally Statsig, Sentry, and bug reporting](https://mintcdn.com/claude-code/YcBW2H7CArGcduPb/images/claude-code-data-flow.svg?fit=max&auto=format&n=YcBW2H7CArGcduPb&q=85&s=b600a89f84fc86f9ff7be00a466c0635)
+![Diagram showing Claude Code's external connections: install/update connects to the distribution server, and user requests connect to Anthropic services including Console auth, public-api, and optionally metrics, Sentry, and bug reporting](https://mintcdn.com/claude-code/RcOyXc06Ja8cuvMZ/images/claude-code-data-flow.svg?fit=max&auto=format&n=RcOyXc06Ja8cuvMZ&q=85&s=b5be40abf333defe984993af89546c19)
 Claude Code runs locally. To interact with the LLM, Claude Code sends data over the network. This data includes all user prompts and model outputs, encrypted in transit via TLS 1.2+. Claude Code is compatible with most popular VPNs and LLM proxies.
 Encryption at rest depends on your model provider:
 
@@ -86,7 +86,7 @@ For security details about cloud execution, see [Security](security.md).
 
 ## [​](#telemetry-services) Telemetry services
 
-Claude Code connects from users’ machines to the Statsig service to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the [Statsig security documentation](https://www.statsig.com/trust/security). To opt out of Statsig telemetry, set the `DISABLE_TELEMETRY` environment variable.
+Claude Code connects from users’ machines to Anthropic to log operational metrics such as latency, reliability, and usage patterns. This logging does not include any code or file paths. Data is encrypted in transit and at rest. To opt out of telemetry, set the `DISABLE_TELEMETRY` environment variable.
 Claude Code connects from users’ machines to Sentry for operational error logging. The data is encrypted in transit using TLS and at rest using 256-bit AES encryption. Read more in the [Sentry security documentation](https://sentry.io/security/). To opt out of error logging, set the `DISABLE_ERROR_REPORTING` environment variable.
 When users run the `/feedback` command, a copy of their full conversation history including code is sent to Anthropic. The data is encrypted in transit via TLS. Optionally, a GitHub issue is created in the public repository. To opt out, set the `DISABLE_FEEDBACK_COMMAND` environment variable to `1`.
 
@@ -96,14 +96,14 @@ By default, error reporting, telemetry, and bug reporting are disabled when usin
 
 | Service | Claude API | Vertex API | Bedrock API | Foundry API |
 | --- | --- | --- | --- | --- |
-| **Statsig (Metrics)** | Default on. `DISABLE_TELEMETRY=1` to disable. | Default off. `CLAUDE_CODE_USE_VERTEX` must be 1. | Default off. `CLAUDE_CODE_USE_BEDROCK` must be 1. | Default off. `CLAUDE_CODE_USE_FOUNDRY` must be 1. |
+| **Anthropic (Metrics)** | Default on. `DISABLE_TELEMETRY=1` to disable. | Default off. `CLAUDE_CODE_USE_VERTEX` must be 1. | Default off. `CLAUDE_CODE_USE_BEDROCK` must be 1. | Default off. `CLAUDE_CODE_USE_FOUNDRY` must be 1. |
 | **Sentry (Errors)** | Default on. `DISABLE_ERROR_REPORTING=1` to disable. | Default off. `CLAUDE_CODE_USE_VERTEX` must be 1. | Default off. `CLAUDE_CODE_USE_BEDROCK` must be 1. | Default off. `CLAUDE_CODE_USE_FOUNDRY` must be 1. |
 | **Claude API (`/feedback` reports)** | Default on. `DISABLE_FEEDBACK_COMMAND=1` to disable. | Default off. `CLAUDE_CODE_USE_VERTEX` must be 1. | Default off. `CLAUDE_CODE_USE_BEDROCK` must be 1. | Default off. `CLAUDE_CODE_USE_FOUNDRY` must be 1. |
 | **Session quality surveys** | Default on. `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` to disable. | Default on. `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` to disable. | Default on. `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` to disable. | Default on. `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` to disable. |
 | **WebFetch domain safety check** | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. | Default on. `skipWebFetchPreflight: true` in [settings](settings.md) to disable. |
 
 All environment variables can be checked into `settings.json` (see [settings reference](settings.md)).
-As of v2.1.126, when a host platform sets `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`, Statsig metrics default to on for Vertex, Bedrock, and Foundry, and follow the standard `DISABLE_TELEMETRY` opt-out. Sentry error reporting and `/feedback` reports remain off by default on those providers.
+As of v2.1.126, when a host platform sets `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`, metrics default to on for Vertex, Bedrock, and Foundry, and follow the standard `DISABLE_TELEMETRY` opt-out. Sentry error reporting and `/feedback` reports remain off by default on those providers.
 
 ### [​](#webfetch-domain-safety-check) WebFetch domain safety check
 

@@ -2,15 +2,13 @@
 
 Copy page
 
-Multiagent is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
 
-Multi-agent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and improve time to completion.
-
-All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. An additional beta header is needed for research preview features. The SDK sets these beta headers automatically.
+All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets this beta header automatically.
 
 ## How it works
 
-All agents share the same container and filesystem, but each agent runs in its own session **thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level event stream); additional threads are spawned at runtime when the coordinator decides to delegate.
+All agents share the same container and filesystem, but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator decides to delegate.
 
 Threads are persistent: the coordinator can send a follow-up to an agent it called earlier, and that agent retains everything from its previous turns.
 
@@ -18,15 +16,17 @@ Each agent uses its own configuration (model, system prompt, tools, MCP servers,
 
 ### What to delegate
 
-Multiagent sessions work best when there are multiple well-scoped, specialized tasks in an overall goal:
+Multiagent coordination is best-suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
 
-- **Code review:** A reviewer agent with a focused system prompt and read-only tools.
-- **Test generation:** A test agent that writes and runs tests without touching production code.
-- **Research:** A search agent with web tools that summarizes findings back to the coordinator.
+Patterns that work well:
 
-## Declare callable agents
+- **Parallelization:** Fan out independent subtasks simultaneously (searching multiple sources, analyzing separate files) and have the coordinator synthesize the results.
+- **Specialization:** Route to agents with domain-focused system prompts and tools, such as a security agent or a documentation agent, rather than loading a single agent with every capability.
+- **Escalation:** Consult a more capable agent / model for a subset of complex subtasks.
 
-When [defining your agent](managed-agents/agent-setup.md), list additional IDs of agents it is permitted to call:
+## Configure the coordinator
+
+When [defining your agent](managed-agents/agent-setup.md), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -37,52 +37,99 @@ model: claude-opus-4-7
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
-callable_agents:
-  - type: agent
-    id: $REVIEWER_AGENT_ID
-    version: $REVIEWER_AGENT_VERSION
-  - type: agent
-    id: $TEST_WRITER_AGENT_ID
-    version: $TEST_WRITER_AGENT_VERSION
+multiagent:
+  type: coordinator
+  agents:
+    - type: agent
+      id: $REVIEWER_AGENT_ID
+    - type: agent
+      id: $TEST_WRITER_AGENT_ID
 YAML
 ```
 
-Each entry in `callable_agents` must be the ID of an existing agent. Only one level of delegation is supported: the coordinator can call other agents, but those agents cannot call agents of their own.
+`multiagent.agents` can accept any of the following:
 
-Then create a session referencing the orchestrator:
+- `{"type": "agent", "id": agent.id}` references a previously created `agent` by ID. Defaults to pinning the latest agent version if no `version` is specified.
+- `{"type": "agent", "id": agent.id, "version": agent.version}` pins a specific agent version.
+- `{"type": "self"}`: allows the coordinator to spawn copies of itself.
 
-curlCLIPythonTypeScript
+The coordinator can only delegate to one level of agents; depth > 1 is ignored. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
+
+## Create the session
+
+Create a session referencing the coordinator. The coordinator will delegate to the agents in its roster as needed.
+
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 session = client.beta.sessions.create(
-    agent=orchestrator.id,
+    agent=coordinator.id,
     environment_id=environment.id,
 )
 ```
 
-The callable agents are resolved from the orchestrator's configuration. You don't need to reference them at session creation.
+## Threads
 
-## Session threads
+The **session-level event stream** (`/v1/sessions/:id/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You won't see the full activity from non-coordinator agents, but you will see the start and end of their work, as well as blocking events like tool permission requests.
 
-The **session-level event stream** (`/v1/sessions/:id/stream`) is considered the **primary thread**, containing an condensed view of all activity across all threads. You won't see called agents' individual traces, but you will see the start and end of their work. **Session threads** are where you drill into a specific agent's reasoning and tool calls.
+**Session threads** are where you drill into a specific agent's activity.
 
-The session status also is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status will be `running` as well.
+The session `status` is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status will be `running` as well.
 
-List all threads in a session as follows:
+A maximum of 25 concurrent threads are supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`.
+
+List threads
+
+List threads
+
+Interrupt a session thread
+
+Interrupt a session thread
+
+Archive a session thread
+
+Archive a session thread
+
+List all threads associated with a session as follows:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 for thread in client.beta.sessions.threads.list(session.id):
-    print(f"[{thread.agent_name}] {thread.status}")
+    print(f"[{thread.agent.name}] {thread.status}")
 ```
 
-Stream events from a specific thread:
+The full list includes the primary thread. `parent_thread_id` will be null for the primary thread.
+
+### Primary thread events
+
+These events surface multiagent activity on the primary thread at `/v1/sessions/:id/events/stream`.
+
+| Type | Description |
+| --- | --- |
+| `session.thread_created` | A thread was created. Includes `session_thread_id` and `agent_name`. |
+| `session.thread_status_running` | A thread started activity. |
+| `session.thread_status_idle` | The agent associated with the thread is awaiting input. Includes a `stop_reason` indicating why the agent stopped. |
+| `session.thread_status_terminated` | A thread was archived or encountered a terminal error. |
+| `agent.thread_message_received` | An agent delivered its result to the coordinator. Includes `from_session_thread_id`, `from_agent_name`, and `content`. |
+| `agent.thread_message_sent` | The coordinator sent a follow-up to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`. |
+
+### Session thread events
+
+Critical events are proxied to the primary thread. However, you may still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
+
+Stream session thread events
+
+Stream session thread events
+
+List session thread events
+
+List session thread events
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-with client.beta.sessions.threads.stream(
+with client.beta.sessions.threads.events.stream(
     thread.id,
     session_id=session.id,
 ) as stream:
@@ -92,40 +139,28 @@ with client.beta.sessions.threads.stream(
                 for block in event.content:
                     if block.type == "text":
                         print(block.text, end="")
-            case "session.thread_idle":
+            case "session.thread_status_idle":
                 break
 ```
 
-List past events for a thread:
+### Tool permissions and custom tools
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+If a non-coordinator agent needs something from your client, such as [permission](managed-agents/events-and-streaming.md) to run an `always_ask` tool, or the [result of a custom tool](managed-agents/events-and-streaming.md), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
 
 ```shiki
-for event in client.beta.sessions.threads.events.list(
-    thread.id,
-    session_id=session.id,
-):
-    print(f"[{event.type}] {event.processed_at}")
+{
+  "type": "session.thread_status_idle",
+  "id": "sevt_01ABC...",
+  "session_thread_id": "sth_01DEF...",
+  "agent_name": "code-reviewer",
+  "stop_reason": {
+    "type": "requires_action",
+    "event_ids": ["toolu_01XYZ..."]
+  }
+}
 ```
 
-## Multiagent event types
-
-These events surface multiagent activity on the top-level session stream.
-
-| Type | Description |
-| --- | --- |
-| `session.thread_created` | The coordinator spawned a new thread. Includes the `session_thread_id` and `model`. |
-| `session.thread_idle` | An agent thread finished its current work. |
-| `agent.thread_message_sent` | An agent sent a message to another thread. Includes `to_thread_id` and `content`. |
-| `agent.thread_message_received` | An agent received a message from another thread. Includes `from_thread_id` and `content`. |
-
-## Tool permissions and custom tools in threads
-
-When a `callable_agent` thread needs something from your client ([permission](managed-agents/events-and-streaming.md) to run an `always_ask` tool, or the [result of a custom tool](managed-agents/events-and-streaming.md)) the request surfaces on the **session stream** with a `session_thread_id` field. Include the same `session_thread_id` when you post your response so the platform routes it back to the waiting thread.
-
-- **`session_thread_id` is present:** the event originated in a subagent thread. Echo it on your reply.
-- **`session_thread_id` is absent:** the event came from the primary thread. Reply without the field.
-- Match on `tool_use_id` to pair requests with responses.
+Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` (with `custom_tool_use_id`); the server routes the response to the correct thread automatically.
 
 The example below extends the [tool confirmation handler](managed-agents/events-and-streaming.md) to route replies. The same pattern applies to `user.custom_tool_result`.
 
@@ -133,16 +168,16 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 for event_id in stop.event_ids:
-    pending = events_by_id[event_id]
-    confirmation = {
-        "type": "user.tool_confirmation",
-        "tool_use_id": event_id,
-        "result": "allow",
-    }
-    # Echo session_thread_id when the request came from a subagent thread
-    if pending.session_thread_id is not None:
-        confirmation["session_thread_id"] = pending.session_thread_id
-    client.beta.sessions.events.send(session.id, events=[confirmation])
+    client.beta.sessions.events.send(
+        session.id,
+        events=[
+            {
+                "type": "user.tool_confirmation",
+                "tool_use_id": event_id,
+                "result": "allow",
+            }
+        ],
+    )
 ```
 
 Was this page helpful?

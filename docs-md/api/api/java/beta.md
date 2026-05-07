@@ -43896,7 +43896,154 @@ GET/v1/skills/{skill\_id}/versions/{version}
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+[BetaUserProfile](api/beta.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+[BetaUserProfileEnrollmentUrl](api/beta.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+class BetaUserProfile:
+
+String id
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+LocalDateTime createdAt
+
+A timestamp in RFC 3339 format
+
+Metadata metadata
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+Relationship relationship
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+EXTERNAL("external")
+
+RESOLD("resold")
+
+INTERNAL("internal")
+
+TrustGrants trustGrants
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+Status status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+ACTIVE("active")
+
+PENDING("pending")
+
+REJECTED("rejected")
+
+Type type
+
+Object type. Always `user_profile`.
+
+LocalDateTime updatedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> externalId
+
+Platform's own identifier for this user. Not enforced unique.
+
+Optional<String> name
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
+class BetaUserProfileEnrollmentUrl:
+
+LocalDateTime expiresAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+Object type. Always `enrollment_url`.
+
+String url
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+class BetaUserProfileTrustGrant:
+
+Status status
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+ACTIVE("active")
+
+PENDING("pending")
+
+REJECTED("rejected")
+
 #### BetaWebhooks
+
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+
+Possible `data.type` values:
+
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
 
@@ -43998,7 +44145,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -44006,7 +44153,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 
@@ -44284,7 +44431,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -44292,7 +44439,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 
@@ -44588,6 +44735,18 @@ JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
 
 String workspaceId
 
+class BetaWebhookSessionStatusRescheduledEventData:
+
+String id
+
+ID of the resource that triggered the event.
+
+String organizationId
+
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+
+String workspaceId
+
 class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
@@ -44597,18 +44756,6 @@ ID of the resource that triggered the event.
 String organizationId
 
 JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
-
-String workspaceId
-
-class BetaWebhookSessionStatusScheduledEventData:
-
-String id
-
-ID of the resource that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
 
 String workspaceId
 
@@ -44858,7 +45005,7 @@ JsonValue; type "session.deleted"constant"session.deleted"constant
 
 String workspaceId
 
-class BetaWebhookSessionStatusScheduledEventData:
+class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
@@ -44866,7 +45013,7 @@ ID of the resource that triggered the event.
 
 String organizationId
 
-JsonValue; type "session.status\_scheduled"constant"session.status\_scheduled"constant
+JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
 
 String workspaceId
 
@@ -45057,126 +45204,6 @@ String workspaceId
 JsonValue; type "event"constant"event"constant
 
 Object type. Always `event` for webhook payloads.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-[BetaUserProfile](api/beta.md) beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-[BetaUserProfile](api/beta.md) beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-[BetaUserProfile](api/beta.md) beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-[BetaUserProfileEnrollmentUrl](api/beta.md) beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile:
-
-String id
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-LocalDateTime createdAt
-
-A timestamp in RFC 3339 format
-
-Metadata metadata
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-Relationship relationship
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-Accepts one of the following:
-
-EXTERNAL("external")
-
-RESOLD("resold")
-
-INTERNAL("internal")
-
-TrustGrants trustGrants
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-Status status
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-ACTIVE("active")
-
-PENDING("pending")
-
-REJECTED("rejected")
-
-Type type
-
-Object type. Always `user_profile`.
-
-LocalDateTime updatedAt
-
-A timestamp in RFC 3339 format
-
-Optional<String> externalId
-
-Platform's own identifier for this user. Not enforced unique.
-
-Optional<String> name
-
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
-
-class BetaUserProfileEnrollmentUrl:
-
-LocalDateTime expiresAt
-
-A timestamp in RFC 3339 format
-
-Type type
-
-Object type. Always `enrollment_url`.
-
-String url
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-class BetaUserProfileTrustGrant:
-
-Status status
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-ACTIVE("active")
-
-PENDING("pending")
-
-REJECTED("rejected")
 
 ---
 

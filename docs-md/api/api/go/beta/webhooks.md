@@ -6,11 +6,32 @@ Go
 
 # Webhooks
 
-##### [Unwrap](api/beta/webhooks/unwrap.md)
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
 
-client.Beta.Webhooks.Unwrap(ctx) error
+Possible `data.type` values:
 
-Function
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
 
@@ -112,7 +133,7 @@ Type SessionDeleted
 
 WorkspaceID string
 
-type BetaWebhookSessionStatusScheduledEventData struct{…}
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
@@ -120,7 +141,7 @@ ID of the resource that triggered the event.
 
 OrganizationID string
 
-Type SessionStatusScheduled
+Type SessionStatusRescheduled
 
 WorkspaceID string
 
@@ -400,7 +421,7 @@ Type SessionDeleted
 
 WorkspaceID string
 
-type BetaWebhookSessionStatusScheduledEventData struct{…}
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
@@ -408,7 +429,7 @@ ID of the resource that triggered the event.
 
 OrganizationID string
 
-Type SessionStatusScheduled
+Type SessionStatusRescheduled
 
 WorkspaceID string
 
@@ -704,6 +725,18 @@ Type SessionStatusIdled
 
 WorkspaceID string
 
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
+
+ID string
+
+ID of the resource that triggered the event.
+
+OrganizationID string
+
+Type SessionStatusRescheduled
+
+WorkspaceID string
+
 type BetaWebhookSessionStatusRunStartedEventData struct{…}
 
 ID string
@@ -713,18 +746,6 @@ ID of the resource that triggered the event.
 OrganizationID string
 
 Type SessionStatusRunStarted
-
-WorkspaceID string
-
-type BetaWebhookSessionStatusScheduledEventData struct{…}
-
-ID string
-
-ID of the resource that triggered the event.
-
-OrganizationID string
-
-Type SessionStatusScheduled
 
 WorkspaceID string
 
@@ -974,7 +995,7 @@ Type SessionDeleted
 
 WorkspaceID string
 
-type BetaWebhookSessionStatusScheduledEventData struct{…}
+type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
@@ -982,7 +1003,7 @@ ID of the resource that triggered the event.
 
 OrganizationID string
 
-Type SessionStatusScheduled
+Type SessionStatusRescheduled
 
 WorkspaceID string
 

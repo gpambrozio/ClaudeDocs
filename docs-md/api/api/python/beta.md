@@ -45447,13 +45447,154 @@ Deleted object type.
 
 For Skill Versions, this is always `"skill_version_deleted"`.
 
+#### BetaUser Profiles
+
+##### [Create User Profile](api/beta/user_profiles/create.md)
+
+beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+
+POST/v1/user\_profiles
+
+##### [List User Profiles](api/beta/user_profiles/list.md)
+
+beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta.md)]
+
+GET/v1/user\_profiles
+
+##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+
+beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+
+GET/v1/user\_profiles/{user\_profile\_id}
+
+##### [Update User Profile](api/beta/user_profiles/update.md)
+
+beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
+
+POST/v1/user\_profiles/{user\_profile\_id}
+
+##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+
+beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta.md)
+
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+
+##### ModelsExpand Collapse
+
+class BetaUserProfile: …
+
+id: str
+
+Unique identifier for this user profile, prefixed `uprof_`.
+
+created\_at: datetime
+
+A timestamp in RFC 3339 format
+
+metadata: Dict[str, str]
+
+Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+relationship: Literal["external", "resold", "internal"]
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+Accepts one of the following:
+
+"external"
+
+"resold"
+
+"internal"
+
+trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
+
+Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+status: Literal["active", "pending", "rejected"]
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"
+
+"pending"
+
+"rejected"
+
+type: Literal["user\_profile"]
+
+Object type. Always `user_profile`.
+
+updated\_at: datetime
+
+A timestamp in RFC 3339 format
+
+external\_id: Optional[str]
+
+Platform's own identifier for this user. Not enforced unique.
+
+name: Optional[str]
+
+Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+
+class BetaUserProfileEnrollmentURL: …
+
+expires\_at: datetime
+
+A timestamp in RFC 3339 format
+
+type: Literal["enrollment\_url"]
+
+Object type. Always `enrollment_url`.
+
+url: str
+
+Enrollment URL to send to the end user. Valid until `expires_at`.
+
+class BetaUserProfileTrustGrant: …
+
+status: Literal["active", "pending", "rejected"]
+
+Status of the trust grant.
+
+Accepts one of the following:
+
+"active"
+
+"pending"
+
+"rejected"
+
 #### BetaWebhooks
 
-##### [Unwrap](api/beta/webhooks/unwrap.md)
+Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
 
-beta.webhooks.unwrap()
+Possible `data.type` values:
 
-Function
+- `session.archived`
+- `session.created`
+- `session.deleted`
+- `session.idled`
+- `session.outcome_evaluation_ended`
+- `session.pending`
+- `session.requires_action`
+- `session.running`
+- `session.status_idled`
+- `session.status_rescheduled`
+- `session.status_run_started`
+- `session.status_terminated`
+- `session.thread_created`
+- `session.thread_idled`
+- `session.thread_terminated`
+- `vault.archived`
+- `vault.created`
+- `vault.deleted`
+- `vault_credential.archived`
+- `vault_credential.created`
+- `vault_credential.deleted`
+- `vault_credential.refresh_failed`
 
 ##### ModelsExpand Collapse
 
@@ -45555,7 +45696,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -45563,7 +45704,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 
@@ -45843,7 +45984,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -45851,7 +45992,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 
@@ -46147,6 +46288,18 @@ type: Literal["session.status\_idled"]
 
 workspace\_id: str
 
+class BetaWebhookSessionStatusRescheduledEventData: …
+
+id: str
+
+ID of the resource that triggered the event.
+
+organization\_id: str
+
+type: Literal["session.status\_rescheduled"]
+
+workspace\_id: str
+
 class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
@@ -46156,18 +46309,6 @@ ID of the resource that triggered the event.
 organization\_id: str
 
 type: Literal["session.status\_run\_started"]
-
-workspace\_id: str
-
-class BetaWebhookSessionStatusScheduledEventData: …
-
-id: str
-
-ID of the resource that triggered the event.
-
-organization\_id: str
-
-type: Literal["session.status\_scheduled"]
 
 workspace\_id: str
 
@@ -46417,7 +46558,7 @@ type: Literal["session.deleted"]
 
 workspace\_id: str
 
-class BetaWebhookSessionStatusScheduledEventData: …
+class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
@@ -46425,7 +46566,7 @@ ID of the resource that triggered the event.
 
 organization\_id: str
 
-type: Literal["session.status\_scheduled"]
+type: Literal["session.status\_rescheduled"]
 
 workspace\_id: str
 
@@ -46616,126 +46757,6 @@ workspace\_id: str
 type: Literal["event"]
 
 Object type. Always `event` for webhook payloads.
-
-#### BetaUser Profiles
-
-##### [Create User Profile](api/beta/user_profiles/create.md)
-
-beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-POST/v1/user\_profiles
-
-##### [List User Profiles](api/beta/user_profiles/list.md)
-
-beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta.md)]
-
-GET/v1/user\_profiles
-
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
-
-beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-GET/v1/user\_profiles/{user\_profile\_id}
-
-##### [Update User Profile](api/beta/user_profiles/update.md)
-
-beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta.md)
-
-POST/v1/user\_profiles/{user\_profile\_id}
-
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
-
-beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta.md)
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
-
-##### ModelsExpand Collapse
-
-class BetaUserProfile: …
-
-id: str
-
-Unique identifier for this user profile, prefixed `uprof_`.
-
-created\_at: datetime
-
-A timestamp in RFC 3339 format
-
-metadata: Dict[str, str]
-
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-relationship: Literal["external", "resold", "internal"]
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-Accepts one of the following:
-
-"external"
-
-"resold"
-
-"internal"
-
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta.md)]
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-status: Literal["active", "pending", "rejected"]
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"
-
-"pending"
-
-"rejected"
-
-type: Literal["user\_profile"]
-
-Object type. Always `user_profile`.
-
-updated\_at: datetime
-
-A timestamp in RFC 3339 format
-
-external\_id: Optional[str]
-
-Platform's own identifier for this user. Not enforced unique.
-
-name: Optional[str]
-
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
-
-class BetaUserProfileEnrollmentURL: …
-
-expires\_at: datetime
-
-A timestamp in RFC 3339 format
-
-type: Literal["enrollment\_url"]
-
-Object type. Always `enrollment_url`.
-
-url: str
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-class BetaUserProfileTrustGrant: …
-
-status: Literal["active", "pending", "rejected"]
-
-Status of the trust grant.
-
-Accepts one of the following:
-
-"active"
-
-"pending"
-
-"rejected"
 
 ---
 
