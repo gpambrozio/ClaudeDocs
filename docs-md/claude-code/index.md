@@ -8,20 +8,6 @@
 
 Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
-TerminalDesktopVS CodeJetBrains
-
-I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
-
-macOS / LinuxWindowsHomebrewWinGet
-
-$
-
-curl -fsSL https://claude.ai/install.sh | bash
-
-Copy
-
-[Installation troubleshooting](troubleshoot-install.md)
-
 ## [​](#get-started) Get started
 
 Choose your environment to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_pricing) or [Anthropic Console](https://console.anthropic.com/) account. The Terminal CLI and VS Code also support [third-party providers](third-party-integrations.md).
