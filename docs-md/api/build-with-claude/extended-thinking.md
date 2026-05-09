@@ -6,13 +6,13 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
 
-For Claude Opus 4.7 and later models, use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md). Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is no longer supported on Claude Opus 4.7 or later models and returns a 400 error. For Claude Opus 4.6 and Claude Sonnet 4.6, adaptive thinking is also recommended; the manual configuration is still functional on these models but is deprecated and will be removed in a future model release.
+For Claude Opus 4.7, use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md). Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is no longer supported on Claude Opus 4.7 and returns a 400 error. For Claude Opus 4.6 and Claude Sonnet 4.6, adaptive thinking is also recommended; the manual configuration is still functional on these models but is deprecated and will be removed in a future model release.
 
 ## Supported models
 
-Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is supported on all current Claude models **except Claude Opus 4.7 and later models**, where it is no longer accepted and returns a 400 error. A few models have mode-specific behavior:
+Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is supported on all current Claude models **except Claude Opus 4.7**, where it is no longer accepted and returns a 400 error. A few models have mode-specific behavior:
 
-- **Claude Opus 4.7 (`claude-opus-4-7`) and later models:** manual extended thinking is no longer supported. Use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md) instead.
+- **Claude Opus 4.7 (`claude-opus-4-7`):** manual extended thinking is no longer supported. Use [adaptive thinking](build-with-claude/adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](build-with-claude/effort.md) instead.
 - **[Claude Mythos Preview](https://anthropic.com/glasswing):** [adaptive thinking](build-with-claude/adaptive-thinking.md) is the default; `thinking: {type: "enabled", budget_tokens: N}` is also accepted. `thinking: {type: "disabled"}` is not supported, and `display` defaults to `"omitted"` rather than returning thinking content. Pass `display: "summarized"` to receive summaries.
 - **Claude Opus 4.6 (`claude-opus-4-6`):** [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated but still functional.
 - **Claude Sonnet 4.6 (`claude-sonnet-4-6`):** [adaptive thinking](build-with-claude/adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) with [interleaved mode](#interleaved-thinking) is deprecated but still functional.
@@ -101,7 +101,7 @@ Here are some important considerations for summarized thinking:
 
 Claude Sonnet 3.7 continues to return full thinking output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#2e5d4f424b5d6e4f405a465c415e474d004d4143).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#ccbfada0a9bf8cada2b8a4bea3bca5afe2afa3a1).
 
 ### Controlling thinking display
 

@@ -41,7 +41,7 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
 
 **Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](build-with-claude/citations.md).
 
-#### Document Processing Modes
+#### Document processing modes
 
 1. **Converse Document Chat** (Original mode - Text extraction only)
 

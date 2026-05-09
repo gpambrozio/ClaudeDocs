@@ -60,9 +60,9 @@ To provision your resource:
 
 1. Navigate to the [Foundry portal](https://ai.azure.com/)
 2. Create a new Foundry resource or select an existing one
-3. Configure access management using Azure-issued API keys or Entra ID for role-based access control
+3. Configure access management using Azure-issued API keys or Entra ID (formerly Azure Active Directory) for role-based access control
 4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security
-5. Note your resource name. You'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
+5. Note your resource name. You'll use this as `{resource}` in API endpoints (for example, `https://{resource}.services.ai.azure.com/anthropic/v1/*`)
 
 ### Creating Foundry deployments
 
@@ -70,9 +70,9 @@ After creating your resource, deploy a Claude model to make it available for API
 
 1. In the Foundry portal, navigate to your resource
 2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**
-3. Search for and select a Claude model (e.g., `claude-sonnet-4-6`)
+3. Search for and select a Claude model (for example, `claude-sonnet-4-6`)
 4. Configure deployment settings:
-   - **Deployment name:** Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.
+   - **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after it has been created.
    - **Deployment type:** Select Global Standard (recommended for Claude)
 5. Select **Deploy** and wait for provisioning to complete
 6. Once deployed, you can find your endpoint URL and keys under **Keys and Endpoint**
@@ -233,6 +233,7 @@ Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context
 ### Features not supported
 
 - Admin API (`/v1/organizations/*` endpoints)
+- Compliance API (`/v1/compliance/*` endpoints)
 - Models API (`/v1/models`)
 - Message Batch API (`/v1/messages/batches`)
 
@@ -281,7 +282,7 @@ Azure's logging services are configured within your Azure subscription. Enabling
 
 **Error:** `403 Forbidden`
 
-- **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (e.g., "Cognitive Services OpenAI User").
+- **Solution:** Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (for example, "Cognitive Services OpenAI User").
 
 ### Rate limiting
 
@@ -298,7 +299,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-6`).
+- **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, `claude-sonnet-4-6`).
 - **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`

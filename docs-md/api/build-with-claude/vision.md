@@ -8,7 +8,7 @@ This guide describes how to work with images in Claude, including best practices
 
 ## How to use vision
 
-Use Claude’s vision capabilities through:
+Use Claude's vision capabilities through:
 
 - [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
 - The [Console Workbench](/workbench). A button to add images appears at the top right of every User message block.
@@ -51,7 +51,7 @@ To minimize latency and to simplify coordinate-based workflows, you should prefe
 
 ### Calculate image costs
 
-Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you’re using.
+Each image you include in a request to Claude counts toward your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you're using.
 
 Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
@@ -83,15 +83,15 @@ Here are the same image sizes tokenized for Claude Opus 4.7, based on its per-to
 | 1920x1080 px(2.07 megapixels) | ~2765 | ~$0.014 | ~$14.00 |
 | 2000x1500 px(3 megapixels) | ~4000 | ~$0.020 | ~$20.00 |
 
-### Ensuring image quality
+### Ensure image quality
 
 When providing images to Claude, keep the following in mind for best results:
 
 - **Image format**: Use a supported image format: JPEG, PNG, GIF, or WebP.  
   Animations are unsupported, and only the first frame will be used.
 - **Image clarity**: Ensure images are clear and not too blurry or pixelated.
-- **Text**: If the image contains important text, make sure it’s legible and not too small. Avoid cropping out key visual context just to enlarge the text.
-- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing and/or cropping your images.
+- **Text**: If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context just to enlarge the text.
+- **Resizing**: Take into account that your image might be resized if it is too large (see above); this might for example make text less legible. Consider pre-resizing your images, cropping them, or both.
 - **Image compression**: Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
 ---

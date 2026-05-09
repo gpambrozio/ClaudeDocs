@@ -237,7 +237,7 @@ response = client.messages.create(
     ],
 )
 
-print(response.model_dump_json(indent=2))
+print(response)
 ```
 
 ## Claude's response with citations

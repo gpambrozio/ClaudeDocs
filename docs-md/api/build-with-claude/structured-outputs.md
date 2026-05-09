@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are in beta on Microsoft Foundry. Structured outputs are not supported on Google Cloud's Vertex AI for Claude Mythos Preview.
+Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are in beta on Microsoft Foundry. On [Google Cloud Vertex AI](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.
 
 This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 
@@ -26,9 +26,9 @@ Without structured outputs, Claude can generate malformed JSON responses or inva
 
 Structured outputs guarantee schema-compliant responses through constrained decoding:
 
-- **Always valid**: No more `JSON.parse()` errors
-- **Type safe**: Guaranteed field types and required fields
-- **Reliable**: No retries needed for schema violations
+- **Always valid:** No more `JSON.parse()` errors
+- **Type safe:** Guaranteed field types and required fields
+- **Reliable:** No retries needed for schema violations
 
 ## JSON outputs
 
@@ -110,18 +110,18 @@ Output
 
 The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
-The Python SDK's `client.messages.parse()` still accepts `output_format` as a convenience parameter and translates it to `output_config.format` internally. Other SDKs require `output_config` directly. The examples below show the SDK helper syntax.
+The Python SDK's `client.messages.parse()` still accepts `output_format` as a convenience parameter and translates it to `output_config.format` internally. Other SDKs require `output_config` directly. The following examples show the SDK helper syntax.
 
 #### Using native schema definitions
 
 Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
-- **Python**: [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
-- **TypeScript**: [Zod](https://zod.dev/) schemas with `zodOutputFormat()` or typed JSON Schema literals with `jsonSchemaOutputFormat()`
-- **Java**: Plain Java classes with automatic schema derivation via `outputConfig(Class<T>)`
-- **Ruby**: `Anthropic::BaseModel` classes with `output_config: {format: Model}`
-- **PHP**: Classes implementing `StructuredOutputModel` with `outputConfig: ['format' => MyClass::class]`
-- **CLI**, **C#**, **Go**: Raw JSON schemas passed via `output_config`
+- **Python:** [Pydantic](https://docs.pydantic.dev/) models with `client.messages.parse()`
+- **TypeScript:** [Zod](https://zod.dev/) schemas with `zodOutputFormat()` or typed JSON Schema literals with `jsonSchemaOutputFormat()`
+- **Java:** Plain Java classes with automatic schema derivation through `outputConfig(Class<T>)`
+- **Ruby:** `Anthropic::BaseModel` classes with `output_config: {format: Model}`
+- **PHP:** Classes implementing `StructuredOutputModel` with `outputConfig: ['format' => MyClass::class]`
+- **CLI**, **C#**, **Go:** Raw JSON schemas passed through `output_config`
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -245,8 +245,8 @@ response = client.messages.create(
 
 The Python, TypeScript, Ruby, and PHP SDKs automatically transform schemas with unsupported features:
 
-1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)
-2. **Update descriptions** with constraint info (e.g., "Must be at least 100"), when the constraint is not directly supported with structured outputs
+1. **Remove unsupported constraints** (for example, `minimum`, `maximum`, `minLength`, `maxLength`)
+2. **Update descriptions** with constraint info (for example, "Must be at least 100"), when the constraint is not directly supported with structured outputs
 3. **Add `additionalProperties: false`** to all objects
 4. **Filter string formats** to supported list only
 5. **Validate responses** against your original schema (with all constraints)
@@ -430,15 +430,15 @@ The following limits apply to all requests with `output_config.format` or `stric
 | --- | --- | --- |
 | Strict tools per request | 20 | Maximum number of tools with `strict: true`. Non-strict tools don't count toward this limit. |
 | Optional parameters | 24 | Total optional parameters across all strict tool schemas and JSON output schemas. Each parameter not listed in `required` counts toward this limit. |
-| Parameters with union types | 16 | Total parameters that use `anyOf` or type arrays (e.g., `"type": ["string", "null"]`) across all strict schemas. These are especially expensive because they create exponential compilation cost. |
+| Parameters with union types | 16 | Total parameters that use `anyOf` or type arrays (for example, `"type": ["string", "null"]`) across all strict schemas. These are especially expensive because they create exponential compilation cost. |
 
 These limits apply to the combined total across all strict schemas in a single request. For example, if you have 4 strict tools with 6 optional parameters each, you'll reach the 24-parameter limit even though no single tool seems complex.
 
 #### Additional internal limits
 
-Beyond the explicit limits above, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
+Beyond the explicit limits in the preceding table, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
 
-When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit above is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars may hit this timeout.
+When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit in the preceding table is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars may hit this timeout.
 
 #### Tips for reducing schema complexity
 
@@ -463,17 +463,17 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 **Works with:**
 
-- **[Batch processing](build-with-claude/batch-processing.md)**: Process structured outputs at scale with 50% discount
-- **[Token counting](build-with-claude/token-counting.md)**: Count tokens without compilation
-- **[Streaming](build-with-claude/streaming.md)**: Stream structured outputs like normal responses
-- **Combined usage**: Use JSON outputs (`output_config.format`) and strict tool use (`strict: true`) together in the same request
+- **[Batch processing](build-with-claude/batch-processing.md):** Process structured outputs at scale with 50% discount
+- **[Token counting](build-with-claude/token-counting.md):** Count tokens without compilation
+- **[Streaming](build-with-claude/streaming.md):** Stream structured outputs like normal responses
+- **Combined usage:** Use JSON outputs (`output_config.format`) and strict tool use (`strict: true`) together in the same request
 
 **Incompatible with:**
 
-- **[Citations](build-with-claude/citations.md)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
-- **Message Prefilling**: Incompatible with JSON outputs
+- **[Citations](build-with-claude/citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
+- **Message Prefilling:** Incompatible with JSON outputs
 
-**Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
+**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](build-with-claude/extended-thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
 Was this page helpful?
 

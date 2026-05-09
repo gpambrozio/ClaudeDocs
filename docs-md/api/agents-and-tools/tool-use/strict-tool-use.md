@@ -2,7 +2,7 @@
 
 Copy page
 
-Setting `strict: true` on a tool definition uses grammar-constrained sampling to guarantee Claude's tool inputs match your JSON Schema. This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](build-with-claude/structured-outputs.md). For non-strict schema guidance, see [Define tools](agents-and-tools/tool-use/define-tools.md).
+Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](build-with-claude/structured-outputs.md). For non-strict schema guidance, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
 Strict tool use validates tool parameters, ensuring Claude calls your functions with correctly-typed arguments. Use strict tool use when you need to:
 
@@ -21,7 +21,7 @@ Strict tool use guarantees type-safe parameters:
 - No need to validate and retry tool calls
 - Production-ready agents that work consistently at scale
 
-For example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: "two"` or `passengers: "2"`. With `strict: true`, the response will always contain `passengers: 2`.
+For example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: "two"` or `passengers: "2"`. With `strict: true`, the response always contains `passengers: 2`.
 
 ## Quick start
 
@@ -96,7 +96,7 @@ Output
 
    Handle tool calls
 
-   When Claude uses the tool, the `input` field in the tool\_use block will strictly follow your `input_schema`, and the `name` will always be valid.
+   When Claude uses the tool, the `input` field in the tool\_use block strictly follows your `input_schema`, and the `name` is always valid.
 
 ## Common use cases
 

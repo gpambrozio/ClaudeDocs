@@ -319,6 +319,7 @@ response = client.messages.create(
         },
     ],
 )
+print(response)
 ```
 
 In this workflow, Claude will:

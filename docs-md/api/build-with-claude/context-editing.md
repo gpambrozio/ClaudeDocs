@@ -35,7 +35,15 @@ When activated, the API automatically clears the oldest tool results in chronolo
 
 The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
 
-**Default behavior:** The default varies by model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
+**Default behavior:** The default varies by model class.
+
+| Model class | Keep all prior thinking | Keep only the last turn's thinking |
+| --- | --- | --- |
+| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
+| Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier |
+| Haiku | (none) | All models through Claude Haiku 4.5 |
+
+Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 
 An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](build-with-claude/extended-thinking.md)).
 

@@ -138,10 +138,11 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
             return create_message_with_fast_fallback(**params)
         raise
     except (
-        anthropic.InternalServerError,
-        anthropic.OverloadedError,
+        anthropic.APIStatusError,
         anthropic.APIConnectionError,
-    ):
+    ) as error:
+        if isinstance(error, anthropic.APIStatusError) and error.status_code < 500:
+            raise
         if max_attempts > 1:
             return create_message_with_fast_fallback(
                 max_attempts=max_attempts - 1, **params

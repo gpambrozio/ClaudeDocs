@@ -11,11 +11,11 @@ For complete API reference including request/response schemas and all parameters
 
 This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 
-## Quick Links
+## Quick links
 
 [Get started with Agent Skills
 
-Create your first Skill](agents-and-tools/agent-skills/quickstart.md)[Create Custom Skills
+Create your first Skill](agents-and-tools/agent-skills/quickstart.md)[Create custom Skills
 
 Best practices for authoring Skills](agents-and-tools/agent-skills/best-practices.md)
 
@@ -23,7 +23,7 @@ Best practices for authoring Skills](agents-and-tools/agent-skills/best-practice
 
 For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
-Skills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
+Skills integrate with the Messages API through the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
 ### Using Skills
 
@@ -36,7 +36,7 @@ Skills integrate identically in the Messages API regardless of source. You speci
 | **Type value** | `anthropic` | `custom` |
 | **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |
 | **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |
-| **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](api/skills/create-skill.md) |
+| **Management** | Pre-built and maintained by Anthropic | Upload and manage through the [Skills API](api/skills/create-skill.md) |
 | **Availability** | Available to all users | Private to your workspace |
 
 Both skill sources are returned by the [List Skills endpoint](api/skills/list-skills.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
@@ -50,13 +50,13 @@ To use Skills, you need:
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
    - `files-api-2025-04-14` - For uploading/downloading files to/from container
-3. **Code execution tool** enabled in your requests
+3. **[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
 
 ---
 
 ## Using Skills in Messages
 
-### Container Parameter
+### Container parameter
 
 Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
 
@@ -81,7 +81,7 @@ response = client.beta.messages.create(
 )
 ```
 
-### Downloading Generated Files
+### Downloading generated files
 
 When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_id` attributes in the response. You must use the Files API to download these files.
 
@@ -123,9 +123,9 @@ def extract_file_ids(response):
         if item.type == "bash_code_execution_tool_result":
             content_item = item.content
             if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
                 for file in content_item.content:
-                    if hasattr(file, "file_id"):
-                        file_ids.append(file.file_id)
+                    file_ids.append(file.file_id)
     return file_ids
 
 # Step 3: Download the file using Files API
@@ -160,7 +160,7 @@ client.beta.files.delete(file_id=file_id)
 
 For complete details on the Files API, see the [Files API documentation](api/files-content.md).
 
-### Multi-Turn Conversations
+### Multi-turn conversations
 
 Reuse the same container across multiple messages by specifying the container ID:
 
@@ -199,7 +199,7 @@ response2 = client.beta.messages.create(
 )
 ```
 
-### Long-Running Operations
+### Long-running operations
 
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
@@ -438,7 +438,7 @@ See the [Create Skill Version API reference](api/skills/create-skill-version.md)
 
 ---
 
-## How Skills Are Loaded
+## How Skills are loaded
 
 When you specify Skills in a container:
 
@@ -451,7 +451,7 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 
 ---
 
-## Use Cases
+## Use cases
 
 ### Organizational Skills
 
@@ -493,7 +493,7 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 - Testing frameworks
 - Deployment workflows
 
-### Example: Financial Modeling
+### Example: financial modeling
 
 Combine Excel and custom DCF analysis Skills:
 
@@ -569,7 +569,7 @@ Combine Skills when tasks involve multiple document types or domains:
 
 - Including unused Skills (impacts performance)
 
-### Version Management Strategy
+### Version management strategy
 
 **For production:**
 
@@ -601,7 +601,7 @@ container = {
 }
 ```
 
-### Prompt Caching Considerations
+### Prompt caching considerations
 
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
@@ -650,7 +650,7 @@ response2 = client.beta.messages.create(
 
 For best caching performance, keep your Skills list consistent across requests.
 
-### Error Handling
+### Error handling
 
 Handle Skill-related errors gracefully:
 
@@ -692,7 +692,7 @@ Agent Skills are not covered by ZDR arrangements. Skill definitions and executio
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-## Next Steps
+## Next steps
 
 [API Reference
 

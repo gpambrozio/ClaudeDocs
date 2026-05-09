@@ -2,8 +2,6 @@
 
 Copy page
 
-cURL
-
 # Admin
 
 #### AdminOrganizations

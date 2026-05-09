@@ -175,7 +175,7 @@ Keyless CI authentication with the Actions OIDC token.](manage-claude/wif-provid
 
 Self-managed and on-premises clusters using projected service-account tokens.](manage-claude/wif-providers/kubernetes.md)[SPIFFE
 
-SPIRE-issued workloads using JWT-SVIDs and the OIDC Discovery Provider.](manage-claude/wif-providers/spiffe.md)[Okta
+Workloads with SPIFFE JWT-SVIDs from SPIRE or another conformant issuer.](manage-claude/wif-providers/spiffe.md)[Okta
 
 Okta service applications using client-credentials flow.](manage-claude/wif-providers/okta.md)
 

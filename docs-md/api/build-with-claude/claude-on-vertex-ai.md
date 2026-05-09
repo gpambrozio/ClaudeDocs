@@ -112,7 +112,7 @@ Turning on this service does not give Google or Anthropic any access to your con
 
 ## Feature support
 
-For all currently supported features on Vertex AI, see [API features overview](api/overview.md).
+For all currently supported features on Vertex AI, see [API features overview](build-with-claude/overview.md).
 
 ### Context window
 
@@ -122,7 +122,7 @@ Vertex AI limits request payloads to 30 MB. When sending large documents or many
 
 ## Global, multi-region, and regional endpoints
 
-Google Vertex AI offers three endpoint types:
+Vertex AI offers three endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
 - **Multi-region endpoints:** Dynamic routing within a geographic area (for example, the United States or the European Union) for data residency with high availability

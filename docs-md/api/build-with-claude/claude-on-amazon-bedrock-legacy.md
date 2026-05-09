@@ -121,8 +121,8 @@ client = AnthropicBedrock(
     # Temporary credentials can be used with aws_session_token.
     # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
     aws_session_token="<session_token>",
-    # aws_region changes the aws region to which the request is made. By default, we read AWS_REGION,
-    # and if that's not present, we default to us-east-1. Note that we do not read ~/.aws/config for the region.
+    # aws_region changes the aws region to which the request is made. By default, the SDK reads AWS_REGION,
+    # and if that's not present, defaults to us-east-1. Note that the SDK does not read ~/.aws/config for the region.
     aws_region="us-west-2",
 )
 

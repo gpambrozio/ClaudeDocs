@@ -267,6 +267,7 @@ if response.stop_reason == "pause_turn":
     ]
     continuation = client.messages.create(
         model="claude-opus-4-7",
+        max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
     )
@@ -307,7 +308,7 @@ Python
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
     model="claude-opus-4-7",
-    max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -388,7 +389,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, tools=tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -440,7 +441,7 @@ try:
     if response.stop_reason == "max_tokens":
         print("Response was truncated")
 
-except anthropic.APIError as e:
+except anthropic.APIStatusError as e:
     # Handle actual errors
     if e.status_code == 429:
         print("Rate limit exceeded")

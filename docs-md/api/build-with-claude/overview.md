@@ -12,6 +12,8 @@ Claude's API surface is organized into five areas:
 
 If you're new, start with [model capabilities](#model-capabilities) and [tools](#tools). Return to the other sections when you're ready to optimize cost, latency, or scale.
 
+For administration and governance, see the [Admin API](manage-claude/admin-api.md), the [Usage and Cost API](manage-claude/usage-cost-api.md), and the [Compliance API](manage-claude/compliance-api.md).
+
 ## Feature availability
 
 Features on the Claude Platform are assigned one of the following availability classifications per platform (shown in the Availability column of each table below). Not all features pass through every stage. A feature may enter at any classification and may skip stages.
@@ -42,7 +44,7 @@ You can discover which capabilities a model supports programmatically. The [Mode
 | [Extended thinking](build-with-claude/extended-thinking.md) | Enhanced reasoning capabilities for complex tasks, providing transparency into Claude's step-by-step thought process before delivering its final answer. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 | [PDF support](build-with-claude/pdf-support.md) | Process and analyze text and visual content from PDF documents. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 | [Search results](build-with-claude/search-results.md) | Enable natural citations for RAG applications by providing search results with proper source attribution. Achieve web search-quality citations for custom knowledge bases and tools. | ZDR eligible | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
-| [Structured outputs](build-with-claude/structured-outputs.md) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](build-with-claude/structured-outputs.md)\* | Claude API (GA)  Amazon Bedrock (GA)  Microsoft Foundry (Beta) |
+| [Structured outputs](build-with-claude/structured-outputs.md) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](build-with-claude/structured-outputs.md)\* | Claude API (GA)  Amazon Bedrock (GA)  Google Cloud's Vertex AI (GA)  Microsoft Foundry (Beta) |
 
 ## Tools
 

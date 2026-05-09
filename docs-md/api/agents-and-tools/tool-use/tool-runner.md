@@ -106,13 +106,13 @@ The `@beta_tool` decorator inspects the function arguments and docstring to extr
 }
 ```
 
-The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings will be converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, booleans, or other non-string primitives must also be converted to strings.
+The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, booleans, or other non-string primitives must also be converted to strings.
 
 ## Iterating over the tool runner
 
 The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop". Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
 
-You can end the loop at any iteration with a `break` statement. The runner will loop until Claude returns a message without a tool use.
+You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use.
 
 If you don't need intermediate messages, you can get the final message directly:
 
@@ -143,7 +143,9 @@ runner = client.beta.messages.tool_runner(
     ],
 )
 final_message = runner.until_done()
-print(final_message.content[0].text)
+for block in final_message.content:
+    if block.type == "text":
+        print(block.text)
 ```
 
 ## Advanced usage
@@ -253,7 +255,7 @@ for message in runner:
 
 ### Modifying tool results
 
-You can modify tool results before they're sent back to Claude. This is useful for adding metadata like `cache_control` to enable [prompt caching](build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
+You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
 
 Use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK; see the code comments in each tab.
 
@@ -299,7 +301,7 @@ for message in runner:
     print(message.content)
 ```
 
-Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (like document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
+Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
 
 ## Streaming
 

@@ -30,7 +30,7 @@ pinned_session = client.beta.sessions.create(
 )
 ```
 
-The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Agent setup](managed-agents/agent-setup.md) for details.
+The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Define your agent](managed-agents/agent-setup.md) for details.
 
 ## MCP authentication through vaults
 
@@ -75,9 +75,9 @@ Sessions progress through these statuses:
 | Status | Description |
 | --- | --- |
 | `idle` | Agent is waiting for input, including user messages or tool confirmations. Sessions start in `idle`. |
-| `running` | Agent is actively executing |
-| `rescheduling` | Transient error occurred, retrying automatically |
-| `terminated` | Session has ended due to an unrecoverable error |
+| `running` | Agent is actively executing. |
+| `rescheduling` | Transient error occurred, retrying automatically. |
+| `terminated` | Session has ended due to an unrecoverable error. |
 
 ## Other session operations
 

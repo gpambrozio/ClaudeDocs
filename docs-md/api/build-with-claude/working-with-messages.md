@@ -95,6 +95,8 @@ Output
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
@@ -134,8 +136,6 @@ Output
   }
 }
 ```
-
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 ## Vision
 

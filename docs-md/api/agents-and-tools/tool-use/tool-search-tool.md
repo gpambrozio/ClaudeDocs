@@ -32,13 +32,13 @@ There are two tool search variants:
 
 When you enable the tool search tool:
 
-1. You include a tool search tool (e.g., `tool_search_tool_regex_20251119` or `tool_search_tool_bm25_20251119`) in your tools list
-2. You provide all tool definitions with `defer_loading: true` for tools that shouldn't be loaded immediately
-3. Claude sees only the tool search tool and any non-deferred tools initially
-4. When Claude needs additional tools, it searches using a tool search tool
-5. The API returns 3-5 most relevant `tool_reference` blocks
-6. These references are automatically expanded into full tool definitions
-7. Claude selects from the discovered tools and invokes them
+1. You include a tool search tool (for example, `tool_search_tool_regex_20251119` or `tool_search_tool_bm25_20251119`) in your tools list.
+2. You provide all tool definitions with `defer_loading: true` for tools that shouldn't be loaded immediately.
+3. Claude sees only the tool search tool and any non-deferred tools initially.
+4. When Claude needs additional tools, it searches using a tool search tool.
+5. The API returns 3-5 most relevant `tool_reference` blocks.
+6. These references are automatically expanded into full tool definitions.
+7. Claude selects from the discovered tools and calls them.
 
 This keeps your context window efficient while maintaining high tool selection accuracy.
 
@@ -206,10 +206,10 @@ JSON
 
 ### Understanding the response
 
-- **`server_tool_use`:** Indicates Claude is invoking the tool search tool
+- **`server_tool_use`:** Indicates Claude is calling the tool search tool
 - **`tool_search_tool_result`:** Contains the search results with a nested `tool_search_tool_search_result` object
 - **`tool_references`:** Array of `tool_reference` objects pointing to discovered tools
-- **`tool_use`:** Claude invoking the discovered tool
+- **`tool_use`:** Claude calling the discovered tool
 
 The `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.
 
@@ -219,7 +219,7 @@ For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](agents-a
 
 ## Custom tool search implementation
 
-You can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:
+You can implement your own tool search logic (for example, using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:
 
 JSON
 
@@ -233,7 +233,7 @@ JSON
 
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter with `defer_loading: true`. This approach lets you use more sophisticated search algorithms while maintaining compatibility with the tool search system.
 
-The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
+The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
 
 For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/cookbooks/tool_use).
 
@@ -280,7 +280,7 @@ JSON
 
 ```shiki
 {
-  "type": "tool_result",
+  "type": "tool_search_tool_result",
   "tool_use_id": "srvtoolu_01ABC123",
   "content": {
     "type": "tool_search_tool_result_error",
@@ -364,7 +364,7 @@ You can include the tool search tool in the [Messages Batches API](build-with-cl
 
 - Keep 3-5 most frequently used tools as non-deferred
 - Write clear, descriptive tool names and descriptions
-- Use consistent namespacing in tool names: prefix by service or resource (e.g., `github_`, `slack_`) so that search queries naturally surface the right tool group
+- Use consistent namespacing in tool names: prefix by service or resource (for example, `github_`, `slack_`) so that search queries naturally surface the right tool group
 - Use semantic keywords in descriptions that match how users describe tasks
 - Add a system prompt section describing available tool categories: "You can search for tools to interact with Slack, GitHub, and Jira"
 - Monitor which tools Claude discovers to refine descriptions
