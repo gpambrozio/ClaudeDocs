@@ -42,24 +42,29 @@ claude --worktree
 ```
 
 You can also ask Claude to “work in a worktree” during a session, and it will create one with the [`EnterWorktree`](tools-reference.md) tool.
+Before using `--worktree` in a directory for the first time, accept the workspace trust dialog by running `claude` once in that directory. If trust has not yet been accepted, `--worktree` exits with an error and prompts you to run `claude` in the directory first, including when combined with `-p`.
 
 Add `.claude/worktrees/` to your `.gitignore` so worktree contents don’t appear as untracked files in your main checkout.
 
 ### [​](#choose-the-base-branch) Choose the base branch
 
-Worktrees branch from your default branch: `origin/HEAD` if the repository has a remote, otherwise the current local `HEAD`. The `origin/HEAD` reference is stored in your local `.git` directory and was set when you cloned. If the repository’s default branch later changed on the remote, your local `origin/HEAD` still points at the old one. Re-sync it with the remote’s current default:
+Worktrees branch from your repository’s default branch, `origin/HEAD`, so they start from a clean tree matching the remote. If no remote is configured or the fetch fails, the worktree falls back to your current local `HEAD`. To always branch from local `HEAD` instead, set `worktree.baseRef` to `"head"` in [settings](settings.md). Setting `baseRef` to `"head"` makes new worktrees carry your unpushed commits and feature-branch state, which is useful when isolating subagents that need to operate on in-progress work. The setting accepts only `"fresh"` or `"head"`, not arbitrary git refs:
 
 ```shiki
-git remote set-head origin -a
+{
+  "worktree": {
+    "baseRef": "head"
+  }
+}
 ```
 
-To base worktrees off a specific branch instead, set it explicitly:
+To branch from a specific pull request, pass the PR number prefixed with `#`, or a full GitHub pull request URL. Claude Code fetches `pull/<number>/head` from `origin` and creates the worktree at `.claude/worktrees/pr-<number>`:
 
 ```shiki
-git remote set-head origin your-branch-name
+claude --worktree "#1234"
 ```
 
-Both commands update only your local `.git` directory and change nothing on the remote. For per-invocation control over the base, configure a [`WorktreeCreate` hook](hooks.md), which replaces the default `git worktree` logic entirely.
+For full control over how worktrees are created, configure a [`WorktreeCreate` hook](hooks.md), which replaces the default `git worktree` logic entirely.
 
 ## [​](#copy-gitignored-files-into-worktrees) Copy gitignored files into worktrees
 
