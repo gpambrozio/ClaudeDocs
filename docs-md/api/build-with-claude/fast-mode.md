@@ -101,8 +101,8 @@ Output
   "role": "assistant",
 // ...
   "usage": {
-    "input_tokens": 523,
-    "output_tokens": 1842,
+    "input_tokens": 8,
+    "output_tokens": 12,
     "speed": "fast"
   }
 }
@@ -166,6 +166,7 @@ message = create_message_with_fast_fallback(
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](build-with-claude/batch-processing.md).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](api/service-tiers.md).
+- **Claude Platform on AWS:** Fast mode is not available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
 ## Next steps
 

@@ -306,9 +306,16 @@ claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
 ```
 
 To test a plugin that is already packaged as a `.zip` archive and hosted at a URL, such as a CI build artifact, use `--plugin-url` instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same [trust considerations](discover-plugins.md) apply as for any plugin source: only point this flag at archives you control or trust.
+To load multiple plugins, repeat the flag for each URL:
 
 ```shiki
-claude --plugin-url https://example.com/my-plugin.zip
+claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip
+```
+
+Or pass space-separated URLs as one quoted argument:
+
+```shiki
+claude --plugin-url "https://example.com/my-plugin.zip https://example.com/other.zip"
 ```
 
 ### [​](#debug-plugin-issues) Debug plugin issues

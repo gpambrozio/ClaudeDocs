@@ -24,7 +24,7 @@ Programmatic tool calling requires `code_execution_20260120`, which is supported
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) |
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) |
 
-For the full code execution tool version matrix, see the [code execution tool model compatibility table](agents-and-tools/tool-use/code-execution-tool.md). Programmatic tool calling is available via the Claude API and Microsoft Foundry.
+For the full code execution tool version matrix, see the [code execution tool model compatibility table](agents-and-tools/tool-use/code-execution-tool.md). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
 ## Quick start
 
@@ -33,8 +33,6 @@ Here's a simple example where Claude programmatically queries a database multipl
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-import anthropic
-
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -71,7 +69,7 @@ print(response)
 When you configure a tool to be callable from code execution and Claude decides to use that tool:
 
 1. Claude writes Python code that invokes the tool as a function, potentially including multiple tool calls and pre/post-processing logic
-2. Claude runs this code in a sandboxed container via code execution
+2. Claude runs this code in a sandboxed container through code execution
 3. When a tool function is called, code execution pauses and the API returns a `tool_use` block
 4. You provide the tool result, and code execution continues (intermediate results are not loaded into Claude's context window)
 5. Once all code execution completes, Claude receives the final output and continues working on the task
@@ -148,9 +146,9 @@ The `tool_id` references the code execution tool that made the programmatic call
 
 Programmatic tool calling uses the same containers as code execution:
 
-- **Container creation:** A new container is created for each session unless you reuse an existing one
+- **Container creation:** A new container is created for each request unless you reuse an existing one
 - **Expiration:** Containers have a 30-day maximum lifetime and are cleaned up after 4.5 minutes of idle time
-- **Container ID:** Returned in responses via the `container` field
+- **Container ID:** Returned in responses in the `container` field
 - **Reuse:** Pass the container ID to maintain state across requests
 
 When a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the `expires_at` field. If the container expires, Claude may treat the tool call as timed out and retry it.
@@ -165,7 +163,7 @@ Send a request with code execution and a tool that allows programmatic calling. 
 
 Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 
-The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message.
+The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message `"Query customer purchase history from the last quarter and identify our top 5 customers by revenue"`.
 
 ### Step 2: API response with tool call
 
@@ -202,7 +200,7 @@ Output
   ],
   "container": {
     "id": "container_xyz789",
-    "expires_at": "2025-01-15T14:30:00Z"
+    "expires_at": "2026-01-20T14:30:00Z"
   },
   "stop_reason": "tool_use"
 }
@@ -284,7 +282,7 @@ Output
       "tool_use_id": "srvtoolu_abc123",
       "content": {
         "type": "code_execution_result",
-        "stdout": "Top 5 customers by revenue:\n1. Customer C1: $45,000\n2. Customer C2: $38,000\n3. Customer C5: $32,000\n4. Customer C8: $28,500\n5. Customer C3: $24,000",
+        "stdout": "Top 5 customers: [{'customer_id': 'C1', 'revenue': 45000}, {'customer_id': 'C2', 'revenue': 38000}, {'customer_id': 'C5', 'revenue': 32000}, {'customer_id': 'C8', 'revenue': 28500}, {'customer_id': 'C3', 'revenue': 24000}]",
         "stderr": "",
         "return_code": 0,
         "content": []
@@ -423,7 +421,6 @@ When all tool calls are satisfied and code completes:
 | --- | --- | --- |
 | `invalid_tool_input` | Tool input doesn't match schema | Validate your tool's input\_schema |
 | `tool_not_allowed` | Tool doesn't allow the requested caller type | Check `allowed_callers` includes the right contexts |
-| `missing_beta_header` | Required beta header not provided (Bedrock and Vertex AI only; programmatic tool calling is GA on the first-party Claude API) | Add the required beta headers to your request |
 
 ### Container expiration during tool call
 
@@ -468,12 +465,12 @@ Claude's code receives this error and can handle it appropriately.
 ### Feature incompatibilities
 
 - **Structured outputs:** Tools with `strict: true` are not supported with programmatic calling
-- **Tool choice:** You cannot force programmatic calling of a specific tool via `tool_choice`
+- **Tool choice:** You cannot force programmatic calling of a specific tool through `tool_choice`
 - **Parallel tool use:** `disable_parallel_tool_use: true` is not supported with programmatic calling
 
 ### Tool restrictions
 
-The following tools cannot currently be called programmatically, but support may be added in future releases:
+The following tools cannot be called programmatically:
 
 - Tools provided by an [MCP connector](agents-and-tools/mcp-connector.md)
 
@@ -610,7 +607,7 @@ This approach enables workflows that would be impractical with traditional tool 
 
 ## Alternative implementations
 
-Programmatic tool calling is a generalizable pattern that can be implemented outside of Anthropic's managed code execution. Here's an overview of the approaches:
+Programmatic tool calling is a generalizable pattern that can also be implemented on your own infrastructure. Here's how the approaches compare:
 
 ### Client-side direct execution
 
@@ -654,7 +651,7 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 - Easy to enable with minimal configuration
 - Environment and instructions optimized for Claude
 
-Consider using Anthropic's managed solution if you're using the Claude API.
+Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), or [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ## Data retention
 

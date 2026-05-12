@@ -82,6 +82,7 @@ Output
       "text": "Sure, I'd be happy to provide..."
     }
   ],
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

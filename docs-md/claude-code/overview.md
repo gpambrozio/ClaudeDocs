@@ -8,20 +8,6 @@
 
 Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
-TerminalDesktopVS CodeJetBrains
-
-I’m buying for a team or company (SSO, AWS/Azure/GCP, central billing)
-
-macOS / LinuxWindowsHomebrewWinGet
-
-$
-
-curl -fsSL https://claude.ai/install.sh | bash
-
-Copy
-
-[Installation troubleshooting](troubleshoot-install.md)
-
 ## [​](#get-started) Get started
 
 Choose your environment to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_pricing) or [Anthropic Console](https://console.anthropic.com/) account. The Terminal CLI and VS Code also support [third-party providers](third-party-integrations.md).
@@ -140,7 +126,7 @@ Customize with instructions, skills, and hooks
 
 Run agent teams and build custom agents
 
-Spawn [multiple Claude Code agents](sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.For fully custom workflows, the [Agent SDK](agent-sdk/overview.md) lets you build your own agents powered by Claude Code’s tools and capabilities, with full control over orchestration, tool access, and permissions.
+Spawn [multiple Claude Code agents](sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.To run several full sessions in parallel and watch them from one screen, use [background agents](agent-view.md). For fully custom workflows, the [Agent SDK](agent-sdk/overview.md) lets you build your own agents powered by Claude Code’s tools and capabilities, with full control over orchestration, tool access, and permissions.
 
 Pipe, script, and automate with the CLI
 

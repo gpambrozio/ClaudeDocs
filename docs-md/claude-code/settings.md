@@ -160,7 +160,7 @@ The published schema is updated periodically and may not include settings added 
 | `attribution` | Customize attribution for git commits and pull requests. See [Attribution settings](#attribution-settings) | `{"commit": "🤖 Generated with Claude Code", "pr": ""}` |
 | `autoMemoryDirectory` | Custom directory for [auto memory](memory.md) storage. Accepts an absolute path or a `~/`-prefixed path. Accepted from policy and user settings, and from the `--settings` flag. Not accepted from project or local settings, since a cloned repository could supply either file to redirect memory writes to sensitive locations | `"~/my-memory-dir"` |
 | `autoMemoryEnabled` | Enable [auto memory](memory.md). When `false`, Claude does not read from or write to the auto memory directory. Default: `true`. You can also toggle this with `/memory` during a session. To disable via environment variable, set [`CLAUDE_CODE_DISABLE_AUTO_MEMORY`](env-vars.md) in `env` | `false` |
-| `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, and `soft_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Not read from shared project settings | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
+| `autoMode` | Customize what the [auto mode](permission-modes.md) classifier blocks and allows. Contains `environment`, `allow`, `soft_deny`, and `hard_deny` arrays of prose rules. Include the literal string `"$defaults"` in an array to inherit the built-in rules at that position. See [Configure auto mode](auto-mode-config.md). Not read from shared project settings | `{"soft_deny": ["$defaults", "Never run terraform apply"]}` |
 | `autoScrollEnabled` | In [fullscreen rendering](fullscreen.md), follow new output to the bottom of the conversation. Default: `true`. Appears in `/config` as **Auto-scroll**. Permission prompts still scroll into view when this is off | `false` |
 | `autoUpdatesChannel` | Release channel to follow for updates. Use `"stable"` for a version that is typically about one week old and skips versions with major regressions, or `"latest"` (default) for the most recent release. To disable auto-updates entirely, set [`DISABLE_AUTOUPDATER`](setup.md) in `env` | `"stable"` |
 | `availableModels` | Restrict which models users can select via `/model`, `--model`, or `ANTHROPIC_MODEL`. Does not affect the Default option. See [Restrict model selection](model-config.md) | `["sonnet", "haiku"]` |
@@ -169,10 +169,13 @@ The published schema is updated periodically and may not include settings added 
 | `awsCredentialExport` | Custom script that outputs JSON with AWS credentials (see [advanced credential configuration](amazon-bedrock.md)) | `/bin/generate_aws_grant.sh` |
 | `blockedMarketplaces` | (Managed settings only) Blocklist of marketplace sources. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. Blocked sources are checked before downloading, so they never touch the filesystem. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "untrusted/plugins" }]` |
 | `channelsEnabled` | (Managed settings only) Allow [channels](channels.md) for the organization. On claude.ai Team and Enterprise plans, channels are blocked when this is unset or `false`. For [Anthropic Console](authentication.md) accounts using API key authentication, channels are allowed by default unless your organization deploys managed settings, in which case this key must be set to `true` | `true` |
+| `claudeMd` | (Managed settings only) CLAUDE.md-style instructions injected as organization-managed memory. Only honored when set in managed or policy settings and ignored in user, project, and local settings. See [organization-wide CLAUDE.md](memory.md) | `"Always run make lint before committing."` |
+| `claudeMdExcludes` | Glob patterns or absolute paths of `CLAUDE.md` files to skip when loading [memory](memory.md). Patterns match against absolute file paths. Only applies to user, project, and local memory; managed policy files cannot be excluded | `["**/vendor/**/CLAUDE.md"]` |
 | `cleanupPeriodDays` | Session files older than this period are deleted at startup (default: 30 days, minimum 1). Setting to `0` is rejected with a validation error. Also controls the age cutoff for automatic removal of [orphaned subagent worktrees](worktrees.md) at startup. To disable transcript writes entirely, set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable, or in non-interactive mode (`-p`) use the `--no-session-persistence` flag or the `persistSession: false` SDK option. | `20` |
 | `companyAnnouncements` | Announcement to display to users at startup. If multiple announcements are provided, they will be cycled through at random. | `["Welcome to Acme Corp! Review our code guidelines at docs.acme.com"]` |
 | `defaultShell` | Default shell for input-box `!` commands. Accepts `"bash"` (default) or `"powershell"`. Setting `"powershell"` routes interactive `!` commands through PowerShell on Windows. Requires `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`. See [PowerShell tool](tools-reference.md) | `"powershell"` |
 | `deniedMcpServers` | When set in managed-settings.json, denylist of MCP servers that are explicitly blocked. Applies to all scopes including managed servers. Denylist takes precedence over allowlist. See [Managed MCP configuration](mcp.md) | `[{ "serverName": "filesystem" }]` |
+| `disableAgentView` | Set to `true` to turn off [background agents and agent view](agent-view.md): `claude agents`, `--bg`, `/background`, and the on-demand supervisor. Typically set in [managed settings](permissions.md). Equivalent to setting `CLAUDE_CODE_DISABLE_AGENT_VIEW` to `1` | `true` |
 | `disableAllHooks` | Disable all [hooks](hooks.md) and any custom [status line](statusline.md) | `true` |
 | `disableAutoMode` | Set to `"disable"` to prevent [auto mode](permission-modes.md) from being activated. Removes `auto` from the `Shift+Tab` cycle and rejects `--permission-mode auto` at startup. Most useful in [managed settings](permissions.md) where users cannot override it | `"disable"` |
 | `disableDeepLinkRegistration` | Set to `"disable"` to prevent Claude Code from registering the `claude-cli://` protocol handler with the operating system on startup. [Deep links](deep-links.md) let external tools open a Claude Code session with a pre-filled prompt. Useful in environments where protocol handler registration is restricted or managed separately | `"disable"` |
@@ -190,19 +193,23 @@ The published schema is updated periodically and may not include settings added 
 | `forceLoginMethod` | Use `claudeai` to restrict login to Claude.ai accounts, `console` to restrict login to Claude Console (API usage billing) accounts | `claudeai` |
 | `forceLoginOrgUUID` | Require login to belong to a specific organization. Accepts a single UUID string, which also pre-selects that organization during login, or an array of UUIDs where any listed organization is accepted without pre-selection. When set in managed settings, login fails if the authenticated account does not belong to a listed organization; an empty array fails closed and blocks login with a misconfiguration message | `"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` or `["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy"]` |
 | `forceRemoteSettingsRefresh` | (Managed settings only) Block CLI startup until remote managed settings are freshly fetched from the server. If the fetch fails, the CLI exits rather than continuing with cached or no settings. When not set, startup continues without waiting for remote settings. See [fail-closed enforcement](server-managed-settings.md) | `true` |
+| `gcpAuthRefresh` | Custom script that refreshes GCP Application Default Credentials when they expire or cannot be loaded. See [advanced credential configuration](google-vertex-ai.md) | `gcloud auth application-default login` |
 | `hooks` | Configure custom commands to run at lifecycle events. See [hooks documentation](hooks.md) for format | See [hooks](hooks.md) |
 | `httpHookAllowedEnvVars` | Allowlist of environment variable names HTTP hooks may interpolate into headers. When set, each hook’s effective `allowedEnvVars` is the intersection with this list. Undefined = no restriction. Arrays merge across settings sources. See [Hook configuration](#hook-configuration) | `["MY_TOKEN", "HOOK_SECRET"]` |
 | `includeCoAuthoredBy` | **Deprecated**: Use `attribution` instead. Whether to include the `co-authored-by Claude` byline in git commits and pull requests (default: `true`) | `false` |
 | `includeGitInstructions` | Include built-in commit and PR workflow instructions and the git status snapshot in Claude’s system prompt (default: `true`). Set to `false` to remove both, for example when using your own git workflow skills. The `CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS` environment variable takes precedence over this setting when set | `false` |
 | `language` | Configure Claude’s preferred response language (e.g., `"japanese"`, `"spanish"`, `"french"`). Claude will respond in this language by default. Also sets the [voice dictation](voice-dictation.md) language | `"japanese"` |
+| `maxSkillDescriptionChars` | Per-skill character cap on the combined `description` and `when_to_use` text in the [skill listing](skills.md) Claude sees each turn (default: `1536`). Text longer than this is truncated. Raise to keep long descriptions intact at the cost of more context per turn; lower to fit more skills under [`skillListingBudgetFraction`](#available-settings). Requires Claude Code v2.1.105 or later | `2048` |
 | `minimumVersion` | Floor that prevents background auto-updates and `claude update` from installing a version below this one. Switching from the `"latest"` channel to `"stable"` via `/config` prompts you to stay on the current version or allow the downgrade. Choosing to stay sets this value. Also useful in [managed settings](permissions.md) to pin an organization-wide minimum | `"2.1.100"` |
 | `model` | Override the default model to use for Claude Code. `--model` and [`ANTHROPIC_MODEL`](model-config.md) override this for one session | `"claude-sonnet-4-6"` |
 | `modelOverrides` | Map Anthropic model IDs to provider-specific model IDs such as Bedrock inference profile ARNs. Each model picker entry uses its mapped value when calling the provider API. See [Override model IDs per version](model-config.md) | `{"claude-opus-4-6": "arn:aws:bedrock:..."}` |
 | `otelHeadersHelper` | Script to generate dynamic OpenTelemetry headers. Runs at startup and periodically. Set the refresh interval with [`CLAUDE_CODE_OTEL_HEADERS_HELPER_DEBOUNCE_MS`](env-vars.md). See [Dynamic headers](monitoring-usage.md) | `/bin/generate_otel_headers.sh` |
 | `outputStyle` | Configure an output style to adjust the system prompt. See [output styles documentation](output-styles.md) | `"Explanatory"` |
+| `parentSettingsBehavior` | (Managed settings only) Controls whether managed settings supplied programmatically by an embedding host process, such as the Agent SDK or an IDE extension, apply when an admin-deployed managed tier is also present. `"first-wins"`: the parent-supplied settings are dropped and only the admin tier applies. `"merge"`: the parent-supplied settings apply under the admin tier, filtered so they can tighten policy but not loosen it. Has no effect when no admin tier is deployed. Default: `"first-wins"`. Requires Claude Code v2.1.133 or later | `"merge"` |
 | `permissions` | See table below for structure of permissions. |  |
 | `plansDirectory` | Customize where plan files are stored. Path is relative to project root. Default: `~/.claude/plans` | `"./plans"` |
 | `pluginTrustMessage` | (Managed settings only) Custom message appended to the plugin trust warning shown before installation. Use this to add organization-specific context, for example to confirm that plugins from your internal marketplace are vetted. | `"All plugins from our marketplace are approved by IT"` |
+| `policyHelper` | Admin-deployed executable that computes managed settings dynamically at startup. Only honored from MDM or a system `managed-settings.json` file. See [Compute managed settings with a policy helper](#compute-managed-settings-with-a-policy-helper). Requires Claude Code v2.1.136 or later | `{"path": "/usr/local/bin/claude-policy"}` |
 | `preferredNotifChannel` | Method for task-complete and permission-prompt notifications: `"auto"`, `"terminal_bell"`, `"iterm2"`, `"iterm2_with_bell"`, `"kitty"`, `"ghostty"`, or `"notifications_disabled"`. Default: `"auto"`, which sends a desktop notification in iTerm2, Ghostty, and Kitty and does nothing in other terminals. Set `"terminal_bell"` to ring the bell character in any terminal. Appears in `/config` as **Notifications**. See [Get a terminal bell or notification](terminal-config.md) | `"terminal_bell"` |
 | `prefersReducedMotion` | Reduce or disable UI animations (spinners, shimmer, flash effects) for accessibility | `true` |
 | `prUrlTemplate` | URL template for the PR badge shown in the footer and in tool-result summaries. Substitutes `{host}`, `{owner}`, `{repo}`, `{number}`, and `{url}` from the `gh`-reported PR URL. Use to point PR links at an internal code-review tool instead of `github.com`. Does not affect `#123` autolinks in Claude’s prose | `"https://reviews.example.com/{owner}/{repo}/pull/{number}"` |
@@ -210,6 +217,7 @@ The published schema is updated periodically and may not include settings added 
 | `showClearContextOnPlanAccept` | Show the “clear context” option on the plan accept screen. Defaults to `false`. Set to `true` to restore the option | `true` |
 | `showThinkingSummaries` | Show [extended thinking](model-config.md) summaries in interactive sessions. When unset or `false` (default in interactive mode), thinking blocks are redacted by the API and shown as a collapsed stub. Redaction only changes what you see, not what the model generates: to reduce thinking spend, [lower the budget or disable thinking](model-config.md) instead. Non-interactive mode (`-p`) and SDK callers always receive summaries regardless of this setting | `true` |
 | `showTurnDuration` | Show turn duration messages after responses, e.g. “Cooked for 1m 6s”. Default: `true`. Appears in `/config` as **Show turn duration** | `false` |
+| `skillListingBudgetFraction` | Fraction of the model’s context window reserved for the [skill listing](skills.md) Claude sees each turn (default: `0.01` = 1%). When the listing exceeds the budget, descriptions for the least-used skills are collapsed to bare names so Claude can still invoke them but won’t see why. Raise to keep more descriptions visible at the cost of more context per turn. `/doctor` shows the current truncation count and which skills are affected. Requires Claude Code v2.1.105 or later | `0.02` |
 | `skillOverrides` | Per-skill visibility overrides keyed by skill name. Value is `"on"`, `"name-only"`, `"user-invocable-only"`, or `"off"`. Lets you hide or collapse a skill without editing its SKILL.md. Does not apply to plugin skills, which are managed through `/plugin`. The `/skills` menu writes these to `.claude/settings.local.json`. See [Override skill visibility from settings](skills.md). Requires Claude Code v2.1.129 or later | `{"legacy-context": "name-only", "deploy": "off"}` |
 | `skipWebFetchPreflight` | Skip the [WebFetch domain safety check](data-usage.md) that sends each requested hostname to `api.anthropic.com` before fetching. Set to `true` in environments that block traffic to Anthropic, such as Bedrock, Vertex AI, or Foundry deployments with restrictive egress. When skipped, WebFetch attempts any URL without consulting the blocklist | `true` |
 | `spinnerTipsEnabled` | Show tips in the spinner while Claude is working. Set to `false` to disable tips (default: `true`) | `false` |
@@ -218,6 +226,7 @@ The published schema is updated periodically and may not include settings added 
 | `sshConfigs` | SSH connections to show in the [Desktop](desktop.md) environment dropdown. Each entry requires `id`, `name`, and `sshHost`; `sshPort`, `sshIdentityFile`, and `startDirectory` are optional. When set in managed settings, connections are read-only for users. Read from managed and user settings only | `[{"id": "dev-vm", "name": "Dev VM", "sshHost": "user@dev.example.com"}]` |
 | `statusLine` | Configure a custom status line to display context. See [`statusLine` documentation](statusline.md) | `{"type": "command", "command": "~/.claude/statusline.sh"}` |
 | `strictKnownMarketplaces` | (Managed settings only) Allowlist of plugin marketplace sources. Undefined = no restrictions, empty array = lockdown. Enforced on marketplace add and on plugin install, update, refresh, and auto-update, so a marketplace added before the policy was set cannot be used to fetch plugins. See [Managed marketplace restrictions](plugin-marketplaces.md) | `[{ "source": "github", "repo": "acme-corp/plugins" }]` |
+| `syntaxHighlightingDisabled` | Disable syntax highlighting in diffs, code blocks, and file previews | `true` |
 | `teammateMode` | How [agent team](agent-teams.md) teammates display: `auto` (picks split panes in tmux or iTerm2, in-process otherwise), `in-process`, or `tmux`. `--teammate-mode` overrides this for one session. See [choose a display mode](agent-teams.md) | `"in-process"` |
 | `terminalProgressBarEnabled` | Show the terminal progress bar in supported terminals: ConEmu, Ghostty 1.2.0+, and iTerm2 3.6.6+. Default: `true`. Appears in `/config` as **Terminal progress bar** | `false` |
 | `tui` | Terminal UI renderer. Use `"fullscreen"` for the flicker-free [alt-screen renderer](fullscreen.md) with virtualized scrollback. Use `"default"` for the classic main-screen renderer. Set via `/tui`. You can also set the [`CLAUDE_CODE_NO_FLICKER`](env-vars.md) environment variable | `"fullscreen"` |
@@ -241,10 +250,11 @@ Versions before v2.1.119 also store `autoScrollEnabled`, `editorMode`, `showTurn
 
 ### [​](#worktree-settings) Worktree settings
 
-Configure how `--worktree` creates and manages git worktrees. Use these settings to reduce disk usage and startup time in large monorepos.
+Configure how `--worktree` creates and manages git worktrees.
 
 | Key | Description | Example |
 | --- | --- | --- |
+| `worktree.baseRef` | Which ref new worktrees branch from. `"fresh"` (default) branches from `origin/<default-branch>` for a clean tree matching the remote. `"head"` branches from your current local `HEAD`, so unpushed commits and feature-branch state are present in the worktree. Applies to `--worktree`, the `EnterWorktree` tool, and subagent isolation | `"head"` |
 | `worktree.symlinkDirectories` | Directories to symlink from the main repository into each worktree to avoid duplicating large directories on disk. No directories are symlinked by default | `["node_modules", ".cache"]` |
 | `worktree.sparsePaths` | Directories to check out in each worktree via git sparse-checkout (cone mode). Only the listed paths are written to disk, which is faster in large monorepos | `["packages/my-app", "shared/utils"]` |
 
@@ -303,6 +313,8 @@ Configure advanced sandboxing behavior. Sandboxing isolates bash commands from y
 | `network.socksProxyPort` | SOCKS5 proxy port used if you wish to bring your own proxy. If not specified, Claude will run its own proxy. | `8081` |
 | `enableWeakerNestedSandbox` | Enable weaker sandbox for unprivileged Docker environments (Linux and WSL2 only). **Reduces security.** Default: false | `true` |
 | `enableWeakerNetworkIsolation` | (macOS only) Allow access to the system TLS trust service (`com.apple.trustd.agent`) in the sandbox. Required for Go-based tools like `gh`, `gcloud`, and `terraform` to verify TLS certificates when using `httpProxyPort` with a MITM proxy and custom CA. **Reduces security** by opening a potential data exfiltration path. Default: false | `true` |
+| `bwrapPath` | (Managed settings only, Linux/WSL2) Absolute path to the bubblewrap (`bwrap`) binary. Overrides automatic detection via `PATH`. Only honored from [managed settings](settings.md), not from user or project settings. Useful when `bwrap` is installed at a non-standard location in managed environments. | `/opt/admin/bwrap` |
+| `socatPath` | (Managed settings only, Linux/WSL2) Absolute path to the `socat` binary used for the sandbox network proxy. Overrides automatic detection via `PATH`. Only honored from managed settings. | `/opt/admin/socat` |
 
 #### [​](#sandbox-path-prefixes) Sandbox path prefixes
 
@@ -444,6 +456,31 @@ Limit which environment variable names HTTP hooks can interpolate into header va
   "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"]
 }
 ```
+
+### [​](#compute-managed-settings-with-a-policy-helper) Compute managed settings with a policy helper
+
+The `policyHelper` setting points at an executable that computes managed settings at startup, so admins can derive policy from device posture, identity, or a remote service instead of a static file. Configure it from MDM or a system `managed-settings.json` file. Claude Code ignores `policyHelper` when it appears in any other scope, including user settings, project settings, the HKCU registry hive, and [server-managed settings](server-managed-settings.md).
+The setting accepts these keys:
+
+| Key | Type | Description |
+| --- | --- | --- |
+| `path` | string | Absolute path to the helper executable |
+| `timeoutMs` | number | How long to wait for the helper before treating the run as failed |
+| `refreshIntervalMs` | number | How often to re-run the helper in the background. Set to `0` to disable refresh, or to at least `60000` |
+
+The helper writes a JSON envelope to stdout. Put the settings under a `managedSettings` key rather than at the top level, since a bare settings object parses with `managedSettings` undefined and applies nothing:
+
+```shiki
+{
+  "managedSettings": {
+    "permissions": { "deny": ["Read(//etc/secrets/**)"] }
+  },
+  "claudeMd": "# Organization context\n...",
+  "appendSystemPrompt": "Always cite the internal style guide."
+}
+```
+
+When the helper emits `managedSettings`, that object replaces the file-based managed settings for the run. When the helper exits non-zero at startup, Claude Code prints the error and refuses to start, so a helper that needs outage resilience should serve from its own cache and exit `0`.
 
 ### [​](#settings-precedence) Settings precedence
 

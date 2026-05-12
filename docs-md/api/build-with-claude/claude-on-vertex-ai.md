@@ -9,7 +9,7 @@ The Vertex API for accessing Claude is nearly-identical to the [Messages API](ap
 
 Vertex is also supported by Anthropic's official [client SDKs](api/client-sdks.md). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
-Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
+Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Vertex AI
 
@@ -51,7 +51,7 @@ pip install -U google-cloud-aiplatform "anthropic[vertex]"
 
 ### Model availability
 
-Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
+Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
 
 #### API model IDs
 
@@ -100,7 +100,7 @@ print(message)
 
 See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
-Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
 ## Activity logging
 
@@ -189,7 +189,7 @@ print(message)
 
 Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
-PythonTypeScriptC#GoJavaPHPRuby
+CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 from anthropic import AnthropicVertex
@@ -239,14 +239,14 @@ message = client.messages.create(
 print(message)
 ```
 
-Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+Claude Mythos Preview is a research preview available to invited customers on Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 
-### Additional resources
+## Additional resources
 
-- **Google Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
+- **Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 - **Claude models documentation:** [Claude on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude)
 - **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
-- **Anthropic pricing details:** [Pricing documentation](about-claude/pricing.md)
+- **Anthropic pricing details:** [Cloud platform pricing](about-claude/pricing.md)
 
 Was this page helpful?
 

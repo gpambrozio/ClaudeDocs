@@ -73,7 +73,7 @@ When handling `pause_turn`:
 
 ## ZDR and allowed\_callers
 
-The basic versions of web search (`web_search_20250305`) and web fetch (`web_fetch_20250910`) are eligible for [Zero Data Retention (ZDR)](build-with-claude/zero-data-retention.md).
+The basic versions of web search (`web_search_20250305`) and web fetch (`web_fetch_20250910`) are eligible for [Zero Data Retention (ZDR)](manage-claude/api-and-data-retention.md).
 
 The `_20260209` versions with dynamic filtering are **not** ZDR-eligible by default because dynamic filtering relies on code execution internally.
 
@@ -89,7 +89,7 @@ To use a `_20260209` server tool with ZDR, disable dynamic filtering by setting 
 
 This restricts the tool to direct invocation only, bypassing the internal code execution step.
 
-While the web fetch tool itself is ZDR-eligible, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
+Even when web fetch is used in a ZDR-eligible configuration, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
 
 ## Domain filtering
 
@@ -111,7 +111,7 @@ When using domain filters:
 
 Invalid domain formats return an `invalid_tool_input` tool error.
 
-Request-level domain restrictions must be compatible with organization-level domain restrictions configured in the Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API returns a validation error.
+Request-level domain restrictions must be compatible with organization-level domain restrictions configured in Claude Console. Request-level domains can only further restrict domains, not override or expand beyond the organization-level list. If your request includes domains that conflict with organization settings, the API returns a validation error.
 
 Be aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.
 

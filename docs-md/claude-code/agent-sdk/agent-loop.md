@@ -182,7 +182,7 @@ Here’s how each component affects context in the SDK:
 | --- | --- | --- |
 | **System prompt** | Every request | Small fixed cost, always present |
 | **CLAUDE.md files** | Session start, via [`settingSources`](agent-sdk/claude-code-features.md) | Full content in every request (but prompt-cached, so only the first request pays full cost) |
-| **Tool definitions** | Every request | Each tool adds its schema; use [MCP tool search](agent-sdk/mcp.md) to load tools on-demand instead of all at once |
+| **Tool definitions** | Every request; MCP schemas deferred by default | Built-in tool schemas load every request. [Tool search](agent-sdk/mcp.md) defers MCP tool schemas by default, falling back to upfront loading on Vertex AI or a non-first-party `ANTHROPIC_BASE_URL`. See [Configure tool search](agent-sdk/tool-search.md) for the full matrix |
 | **Conversation history** | Accumulates over turns | Grows with each turn: prompts, responses, tool inputs, tool outputs |
 | **Skill descriptions** | Session start, via setting sources | Short summaries; full content loads only when invoked |
 
@@ -219,8 +219,8 @@ When summarizing this conversation, always preserve:
 A few strategies for long-running agents:
 
 - **Use subagents for subtasks.** Each subagent starts with a fresh conversation (no prior message history, though it does load its own system prompt and project-level context like CLAUDE.md). It does not see the parent’s turns, and only its final response returns to the parent as a tool result. The main agent’s context grows by that summary, not by the full subtask transcript. See [What subagents inherit](agent-sdk/subagents.md) for details.
-- **Be selective with tools.** Every tool definition takes context space. Use the `tools` field on [`AgentDefinition`](agent-sdk/subagents.md) to scope subagents to the minimum set they need, and use [MCP tool search](agent-sdk/mcp.md) to load tools on demand instead of preloading all of them.
-- **Watch MCP server costs.** Each MCP server adds all its tool schemas to every request. A few servers with many tools can consume significant context before the agent does any work. The `ToolSearch` tool can help by loading tools on-demand instead of preloading all of them. See [MCP tool search](agent-sdk/mcp.md) for configuration.
+- **Be selective with tools.** Every tool definition takes context space. Use the `tools` field on [`AgentDefinition`](agent-sdk/subagents.md) to scope subagents to the minimum set they need.
+- **Watch MCP server costs.** [MCP tool search](agent-sdk/mcp.md) defers MCP tool schemas by default and loads them on demand. When tool search is off, on Vertex AI, or behind a non-first-party `ANTHROPIC_BASE_URL`, each MCP server adds all its tool schemas to every request, so a few servers with many tools can consume significant context before the agent does any work.
 - **Use lower effort for routine tasks.** Set [effort](#effort-level) to `"low"` for agents that only need to read files or list directories. This reduces token usage and cost.
 
 For a detailed breakdown of per-feature context costs, see [Understand context costs](features-overview.md).

@@ -20,7 +20,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 VAULT_ID=$(ant beta:vaults create \
   --display-name "Alice" \
   --metadata '{external_user_id: usr_abc123}' \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ```
 
 The response is the full vault record:
@@ -63,7 +63,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 CREDENTIAL_ID=$(ant beta:vaults:credentials create \
   --vault-id "$VAULT_ID" \
   --display-name "Alice's Slack" \
-  --transform id --format yaml <<'EOF'
+  --transform id --raw-output <<'EOF'
 auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp

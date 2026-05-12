@@ -37,7 +37,7 @@ YAML
 
 ### MCP toolset permissions
 
-MCP toolsets default to `always_ask`. This ensures that new tools that are added to an MCP server do not execute in your application without approval. To auto-approve tools from a trusted MCP server, set `permission_policy` on the `mcp_toolset` entry.
+MCP toolsets default to `always_ask`. This ensures that new tools that are added to an MCP server do not execute in your application without approval. To auto-approve tools from a trusted MCP server, set `default_config.permission_policy` on the `mcp_toolset` entry.
 
 The `mcp_server_name` must match the `name` referenced in the `mcp_servers` array.
 
@@ -70,20 +70,17 @@ Use the `configs` array to override the default for individual tools. This examp
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-tools = [
-    {
-        "type": "agent_toolset_20260401",
-        "default_config": {
-            "permission_policy": {"type": "always_allow"},
-        },
-        "configs": [
-            {
-                "name": "bash",
-                "permission_policy": {"type": "always_ask"},
-            },
-        ],
-    },
-]
+tools=$(cat <<'YAML'
+- type: agent_toolset_20260401
+  default_config:
+    permission_policy:
+      type: always_allow
+  configs:
+    - name: bash
+      permission_policy:
+        type: always_ask
+YAML
+)
 ```
 
 ## Respond to confirmation requests
@@ -91,39 +88,25 @@ tools = [
 When the agent invokes a tool with an `always_ask` policy:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
-3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
+2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
+3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` parameter. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-Learn more about event handling in the [session event stream](managed-agents/events-and-streaming.md) guide.
+Learn more about event handling in the [Session event stream](managed-agents/events-and-streaming.md) guide.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Allow the tool to execute
-client.beta.sessions.events.send(
-    session.id,
-    events=[
-        {
-            "type": "user.tool_confirmation",
-            "tool_use_id": agent_tool_use_event.id,
-            "result": "allow",
-        },
-    ],
-)
+ant beta:sessions:events send \
+  --session-id "$SESSION_ID" \
+  --event "{type: user.tool_confirmation, tool_use_id: $AGENT_TOOL_USE_EVENT_ID, result: allow}"
 
 # Or deny it with an explanation
-client.beta.sessions.events.send(
-    session.id,
-    events=[
-        {
-            "type": "user.tool_confirmation",
-            "tool_use_id": mcp_tool_use_event.id,
-            "result": "deny",
-            "deny_message": "Don't create issues in the production project. Use the staging project.",
-        },
-    ],
-)
+ant beta:sessions:events send \
+  --session-id "$SESSION_ID" \
+  --event "{type: user.tool_confirmation, tool_use_id: $MCP_TOOL_USE_EVENT_ID, result: deny,
+    deny_message: Don't create issues in the production project. Use the staging project.}"
 ```
 
 ## Custom tools

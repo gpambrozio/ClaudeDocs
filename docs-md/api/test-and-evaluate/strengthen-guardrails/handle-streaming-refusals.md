@@ -59,7 +59,7 @@ try:
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
-            if hasattr(event, "type") and event.type == "message_delta":
+            if event.type == "message_delta":
                 if event.delta.stop_reason == "refusal":
                     reset_conversation()
                     break

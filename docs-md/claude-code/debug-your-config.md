@@ -23,6 +23,7 @@ For detail on a specific category, follow up with the dedicated command:
 | `/mcp` | Connected MCP servers and their status |
 | `/permissions` | Resolved allow and deny rules currently in effect |
 | `/doctor` | Configuration diagnostics: invalid keys, schema errors, installation health |
+| `/debug [issue]` | Enables debug logging for the session and prompts Claude to diagnose using the log output and settings paths |
 | `/status` | Active settings sources, including whether managed settings are in effect |
 
 If a memory file is missing from `/memory`, check its location against [how CLAUDE.md files load](memory.md). Subdirectory `CLAUDE.md` files load on demand when Claude reads a file in that directory with the Read tool, not at session start.
@@ -34,7 +35,8 @@ CLAUDE.md and permissions solve different problems. CLAUDE.md tells Claude how y
 ## [​](#check-resolved-settings) Check resolved settings
 
 Settings merge across managed, user, project, and local scopes. Managed settings always win when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or [environment variables](env-vars.md), which act as another override layer. When a setting doesn’t seem to apply, the value you set is usually being overridden by another scope or an environment variable.
-Run `/doctor` to validate your configuration files and surface invalid keys or schema errors. Run `/status` to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see [How scopes interact](settings.md).
+Run `/doctor` to validate your configuration files and surface invalid keys or schema errors. When `/doctor` reports issues, press `f` to send the diagnostic report to Claude and have it walk through fixes with you.
+Run `/status` to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see [How scopes interact](settings.md).
 
 ## [​](#check-mcp-servers) Check MCP servers
 
@@ -53,7 +55,23 @@ If the hook appears but doesn’t fire, the matcher is the usual cause. The `mat
 Edits to `settings.json` take effect in the running session after a brief file-stability delay. You don’t need to restart. If `/hooks` still shows the old definition a few seconds after saving, run `/hooks` again to refresh the view.
 If `/hooks` shows the hook but it still does not fire, the next step is to watch hook evaluation live. Start a session with `claude --debug hooks` and trigger the tool call. The debug log records each event, which matchers were checked, and the hook’s exit code and output. See [Debug hooks](hooks.md) for the log format and [hooks troubleshooting](hooks-guide.md) for common failure patterns.
 
-## [​](#common-causes) Common causes
+## [​](#test-against-a-clean-configuration) Test against a clean configuration
+
+If targeted checks don’t isolate the cause, or your configuration is in an unknown state, compare against a session that loads nothing from your usual setup. Point [`CLAUDE_CONFIG_DIR`](env-vars.md) at an empty directory to bypass everything under `~/.claude`, and launch from a directory that has no `.claude` folder, `.mcp.json`, or `CLAUDE.md` so project configuration is also skipped.
+
+```shiki
+cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude
+```
+
+The clean session has no user or project settings, hooks, MCP servers, plugins, or memory.
+
+- Managed settings still apply if your organization deploys them, since they live at a system path outside `~/.claude`
+- On Linux and Windows, you’ll be prompted to log in again because credentials are stored under the configuration directory
+- On macOS, credentials are in the Keychain and carry over to the clean session
+
+If the problem disappears here, the cause is somewhere in your real `~/.claude` or project `.claude` files. Reintroduce them one at a time, by copying files into the temporary directory or by launching from your project, to find which one. If it persists in the clean session, the cause is outside your user and project configuration. Run `/status` to check whether managed settings are in effect, look for [environment variables](env-vars.md) that affect Claude Code, then see [Troubleshooting](troubleshooting.md).
+
+## [​](#check-common-causes) Check common causes
 
 Most configuration surprises trace back to a small set of location and syntax rules. Check these before assuming a bug:
 
@@ -61,7 +79,7 @@ Most configuration surprises trace back to a small set of location and syntax ru
 | --- | --- | --- |
 | Hook never fires | `matcher` is a JSON array instead of a string | Use a single string with `|` to match multiple tools, for example `"Edit|Write"`. See [matcher patterns](hooks.md). |
 | Hook never fires | `matcher` value is lowercase, for example `"bash"` | Matching is case-sensitive. Tool names are capitalized: `Bash`, `Edit`, `Write`, `Read`. |
-| Hook never fires | Hooks are in a standalone `.claude/hooks.json` file | There is no standalone hooks file. Define hooks under the `"hooks"` key in `settings.json`. See [hook configuration](hooks.md). |
+| Hook never fires | Hooks are defined in a standalone file instead of `settings.json` | There is no standalone hooks file for project or user config. Define hooks under the `"hooks"` key in `settings.json`. Only [plugins](plugins-reference.md) load a separate `hooks/hooks.json`. See [hook configuration](hooks.md). |
 | Permissions, hooks, or env set globally are ignored | Configuration was added to `~/.claude.json` | `~/.claude.json` holds app state and UI toggles. `permissions`, `hooks`, and `env` belong in `~/.claude/settings.json`. These are two different files. |
 | A `settings.json` value seems ignored | The same key is set in `settings.local.json` | `settings.local.json` overrides `settings.json`, and both override `~/.claude/settings.json`. See [settings precedence](settings.md). |
 | Skill doesn’t appear in `/skills` | Skill file is at `.claude/skills/name.md` instead of in a folder | Use a folder with `SKILL.md` inside: `.claude/skills/name/SKILL.md`. |
@@ -70,6 +88,7 @@ Most configuration surprises trace back to a small set of location and syntax ru
 | Subagent ignores `CLAUDE.md` instructions | Subagents don’t always inherit project memory | Put critical rules in the agent file body, which becomes the subagent’s system prompt. See [subagent configuration](sub-agents.md). |
 | Cleanup logic never runs at session end | No `SessionEnd` hook configured | Add a `SessionEnd` hook in `settings.json`. See the [hook events list](hooks.md). |
 | MCP servers in `.mcp.json` never load | File is under `.claude/` or uses Claude Desktop’s config format | Project MCP config goes at the repository root as `.mcp.json`, not inside `.claude/`. See [MCP configuration](mcp.md). |
+| MCP servers added under `mcpServers` in `settings.json` never appear | `settings.json` does not read an `mcpServers` key | Define project servers in `.mcp.json` at the repository root, or run `claude mcp add --scope user` for user-scoped servers. See [MCP configuration](mcp.md). |
 | Project MCP server added but doesn’t appear | The one-time approval prompt was dismissed | Project-scoped servers require approval. Run `/mcp` to see status and approve. |
 | MCP server fails to start from some directories | `command` or `args` uses a relative file path | Use absolute paths for local scripts. Executables on your `PATH` like `npx` or `uvx` work as-is. |
 | MCP server starts without expected environment variables | Variables are in `settings.json` `env`, which doesn’t propagate to MCP child processes | Set per-server `env` inside `.mcp.json` instead. |

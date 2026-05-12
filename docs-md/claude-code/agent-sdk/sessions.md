@@ -126,7 +126,7 @@ for await (const message of query({
 }
 ```
 
-There’s also a [V2 preview](agent-sdk/typescript-v2-preview.md) of the TypeScript SDK that provides `createSession()` with a `send` / `stream` pattern, closer to Python’s `ClaudeSDKClient` in feel. V2 is unstable and its APIs may change; the rest of this documentation uses the stable V1 `query()` function.
+The experimental [V2 session API](agent-sdk/typescript-v2-preview.md), which provided `createSession()` with a `send` / `stream` pattern, is deprecated. Use the V1 `query()` function and the session options described on this page instead.
 
 ## [​](#use-session-options-with-query) Use session options with `query()`
 

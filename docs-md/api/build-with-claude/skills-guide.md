@@ -288,7 +288,9 @@ response = client.beta.messages.create(
 
 ### Creating a Skill
 
-Upload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.
+A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md) to author one, and the **Requirements** list following the examples for the full constraints.
+
+Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects; the Python SDK additionally provides a `files_from_dir` helper that accepts a directory path.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -355,8 +357,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 # Step 1: Delete all versions
 ant beta:skills:versions list \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
-  --transform version --format yaml \
-  | tr -d '"' \
+  --transform version --raw-output \
   | while read -r VERSION; do
       ant beta:skills:versions delete \
         --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
@@ -374,7 +375,7 @@ Attempting to delete a Skill with existing versions returns a 400 error.
 
 Skills support versioning to manage updates safely:
 
-**Anthropic-Managed Skills:**
+**Anthropic Skills:**
 
 - Versions use date format: `20251013`
 - New versions released as updates are made
@@ -393,7 +394,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 VERSION_NUMBER=$(ant beta:skills:versions create \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv \
   --file updated_skill/SKILL.md \
-  --transform version --format yaml)
+  --transform version --raw-output)
 
 # Use specific version
 ant beta:messages create \
@@ -527,35 +528,36 @@ response = client.beta.messages.create(
     ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
+print(response)
 ```
 
 ---
 
-## Limits and Constraints
+## Limits and constraints
 
-### Request Limits
+### Request limits
 
 - **Maximum Skills per request:** 8
 - **Maximum Skill upload size:** 30 MB (all files combined)
 - **YAML frontmatter requirements:**
-  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words
+  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
 
-### Environment Constraints
+### Environment constraints
 
 Skills run in the code execution container with these limitations:
 
-- **No network access** - Cannot make external API calls
-- **No runtime package installation** - Only pre-installed packages available
-- **Isolated environment** - Each request gets a fresh container
+- **No network access:** Cannot make external API calls
+- **No runtime package installation:** Only pre-installed packages available
+- **Isolated environment:** Containers are isolated; a fresh container is created unless you specify an existing container ID
 
-See the [code execution tool documentation](agents-and-tools/tool-use/code-execution-tool.md) for available packages.
+See [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) for available packages.
 
 ---
 
-## Best Practices
+## Best practices
 
-### When to Use Multiple Skills
+### When to use multiple Skills
 
 Combine Skills when tasks involve multiple document types or domains:
 

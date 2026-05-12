@@ -28,7 +28,7 @@ AGENT_ID=$(ant beta:agents create \
   --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ```
 
 The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](managed-agents/permission-policies.md) to configure this behavior.

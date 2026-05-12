@@ -9,7 +9,7 @@
 While working on a task, Claude sometimes needs to check in with users. It might need permission before deleting files, or need to ask which database to use for a new project. Your application needs to surface these requests to users so Claude can continue with their input.
 Claude requests user input in two situations: when it needs **permission to use a tool** (like deleting files or running commands), and when it has **clarifying questions** (via the `AskUserQuestion` tool). Both trigger your `canUseTool` callback, which pauses execution until you return a response. This is different from normal conversation turns where Claude finishes and waits for your next message.
 For clarifying questions, Claude generates the questions and options. Your role is to present them to users and return their selections. You can’t add your own questions to this flow; if you need to ask users something yourself, do that separately in your application logic.
-The callback can stay pending indefinitely. Execution remains paused until your callback returns, and the SDK only cancels the wait when the query itself is cancelled. If a user might take longer to respond than your process can reasonably stay running, the TypeScript SDK supports the [`defer` hook decision](hooks.md), which lets the process exit and resume later from the persisted session; this option is not available in the Python SDK.
+The callback can stay pending indefinitely. Execution remains paused until your callback returns, and the SDK only cancels the wait when the query itself is cancelled. If a user might take longer to respond than your process can reasonably stay running, return the [`defer` hook decision](hooks.md), which lets the process exit and resume later from the persisted session.
 This guide shows you how to detect each type of request and respond appropriately.
 
 ## [​](#detect-when-claude-needs-input) Detect when Claude needs input
@@ -332,7 +332,7 @@ Build the `answers` object as a record where each key is the `question` text and
 | `question` field (e.g., `"How should I format the output?"`) | Key |
 | Selected option’s `label` field (e.g., `"Summary"`) | Value |
 
-For multi-select questions, join multiple labels with `", "`. If you [support free-text input](#support-free-text-input), use the user’s custom text as the value.
+For multi-select questions, pass an array of labels or join them with `", "`. If you [support free-text input](#support-free-text-input), use the user’s custom text as the value.
 
 Python
 
@@ -344,7 +344,7 @@ return PermissionResultAllow(
         "questions": input_data.get("questions", []),
         "answers": {
             "How should I format the output?": "Summary",
-            "Which sections should I include?": "Introduction, Conclusion",
+            "Which sections should I include?": ["Introduction", "Conclusion"],
         },
     }
 )
@@ -429,7 +429,7 @@ Return an `answers` object mapping each question’s `question` field to the sel
 | `questions` | Pass through the original questions array (required for tool processing) |
 | `answers` | Object where keys are question text and values are selected labels |
 
-For multi-select questions, join multiple labels with `", "`. For free-text input, use the user’s custom text directly.
+For multi-select questions, pass an array of labels or join them with `", "`. For free-text input, use the user’s custom text directly.
 
 ```shiki
 {
@@ -438,7 +438,7 @@ For multi-select questions, join multiple labels with `", "`. For free-text inpu
   ],
   "answers": {
     "How should I format the output?": "Summary",
-    "Which sections should I include?": "Introduction, Conclusion"
+    "Which sections should I include?": ["Introduction", "Conclusion"]
   }
 }
 ```

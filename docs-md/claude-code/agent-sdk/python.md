@@ -810,6 +810,7 @@ class ClaudeAgentOptions:
 | `plugins` | `list[SdkPluginConfig]` | `[]` | Load custom plugins from local paths. See [Plugins](agent-sdk/plugins.md) for details |
 | `sandbox` | [`SandboxSettings`](#sandboxsettings)  `| None` | `None` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
 | `setting_sources` | `list[SettingSource] | None` | `None` (CLI defaults: all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. Managed policy settings load regardless. See [Use Claude Code features](agent-sdk/claude-code-features.md) |
+| `skills` | `list[str] | Literal["all"] | None` | `None` | Skills available to the session. Pass `"all"` to enable every discovered skill, or a list of skill names. When set, the SDK enables the Skill tool automatically without listing it in `allowed_tools`. See [Skills](agent-sdk/skills.md) |
 | `max_thinking_tokens` | `int | None` | `None` | *Deprecated* - Maximum tokens for thinking blocks. Use `thinking` instead |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig)  `| None` | `None` | Controls extended thinking behavior. Takes precedence over `max_thinking_tokens` |
 | `effort` | `Literal["low", "medium", "high", "xhigh", "max"] | None` | `None` | Effort level for thinking depth |
@@ -1023,7 +1024,7 @@ class AgentDefinition:
 | `tools` | No | Array of allowed tool names. If omitted, inherits all tools |
 | `disallowedTools` | No | Array of tool names to remove from the agent’s tool set |
 | `model` | No | Model override for this agent. Accepts an alias such as `"sonnet"`, `"opus"`, `"haiku"`, or `"inherit"`, or a full model ID. If omitted, uses the main model |
-| `skills` | No | List of skill names available to this agent |
+| `skills` | No | List of skill names to preload into the agent’s context at startup. Unlisted skills remain invocable through the Skill tool |
 | `memory` | No | Memory source for this agent: `"user"`, `"project"`, or `"local"` |
 | `mcpServers` | No | MCP servers available to this agent. Each entry is a server name or an inline `{name: config}` dict |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent |
@@ -1466,13 +1467,17 @@ class ResultMessage:
     is_error: bool
     num_turns: int
     session_id: str
+    stop_reason: str | None = None
     total_cost_usd: float | None = None
     usage: dict[str, Any] | None = None
     result: str | None = None
-    stop_reason: str | None = None
     structured_output: Any = None
     model_usage: dict[str, Any] | None = None
+    permission_denials: list[Any] | None = None
     deferred_tool_use: DeferredToolUse | None = None
+    errors: list[str] | None = None
+    api_error_status: int | None = None
+    uuid: str | None = None
 ```
 
 The `usage` dict contains the following keys when present:
@@ -2275,7 +2280,9 @@ Asks the user clarifying questions during execution. See [Handle approvals and u
             "multiSelect": bool,  # Set to true to allow multiple selections
         }
     ],
-    "answers": dict | None,  # User answers populated by the permission system
+    "answers": dict[str, str | list[str]] | None,
+    # User answers populated by the permission system. Multi-select
+    # answers may be a list of labels or a comma-joined string
 }
 ```
 
@@ -2537,10 +2544,12 @@ Runs a background script and delivers each stdout line to Claude as an event so 
 
 ```shiki
 {
-    "response": str,  # AI model's response to the prompt
+    "bytes": int,  # Size of the fetched content in bytes
+    "code": int,  # HTTP response code
+    "codeText": str,  # HTTP response code text
+    "result": str,  # Processed result from applying the prompt to the content
+    "durationMs": int,  # Time to fetch and process the content, in milliseconds
     "url": str,  # URL that was fetched
-    "final_url": str | None,  # Final URL after redirects
-    "status_code": int | None,  # HTTP status code
 }
 ```
 
@@ -2561,9 +2570,9 @@ Runs a background script and delivers each stdout line to Claude as an event so 
 
 ```shiki
 {
-    "results": [{"title": str, "url": str, "snippet": str, "metadata": dict | None}],
-    "total_results": int,
-    "query": str,
+    "query": str,  # The search query
+    "results": list[str | {"tool_use_id": str, "content": list[{"title": str, "url": str}]}],
+    "durationSeconds": float,  # Search duration in seconds
 }
 ```
 

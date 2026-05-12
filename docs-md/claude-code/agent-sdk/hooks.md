@@ -183,7 +183,7 @@ Every hook callback receives three arguments:
 Your callback returns an object with two categories of fields:
 
 - **Top-level fields** control the conversation: `systemMessage` injects a message into the conversation visible to the model, and `continue` (`continue_` in Python) determines whether the agent keeps running after this hook.
-- **`hookSpecificOutput`** controls the current operation. The fields inside depend on the hook event type. For `PreToolUse` hooks, this is where you set `permissionDecision` (`"allow"`, `"deny"`, or `"ask"`), `permissionDecisionReason`, and `updatedInput`. In the TypeScript SDK, `permissionDecision` also accepts `"defer"` to end the query and [resume later](hooks.md); this value is not available in the Python SDK. For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result, or `updatedToolOutput` to replace the tool’s output entirely before Claude sees it.
+- **`hookSpecificOutput`** controls the current operation. The fields inside depend on the hook event type. For `PreToolUse` hooks, this is where you set `permissionDecision` (`"allow"`, `"deny"`, `"ask"`, or `"defer"`), `permissionDecisionReason`, and `updatedInput`. Returning `"defer"` ends the query so you can [resume it later](hooks.md). For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result, or `updatedToolOutput` to replace the tool’s output entirely before Claude sees it.
 
 Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](hooks.md), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](agent-sdk/typescript.md) and [Python](agent-sdk/python.md) SDK references.
 
@@ -241,7 +241,7 @@ async def redirect_to_sandbox(input_data, tool_use_id, context):
     return {}
 ```
 
-When using `updatedInput`, you must also include `permissionDecision: 'allow'`. Always return a new object rather than mutating the original `tool_input`.
+When using `updatedInput`, you must also include `permissionDecision: 'allow'` to auto-approve the modified input or `permissionDecision: 'ask'` to show it to the user. With `'defer'`, `updatedInput` is ignored. Always return a new object rather than mutating the original `tool_input`.
 
 ### [​](#add-context-and-block-a-tool) Add context and block a tool
 
@@ -408,7 +408,7 @@ async def webhook_notifier(input_data, tool_use_id, context):
 
 ### [​](#forward-notifications-to-slack) Forward notifications to Slack
 
-Use `Notification` hooks to receive system notifications from the agent and forward them to external services. Notifications fire for specific event types: `permission_prompt` (Claude needs permission), `idle_prompt` (Claude is waiting for input), `auth_success` (authentication completed), and `elicitation_dialog` (Claude is prompting the user). Each notification includes a `message` field with a human-readable description and optionally a `title`.
+Use `Notification` hooks to receive system notifications from the agent and forward them to external services. Notifications fire for specific event types: `permission_prompt` (Claude needs permission), `idle_prompt` (Claude is waiting for input), `auth_success` (authentication completed), `elicitation_dialog` (Claude is prompting the user), `elicitation_response` (the user answered an elicitation), and `elicitation_complete` (an elicitation closed). Each notification includes a `message` field with a human-readable description and optionally a `title`.
 This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://api.slack.com/messaging/webhooks), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
 
 Python
@@ -508,7 +508,7 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
     }
   };
   ```
-- You must also return `permissionDecision: 'allow'` for the input modification to take effect
+- You must also return `permissionDecision: 'allow'` or `'ask'` for the input modification to take effect
 - Include `hookEventName` in `hookSpecificOutput` to identify which hook type the output is for
 
 ### [​](#session-hooks-not-available-in-python) Session hooks not available in Python

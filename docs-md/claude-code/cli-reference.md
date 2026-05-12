@@ -24,13 +24,18 @@ You can start sessions, pipe content, resume conversations, and manage updates w
 | `claude auth login` | Sign in to your Anthropic account. Use `--email` to pre-fill your email address, `--sso` to force SSO authentication, and `--console` to sign in with Anthropic Console for API usage billing instead of a Claude subscription | `claude auth login --console` |
 | `claude auth logout` | Log out from your Anthropic account | `claude auth logout` |
 | `claude auth status` | Show authentication status as JSON. Use `--text` for human-readable output. Exits with code 0 if logged in, 1 if not | `claude auth status` |
-| `claude agents` | List all configured [subagents](sub-agents.md), grouped by source | `claude agents` |
+| `claude agents` | Open [agent view](agent-view.md) to monitor and dispatch parallel background sessions. When output is piped, lists configured [subagents](sub-agents.md) instead | `claude agents` |
+| `claude attach <id>` | Attach to a [background session](agent-view.md) in this terminal | `claude attach 7c5dcf5d` |
 | `claude auto-mode defaults` | Print the built-in [auto mode](permission-modes.md) classifier rules as JSON. Use `claude auto-mode config` to see your effective config with settings applied | `claude auto-mode defaults > rules.json` |
+| `claude logs <id>` | Print recent output from a [background session](agent-view.md) | `claude logs 7c5dcf5d` |
 | `claude mcp` | Configure Model Context Protocol (MCP) servers | See the [Claude Code MCP documentation](mcp.md). |
 | `claude plugin` | Manage Claude Code [plugins](plugins.md). Alias: `claude plugins`. See [plugin reference](plugins-reference.md) for subcommands | `claude plugin install code-review@claude-plugins-official` |
 | `claude project purge [path]` | Delete all local Claude Code state for a project: transcripts, task lists, debug logs, file-edit history, prompt history lines, and the project’s entry in `~/.claude.json`. Omit `[path]` to pick from an interactive list. Flags: `--dry-run` to preview, `-y`/`--yes` to skip confirmation, `-i`/`--interactive` to confirm each item, `--all` for every project. See [Clear local data](claude-directory.md) | `claude project purge ~/work/repo --dry-run` |
 | `claude remote-control` | Start a [Remote Control](remote-control.md) server to control Claude Code from Claude.ai or the Claude app. Runs in server mode (no local interactive session). See [Server mode flags](remote-control.md) | `claude remote-control --name "My Project"` |
+| `claude respawn <id>` | Restart a stopped [background session](agent-view.md) with its conversation intact. Use `--all` to restart every stopped session | `claude respawn 7c5dcf5d` |
+| `claude rm <id>` | Remove a [background session](agent-view.md) from the list | `claude rm 7c5dcf5d` |
 | `claude setup-token` | Generate a long-lived OAuth token for CI and scripts. Prints the token to the terminal without saving it. Requires a Claude subscription. See [Generate a long-lived token](authentication.md) | `claude setup-token` |
+| `claude stop <id>` | Stop a [background session](agent-view.md). Also accepts `claude kill` | `claude stop 7c5dcf5d` |
 | `claude ultrareview [target]` | Run [ultrareview](ultrareview.md) non-interactively. Prints findings to stdout and exits 0 on success or 1 on failure. Use `--json` for the raw payload and `--timeout <minutes>` to override the 30-minute default | `claude ultrareview 1234 --json` |
 
 If you mistype a subcommand, Claude Code suggests the closest match and exits without starting a session. For example, `claude udpate` prints `Did you mean claude update?`.
@@ -50,6 +55,7 @@ Customize Claude Code’s behavior with these command-line flags. `claude --help
 | `--append-system-prompt-file` | Load additional system prompt text from a file and append to the default prompt | `claude --append-system-prompt-file ./extra-rules.txt` |
 | `--bare` | Minimal mode: skip auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md so scripted calls start faster. Claude has access to Bash, file read, and file edit tools. Sets [`CLAUDE_CODE_SIMPLE`](env-vars.md). See [bare mode](headless.md) | `claude --bare -p "query"` |
 | `--betas` | Beta headers to include in API requests (API key users only) | `claude --betas interleaved-thinking` |
+| `--bg` | Start the session as a [background agent](agent-view.md) and return immediately. Prints the session ID and management commands. Combine with `--agent` to run a specific subagent | `claude --bg "investigate the flaky test"` |
 | `--channels` | (Research preview) MCP servers whose [channel](channels.md) notifications Claude should listen for in this session. Space-separated list of `plugin:<name>@<marketplace>` entries. Requires Claude.ai authentication | `claude --channels plugin:my-notifier@my-marketplace` |
 | `--chrome` | Enable [Chrome browser integration](chrome.md) for web automation and testing | `claude --chrome` |
 | `--continue`, `-c` | Load the most recent conversation in the current directory. Includes sessions that added this directory with `/add-dir` | `claude --continue` |
@@ -84,7 +90,7 @@ Customize Claude Code’s behavior with these command-line flags. `claude --help
 | `--permission-mode` | Begin in a specified [permission mode](permission-modes.md). Accepts `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, or `bypassPermissions`. Overrides `defaultMode` from settings files | `claude --permission-mode plan` |
 | `--permission-prompt-tool` | Specify an MCP tool to handle permission prompts in non-interactive mode | `claude -p --permission-prompt-tool mcp_auth_tool "query"` |
 | `--plugin-dir` | Load a plugin from a directory or `.zip` archive for this session only. Each flag takes one path. Repeat the flag for multiple plugins: `--plugin-dir A --plugin-dir B.zip` | `claude --plugin-dir ./my-plugin` |
-| `--plugin-url` | Fetch a plugin `.zip` archive from a URL for this session only. Each flag takes one URL. Repeat the flag for multiple plugins | `claude --plugin-url https://example.com/plugin.zip` |
+| `--plugin-url` | Fetch a plugin `.zip` archive from a URL for this session only. Repeat the flag for multiple plugins, or pass space-separated URLs in a single quoted value | `claude --plugin-url https://example.com/plugin.zip` |
 | `--print`, `-p` | Print response without interactive mode (see [Agent SDK documentation](agent-sdk/overview.md) for programmatic usage details) | `claude -p "query"` |
 | `--remote` | Create a new [web session](claude-code-on-the-web.md) on claude.ai with the provided task description | `claude --remote "Fix the login bug"` |
 | `--remote-control`, `--rc` | Start an interactive session with [Remote Control](remote-control.md) enabled so you can also control it from claude.ai or the Claude app. Optionally pass a name for the session | `claude --remote-control "My Project"` |
@@ -103,7 +109,7 @@ Customize Claude Code’s behavior with these command-line flags. `claude --help
 | `--tools` | Restrict which built-in tools Claude can use. Use `""` to disable all, `"default"` for all, or tool names like `"Bash,Edit,Read"` | `claude --tools "Bash,Edit,Read"` |
 | `--verbose` | Enable verbose logging, shows full turn-by-turn output. Overrides the [`viewMode`](settings.md) setting for this session | `claude --verbose` |
 | `--version`, `-v` | Output the version number | `claude -v` |
-| `--worktree`, `-w` | Start Claude in an isolated [git worktree](worktrees.md) at `<repo>/.claude/worktrees/<name>`. If no name is given, one is auto-generated | `claude -w feature-auth` |
+| `--worktree`, `-w` | Start Claude in an isolated [git worktree](worktrees.md) at `<repo>/.claude/worktrees/<name>`. If no name is given, one is auto-generated. Pass `#<number>` or a GitHub pull request URL to fetch that PR from `origin` and branch the worktree from it | `claude -w feature-auth` |
 
 ### [​](#system-prompt-flags) System prompt flags
 

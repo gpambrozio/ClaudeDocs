@@ -13,9 +13,14 @@ For instructions about your project, conventions, or codebase, use [CLAUDE.md](m
 
 Claude Code’s **Default** output style is the existing system prompt, designed
 to help you complete software engineering tasks efficiently.
-There are two additional built-in output styles focused on teaching you the
-codebase and how Claude operates:
+There are three additional built-in output styles:
 
+- **Proactive**: Claude executes immediately, makes reasonable assumptions
+  instead of pausing for routine decisions, and prefers action over planning.
+  This applies the same guidance as
+  [auto mode](permission-modes.md) without
+  changing your permission mode, so you still see permission prompts before
+  tools run.
 - **Explanatory**: Provides educational “Insights” in between helping you
   complete software engineering tasks. Helps you understand implementation
   choices and codebase patterns.
@@ -83,9 +88,13 @@ tasks. [Your custom instructions here...]
 [Define how the assistant should behave in this style...]
 ```
 
-You can save these files at the user level (`~/.claude/output-styles`) or
-project level (`.claude/output-styles`). [Plugins](plugins-reference.md) can
-also ship output styles in an `output-styles/` directory.
+You can save these files at three levels:
+
+- User: `~/.claude/output-styles`
+- Project: `.claude/output-styles`
+- Managed policy: `.claude/output-styles` inside the [managed settings directory](settings.md)
+
+[Plugins](plugins-reference.md) can also ship output styles in an `output-styles/` directory.
 
 ### [​](#frontmatter) Frontmatter
 
@@ -96,6 +105,7 @@ Output style files support frontmatter for specifying metadata:
 | `name` | Name of the output style, if not the file name | Inherits from file name |
 | `description` | Description of the output style, shown in the `/config` picker | None |
 | `keep-coding-instructions` | Whether to keep the parts of Claude Code’s system prompt related to coding. | false |
+| `force-for-plugin` | Plugin output styles only: apply this style automatically whenever the plugin is enabled, without requiring users to select it. Overrides the user’s `outputStyle` setting. If multiple enabled plugins set this, the first one loaded wins. | false |
 
 ## [​](#comparisons-to-related-features) Comparisons to related features
 

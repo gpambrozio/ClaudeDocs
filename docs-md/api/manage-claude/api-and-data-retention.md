@@ -44,7 +44,7 @@ The Claude API supports HIPAA-ready integrations for organizations that handle p
 
 Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
 
-This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
+This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 
 ### Getting started
 
@@ -78,7 +78,8 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 
 - **Claude consumer products:** Claude Free, Pro, or Max plans
 - **Console and Workbench:** Usage through the Claude Console interface
-- **Third-party platforms:** Claude on AWS Bedrock or Google Cloud Vertex AI (refer to those platforms' compliance documentation)
+- **Partner-operated platforms:** Amazon Bedrock or Vertex AI (refer to those platforms' compliance documentation)
+- **Claude Platform on AWS and Microsoft Foundry:** HIPAA readiness is not available
 - **Third-party integrations:** Data processed by external tools or services connected to your application
 - **Claude Code:** Claude Code is not covered under HIPAA readiness
 - **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
@@ -199,7 +200,9 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 
 ### How do I request HIPAA-ready API access?
 
-### Does this apply to Claude on AWS Bedrock or Vertex AI?
+### Does this apply to Amazon Bedrock or Vertex AI?
+
+### Is Claude Platform on AWS eligible for ZDR or HIPAA readiness?
 
 ### Is Claude Code eligible for ZDR?
 

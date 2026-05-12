@@ -28,6 +28,8 @@ You can view and manage Claude Code’s tool permissions with `/permissions`. Th
 
 Rules are evaluated in order: **deny -> ask -> allow**. The first matching rule wins, so deny rules always take precedence.
 
+Permission rules are enforced by Claude Code, not by the model. Instructions in your prompt or `CLAUDE.md` shape what Claude tries to do, but they don’t change what Claude Code allows. To grant or revoke access, use `/permissions`, the rules described here, a [permission mode](permission-modes.md), or a [PreToolUse hook](#extend-permissions-with-hooks).
+
 ## [​](#permission-modes) Permission modes
 
 Claude Code supports several permission modes that control how tools are approved. See [Permission modes](permission-modes.md) for when to use each one. Set the `defaultMode` in your [settings files](settings.md):
@@ -141,7 +143,7 @@ For more reliable URL filtering, consider:
 
 - **Restrict Bash network tools**: use deny rules to block `curl`, `wget`, and similar commands, then use the WebFetch tool with `WebFetch(domain:github.com)` permission for allowed domains
 - **Use PreToolUse hooks**: implement a hook that validates URLs in Bash commands and blocks disallowed domains
-- Instructing Claude Code about your allowed curl patterns via CLAUDE.md
+- **Add CLAUDE.md guidance**: describe your allowed curl patterns in `CLAUDE.md`. This shapes what Claude tries but doesn’t enforce a boundary, so pair it with one of the options above
 
 Note that using WebFetch alone does not prevent network access. If Bash is allowed, Claude can still use `curl`, `wget`, or other tools to reach any URL.
 
@@ -170,7 +172,7 @@ Claude Code parses the PowerShell AST and checks each command in a compound comm
 
 `Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep and Glob.
 
-Read and Edit deny rules apply to Claude’s built-in file tools, not to Bash subprocesses. A `Read(./.env)` deny rule blocks the Read tool but does not prevent `cat .env` in Bash. For OS-level enforcement that blocks all processes from accessing a path, [enable the sandbox](sandboxing.md).
+Read and Edit deny rules apply to Claude’s built-in file tools and to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, and `sed`. They do not apply to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. For OS-level enforcement that blocks all processes from accessing a path, [enable the sandbox](sandboxing.md).
 
 Read and Edit rules both follow the [gitignore](https://git-scm.com/docs/gitignore) specification with four distinct pattern types:
 
@@ -190,6 +192,13 @@ Examples:
 - `Read(~/.zshrc)`: reads your home directory’s `.zshrc`
 - `Edit(//tmp/scratch.txt)`: edits the absolute path `/tmp/scratch.txt`
 - `Read(src/**)`: reads from `<current-directory>/src/`
+
+A rule only matches files under its anchor, so the anchor determines how far a deny rule reaches. Bare filenames follow gitignore semantics and match at any depth, so `Read(.env)` and `Read(**/.env)` are equivalent:
+
+| Deny rule | Blocks | Does not block |
+| --- | --- | --- |
+| `Read(.env)` or `Read(**/.env)` | any `.env` at or under the current directory | `.env` in a parent directory or another project |
+| `Read(//**/.env)` | any `.env` anywhere on the filesystem | nothing; the rule is anchored at the filesystem root |
 
 In gitignore patterns, `*` matches files in a single directory while `**` matches recursively across directories. To allow all file access, use just the tool name without parentheses: `Read`, `Edit`, or `Write`.
 

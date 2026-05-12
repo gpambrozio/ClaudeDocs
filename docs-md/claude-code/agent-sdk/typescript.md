@@ -304,6 +304,55 @@ function tagSession(
 | `tag` | `string | null` | required | Tag string, or `null` to clear |
 | `options.dir` | `string` | `undefined` | Project directory path. When omitted, searches all project directories |
 
+### [​](#resolvesettings) `resolveSettings()`
+
+Resolves the effective Claude Code settings for a given directory using the same merge engine as the CLI, without spawning the Claude CLI. Use it to inspect what configuration a `query()` call would see before invoking one.
+
+This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured `policyHelper` subprocess. The `permissions.defaultMode` field is returned as-is from all tiers including project settings. The trust filter the CLI applies before honoring escalating permission modes is not applied.
+
+```shiki
+function resolveSettings(
+  options?: ResolveSettingsOptions
+): Promise<ResolvedSettings>;
+```
+
+#### [​](#parameters-10) Parameters
+
+`resolveSettings()` accepts a single options object. All fields are optional.
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options.cwd` | `string` | `process.cwd()` | Directory to resolve project and local settings relative to |
+| `options.settingSources` | [`SettingSource`](#settingsource)`[]` | All sources | Which filesystem sources to load. Pass `[]` to skip user, project, and local settings. Managed policy settings load in all cases |
+| `options.managedSettings` | `Settings` | `undefined` | Restrictive policy-tier settings merged at the managed-policy precedence level. Non-restrictive keys such as `model` are silently dropped |
+| `options.serverManagedSettings` | `Settings` | `undefined` | Server-managed settings payload from `/api/claude_code/settings`. Non-restrictive keys pass through unfiltered |
+
+#### [​](#return-type-resolvedsettings) Return type: `ResolvedSettings`
+
+`resolveSettings()` returns an object describing the merged settings and the source that contributed each key.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `effective` | `Settings` | Merged settings after applying all enabled sources in precedence order |
+| `provenance` | `Partial<Record<keyof Settings, ProvenanceEntry>>` | For each top-level key in `effective`, which source supplied the value |
+| `sources` | `Array<{ source, settings, path?, policyOrigin? }>` | Per-source raw settings, ordered from lowest to highest precedence |
+
+#### [​](#example-4) Example
+
+The example below resolves settings for a project directory and prints the source that controls the cleanup period.
+
+```shiki
+import { resolveSettings } from "@anthropic-ai/claude-agent-sdk";
+
+const { effective, provenance } = await resolveSettings({
+  cwd: "/path/to/project",
+  settingSources: ["user", "project", "local"],
+});
+
+console.log(`Cleanup period: ${effective.cleanupPeriodDays} days`);
+console.log(`Set by: ${provenance.cleanupPeriodDays?.source}`);
+```
+
 ## [​](#types) Types
 
 ### [​](#options) `Options`
@@ -354,6 +403,7 @@ Configuration object for the `query()` function.
 | `sessionStore` | [`SessionStore`](agent-sdk/session-storage.md) | `undefined` | Mirror session transcripts to an external backend so any host can resume them. See [Persist sessions to external storage](agent-sdk/session-storage.md) |
 | `settings` | `string | Settings` | `undefined` | Inline [settings](settings.md) object or path to a settings file. Populates the flag-settings layer in the [precedence order](settings.md). Change at runtime with [`applyFlagSettings()`](#applyflagsettings) |
 | `settingSources` | [`SettingSource`](#settingsource)`[]` | CLI defaults (all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. Managed policy settings load regardless. See [Use Claude Code features](agent-sdk/claude-code-features.md) |
+| `skills` | `string[] | 'all'` | `undefined` | Skills available to the session. Pass `'all'` to enable every discovered skill, or a list of skill names. When set, the SDK enables the Skill tool automatically without listing it in `allowedTools`. See [Skills](agent-sdk/skills.md) |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Enforce strict MCP validation |
@@ -520,7 +570,7 @@ type AgentDefinition = {
 | Field | Required | Description |
 | --- | --- | --- |
 | `description` | Yes | Natural language description of when to use this agent |
-| `tools` | No | Array of allowed tool names. If omitted, inherits all tools from parent |
+| `tools` | No | Array of allowed tool names. If omitted, inherits all tools from parent. To preload Skills into the agent’s context, use the `skills` field rather than listing `'Skill'` here |
 | `disallowedTools` | No | Array of tool names to explicitly disallow for this agent |
 | `prompt` | Yes | The agent’s system prompt |
 | `model` | No | Model override for this agent. Accepts an alias such as `'sonnet'`, `'opus'`, `'haiku'`, `'inherit'`, or a full model ID. If omitted or `'inherit'`, uses the main model |
@@ -853,6 +903,7 @@ type SDKMessage =
   | SDKFilesPersistedEvent
   | SDKToolUseSummaryMessage
   | SDKRateLimitEvent
+  | SDKPermissionDeniedMessage
   | SDKPromptSuggestionMessage;
 ```
 
@@ -1039,6 +1090,35 @@ type SDKPluginInstallMessage = {
 };
 ```
 
+### [​](#sdkpermissiondeniedmessage) `SDKPermissionDeniedMessage`
+
+Stream event emitted when the permission system auto-denies a tool call without an interactive prompt. Use it to render the denial in your UI as it happens, rather than only observing the `is_error` tool result that follows. The interactive ask path reaches your application separately through the [`canUseTool`](#canusetool) callback. Denials issued by a `PreToolUse` hook are not reported through this event.
+This event requires Claude Code v2.1.136 or later.
+
+```shiki
+type SDKPermissionDeniedMessage = {
+  type: "system";
+  subtype: "permission_denied";
+  tool_name: string;
+  tool_use_id: string;
+  agent_id?: string;
+  decision_reason_type?: string;
+  decision_reason?: string;
+  message: string;
+  uuid: UUID;
+  session_id: string;
+};
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `tool_name` | `string` | Name of the tool that was denied |
+| `tool_use_id` | `string` | ID of the `tool_use` block this denial answers |
+| `agent_id` | `string` | Subagent ID when the denied call originated inside a subagent. Mirrors the field on `can_use_tool` for host-side routing |
+| `decision_reason_type` | `string` | Discriminator for the component that decided, such as `"rule"`, `"mode"`, `"classifier"`, or `"asyncAgent"` |
+| `decision_reason` | `string` | Human-readable reason from the deciding component, when available |
+| `message` | `string` | Rejection message returned to the model in the `tool_result` |
+
 ### [​](#sdkpermissiondenial) `SDKPermissionDenial`
 
 Information about a denied tool use.
@@ -1164,6 +1244,7 @@ type BaseHookInput = {
   transcript_path: string;
   cwd: string;
   permission_mode?: string;
+  effort?: { level: string };
   agent_id?: string;
   agent_type?: string;
 };

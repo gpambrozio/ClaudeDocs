@@ -144,7 +144,7 @@ A stream response consists of:
    - A `content_block_start` event
    - Potentially multiple `content_block_delta` events
    - A `content_block_stop` event
-3. A `message_delta` event
+3. One or more `message_delta` events
 4. A `message_stop` event
 
 There may be `ping` events dispersed throughout the response as well. See [Event types](#event-types) for more details on the format.
@@ -307,16 +307,7 @@ event: content_block_delta
 data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"o,"}}
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":" CA\""}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":", "}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"\"unit\": \"fah"}}
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":"renheit\"}"}}
+data: {"type":"content_block_delta","index":1,"delta":{"type":"input_json_delta","partial_json":" CA\"}"}}
 
 event: content_block_stop
 data: {"type":"content_block_stop","index":1}
@@ -512,24 +503,28 @@ For Claude 4.5 models and earlier, you can recover a streaming request that was 
 
 The basic recovery strategy involves:
 
-1. **Capture the partial response**: Save all content that was successfully received before the error occurred
-2. **Construct a continuation request**: Create a new API request that includes the partial assistant response as the beginning of a new assistant message
-3. **Resume streaming**: Continue receiving the rest of the response from where it was interrupted
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
 
-### Claude 4.6
+### Claude 4.6 and later
 
-For Claude 4.6 models, you should add a user message that instructs the model to continue from where it left off. For example:
+For Claude 4.6 and later models, the same capture-and-resume strategy applies, but step 2 changes: instead of placing the partial response in an assistant message, add a user message that instructs the model to continue from where it left off.
 
-Sample prompt
+1. **Capture the partial response:** Save all content that was successfully received before the error occurred
+2. **Construct a continuation request:** Create a new API request with a user message containing the partial response and an instruction to continue, for example:
 
-```inline-block
-Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
-```
+   Sample prompt
+
+   ```inline-block
+   Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
+   ```
+3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted
 
 ### Error recovery best practices
 
-1. **Use SDK features**: Leverage the SDK's built-in message accumulation and error handling capabilities
-2. **Handle content types**: Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
+1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
+2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
 Was this page helpful?
 

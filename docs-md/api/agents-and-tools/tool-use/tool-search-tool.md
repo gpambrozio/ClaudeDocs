@@ -17,11 +17,12 @@ Share feedback on this feature through the [feedback form](https://forms.gle/Mhc
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
-On Amazon Bedrock, server-side tool search is available only via the [invoke
+On Amazon Bedrock, server-side tool search is available only through the
+[InvokeModel
 API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
-not the converse API.
+not the Converse API.
 
-You can also implement [client-side tool search](#custom-tool-search-implementation) by returning `tool_reference` blocks from your own search implementation.
+On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
 
 ## How tool search works
 
@@ -151,13 +152,13 @@ JSON
 **Key points:**
 
 - Tools without `defer_loading` are loaded into context immediately
-- Tools with `defer_loading: true` are only loaded when Claude discovers them via search
+- Tools with `defer_loading: true` are only loaded when Claude discovers them through search
 - The tool search tool itself should **never** have `defer_loading: true`
 - Keep your 3-5 most frequently used tools as non-deferred for optimal performance
 
 Both tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.
 
-**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the tool definition is appended inline as a `tool_reference` block in the conversation. The prefix is untouched, so prompt caching is preserved. The grammar for strict mode builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
+**How deferral works internally:** Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through tool search, the API appends a `tool_reference` block inline in the conversation, then expands it into the full tool definition before passing it to Claude. The prefix is untouched, so prompt caching is preserved. The grammar for [strict mode](agents-and-tools/tool-use/strict-tool-use.md) (the rules that constrain tool-call output to match your schemas) builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
 
 ## Response format
 

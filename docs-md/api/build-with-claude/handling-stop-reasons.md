@@ -296,8 +296,6 @@ if response.stop_reason == "refusal":
 
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
-To learn more about refusals triggered by API safety filters for Claude Sonnet 4.5, see [Understanding Sonnet 4.5's API Safety Filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
-
 ### model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
@@ -488,7 +486,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, tools=tools
+            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -541,7 +539,7 @@ def get_max_possible_tokens(client, prompt):
     response = client.messages.create(
         model="claude-opus-4-7",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=64000,  # Practical non-streaming ceiling (Opus 4.7 supports 128K with streaming)
+        max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )
 
     if response.stop_reason == "model_context_window_exceeded":

@@ -27,6 +27,7 @@ Click the link for your IDE to install directly:
 - [Install for Cursor](cursor:extension/anthropic.claude-code)
 
 Or in VS Code, press `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux) to open the Extensions view, search for “Claude Code”, and click **Install**.
+The extension also installs in other VS Code forks like Windsurf or Kiro. Search for “Claude Code” in the editor’s Extensions view, or install from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code). If your editor can’t install the extension, run `claude` in its integrated terminal instead. The [CLI](quickstart.md) works in any terminal.
 
 If the extension doesn’t appear after installation, restart VS Code or run “Developer: Reload Window” from the Command Palette.
 
@@ -209,6 +210,7 @@ These are VS Code commands for controlling the extension. Not all built-in Claud
 | Open in New Tab | `Cmd+Shift+Esc` (Mac) / `Ctrl+Shift+Esc` (Windows/Linux) | Open a new conversation as an editor tab |
 | Open in New Window | - | Open a new conversation in a separate window |
 | New Conversation | `Cmd+N` (Mac) / `Ctrl+N` (Windows/Linux) | Start a new conversation. Requires Claude to be focused and `enableNewConversationShortcut` set to `true` |
+| Reopen Closed Session | `Cmd+Shift+T` (Mac) / `Ctrl+Shift+T` (Windows/Linux) | Reopen the most recently closed Claude session tab. Falls through to VS Code’s normal reopen-closed-editor when the last closed tab wasn’t a Claude session. Disable with `enableReopenClosedSessionShortcut` |
 | Insert @-Mention Reference | `Option+K` (Mac) / `Alt+K` (Windows/Linux) | Insert a reference to the current file and selection (requires editor to be focused) |
 | Show Logs | - | View extension debug logs |
 | Logout | - | Sign out of your Anthropic account |
@@ -276,13 +278,14 @@ Add `"$schema": "https://json.schemastore.org/claude-code-settings.json"` to you
 | `autosave` | `true` | Auto-save files before Claude reads or writes them |
 | `useCtrlEnterToSend` | `false` | Use Ctrl/Cmd+Enter instead of Enter to send prompts |
 | `enableNewConversationShortcut` | `false` | Enable Cmd/Ctrl+N to start a new conversation |
+| `enableReopenClosedSessionShortcut` | `true` | Use Cmd/Ctrl+Shift+T to reopen the most recently closed Claude session tab. When the last closed tab wasn’t a Claude session, the shortcut runs VS Code’s normal reopen-closed-editor command instead. |
 | `hideOnboarding` | `false` | Hide the onboarding checklist (graduation cap icon) |
 | `respectGitIgnore` | `true` | Exclude .gitignore patterns from file searches |
 | `usePythonEnvironment` | `true` | Activate the workspace’s Python environment when running Claude. Requires the Python extension. |
 | `environmentVariables` | `[]` | Set environment variables for the Claude process. Use Claude Code settings instead for shared config. |
 | `disableLoginPrompt` | `false` | Skip authentication prompts (for third-party provider setups) |
 | `allowDangerouslySkipPermissions` | `false` | Adds [Auto mode](permission-modes.md) and Bypass permissions to the mode selector. Auto mode has [plan, admin, model, and provider requirements](permission-modes.md), so it may remain unavailable even with this toggle on. Use Bypass permissions only in sandboxes with no internet access. |
-| `claudeProcessWrapper` | - | Executable path used to launch the Claude process |
+| `claudeProcessWrapper` | - | Executable used to launch the Claude process. The bundled binary path is passed as an argument when present. Set this to a separately installed `claude` binary if the extension build doesn’t include one for your platform. |
 
 ## [​](#vs-code-extension-vs-claude-code-cli) VS Code extension vs. Claude Code CLI
 

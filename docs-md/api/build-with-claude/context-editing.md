@@ -320,7 +320,7 @@ Output
 
 The response shows both the final token count after context management is applied (`input_tokens`) and the original token count before any clearing occurred (`original_input_tokens`).
 
-## Using with the Memory Tool
+## Using with the memory tool
 
 Context editing can be combined with the [memory tool](agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
 
@@ -547,13 +547,14 @@ Output
 {
   "usage": {
     "input_tokens": 63000,
+    "cache_creation_input_tokens": 0,
     "cache_read_input_tokens": 270000,
     "output_tokens": 1400
   }
 }
 ```
 
-The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 333k and triggers compaction prematurely.
+The SDK calculates total usage as 63,000 + 0 + 270,000 + 1,400 = 334,400 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 334k and triggers compaction prematurely.
 
 **Workarounds:**
 

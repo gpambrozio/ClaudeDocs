@@ -26,7 +26,7 @@ Claude Code has two complementary memory systems. Both are loaded at the start o
 | --- | --- | --- |
 | **Who writes it** | You | Claude |
 | **What it contains** | Instructions and rules | Learnings and patterns |
-| **Scope** | Project, user, or org | Per working tree |
+| **Scope** | Project, user, or org | Per repository, shared across worktrees |
 | **Loaded into** | Every session | Every session (first 200 lines or 25KB) |
 | **Use for** | Coding standards, workflows, project architecture | Build commands, debugging insights, preferences Claude discovers |
 
@@ -119,6 +119,15 @@ CLAUDE.md
 
 Use plan mode for changes under `src/billing/`.
 ```
+
+A symlink also works if you don’t need to add Claude-specific content:
+
+```shiki
+ln -s AGENTS.md CLAUDE.md
+```
+
+On Windows, creating a symlink requires Administrator privileges or Developer Mode, so use the `@AGENTS.md` import instead.
+Running [`/init`](commands.md) in a repo that already has an `AGENTS.md` reads it and incorporates the relevant parts into the generated `CLAUDE.md`. It also reads other tool configs like `.cursorrules` and `.windsurfrules`.
 
 ### [​](#how-claude-md-files-load) How CLAUDE.md files load
 
@@ -243,6 +252,18 @@ Deploy with your configuration management system
 
 Use MDM, Group Policy, Ansible, or similar tools to distribute the file across developer machines. See [managed settings](permissions.md) for other organization-wide configuration options.
 
+The `claudeMd` key lets you put managed CLAUDE.md content directly inside `managed-settings.json` instead of deploying a separate file.
+**Scope**: every Claude Code session on the machine, in every repository. For repository-specific guidance, commit a project CLAUDE.md instead.
+**Precedence**: same as a managed CLAUDE.md file. Loads before user and project CLAUDE.md.
+**Where it’s honored**: managed and policy settings only. Setting `claudeMd` in user, project, or local settings has no effect.
+The example below adds behavioral instructions directly in a managed settings file:
+
+```shiki
+{
+  "claudeMd": "Always run `make lint` before committing.\nNever push directly to main."
+}
+```
+
 A managed CLAUDE.md and [managed settings](settings.md) serve different purposes. Use settings for technical enforcement and CLAUDE.md for behavioral guidance:
 
 | Concern | Configure in |
@@ -347,6 +368,7 @@ To debug:
 - Make instructions more specific. “Use 2-space indentation” works better than “format code nicely.”
 - Look for conflicting instructions across CLAUDE.md files. If two files give different guidance for the same behavior, Claude may pick one arbitrarily.
 
+If the instruction is something that must run at a specific point, such as before every commit or after each file edit, write it as a [hook](hooks-guide.md) instead. Hooks execute as shell commands at fixed lifecycle events and apply regardless of what Claude decides to do.
 For instructions you want at the system prompt level, use [`--append-system-prompt`](cli-reference.md). This must be passed every invocation, so it’s better suited to scripts and automation than interactive use.
 
 Use the [`InstructionsLoaded` hook](hooks.md) to log exactly which instruction files are loaded, when they load, and why. This is useful for debugging path-specific rules or lazy-loaded files in subdirectories.

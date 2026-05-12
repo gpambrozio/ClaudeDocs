@@ -2,7 +2,7 @@
 
 Copy page
 
-[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It produces the same `/v1/agents` and `/v1/sessions` resources as the API but lets you iterate on configuration interactively before writing code.
+[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
@@ -25,17 +25,16 @@ Console includes an inline session runner. After configuring your agent, you can
 
 Once your agent works as expected:
 
-1. Copy the agent ID from Console output.
-2. Reference it in your code when [creating sessions](managed-agents/sessions.md):
+1. Copy the agent ID and [environment ID](managed-agents/environments.md) from Console.
+2. Reference them in your code when [creating sessions](managed-agents/sessions.md):
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-session = client.beta.sessions.create(
-    agent="agent_01J8XkN5uT3vHpLqRfWdY2",
-    environment_id="env_01K2mPsT7hNwR4jXuLvCqD8",
-    title="My first session",
-)
+ant beta:sessions create \
+  --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
+  --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 \
+  --title "My first session"
 ```
 
 Was this page helpful?

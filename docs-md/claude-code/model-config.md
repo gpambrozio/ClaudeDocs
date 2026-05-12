@@ -17,6 +17,8 @@ For the `model` setting in Claude Code, you can configure either:
   - Foundry: a deployment name
   - Vertex: a version name
 
+`ANTHROPIC_BASE_URL` changes where requests are sent, not which model answers them. To route Claude through an LLM gateway, see [LLM gateway configuration](llm-gateway.md).
+
 ### [​](#model-aliases) Model aliases
 
 Model aliases provide a convenient way to select model settings without
@@ -33,7 +35,7 @@ remembering exact version numbers:
 | **`opus[1m]`** | Uses Opus with a [1 million token context window](build-with-claude/context-windows.md) for long sessions |
 | **`opusplan`** | Special mode that uses `opus` during plan mode, then switches to `sonnet` for execution |
 
-On the Anthropic API, `opus` resolves to Opus 4.7 and `sonnet` resolves to Sonnet 4.6. On Bedrock, Vertex, and Foundry, `opus` resolves to Opus 4.6 and `sonnet` resolves to Sonnet 4.5; newer models are available on those providers by selecting the full model name explicitly or setting `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`.
+On the Anthropic API and [Claude Platform on AWS](claude-platform-on-aws.md), `opus` resolves to Opus 4.7 and `sonnet` resolves to Sonnet 4.6. On Bedrock, Vertex, and Foundry, `opus` resolves to Opus 4.6 and `sonnet` resolves to Sonnet 4.5; newer models are available on those providers by selecting the full model name explicitly or setting `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`.
 Aliases point to the recommended version for your provider and update over time. To pin to a specific version, use the full model name (for example, `claude-opus-4-7`) or set the corresponding environment variable like `ANTHROPIC_DEFAULT_OPUS_MODEL`.
 
 Opus 4.7 requires Claude Code v2.1.111 or later. Run `claude update` to upgrade.
@@ -49,6 +51,7 @@ You can configure your model in several ways, listed in order of priority:
    field.
 
 Your `/model` selection is saved to user settings and persists across restarts. As of v2.1.117, if the project’s `.claude/settings.json` pins a different model, Claude Code also writes your choice to `.claude/settings.local.json` so it continues to apply in that project after a restart. Managed settings take precedence and reapply on the next launch.
+The `--model` flag and `ANTHROPIC_MODEL` environment variable apply only to the session you launch with them and are not saved. To run different models in different terminals at the same time, launch each one with its own `--model` flag rather than switching with `/model`.
 When the active model at startup comes from project or managed settings rather than your own selection, the startup header shows which settings file set it. Run `/model` to override for the current session.
 Example usage:
 
@@ -273,7 +276,7 @@ Note: `ANTHROPIC_SMALL_FAST_MODEL` is deprecated in favor of
 
 ### [​](#pin-models-for-third-party-deployments) Pin models for third-party deployments
 
-When deploying Claude Code through [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), or [Foundry](microsoft-foundry.md), pin model versions before rolling out to users.
+When deploying Claude Code through [Bedrock](amazon-bedrock.md), [Vertex AI](google-vertex-ai.md), [Foundry](microsoft-foundry.md), or [Claude Platform on AWS](claude-platform-on-aws.md), pin model versions before rolling out to users.
 Without pinning, Claude Code uses model aliases (`sonnet`, `opus`, `haiku`) that resolve to the latest version. When Anthropic releases a new model that isn’t yet enabled in a user’s account, Bedrock and Vertex AI users see a notice and fall back to the previous version for that session, while Foundry users see errors because Foundry has no equivalent startup check.
 
 Set all three model environment variables to specific version IDs as part of your initial setup. Pinning lets you control when your users move to a new model.

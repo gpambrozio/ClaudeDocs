@@ -126,7 +126,7 @@ Customize with instructions, skills, and hooks
 
 Run agent teams and build custom agents
 
-Spawn [multiple Claude Code agents](sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.For fully custom workflows, the [Agent SDK](agent-sdk/overview.md) lets you build your own agents powered by Claude Code’s tools and capabilities, with full control over orchestration, tool access, and permissions.
+Spawn [multiple Claude Code agents](sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.To run several full sessions in parallel and watch them from one screen, use [background agents](agent-view.md). For fully custom workflows, the [Agent SDK](agent-sdk/overview.md) lets you build your own agents powered by Claude Code’s tools and capabilities, with full control over orchestration, tool access, and permissions.
 
 Pipe, script, and automate with the CLI
 

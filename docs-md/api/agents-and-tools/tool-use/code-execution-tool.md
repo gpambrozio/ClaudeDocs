@@ -39,11 +39,12 @@ Older tool versions are not guaranteed to be backwards-compatible with newer mod
 Code execution is available on:
 
 - **Claude API** (Anthropic)
-- **Microsoft Azure AI Foundry**
+- **[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)**
+- **[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)**
 
-Code execution is not currently available on Amazon Bedrock or Google Vertex AI.
+Code execution is not currently available on Amazon Bedrock or Vertex AI.
 
-For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock or Google Vertex AI.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry only. It is not available for Mythos Preview on Amazon Bedrock, Vertex AI, or Claude Platform on AWS.
 
 ## Quick start
 
@@ -101,18 +102,18 @@ This is especially important when combining code execution with [web search](age
 
 ### Upload and analyze your own files
 
-To analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:
+To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
 
 Using the Files API with Code Execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
 
-The Python environment can process various file types uploaded via the Files API, including:
+The Python environment can process various file types uploaded through the Files API, including:
 
 - CSV
 - Excel (.xlsx, .xls)
 - JSON
 - XML
 - Images (JPEG, PNG, GIF, WebP)
-- Text files (.txt, .md, .py, etc)
+- Text files (.txt, .md, .py, and others)
 
 #### Upload and analyze files
 
@@ -150,7 +151,7 @@ response = client.beta.messages.create(
 print(response)
 ```
 
-#### Retrieve generated files
+### Retrieve generated files
 
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
@@ -548,7 +549,7 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 The code execution tool enables Claude to use [Agent Skills](agents-and-tools/agent-skills/overview.md). Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.
 
-Learn more in the [Agent Skills documentation](agents-and-tools/agent-skills/overview.md) and [Agent Skills API guide](build-with-claude/skills-guide.md).
+Learn more in [Agent Skills](agents-and-tools/agent-skills/overview.md) and [Using Agent Skills with the API](build-with-claude/skills-guide.md).
 
 Was this page helpful?
 
