@@ -23,7 +23,7 @@ When using the Claude Agent SDK, Skills are:
 
 Unlike subagents (which can be defined programmatically), Skills must be created as filesystem artifacts. The SDK does not provide a programmatic API for registering Skills.
 
-Skills are discovered through the filesystem setting sources. With default `query()` options, the SDK loads user and project sources, so skills in `~/.claude/skills/` and `<cwd>/.claude/skills/` are available. If you set `settingSources` explicitly, include `'user'` or `'project'` to keep skill discovery, or use the [`plugins` option](agent-sdk/plugins.md) to load skills from a specific path.
+Skills are discovered through the filesystem setting sources. With default `query()` options, the SDK loads user and project sources, so skills in `~/.claude/skills/`, `<cwd>/.claude/skills/`, and `.claude/skills/` in any parent directory of `<cwd>` up to the repository root are available. If you set `settingSources` explicitly, include `'user'` or `'project'` to keep skill discovery, or use the [`plugins` option](agent-sdk/plugins.md) to load skills from a specific path.
 
 ## [​](#using-skills-with-the-sdk) Using Skills with the SDK
 
@@ -176,7 +176,7 @@ options = ClaudeAgentOptions(
 ```
 
 For more details on `settingSources`/`setting_sources`, see the [TypeScript SDK reference](agent-sdk/typescript.md) or [Python SDK reference](agent-sdk/python.md).
-**Check working directory**: The SDK loads Skills relative to the `cwd` option. Ensure it points to a directory containing `.claude/skills/`:
+**Check working directory**: The SDK loads Skills from `.claude/skills/` in the `cwd` option and in every parent directory up to the repository root. Ensure `cwd` points at or below the directory containing `.claude/skills/`, within the same repository:
 
 Python
 
@@ -185,7 +185,7 @@ TypeScript
 ```shiki
 # Ensure your cwd points to the directory containing .claude/skills/
 options = ClaudeAgentOptions(
-    cwd="/path/to/project",  # Must contain .claude/skills/
+    cwd="/path/to/project",  # .claude/skills/ here or in a parent directory
     setting_sources=["user", "project"],  # Loads skills from these sources
     skills="all",
 )

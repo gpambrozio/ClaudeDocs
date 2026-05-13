@@ -2,7 +2,7 @@
 
 Copy page
 
-Fast mode provides significantly faster output token generation for Claude Opus 4.6. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
+Fast mode provides significantly faster output token generation for Claude Opus 4.6 and Claude Opus 4.7. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
 
 Fast mode is in beta (research preview). [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
 
@@ -12,6 +12,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 Fast mode is supported on the following models:
 
+- Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 
 ## How fast mode works
@@ -30,7 +31,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=4096,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -44,7 +45,7 @@ print(response.content[0].text)
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates across the full context window, including requests over 200k input tokens. The following table shows pricing for Claude Opus 4.6 with fast mode:
+Fast mode is priced at 6x standard Opus rates across the full context window, including requests over 200k input tokens. The following table shows pricing for Claude Opus 4.6 and Claude Opus 4.7 with fast mode:
 
 | Input | Output |
 | --- | --- |
@@ -82,7 +83,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -150,7 +151,7 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
         raise
 
 message = create_message_with_fast_fallback(
-    model="claude-opus-4-6",
+    model="claude-opus-4-7",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["fast-mode-2026-02-01"],
@@ -162,7 +163,7 @@ message = create_message_with_fast_fallback(
 ## Considerations
 
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-- **Supported models:** Fast mode is currently supported on Opus 4.6 only. Sending `speed: "fast"` with an unsupported model returns an error.
+- **Supported models:** Fast mode is supported on Claude Opus 4.6 and Claude Opus 4.7. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](build-with-claude/batch-processing.md).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](api/service-tiers.md).

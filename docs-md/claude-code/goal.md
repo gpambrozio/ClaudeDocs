@@ -116,7 +116,7 @@ Evaluation tokens are billed on the small fast model configured for your provide
 
 ## [​](#requirements) Requirements
 
-`/goal` runs only in workspaces where you have accepted the trust dialog, because the evaluator is part of the hooks system. If [`disableAllHooks`](hooks.md) is set in managed policy settings, `/goal` is unavailable. In both cases, the command tells you why instead of silently doing nothing.
+`/goal` runs only in workspaces where you have accepted the trust dialog, because the evaluator is part of the hooks system. `/goal` is also unavailable when [`disableAllHooks`](hooks.md) is set at any settings level or when [`allowManagedHooksOnly`](settings.md) is set in managed settings. In each case, the command tells you why instead of silently doing nothing.
 
 ## [​](#see-also) See also
 

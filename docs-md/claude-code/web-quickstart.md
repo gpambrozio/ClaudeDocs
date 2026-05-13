@@ -186,7 +186,7 @@ The session stays live after the PR is created. Paste CI failure output or revie
 
 ### [​](#no-repositories-appear-after-connecting-github) No repositories appear after connecting GitHub
 
-The Claude GitHub App needs explicit access to each repository you want to use. On github.com, open **Settings → Applications → Claude → Configure** and verify your repo is listed under **Repository access**. Private repositories need the same authorization as public ones.
+A cloud session can use any repository the connected GitHub account can see, regardless of which repositories the Claude GitHub App is installed on. If a repository is missing, verify the connected GitHub account has access to it on GitHub. If you also want [Auto-fix](claude-code-on-the-web.md) for a repository, install the App on it: on github.com, open **Settings → Applications → Claude → Configure** and verify the repository is listed under **Repository access**. Private repositories need the same authorization as public ones.
 
 ### [​](#the-page-only-shows-a-github-login-button) The page only shows a GitHub login button
 

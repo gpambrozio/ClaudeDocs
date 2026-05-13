@@ -870,7 +870,7 @@ class SystemPromptPreset(TypedDict):
 | `type` | Yes | Must be `"preset"` to use a preset system prompt |
 | `preset` | Yes | Must be `"claude_code"` to use Claude Code’s system prompt |
 | `append` | No | Additional instructions to append to the preset system prompt |
-| `exclude_dynamic_sections` | No | Move per-session context such as working directory, git status, and memory paths from the system prompt into the first user message. Improves prompt-cache reuse across users and machines. See [Modify system prompts](agent-sdk/modifying-system-prompts.md) |
+| `exclude_dynamic_sections` | No | Move per-session context such as working directory, the git-repo flag, and auto-memory paths from the system prompt into the first user message. Improves prompt-cache reuse across users and machines. See [Modify system prompts](agent-sdk/modifying-system-prompts.md) |
 
 ### [​](#settingsource) `SettingSource`
 
@@ -2579,6 +2579,9 @@ Runs a background script and delivers each stdout line to Claude as an event so 
 ### [​](#todowrite) TodoWrite
 
 **Tool name:** `TodoWrite`
+
+`TodoWrite` is deprecated and will be removed in a future release. Use `TaskCreate`, `TaskGet`, `TaskUpdate`, and `TaskList` instead. Set `CLAUDE_CODE_ENABLE_TASKS=1` to opt in. See [Migrate to Task tools](agent-sdk/todo-tracking.md) for how monitoring code changes.
+
 **Input:**
 
 ```shiki
@@ -2599,6 +2602,110 @@ Runs a background script and delivers each stdout line to Claude as an event so 
 {
     "message": str,  # Success message
     "stats": {"total": int, "pending": int, "in_progress": int, "completed": int},
+}
+```
+
+### [​](#taskcreate) TaskCreate
+
+**Tool name:** `TaskCreate`
+**Input:**
+
+```shiki
+{
+    "subject": str,  # Short task title
+    "description": str,  # Detailed task body
+    "activeForm": str | None,  # Present-tense label shown while in progress
+    "metadata": dict | None,  # Arbitrary caller metadata
+}
+```
+
+**Output:**
+
+```shiki
+{
+    "task": {"id": str, "subject": str},  # Created task with assigned ID
+}
+```
+
+### [​](#taskupdate) TaskUpdate
+
+**Tool name:** `TaskUpdate`
+**Input:**
+
+```shiki
+{
+    "taskId": str,  # ID of the task to patch
+    "status": Literal["pending", "in_progress", "completed", "deleted"] | None,
+    "subject": str | None,
+    "description": str | None,
+    "activeForm": str | None,
+    "addBlocks": list[str] | None,  # Task IDs this task now blocks
+    "addBlockedBy": list[str] | None,  # Task IDs that now block this task
+    "owner": str | None,
+    "metadata": dict | None,
+}
+```
+
+**Output:**
+
+```shiki
+{
+    "success": bool,
+    "taskId": str,
+    "updatedFields": list[str],  # Names of fields that changed
+    "error": str | None,
+    "statusChange": {"from": str, "to": str} | None,
+}
+```
+
+### [​](#taskget) TaskGet
+
+**Tool name:** `TaskGet`
+**Input:**
+
+```shiki
+{
+    "taskId": str,  # ID of the task to read
+}
+```
+
+**Output:**
+
+```shiki
+{
+    "task": {
+        "id": str,
+        "subject": str,
+        "description": str,
+        "status": Literal["pending", "in_progress", "completed"],
+        "blocks": list[str],
+        "blockedBy": list[str],
+    } | None,  # None when the ID is not found
+}
+```
+
+### [​](#tasklist) TaskList
+
+**Tool name:** `TaskList`
+**Input:**
+
+```shiki
+{}
+```
+
+**Output:**
+
+```shiki
+{
+    "tasks": [
+        {
+            "id": str,
+            "subject": str,
+            "status": Literal["pending", "in_progress", "completed"],
+            "owner": str | None,
+            "blockedBy": list[str],
+        }
+    ],
 }
 ```
 
