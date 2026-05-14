@@ -21,7 +21,7 @@ SSO, SCIM provisioning, and seat assignment are configured at the Claude account
 
 ## [​](#choose-your-api-provider) Choose your API provider
 
-Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, and which compliance posture you inherit.
+Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, which compliance posture you inherit, and which Claude Code features your developers can use.
 
 | Provider | Choose this when |
 | --- | --- |
@@ -31,6 +31,7 @@ Claude Code connects to Claude through one of several API providers. Your choice
 | Google Vertex AI | You want to inherit existing GCP compliance controls and billing |
 | Microsoft Foundry | You want to inherit existing Azure compliance controls and billing |
 
+Some Claude Code features require a Claude.ai account. [Claude Code on the web](claude-code-on-the-web.md), [Routines](routines.md), [Code Review](code-review.md), [Remote Control](remote-control.md), and the [Chrome extension](chrome.md) are not available through Console API keys or cloud-provider credentials alone. If you deploy through Bedrock, Vertex, or Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.
 For the full provider comparison covering authentication, regions, and feature parity, see the [enterprise deployment overview](third-party-integrations.md). Each provider’s auth setup is in [Authentication](authentication.md).
 Proxy and firewall requirements in [Network configuration](network-config.md) apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see [LLM gateway](llm-gateway.md).
 

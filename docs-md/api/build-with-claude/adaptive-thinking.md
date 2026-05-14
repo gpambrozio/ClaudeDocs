@@ -173,12 +173,10 @@ Here are some important considerations for summarized thinking:
 - The billed output token count will **not match** the count of tokens you see in the response.
 - On Claude 4 models, the first few lines of thinking output are more verbose, providing detailed reasoning that's particularly helpful for prompt engineering purposes. [Claude Mythos Preview](https://anthropic.com/glasswing) summarizes from the first token, so its thinking blocks do not show this verbose preamble.
 - As Anthropic seeks to improve the extended thinking feature, summarization behavior is subject to change.
-- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience and easy migration from Claude Sonnet 3.7 to Claude 4 and later models.
+- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-Claude Sonnet 3.7 continues to return full thinking output.
-
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#87f4e6ebe2f4c7e6e9f3eff5e8f7eee4a9e4e8ea).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#582b39343d2b1839362c302a3728313b763b3735).
 
 ### Controlling thinking display
 

@@ -6,11 +6,10 @@
 >
 > Use this file to discover all available pages before exploring further.
 
+Starting June 15, 2026, Agent SDK and `claude -p` usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) for details.
+
 The [Agent SDK](agent-sdk/overview.md) gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as [Python](agent-sdk/python.md) and [TypeScript](agent-sdk/typescript.md) packages for full programmatic control.
-
-The CLI was previously called “headless mode.” The `-p` flag and all CLI options work the same way.
-
-To run Claude Code programmatically from the CLI, pass `-p` with your prompt and any [CLI options](cli-reference.md):
+To run Claude Code in non-interactive mode, pass `-p` with your prompt and any [CLI options](cli-reference.md):
 
 ```shiki
 claude -p "Find and fix the bug in auth.py" --allowedTools "Read,Edit,Bash"

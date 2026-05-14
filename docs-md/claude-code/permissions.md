@@ -325,7 +325,7 @@ Permission rules follow the same [settings precedence](settings.md) as all other
 
 If a tool is denied at any level, no other level can allow it. For example, a managed settings deny cannot be overridden by `--allowedTools`, and `--disallowedTools` can add restrictions beyond what managed settings define.
 Embedding hosts can supply additional managed policy via the SDK `managedSettings` option when [`parentSettingsBehavior`](settings.md) is set to `"merge"`; embedder values can tighten policy but not loosen it.
-If a permission is allowed in user settings but denied in project settings, the project setting takes precedence and the permission is blocked.
+For example, if user settings allow a permission and project settings deny it, the deny rule blocks it. The reverse is also true: a user-level deny blocks a project-level allow, because deny rules from any scope are evaluated before allow rules.
 
 ## [​](#example-configurations) Example configurations
 

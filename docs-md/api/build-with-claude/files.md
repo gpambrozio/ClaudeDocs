@@ -10,7 +10,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](build-with-clau
 
 ## Supported models
 
-Referencing a `file_id` in a Messages request is supported in all models that support the given file type. For example, [images](build-with-claude/vision.md) are supported in all Claude 3+ models, [PDFs](build-with-claude/pdf-support.md) in all Claude 3.5+ models, and [various other file types](agents-and-tools/tool-use/code-execution-tool.md) for the code execution tool in Claude Haiku 4.5 plus all Claude 3.7+ models.
+Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
 
 The Files API is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
@@ -275,7 +275,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#cbb8aaa7aeb88baaa5bfa3b9a4bba2a8e5a8a4a6) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#c0b3a1aca5b380a1aeb4a8b2afb0a9a3eea3afad) if you need higher limits for your use case
 
 Was this page helpful?
 
