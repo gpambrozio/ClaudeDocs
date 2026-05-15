@@ -18,7 +18,7 @@ Most commands are useful at a specific point in a session, from setting up a pro
 **Running work in parallel.** `/agents` opens the manager for the [subagents](sub-agents.md) Claude can delegate side tasks to, and `/tasks` lists what’s running in the background of the current session. `/background` detaches the whole session to keep running as a [background agent](agent-view.md) and frees your terminal. For a large change that spans the codebase, `/batch` decomposes it into independent units and runs each in its own [worktree](worktrees.md). See [Run agents in parallel](agents.md) for how these approaches relate.
 **Before you ship.** `/diff` shows what changed, `/simplify` reviews recent files and applies quality and efficiency fixes, and `/review` or `/security-review` give a deeper read-only pass.
 **Between sessions.** `/clear` starts fresh on a new task while keeping project memory. `/resume` and `/branch` let you return to or fork an earlier conversation. `/teleport` pulls a web session into this terminal, and `/remote-control` lets you continue this local session from another device.
-**When something is wrong.** `/rewind` rolls code and conversation back to a checkpoint. `/doctor` and `/debug` diagnose install and runtime issues, and `/feedback` reports a bug with session context attached.
+**When something is wrong.** `/rewind` rolls code and conversation back to a checkpoint, or summarizes part of the conversation. `/doctor` and `/debug` diagnose install and runtime issues, and `/feedback` reports a bug with session context attached.
 
 ## [​](#all-commands) All commands
 
