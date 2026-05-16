@@ -5,7 +5,6 @@ Copy page
 ## Prerequisites
 
 - An Anthropic [Console account](/)
-- An [API key](/settings/keys)
 
 ## Call the API
 

@@ -2,26 +2,20 @@
 
 Copy page
 
-Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. Use the [manual loop](agents-and-tools/tool-use/handle-tool-calls.md) only when you need human-in-the-loop approval, custom logging, or conditional execution. Available in Python, TypeScript, and Ruby SDKs.
+Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](agents-and-tools/tool-use/handle-tool-calls.md) instead.
 
-The tool runner provides an out-of-the-box solution for executing tools with Claude. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
+The tool runner provides an out-of-the-box solution for running tools with Claude. The tool runner can simplify most tool use implementations. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
 
-- Executes tools when Claude calls them
+- Runs tools when Claude calls them
 - Handles the request/response cycle
 - Manages conversation state
 - Provides type safety and validation
 
-Use the tool runner for most tool use implementations.
-
-The tool runner is currently in beta and available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), and [Ruby](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta) SDKs.
-
-**Automatic context management with compaction**
-
-The tool runner supports automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold. This allows long-running agentic tasks to continue beyond context window limits.
+The tool runner is currently in beta and available in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), [C# SDK](https://github.com/anthropics/anthropic-sdk-csharp/blob/main/examples/ToolRunnerExample/Program.cs), [Go SDK](https://github.com/anthropics/anthropic-sdk-go/blob/main/tools.md), [Java SDK](https://github.com/anthropics/anthropic-sdk-java/blob/main/anthropic-java-example/src/main/java/com/anthropic/example/BetaToolRunnerExample.java), [PHP SDK](https://github.com/anthropics/anthropic-sdk-php/blob/main/examples/beta/beta_tool_runner.php), and [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta).
 
 ## Basic usage
 
-Define tools using the SDK helpers, then use the tool runner to execute them.
+Define tools using the SDK helpers, then use the tool runner to run them.
 
 Python
 
@@ -30,6 +24,22 @@ Python
 TypeScript
 
 TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
 
 Ruby
 
@@ -80,37 +90,13 @@ for message in runner:
     print(message)
 ```
 
-The `@beta_tool` decorator inspects the function arguments and docstring to extract a JSON schema representation. For example, `calculate_sum` becomes:
+The `@beta_tool` decorator inspects the function arguments and docstring to derive the JSON schema for you.
 
-```shiki
-{
-  "name": "calculate_sum",
-  "description": "Add two numbers together.",
-  "input_schema": {
-    "additionalProperties": false,
-    "properties": {
-      "a": {
-        "description": "First number",
-        "title": "A",
-        "type": "integer"
-      },
-      "b": {
-        "description": "Second number",
-        "title": "B",
-        "type": "integer"
-      }
-    },
-    "required": ["a", "b"],
-    "type": "object"
-  }
-}
-```
-
-The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, booleans, or other non-string primitives must also be converted to strings.
+The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, Booleans, or other non-string primitives must also be converted to strings.
 
 ## Iterating over the tool runner
 
-The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop". Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
+The tool runner is an iterable that yields messages from Claude. This is often referred to as a "tool call loop." Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.
 
 You can end the loop at any iteration with a `break` statement. The runner loops until Claude returns a message without a tool use.
 
@@ -123,6 +109,22 @@ Python
 TypeScript
 
 TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
 
 Ruby
 
@@ -150,7 +152,24 @@ for block in final_message.content:
 
 ## Advanced usage
 
-Within the loop, you can fully customize the tool runner's next request to the Messages API. The runner automatically appends tool results to the message history, so you don't need to manually manage them. You can optionally inspect the tool result for logging or debugging, and modify the request parameters before the next API call.
+Within the loop, you can read each response message and modify the runner's state before the next API call. Each iteration follows this lifecycle:
+
+1. The runner sends a request to the Messages API with its current state.
+2. The runner yields the response message to your loop body.
+3. Your loop body runs. You can read the message and optionally modify the runner's state.
+4. When your loop body returns, the runner checks whether you modified its message history.
+   - **If you did not modify message history:** The runner appends the assistant message to its state. If the message contains tool calls, the runner runs them and appends the results. If there are no tool calls, the loop exits.
+   - **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](#taking-over-message-history).
+
+Messages APIToolRunnerYour codeMessages APIToolRunnerYour codeYour loop body runsalt[Message historyunchanged][Message historychanged]loop[For each iteration]Send request with current stateResponse messageYield messageResumeAppend assistant message,run tools, append results(exit if no tool calls)Use your state unchanged
+
+### Taking over message history
+
+By default, the runner manages conversation state for you: after each turn, it appends the assistant message and any tool results to its own message history. You take over message history when you want to retry a turn (discard the response and resend), inject a follow-up message, or build the tool result yourself.
+
+You take over by modifying the runner's messages from inside the loop body. The exact method depends on the SDK; see the per-language tabs that follow.
+
+When you take over for an iteration, the runner does not append the assistant message or tool results from that turn. You become responsible for keeping the conversation valid: append the assistant message and a tool result yourself (if you want the turn to count), modify state conditionally so the loop can still exit when there are no tool calls, and pass `max_iterations` to bound the loop. All seven SDKs support `max_iterations`.
 
 Python
 
@@ -160,38 +179,61 @@ TypeScript
 
 TypeScript
 
-Ruby
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
 
 Ruby
 
-Use `generate_tool_call_response()` to optionally inspect the tool result (the runner appends it automatically). Use `set_messages_params()` and `append_messages()` to modify the request.
+Ruby
+
+Use `generate_tool_call_response()` to inspect or compute the tool result. Calling `append_messages()` inside the loop tells the runner you're managing history yourself, so include the assistant message and tool result in what you append.
 
 ```shiki
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
     max_tokens=1024,
+    max_iterations=10,
     tools=[get_weather],
     messages=[{"role": "user", "content": "What's the weather in San Francisco?"}],
 )
+
 for message in runner:
-    # Optional: inspect the tool response (automatically appended by the runner)
     tool_response = runner.generate_tool_call_response()
-    if tool_response:
-        print(f"Tool result: {tool_response}")
-
-    # Customize the next request
-    runner.set_messages_params(
-        lambda params: {
-            **params,
-            "max_tokens": 2048,  # Increase tokens for next request
-        }
-    )
-
-    # Or add additional messages
-    runner.append_messages(
-        {"role": "user", "content": "Please be concise in your response."}
-    )
+    if tool_response is not None:
+        # append_messages() flags state as modified, so the runner skips its
+        # automatic append for this iteration. Append the assistant message and
+        # tool result yourself, plus any follow-up.
+        runner.append_messages(
+            message,
+            tool_response,
+            {"role": "user", "content": "Please be concise."},
+        )
+    # When there's no tool call, leave state untouched so the loop exits.
 ```
+
+To change request parameters such as `max_tokens` without taking over message history, use `set_messages_params()`. The runner still appends the assistant message and tool result automatically.
+
+```shiki
+for message in runner:
+    runner.set_messages_params(lambda params: {**params, "max_tokens": 2048})
+```
+
+### Automatic context management
+
+For long-running agentic tasks, the tool runner supports automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits.
 
 ### Debugging tool execution
 
@@ -207,11 +249,11 @@ export ANTHROPIC_LOG=info
 export ANTHROPIC_LOG=debug
 ```
 
-When enabled, the SDK logs full exception details (using Python's `logging` module, the console in TypeScript, or Ruby's logger), including the complete stack trace when a tool fails.
+When enabled, the SDK logs full exception details to your language's standard logging facility, including the complete stack trace when a tool fails.
 
 ### Intercepting tool errors
 
-By default, tool errors are passed back to Claude, which can then respond appropriately. However, you may want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
+By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
 
 Use the tool response method to intercept tool results and check for errors before they're sent to Claude:
 
@@ -223,6 +265,22 @@ TypeScript
 
 TypeScript
 
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
+
 Ruby
 
 Ruby
@@ -232,7 +290,7 @@ runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
     max_tokens=1024,
     tools=[my_tool],
-    messages=[{"role": "user", "content": "Run the tool"}],
+    messages=[{"role": "user", "content": "Run my_tool with the query 'hello'."}],
 )
 
 for message in runner:
@@ -266,6 +324,22 @@ Python
 TypeScript
 
 TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
 
 Ruby
 
@@ -305,7 +379,7 @@ Adding `cache_control` to tool results is particularly useful when tools return 
 
 ## Streaming
 
-Enable streaming to receive events as they arrive. Each iteration yields a stream object that you can iterate for events.
+Enable streaming to process each turn's response incrementally. Each iteration yields a stream object that you can iterate for events.
 
 Python
 
@@ -314,6 +388,22 @@ Python
 TypeScript
 
 TypeScript
+
+C#
+
+C#
+
+Go
+
+Go
+
+Java
+
+Java
+
+PHP
+
+PHP
 
 Ruby
 

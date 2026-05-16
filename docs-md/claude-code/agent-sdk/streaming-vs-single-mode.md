@@ -57,17 +57,18 @@ TypeScript
 Python
 
 ```shiki
-import { query } from "@anthropic-ai/claude-agent-sdk";
+import { query, type SDKUserMessage } from "@anthropic-ai/claude-agent-sdk";
 import { readFile } from "fs/promises";
 
-async function* generateMessages() {
+async function* generateMessages(): AsyncGenerator<SDKUserMessage> {
   // First message
   yield {
-    type: "user" as const,
+    type: "user",
     message: {
-      role: "user" as const,
+      role: "user",
       content: "Analyze this codebase for security issues"
-    }
+    },
+    parent_tool_use_id: null
   };
 
   // Wait for conditions or user input
@@ -75,9 +76,9 @@ async function* generateMessages() {
 
   // Follow-up with image
   yield {
-    type: "user" as const,
+    type: "user",
     message: {
-      role: "user" as const,
+      role: "user",
       content: [
         {
           type: "text",
@@ -92,7 +93,8 @@ async function* generateMessages() {
           }
         }
       ]
-    }
+    },
+    parent_tool_use_id: null
   };
 }
 
@@ -104,7 +106,7 @@ for await (const message of query({
     allowedTools: ["Read", "Grep"]
   }
 })) {
-  if (message.type === "result") {
+  if (message.type === "result" && message.subtype === "success") {
     console.log(message.result);
   }
 }
@@ -149,7 +151,7 @@ for await (const message of query({
     allowedTools: ["Read", "Grep"]
   }
 })) {
-  if (message.type === "result") {
+  if (message.type === "result" && message.subtype === "success") {
     console.log(message.result);
   }
 }
@@ -162,7 +164,7 @@ for await (const message of query({
     maxTurns: 1
   }
 })) {
-  if (message.type === "result") {
+  if (message.type === "result" && message.subtype === "success") {
     console.log(message.result);
   }
 }
