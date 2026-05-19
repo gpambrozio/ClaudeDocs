@@ -242,7 +242,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
 id: string
 
@@ -1180,6 +1180,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 
@@ -1732,7 +1783,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
 id: string
 
@@ -2670,6 +2721,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 
@@ -3184,7 +3286,7 @@ type: "expired"
 
 BetaMessageBatchSucceededResult { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
 id: string
 
@@ -4122,6 +4224,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }  | null
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  | 3 more | null
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 

@@ -14,10 +14,6 @@ workspace\_id: string
 
 ##### Body ParametersJSONExpand Collapse
 
-name: string
-
-Name of the Workspace.
-
 data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo }
 
 Data residency configuration for the workspace.
@@ -36,9 +32,17 @@ default\_inference\_geo: optional string
 
 Default inference geo applied when requests omit the parameter. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
 
+name: optional string
+
+Name of the Workspace.
+
+tags: optional map[string]
+
+User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 ##### ReturnsExpand Collapse
 
-Workspace = object { id, archived\_at, created\_at, 4 more }
+Workspace = object { id, archived\_at, created\_at, 5 more }
 
 id: string
 
@@ -82,6 +86,10 @@ name: string
 
 Name of the Workspace.
 
+tags: map[string]
+
+User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 type: "workspace"
 
 Object type.
@@ -96,7 +104,10 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
-          "name": "x"
+          "tags": {
+            "env": "prod",
+            "team": "platform"
+          }
         }'
 ```
 
@@ -114,6 +125,10 @@ Response 200
   },
   "display_color": "#6C5BB9",
   "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
   "type": "workspace"
 }
 ```
@@ -134,6 +149,10 @@ Response 200
   },
   "display_color": "#6C5BB9",
   "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
   "type": "workspace"
 }
 ```

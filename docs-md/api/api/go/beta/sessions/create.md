@@ -192,6 +192,8 @@ const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03
 
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsSession struct{…}
@@ -788,7 +790,7 @@ Server-generated outc\_ ID for this outcome.
 
 Result string
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 Type BetaManagedAgentsOutcomeEvaluationResourceType
 

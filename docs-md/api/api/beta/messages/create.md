@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
 Accepts one of the following:
 
@@ -75,6 +75,8 @@ Accepts one of the following:
 "advisor-tool-2026-03-01"
 
 "managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -3017,6 +3019,15 @@ type: "input\_tokens"
 
 value: number
 
+diagnostics: optional [BetaDiagnosticsParam](api/beta.md) { previous\_message\_id }
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+previous\_message\_id: optional string
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 inference\_geo: optional string
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -5033,7 +5044,7 @@ The user profile ID to attribute this request to. Use when acting on behalf of a
 
 ##### ReturnsExpand Collapse
 
-BetaMessage = object { id, container, content, 8 more }
+BetaMessage = object { id, container, content, 9 more }
 
 id: string
 
@@ -5971,6 +5982,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or 3 more
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound = object { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable = object { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 
@@ -6423,7 +6485,7 @@ Accepts one of the following:
 
 BetaRawMessageStartEvent = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
 id: string
 
@@ -7361,6 +7423,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or 3 more
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound = object { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable = object { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 
@@ -9272,6 +9385,12 @@ Response 200
       }
     ]
   },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_details": {
@@ -9358,6 +9477,12 @@ Response 200
         "type": "clear_tool_uses_20250919"
       }
     ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
   },
   "model": "claude-opus-4-6",
   "role": "assistant",

@@ -30,7 +30,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
 Accepts one of the following:
 
@@ -81,6 +81,8 @@ Accepts one of the following:
 "advisor-tool-2026-03-01"
 
 "managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -1042,6 +1044,57 @@ Number of thinking turns that were cleared.
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
+
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
 
 model: [Model](api/messages.md)
 

@@ -18,6 +18,12 @@ client.Beta.Skills.Versions.List(ctx, skillID, params) (\*PageCursor[[BetaSkillV
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+client.Beta.Skills.Versions.Download(ctx, version, params) (\*Response, error)
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 client.Beta.Skills.Versions.Get(ctx, version, params) (\*[BetaSkillVersionGetResponse](api/beta.md), error)

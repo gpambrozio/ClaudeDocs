@@ -2,7 +2,7 @@
 
 Copy page
 
-The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+The endpoints on this page retrieve and delete claude.ai content, which is available only to organizations on the Claude Enterprise plan. The Compliance API is enabled on request. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 **Required scope:** `read:compliance_user_data` on the Compliance Access Key. The delete endpoints also require `delete:compliance_user_data`.
 
@@ -45,7 +45,6 @@ Response
       "deleted_at": null,
       "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
       "model": "claude-opus-4-7",
-      "organization_id": "org_01Wv6QeBcDfGhJkLmNpQrSt8",
       "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
       "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
       "user": {
@@ -89,7 +88,6 @@ Response
   "deleted_at": null,
   "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
   "model": "claude-opus-4-7",
-  "organization_id": "org_01Wv6QeBcDfGhJkLmNpQrSt8",
   "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
   "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
   "user": {

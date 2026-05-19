@@ -68,6 +68,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 String name
 
 Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.

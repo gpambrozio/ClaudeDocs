@@ -2756,6 +2756,11 @@ Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
+[BetaDiagnosticsParam](api/beta.md)? diagnostics
+
+Body param: Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
 string? inferenceGeo
 
 Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -4650,6 +4655,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaMessage:
@@ -5590,6 +5597,57 @@ Number of thinking turns that were cleared.
 JsonElement Type "clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+required [BetaDiagnostics](api/beta.md)? Diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+required CacheMissReason? CacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonElement Type "previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonElement Type "unavailable"constant
 
 required [Model](api/messages.md) Model
 
@@ -6958,6 +7016,57 @@ Number of thinking turns that were cleared.
 JsonElement Type "clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+required [BetaDiagnostics](api/beta.md)? Diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+required CacheMissReason? CacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonElement Type "previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonElement Type "unavailable"constant
 
 required [Model](api/messages.md) Model
 
@@ -8814,6 +8923,12 @@ Response 200
       }
     ]
   },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_details": {
@@ -8900,6 +9015,12 @@ Response 200
         "type": "clear_tool_uses_20250919"
       }
     ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
   },
   "model": "claude-opus-4-6",
   "role": "assistant",

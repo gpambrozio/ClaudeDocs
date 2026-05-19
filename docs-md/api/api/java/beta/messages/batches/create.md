@@ -72,6 +72,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 List<Request> requests
 
 List of requests for prompt completion. Each is an individual request to create a Message.
@@ -3020,6 +3022,15 @@ When to trigger compaction. Defaults to 150000 input tokens.
 JsonValue; type "input\_tokens"constant"input\_tokens"constant
 
 long value
+
+Optional<[BetaDiagnosticsParam](api/beta.md)> diagnostics
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+Optional<String> previousMessageId
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
 Optional<String> inferenceGeo
 

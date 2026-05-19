@@ -30,7 +30,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
 Accepts one of the following:
 
@@ -82,6 +82,8 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 BetaMessageBatchIndividualResponse = object { custom\_id, result }
@@ -104,7 +106,7 @@ Accepts one of the following:
 
 BetaMessageBatchSucceededResult = object { message, type }
 
-message: [BetaMessage](api/beta.md) { id, container, content, 8 more }
+message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
 id: string
 
@@ -1042,6 +1044,57 @@ Number of thinking turns that were cleared.
 type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
+
+diagnostics: [BetaDiagnostics](api/beta.md) { cache\_miss\_reason }
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta.md) { cache\_missed\_input\_tokens, type }  or 3 more
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "model\_changed"
+
+BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "system\_changed"
+
+BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "tools\_changed"
+
+BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+
+cache\_missed\_input\_tokens: number
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: "messages\_changed"
+
+BetaCacheMissPreviousMessageNotFound = object { type }
+
+type: "previous\_message\_not\_found"
+
+BetaCacheMissUnavailable = object { type }
+
+type: "unavailable"
 
 model: [Model](api/messages.md)
 

@@ -76,6 +76,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -1036,6 +1038,57 @@ Number of thinking turns that were cleared.
 JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
 
 Model model
 

@@ -1,4 +1,4 @@
-# Use Claude Code Desktop
+# Desktop application
 
 > ## Documentation Index
 >
@@ -640,6 +640,7 @@ The following features are only available in the CLI or VS Code extension:
 - **Linux**: the desktop app is available on macOS and Windows only. On Linux, use the [CLI](quickstart.md).
 - **Inline code suggestions**: Desktop does not provide autocomplete-style suggestions. It works through conversational prompts and explicit code changes.
 - **Agent teams**: multi-agent orchestration is available via the [CLI](agent-teams.md) and [Agent SDK](headless.md), not in Desktop.
+- **Terminal-dialog commands**: built-in commands that open an interactive panel in the terminal, such as `/permissions`, `/config`, `/agents`, and `/doctor`, are not available in the Code tab and reply with `isn't available in this environment`. Edit [settings files](settings.md) directly to manage permission rules and configuration, or run the command from the standalone CLI.
 
 ## [​](#troubleshooting) Troubleshooting
 

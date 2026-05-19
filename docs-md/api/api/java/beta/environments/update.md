@@ -70,12 +70,101 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
-Optional<[BetaCloudConfigParams](api/beta.md)> config
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
+Optional<Config> config
+
+Updated environment configuration
+
+class BetaCloudConfigParams:
 
 Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
+
+JsonValue; type "cloud"constant"cloud"constant
+
+Environment type
+
+Optional<Networking> networking
+
+Network configuration policy. Omit on update to preserve the existing value.
+
+Accepts one of the following:
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonValue; type "unrestricted"constant"unrestricted"constant
+
+Network policy type
+
+class BetaLimitedNetworkParams:
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+JsonValue; type "limited"constant"limited"constant
+
+Network policy type
+
+Optional<Boolean> allowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+Optional<Boolean> allowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+Optional<List<String>> allowedHosts
+
+Specifies domains the container can reach.
+
+Optional<[BetaPackagesParams](api/beta.md)> packages
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+Optional<List<String>> apt
+
+Ubuntu/Debian packages to install
+
+Optional<List<String>> cargo
+
+Rust packages to install
+
+Optional<List<String>> gem
+
+Ruby packages to install
+
+Optional<List<String>> go
+
+Go packages to install
+
+Optional<List<String>> npm
+
+Node.js packages to install
+
+Optional<List<String>> pip
+
+Python packages to install
+
+Optional<Type> type
+
+Package configuration type
+
+class BetaSelfHostedConfigParams:
+
+Request params for `self_hosted` environment configuration.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
 
 Optional<String> description
 
@@ -88,6 +177,14 @@ User-provided metadata key-value pairs. Set a value to null or empty string to d
 Optional<String> name
 
 Updated name for the environment
+
+Optional<Scope> scope
+
+The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+
+ORGANIZATION("organization")
+
+ACCOUNT("account")
 
 ##### ReturnsExpand Collapse
 
@@ -103,7 +200,13 @@ Optional<String> archivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-[BetaCloudConfig](api/beta.md) config
+Config config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig:
 
 `cloud` environment configuration.
 
@@ -177,6 +280,14 @@ JsonValue; type "cloud"constant"cloud"constant
 
 Environment type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
+
 String createdAt
 
 RFC 3339 timestamp when environment was created
@@ -200,6 +311,16 @@ The type of object (always 'environment')
 String updatedAt
 
 RFC 3339 timestamp when environment was last updated
+
+Optional<Scope> scope
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+ORGANIZATION("organization")
+
+ACCOUNT("account")
 
 Update Environment
 
@@ -268,7 +389,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -318,7 +440,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

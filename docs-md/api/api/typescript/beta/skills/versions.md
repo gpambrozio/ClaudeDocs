@@ -18,6 +18,12 @@ client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page,
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+client.beta.skills.versions.download(stringversion, VersionDownloadParams { skill\_id, betas } params, RequestOptionsoptions?): Response
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 client.beta.skills.versions.retrieve(stringversion, VersionRetrieveParams { skill\_id, betas } params, RequestOptionsoptions?): [VersionRetrieveResponse](api/beta.md) { id, created\_at, description, 5 more }

@@ -70,6 +70,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 List<[BetaManagedAgentsEventParams](api/beta.md)> events
 
 Events to send to the `session`.
@@ -384,6 +386,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -427,6 +461,182 @@ Type type
 Optional<Long> maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
+
+class BetaManagedAgentsUserToolResultEventParams:
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
 
 ##### ReturnsExpand Collapse
 
@@ -782,6 +992,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -845,6 +1087,194 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 Type type
 
 Type type
+
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 Send Events
 

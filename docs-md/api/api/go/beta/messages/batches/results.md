@@ -82,6 +82,8 @@ const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03
 
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessageBatchIndividualResponse struct{…}
@@ -1042,6 +1044,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 

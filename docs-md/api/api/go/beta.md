@@ -66,6 +66,8 @@ const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03
 
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+
 type BetaAPIError struct{…}
 
 Message string
@@ -1474,6 +1476,46 @@ The number of input tokens used to create the 1 hour cache entry.
 Ephemeral5mInputTokens int64
 
 The number of input tokens used to create the 5 minute cache entry.
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 type BetaCitationCharLocation struct{…}
 
@@ -6611,6 +6653,66 @@ OriginalInputTokens int64
 
 The original token count before context management was applied
 
+type BetaDiagnostics struct{…}
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
+type BetaDiagnosticsParamResp struct{…}
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+PreviousMessageID stringoptional
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 type BetaDirectCaller struct{…}
 
 Tool invocation directly from the model.
@@ -8414,6 +8516,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -14284,6 +14437,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -15679,6 +15883,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -25714,6 +25969,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -27216,6 +27522,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -28680,6 +29037,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -29691,6 +30099,81 @@ Type BetaManagedAgentsAlwaysAskPolicyType
 
 Type BetaManagedAgentsAgentToolset20260401Type
 
+type BetaManagedAgentsAgentToolset20260401BashInput struct{…}
+
+Input payload for the `bash` tool of the
+`agent_toolset_20260401` toolset. All fields are optional;
+a normal invocation supplies `command`, while `restart=true`
+(with no `command`) reboots the runner-side bash session.
+
+Command stringoptional
+
+Shell command to execute. Omit only when `restart` is true.
+
+Restart booloptional
+
+When true, restart the persistent bash session instead of
+running a command. Subsequent calls without `restart` will
+run against the fresh session.
+
+TimeoutMs int64optional
+
+Per-call timeout in milliseconds. Defaults to the
+runner-wide tool timeout when omitted or zero.
+
+type BetaManagedAgentsAgentToolset20260401EditInput struct{…}
+
+Input payload for the `edit` tool. Performs a string
+replacement in the named file; by default `old_string` must
+occur exactly once.
+
+FilePath string
+
+Path of the file to edit.
+
+NewString string
+
+Replacement text.
+
+OldString string
+
+Substring to find and replace.
+
+ReplaceAll booloptional
+
+When true, replace every occurrence of `old_string`
+instead of requiring a unique match.
+
+type BetaManagedAgentsAgentToolset20260401GlobInput struct{…}
+
+Input payload for the `glob` tool. Returns paths matching a
+doublestar glob pattern, newest first.
+
+Pattern string
+
+Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
+are only permitted when the runner is configured to allow
+them.
+
+Path stringoptional
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
+type BetaManagedAgentsAgentToolset20260401GrepInput struct{…}
+
+Input payload for the `grep` tool. Searches file contents for
+a regular expression, returning matching lines.
+
+Pattern string
+
+Regular expression to search for.
+
+Path stringoptional
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
 type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
@@ -29770,6 +30253,35 @@ type BetaManagedAgentsAlwaysAskPolicy struct{…}
 Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
+
+type BetaManagedAgentsAgentToolset20260401ReadInput struct{…}
+
+Input payload for the `read` tool. Reads file contents
+relative to the runner's working directory (or absolute when
+the runner permits).
+
+FilePath string
+
+Path of the file to read.
+
+ViewRange []int64optional
+
+Optional `[start_line, end_line]` 1-indexed inclusive
+range. When omitted the entire file is returned.
+`end_line` of 0 or negative means "to end of file".
+
+type BetaManagedAgentsAgentToolset20260401WriteInput struct{…}
+
+Input payload for the `write` tool. Writes (overwriting) the
+entire file contents.
+
+Content string
+
+Full file contents to write.
+
+FilePath string
+
+Path of the file to write.
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30385,6 +30897,278 @@ Sentinel roster entry meaning "the agent that owns this configuration". Resolved
 
 Type BetaManagedAgentsMultiagentSelfParamsType
 
+type BetaManagedAgentsSessionThreadAgent struct{…}
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
 type BetaManagedAgentsSkillParamsUnionResp interface{…}
 
 Skill to load in the session container.
@@ -30649,7 +31433,13 @@ ArchivedAt string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-Config [BetaCloudConfig](api/beta.md)
+Config BetaEnvironmentConfigUnion
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+type BetaCloudConfig struct{…}
 
 `cloud` environment configuration.
 
@@ -30723,6 +31513,14 @@ Type Cloud
 
 Environment type
 
+type BetaSelfHostedConfig struct{…}
+
+Configuration for self-hosted environments.
+
+Type SelfHosted
+
+Environment type
+
 CreatedAt string
 
 RFC 3339 timestamp when environment was created
@@ -30746,6 +31544,16 @@ The type of object (always 'environment')
 UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
+
+Scope BetaEnvironmentScopeoptional
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
+
+const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
 
 type BetaEnvironmentDeleteResponse struct{…}
 
@@ -30868,6 +31676,22 @@ Type BetaPackagesParamsTypeoptional
 
 Package configuration type
 
+type BetaSelfHostedConfig struct{…}
+
+Configuration for self-hosted environments.
+
+Type SelfHosted
+
+Environment type
+
+type BetaSelfHostedConfigParamsResp struct{…}
+
+Request params for `self_hosted` environment configuration.
+
+Type SelfHosted
+
+Environment type
+
 type BetaUnrestrictedNetwork struct{…}
 
 Unrestricted network access.
@@ -30875,6 +31699,307 @@ Unrestricted network access.
 Type Unrestricted
 
 Network policy type
+
+#### BetaEnvironmentsWork
+
+##### [Get Work Item](api/beta/environments/work/retrieve.md)
+
+client.Beta.Environments.Work.Get(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+
+GET/v1/environments/{environment\_id}/work/{work\_id}
+
+##### [Poll for Work](api/beta/environments/work/poll.md)
+
+client.Beta.Environments.Work.Poll(ctx, environmentID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+
+GET/v1/environments/{environment\_id}/work/poll
+
+##### [Acknowledge Work](api/beta/environments/work/ack.md)
+
+client.Beta.Environments.Work.Ack(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+
+##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+
+client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (\*[BetaSelfHostedWorkHeartbeatResponse](api/beta.md), error)
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+
+##### [Stop Work](api/beta/environments/work/stop.md)
+
+client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+
+##### [List Work Items](api/beta/environments/work/list.md)
+
+client.Beta.Environments.Work.List(ctx, environmentID, params) (\*PageCursor[[BetaSelfHostedWork](api/beta.md)], error)
+
+GET/v1/environments/{environment\_id}/work
+
+##### [Update Work Item](api/beta/environments/work/update.md)
+
+client.Beta.Environments.Work.Update(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta.md), error)
+
+POST/v1/environments/{environment\_id}/work/{work\_id}
+
+##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+
+client.Beta.Environments.Work.Stats(ctx, environmentID, query) (\*[BetaSelfHostedWorkQueueStats](api/beta.md), error)
+
+GET/v1/environments/{environment\_id}/work/stats
+
+##### ModelsExpand Collapse
+
+type BetaSelfHostedWork struct{…}
+
+Work resource representing a unit of work in a self-hosted environment.
+
+Work items are queued when sessions are created or when long-dormant sessions
+receive new messages. The environment worker polls for work to execute in a
+self-hosted sandbox.
+
+ID string
+
+Work identifier (e.g., 'work\_...')
+
+AcknowledgedAt string
+
+RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+CreatedAt string
+
+RFC 3339 timestamp when work was created
+
+Data [BetaSessionWorkData](api/beta.md)
+
+The actual work to be performed
+
+ID string
+
+Session identifier (e.g., 'session\_...')
+
+Type Session
+
+Type of work data
+
+EnvironmentID string
+
+Environment identifier this work belongs to (e.g., `env_...`)
+
+LatestHeartbeatAt string
+
+RFC 3339 timestamp of the most recent heartbeat
+
+Metadata map[string, string]
+
+User-provided metadata key-value pairs associated with this work item
+
+StartedAt string
+
+RFC 3339 timestamp when work execution started
+
+State BetaSelfHostedWorkState
+
+Current state of the work item
+
+Accepts one of the following:
+
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+
+StopRequestedAt string
+
+RFC 3339 timestamp when stop was requested
+
+StoppedAt string
+
+RFC 3339 timestamp when work execution stopped
+
+Type Work
+
+The type of object (always 'work')
+
+type BetaSelfHostedWorkHeartbeatResponse struct{…}
+
+Response after recording a heartbeat for a work item.
+
+LastHeartbeat string
+
+RFC 3339 timestamp of the actual heartbeat from DB
+
+LeaseExtended bool
+
+Whether the heartbeat succeeded in extending the lease
+
+State BetaSelfHostedWorkHeartbeatResponseState
+
+Current state of the work item (active/stopping/stopped)
+
+Accepts one of the following:
+
+const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
+
+const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"
+
+const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"
+
+const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"
+
+const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"
+
+TTLSeconds int64
+
+Effective TTL applied to the lease
+
+Type WorkHeartbeat
+
+The type of response
+
+type BetaSelfHostedWorkListResponse struct{…}
+
+Response when listing work items with cursor-based pagination.
+
+Data [][BetaSelfHostedWork](api/beta.md)
+
+List of work items
+
+ID string
+
+Work identifier (e.g., 'work\_...')
+
+AcknowledgedAt string
+
+RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+CreatedAt string
+
+RFC 3339 timestamp when work was created
+
+Data [BetaSessionWorkData](api/beta.md)
+
+The actual work to be performed
+
+ID string
+
+Session identifier (e.g., 'session\_...')
+
+Type Session
+
+Type of work data
+
+EnvironmentID string
+
+Environment identifier this work belongs to (e.g., `env_...`)
+
+LatestHeartbeatAt string
+
+RFC 3339 timestamp of the most recent heartbeat
+
+Metadata map[string, string]
+
+User-provided metadata key-value pairs associated with this work item
+
+StartedAt string
+
+RFC 3339 timestamp when work execution started
+
+State BetaSelfHostedWorkState
+
+Current state of the work item
+
+Accepts one of the following:
+
+const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+
+const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+
+const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+
+const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+
+const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+
+StopRequestedAt string
+
+RFC 3339 timestamp when stop was requested
+
+StoppedAt string
+
+RFC 3339 timestamp when work execution stopped
+
+Type Work
+
+The type of object (always 'work')
+
+NextPage string
+
+Opaque cursor for fetching the next page of results
+
+type BetaSelfHostedWorkQueueStats struct{…}
+
+Statistics about the work queue for an environment.
+
+Uses Redis Stream consumer group metrics for O(1) queries.
+
+Depth int64
+
+Number of work items waiting to be picked up (lag from consumer group)
+
+OldestQueuedAt string
+
+RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+Pending int64
+
+Number of work items being processed (polled but not acknowledged)
+
+Type WorkQueueStats
+
+The type of object
+
+WorkersPolling int64
+
+Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+
+type BetaSelfHostedWorkStopRequest struct{…}
+
+Request to stop a work item.
+
+Force booloptional
+
+If true, immediately stop work without graceful shutdown
+
+type BetaSelfHostedWorkUpdateRequest struct{…}
+
+Request to update work item metadata.
+
+Metadata map[string, string]
+
+Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+type BetaSessionWorkData struct{…}
+
+Work data for session work items.
+
+This resource type is used when work represents a session that needs to be executed
+in a self-hosted environment.
+
+ID string
+
+Session identifier (e.g., 'session\_...')
+
+Type Session
+
+Type of work data
 
 #### BetaSessions
 
@@ -31148,7 +32273,7 @@ Server-generated outc\_ ID for this outcome.
 
 Result string
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 Type BetaManagedAgentsOutcomeEvaluationResourceType
 
@@ -31746,7 +32871,7 @@ Server-generated outc\_ ID for this outcome.
 
 Result string
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 Type BetaManagedAgentsOutcomeEvaluationResourceType
 
@@ -32462,6 +33587,206 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
+type BetaManagedAgentsSessionAgentUpdate struct{…}
+
+Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
+
+MCPServers [][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)optional
+
+Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+Name string
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+Type BetaManagedAgentsURLMCPServerParamsType
+
+URL string
+
+Endpoint URL for the MCP server.
+
+Tools []BetaManagedAgentsSessionAgentUpdateToolUnionoptional
+
+Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+Type BetaManagedAgentsAgentToolset20260401ParamsType
+
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)optional
+
+Per-tool configuration overrides.
+
+Name BetaManagedAgentsAgentToolConfigParamsName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
+
+const BetaManagedAgentsAgentToolConfigParamsNameEdit BetaManagedAgentsAgentToolConfigParamsName = "edit"
+
+const BetaManagedAgentsAgentToolConfigParamsNameRead BetaManagedAgentsAgentToolConfigParamsName = "read"
+
+const BetaManagedAgentsAgentToolConfigParamsNameWrite BetaManagedAgentsAgentToolConfigParamsName = "write"
+
+const BetaManagedAgentsAgentToolConfigParamsNameGlob BetaManagedAgentsAgentToolConfigParamsName = "glob"
+
+const BetaManagedAgentsAgentToolConfigParamsNameGrep BetaManagedAgentsAgentToolConfigParamsName = "grep"
+
+const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentToolConfigParamsName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
+
+Enabled booloptional
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)optional
+
+Default configuration for all tools in a toolset.
+
+Enabled booloptional
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+type BetaManagedAgentsMCPToolsetParamsResp struct{…}
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+MCPServerName string
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+Type BetaManagedAgentsMCPToolsetParamsType
+
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)optional
+
+Per-tool configuration overrides.
+
+Name string
+
+Name of the MCP tool to configure. 1-128 characters.
+
+Enabled booloptional
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)optional
+
+Default configuration for all tools from an MCP server.
+
+Enabled booloptional
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+type BetaManagedAgentsCustomToolParamsResp struct{…}
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+Description string
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+Type BetaManagedAgentsCustomToolParamsType
+
 type BetaManagedAgentsSessionMultiagentCoordinator struct{…}
 
 Resolved coordinator topology with full agent definitions for each roster member.
@@ -32752,6 +34077,578 @@ DurationSeconds float64optional
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
+type BetaManagedAgentsSessionUpdatedEvent struct{…}
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+ID string
+
+Unique identifier for this event.
+
+ProcessedAt Time
+
+A timestamp in RFC 3339 format
+
+Type BetaManagedAgentsSessionUpdatedEventType
+
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
+Type BetaManagedAgentsSessionMultiagentCoordinatorType
+
+Name string
+
+Skills []BetaManagedAgentsSessionAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionAgentType
+
+Version int64
+
+Metadata map[string, string]optional
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Title stringoptional
+
+The session's new title. Present only when the update changed it.
+
 type BetaManagedAgentsSessionUsage struct{…}
 
 Cumulative token usage for a session across all turns.
@@ -32779,6 +34676,194 @@ Total input tokens consumed across all turns.
 OutputTokens int64optional
 
 Total output tokens generated across all turns.
+
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 #### BetaSessionsEvents
 
@@ -32975,6 +35060,38 @@ Additional context about the document for the model.
 Title stringoptional
 
 The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
 
 IsError booloptional
 
@@ -33526,6 +35643,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -34014,6 +36163,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -34057,6 +36238,182 @@ Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 MaxIterations int64optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
+
+type BetaManagedAgentsUserToolResultEventParamsResp struct{…}
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventParamsType
+
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
 
 type BetaManagedAgentsFileDocumentSource struct{…}
 
@@ -34353,6 +36710,56 @@ type BetaManagedAgentsRetryStatusTerminal struct{…}
 The session encountered a terminal error and will transition to `terminated` state.
 
 Type BetaManagedAgentsRetryStatusTerminalType
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+type BetaManagedAgentsSearchResultCitations struct{…}
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+type BetaManagedAgentsSearchResultContent struct{…}
+
+Text content within a search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
 
 type BetaManagedAgentsSendSessionEvents struct{…}
 
@@ -34706,6 +37113,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -34769,6 +37208,194 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 Type BetaManagedAgentsTextRubricType
 
 Type BetaManagedAgentsUserDefineOutcomeEventType
+
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 type BetaManagedAgentsSessionDeletedEvent struct{…}
 
@@ -35404,6 +38031,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -35670,6 +38329,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -35859,6 +38550,38 @@ Additional context about the document for the model.
 Title stringoptional
 
 The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
 
 IsError booloptional
 
@@ -36888,6 +39611,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type BetaManagedAgentsSessionThreadStatusTerminatedEventType
 
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -36909,6 +39820,578 @@ SessionThreadID string
 Public sthr\_ ID of the thread that is retrying.
 
 Type BetaManagedAgentsSessionThreadStatusRescheduledEventType
+
+type BetaManagedAgentsSessionUpdatedEvent struct{…}
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+ID string
+
+Unique identifier for this event.
+
+ProcessedAt Time
+
+A timestamp in RFC 3339 format
+
+Type BetaManagedAgentsSessionUpdatedEventType
+
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
+Type BetaManagedAgentsSessionMultiagentCoordinatorType
+
+Name string
+
+Skills []BetaManagedAgentsSessionAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionAgentType
+
+Version int64
+
+Metadata map[string, string]optional
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Title stringoptional
+
+The session's new title. Present only when the update changed it.
 
 type BetaManagedAgentsSessionRequiresAction struct{…}
 
@@ -37700,6 +41183,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -37966,6 +41481,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -38155,6 +41702,38 @@ Additional context about the document for the model.
 Title stringoptional
 
 The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
 
 IsError booloptional
 
@@ -39184,6 +42763,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type BetaManagedAgentsSessionThreadStatusTerminatedEventType
 
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -39205,6 +42972,578 @@ SessionThreadID string
 Public sthr\_ ID of the thread that is retrying.
 
 Type BetaManagedAgentsSessionThreadStatusRescheduledEventType
+
+type BetaManagedAgentsSessionUpdatedEvent struct{…}
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+ID string
+
+Unique identifier for this event.
+
+ProcessedAt Time
+
+A timestamp in RFC 3339 format
+
+Type BetaManagedAgentsSessionUpdatedEventType
+
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
+Type BetaManagedAgentsSessionMultiagentCoordinatorType
+
+Name string
+
+Skills []BetaManagedAgentsSessionAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionAgentType
+
+Version int64
+
+Metadata map[string, string]optional
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Title stringoptional
+
+The session's new title. Present only when the update changed it.
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -39434,6 +43773,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -39585,6 +43956,38 @@ Additional context about the document for the model.
 Title stringoptional
 
 The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
 
 IsError booloptional
 
@@ -40049,6 +44452,182 @@ Type BetaManagedAgentsUserToolConfirmationEventParamsType
 DenyMessage stringoptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+type BetaManagedAgentsUserToolResultEventParamsResp struct{…}
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventParamsType
+
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
 
 #### BetaSessionsResources
 
@@ -40664,278 +45243,6 @@ OutputTokens int64optional
 
 Total output tokens generated across all turns.
 
-type BetaManagedAgentsSessionThreadAgent struct{…}
-
-Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
-
-ID string
-
-Description string
-
-MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
-
-Name string
-
-Type BetaManagedAgentsMCPServerURLDefinitionType
-
-URL string
-
-Model [BetaManagedAgentsModelConfig](api/beta.md)
-
-Model identifier and configuration.
-
-ID BetaManagedAgentsModel
-
-The model that will power your agent.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-Accepts one of the following:
-
-type BetaManagedAgentsModel string
-
-The model that will power your agent.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-Accepts one of the following:
-
-const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
-
-Most intelligent model for building agents and coding
-
-const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-string
-
-Speed BetaManagedAgentsModelConfigSpeedoptional
-
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-Accepts one of the following:
-
-const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
-
-const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
-
-Name string
-
-Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
-
-Accepts one of the following:
-
-type BetaManagedAgentsAnthropicSkill struct{…}
-
-A resolved Anthropic-managed skill.
-
-SkillID string
-
-Type BetaManagedAgentsAnthropicSkillType
-
-Version string
-
-type BetaManagedAgentsCustomSkill struct{…}
-
-A resolved user-created custom skill.
-
-SkillID string
-
-Type BetaManagedAgentsCustomSkillType
-
-Version string
-
-System string
-
-Tools []BetaManagedAgentsSessionThreadAgentToolUnion
-
-Accepts one of the following:
-
-type BetaManagedAgentsAgentToolset20260401 struct{…}
-
-Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
-
-Enabled bool
-
-Name BetaManagedAgentsAgentToolConfigName
-
-Built-in agent tool identifier.
-
-Accepts one of the following:
-
-const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
-
-const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
-
-const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
-
-const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
-
-const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
-
-const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
-
-const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
-
-const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
-
-PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
-
-Tool calls are automatically approved without user confirmation.
-
-Type BetaManagedAgentsAlwaysAllowPolicyType
-
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
-
-Tool calls require user confirmation before execution.
-
-Type BetaManagedAgentsAlwaysAskPolicyType
-
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
-
-Resolved default configuration for agent tools.
-
-Enabled bool
-
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
-
-Tool calls are automatically approved without user confirmation.
-
-Type BetaManagedAgentsAlwaysAllowPolicyType
-
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
-
-Tool calls require user confirmation before execution.
-
-Type BetaManagedAgentsAlwaysAskPolicyType
-
-Type BetaManagedAgentsAgentToolset20260401Type
-
-type BetaManagedAgentsMCPToolset struct{…}
-
-Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
-
-Enabled bool
-
-Name string
-
-PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
-
-Tool calls are automatically approved without user confirmation.
-
-Type BetaManagedAgentsAlwaysAllowPolicyType
-
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
-
-Tool calls require user confirmation before execution.
-
-Type BetaManagedAgentsAlwaysAskPolicyType
-
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
-
-Resolved default configuration for all tools from an MCP server.
-
-Enabled bool
-
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-type BetaManagedAgentsAlwaysAllowPolicy struct{…}
-
-Tool calls are automatically approved without user confirmation.
-
-Type BetaManagedAgentsAlwaysAllowPolicyType
-
-type BetaManagedAgentsAlwaysAskPolicy struct{…}
-
-Tool calls require user confirmation before execution.
-
-Type BetaManagedAgentsAlwaysAskPolicyType
-
-MCPServerName string
-
-Type BetaManagedAgentsMCPToolsetType
-
-type BetaManagedAgentsCustomTool struct{…}
-
-A custom tool as returned in API responses.
-
-Description string
-
-InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
-
-JSON Schema for custom tool input parameters.
-
-Properties map[string, any]optional
-
-JSON Schema properties defining the tool's input parameters.
-
-Required []stringoptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
-
-Must be 'object' for tool input schemas.
-
-Name string
-
-Type BetaManagedAgentsCustomToolType
-
-Type BetaManagedAgentsSessionThreadAgentType
-
-Version int64
-
 type BetaManagedAgentsSessionThreadStats struct{…}
 
 Timing statistics for a session thread.
@@ -41342,6 +45649,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -41608,6 +45947,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -41797,6 +46168,38 @@ Additional context about the document for the model.
 Title stringoptional
 
 The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
 
 IsError booloptional
 
@@ -42826,6 +47229,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type BetaManagedAgentsSessionThreadStatusTerminatedEventType
 
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -42847,6 +47438,578 @@ SessionThreadID string
 Public sthr\_ ID of the thread that is retrying.
 
 Type BetaManagedAgentsSessionThreadStatusRescheduledEventType
+
+type BetaManagedAgentsSessionUpdatedEvent struct{…}
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+ID string
+
+Unique identifier for this event.
+
+ProcessedAt Time
+
+A timestamp in RFC 3339 format
+
+Type BetaManagedAgentsSessionUpdatedEventType
+
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Multiagent [BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+Agents [][BetaManagedAgentsSessionThreadAgent](api/beta.md)
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+ID string
+
+Description string
+
+MCPServers [][BetaManagedAgentsMCPServerURLDefinition](api/beta.md)
+
+Name string
+
+Type BetaManagedAgentsMCPServerURLDefinitionType
+
+URL string
+
+Model [BetaManagedAgentsModelConfig](api/beta.md)
+
+Model identifier and configuration.
+
+ID BetaManagedAgentsModel
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+type BetaManagedAgentsModel string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const BetaManagedAgentsModelClaudeOpus4\_6 BetaManagedAgentsModel = "claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_6 BetaManagedAgentsModel = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5 BetaManagedAgentsModel = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeHaiku4\_5\_20251001 BetaManagedAgentsModel = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const BetaManagedAgentsModelClaudeOpus4\_5 BetaManagedAgentsModel = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeOpus4\_5\_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const BetaManagedAgentsModelClaudeSonnet4\_5 BetaManagedAgentsModel = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const BetaManagedAgentsModelClaudeSonnet4\_5\_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+string
+
+Speed BetaManagedAgentsModelConfigSpeedoptional
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
+
+const BetaManagedAgentsModelConfigSpeedFast BetaManagedAgentsModelConfigSpeed = "fast"
+
+Name string
+
+Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionThreadAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionThreadAgentType
+
+Version int64
+
+Type BetaManagedAgentsSessionMultiagentCoordinatorType
+
+Name string
+
+Skills []BetaManagedAgentsSessionAgentSkillUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAnthropicSkill struct{…}
+
+A resolved Anthropic-managed skill.
+
+SkillID string
+
+Type BetaManagedAgentsAnthropicSkillType
+
+Version string
+
+type BetaManagedAgentsCustomSkill struct{…}
+
+A resolved user-created custom skill.
+
+SkillID string
+
+Type BetaManagedAgentsCustomSkillType
+
+Version string
+
+System string
+
+Tools []BetaManagedAgentsSessionAgentToolUnion
+
+Accepts one of the following:
+
+type BetaManagedAgentsAgentToolset20260401 struct{…}
+
+Configs [][BetaManagedAgentsAgentToolConfig](api/beta.md)
+
+Enabled bool
+
+Name BetaManagedAgentsAgentToolConfigName
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
+
+const BetaManagedAgentsAgentToolConfigNameEdit BetaManagedAgentsAgentToolConfigName = "edit"
+
+const BetaManagedAgentsAgentToolConfigNameRead BetaManagedAgentsAgentToolConfigName = "read"
+
+const BetaManagedAgentsAgentToolConfigNameWrite BetaManagedAgentsAgentToolConfigName = "write"
+
+const BetaManagedAgentsAgentToolConfigNameGlob BetaManagedAgentsAgentToolConfigName = "glob"
+
+const BetaManagedAgentsAgentToolConfigNameGrep BetaManagedAgentsAgentToolConfigName = "grep"
+
+const BetaManagedAgentsAgentToolConfigNameWebFetch BetaManagedAgentsAgentToolConfigName = "web\_fetch"
+
+const BetaManagedAgentsAgentToolConfigNameWebSearch BetaManagedAgentsAgentToolConfigName = "web\_search"
+
+PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for agent tools.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+Type BetaManagedAgentsAgentToolset20260401Type
+
+type BetaManagedAgentsMCPToolset struct{…}
+
+Configs [][BetaManagedAgentsMCPToolConfig](api/beta.md)
+
+Enabled bool
+
+Name string
+
+PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta.md)
+
+Resolved default configuration for all tools from an MCP server.
+
+Enabled bool
+
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+type BetaManagedAgentsAlwaysAllowPolicy struct{…}
+
+Tool calls are automatically approved without user confirmation.
+
+Type BetaManagedAgentsAlwaysAllowPolicyType
+
+type BetaManagedAgentsAlwaysAskPolicy struct{…}
+
+Tool calls require user confirmation before execution.
+
+Type BetaManagedAgentsAlwaysAskPolicyType
+
+MCPServerName string
+
+Type BetaManagedAgentsMCPToolsetType
+
+type BetaManagedAgentsCustomTool struct{…}
+
+A custom tool as returned in API responses.
+
+Description string
+
+InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
+
+JSON Schema for custom tool input parameters.
+
+Properties map[string, any]optional
+
+JSON Schema properties defining the tool's input parameters.
+
+Required []stringoptional
+
+List of required property names.
+
+Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+
+Must be 'object' for tool input schemas.
+
+Name string
+
+Type BetaManagedAgentsCustomToolType
+
+Type BetaManagedAgentsSessionAgentType
+
+Version int64
+
+Metadata map[string, string]optional
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Title stringoptional
+
+The session's new title. Present only when the update changed it.
 
 #### BetaSessionsThreadsEvents
 
@@ -44461,6 +49624,12 @@ POST/v1/skills/{skill\_id}/versions
 client.Beta.Skills.Versions.List(ctx, skillID, params) (\*PageCursor[[BetaSkillVersionListResponse](api/beta.md)], error)
 
 GET/v1/skills/{skill\_id}/versions
+
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+client.Beta.Skills.Versions.Download(ctx, version, params) (\*Response, error)
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 

@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
 Accepts one of the following:
 
@@ -76,6 +76,8 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### Body ParametersJSONExpand Collapse
 
 requests: array of object { custom\_id, params }
@@ -92,7 +94,7 @@ maxLength64
 
 minLength1
 
-params: object { max\_tokens, messages, model, 20 more }
+params: object { max\_tokens, messages, model, 21 more }
 
 Messages API creation parameters for the individual request.
 
@@ -3036,6 +3038,15 @@ When to trigger compaction. Defaults to 150000 input tokens.
 type: "input\_tokens"
 
 value: number
+
+diagnostics: optional [BetaDiagnosticsParam](api/beta.md) { previous\_message\_id }
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+previous\_message\_id: optional string
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
 inference\_geo: optional string
 

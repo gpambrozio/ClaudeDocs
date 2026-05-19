@@ -6,7 +6,7 @@ TypeScript
 
 # Update Environment
 
-client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParams { config, description, metadata, 2 more } params, RequestOptionsoptions?): [BetaEnvironment](api/beta.md) { id, archived\_at, config, 6 more }
+client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParams { config, description, metadata, 3 more } params, RequestOptionsoptions?): [BetaEnvironment](api/beta.md) { id, archived\_at, config, 7 more }
 
 POST/v1/environments/{environment\_id}
 
@@ -16,11 +16,17 @@ Update an existing environment's configuration.
 
 environmentID: string
 
-params: EnvironmentUpdateParams { config, description, metadata, 2 more }
+params: EnvironmentUpdateParams { config, description, metadata, 3 more }
 
-config?: [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  | null
+config?: [BetaCloudConfigParams](api/beta.md) { type, networking, packages }  | [BetaSelfHostedConfigParams](api/beta.md) { type }  | null
 
-Body param: Request params for `cloud` environment configuration.
+Body param: Updated environment configuration
+
+Accepts one of the following:
+
+BetaCloudConfigParams { type, networking, packages }
+
+Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
@@ -100,6 +106,14 @@ type?: "packages"
 
 Package configuration type
 
+BetaSelfHostedConfigParams { type }
+
+Request params for `self_hosted` environment configuration.
+
+type: "self\_hosted"
+
+Environment type
+
 description?: string | null
 
 Body param: Updated description of the environment
@@ -112,6 +126,16 @@ name?: string | null
 
 Body param: Updated name for the environment
 
+scope?: "organization" | "account" | null
+
+Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+
+Accepts one of the following:
+
+"organization"
+
+"account"
+
 betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -120,7 +144,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more
 
 "message-batches-2024-09-24"
 
@@ -170,9 +194,11 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
-BetaEnvironment { id, archived\_at, config, 6 more }
+BetaEnvironment { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -184,7 +210,13 @@ archived\_at: string | null
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type }
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+BetaCloudConfig { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -258,6 +290,14 @@ type: "cloud"
 
 Environment type
 
+BetaSelfHostedConfig { type }
+
+Configuration for self-hosted environments.
+
+type: "self\_hosted"
+
+Environment type
+
 created\_at: string
 
 RFC 3339 timestamp when environment was created
@@ -281,6 +321,16 @@ The type of object (always 'environment')
 updated\_at: string
 
 RFC 3339 timestamp when environment was last updated
+
+scope?: "organization" | "account"
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+"organization"
+
+"account"
 
 Update Environment
 
@@ -342,7 +392,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -392,7 +443,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

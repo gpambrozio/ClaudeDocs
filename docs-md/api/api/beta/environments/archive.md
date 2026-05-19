@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
 Accepts one of the following:
 
@@ -76,9 +76,11 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
-BetaEnvironment = object { id, archived\_at, config, 6 more }
+BetaEnvironment = object { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -90,7 +92,13 @@ archived\_at: string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta.md) { type }
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+BetaCloudConfig = object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -164,6 +172,14 @@ type: "cloud"
 
 Environment type
 
+BetaSelfHostedConfig = object { type }
+
+Configuration for self-hosted environments.
+
+type: "self\_hosted"
+
+Environment type
+
 created\_at: string
 
 RFC 3339 timestamp when environment was created
@@ -187,6 +203,16 @@ The type of object (always 'environment')
 updated\_at: string
 
 RFC 3339 timestamp when environment was last updated
+
+scope: optional "organization" or "account"
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+"organization"
+
+"account"
 
 Archive Environment
 
@@ -244,7 +270,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -294,7 +321,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

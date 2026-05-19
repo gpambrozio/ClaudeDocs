@@ -32,7 +32,7 @@ maxLength64
 
 minLength1
 
-params: { max\_tokens, messages, model, 20 more}
+params: { max\_tokens, messages, model, 21 more}
 
 Messages API creation parameters for the individual request.
 
@@ -2977,6 +2977,15 @@ type: :input\_tokens
 
 value: Integer
 
+diagnostics: [BetaDiagnosticsParam](api/beta.md) { previous\_message\_id }
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+previous\_message\_id: String
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 inference\_geo: String
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -4999,7 +5008,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
 Accepts one of the following:
 
@@ -5050,6 +5059,8 @@ Accepts one of the following:
 :"advisor-tool-2026-03-01"
 
 :"managed-agents-2026-04-01"
+
+:"cache-diagnosis-2026-04-07"
 
 ##### ReturnsExpand Collapse
 

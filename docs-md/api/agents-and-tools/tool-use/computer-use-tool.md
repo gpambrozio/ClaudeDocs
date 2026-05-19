@@ -80,7 +80,7 @@ print(response)
 
 A beta header is only required for the computer use tool.
 
-The example above shows all three tools being used together, which requires the beta header because it includes the computer use tool.
+The preceding example shows all three tools being used together, which requires the beta header because it includes the computer use tool.
 
 ---
 
@@ -240,7 +240,8 @@ Here are some tips on how to get the best quality outputs:
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside XML tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md) before providing the model with login credentials.
+6. When constructing a user turn's `content` array, place the instruction text *before* the screenshot image. Providing the target description before the image is processed improves click accuracy.
 
 If you repeatedly encounter a clear set of issues or know in advance the tasks
 Claude will need to complete, use the system prompt to provide Claude with
@@ -310,9 +311,14 @@ Available in Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opu
 
 For combining computer use with extended thinking, see [Extended thinking](build-with-claude/extended-thinking.md).
 
+For computer use specifically, internal benchmarking suggests these `effort` settings:
+
+- **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
+- **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
+
 ### Augmenting computer use with other tools
 
-To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](agents-and-tools/tool-use/bash-tool.md) and [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). You can add your own [custom tool definitions](agents-and-tools/tool-use/define-tools.md) the same way.
+To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](#quick-start) section shows this pattern with the [bash tool](agents-and-tools/tool-use/bash-tool.md) and [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). You can add your own [custom tool definitions](agents-and-tools/tool-use/define-tools.md) the same way.
 
 ### Build a custom computer use environment
 
@@ -407,7 +413,7 @@ When implementing the computer use tool, various errors may occur. Here's how to
 
 #### Handle coordinate scaling for higher resolutions
 
-Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
+Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
 
 The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](build-with-claude/vision.md) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
 
@@ -445,11 +451,28 @@ def execute_click(x, y):
     perform_click(screen_x, screen_y)
 ```
 
+**macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
+
+#### Diagnose click issues
+
+If clicks miss their targets, the cause is usually one of the following:
+
+| Symptom | Likely cause | Try |
+| --- | --- | --- |
+| Clicks consistently offset in one direction | `display_width_px`/`display_height_px` don't match the image dimensions actually sent, or the image exceeds API limits and is silently downscaled | Ensure display dimensions exactly match the resized screenshot; pre-downscale to fit within API limits |
+| Clicks land in the right area but miss the target | Target is very small, detail was lost downscaling a 4K+ source, or aspect ratio was distorted | Set `enable_zoom: true`; capture at lower DPI or crop to the relevant region; preserve aspect ratio when resizing |
+| Claude clicks the wrong element entirely | Ambiguous instruction, or visually similar elements nearby | Use positional prompts ("the blue Submit button in the bottom-right"); break the interaction into smaller steps |
+| Accuracy is consistently poor | Screenshots sent above API limits, or resolution too low | Pre-downscale to fit within limits; try 1280x720 as a baseline |
+
+**Model choice affects click precision.** Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
+
 #### Follow implementation best practices
 
 ### Use appropriate display resolution
 
 ### Implement proper screenshot handling
+
+### Manage screenshot history for prompt caching
 
 ### Add action delays
 
@@ -508,7 +531,9 @@ If you're also using bash or text editor tools alongside computer use, those too
 
 Get started quickly with the complete Docker-based implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo)[Tool documentation
 
-Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)
+Learn more about tool use and creating custom tools](agents-and-tools/tool-use/overview.md)[Best practices in detail
+
+Benchmarked recommendations for resolution, thinking effort, and context management](https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude)
 
 Was this page helpful?
 

@@ -408,7 +408,7 @@ Configuration object for the `query()` function.
 | `skills` | `string[] | 'all'` | `undefined` | Skills available to the session. Pass `'all'` to enable every discovered skill, or a list of skill names. When set, the SDK enables the Skill tool automatically without listing it in `allowedTools`. See [Skills](agent-sdk/skills.md) |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
-| `strictMcpConfig` | `boolean` | `false` | Enforce strict MCP validation |
+| `strictMcpConfig` | `boolean` | `false` | Use only the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, and plugin-provided MCP servers |
 | `systemPrompt` | `string | { type: 'preset'; preset: 'claude_code'; append?: string; excludeDynamicSections?: boolean }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code’s system prompt. When using the preset object form, add `append` to extend it with additional instructions, and set `excludeDynamicSections: true` to move per-session context into the first user message for [better prompt-cache reuse across machines](agent-sdk/modifying-system-prompts.md) |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude’s thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
 | `toolConfig` | [`ToolConfig`](#toolconfig) | `undefined` | Configuration for built-in tool behavior. See [`ToolConfig`](#toolconfig) for details |
@@ -1831,7 +1831,7 @@ type TodoWriteInput = {
 
 Creates and manages a structured task list for tracking progress.
 
-`TodoWrite` is deprecated and will be removed in a future release. Use `TaskCreate`, `TaskGet`, `TaskUpdate`, and `TaskList` instead. Set `CLAUDE_CODE_ENABLE_TASKS=1` to opt in. See [Migrate to Task tools](agent-sdk/todo-tracking.md) for how monitoring code changes.
+As of TypeScript Agent SDK 0.3.142, `TodoWrite` is disabled by default. Use `TaskCreate`, `TaskGet`, `TaskUpdate`, and `TaskList` instead. See [Migrate to Task tools](agent-sdk/todo-tracking.md) to update your monitoring code, or set `CLAUDE_CODE_ENABLE_TASKS=0` to revert to `TodoWrite`.
 
 ### [​](#taskcreate) TaskCreate
 
@@ -2326,7 +2326,7 @@ type TodoWriteOutput = {
 
 Returns the previous and updated task lists.
 
-`TodoWrite` is deprecated and will be removed in a future release. Use `TaskCreate`, `TaskGet`, `TaskUpdate`, and `TaskList` instead. Set `CLAUDE_CODE_ENABLE_TASKS=1` to opt in. See [Migrate to Task tools](agent-sdk/todo-tracking.md) for how monitoring code changes.
+As of TypeScript Agent SDK 0.3.142, `TodoWrite` is disabled by default. Use `TaskCreate`, `TaskGet`, `TaskUpdate`, and `TaskList` instead. See [Migrate to Task tools](agent-sdk/todo-tracking.md) to update your monitoring code, or set `CLAUDE_CODE_ENABLE_TASKS=0` to revert to `TodoWrite`.
 
 ### [​](#taskcreate-2) TaskCreate
 
@@ -2718,11 +2718,15 @@ type CallToolResult = {
 Controls Claude’s thinking/reasoning behavior. Takes precedence over the deprecated `maxThinkingTokens`.
 
 ```shiki
+type ThinkingDisplay = "summarized" | "omitted";
+
 type ThinkingConfig =
-  | { type: "adaptive" } // The model determines when and how much to reason (Opus 4.6+)
-  | { type: "enabled"; budgetTokens?: number } // Fixed thinking token budget
+  | { type: "adaptive"; display?: ThinkingDisplay } // The model determines when and how much to reason (Opus 4.6+)
+  | { type: "enabled"; budgetTokens?: number; display?: ThinkingDisplay } // Fixed thinking token budget
   | { type: "disabled" }; // No extended thinking
 ```
+
+The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in `thinking` blocks.
 
 ### [​](#spawnedprocess) `SpawnedProcess`
 
@@ -3138,7 +3142,7 @@ type SandboxNetworkConfig = {
 | --- | --- | --- | --- |
 | `allowedDomains` | `string[]` | `[]` | Domain names that sandboxed processes can access |
 | `deniedDomains` | `string[]` | `[]` | Domain names that sandboxed processes cannot access. Takes precedence over `allowedDomains` |
-| `allowManagedDomainsOnly` | `boolean` | `false` | Restrict network access to only the domains in `allowedDomains` |
+| `allowManagedDomainsOnly` | `boolean` | `false` | Managed-settings only. When set in [managed settings](permissions.md), only `allowedDomains` entries from managed settings are honored and entries from user, project, or local settings are ignored. Has no effect when set via SDK options |
 | `allowLocalBinding` | `boolean` | `false` | Allow processes to bind to local ports (e.g., for dev servers) |
 | `allowUnixSockets` | `string[]` | `[]` | Unix socket paths that processes can access (e.g., Docker socket) |
 | `allowAllUnixSockets` | `boolean` | `false` | Allow access to all Unix sockets |

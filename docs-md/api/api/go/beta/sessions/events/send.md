@@ -332,6 +332,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -375,6 +407,182 @@ Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 MaxIterations int64optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
+
+type BetaManagedAgentsUserToolResultEventParamsResp struct{…}
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventParamsType
+
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
 
 Betas param.Field[[]AnthropicBeta]optional
 
@@ -433,6 +641,8 @@ const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-
 const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
 
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -788,6 +998,38 @@ Title stringoptional
 
 The title of the document.
 
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
 IsError booloptional
 
 Whether the tool execution resulted in an error.
@@ -851,6 +1093,194 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 Type BetaManagedAgentsTextRubricType
 
 Type BetaManagedAgentsUserDefineOutcomeEventType
+
+type BetaManagedAgentsUserToolResultEvent struct{…}
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+ID string
+
+Unique identifier for this event.
+
+ToolUseID string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type BetaManagedAgentsUserToolResultEventType
+
+Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+type BetaManagedAgentsTextBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsTextBlockType
+
+type BetaManagedAgentsImageBlock struct{…}
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source BetaManagedAgentsImageBlockSourceUnion
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64ImageSource struct{…}
+
+Base64-encoded image data.
+
+Data string
+
+Base64-encoded image data.
+
+MediaType string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type BetaManagedAgentsBase64ImageSourceType
+
+type BetaManagedAgentsURLImageSource struct{…}
+
+Image referenced by URL.
+
+Type BetaManagedAgentsURLImageSourceType
+
+URL string
+
+URL of the image to fetch.
+
+type BetaManagedAgentsFileImageSource struct{…}
+
+Image referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileImageSourceType
+
+Type BetaManagedAgentsImageBlockType
+
+type BetaManagedAgentsDocumentBlock struct{…}
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source BetaManagedAgentsDocumentBlockSourceUnion
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+type BetaManagedAgentsBase64DocumentSource struct{…}
+
+Base64-encoded document data.
+
+Data string
+
+Base64-encoded document data.
+
+MediaType string
+
+MIME type of the document (e.g., "application/pdf").
+
+Type BetaManagedAgentsBase64DocumentSourceType
+
+type BetaManagedAgentsPlainTextDocumentSource struct{…}
+
+Plain text document content.
+
+Data string
+
+The plain text content.
+
+MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type BetaManagedAgentsPlainTextDocumentSourceType
+
+type BetaManagedAgentsURLDocumentSource struct{…}
+
+Document referenced by URL.
+
+Type BetaManagedAgentsURLDocumentSourceType
+
+URL string
+
+URL of the document to fetch.
+
+type BetaManagedAgentsFileDocumentSource struct{…}
+
+Document referenced by file ID.
+
+FileID string
+
+ID of a previously uploaded file.
+
+Type BetaManagedAgentsFileDocumentSourceType
+
+Type BetaManagedAgentsDocumentBlockType
+
+Context stringoptional
+
+Additional context about the document for the model.
+
+Title stringoptional
+
+The title of the document.
+
+type BetaManagedAgentsSearchResultBlock struct{…}
+
+A block containing a web search result.
+
+Citations [BetaManagedAgentsSearchResultCitations](api/beta.md)
+
+Citation settings for a search result.
+
+Enabled bool
+
+Whether citations are enabled for this search result.
+
+Content [][BetaManagedAgentsSearchResultContent](api/beta.md)
+
+Array of text content blocks from the search result.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSearchResultContentType
+
+Source string
+
+The URL source of the search result.
+
+Title string
+
+The title of the search result.
+
+Type BetaManagedAgentsSearchResultBlockType
+
+IsError booloptional
+
+Whether the tool execution resulted in an error.
+
+ProcessedAt Timeoptional
+
+A timestamp in RFC 3339 format
+
+SessionThreadID stringoptional
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 Send Events
 

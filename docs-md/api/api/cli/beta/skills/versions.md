@@ -18,6 +18,12 @@ $ ant beta:skills:versions list
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+$ ant beta:skills:versions download
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 $ ant beta:skills:versions retrieve

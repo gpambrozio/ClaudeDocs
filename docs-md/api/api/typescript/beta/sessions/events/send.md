@@ -204,7 +204,7 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 type: "user.custom\_tool\_result"
 
-content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } >
 
 The result content returned by the tool.
 
@@ -334,6 +334,38 @@ title?: string | null
 
 The title of the document.
 
+BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more }
+
+A block containing a web search result.
+
+citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled }
+
+Citation settings for a search result.
+
+enabled: boolean
+
+Whether citations are enabled for this search result.
+
+content: Array<[BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } >
+
+Array of text content blocks from the search result.
+
+text: string
+
+The text content.
+
+type: "text"
+
+source: string
+
+The URL source of the search result.
+
+title: string
+
+The title of the search result.
+
+type: "search\_result"
+
 is\_error?: boolean | null
 
 Whether the tool execution resulted in an error.
@@ -378,6 +410,182 @@ max\_iterations?: number | null
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
+BetaManagedAgentsUserToolResultEventParams { tool\_use\_id, type, content, is\_error }
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_result"
+
+content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } >
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more }
+
+A block containing a web search result.
+
+citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled }
+
+Citation settings for a search result.
+
+enabled: boolean
+
+Whether citations are enabled for this search result.
+
+content: Array<[BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } >
+
+Array of text content blocks from the search result.
+
+text: string
+
+The text content.
+
+type: "text"
+
+source: string
+
+The URL source of the search result.
+
+title: string
+
+The title of the search result.
+
+type: "search\_result"
+
+is\_error?: boolean | null
+
+Whether the tool execution resulted in an error.
+
 betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -386,7 +594,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more
 
 "message-batches-2024-09-24"
 
@@ -436,13 +644,15 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 BetaManagedAgentsSendSessionEvents { data }
 
 Events that were successfully sent to the session.
 
-data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 2 more>
+data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 3 more>
 
 Sent events
 
@@ -660,7 +870,7 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 type: "user.custom\_tool\_result"
 
-content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } >
 
 The result content returned by the tool.
 
@@ -790,6 +1000,38 @@ title?: string | null
 
 The title of the document.
 
+BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more }
+
+A block containing a web search result.
+
+citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled }
+
+Citation settings for a search result.
+
+enabled: boolean
+
+Whether citations are enabled for this search result.
+
+content: Array<[BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } >
+
+Array of text content blocks from the search result.
+
+text: string
+
+The text content.
+
+type: "text"
+
+source: string
+
+The URL source of the search result.
+
+title: string
+
+The title of the search result.
+
+type: "search\_result"
+
 is\_error?: boolean | null
 
 Whether the tool execution resulted in an error.
@@ -853,6 +1095,194 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 type: "text"
 
 type: "user.define\_outcome"
+
+BetaManagedAgentsUserToolResultEvent { id, tool\_use\_id, type, 4 more }
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+id: string
+
+Unique identifier for this event.
+
+tool\_use\_id: string
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+type: "user.tool\_result"
+
+content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta.md) { citations, content, source, 2 more } >
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more }
+
+A block containing a web search result.
+
+citations: [BetaManagedAgentsSearchResultCitations](api/beta.md) { enabled }
+
+Citation settings for a search result.
+
+enabled: boolean
+
+Whether citations are enabled for this search result.
+
+content: Array<[BetaManagedAgentsSearchResultContent](api/beta.md) { text, type } >
+
+Array of text content blocks from the search result.
+
+text: string
+
+The text content.
+
+type: "text"
+
+source: string
+
+The URL source of the search result.
+
+title: string
+
+The title of the search result.
+
+type: "search\_result"
+
+is\_error?: boolean | null
+
+Whether the tool execution resulted in an error.
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+session\_thread\_id?: string | null
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 Send Events
 

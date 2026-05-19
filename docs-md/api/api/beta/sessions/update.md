@@ -24,7 +24,7 @@ Accepts one of the following:
 
 UnionMember0 = string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more
+UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
 Accepts one of the following:
 
@@ -76,7 +76,209 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### Body ParametersJSONExpand Collapse
+
+agent: optional [BetaManagedAgentsSessionAgentUpdate](api/beta.md) { mcp\_servers, tools }
+
+Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
+
+mcp\_servers: optional array of [BetaManagedAgentsURLMCPServerParams](api/beta.md) { name, type, url }
+
+Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+name: string
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+type: "url"
+
+url: string
+
+Endpoint URL for the MCP server.
+
+tools: optional array of [BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, configs, default\_config }  or [BetaManagedAgentsMCPToolsetParams](api/beta.md) { mcp\_server\_name, type, configs, default\_config }  or [BetaManagedAgentsCustomToolParams](api/beta.md) { description, input\_schema, name, type }
+
+Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+Accepts one of the following:
+
+BetaManagedAgentsAgentToolset20260401Params = object { type, configs, default\_config }
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+type: "agent\_toolset\_20260401"
+
+configs: optional array of [BetaManagedAgentsAgentToolConfigParams](api/beta.md) { name, enabled, permission\_policy }
+
+Per-tool configuration overrides.
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+enabled: optional boolean
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: optional [BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }
+
+Default configuration for all tools in a toolset.
+
+enabled: optional boolean
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsMCPToolsetParams = object { mcp\_server\_name, type, configs, default\_config }
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+mcp\_server\_name: string
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+type: "mcp\_toolset"
+
+configs: optional array of [BetaManagedAgentsMCPToolConfigParams](api/beta.md) { name, enabled, permission\_policy }
+
+Per-tool configuration overrides.
+
+name: string
+
+Name of the MCP tool to configure. 1-128 characters.
+
+enabled: optional boolean
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+default\_config: optional [BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta.md) { enabled, permission\_policy }
+
+Default configuration for all tools from an MCP server.
+
+enabled: optional boolean
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+BetaManagedAgentsAlwaysAllowPolicy = object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+BetaManagedAgentsAlwaysAskPolicy = object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+BetaManagedAgentsCustomToolParams = object { description, input\_schema, name, type }
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+description: string
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+name: string
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+type: "custom"
 
 metadata: optional map[string]
 
@@ -686,7 +888,7 @@ Server-generated outc\_ ID for this outcome.
 
 result: string
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 type: "outcome\_evaluation"
 

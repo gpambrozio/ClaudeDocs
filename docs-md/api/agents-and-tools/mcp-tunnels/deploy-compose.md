@@ -1,0 +1,300 @@
+# Deploy MCP tunnels with Docker Compose
+
+Copy page
+
+MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+
+This guide deploys the MCP tunnel stack as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
+
+## Before you begin
+
+You need:
+
+- **A tunnel created in the Console.** Follow [Create a tunnel](agents-and-tools/mcp-tunnels/console.md) and record the tunnel ID (`tnl_...`).
+- **A way for the host to authenticate to the Tunnels API.**
+  - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the `setup` service can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
+  - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](agents-and-tools/mcp-tunnels/console.md), generate a CA and server certificate yourself, and [register the CA in the Console](agents-and-tools/mcp-tunnels/console.md).
+- **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
+- **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the tunnel edge (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
+- **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server below](#optional-use-a-sample-mcp-server).
+
+## Optional: Use a sample MCP server
+
+If you don't have an MCP server available for testing, use this minimal one:
+
+```shiki
+mkdir -p mcp-tunnel/{config,data}
+cat > mcp-tunnel/hello_server.py <<'EOF'
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("hello-server", host="0.0.0.0", port=9000)
+
+@mcp.tool()
+def hello(name: str = "world") -> str:
+    """Say hello to someone."""
+    return f"Hello, {name}!"
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")
+EOF
+```
+
+The Install steps below `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
+
+## Install
+
+This guide provides one reference approach using Docker Compose. You are responsible for adapting it to meet your organization's security requirements.
+
+With programmatic access
+
+With programmatic access
+
+Without programmatic access
+
+Without programmatic access
+
+The `setup` service uses Workload Identity Federation to fetch the tunnel token, generate a CA and server certificate, and register the CA with Anthropic.
+
+1. 1
+
+   Prepare the deployment directory
+
+   ```shiki
+   mkdir -p mcp-tunnel/{config,data}
+   cd mcp-tunnel
+   sudo chown 65532:65532 data
+   ```
+
+   The containers run as the non-root UID `65532` and need write access to `data/`.
+2. 2
+
+   Write docker-compose.yaml
+
+   ```shiki
+   cat > docker-compose.yaml <<'EOF'
+   services:
+     setup:
+       image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
+       entrypoint: ["/setup"]
+       command:
+         - init
+         - --api-url=https://api.anthropic.com
+         - --output=dir:/data
+         - --token-version=1
+       environment:
+         - TUNNEL_ID
+         - ANTHROPIC_FEDERATION_RULE_ID
+         - ANTHROPIC_ORGANIZATION_ID
+         - ANTHROPIC_WORKSPACE_ID
+         - ANTHROPIC_IDENTITY_TOKEN
+       volumes:
+         - ./data:/data
+       user: "65532:65532"
+       read_only: true
+       security_opt:
+         - no-new-privileges:true
+       cap_drop:
+         - ALL
+       profiles: ["setup"]
+
+     cloudflared:
+       image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
+       command: tunnel --no-autoupdate run --url http://localhost:8080
+       environment:
+         - TUNNEL_TOKEN
+       # Share the proxy's netns so localhost:8080 reaches it.
+       network_mode: "service:mcp-gateway"
+       restart: unless-stopped
+       user: "65532:65532"
+       read_only: true
+       security_opt:
+         - no-new-privileges:true
+       cap_drop:
+         - ALL
+       stop_grace_period: 30s
+       logging:
+         options:
+           max-size: "10m"
+           max-file: "3"
+
+     mcp-gateway:
+       image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
+       volumes:
+         - ./config/mcp-gateway.yaml:/etc/mcp-gateway/config.yaml:ro
+         - ./data:/data:ro
+       restart: unless-stopped
+       user: "65532:65532"
+       read_only: true
+       security_opt:
+         - no-new-privileges:true
+       cap_drop:
+         - ALL
+       stop_grace_period: 30s
+       logging:
+         options:
+           max-size: "10m"
+           max-file: "3"
+   EOF
+   ```
+
+   The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
+
+   If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
+
+   ```shiki
+   cat >> docker-compose.yaml <<'EOF'
+
+     hello-mcp:
+       image: python:3.13-slim
+       working_dir: /app
+       volumes:
+         - ./hello_server.py:/app/hello_server.py:ro
+       command: sh -c "pip install --quiet mcp && python hello_server.py"
+       restart: unless-stopped
+   EOF
+   ```
+3. 3
+
+   Provision the tunnel
+
+   Set the identifiers from the [Console create-tunnel flow](agents-and-tools/mcp-tunnels/console.md):
+
+   ```shiki
+   export TUNNEL_ID=tnl_...
+   export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
+   export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
+   ```
+
+   If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; setup uses the default workspace otherwise.
+
+   Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](manage-claude/workload-identity-federation.md) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting. If this host has no identity provider, switch to the **Without programmatic access** tab.
+
+   Run setup:
+
+   ```shiki
+   docker compose run --rm setup
+   ```
+
+   `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is only generated and registered when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
+
+   See [Setup Job authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md) if it errors.
+
+   Retrieve your tunnel domain and export it for later steps:
+
+   ```shiki
+   export TUNNEL_DOMAIN=$(sudo cat data/tunnel-domain)
+   echo "$TUNNEL_DOMAIN"
+   ```
+
+   Workload Identity Federation tokens are short-lived (one hour by default) and expire automatically; there is nothing to revoke after setup completes.
+4. 4
+
+   Write the proxy config
+
+   `tunnel_domain` is **required**: the proxy uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL.
+
+   ```shiki
+   cat > config/mcp-gateway.yaml <<EOF
+   listen_addr: ":8080"
+   log_level: info
+   shutdown_timeout: 30s
+   tunnel_domain: ${TUNNEL_DOMAIN}
+   tls:
+     cert_file: /data/tls.crt
+     key_file: /data/tls.key
+   routes:
+     echo: http://hello-mcp:9000
+   EOF
+   ```
+
+   The `echo:` route targets the [sample MCP server](#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for all available fields.
+5. 5
+
+   Start the deployment
+
+   ```shiki
+   export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
+   docker compose up -d
+   ```
+
+For a multi-VM deployment, copy your deployment directory to each host, set `TUNNEL_TOKEN` (`$(sudo cat data/tunnel-token)` in the programmatic flow, or the revealed value in the manual flow), and run `docker compose up -d`. The compose file reads `TUNNEL_TOKEN` from the environment with no default, so the export must run in every fresh shell, including after a reboot. The same tunnel token and certificates work across all replicas.
+
+## Verify the deployment
+
+Verify end to end by calling a routed server from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
+
+## Upgrades
+
+Run the commands in this section from inside the `mcp-tunnel/` deployment directory.
+
+### Rotate the tunnel token
+
+With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT (it will have expired since install), and re-run setup:
+
+```shiki
+# Edit docker-compose.yaml: increment the integer in the setup service's
+# --token-version argument (for example, --token-version=1 to
+# --token-version=2). The setup binary refuses to rotate when the value
+# hasn't changed.
+
+export TUNNEL_ID=tnl_...
+export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
+export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
+# export ANTHROPIC_WORKSPACE_ID=wrkspc_...   # if your rule is workspace-scoped
+# Re-mint ANTHROPIC_IDENTITY_TOKEN per the WIF provider guide for your
+# environment (it will have expired since install).
+export ANTHROPIC_IDENTITY_TOKEN=...
+
+docker compose run --rm setup
+
+export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
+docker compose up -d cloudflared
+```
+
+The setup binary authenticates with Workload Identity Federation; there is no API token to revoke.
+
+Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
+
+Clicking **Rotate token** invalidates the current token immediately. Between that moment and updating `TUNNEL_TOKEN` on every host and restarting cloudflared, any host whose cloudflared restarts (crash, host reboot) cannot reconnect. Update each host promptly after rotating.
+
+### Certificate renewal
+
+You're responsible for monitoring expiry and renewing the server certificate before it expires.
+
+With programmatic access:
+
+```shiki
+docker compose run --rm setup renew-cert --output=dir:/data
+```
+
+Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
+
+Without programmatic access, sign a new server certificate with your existing CA (the CA registered in the Console doesn't change) and replace `data/tls.crt`. Set `TUNNEL_DOMAIN` first if you're running this from a fresh shell.
+
+```shiki
+export TUNNEL_DOMAIN=YOUR_TUNNEL_DOMAIN_HERE
+openssl req -new -key data/tls.key -out /tmp/server.csr \
+  -subj "/CN=${TUNNEL_DOMAIN}"
+openssl x509 -req -in /tmp/server.csr \
+  -CA data/ca.crt -CAkey data/ca.key -CAcreateserial \
+  -out data/tls.crt -days 90 \
+  -extfile data/tls.ext
+```
+
+In either flow the proxy polls `tls.cert_file` and reloads it automatically, so no restart is required.
+
+## Next steps
+
+[Use the tunneled MCP servers
+
+Attach a routed MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[Security
+
+Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[Troubleshooting
+
+Diagnose connectivity, TLS, and routing issues.](agents-and-tools/mcp-tunnels/troubleshooting.md)
+
+Was this page helpful?
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

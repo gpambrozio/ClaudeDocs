@@ -1181,6 +1181,57 @@ JsonElement Type "clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
 
+required [BetaDiagnostics](api/beta.md)? Diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+required CacheMissReason? CacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonElement Type "previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonElement Type "unavailable"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -2661,6 +2712,57 @@ JsonElement Type "clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
 
+required [BetaDiagnostics](api/beta.md)? Diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+required CacheMissReason? CacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonElement Type "previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonElement Type "unavailable"constant
+
 required [Model](api/messages.md) Model
 
 The model that will complete your prompt.
@@ -4104,6 +4206,57 @@ Number of thinking turns that were cleared.
 JsonElement Type "clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+required [BetaDiagnostics](api/beta.md)? Diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+required CacheMissReason? CacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+required Long CacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonElement Type "messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonElement Type "previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonElement Type "unavailable"constant
 
 required [Model](api/messages.md) Model
 

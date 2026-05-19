@@ -2,7 +2,7 @@
 
 Copy page
 
-The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
+The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the Activity Feed (this page) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
 **Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
 
@@ -156,8 +156,8 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 | `anthropic_actor` | Anthropic acted on the organization, for example through internal tooling. | `email_address` (always `null`; present for shape consistency with `user_actor`, since Anthropic operators are not represented by individual email) |
 | `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
 
-**Build forward-compatible parsers.** Pass through unrecognized `type` and
-`actor.type` values, and ignore fields your parser does not expect, so your
+**Build forward-compatible handlers.** Pass through unrecognized `type` and
+`actor.type` values, and ignore fields your handler does not expect, so your
 integration keeps working when new activity types ship.
 
 ## Next steps

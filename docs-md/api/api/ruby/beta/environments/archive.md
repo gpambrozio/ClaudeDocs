@@ -6,7 +6,7 @@ Ruby
 
 # Archive Environment
 
-beta.environments.archive(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta.md) { id, archived\_at, config, 6 more }
+beta.environments.archive(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta.md) { id, archived\_at, config, 7 more }
 
 POST/v1/environments/{environment\_id}/archive
 
@@ -24,7 +24,7 @@ Accepts one of the following:
 
 String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more
+:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
 Accepts one of the following:
 
@@ -76,9 +76,11 @@ Accepts one of the following:
 
 :"managed-agents-2026-04-01"
 
+:"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
-class BetaEnvironment { id, archived\_at, config, 6 more }
+class BetaEnvironment { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -90,7 +92,13 @@ archived\_at: String
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md) { networking, packages, type }
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta.md) { type }
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -164,6 +172,14 @@ type: :cloud
 
 Environment type
 
+class BetaSelfHostedConfig { type }
+
+Configuration for self-hosted environments.
+
+type: :self\_hosted
+
+Environment type
+
 created\_at: String
 
 RFC 3339 timestamp when environment was created
@@ -187,6 +203,16 @@ The type of object (always 'environment')
 updated\_at: String
 
 RFC 3339 timestamp when environment was last updated
+
+scope: :organization | :account
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+:organization
+
+:account
 
 Archive Environment
 
@@ -246,7 +272,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -296,7 +323,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

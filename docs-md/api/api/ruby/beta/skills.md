@@ -189,6 +189,12 @@ beta.skills.versions.list(skill\_id, \*\*kwargs) -> PageCursor<[VersionListRespo
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+beta.skills.versions.download(version, \*\*kwargs) -> StringIO
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 beta.skills.versions.retrieve(version, \*\*kwargs) -> [VersionRetrieveResponse](api/beta.md) { id, created\_at, description, 5 more }

@@ -11,7 +11,7 @@ This guide walks you through creating an agent, setting up an environment, start
 | Concept | Description |
 | --- | --- |
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | A configured container template (packages, network access) |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -122,6 +122,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    ```
 
    Save the returned `environment.id`. You'll reference it in every session you create.
+
+   To run the sandbox on your own infrastructure instead of a cloud container, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 3. 3
 
    Start a session

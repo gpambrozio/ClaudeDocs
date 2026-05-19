@@ -20,6 +20,10 @@ required string sessionID
 
 Path param: Path parameter session\_id
 
+[BetaManagedAgentsSessionAgentUpdate](api/beta.md) agent
+
+Body param: Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
+
 IReadOnlyDictionary<string, string>? metadata
 
 Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
@@ -83,6 +87,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
 
 ##### ReturnsExpand Collapse
 
@@ -660,7 +666,7 @@ Server-generated outc\_ ID for this outcome.
 
 required string Result
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 required Type Type
 

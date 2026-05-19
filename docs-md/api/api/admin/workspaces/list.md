@@ -34,7 +34,7 @@ minimum1
 
 ##### ReturnsExpand Collapse
 
-data: array of [Workspace](api/$shared.md) { id, archived\_at, created\_at, 4 more }
+data: array of [Workspace](api/$shared.md) { id, archived\_at, created\_at, 5 more }
 
 id: string
 
@@ -78,6 +78,10 @@ name: string
 
 Name of the Workspace.
 
+tags: map[string]
+
+User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 type: "workspace"
 
 Object type.
@@ -120,6 +124,10 @@ Response 200
       },
       "display_color": "#6C5BB9",
       "name": "Workspace Name",
+      "tags": {
+        "env": "prod",
+        "team": "platform"
+      },
       "type": "workspace"
     }
   ],
@@ -147,6 +155,10 @@ Response 200
       },
       "display_color": "#6C5BB9",
       "name": "Workspace Name",
+      "tags": {
+        "env": "prod",
+        "team": "platform"
+      },
       "type": "workspace"
     }
   ],

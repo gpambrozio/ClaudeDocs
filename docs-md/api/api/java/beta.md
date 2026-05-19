@@ -58,6 +58,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 class BetaApiError:
 
 String message
@@ -1444,6 +1446,46 @@ The number of input tokens used to create the 1 hour cache entry.
 long ephemeral5mInputTokens
 
 The number of input tokens used to create the 5 minute cache entry.
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
 
 class BetaCitationCharLocation:
 
@@ -6571,6 +6613,66 @@ long originalInputTokens
 
 The original token count before context management was applied
 
+class BetaDiagnostics:
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
+class BetaDiagnosticsParam:
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+Optional<String> previousMessageId
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 class BetaDirectCaller:
 
 Tool invocation directly from the model.
@@ -8166,6 +8268,57 @@ Number of thinking turns that were cleared.
 JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
 
 Model model
 
@@ -13998,6 +14151,57 @@ JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"co
 
 The type of context management edit applied.
 
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -15371,6 +15575,57 @@ Number of thinking turns that were cleared.
 JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
 
 The type of context management edit applied.
+
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
 
 Model model
 
@@ -25338,6 +25593,57 @@ JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"co
 
 The type of context management edit applied.
 
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -26818,6 +27124,57 @@ JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"co
 
 The type of context management edit applied.
 
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -28262,6 +28619,57 @@ JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"co
 
 The type of context management edit applied.
 
+Optional<[BetaDiagnostics](api/beta.md)> diagnostics
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+Optional<CacheMissReason> cacheMissReason
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "model\_changed"constant"model\_changed"constant
+
+class BetaCacheMissSystemChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "system\_changed"constant"system\_changed"constant
+
+class BetaCacheMissToolsChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "tools\_changed"constant"tools\_changed"constant
+
+class BetaCacheMissMessagesChanged:
+
+long cacheMissedInputTokens
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+JsonValue; type "messages\_changed"constant"messages\_changed"constant
+
+class BetaCacheMissPreviousMessageNotFound:
+
+JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+
+class BetaCacheMissUnavailable:
+
+JsonValue; type "unavailable"constant"unavailable"constant
+
 Model model
 
 The model that will complete your prompt.
@@ -29243,6 +29651,81 @@ Type type
 
 Type type
 
+class BetaManagedAgentsAgentToolset20260401BashInput:
+
+Input payload for the `bash` tool of the
+`agent_toolset_20260401` toolset. All fields are optional;
+a normal invocation supplies `command`, while `restart=true`
+(with no `command`) reboots the runner-side bash session.
+
+Optional<String> command
+
+Shell command to execute. Omit only when `restart` is true.
+
+Optional<Boolean> restart
+
+When true, restart the persistent bash session instead of
+running a command. Subsequent calls without `restart` will
+run against the fresh session.
+
+Optional<Long> timeoutMs
+
+Per-call timeout in milliseconds. Defaults to the
+runner-wide tool timeout when omitted or zero.
+
+class BetaManagedAgentsAgentToolset20260401EditInput:
+
+Input payload for the `edit` tool. Performs a string
+replacement in the named file; by default `old_string` must
+occur exactly once.
+
+String filePath
+
+Path of the file to edit.
+
+String newString
+
+Replacement text.
+
+String oldString
+
+Substring to find and replace.
+
+Optional<Boolean> replaceAll
+
+When true, replace every occurrence of `old_string`
+instead of requiring a unique match.
+
+class BetaManagedAgentsAgentToolset20260401GlobInput:
+
+Input payload for the `glob` tool. Returns paths matching a
+doublestar glob pattern, newest first.
+
+String pattern
+
+Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
+are only permitted when the runner is configured to allow
+them.
+
+Optional<String> path
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
+class BetaManagedAgentsAgentToolset20260401GrepInput:
+
+Input payload for the `grep` tool. Searches file contents for
+a regular expression, returning matching lines.
+
+String pattern
+
+Regular expression to search for.
+
+Optional<String> path
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
 class BetaManagedAgentsAgentToolset20260401Params:
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
@@ -29322,6 +29805,35 @@ class BetaManagedAgentsAlwaysAskPolicy:
 Tool calls require user confirmation before execution.
 
 Type type
+
+class BetaManagedAgentsAgentToolset20260401ReadInput:
+
+Input payload for the `read` tool. Reads file contents
+relative to the runner's working directory (or absolute when
+the runner permits).
+
+String filePath
+
+Path of the file to read.
+
+Optional<List<Long>> viewRange
+
+Optional `[start_line, end_line]` 1-indexed inclusive
+range. When omitted the entire file is returned.
+`end_line` of 0 or negative means "to end of file".
+
+class BetaManagedAgentsAgentToolset20260401WriteInput:
+
+Input payload for the `write` tool. Writes (overwriting) the
+entire file contents.
+
+String content
+
+Full file contents to write.
+
+String filePath
+
+Path of the file to write.
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -29905,6 +30417,268 @@ Sentinel roster entry meaning "the agent that owns this configuration". Resolved
 
 Type type
 
+class BetaManagedAgentsSessionThreadAgent:
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
 class BetaManagedAgentsSkillParams: A class that can be one of several variants.union
 
 Skill to load in the session container.
@@ -30167,7 +30941,13 @@ Optional<String> archivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-[BetaCloudConfig](api/beta.md) config
+Config config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig:
 
 `cloud` environment configuration.
 
@@ -30241,6 +31021,14 @@ JsonValue; type "cloud"constant"cloud"constant
 
 Environment type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
+
 String createdAt
 
 RFC 3339 timestamp when environment was created
@@ -30264,6 +31052,16 @@ The type of object (always 'environment')
 String updatedAt
 
 RFC 3339 timestamp when environment was last updated
+
+Optional<Scope> scope
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+ORGANIZATION("organization")
+
+ACCOUNT("account")
 
 class BetaEnvironmentDeleteResponse:
 
@@ -30386,6 +31184,22 @@ Optional<Type> type
 
 Package configuration type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
+
+class BetaSelfHostedConfigParams:
+
+Request params for `self_hosted` environment configuration.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
+
 class BetaUnrestrictedNetwork:
 
 Unrestricted network access.
@@ -30393,6 +31207,307 @@ Unrestricted network access.
 JsonValue; type "unrestricted"constant"unrestricted"constant
 
 Network policy type
+
+#### BetaEnvironmentsWork
+
+##### [Get Work Item](api/beta/environments/work/retrieve.md)
+
+[BetaSelfHostedWork](api/beta.md) beta().environments().work().retrieve(WorkRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/environments/{environment\_id}/work/{work\_id}
+
+##### [Poll for Work](api/beta/environments/work/poll.md)
+
+[BetaSelfHostedWork](api/beta.md) beta().environments().work().poll(WorkPollParamsparams = WorkPollParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/environments/{environment\_id}/work/poll
+
+##### [Acknowledge Work](api/beta/environments/work/ack.md)
+
+[BetaSelfHostedWork](api/beta.md) beta().environments().work().ack(WorkAckParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+
+##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+
+[BetaSelfHostedWorkHeartbeatResponse](api/beta.md) beta().environments().work().heartbeat(WorkHeartbeatParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+
+##### [Stop Work](api/beta/environments/work/stop.md)
+
+[BetaSelfHostedWork](api/beta.md) beta().environments().work().stop(WorkStopParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+
+##### [List Work Items](api/beta/environments/work/list.md)
+
+WorkListPage beta().environments().work().list(WorkListParamsparams = WorkListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/environments/{environment\_id}/work
+
+##### [Update Work Item](api/beta/environments/work/update.md)
+
+[BetaSelfHostedWork](api/beta.md) beta().environments().work().update(WorkUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+POST/v1/environments/{environment\_id}/work/{work\_id}
+
+##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+
+[BetaSelfHostedWorkQueueStats](api/beta.md) beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/environments/{environment\_id}/work/stats
+
+##### ModelsExpand Collapse
+
+class BetaSelfHostedWork:
+
+Work resource representing a unit of work in a self-hosted environment.
+
+Work items are queued when sessions are created or when long-dormant sessions
+receive new messages. The environment worker polls for work to execute in a
+self-hosted sandbox.
+
+String id
+
+Work identifier (e.g., 'work\_...')
+
+Optional<String> acknowledgedAt
+
+RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+String createdAt
+
+RFC 3339 timestamp when work was created
+
+[BetaSessionWorkData](api/beta.md) data
+
+The actual work to be performed
+
+String id
+
+Session identifier (e.g., 'session\_...')
+
+JsonValue; type "session"constant"session"constant
+
+Type of work data
+
+String environmentId
+
+Environment identifier this work belongs to (e.g., `env_...`)
+
+Optional<String> latestHeartbeatAt
+
+RFC 3339 timestamp of the most recent heartbeat
+
+Metadata metadata
+
+User-provided metadata key-value pairs associated with this work item
+
+Optional<String> startedAt
+
+RFC 3339 timestamp when work execution started
+
+State state
+
+Current state of the work item
+
+Accepts one of the following:
+
+QUEUED("queued")
+
+STARTING("starting")
+
+ACTIVE("active")
+
+STOPPING("stopping")
+
+STOPPED("stopped")
+
+Optional<String> stopRequestedAt
+
+RFC 3339 timestamp when stop was requested
+
+Optional<String> stoppedAt
+
+RFC 3339 timestamp when work execution stopped
+
+JsonValue; type "work"constant"work"constant
+
+The type of object (always 'work')
+
+class BetaSelfHostedWorkHeartbeatResponse:
+
+Response after recording a heartbeat for a work item.
+
+String lastHeartbeat
+
+RFC 3339 timestamp of the actual heartbeat from DB
+
+boolean leaseExtended
+
+Whether the heartbeat succeeded in extending the lease
+
+State state
+
+Current state of the work item (active/stopping/stopped)
+
+Accepts one of the following:
+
+QUEUED("queued")
+
+STARTING("starting")
+
+ACTIVE("active")
+
+STOPPING("stopping")
+
+STOPPED("stopped")
+
+long ttlSeconds
+
+Effective TTL applied to the lease
+
+JsonValue; type "work\_heartbeat"constant"work\_heartbeat"constant
+
+The type of response
+
+class BetaSelfHostedWorkListResponse:
+
+Response when listing work items with cursor-based pagination.
+
+List<[BetaSelfHostedWork](api/beta.md)> data
+
+List of work items
+
+String id
+
+Work identifier (e.g., 'work\_...')
+
+Optional<String> acknowledgedAt
+
+RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+String createdAt
+
+RFC 3339 timestamp when work was created
+
+[BetaSessionWorkData](api/beta.md) data
+
+The actual work to be performed
+
+String id
+
+Session identifier (e.g., 'session\_...')
+
+JsonValue; type "session"constant"session"constant
+
+Type of work data
+
+String environmentId
+
+Environment identifier this work belongs to (e.g., `env_...`)
+
+Optional<String> latestHeartbeatAt
+
+RFC 3339 timestamp of the most recent heartbeat
+
+Metadata metadata
+
+User-provided metadata key-value pairs associated with this work item
+
+Optional<String> startedAt
+
+RFC 3339 timestamp when work execution started
+
+State state
+
+Current state of the work item
+
+Accepts one of the following:
+
+QUEUED("queued")
+
+STARTING("starting")
+
+ACTIVE("active")
+
+STOPPING("stopping")
+
+STOPPED("stopped")
+
+Optional<String> stopRequestedAt
+
+RFC 3339 timestamp when stop was requested
+
+Optional<String> stoppedAt
+
+RFC 3339 timestamp when work execution stopped
+
+JsonValue; type "work"constant"work"constant
+
+The type of object (always 'work')
+
+Optional<String> nextPage
+
+Opaque cursor for fetching the next page of results
+
+class BetaSelfHostedWorkQueueStats:
+
+Statistics about the work queue for an environment.
+
+Uses Redis Stream consumer group metrics for O(1) queries.
+
+long depth
+
+Number of work items waiting to be picked up (lag from consumer group)
+
+Optional<String> oldestQueuedAt
+
+RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+long pending
+
+Number of work items being processed (polled but not acknowledged)
+
+JsonValue; type "work\_queue\_stats"constant"work\_queue\_stats"constant
+
+The type of object
+
+Optional<Long> workersPolling
+
+Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+
+class BetaSelfHostedWorkStopRequest:
+
+Request to stop a work item.
+
+Optional<Boolean> force
+
+If true, immediately stop work without graceful shutdown
+
+class BetaSelfHostedWorkUpdateRequest:
+
+Request to update work item metadata.
+
+Metadata metadata
+
+Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+class BetaSessionWorkData:
+
+Work data for session work items.
+
+This resource type is used when work represents a session that needs to be executed
+in a self-hosted environment.
+
+String id
+
+Session identifier (e.g., 'session\_...')
+
+JsonValue; type "session"constant"session"constant
+
+Type of work data
 
 #### BetaSessions
 
@@ -30664,7 +31779,7 @@ Server-generated outc\_ ID for this outcome.
 
 String result
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 Type type
 
@@ -31242,7 +32357,7 @@ Server-generated outc\_ ID for this outcome.
 
 String result
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 Type type
 
@@ -31938,6 +33053,206 @@ Type type
 
 long version
 
+class BetaManagedAgentsSessionAgentUpdate:
+
+Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
+
+Optional<List<[BetaManagedAgentsUrlMcpServerParams](api/beta.md)>> mcpServers
+
+Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+String name
+
+Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+
+Type type
+
+String url
+
+Endpoint URL for the MCP server.
+
+Optional<List<Tool>> tools
+
+Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401Params:
+
+Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+Type type
+
+Optional<List<[BetaManagedAgentsAgentToolConfigParams](api/beta.md)>> configs
+
+Per-tool configuration overrides.
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+Optional<Boolean> enabled
+
+Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+
+Optional<PermissionPolicy> permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Optional<[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta.md)> defaultConfig
+
+Default configuration for all tools in a toolset.
+
+Optional<Boolean> enabled
+
+Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+Optional<PermissionPolicy> permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+class BetaManagedAgentsMcpToolsetParams:
+
+Configuration for tools from an MCP server defined in `mcp_servers`.
+
+String mcpServerName
+
+Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+
+Type type
+
+Optional<List<[BetaManagedAgentsMcpToolConfigParams](api/beta.md)>> configs
+
+Per-tool configuration overrides.
+
+String name
+
+Name of the MCP tool to configure. 1-128 characters.
+
+Optional<Boolean> enabled
+
+Whether this tool is enabled. Overrides the `default_config` setting.
+
+Optional<PermissionPolicy> permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Optional<[BetaManagedAgentsMcpToolsetDefaultConfigParams](api/beta.md)> defaultConfig
+
+Default configuration for all tools from an MCP server.
+
+Optional<Boolean> enabled
+
+Whether tools are enabled by default. Defaults to true if not specified.
+
+Optional<PermissionPolicy> permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+class BetaManagedAgentsCustomToolParams:
+
+A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+String description
+
+Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+Type type
+
 class BetaManagedAgentsSessionMultiagentCoordinator:
 
 Resolved coordinator topology with full agent definitions for each roster member.
@@ -32218,6 +33533,558 @@ Optional<Double> durationSeconds
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
+class BetaManagedAgentsSessionUpdatedEvent:
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+String id
+
+Unique identifier for this event.
+
+LocalDateTime processedAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+Optional<[BetaManagedAgentsSessionAgent](api/beta.md)> agent
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)> multiagent
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+List<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Type type
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Optional<Metadata> metadata
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Optional<String> title
+
+The session's new title. Present only when the update changed it.
+
 class BetaManagedAgentsSessionUsage:
 
 Cumulative token usage for a session across all turns.
@@ -32245,6 +34112,194 @@ Total input tokens consumed across all turns.
 Optional<Long> outputTokens
 
 Total output tokens generated across all turns.
+
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 #### BetaSessionsEvents
 
@@ -32441,6 +34496,38 @@ Additional context about the document for the model.
 Optional<String> title
 
 The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
 
 Optional<Boolean> isError
 
@@ -32992,6 +35079,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -33478,6 +35597,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -33521,6 +35672,182 @@ Type type
 Optional<Long> maxIterations
 
 Eval→revision cycles before giving up. Default 3, max 20.
+
+class BetaManagedAgentsUserToolResultEventParams:
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
 
 class BetaManagedAgentsFileDocumentSource:
 
@@ -33815,6 +36142,56 @@ Type type
 class BetaManagedAgentsRetryStatusTerminal:
 
 The session encountered a terminal error and will transition to `terminated` state.
+
+Type type
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+class BetaManagedAgentsSearchResultCitations:
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+class BetaManagedAgentsSearchResultContent:
+
+Text content within a search result.
+
+String text
+
+The text content.
 
 Type type
 
@@ -34170,6 +36547,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -34233,6 +36642,194 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 Type type
 
 Type type
+
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
 class BetaManagedAgentsSessionDeletedEvent:
 
@@ -34866,6 +37463,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -35132,6 +37761,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -35321,6 +37982,38 @@ Additional context about the document for the model.
 Optional<String> title
 
 The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
 
 Optional<Boolean> isError
 
@@ -36350,6 +39043,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type type
 
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -36371,6 +39252,558 @@ String sessionThreadId
 Public sthr\_ ID of the thread that is retrying.
 
 Type type
+
+class BetaManagedAgentsSessionUpdatedEvent:
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+String id
+
+Unique identifier for this event.
+
+LocalDateTime processedAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+Optional<[BetaManagedAgentsSessionAgent](api/beta.md)> agent
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)> multiagent
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+List<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Type type
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Optional<Metadata> metadata
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Optional<String> title
+
+The session's new title. Present only when the update changed it.
 
 class BetaManagedAgentsSessionRequiresAction:
 
@@ -37160,6 +40593,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -37426,6 +40891,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -37615,6 +41112,38 @@ Additional context about the document for the model.
 Optional<String> title
 
 The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
 
 Optional<Boolean> isError
 
@@ -38644,6 +42173,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type type
 
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -38665,6 +42382,558 @@ String sessionThreadId
 Public sthr\_ ID of the thread that is retrying.
 
 Type type
+
+class BetaManagedAgentsSessionUpdatedEvent:
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+String id
+
+Unique identifier for this event.
+
+LocalDateTime processedAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+Optional<[BetaManagedAgentsSessionAgent](api/beta.md)> agent
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)> multiagent
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+List<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Type type
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Optional<Metadata> metadata
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Optional<String> title
+
+The session's new title. Present only when the update changed it.
 
 class BetaManagedAgentsTextBlock:
 
@@ -38894,6 +43163,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -39045,6 +43346,38 @@ Additional context about the document for the model.
 Optional<String> title
 
 The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
 
 Optional<Boolean> isError
 
@@ -39509,6 +43842,182 @@ Type type
 Optional<String> denyMessage
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+class BetaManagedAgentsUserToolResultEventParams:
+
+Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
 
 #### BetaSessionsResources
 
@@ -40112,268 +44621,6 @@ Optional<Long> outputTokens
 
 Total output tokens generated across all turns.
 
-class BetaManagedAgentsSessionThreadAgent:
-
-Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
-
-String id
-
-Optional<String> description
-
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
-
-String name
-
-Type type
-
-String url
-
-[BetaManagedAgentsModelConfig](api/beta.md) model
-
-Model identifier and configuration.
-
-BetaManagedAgentsModel id
-
-The model that will power your agent.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-Accepts one of the following:
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Most intelligent model for building agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-Optional<Speed> speed
-
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-Accepts one of the following:
-
-STANDARD("standard")
-
-FAST("fast")
-
-String name
-
-List<Skill> skills
-
-Accepts one of the following:
-
-class BetaManagedAgentsAnthropicSkill:
-
-A resolved Anthropic-managed skill.
-
-String skillId
-
-Type type
-
-String version
-
-class BetaManagedAgentsCustomSkill:
-
-A resolved user-created custom skill.
-
-String skillId
-
-Type type
-
-String version
-
-Optional<String> system
-
-List<Tool> tools
-
-Accepts one of the following:
-
-class BetaManagedAgentsAgentToolset20260401:
-
-List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
-
-boolean enabled
-
-Name name
-
-Built-in agent tool identifier.
-
-Accepts one of the following:
-
-BASH("bash")
-
-EDIT("edit")
-
-READ("read")
-
-WRITE("write")
-
-GLOB("glob")
-
-GREP("grep")
-
-WEB\_FETCH("web\_fetch")
-
-WEB\_SEARCH("web\_search")
-
-PermissionPolicy permissionPolicy
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-Type type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-Type type
-
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
-
-Resolved default configuration for agent tools.
-
-boolean enabled
-
-PermissionPolicy permissionPolicy
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-Type type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-Type type
-
-Type type
-
-class BetaManagedAgentsMcpToolset:
-
-List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
-
-boolean enabled
-
-String name
-
-PermissionPolicy permissionPolicy
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-Type type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-Type type
-
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
-
-Resolved default configuration for all tools from an MCP server.
-
-boolean enabled
-
-PermissionPolicy permissionPolicy
-
-Permission policy for tool execution.
-
-Accepts one of the following:
-
-class BetaManagedAgentsAlwaysAllowPolicy:
-
-Tool calls are automatically approved without user confirmation.
-
-Type type
-
-class BetaManagedAgentsAlwaysAskPolicy:
-
-Tool calls require user confirmation before execution.
-
-Type type
-
-String mcpServerName
-
-Type type
-
-class BetaManagedAgentsCustomTool:
-
-A custom tool as returned in API responses.
-
-String description
-
-[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
-
-JSON Schema for custom tool input parameters.
-
-Optional<Properties> properties
-
-JSON Schema properties defining the tool's input parameters.
-
-Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
-
-String name
-
-Type type
-
-Type type
-
-long version
-
 class BetaManagedAgentsSessionThreadStats:
 
 Timing statistics for a session thread.
@@ -40776,6 +45023,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -41042,6 +45321,38 @@ Optional<String> title
 
 The title of the document.
 
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
@@ -41231,6 +45542,38 @@ Additional context about the document for the model.
 Optional<String> title
 
 The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
 
 Optional<Boolean> isError
 
@@ -42260,6 +46603,194 @@ Public sthr\_ ID of the thread that terminated.
 
 Type type
 
+class BetaManagedAgentsUserToolResultEvent:
+
+Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+String id
+
+Unique identifier for this event.
+
+String toolUseId
+
+The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+Type type
+
+Optional<List<Content>> content
+
+The result content returned by the tool.
+
+Accepts one of the following:
+
+class BetaManagedAgentsTextBlock:
+
+Regular text content.
+
+String text
+
+The text content.
+
+Type type
+
+class BetaManagedAgentsImageBlock:
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+Source source
+
+Union type for image source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64ImageSource:
+
+Base64-encoded image data.
+
+String data
+
+Base64-encoded image data.
+
+String mediaType
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+Type type
+
+class BetaManagedAgentsUrlImageSource:
+
+Image referenced by URL.
+
+Type type
+
+String url
+
+URL of the image to fetch.
+
+class BetaManagedAgentsFileImageSource:
+
+Image referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsDocumentBlock:
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+Source source
+
+Union type for document source variants.
+
+Accepts one of the following:
+
+class BetaManagedAgentsBase64DocumentSource:
+
+Base64-encoded document data.
+
+String data
+
+Base64-encoded document data.
+
+String mediaType
+
+MIME type of the document (e.g., "application/pdf").
+
+Type type
+
+class BetaManagedAgentsPlainTextDocumentSource:
+
+Plain text document content.
+
+String data
+
+The plain text content.
+
+MediaType mediaType
+
+MIME type of the text content. Must be "text/plain".
+
+Type type
+
+class BetaManagedAgentsUrlDocumentSource:
+
+Document referenced by URL.
+
+Type type
+
+String url
+
+URL of the document to fetch.
+
+class BetaManagedAgentsFileDocumentSource:
+
+Document referenced by file ID.
+
+String fileId
+
+ID of a previously uploaded file.
+
+Type type
+
+Type type
+
+Optional<String> context
+
+Additional context about the document for the model.
+
+Optional<String> title
+
+The title of the document.
+
+class BetaManagedAgentsSearchResultBlock:
+
+A block containing a web search result.
+
+[BetaManagedAgentsSearchResultCitations](api/beta.md) citations
+
+Citation settings for a search result.
+
+boolean enabled
+
+Whether citations are enabled for this search result.
+
+List<[BetaManagedAgentsSearchResultContent](api/beta.md)> content
+
+Array of text content blocks from the search result.
+
+String text
+
+The text content.
+
+Type type
+
+String source
+
+The URL source of the search result.
+
+String title
+
+The title of the search result.
+
+Type type
+
+Optional<Boolean> isError
+
+Whether the tool execution resulted in an error.
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
+
+Optional<String> sessionThreadId
+
+Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
 class BetaManagedAgentsSessionThreadStatusRescheduledEvent:
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -42281,6 +46812,558 @@ String sessionThreadId
 Public sthr\_ ID of the thread that is retrying.
 
 Type type
+
+class BetaManagedAgentsSessionUpdatedEvent:
+
+Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+String id
+
+Unique identifier for this event.
+
+LocalDateTime processedAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+Optional<[BetaManagedAgentsSessionAgent](api/beta.md)> agent
+
+Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+Optional<[BetaManagedAgentsSessionMultiagentCoordinator](api/beta.md)> multiagent
+
+Resolved coordinator topology with full agent definitions for each roster member.
+
+List<[BetaManagedAgentsSessionThreadAgent](api/beta.md)> agents
+
+Full `agent` definitions the coordinator may spawn as session threads.
+
+String id
+
+Optional<String> description
+
+List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> mcpServers
+
+String name
+
+Type type
+
+String url
+
+[BetaManagedAgentsModelConfig](api/beta.md) model
+
+Model identifier and configuration.
+
+BetaManagedAgentsModel id
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Most intelligent model for building agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+Optional<Speed> speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Type type
+
+String name
+
+List<Skill> skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+String skillId
+
+Type type
+
+String version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+String skillId
+
+Type type
+
+String version
+
+Optional<String> system
+
+List<Tool> tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+List<[BetaManagedAgentsAgentToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+Name name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+BASH("bash")
+
+EDIT("edit")
+
+READ("read")
+
+WRITE("write")
+
+GLOB("glob")
+
+GREP("grep")
+
+WEB\_FETCH("web\_fetch")
+
+WEB\_SEARCH("web\_search")
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for agent tools.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+Type type
+
+class BetaManagedAgentsMcpToolset:
+
+List<[BetaManagedAgentsMcpToolConfig](api/beta.md)> configs
+
+boolean enabled
+
+String name
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) defaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+boolean enabled
+
+PermissionPolicy permissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+Type type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+Type type
+
+String mcpServerName
+
+Type type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+String description
+
+[BetaManagedAgentsCustomToolInputSchema](api/beta.md) inputSchema
+
+JSON Schema for custom tool input parameters.
+
+Optional<Properties> properties
+
+JSON Schema properties defining the tool's input parameters.
+
+Optional<List<String>> required
+
+List of required property names.
+
+Optional<Type> type
+
+Must be 'object' for tool input schemas.
+
+String name
+
+Type type
+
+Type type
+
+long version
+
+Optional<Metadata> metadata
+
+The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+Optional<String> title
+
+The session's new title. Present only when the update changed it.
 
 #### BetaSessionsThreadsEvents
 
@@ -43883,6 +48966,12 @@ POST/v1/skills/{skill\_id}/versions
 VersionListPage beta().skills().versions().list(VersionListParamsparams = VersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
 
 GET/v1/skills/{skill\_id}/versions
+
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+HttpResponse beta().skills().versions().download(VersionDownloadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
 
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 

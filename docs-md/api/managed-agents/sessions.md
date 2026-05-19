@@ -10,7 +10,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string starts the session with the latest agent version.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions create \
@@ -20,7 +20,7 @@ ant beta:sessions create \
 
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions create <<YAML
@@ -38,7 +38,7 @@ The agent defines how Claude behaves within the session, including the model, sy
 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and register credentials.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions create <<YAML
@@ -53,7 +53,7 @@ YAML
 
 Creating a session provisions the environment's container but does not start any work. To delegate a task, send events to the session using a [user event](managed-agents/events-and-streaming.md). The session acts as a state machine that tracks progress while events drive the actual execution.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions:events send \
@@ -81,9 +81,33 @@ Sessions progress through these statuses:
 
 ## Other session operations
 
+### Updating the agent configuration
+
+You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
+
+The semantics of an update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
+
+The session must be `idle` to update the agent. [Interrupt](managed-agents/events-and-streaming.md) the session if you need to update the agent while it's running.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+ant beta:sessions update --session-id "$SESSION_ID" <<'YAML'
+agent:
+  tools:
+    - type: agent_toolset_20260401
+    - type: mcp_toolset
+      mcp_server_name: linear
+  mcp_servers:
+    - type: url
+      name: linear
+      url: https://mcp.linear.app/sse
+YAML
+```
+
 ### Retrieving a session
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions retrieve --session-id "$SESSION_ID"
@@ -91,17 +115,17 @@ ant beta:sessions retrieve --session-id "$SESSION_ID"
 
 ### Listing sessions
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-ant beta:sessions list
+ant beta:sessions list --agent-id "$AGENT_ID"
 ```
 
 ### Archiving a session
 
 Archive a session to prevent new events from being sent while preserving its history:
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions archive \
@@ -114,7 +138,7 @@ Delete a session to permanently remove its record, events, and associated contai
 
 Files, memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion.
 
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:sessions delete \

@@ -1,4 +1,4 @@
-# Claude Code overview
+# Overview
 
 > ## Documentation Index
 >

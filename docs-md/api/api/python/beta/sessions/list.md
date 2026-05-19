@@ -86,7 +86,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
 Accepts one of the following:
 
@@ -137,6 +137,8 @@ Accepts one of the following:
 "advisor-tool-2026-03-01"
 
 "managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -754,7 +756,7 @@ Server-generated outc\_ ID for this outcome.
 
 result: str
 
-Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max\_iterations\_reached'/'failed'/'interrupted' are terminal.
+Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
 type: Literal["outcome\_evaluation"]
 

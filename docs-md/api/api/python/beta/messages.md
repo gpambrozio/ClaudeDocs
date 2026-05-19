@@ -773,6 +773,46 @@ ephemeral\_5m\_input\_tokens: int
 
 The number of input tokens used to create the 5 minute cache entry.
 
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
+
 class BetaCitationCharLocation: …
 
 cited\_text: str
@@ -5911,6 +5951,66 @@ original\_input\_tokens: int
 
 The original token count before context management was applied
 
+class BetaDiagnostics: …
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
+
+class BetaDiagnosticsParam: …
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+previous\_message\_id: Optional[str]
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 class BetaDirectCaller: …
 
 Tool invocation directly from the model.
@@ -7732,6 +7832,57 @@ Number of thinking turns that were cleared.
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
+
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
 
 model: [Model](api/messages.md)
 
@@ -13678,6 +13829,57 @@ type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
 
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -15109,6 +15311,57 @@ Number of thinking turns that were cleared.
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
+
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
 
 model: [Model](api/messages.md)
 
@@ -25236,6 +25489,57 @@ type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
 
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -26774,6 +27078,57 @@ type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
 
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
+
 model: [Model](api/messages.md)
 
 The model that will complete your prompt.
@@ -28273,6 +28628,57 @@ Number of thinking turns that were cleared.
 type: Literal["clear\_thinking\_20251015"]
 
 The type of context management edit applied.
+
+diagnostics: Optional[BetaDiagnostics]
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+cache\_miss\_reason: Optional[CacheMissReason]
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+class BetaCacheMissModelChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["model\_changed"]
+
+class BetaCacheMissSystemChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["system\_changed"]
+
+class BetaCacheMissToolsChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["tools\_changed"]
+
+class BetaCacheMissMessagesChanged: …
+
+cache\_missed\_input\_tokens: int
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+type: Literal["messages\_changed"]
+
+class BetaCacheMissPreviousMessageNotFound: …
+
+type: Literal["previous\_message\_not\_found"]
+
+class BetaCacheMissUnavailable: …
+
+type: Literal["unavailable"]
 
 model: [Model](api/messages.md)
 

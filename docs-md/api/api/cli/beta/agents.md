@@ -586,6 +586,81 @@ type: "agent\_toolset\_20260401"
 
 "agent\_toolset\_20260401"
 
+beta\_managed\_agents\_agent\_toolset20260401\_bash\_input: object { command, restart, timeout\_ms }
+
+Input payload for the `bash` tool of the
+`agent_toolset_20260401` toolset. All fields are optional;
+a normal invocation supplies `command`, while `restart=true`
+(with no `command`) reboots the runner-side bash session.
+
+command: optional string
+
+Shell command to execute. Omit only when `restart` is true.
+
+restart: optional boolean
+
+When true, restart the persistent bash session instead of
+running a command. Subsequent calls without `restart` will
+run against the fresh session.
+
+timeout\_ms: optional number
+
+Per-call timeout in milliseconds. Defaults to the
+runner-wide tool timeout when omitted or zero.
+
+beta\_managed\_agents\_agent\_toolset20260401\_edit\_input: object { file\_path, new\_string, old\_string, replace\_all }
+
+Input payload for the `edit` tool. Performs a string
+replacement in the named file; by default `old_string` must
+occur exactly once.
+
+file\_path: string
+
+Path of the file to edit.
+
+new\_string: string
+
+Replacement text.
+
+old\_string: string
+
+Substring to find and replace.
+
+replace\_all: optional boolean
+
+When true, replace every occurrence of `old_string`
+instead of requiring a unique match.
+
+beta\_managed\_agents\_agent\_toolset20260401\_glob\_input: object { pattern, path }
+
+Input payload for the `glob` tool. Returns paths matching a
+doublestar glob pattern, newest first.
+
+pattern: string
+
+Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
+are only permitted when the runner is configured to allow
+them.
+
+path: optional string
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
+beta\_managed\_agents\_agent\_toolset20260401\_grep\_input: object { pattern, path }
+
+Input payload for the `grep` tool. Searches file contents for
+a regular expression, returning matching lines.
+
+pattern: string
+
+Regular expression to search for.
+
+path: optional string
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
 beta\_managed\_agents\_agent\_toolset20260401\_params: object { type, configs, default\_config }
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
@@ -669,6 +744,35 @@ Tool calls require user confirmation before execution.
 type: "always\_ask"
 
 "always\_ask"
+
+beta\_managed\_agents\_agent\_toolset20260401\_read\_input: object { file\_path, view\_range }
+
+Input payload for the `read` tool. Reads file contents
+relative to the runner's working directory (or absolute when
+the runner permits).
+
+file\_path: string
+
+Path of the file to read.
+
+view\_range: optional array of number
+
+Optional `[start_line, end_line]` 1-indexed inclusive
+range. When omitted the entire file is returned.
+`end_line` of 0 or negative means "to end of file".
+
+beta\_managed\_agents\_agent\_toolset20260401\_write\_input: object { content, file\_path }
+
+Input payload for the `write` tool. Writes (overwriting) the
+entire file contents.
+
+content: string
+
+Full file contents to write.
+
+file\_path: string
+
+Path of the file to write.
 
 beta\_managed\_agents\_always\_allow\_policy: object { type }
 
@@ -1255,6 +1359,282 @@ Sentinel roster entry meaning "the agent that owns this configuration". Resolved
 type: "self"
 
 "self"
+
+beta\_managed\_agents\_session\_thread\_agent: object { id, description, mcp\_servers, 7 more }
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+id: string
+
+description: string
+
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/beta.md) { name, type, url }
+
+name: string
+
+type: "url"
+
+"url"
+
+url: string
+
+model: object { id, speed }
+
+Model identifier and configuration.
+
+id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-6"
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+speed: optional "standard" or "fast"
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+"standard"
+
+"fast"
+
+name: string
+
+skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
+
+beta\_managed\_agents\_anthropic\_skill: object { skill\_id, type, version }
+
+A resolved Anthropic-managed skill.
+
+skill\_id: string
+
+type: "anthropic"
+
+"anthropic"
+
+version: string
+
+beta\_managed\_agents\_custom\_skill: object { skill\_id, type, version }
+
+A resolved user-created custom skill.
+
+skill\_id: string
+
+type: "custom"
+
+"custom"
+
+version: string
+
+system: string
+
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
+
+beta\_managed\_agents\_agent\_toolset20260401: object { configs, default\_config, type }
+
+configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: "bash" or "edit" or "read" or 5 more
+
+Built-in agent tool identifier.
+
+"bash"
+
+"edit"
+
+"read"
+
+"write"
+
+"glob"
+
+"grep"
+
+"web\_fetch"
+
+"web\_search"
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+beta\_managed\_agents\_always\_allow\_policy: object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+"always\_allow"
+
+beta\_managed\_agents\_always\_ask\_policy: object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+"always\_ask"
+
+default\_config: object { enabled, permission\_policy }
+
+Resolved default configuration for agent tools.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+beta\_managed\_agents\_always\_allow\_policy: object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+"always\_allow"
+
+beta\_managed\_agents\_always\_ask\_policy: object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+"always\_ask"
+
+type: "agent\_toolset\_20260401"
+
+"agent\_toolset\_20260401"
+
+beta\_managed\_agents\_mcp\_toolset: object { configs, default\_config, mcp\_server\_name, type }
+
+configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
+
+enabled: boolean
+
+name: string
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+beta\_managed\_agents\_always\_allow\_policy: object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+"always\_allow"
+
+beta\_managed\_agents\_always\_ask\_policy: object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+"always\_ask"
+
+default\_config: object { enabled, permission\_policy }
+
+Resolved default configuration for all tools from an MCP server.
+
+enabled: boolean
+
+permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  or [BetaManagedAgentsAlwaysAskPolicy](api/beta.md) { type }
+
+Permission policy for tool execution.
+
+beta\_managed\_agents\_always\_allow\_policy: object { type }
+
+Tool calls are automatically approved without user confirmation.
+
+type: "always\_allow"
+
+"always\_allow"
+
+beta\_managed\_agents\_always\_ask\_policy: object { type }
+
+Tool calls require user confirmation before execution.
+
+type: "always\_ask"
+
+"always\_ask"
+
+mcp\_server\_name: string
+
+type: "mcp\_toolset"
+
+"mcp\_toolset"
+
+beta\_managed\_agents\_custom\_tool: object { description, input\_schema, name, type }
+
+A custom tool as returned in API responses.
+
+description: string
+
+input\_schema: object { properties, required, type }
+
+JSON Schema for custom tool input parameters.
+
+properties: optional map[unknown]
+
+JSON Schema properties defining the tool's input parameters.
+
+required: optional array of string
+
+List of required property names.
+
+type: optional "object"
+
+Must be 'object' for tool input schemas.
+
+"object"
+
+name: string
+
+type: "custom"
+
+"custom"
+
+type: "agent"
+
+"agent"
+
+version: number
 
 beta\_managed\_agents\_skill\_params: [BetaManagedAgentsAnthropicSkillParams](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkillParams](api/beta.md) { skill\_id, type, version }
 

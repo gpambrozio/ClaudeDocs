@@ -34,7 +34,7 @@ Accepts one of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 21 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
 Accepts one of the following:
 
@@ -86,6 +86,8 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 class BetaEnvironment: …
@@ -100,7 +102,13 @@ archived\_at: Optional[str]
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta.md)
+config: Config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig: …
 
 `cloud` environment configuration.
 
@@ -174,6 +182,14 @@ type: Literal["cloud"]
 
 Environment type
 
+class BetaSelfHostedConfig: …
+
+Configuration for self-hosted environments.
+
+type: Literal["self\_hosted"]
+
+Environment type
+
 created\_at: str
 
 RFC 3339 timestamp when environment was created
@@ -197,6 +213,16 @@ The type of object (always 'environment')
 updated\_at: str
 
 RFC 3339 timestamp when environment was last updated
+
+scope: Optional[Literal["organization", "account"]]
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+"organization"
+
+"account"
 
 List Environments
 
@@ -260,7 +286,8 @@ Response 200
       "metadata": {},
       "name": "python-data-analysis",
       "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z"
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -315,7 +342,8 @@ Response 200
       "metadata": {},
       "name": "python-data-analysis",
       "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z"
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

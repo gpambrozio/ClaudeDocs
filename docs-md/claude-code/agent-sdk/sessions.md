@@ -42,7 +42,7 @@ Both SDKs offer an interface that tracks session state for you across calls, so 
 
 ### [​](#python-claudesdkclient) Python: `ClaudeSDKClient`
 
-[`ClaudeSDKClient`](agent-sdk/python.md) handles session IDs internally. Each call to `client.query()` automatically continues the same session. Call [`client.receive_response()`](agent-sdk/python.md) to iterate over the messages for the current query. The client must be used as an async context manager.
+[`ClaudeSDKClient`](agent-sdk/python.md) handles session IDs internally. Each call to `client.query()` automatically continues the same session. Call [`client.receive_response()`](agent-sdk/python.md) to iterate over the messages for the current query. The client is typically used as an async context manager.
 This example runs two queries against the same `client`. The first asks the agent to analyze a module; the second asks it to refactor that module. Because both calls go through the same client instance, the second query has full context from the first without any explicit `resume` or session ID:
 
 Python
@@ -94,7 +94,7 @@ See the [Python SDK reference](agent-sdk/python.md) for details on when to use `
 
 ### [​](#typescript-continue-true) TypeScript: `continue: true`
 
-The stable TypeScript SDK (the `query()` function used throughout these docs, sometimes called V1) doesn’t have a session-holding client object like Python’s `ClaudeSDKClient`. Instead, pass `continue: true` on each subsequent `query()` call and the SDK picks up the most recent session in the current directory. No ID tracking required.
+The TypeScript SDK doesn’t have a session-holding client object like Python’s `ClaudeSDKClient`. Instead, pass `continue: true` on each subsequent `query()` call and the SDK picks up the most recent session in the current directory. No ID tracking required.
 This example makes two separate `query()` calls. The first creates a fresh session; the second sets `continue: true`, which tells the SDK to find and resume the most recent session on disk. The agent has full context from the first call:
 
 TypeScript
@@ -126,7 +126,7 @@ for await (const message of query({
 }
 ```
 
-The experimental [V2 session API](agent-sdk/typescript-v2-preview.md), which provided `createSession()` with a `send` / `stream` pattern, is deprecated. Use the V1 `query()` function and the session options described on this page instead.
+The experimental [V2 session API](agent-sdk/typescript-v2-preview.md), which provided `createSession()` with a `send` / `stream` pattern, was removed in TypeScript Agent SDK 0.3.142. Use the `query()` function and the session options described on this page instead.
 
 ## [​](#use-session-options-with-query) Use session options with `query()`
 

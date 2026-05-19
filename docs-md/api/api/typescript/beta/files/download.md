@@ -28,7 +28,7 @@ Accepts one of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more
 
 "message-batches-2024-09-24"
 
@@ -78,9 +78,11 @@ Accepts one of the following:
 
 "managed-agents-2026-04-01"
 
+"cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
-unnamed\_schema\_1 = Response
+unnamed\_schema\_2 = Response
 
 Download File
 

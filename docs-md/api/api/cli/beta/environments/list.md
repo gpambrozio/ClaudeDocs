@@ -39,7 +39,7 @@ Response when listing environments.
 This response model uses opaque cursor-based pagination. Use the `page`
 query parameter with the value from `next_page` to fetch the next page.
 
-data: array of [BetaEnvironment](api/beta.md) { id, archived\_at, config, 6 more }
+data: array of [BetaEnvironment](api/beta.md) { id, archived\_at, config, 7 more }
 
 List of environments.
 
@@ -51,7 +51,11 @@ archived\_at: string
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: object { networking, packages, type }
+config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta.md) { type }
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+beta\_cloud\_config: object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -125,6 +129,14 @@ type: "cloud"
 
 Environment type
 
+beta\_self\_hosted\_config: object { type }
+
+Configuration for self-hosted environments.
+
+type: "self\_hosted"
+
+Environment type
+
 created\_at: string
 
 RFC 3339 timestamp when environment was created
@@ -148,6 +160,14 @@ The type of object (always 'environment')
 updated\_at: string
 
 RFC 3339 timestamp when environment was last updated
+
+scope: optional "organization" or "account"
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+"organization"
+
+"account"
 
 next\_page: string
 
@@ -208,7 +228,8 @@ Response 200
       "metadata": {},
       "name": "python-data-analysis",
       "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z"
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -263,7 +284,8 @@ Response 200
       "metadata": {},
       "name": "python-data-analysis",
       "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z"
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

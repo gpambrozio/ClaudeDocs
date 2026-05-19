@@ -72,6 +72,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsVault:

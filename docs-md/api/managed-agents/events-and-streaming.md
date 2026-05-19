@@ -38,6 +38,7 @@ Span events
 | `user.custom_tool_result` | Response to a custom tool call from the agent. |
 | `user.tool_confirmation` | Approve or deny an agent or MCP tool call when a permission policy requires confirmation. |
 | `user.define_outcome` | Define an [outcome](managed-agents/define-outcomes.md) for the agent to work toward. |
+| `user.tool_result` | For sessions with `self_hosted` [environments](managed-agents/self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
 
 Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and will be handled after preceding events finish processing.
 

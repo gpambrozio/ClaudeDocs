@@ -8,6 +8,14 @@ POST/v1/organizations/workspaces
 
 Create Workspace
 
+##### Header ParametersExpand Collapse
+
+"anthropic-beta": optional array of string
+
+Optional header to specify the beta version(s) you want to use.
+
+To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
 ##### Body ParametersJSONExpand Collapse
 
 name: string
@@ -36,9 +44,13 @@ workspace\_geo: optional string
 
 Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 
+tags: optional map[string]
+
+User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 ##### ReturnsExpand Collapse
 
-Workspace = object { id, archived\_at, created\_at, 4 more }
+Workspace = object { id, archived\_at, created\_at, 5 more }
 
 id: string
 
@@ -82,6 +94,10 @@ name: string
 
 Name of the Workspace.
 
+tags: map[string]
+
+User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 type: "workspace"
 
 Object type.
@@ -96,7 +112,11 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
-          "name": "x"
+          "name": "x",
+          "tags": {
+            "env": "prod",
+            "team": "platform"
+          }
         }'
 ```
 
@@ -114,6 +134,10 @@ Response 200
   },
   "display_color": "#6C5BB9",
   "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
   "type": "workspace"
 }
 ```
@@ -134,6 +158,10 @@ Response 200
   },
   "display_color": "#6C5BB9",
   "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
   "type": "workspace"
 }
 ```

@@ -70,6 +70,8 @@ Optional header to specify the beta version(s) you want to use.
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaEnvironment:
@@ -84,7 +86,13 @@ required string? ArchivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-required [BetaCloudConfig](api/beta.md) Config
+required Config Config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig:
 
 `cloud` environment configuration.
 
@@ -158,6 +166,14 @@ JsonElement Type "cloud"constant
 
 Environment type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonElement Type "self\_hosted"constant
+
+Environment type
+
 required string CreatedAt
 
 RFC 3339 timestamp when environment was created
@@ -181,6 +197,16 @@ The type of object (always 'environment')
 required string UpdatedAt
 
 RFC 3339 timestamp when environment was last updated
+
+Scope Scope
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+"organization"Organization
+
+"account"Account
 
 Archive Environment
 
@@ -241,7 +267,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -291,7 +318,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

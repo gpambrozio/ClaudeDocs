@@ -18,6 +18,12 @@ POST/v1/skills/{skill\_id}/versions
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+HttpResponse Beta.Skills.Versions.Download(VersionDownloadParamsparameters, CancellationTokencancellationToken = default)
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 [VersionRetrieveResponse](api/beta.md) Beta.Skills.Versions.Retrieve(VersionRetrieveParamsparameters, CancellationTokencancellationToken = default)

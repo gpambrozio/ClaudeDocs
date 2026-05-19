@@ -21,7 +21,7 @@ Both offerings let you use Claude through AWS, but they differ significantly in 
 | Aspect | Claude Platform on AWS | [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) |
 | --- | --- | --- | --- |
 | **Who operates the stack** | Anthropic | AWS | AWS |
-| **API surface** | Anthropic Messages API (`/v1/messages`) | Anthropic Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel |
+| **API surface** | Claude API (`/v1/{endpoint}`) | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel |
 | **Feature availability** | Typically same-day as Claude API (see [feature limitations](#features-not-currently-available)) | Per Amazon Bedrock release schedule | Per Amazon Bedrock release schedule |
 | **Agent Skills** | Available (beta) | Not available (requires code execution) | Not available |
 | **Beta features** | Pass through with `anthropic-beta` headers (see [feature limitations](#features-not-currently-available)) | `anthropic-beta` header not supported | `anthropic-beta` header not supported |
@@ -270,7 +270,7 @@ New models launch on Claude Platform on AWS simultaneously with the first-party 
 
 ## Making requests
 
-Claude Platform on AWS uses the Anthropic Messages API (`/v1/messages`), the same API surface as the first-party Claude API. The differences are the base URL, the authentication method, and a required `anthropic-workspace-id` header that identifies which [workspace](#workspaces) the request targets.
+Claude Platform on AWS uses the same API endpoints as the first-party Claude API. The differences are the base URL, the authentication method, and a required `anthropic-workspace-id` header that identifies which [workspace](#workspaces) the request targets.
 
 cURLPythonTypeScriptC#GoJavaPHPRuby
 
@@ -299,7 +299,7 @@ Context-window sizes on Claude Platform on AWS are identical to the first-party 
 
 ## Feature support
 
-Claude Platform on AWS uses the Anthropic Messages API directly, which means you get full Messages API feature parity with the first-party Claude API (except where noted in the [feature limitations](#features-not-currently-available)):
+Claude Platform on AWS uses Claude API endpoints directly, which means you get full feature parity with the first-party Claude API (except where noted in the [feature limitations](#features-not-currently-available)):
 
 - **Feature access:** Because Anthropic operates both platforms, most new features and beta headers become available on Claude Platform on AWS without a separate integration step. See [feature limitations](#features-not-currently-available) for exceptions.
 - **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
@@ -316,7 +316,7 @@ See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for featur
 
 ### Claude Managed Agents
 
-[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including agents, environments, sessions, credential vaults, and memory stores. The [Claude Agent SDK](agent-sdk/overview.md) is also supported.
+[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including agents, environments, sessions, credential vaults, and memory stores.
 
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in one way:
 
@@ -335,7 +335,10 @@ The following capabilities are not currently available on Claude Platform on AWS
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
 - **Fast mode:** Not available on Claude Platform on AWS.
 - **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
-- **Workspace-level inference geography controls:** `allowed_inference_geos` and `default_inference_geo` are not available. Set `inference_geo` on each request instead.
+- **Webhooks:** Not available on Claude Platform on AWS.
+- **Claude Managed Agents multiagent orchestration:** Only one agent per session is currently supported on Claude Platform on AWS.
+- **Claude Managed Agents self-hosted sandboxes:** Only the `cloud` environment type is supported.
+- **MCP tunnels:** Only MCP servers exposed over the public internet are supported.
 
 ## Data residency
 
@@ -344,7 +347,7 @@ Claude Platform on AWS supports the following inference geographies:
 - **US:** Inference stays within US data centers. A 1.1x pricing multiplier applies.
 - **Global:** Inference can route to any Anthropic-operated data center worldwide. Standard pricing applies.
 
-The AWS region your workspace is bound to controls which gateway endpoint you call and where AWS-side resources (IAM, CloudTrail, billing) are scoped. It does not pin where model inference runs. To pin inference to a specific geography, set `inference_geo` on each request.
+The AWS region your workspace is bound to controls which gateway endpoint you call and where AWS-side resources (IAM, CloudTrail, billing) are scoped. It does not pin where model inference runs. To pin inference to a specific geography, set `inference_geo` on each request or configure a workspace default.
 
 Set the inference geography per request with the `inference_geo` parameter:
 
@@ -365,9 +368,9 @@ message = client.messages.create(
 print(message)
 ```
 
-If you omit `inference_geo`, the request defaults to `global`.
+If you omit `inference_geo`, the request uses the workspace's `default_inference_geo` if one is configured, otherwise `global`.
 
-Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are not available on Claude Platform on AWS. Set `inference_geo` on each request instead.
+Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are also available on Claude Platform on AWS. See [Workspace-level restrictions](manage-claude/data-residency.md).
 
 ## Workspaces
 
@@ -495,7 +498,7 @@ The migration delta depends on which Bedrock integration you're coming from. The
 | Aspect | From [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) | From [Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) | To Claude Platform on AWS |
 | --- | --- | --- | --- |
 | **Base URL** | `bedrock-mantle.{region}.api.aws` | `bedrock-runtime.{region}.amazonaws.com` | `aws-external-anthropic.{region}.api.aws` |
-| **API format** | Anthropic Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel | Anthropic Messages API (`/v1/messages`) |
+| **API format** | Messages API at `/anthropic/v1/messages` | Bedrock Converse / InvokeModel | Claude API (`/v1/{endpoint}`) |
 | **Model IDs** | `anthropic.claude-opus-4-6` | `anthropic.claude-opus-4-6-v1` (with optional `us.`/`global.` prefix) | `claude-opus-4-6` |
 | **SDK client** | `AnthropicBedrockMantle` | `AnthropicBedrock` / Bedrock SDK | Platform-specific client (see [Install an SDK](#install-an-sdk)), in beta |
 | **SDK package** | `anthropic[bedrock]`, `@anthropic-ai/bedrock-sdk`, and others | `anthropic[bedrock]`, `@anthropic-ai/bedrock-sdk`, or AWS SDK | `anthropic[aws]`, `@anthropic-ai/aws-sdk`, and others (see [Install an SDK](#install-an-sdk)) |
@@ -504,7 +507,7 @@ The migration delta depends on which Bedrock integration you're coming from. The
 | **Workspace header** | Not applicable | Not applicable | `anthropic-workspace-id` required |
 | **Region availability** | See [Amazon Bedrock regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html) | See [Amazon Bedrock regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html) | All AWS commercial regions |
 
-If you're on the current Bedrock integration, the request body format is already the Anthropic Messages API; the changes are the base URL, SigV4 service name, model IDs, and adding the `anthropic-workspace-id` header. If you're on the legacy InvokeModel or Converse API, you'll also rewrite the request and response shapes to the Messages API format. See [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) for the request-shape mapping.
+If you're on the current Bedrock integration, the request body format is already the Messages API; the changes are the base URL, SigV4 service name, model IDs, and adding the `anthropic-workspace-id` header. If you're on the legacy InvokeModel or Converse API, you'll also rewrite the request and response shapes to the Messages API format. See [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) for the request-shape mapping.
 
 ### What you gain
 

@@ -68,7 +68,7 @@ The same `--permission-mode` flag works with `-p` for [non-interactive runs](hea
 | Auto mode | `auto` |
 | Bypass permissions | `bypassPermissions` |
 
-Auto mode appears in the mode indicator after you enable **Allow dangerously skip permissions** in the extension settings, but it stays unavailable until your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`; to start in auto mode by default, set `defaultMode` in your Claude Code [`settings.json`](settings.md) instead.Bypass permissions also requires the **Allow dangerously skip permissions** toggle before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
+Auto mode appears in the mode indicator after you enable **Allow dangerously skip permissions** in the extension settings, but it stays unavailable until your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](settings.md) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.Bypass permissions also requires the **Allow dangerously skip permissions** toggle before it appears in the mode indicator.See the [VS Code guide](vs-code.md) for extension-specific details.
 
 The JetBrains plugin runs Claude Code in the IDE terminal, so switching modes works the same as in the CLI: press `Shift+Tab` to cycle, or pass `--permission-mode` when launching.
 
@@ -150,6 +150,7 @@ Auto mode is available only when your account meets all of these requirements:
 - **Provider**: Anthropic API only. Not available on Bedrock, Vertex, or Foundry.
 
 If Claude Code reports auto mode as unavailable, one of these requirements is unmet; this is not a transient outage. A separate message that names a model and says auto mode “cannot determine the safety” of an action is a transient classifier outage; see the [error reference](errors.md).
+If you set `defaultMode: "auto"` in [settings](settings.md) and the session starts in `default` mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. Claude Code ignores `auto` from those files so a repository cannot grant itself auto mode. Move it to `~/.claude/settings.json`.
 
 ### [​](#what-the-classifier-blocks-by-default) What the classifier blocks by default
 

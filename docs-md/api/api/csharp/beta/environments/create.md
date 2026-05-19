@@ -20,12 +20,99 @@ required string name
 
 Body param: Human-readable name for the environment
 
-[BetaCloudConfigParams](api/beta.md)? config
+[Config](api/beta/environments/create.md)? config
 
-Body param: Request params for `cloud` environment configuration.
+Body param: Environment configuration
+
+class BetaCloudConfigParams:
+
+Request params for `cloud` environment configuration.
 
 Fields default to null; on update, omitted fields preserve the
 existing value.
+
+JsonElement Type "cloud"constant
+
+Environment type
+
+Networking? Networking
+
+Network configuration policy. Omit on update to preserve the existing value.
+
+Accepts one of the following:
+
+class BetaUnrestrictedNetwork:
+
+Unrestricted network access.
+
+JsonElement Type "unrestricted"constant
+
+Network policy type
+
+class BetaLimitedNetworkParams:
+
+Limited network request params.
+
+Fields default to null; on update, omitted fields preserve the
+existing value.
+
+JsonElement Type "limited"constant
+
+Network policy type
+
+Boolean? AllowMcpServers
+
+Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+Boolean? AllowPackageManagers
+
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+IReadOnlyList<string>? AllowedHosts
+
+Specifies domains the container can reach.
+
+[BetaPackagesParams](api/beta.md)? Packages
+
+Specify packages (and optionally their versions) available in this environment.
+
+When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+IReadOnlyList<string>? Apt
+
+Ubuntu/Debian packages to install
+
+IReadOnlyList<string>? Cargo
+
+Rust packages to install
+
+IReadOnlyList<string>? Gem
+
+Ruby packages to install
+
+IReadOnlyList<string>? Go
+
+Go packages to install
+
+IReadOnlyList<string>? Npm
+
+Node.js packages to install
+
+IReadOnlyList<string>? Pip
+
+Python packages to install
+
+Type Type
+
+Package configuration type
+
+class BetaSelfHostedConfigParams:
+
+Request params for `self_hosted` environment configuration.
+
+JsonElement Type "self\_hosted"constant
+
+Environment type
 
 string? description
 
@@ -34,6 +121,14 @@ Body param: Optional description of the environment
 IReadOnlyDictionary<string, string> metadata
 
 Body param: User-provided metadata key-value pairs
+
+[Scope](api/beta/environments/create.md)? scope
+
+Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+
+"organization"Organization
+
+"account"Account
 
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
@@ -87,6 +182,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaEnvironment:
@@ -101,7 +198,13 @@ required string? ArchivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-required [BetaCloudConfig](api/beta.md) Config
+required Config Config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig:
 
 `cloud` environment configuration.
 
@@ -175,6 +278,14 @@ JsonElement Type "cloud"constant
 
 Environment type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonElement Type "self\_hosted"constant
+
+Environment type
+
 required string CreatedAt
 
 RFC 3339 timestamp when environment was created
@@ -198,6 +309,16 @@ The type of object (always 'environment')
 required string UpdatedAt
 
 RFC 3339 timestamp when environment was last updated
+
+Scope Scope
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+"organization"Organization
+
+"account"Account
 
 Create Environment
 
@@ -255,7 +376,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -305,7 +427,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

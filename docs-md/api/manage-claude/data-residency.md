@@ -9,7 +9,7 @@ Data residency controls let you manage where your data is processed and stored. 
 - **Inference geo:** Controls where model inference runs, on a per-request basis. Set through the `inference_geo` API parameter or as a workspace default.
 - **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
-[Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console.
+[Claude Managed Agents](managed-agents/overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 
 ## Inference geo
 
@@ -71,8 +71,6 @@ Workspace settings also support restricting which inference geos are available:
 - **`default_inference_geo`:** Sets the fallback geo when `inference_geo` is omitted from a request. Individual requests can override this by setting `inference_geo` explicitly.
 
 These settings can be configured through the Console or the [Admin API](manage-claude/admin-api.md) under the `data_residency` field.
-
-**Claude Platform on AWS:** Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are not available. Use the per-request `inference_geo` parameter instead.
 
 ## Workspace geo
 

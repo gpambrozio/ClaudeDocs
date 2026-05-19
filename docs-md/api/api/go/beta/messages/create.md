@@ -2752,6 +2752,11 @@ Body param: Context management configuration.
 
 This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
+Diagnostics param.Field[[BetaDiagnosticsParamResp](api/beta.md)]optional
+
+Body param: Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
 InferenceGeo param.Field[string]optional
 
 Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -4660,6 +4665,8 @@ const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03
 
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
+const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+
 ##### ReturnsExpand Collapse
 
 type BetaMessage struct{…}
@@ -5600,6 +5607,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -6990,6 +7048,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -8890,6 +8999,12 @@ Response 200
       }
     ]
   },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-4-6",
   "role": "assistant",
   "stop_details": {
@@ -8976,6 +9091,12 @@ Response 200
         "type": "clear_tool_uses_20250919"
       }
     ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
   },
   "model": "claude-opus-4-6",
   "role": "assistant",

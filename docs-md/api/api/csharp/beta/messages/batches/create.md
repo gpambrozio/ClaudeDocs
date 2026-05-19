@@ -2969,6 +2969,15 @@ JsonElement Type "input\_tokens"constant
 
 required Long Value
 
+[BetaDiagnosticsParam](api/beta.md)? Diagnostics
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+string? PreviousMessageID
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 string? InferenceGeo
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -5025,6 +5034,8 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "managed-agents-2026-04-01"ManagedAgents2026\_04\_01
 
+"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatch:
@@ -5171,6 +5182,10 @@ BatchCreateParams parameters = new()
                             Trigger = new BetaInputTokensTrigger(1),
                         },
                     ],
+                },
+                Diagnostics = new()
+                {
+                    PreviousMessageID = "previous_message_id"
                 },
                 InferenceGeo = "inference_geo",
                 McpServers =

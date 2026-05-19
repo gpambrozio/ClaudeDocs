@@ -737,6 +737,46 @@ Ephemeral5mInputTokens int64
 
 The number of input tokens used to create the 5 minute cache entry.
 
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 type BetaCitationCharLocation struct{…}
 
 CitedText string
@@ -5873,6 +5913,66 @@ OriginalInputTokens int64
 
 The original token count before context management was applied
 
+type BetaDiagnostics struct{…}
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
+type BetaDiagnosticsParamResp struct{…}
+
+Request-level diagnostics. Currently carries the previous response
+id for prompt-cache divergence reporting.
+
+PreviousMessageID stringoptional
+
+The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 type BetaDirectCaller struct{…}
 
 Tool invocation directly from the model.
@@ -7676,6 +7776,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -13546,6 +13697,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -14941,6 +15143,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 
@@ -24976,6 +25229,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -26478,6 +26782,57 @@ Type ClearThinking20251015
 
 The type of context management edit applied.
 
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
+
 Model Model
 
 The model that will complete your prompt.
@@ -27941,6 +28296,57 @@ Number of thinking turns that were cleared.
 Type ClearThinking20251015
 
 The type of context management edit applied.
+
+Diagnostics [BetaDiagnostics](api/beta.md)
+
+Response envelope for request-level diagnostics. Present (possibly
+null) whenever the caller supplied `diagnostics` on the request.
+
+CacheMissReason BetaDiagnosticsCacheMissReasonUnion
+
+Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+Accepts one of the following:
+
+type BetaCacheMissModelChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ModelChanged
+
+type BetaCacheMissSystemChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type SystemChanged
+
+type BetaCacheMissToolsChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type ToolsChanged
+
+type BetaCacheMissMessagesChanged struct{…}
+
+CacheMissedInputTokens int64
+
+Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+Type MessagesChanged
+
+type BetaCacheMissPreviousMessageNotFound struct{…}
+
+Type PreviousMessageNotFound
+
+type BetaCacheMissUnavailable struct{…}
+
+Type Unavailable
 
 Model Model
 

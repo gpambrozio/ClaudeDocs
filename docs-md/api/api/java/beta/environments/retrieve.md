@@ -70,6 +70,8 @@ ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
 
 MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
+CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+
 ##### ReturnsExpand Collapse
 
 class BetaEnvironment:
@@ -84,7 +86,13 @@ Optional<String> archivedAt
 
 RFC 3339 timestamp when environment was archived, or null if not archived
 
-[BetaCloudConfig](api/beta.md) config
+Config config
+
+Environment configuration (either Anthropic Cloud or self-hosted)
+
+Accepts one of the following:
+
+class BetaCloudConfig:
 
 `cloud` environment configuration.
 
@@ -158,6 +166,14 @@ JsonValue; type "cloud"constant"cloud"constant
 
 Environment type
 
+class BetaSelfHostedConfig:
+
+Configuration for self-hosted environments.
+
+JsonValue; type "self\_hosted"constant"self\_hosted"constant
+
+Environment type
+
 String createdAt
 
 RFC 3339 timestamp when environment was created
@@ -181,6 +197,16 @@ The type of object (always 'environment')
 String updatedAt
 
 RFC 3339 timestamp when environment was last updated
+
+Optional<Scope> scope
+
+The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+Accepts one of the following:
+
+ORGANIZATION("organization")
+
+ACCOUNT("account")
 
 Get Environment
 
@@ -249,7 +275,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 
@@ -299,7 +326,8 @@ Response 200
   "metadata": {},
   "name": "python-data-analysis",
   "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z"
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
 }
 ```
 

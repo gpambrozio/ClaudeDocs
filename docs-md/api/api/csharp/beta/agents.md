@@ -558,6 +558,81 @@ required Type Type
 
 required Type Type
 
+class BetaManagedAgentsAgentToolset20260401BashInput:
+
+Input payload for the `bash` tool of the
+`agent_toolset_20260401` toolset. All fields are optional;
+a normal invocation supplies `command`, while `restart=true`
+(with no `command`) reboots the runner-side bash session.
+
+string Command
+
+Shell command to execute. Omit only when `restart` is true.
+
+Boolean Restart
+
+When true, restart the persistent bash session instead of
+running a command. Subsequent calls without `restart` will
+run against the fresh session.
+
+Long TimeoutMs
+
+Per-call timeout in milliseconds. Defaults to the
+runner-wide tool timeout when omitted or zero.
+
+class BetaManagedAgentsAgentToolset20260401EditInput:
+
+Input payload for the `edit` tool. Performs a string
+replacement in the named file; by default `old_string` must
+occur exactly once.
+
+required string FilePath
+
+Path of the file to edit.
+
+required string NewString
+
+Replacement text.
+
+required string OldString
+
+Substring to find and replace.
+
+Boolean ReplaceAll
+
+When true, replace every occurrence of `old_string`
+instead of requiring a unique match.
+
+class BetaManagedAgentsAgentToolset20260401GlobInput:
+
+Input payload for the `glob` tool. Returns paths matching a
+doublestar glob pattern, newest first.
+
+required string Pattern
+
+Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
+are only permitted when the runner is configured to allow
+them.
+
+string Path
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
+class BetaManagedAgentsAgentToolset20260401GrepInput:
+
+Input payload for the `grep` tool. Searches file contents for
+a regular expression, returning matching lines.
+
+required string Pattern
+
+Regular expression to search for.
+
+string Path
+
+Optional directory root to search under. Defaults to the
+runner's working directory.
+
 class BetaManagedAgentsAgentToolset20260401Params:
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
@@ -637,6 +712,35 @@ class BetaManagedAgentsAlwaysAskPolicy:
 Tool calls require user confirmation before execution.
 
 required Type Type
+
+class BetaManagedAgentsAgentToolset20260401ReadInput:
+
+Input payload for the `read` tool. Reads file contents
+relative to the runner's working directory (or absolute when
+the runner permits).
+
+required string FilePath
+
+Path of the file to read.
+
+IReadOnlyList<Long> ViewRange
+
+Optional `[start_line, end_line]` 1-indexed inclusive
+range. When omitted the entire file is returned.
+`end_line` of 0 or negative means "to end of file".
+
+class BetaManagedAgentsAgentToolset20260401WriteInput:
+
+Input payload for the `write` tool. Writes (overwriting) the
+entire file contents.
+
+required string Content
+
+Full file contents to write.
+
+required string FilePath
+
+Path of the file to write.
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -1177,6 +1281,268 @@ class BetaManagedAgentsMultiagentSelfParams:
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
 required Type Type
+
+class BetaManagedAgentsSessionThreadAgent:
+
+Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+required string ID
+
+required string? Description
+
+required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta.md)> McpServers
+
+required string Name
+
+required Type Type
+
+required string Url
+
+required [BetaManagedAgentsModelConfig](api/beta.md) Model
+
+Model identifier and configuration.
+
+required [BetaManagedAgentsModel](api/beta.md) ID
+
+The model that will power your agent.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+Accepts one of the following:
+
+"claude-opus-4-7"ClaudeOpus4\_7
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-6"ClaudeOpus4\_6
+
+Most intelligent model for building agents and coding
+
+"claude-sonnet-4-6"ClaudeSonnet4\_6
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"ClaudeHaiku4\_5
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"ClaudeOpus4\_5
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"ClaudeSonnet4\_5
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+
+High-performance model for agents and coding
+
+Speed Speed
+
+Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+Accepts one of the following:
+
+"standard"Standard
+
+"fast"Fast
+
+required string Name
+
+required IReadOnlyList<Skill> Skills
+
+Accepts one of the following:
+
+class BetaManagedAgentsAnthropicSkill:
+
+A resolved Anthropic-managed skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+class BetaManagedAgentsCustomSkill:
+
+A resolved user-created custom skill.
+
+required string SkillID
+
+required Type Type
+
+required string Version
+
+required string? System
+
+required IReadOnlyList<Tool> Tools
+
+Accepts one of the following:
+
+class BetaManagedAgentsAgentToolset20260401:
+
+required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required Name Name
+
+Built-in agent tool identifier.
+
+Accepts one of the following:
+
+"bash"Bash
+
+"edit"Edit
+
+"read"Read
+
+"write"Write
+
+"glob"Glob
+
+"grep"Grep
+
+"web\_fetch"WebFetch
+
+"web\_search"WebSearch
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for agent tools.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required Type Type
+
+class BetaManagedAgentsMcpToolset:
+
+required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta.md)> Configs
+
+required Boolean Enabled
+
+required string Name
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta.md) DefaultConfig
+
+Resolved default configuration for all tools from an MCP server.
+
+required Boolean Enabled
+
+required PermissionPolicy PermissionPolicy
+
+Permission policy for tool execution.
+
+Accepts one of the following:
+
+class BetaManagedAgentsAlwaysAllowPolicy:
+
+Tool calls are automatically approved without user confirmation.
+
+required Type Type
+
+class BetaManagedAgentsAlwaysAskPolicy:
+
+Tool calls require user confirmation before execution.
+
+required Type Type
+
+required string McpServerName
+
+required Type Type
+
+class BetaManagedAgentsCustomTool:
+
+A custom tool as returned in API responses.
+
+required string Description
+
+required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
+
+JSON Schema for custom tool input parameters.
+
+IReadOnlyDictionary<string, JsonElement>? Properties
+
+JSON Schema properties defining the tool's input parameters.
+
+IReadOnlyList<string> Required
+
+List of required property names.
+
+Type Type
+
+Must be 'object' for tool input schemas.
+
+required string Name
+
+required Type Type
+
+required Type Type
+
+required Int Version
 
 class BetaManagedAgentsSkillParams: A class that can be one of several variants.union
 

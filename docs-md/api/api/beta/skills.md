@@ -177,6 +177,10 @@ POST/v1/skills/{skill\_id}/versions
 
 GET/v1/skills/{skill\_id}/versions
 
+##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+
+GET/v1/skills/{skill\_id}/versions/{version}/content
+
 ##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}
