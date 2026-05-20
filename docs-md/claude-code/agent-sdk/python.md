@@ -784,7 +784,7 @@ class ClaudeAgentOptions:
 | `resume` | `str | None` | `None` | Session ID to resume |
 | `max_turns` | `int | None` | `None` | Maximum agentic turns (tool-use round trips) |
 | `max_budget_usd` | `float | None` | `None` | Stop the query when the client-side cost estimate reaches this USD value. Compared against the same estimate as `total_cost_usd`; see [Track cost and usage](agent-sdk/cost-tracking.md) for accuracy caveats |
-| `disallowed_tools` | `list[str]` | `[]` | Tools to always deny. Deny rules are checked first and override `allowed_tools` and `permission_mode` (including `bypassPermissions`) |
+| `disallowed_tools` | `list[str]` | `[]` | Tools to deny. A bare name such as `"Bash"` removes the tool from Claude’s context. A scoped rule such as `"Bash(rm *)"` leaves the tool available and denies matching calls in every permission mode, including `bypassPermissions`. See [Permissions](agent-sdk/permissions.md) |
 | `enable_file_checkpointing` | `bool` | `False` | Enable file change tracking for rewinding. See [File checkpointing](agent-sdk/file-checkpointing.md) |
 | `model` | `str | None` | `None` | Claude model to use |
 | `fallback_model` | `str | None` | `None` | Fallback model to use if the primary model fails |

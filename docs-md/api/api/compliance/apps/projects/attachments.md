@@ -1,55 +1,20 @@
-# List project attachments
+# Attachments
 
 Copy page
 
 The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](manage-claude/compliance-activity-feed.md) only. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
 
-# List project attachments
+# Attachments
+
+##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
 
 GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-List files and documents attached to a project.
+##### ModelsExpand Collapse
 
-List files and project documents attached to the project referenced by project\_id.
-This includes the IDs of attached files, and attached project documents.
+AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
 
-The raw binary content of attached files can be downloaded using the
-GET /v1/compliance/apps/chats/files/{claude\_file\_id}/content endpoint.
-
-The text content of attached project documents can be fetched using the
-GET /v1/compliance/apps/projects/documents/{claude\_proj\_doc\_id} endpoint.
-
-Returns:
-List of project attachments with pagination info
-
-Raises:
-NotFoundException: If project doesn't exist or project\_id format is invalid
-
-##### Path ParametersExpand Collapse
-
-project\_id: string
-
-The project ID (tagged ID, e.g., claude\_proj\_abc123)
-
-##### Query ParametersExpand Collapse
-
-limit: optional number
-
-Maximum results (default: 20, max: 100)
-
-page: optional string
-
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-##### Header ParametersExpand Collapse
-
-"x-api-key": optional string
-
-##### ReturnsExpand Collapse
-
-data: array of object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
-
-List of attachments sorted chronologically by created\_at, tie break by id
+File attachment reference for compliance responses.
 
 Accepts one of the following:
 
@@ -100,59 +65,6 @@ MIME type of the project document, always set to plain text
 type: "project\_doc"
 
 Discriminator marking this as a plain text document
-
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string
-
-To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
-
-List project attachments
-
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "filename": "filename",
-      "mime_type": "mime_type",
-      "type": "project_file"
-    }
-  ],
-  "has_more": true,
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "filename": "filename",
-      "mime_type": "mime_type",
-      "type": "project_file"
-    }
-  ],
-  "has_more": true,
-  "next_page": "next_page"
-}
-```
 
 ---
 

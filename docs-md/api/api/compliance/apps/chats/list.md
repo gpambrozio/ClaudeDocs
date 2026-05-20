@@ -108,7 +108,7 @@ name: string
 
 Chat name/title
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization ID this chat belongs to
 

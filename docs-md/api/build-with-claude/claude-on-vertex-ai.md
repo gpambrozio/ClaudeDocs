@@ -71,6 +71,8 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 | Claude Haiku 4.5 | claude-haiku-4-5@20251001 |
 | Claude Haiku 3.5  Deprecated. Retiring July 5, 2026. | claude-3-5-haiku@20241022 |
 
+Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
+
 ### Making requests
 
 Before running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.

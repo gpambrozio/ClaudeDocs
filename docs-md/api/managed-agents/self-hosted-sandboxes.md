@@ -23,7 +23,7 @@ Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-an
 
 ## Environment worker
 
-The guide below describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [Modal](https://github.com/modal-projects/claude-managed-agents-modal-sandbox/blob/main/README.md), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
+The following guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
 
 An environment worker is a process you run on your own infrastructure that receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment is a work queue connecting Anthropic's orchestration to your worker: when a [session](managed-agents/sessions.md) is assigned to an environment, Anthropic enqueues it as a work item. Your worker claims items from that queue, spawns an execution context for each session, downloads the [agent's skills](managed-agents/skills.md), runs tool calls locally, and posts results back.
 
@@ -87,7 +87,7 @@ Webhook-triggered (SDK)
    Run this on the machine where the worker will run.
 
    ```shiki
-   VERSION=1.9.0
+   VERSION=1.9.1
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
    curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -116,7 +116,7 @@ Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.9.0
+   ARG ANT_VERSION=1.9.1
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -224,7 +224,7 @@ print(f"depth={stats.depth} pending={stats.pending}")
 
 Use `work.stop` to ask the worker handling a specific session to shut it down cleanly. The worker finishes any in-flight tool call, posts a final status, and releases the session. Pass `force: true` in the request body to interrupt immediately instead of waiting for the current tool call to complete.
 
-Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the examples below.
+Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the following examples.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

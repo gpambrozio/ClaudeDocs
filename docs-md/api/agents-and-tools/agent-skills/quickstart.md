@@ -25,9 +25,10 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills:
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
+# List Anthropic-managed Skills
 ant beta:skills list --source anthropic
 ```
 
@@ -39,17 +40,13 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-import anthropic
-
-client = anthropic.Anthropic()
-
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
     model="claude-opus-4-7",
-    max_tokens=4096,
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -63,7 +60,7 @@ response = client.beta.messages.create(
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
-print(response.content)
+print(f"stop_reason={response.stop_reason}, blocks={len(response.content)}")
 ```
 
 Let's break down what each part does:
@@ -81,31 +78,29 @@ When you make this request, Claude automatically matches your task to the releva
 
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-from typing import Any
-
-response: Any = None
-# Extract file ID from response
+# Extract file ID from the code-execution tool result. The Skill might run
+# its work through either the Python or bash code-execution tool, so check
+# both result types.
 file_id = None
 for block in response.content:
-    if block.type == "tool_use" and block.name == "code_execution":
-        # File ID is in the tool result
-        for result_block in block.content:
-            if hasattr(result_block, "file_id"):
-                file_id = result_block.file_id
-                break
+    if block.type == "code_execution_tool_result":
+        if block.content.type == "code_execution_result":
+            for output in block.content.content:
+                file_id = output.file_id
+    elif block.type == "bash_code_execution_tool_result":
+        if block.content.type == "bash_code_execution_result":
+            for output in block.content.content:
+                file_id = output.file_id
 
 if file_id:
-    # Download the file
+    # Download the file and save it
+    output_path = Path(tempfile.gettempdir()) / "renewable_energy.pptx"
     file_content = client.beta.files.download(file_id=file_id)
-
-    # Save to disk
-    with open("renewable_energy.pptx", "wb") as f:
-        file_content.write_to_file(f.name)
-
-    print(f"Presentation saved to renewable_energy.pptx")
+    file_content.write_to_file(output_path)
+    print(f"Presentation saved to {output_path}")
 ```
 
 For complete details on working with generated files, see the [code execution tool documentation](agents-and-tools/tool-use/code-execution-tool.md).
@@ -116,12 +111,12 @@ Now that you've created your first document with Skills, try these variations:
 
 ### Create a spreadsheet
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-7",
-    max_tokens=4096,
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -138,12 +133,12 @@ response = client.beta.messages.create(
 
 ### Create a Word document
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-7",
-    max_tokens=4096,
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
@@ -160,17 +155,22 @@ response = client.beta.messages.create(
 
 ### Generate a PDF
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-7",
-    max_tokens=4096,
+    max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
-    messages=[{"role": "user", "content": "Generate a PDF invoice template"}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Generate a PDF invoice template",
+        }
+    ],
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 ```

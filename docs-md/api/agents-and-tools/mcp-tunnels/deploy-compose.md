@@ -16,7 +16,7 @@ You need:
   - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](agents-and-tools/mcp-tunnels/console.md), generate a CA and server certificate yourself, and [register the CA in the Console](agents-and-tools/mcp-tunnels/console.md).
 - **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
 - **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the tunnel edge (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
-- **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server below](#optional-use-a-sample-mcp-server).
+- **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 EOF
 ```
 
-The Install steps below `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
+The following Install steps `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
 
 ## Install
 

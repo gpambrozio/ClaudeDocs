@@ -10,6 +10,10 @@ The Compliance API is enabled on request. Claude Enterprise organizations have a
 
 GET/v1/compliance/apps/projects/documents/{document\_id}
 
+##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
+
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+
 ##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
 
 DELETE/v1/compliance/apps/projects/documents/{document\_id}
@@ -35,6 +39,53 @@ Document creation timestamp
 filename: string
 
 Document filename
+
+user: object { id, email\_address }
+
+User information for project creator.
+
+id: string
+
+User identifier (tagged ID)
+
+email\_address: string
+
+User's email address
+
+DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+
+Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
+
+Returns metadata only. Use the sibling endpoint (without `/metadata`)
+to fetch the document text content.
+
+id: string
+
+Project document identifier (tagged ID)
+
+claude\_project\_id: string
+
+The project this document belongs to
+
+created\_at: string
+
+Document creation timestamp
+
+filename: string
+
+Document filename
+
+md5: string
+
+Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+
+mime\_type: "text/plain"
+
+MIME type of the document content, always plain text
+
+size\_bytes: number
+
+Size in bytes of the document content (UTF-8 encoded)
 
 user: object { id, email\_address }
 

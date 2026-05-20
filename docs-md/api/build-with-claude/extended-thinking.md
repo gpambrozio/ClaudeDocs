@@ -97,7 +97,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](/cdn-cgi/l/email-protection#7704161b1204371619031f0518071e145914181a).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#e794868b8294a78689938f9588978e84c984888a).
 
 ### Controlling thinking display
 
@@ -548,7 +548,7 @@ Full thinking content is encrypted and returned in the `signature` field. This f
 
 It is only strictly necessary to send back thinking blocks when using [tools with extended thinking](build-with-claude/extended-thinking.md). Otherwise you can omit thinking blocks from previous turns. If you pass them back, whether the API keeps or strips them depends on the model: Opus 4.5+ and Sonnet 4.6+ keep them in context by default; earlier Opus/Sonnet models and all Haiku models strip them. See [context editing](build-with-claude/context-editing.md) to configure this.
 
-If sending back thinking blocks, we recommend passing everything back as you received it for consistency and to avoid potential issues.
+If sending back thinking blocks, pass everything back as you received it for consistency and to avoid potential issues.
 
 Here are some important considerations on thinking encryption:
 

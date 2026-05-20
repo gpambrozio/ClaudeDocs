@@ -12,7 +12,7 @@ This page is for CLI and SDK maintainers. If you are looking to install plugins,
 
 ## [​](#how-it-works) How it works
 
-Claude Code sets the [`CLAUDECODE`](env-vars.md) environment variable to `1` for every command it runs through the Bash and PowerShell tools. When your CLI sees that variable, it writes a self-closing `<claude-code-hint />` tag to stderr.
+Claude Code sets the [`CLAUDECODE`](env-vars.md) environment variable to `1` for every command it runs through the Bash and PowerShell tools, and for [hook](hooks.md) commands. When your CLI sees that variable, it writes a self-closing `<claude-code-hint />` tag to stderr. In hook commands the hint tag is stripped and ignored. Only Bash and PowerShell tool output triggers the install prompt.
 When Claude Code receives the command output, it:
 
 1. Scans for hint lines and removes them before the output reaches the model
@@ -117,12 +117,7 @@ The remaining guidance is recommended but not enforced. Claude Code cannot obser
 
 ## [​](#get-your-plugin-into-the-official-marketplace) Get your plugin into the official marketplace
 
-The hint protocol only takes effect for plugins that are listed in the official Anthropic marketplace. To submit a plugin, use one of the in-app submission forms:
-
-- **Claude.ai**: [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit)
-- **Console**: [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit)
-
-If you are working with an Anthropic partner contact, reach out to them to coordinate the listing.
+The hint protocol only takes effect for plugins listed in the official Anthropic marketplace, `claude-plugins-official`. Anthropic curates that marketplace at its discretion, and the in-app submission forms add plugins to the [community marketplace](plugins.md) instead, which the hint protocol does not check. If you are working with an Anthropic partner contact, reach out to them to coordinate an official-marketplace listing.
 
 ## [​](#see-also) See also
 

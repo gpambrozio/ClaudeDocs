@@ -16,10 +16,6 @@ GET/v1/compliance/apps/chats
 
 DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
-##### [Get chat messages](api/compliance/apps/chats/messages.md)
-
-GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
-
 ##### ModelsExpand Collapse
 
 ChatListResponse = object { id, created\_at, deleted\_at, 8 more }
@@ -50,7 +46,7 @@ name: string
 
 Chat name/title
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization ID this chat belongs to
 
@@ -90,17 +86,17 @@ type: optional "claude\_chat\_deleted"
 
 Constant string confirming deletion
 
-ChatMessagesResponse = object { id, chat\_messages, created\_at, 12 more }
+#### AppsChatsMessages
 
-Complete chat conversation data for compliance purposes.
+##### [Get chat messages](api/compliance/apps/chats/messages/list.md)
 
-id: string
+GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
-Chat ID
+##### ModelsExpand Collapse
 
-chat\_messages: array of object { id, artifacts, content, 4 more }
+MessageListResponse = object { id, artifacts, content, 4 more }
 
-Array of chat messages in order of created\_at
+A single message in a chat conversation.
 
 id: string
 
@@ -108,7 +104,7 @@ Unique identifier for the message e.g. 'claude\_chat\_msg\_abcd1234'
 
 artifacts: array of object { id, artifact\_type, title, version\_id }
 
-Artifacts generated or updated by this message
+Versioned documents generated or updated by the assistant in this message. Download via `GET /v1/compliance/apps/artifacts/{artifact_version_id}/content`.
 
 id: string
 
@@ -142,7 +138,7 @@ Message creation timestamp - For human: when they sent the message, For assistan
 
 files: array of object { id, filename, mime\_type }
 
-File attachments
+Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
 
 id: string
 
@@ -158,7 +154,7 @@ MIME type of the file when it was uploaded (e.g. 'application/pdf')
 
 generated\_files: array of object { id, filename, mime\_type }
 
-Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message.
+Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
 
 id: string
 
@@ -172,75 +168,15 @@ mime\_type: string
 
 MIME type reported by the tool that produced the file
 
-role: "user" or "assistant"
+role: "assistant" or "user"
 
 Message sender (user or assistant)
 
 Accepts one of the following:
 
-"user"
-
 "assistant"
 
-created\_at: string
-
-Creation timestamp
-
-deleted\_at: string
-
-Deletion timestamp if deleted
-
-first\_id: string
-
-Opaque pagination cursor for the first message in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-has\_more: boolean
-
-Whether more chat messages exist beyond the current result set. Use `last_id` as `after_id` in a follow-up request to page forward.
-
-href: string
-
-URL to view this chat in claude.ai
-
-last\_id: string
-
-Opaque pagination cursor for the last message in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-model: string
-
-Model selected for this chat (e.g. 'claude-opus-4-7'). May be null for legacy chats that never had a model recorded.
-
-name: string
-
-Chat name
-
-organization\_id: string
-
-Organization ID this chat belongs to
-
-organization\_uuid: string
-
-Organization UUID this chat belongs to
-
-project\_id: string
-
-Project ID this chat belongs to
-
-updated\_at: string
-
-Last update timestamp
-
-user: object { id, email\_address }
-
-User information
-
-id: string
-
-User identifier
-
-email\_address: string
-
-User's email address
+"user"
 
 #### AppsChatsFiles
 
@@ -252,13 +188,13 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Download file content](api/compliance/apps/chats/files/content.md)
+##### [Download file content](api/compliance/apps/chats/files/download.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse = object { id, created\_at, filename, 3 more }
+FileRetrieveResponse = object { id, created\_at, filename, 4 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -276,6 +212,10 @@ File creation timestamp
 filename: string
 
 Display name of the file, if set
+
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
 message\_ids: array of string
 
@@ -301,17 +241,55 @@ type: optional "claude\_file\_deleted"
 
 Constant string confirming deletion
 
-FileContentResponse = unknown
-
 #### AppsChatsGenerated Files
 
-##### [Download a Claude-generated file](api/compliance/apps/chats/generated_files/content.md)
+##### [Get Claude-generated file metadata](api/compliance/apps/chats/generated_files/retrieve.md)
+
+GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
+
+##### [Download a Claude-generated file](api/compliance/apps/chats/generated_files/download.md)
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-GeneratedFileContentResponse = unknown
+GeneratedFileRetrieveResponse = object { id, claude\_chat\_id, created\_at, 4 more }
+
+Metadata for GET /v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}.
+
+Returns metadata only. Use the sibling `/content` endpoint to download
+the bytes. The owning chat is included since the id is opaque; to find the
+specific message that produced the file, fetch
+`/v1/compliance/apps/chats/{claude_chat_id}/messages` and match on
+`generated_files[].id`.
+
+id: string
+
+Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'.
+
+claude\_chat\_id: string
+
+The chat this generated file belongs to
+
+created\_at: string
+
+File creation timestamp from Filestore
+
+filename: string
+
+Display name of the generated file
+
+md5: string
+
+Lowercase hex MD5 of the stored file, as recorded by Filestore. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+
+mime\_type: string
+
+MIME type as recorded by Filestore, when available
+
+size\_bytes: number
+
+Size in bytes of the stored file, when available
 
 #### AppsProjects
 
@@ -327,13 +305,9 @@ GET/v1/compliance/apps/projects/{project\_id}
 
 DELETE/v1/compliance/apps/projects/{project\_id}
 
-##### [List project attachments](api/compliance/apps/projects/attachments.md)
-
-GET/v1/compliance/apps/projects/{project\_id}/attachments
-
 ##### ModelsExpand Collapse
 
-ProjectListResponse = object { id, created\_at, is\_private, 4 more }
+ProjectListResponse = object { id, created\_at, deleted\_at, 6 more }
 
 Project information for compliance responses.
 
@@ -345,6 +319,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 is\_private: boolean
 
 If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
@@ -353,9 +331,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -373,7 +355,7 @@ email\_address: string
 
 User's email address
 
-ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 8 more }
+ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 10 more }
 
 Detailed project information for compliance responses.
 
@@ -393,6 +375,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 description: string
 
 Project description
@@ -409,9 +395,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -441,13 +431,17 @@ type: optional "claude\_project\_deleted"
 
 Constant string confirming deletion.
 
-ProjectAttachmentsResponse = object { data, has\_more, next\_page }
+#### AppsProjectsAttachments
 
-List of project attachments with pagination info.
+##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
 
-data: array of object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
+GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-List of attachments sorted chronologically by created\_at, tie break by id
+##### ModelsExpand Collapse
+
+AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
+
+File attachment reference for compliance responses.
 
 Accepts one of the following:
 
@@ -499,19 +493,15 @@ type: "project\_doc"
 
 Discriminator marking this as a plain text document
 
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string
-
-To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
-
 #### AppsProjectsDocuments
 
 ##### [Get project document content](api/compliance/apps/projects/documents/retrieve.md)
 
 GET/v1/compliance/apps/projects/documents/{document\_id}
+
+##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
+
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
 ##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
 
@@ -551,6 +541,53 @@ email\_address: string
 
 User's email address
 
+DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+
+Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
+
+Returns metadata only. Use the sibling endpoint (without `/metadata`)
+to fetch the document text content.
+
+id: string
+
+Project document identifier (tagged ID)
+
+claude\_project\_id: string
+
+The project this document belongs to
+
+created\_at: string
+
+Document creation timestamp
+
+filename: string
+
+Document filename
+
+md5: string
+
+Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+
+mime\_type: "text/plain"
+
+MIME type of the document content, always plain text
+
+size\_bytes: number
+
+Size in bytes of the document content (UTF-8 encoded)
+
+user: object { id, email\_address }
+
+User information for project creator.
+
+id: string
+
+User identifier (tagged ID)
+
+email\_address: string
+
+User's email address
+
 DocumentDeleteResponse = object { id, type }
 
 Response for deleting a project document.
@@ -565,13 +602,54 @@ Constant string confirming deletion.
 
 #### AppsArtifacts
 
-##### [Download artifact content](api/compliance/apps/artifacts/content.md)
+##### [Get artifact metadata](api/compliance/apps/artifacts/retrieve.md)
+
+GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+
+##### [Download artifact content](api/compliance/apps/artifacts/download.md)
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
 ##### ModelsExpand Collapse
 
-ArtifactContentResponse = unknown
+ArtifactRetrieveResponse = object { id, artifact\_type, claude\_chat\_id, 5 more }
+
+Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact\_version\_id}.
+
+Returns metadata only. Use the sibling `/content` endpoint to fetch the
+artifact body.
+
+id: string
+
+Artifact ID e.g. 'claude\_artifact\_abc123'
+
+artifact\_type: string
+
+MIME-like artifact type e.g. 'application/vnd.ant.code'
+
+claude\_chat\_id: string
+
+The chat this artifact belongs to
+
+created\_at: string
+
+Artifact version creation timestamp
+
+md5: string
+
+Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
+
+size\_bytes: number
+
+Size in bytes of the artifact content (UTF-8 encoded)
+
+title: string
+
+Artifact title
+
+version\_id: string
+
+Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
 ---
 

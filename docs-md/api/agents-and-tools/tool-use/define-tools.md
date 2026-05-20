@@ -69,7 +69,7 @@ You can provide concrete examples of valid tool inputs to help Claude understand
 
 Add an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:
 
-CLIPythonTypeScriptC#GoJavaPHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 import anthropic

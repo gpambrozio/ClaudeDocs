@@ -35,9 +35,9 @@ Opaque pagination token from a previous response's `next_page` field. Pass this 
 
 ##### ReturnsExpand Collapse
 
-data: array of object { id, created\_at, email, full\_name }
+data: array of object { id, created\_at, email, 2 more }
 
-List of current organization members sorted by account creation date ascending
+List of current organization members sorted by organization join date ascending
 
 id: string
 
@@ -54,6 +54,30 @@ User's current email address
 full\_name: string
 
 User's current full name
+
+organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
+
+User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
+
+Accepts one of the following:
+
+"admin"
+
+"billing"
+
+"claude\_code\_user"
+
+"developer"
+
+"managed"
+
+"membership\_admin"
+
+"owner"
+
+"primary\_owner"
+
+"user"
 
 has\_more: boolean
 
@@ -79,7 +103,8 @@ Response 200
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "email": "email",
-      "full_name": "full_name"
+      "full_name": "full_name",
+      "organization_role": "admin"
     }
   ],
   "has_more": true,
@@ -98,7 +123,8 @@ Response 200
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "email": "email",
-      "full_name": "full_name"
+      "full_name": "full_name",
+      "organization_role": "admin"
     }
   ],
   "has_more": true,

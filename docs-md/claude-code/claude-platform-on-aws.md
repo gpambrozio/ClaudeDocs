@@ -84,7 +84,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-5
 ```
 
 For the full list of model IDs and aliases, see [Models overview](about-claude/models/overview.md). For other model-related variables, see [Model configuration](model-config.md).
-[Prompt caching](build-with-claude/prompt-caching.md) is enabled automatically. 1-hour cache writes are billed at a higher rate than 5-minute writes. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`.
+[Prompt caching](prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`. The API bills 1-hour cache writes at a higher rate. See [prompt caching pricing](build-with-claude/prompt-caching.md) for the rates.
 
 ## [​](#use-the-agent-sdk) Use the Agent SDK
 

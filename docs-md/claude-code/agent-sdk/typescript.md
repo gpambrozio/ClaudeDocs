@@ -14,6 +14,33 @@ npm install @anthropic-ai/claude-agent-sdk
 
 The SDK bundles a native Claude Code binary for your platform as an optional dependency such as `@anthropic-ai/claude-agent-sdk-darwin-arm64`. You don’t need to install Claude Code separately. If your package manager skips optional dependencies, the SDK throws `Native CLI binary for <platform> not found`; set [`pathToClaudeCodeExecutable`](#options) to a separately installed `claude` binary instead.
 
+### [​](#compile-to-a-single-executable) Compile to a single executable
+
+When you compile your application into a single-file executable with `bun build --compile`, the SDK cannot resolve the bundled CLI binary at runtime. `require.resolve` does not work inside the compiled executable’s `$bunfs` virtual filesystem, so the SDK throws `Native CLI binary for <platform> not found`.
+To work around this, embed the platform binary as a file asset, extract it to a real path at startup with `extractFromBunfs()`, and pass that path to [`pathToClaudeCodeExecutable`](#options).
+The `extractFromBunfs()` helper requires `@anthropic-ai/claude-agent-sdk` v0.3.144 or later. The example below builds for macOS on Apple Silicon:
+
+```shiki
+import binPath from "@anthropic-ai/claude-agent-sdk-darwin-arm64/claude" with { type: "file" };
+import { extractFromBunfs } from "@anthropic-ai/claude-agent-sdk/extract";
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+const cliPath = extractFromBunfs(binPath);
+
+for await (const message of query({
+  prompt: "Hello",
+  options: { pathToClaudeCodeExecutable: cliPath },
+})) {
+  console.log(message);
+}
+```
+
+`extractFromBunfs()` copies the embedded binary out of the compiled executable’s virtual filesystem to a per-user temp directory and returns the real path. Outside a compiled executable it returns the input path unchanged, so the same code runs in development without modification.
+Each compiled executable embeds a single platform’s binary. Match the platform package in the import to your `--target`:
+
+- To cross-compile, install the non-matching platform package, for example `npm install @anthropic-ai/claude-agent-sdk-linux-x64 --force`.
+- On Windows, the binary subpath is `claude.exe`, for example `@anthropic-ai/claude-agent-sdk-win32-x64/claude.exe`.
+
 ## [​](#functions) Functions
 
 ### [​](#query) `query()`
@@ -223,7 +250,7 @@ function getSessionMessages(
 | `uuid` | `string` | Unique message identifier |
 | `session_id` | `string` | Session this message belongs to |
 | `message` | `unknown` | Raw message payload from the transcript |
-| `parent_tool_use_id` | `null` | Reserved |
+| `parent_tool_use_id` | `string | null` | For subagent messages, the `tool_use_id` of the spawning `Agent` tool call. `null` for main-session messages and older sessions |
 
 #### [​](#example-3) Example
 
@@ -365,6 +392,7 @@ Configuration object for the `query()` function.
 | `additionalDirectories` | `string[]` | `[]` | Additional directories Claude can access |
 | `agent` | `string` | `undefined` | Agent name for the main thread. The agent must be defined in the `agents` option or in settings |
 | `agents` | `Record<string, [`AgentDefinition`](#agentdefinition)>` | `undefined` | Programmatically define subagents |
+| `agentProgressSummaries` | `boolean` | `false` | When `true`, generate one-line progress summaries for subagents and forward them on [`task_progress`](#sdktaskprogressmessage) events via the `summary` field. Applies to foreground and background subagents |
 | `allowDangerouslySkipPermissions` | `boolean` | `false` | Enable bypassing permissions. Required when using `permissionMode: 'bypassPermissions'` |
 | `allowedTools` | `string[]` | `[]` | Tools to auto-approve without prompting. This does not restrict Claude to only these tools; unlisted tools fall through to `permissionMode` and `canUseTool`. Use `disallowedTools` to block tools. See [Permissions](agent-sdk/permissions.md) |
 | `betas` | [`SdkBeta`](#sdkbeta)`[]` | `[]` | Enable beta features |
@@ -373,7 +401,7 @@ Configuration object for the `query()` function.
 | `cwd` | `string` | `process.cwd()` | Current working directory |
 | `debug` | `boolean` | `false` | Enable debug mode for the Claude Code process |
 | `debugFile` | `string` | `undefined` | Write debug logs to a specific file path. Implicitly enables debug mode |
-| `disallowedTools` | `string[]` | `[]` | Tools to always deny. Deny rules are checked first and override `allowedTools` and `permissionMode` (including `bypassPermissions`) |
+| `disallowedTools` | `string[]` | `[]` | Tools to deny. A bare name such as `"Bash"` removes the tool from Claude’s context. A scoped rule such as `"Bash(rm *)"` leaves the tool available and denies matching calls in every permission mode, including `bypassPermissions`. See [Permissions](agent-sdk/permissions.md) |
 | `effort` | `'low' | 'medium' | 'high' | 'xhigh' | 'max'` | `'high'` | Controls how much effort Claude puts into its response. Works with adaptive thinking to guide thinking depth |
 | `enableFileCheckpointing` | `boolean` | `false` | Enable file change tracking for rewinding. See [File checkpointing](agent-sdk/file-checkpointing.md) |
 | `env` | `Record<string, string | undefined>` | `process.env` | Environment variables. See [Environment variables](env-vars.md) for variables the underlying CLI reads, and [Handle slow or stalled API responses](#handle-slow-or-stalled-api-responses) for timeout-related variables. Set `CLAUDE_AGENT_SDK_CLIENT_APP` to identify your app in the User-Agent header |
@@ -382,20 +410,25 @@ Configuration object for the `query()` function.
 | `extraArgs` | `Record<string, string | null>` | `{}` | Additional arguments |
 | `fallbackModel` | `string` | `undefined` | Model to use if primary fails |
 | `forkSession` | `boolean` | `false` | When resuming with `resume`, fork to a new session ID instead of continuing the original session |
+| `forwardSubagentText` | `boolean` | `false` | Forward subagent text and thinking blocks as assistant and user messages with `parent_tool_use_id` set, so consumers can render a nested transcript. By default only `tool_use` and `tool_result` blocks from subagents are emitted |
 | `hooks` | `Partial<Record<`[`HookEvent`](#hookevent)`,` [`HookCallbackMatcher`](#hookcallbackmatcher)`[]>>` | `{}` | Hook callbacks for events |
 | `includeHookEvents` | `boolean` | `false` | Include hook lifecycle events in the message stream as [`SDKHookStartedMessage`](#sdkhookstartedmessage), [`SDKHookProgressMessage`](#sdkhookprogressmessage), and [`SDKHookResponseMessage`](#sdkhookresponsemessage) |
 | `includePartialMessages` | `boolean` | `false` | Include partial message events |
+| `loadTimeoutMs` | `number` | `60000` | *Alpha.* Timeout in milliseconds for each `sessionStore.load()` and `sessionStore.listSubkeys()` call during resume materialization. If the adapter doesn’t settle within this window, the query fails instead of hanging. Ignored when `sessionStore` is not set |
+| `managedSettings` | `Settings` | `undefined` | Policy-tier settings supplied by the spawning parent process. Dropped when an IT-controlled managed-settings tier already exists on the machine, unless that admin opts in with `parentSettingsBehavior: 'merge'`. Filtered to restrictive-only keys regardless |
 | `maxBudgetUsd` | `number` | `undefined` | Stop the query when the client-side cost estimate reaches this USD value. Compared against the same estimate as `total_cost_usd`; see [Track cost and usage](agent-sdk/cost-tracking.md) for accuracy caveats |
 | `maxThinkingTokens` | `number` | `undefined` | *Deprecated:* Use `thinking` instead. Maximum tokens for thinking process |
 | `maxTurns` | `number` | `undefined` | Maximum agentic turns (tool-use round trips) |
 | `mcpServers` | `Record<string, [`McpServerConfig`](#mcpserverconfig)>` | `{}` | MCP server configurations |
 | `model` | `string` | Default from CLI | Claude model to use |
+| `onElicitation` | `(request: ElicitationRequest, options: { signal: AbortSignal }) => Promise<ElicitationResult>` | `undefined` | Callback for handling MCP elicitation requests. Called when an MCP server requests user input and no hook handles it first. When not provided, unhandled elicitation requests are declined automatically |
 | `outputFormat` | `{ type: 'json_schema', schema: JSONSchema }` | `undefined` | Define output format for agent results. See [Structured outputs](agent-sdk/structured-outputs.md) for details |
-| `outputStyle` | `string` | `undefined` | Name of an [output style](output-styles.md) to activate for the session. The style must exist in a loaded `settingSources` location, such as `.claude/output-styles/`. See [Activate an output style](agent-sdk/modifying-system-prompts.md) |
+| `outputStyle` | `string` | `undefined` | Not an `Options` field. Set `outputStyle` in the inline [`settings`](settings.md) object or a settings file instead. See [Activate an output style](agent-sdk/modifying-system-prompts.md) |
 | `pathToClaudeCodeExecutable` | `string` | Auto-resolved from bundled native binary | Path to Claude Code executable. Only needed if optional dependencies were skipped during install or your platform isn’t in the supported set |
 | `permissionMode` | [`PermissionMode`](#permissionmode) | `'default'` | Permission mode for the session |
 | `permissionPromptToolName` | `string` | `undefined` | MCP tool name for permission prompts |
 | `persistSession` | `boolean` | `true` | When `false`, disables session persistence to disk. Sessions cannot be resumed later |
+| `planModeInstructions` | `string` | `undefined` | Custom workflow instructions for plan mode. When `permissionMode` is `'plan'`, this string replaces the default plan-mode workflow body. The CLI still wraps it with the read-only enforcement preamble and the ExitPlanMode protocol footer |
 | `plugins` | [`SdkPluginConfig`](#sdkpluginconfig)`[]` | `[]` | Load custom plugins from local paths. See [Plugins](agent-sdk/plugins.md) for details |
 | `promptSuggestions` | `boolean` | `false` | Enable prompt suggestions. Emits a `prompt_suggestion` message after each turn with a predicted next user prompt |
 | `resume` | `string` | `undefined` | Session ID to resume |
@@ -403,6 +436,7 @@ Configuration object for the `query()` function.
 | `sandbox` | [`SandboxSettings`](#sandboxsettings) | `undefined` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
 | `sessionId` | `string` | Auto-generated | Use a specific UUID for the session instead of auto-generating one |
 | `sessionStore` | [`SessionStore`](agent-sdk/session-storage.md) | `undefined` | Mirror session transcripts to an external backend so any host can resume them. See [Persist sessions to external storage](agent-sdk/session-storage.md) |
+| `sessionStoreFlush` | `'batched' | 'eager'` | `'batched'` | *Alpha.* Flush mode for `sessionStore`. Ignored when `sessionStore` is not set |
 | `settings` | `string | Settings` | `undefined` | Inline [settings](settings.md) object or path to a settings file. Populates the flag-settings layer in the [precedence order](settings.md). Change at runtime with [`applyFlagSettings()`](#applyflagsettings) |
 | `settingSources` | [`SettingSource`](#settingsource)`[]` | CLI defaults (all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. Managed policy settings load regardless. See [Use Claude Code features](agent-sdk/claude-code-features.md) |
 | `skills` | `string[] | 'all'` | `undefined` | Skills available to the session. Pass `'all'` to enable every discovered skill, or a list of skill names. When set, the SDK enables the Skill tool automatically without listing it in `allowedTools`. See [Skills](agent-sdk/skills.md) |
@@ -410,7 +444,10 @@ Configuration object for the `query()` function.
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Use only the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, and plugin-provided MCP servers |
 | `systemPrompt` | `string | { type: 'preset'; preset: 'claude_code'; append?: string; excludeDynamicSections?: boolean }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code’s system prompt. When using the preset object form, add `append` to extend it with additional instructions, and set `excludeDynamicSections: true` to move per-session context into the first user message for [better prompt-cache reuse across machines](agent-sdk/modifying-system-prompts.md) |
+| `taskBudget` | `{ total: number }` | `undefined` | *Alpha.* API-side task budget in tokens. When set, the model is told its remaining token budget so it can pace tool use and wrap up before the limit |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude’s thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
+| `title` | `string` | `undefined` | Display title for the session. When resuming via `resume` or `continue`, the resumed session’s persisted title takes precedence; use [`renameSession()`](#renamesession) to retitle an existing session |
+| `toolAliases` | `Record<string, string>` | `undefined` | Map built-in tool names to MCP tool names so Claude calls your MCP implementation in place of the built-in. For example, `{ Bash: 'mcp__workspace__bash' }` |
 | `toolConfig` | [`ToolConfig`](#toolconfig) | `undefined` | Configuration for built-in tool behavior. See [`ToolConfig`](#toolconfig) for details |
 | `tools` | `string[] | { type: 'preset'; preset: 'claude_code' }` | `undefined` | Tool configuration. Pass an array of tool names or use the preset to get Claude Code’s default tools |
 
@@ -902,11 +939,17 @@ type SDKMessage =
   | SDKTaskStartedMessage
   | SDKTaskProgressMessage
   | SDKTaskUpdatedMessage
+  | SDKSessionStateChangedMessage
+  | SDKNotificationMessage
   | SDKFilesPersistedEvent
   | SDKToolUseSummaryMessage
+  | SDKMemoryRecallMessage
   | SDKRateLimitEvent
+  | SDKElicitationCompleteMessage
   | SDKPermissionDeniedMessage
-  | SDKPromptSuggestionMessage;
+  | SDKPromptSuggestionMessage
+  | SDKAPIRetryMessage
+  | SDKMirrorErrorMessage;
 ```
 
 ### [​](#sdkassistantmessage) `SDKAssistantMessage`
@@ -925,7 +968,7 @@ type SDKAssistantMessage = {
 ```
 
 The `message` field is a [`BetaMessage`](api/messages/create.md) from the Anthropic SDK. It includes fields like `id`, `content`, `model`, `stop_reason`, and `usage`.
-`SDKAssistantMessageError` is one of: `'authentication_failed'`, `'oauth_org_not_allowed'`, `'billing_error'`, `'rate_limit'`, `'invalid_request'`, `'server_error'`, `'max_output_tokens'`, or `'unknown'`.
+`SDKAssistantMessageError` is one of: `'authentication_failed'`, `'oauth_org_not_allowed'`, `'billing_error'`, `'rate_limit'`, `'invalid_request'`, `'model_not_found'`, `'server_error'`, `'max_output_tokens'`, or `'unknown'`. `'model_not_found'` means the selected model doesn’t exist or isn’t available to your account or deployment.
 
 ### [​](#sdkusermessage) `SDKUserMessage`
 
@@ -979,15 +1022,19 @@ type SDKResultMessage =
       duration_ms: number;
       duration_api_ms: number;
       is_error: boolean;
+      api_error_status?: number | null;
       num_turns: number;
       result: string;
       stop_reason: string | null;
+      ttft_ms?: number;
       total_cost_usd: number;
       usage: NonNullableUsage;
       modelUsage: { [modelName: string]: ModelUsage };
       permission_denials: SDKPermissionDenial[];
       structured_output?: unknown;
       deferred_tool_use?: { id: string; name: string; input: Record<string, unknown> };
+      terminal_reason?: TerminalReason;
+      fast_mode_state?: FastModeState;
       origin?: SDKMessageOrigin;
     }
   | {
@@ -1009,9 +1056,18 @@ type SDKResultMessage =
       modelUsage: { [modelName: string]: ModelUsage };
       permission_denials: SDKPermissionDenial[];
       errors: string[];
+      terminal_reason?: TerminalReason;
+      fast_mode_state?: FastModeState;
       origin?: SDKMessageOrigin;
     };
 ```
+
+Several fields on the result carry diagnostic detail beyond `subtype`:
+
+- `api_error_status`: the HTTP status code of the API error that terminated the conversation. Absent or `null` when the turn ended without an API error.
+- `ttft_ms`: time to first token in milliseconds. Present on the success arm only.
+- `terminal_reason`: why the loop ended. One of `"completed"`, `"max_turns"`, `"tool_deferred"`, `"aborted_streaming"`, `"aborted_tools"`, `"hook_stopped"`, `"stop_hook_prevented"`, `"blocking_limit"`, `"rapid_refill_breaker"`, `"prompt_too_long"`, `"image_error"`, or `"model_error"`.
+- `fast_mode_state`: one of `"on"`, `"off"`, or `"cooldown"`.
 
 The `origin` field forwards the [`SDKMessageOrigin`](#sdkmessageorigin) of the user message that triggered this result. When a background task finishes and the SDK injects a synthetic follow-up turn, the resulting `SDKResultMessage` carries `origin: { kind: "task-notification" }`. Check this field to distinguish results that answer your prompt from results emitted for background-task follow-ups, so you can route or suppress the latter. The field is absent for results emitted before any user turn, such as startup errors.
 When a `PreToolUse` hook returns `permissionDecision: "defer"`, the result has `stop_reason: "tool_deferred"` and `deferred_tool_use` carries the pending tool’s `id`, `name`, and `input`. Read this field to surface the request in your own UI, then resume with the same `session_id` to continue. See [Defer a tool call for later](hooks.md) for the full round trip.
@@ -1355,6 +1411,8 @@ type StopHookInput = BaseHookInput & {
   hook_event_name: "Stop";
   stop_hook_active: boolean;
   last_assistant_message?: string;
+  background_tasks?: BackgroundTaskSummary[];
+  session_crons?: SessionCronSummary[];
 };
 ```
 
@@ -1378,6 +1436,27 @@ type SubagentStopHookInput = BaseHookInput & {
   agent_transcript_path: string;
   agent_type: string;
   last_assistant_message?: string;
+  background_tasks?: BackgroundTaskSummary[];
+  session_crons?: SessionCronSummary[];
+};
+
+type BackgroundTaskSummary = {
+  id: string;
+  type: string;
+  status: string;
+  description: string;
+  command?: string;
+  agent_type?: string;
+  server?: string;
+  tool?: string;
+  name?: string;
+};
+
+type SessionCronSummary = {
+  id: string;
+  schedule: string;
+  recurring: boolean;
+  prompt: string;
 };
 ```
 
@@ -2687,16 +2766,27 @@ type NonNullableUsage = {
 
 ### [​](#usage) `Usage`
 
-Token usage statistics (from `@anthropic-ai/sdk`).
+Token usage statistics. This is the `BetaUsage` type from `@anthropic-ai/sdk`.
 
 ```shiki
 type Usage = {
-  input_tokens: number | null;
-  output_tokens: number | null;
-  cache_creation_input_tokens?: number | null;
-  cache_read_input_tokens?: number | null;
+  input_tokens: number;
+  output_tokens: number;
+  cache_creation_input_tokens: number | null;
+  cache_read_input_tokens: number | null;
+  cache_creation: {
+    ephemeral_5m_input_tokens: number;
+    ephemeral_1h_input_tokens: number;
+  } | null;
+  server_tool_use: BetaServerToolUsage | null;
+  service_tier: "standard" | "priority" | "batch" | null;
+  speed: "standard" | "fast" | null;
+  inference_geo: string | null;
+  iterations: BetaIterationsUsage | null;
 };
 ```
+
+`BetaServerToolUsage` and `BetaIterationsUsage` are defined in `@anthropic-ai/sdk`.
 
 ### [​](#calltoolresult) `CallToolResult`
 
@@ -2956,7 +3046,7 @@ type SDKTaskStartedMessage = {
 
 ### [​](#sdktaskprogressmessage) `SDKTaskProgressMessage`
 
-Emitted periodically while a background task is running.
+Emitted periodically while a subagent or background task is running. The `summary` field is populated only when [`agentProgressSummaries`](#options) is enabled.
 
 ```shiki
 type SDKTaskProgressMessage = {
@@ -2965,12 +3055,14 @@ type SDKTaskProgressMessage = {
   task_id: string;
   tool_use_id?: string;
   description: string;
+  subagent_type?: string;
   usage: {
     total_tokens: number;
     tool_uses: number;
     duration_ms: number;
   };
   last_tool_name?: string;
+  summary?: string;
   uuid: UUID;
   session_id: string;
 };

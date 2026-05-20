@@ -6,7 +6,79 @@
 >
 > Use this file to discover all available pages before exploring further.
 
-Claude Code supports the following environment variables to control its behavior. Set them in your shell before launching `claude`, or configure them in [`settings.json`](settings.md) under the `env` key to apply them to every session or roll them out across your team.
+Environment variables can control Claude Code behavior such as model selection, authentication, request routing, and feature toggles. Many of the same behaviors can also be configured through a [settings file](settings.md) field, a [CLI flag](cli-reference.md), or an in-session command like `/model`.
+This page covers how to:
+
+- [Set environment variables](#set-environment-variables) in your shell or in a settings file
+- [Check which value applies](#precedence) when a behavior can be set more than one way
+- [Look up the variables Claude Code reads](#variables)
+
+## [​](#set-environment-variables) Set environment variables
+
+A variable you set in your shell lasts for that terminal session, while a variable in a settings file applies every time `claude` runs.
+
+### [​](#in-your-shell) In your shell
+
+Set the variable before launching `claude`:
+
+- macOS, Linux, WSL
+- Windows PowerShell
+- Windows CMD
+
+```shiki
+export API_TIMEOUT_MS="1200000"
+claude
+```
+
+To set it for every session, add the `export` line to `~/.bashrc`, `~/.zshrc`, or your shell’s profile file.
+
+```shiki
+$env:API_TIMEOUT_MS = "1200000"
+claude
+```
+
+To set it for every session, run `[Environment]::SetEnvironmentVariable("API_TIMEOUT_MS", "1200000", "User")` and open a new terminal.
+
+```shiki
+set API_TIMEOUT_MS=1200000
+claude
+```
+
+To set it for every session, run `setx API_TIMEOUT_MS "1200000"` and open a new terminal.
+
+### [​](#in-settings-files) In settings files
+
+Add variables under the `env` key in a `settings.json` file. Claude Code reads them directly from the file at startup, so they take effect no matter how `claude` was launched.
+
+~/.claude/settings.json
+
+```shiki
+{
+  "env": {
+    "API_TIMEOUT_MS": "1200000",
+    "BASH_DEFAULT_TIMEOUT_MS": "300000"
+  }
+}
+```
+
+The file you choose controls who the variables apply to:
+
+| File | Applies to |
+| --- | --- |
+| `~/.claude/settings.json` | You, in every project |
+| `.claude/settings.json` | Everyone working in the project, checked into source control |
+| `.claude/settings.local.json` | You, in this project only, not checked in |
+| Managed settings | Everyone in your organization, deployed by an admin |
+
+See [Settings files](settings.md) for where each file lives and [Settings precedence](settings.md) for how they combine when more than one sets the same variable.
+
+## [​](#precedence) Precedence
+
+Where the same behavior has both an environment variable and a settings field, the environment variable takes precedence. For example, `ANTHROPIC_MODEL` overrides the `model` setting, and `CLAUDE_CODE_AUTO_CONNECT_IDE` overrides `autoConnectIde`. The settings field applies when the environment variable is not set.
+How an environment variable interacts with CLI flags and in-session commands varies per feature: `--model` and `/model` override `ANTHROPIC_MODEL`, while `CLAUDE_CODE_EFFORT_LEVEL` overrides `/effort`. When a variable interacts with another configuration source, its row in the [Variables](#variables) list states the precedence or links to the page that documents it.
+Claude Code reads environment variables at startup, so changes take effect the next time you launch `claude`.
+
+## [​](#variables) Variables
 
 | Variable | Purpose |
 | --- | --- |
@@ -52,7 +124,7 @@ Claude Code supports the following environment variables to control its behavior
 | `BASH_MAX_OUTPUT_LENGTH` | Maximum number of characters in bash outputs before the full output is saved to a file and Claude receives the path plus a short preview. See [Bash tool behavior](tools-reference.md) |
 | `BASH_MAX_TIMEOUT_MS` | Maximum timeout the model can set for long-running bash commands (default: 600000, or 10 minutes) |
 | `CCR_FORCE_BUNDLE` | Set to `1` to force [`claude --remote`](claude-code-on-the-web.md) to bundle and upload your local repository even when GitHub access is available |
-| `CLAUDECODE` | Set to `1` in shell environments Claude Code spawns (Bash tool, tmux sessions). Not set in [hooks](hooks.md) or [status line](statusline.md) commands. Use to detect when a script is running inside a shell spawned by Claude Code |
+| `CLAUDECODE` | Set to `1` in subprocesses Claude Code spawns (Bash and PowerShell tools, tmux sessions, [hook](hooks.md) commands, [status line](statusline.md) commands). Use to detect when a script is running inside a subprocess spawned by Claude Code |
 | `CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS` | Set to `1` to disable all built-in [subagent](sub-agents.md) types such as Explore and Plan. Only applies in non-interactive mode (the `-p` flag). Useful for SDK users who want a blank slate |
 | `CLAUDE_AGENT_SDK_MCP_NO_PREFIX` | Set to `1` to skip the `mcp__<server>__` prefix on tool names from SDK-created MCP servers. Tools use their original names. SDK usage only |
 | `CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS` | Stall timeout in milliseconds for background subagents. Default `600000` (10 minutes). The timer resets on each streaming progress event; if no progress arrives within the window, the subagent is aborted and the task is marked failed, surfacing any partial result to the parent |
@@ -61,6 +133,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Return to the original working directory after each Bash or PowerShell command in the main session |
 | `CLAUDE_CODE_ACCESSIBILITY` | Set to `1` to keep the native terminal cursor visible and disable the inverted-text cursor indicator. Allows screen magnifiers like macOS Zoom to track cursor position |
 | `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD` | Set to `1` to load memory files from directories specified with `--add-dir`. Loads `CLAUDE.md`, `.claude/CLAUDE.md`, `.claude/rules/*.md`, and `CLAUDE.local.md`. By default, additional directories do not load memory files |
+| `CLAUDE_CODE_ALT_SCREEN_FULL_REPAINT` | Set to `1` to repaint the entire screen on every frame in [fullscreen rendering](fullscreen.md) instead of sending incremental updates. Use this if fullscreen mode shows stale or misplaced text fragments. Claude Code enables this automatically for background sessions on Windows |
 | `CLAUDE_CODE_API_KEY_HELPER_TTL_MS` | Interval in milliseconds at which credentials should be refreshed (when using [`apiKeyHelper`](settings.md)) |
 | `CLAUDE_CODE_ATTRIBUTION_HEADER` | Set to `0` to omit the attribution block (client version and prompt fingerprint) from the start of the system prompt. Disabling it improves prompt-cache hit rates when routing through an [LLM gateway](llm-gateway.md). Anthropic API caching is unaffected |
 | `CLAUDE_CODE_AUTO_COMPACT_WINDOW` | Set the context capacity in tokens used for auto-compaction calculations. Defaults to the model’s context window: 200K for standard models or 1M for [extended context](model-config.md) models. Use a lower value like `500000` on a 1M model to treat the window as 500K for compaction purposes. The value is capped at the model’s actual context window. `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` is applied as a percentage of this value. Setting this variable decouples the compaction threshold from the status line’s `used_percentage`, which always uses the model’s full context window |
@@ -96,7 +169,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_DISABLE_VIRTUAL_SCROLL` | Set to `1` to disable virtual scrolling in [fullscreen rendering](fullscreen.md) and render every message in the transcript. Use this if scrolling in fullscreen mode shows blank regions where messages should appear |
 | `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high`, `xhigh`, `max`, or `auto` to use the model default. Available levels depend on the model. Takes precedence over `/effort` and the `effortLevel` setting. See [Adjust effort level](model-config.md) |
 | `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Override [session recap](interactive-mode.md) availability. Set to `0` to force recaps off regardless of the `/config` toggle. Set to `1` to force recaps on when [`awaySummaryEnabled`](settings.md) is `false`. Takes precedence over the setting and `/config` toggle |
-| `CLAUDE_CODE_ENABLE_BACKGROUND_PLUGIN_REFRESH` | Set to `1` to refresh plugin state at turn boundaries in [non-interactive mode](headless.md) after a background install completes. Off by default because the refresh changes the system prompt mid-session, which invalidates [prompt caching](build-with-claude/prompt-caching.md) for that turn |
+| `CLAUDE_CODE_ENABLE_BACKGROUND_PLUGIN_REFRESH` | Set to `1` to refresh plugin state at turn boundaries in [non-interactive mode](headless.md) after a background install completes. Off by default because the refresh changes the system prompt mid-session, which invalidates [prompt caching](prompt-caching.md) for that turn |
 | `CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL` | Set to `1` to route the “How is Claude doing?” session quality survey to your own [OpenTelemetry collector](monitoring-usage.md) when Anthropic-bound nonessential traffic is blocked. Survey ratings are emitted only as OTEL events to your configured collector. No survey data is sent to Anthropic in this mode. Applies when `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_TELEMETRY`, or `DO_NOT_TRACK` is set, and has no effect otherwise. `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY` and the organization product feedback policy take precedence |
 | `CLAUDE_CODE_ENABLE_FINE_GRAINED_TOOL_STREAMING` | Controls whether tool call inputs stream from the API as Claude generates them. With this off, a large tool input such as a long file write arrives only after Claude finishes generating it, which can look like it’s hanging. Enabled by default on the Anthropic API. On Bedrock and Vertex, enabled per model where the deployed container supports it. Set to `0` to opt out. Set to `1` to force on when routing through a proxy via `ANTHROPIC_BASE_URL`, `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_BEDROCK_BASE_URL`. Off by default on Foundry and [gateway](llm-gateway.md) connections |
 | `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY` | Set to `1` to populate the `/model` picker from your gateway’s `/v1/models` endpoint when `ANTHROPIC_BASE_URL` points at an Anthropic-compatible gateway such as LiteLLM, Kong, or an internal proxy. Off by default because gateways backed by a shared API key would otherwise show every user every model the key can access. Discovered models are still filtered by the [`availableModels`](settings.md) allowlist |
@@ -139,7 +212,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_PLUGIN_CACHE_DIR` | Override the plugins root directory. Despite the name, this sets the parent directory, not the cache itself: marketplaces and the plugin cache live in subdirectories under this path. Defaults to `~/.claude/plugins` |
 | `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS` | Timeout in milliseconds for git operations when installing or updating plugins (default: 120000). Increase this value for large repositories or slow network connections. See [Git operations time out](plugin-marketplaces.md) |
 | `CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE` | Set to `1` to keep the existing marketplace cache when a `git pull` fails instead of wiping and re-cloning. Useful in offline or airgapped environments where re-cloning would fail the same way. See [Marketplace updates fail in offline environments](plugin-marketplaces.md) |
-| `CLAUDE_CODE_PLUGIN_PREFER_HTTPS` | Set to `1` to clone GitHub `owner/repo` plugin sources over HTTPS instead of SSH. Useful in CI runners, containers, or any environment without a configured SSH key for `github.com` |
+| `CLAUDE_CODE_PLUGIN_PREFER_HTTPS` | Set to `1` to clone GitHub `owner/repo` shorthand sources over HTTPS instead of SSH. Applies to plugin install and update, and to `/plugin marketplace add` and `update`. Useful in CI runners, containers, or any environment without a configured SSH key for `github.com` |
 | `CLAUDE_CODE_PLUGIN_SEED_DIR` | Path to one or more read-only plugin seed directories, separated by `:` on Unix or `;` on Windows. Use this to bundle a pre-populated plugins directory into a container image. Claude Code registers marketplaces from these directories at startup and uses pre-cached plugins without re-cloning. See [Pre-populate plugins for containers](plugin-marketplaces.md) |
 | `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY` | Set to `1` to stop Claude Code from passing `-ExecutionPolicy Bypass` when spawning PowerShell for tool calls, hooks, and status line commands, and respect the machine’s effective execution policy instead. By default Claude Code bypasses execution policy at process scope so `.ps1` scripts and module imports work on default-Restricted Windows installs. Process-scope bypass never overrides Group Policy `MachinePolicy` or `UserPolicy` regardless of this setting |
 | `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` | Set by host platforms that embed Claude Code and manage model provider routing on its behalf. When set, provider-selection, endpoint, and authentication variables such as `CLAUDE_CODE_USE_BEDROCK`, `ANTHROPIC_BASE_URL`, and `ANTHROPIC_API_KEY` in settings files are ignored so user settings cannot override the host’s routing. The automatic telemetry opt-out for Bedrock, Vertex, and Foundry is also skipped, so telemetry follows the standard `DISABLE_TELEMETRY` opt-out. See [Default behaviors by API provider](data-usage.md) |
@@ -151,7 +224,7 @@ Claude Code supports the following environment variables to control its behavior
 | `CLAUDE_CODE_SCRIPT_CAPS` | JSON object limiting how many times specific scripts may be invoked per session when `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` is set. Keys are substrings matched against the command text; values are integer call limits. For example, `{"deploy.sh": 2}` allows `deploy.sh` to be called at most twice. Matching is substring-based so shell-expansion tricks like `./scripts/deploy.sh $(evil)` still count against the cap. Runtime fan-out via `xargs` or `find -exec` is not detected; this is a defense-in-depth control |
 | `CLAUDE_CODE_SCROLL_SPEED` | Set the mouse wheel scroll multiplier in [fullscreen rendering](fullscreen.md). Accepts values from 1 to 20. Set to `3` to match `vim` if your terminal sends one wheel event per notch without amplification. Ignored in the JetBrains IDE terminal, where Claude Code uses its own scroll handling |
 | `CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS` | Override the time budget in milliseconds for [SessionEnd](hooks.md) hooks. Applies to session exit, `/clear`, and switching sessions via interactive `/resume`. By default the budget is 1.5 seconds, automatically raised to the highest per-hook `timeout` configured in settings files, up to 60 seconds. Timeouts on plugin-provided hooks do not raise the budget |
-| `CLAUDE_CODE_SESSION_ID` | Set automatically in Bash and PowerShell tool subprocesses to the current session ID. Matches the `session_id` field passed to [hooks](hooks.md). Updated on `/clear`. Use to correlate scripts and external tools with the Claude Code session that launched them |
+| `CLAUDE_CODE_SESSION_ID` | Set automatically in Bash and PowerShell tool subprocesses and in [hook command](hooks.md) subprocesses to the current session ID. Matches the `session_id` field in the hook JSON input. Updated on `/clear`. Use to correlate scripts and external tools with the Claude Code session that launched them |
 | `CLAUDE_CODE_SHELL` | Override automatic shell detection. Useful when your login shell differs from your preferred working shell (for example, `bash` vs `zsh`) |
 | `CLAUDE_CODE_SHELL_PREFIX` | Command prefix that wraps shell commands Claude Code spawns: Bash tool calls, [hook](hooks.md) commands, and stdio [MCP server](mcp.md) startup commands. Useful for logging or auditing. Example: setting `/path/to/logger.sh` runs each command as `/path/to/logger.sh <command>` |
 | `CLAUDE_CODE_SIMPLE` | Set to `1` to run with a minimal system prompt and only the Bash, file read, and file edit tools. MCP tools from `--mcp-config` are still available. Disables auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md. OAuth tokens and keychain credentials are not read, so Anthropic authentication must come from `ANTHROPIC_API_KEY` or an `apiKeyHelper` in `--settings`. Equivalent to passing [`--bare`](headless.md) |
@@ -202,16 +275,16 @@ Claude Code supports the following environment variables to control its behavior
 | `DISABLE_INTERLEAVED_THINKING` | Set to `1` to prevent sending the interleaved-thinking beta header. Useful when your LLM gateway or provider does not support [interleaved thinking](build-with-claude/extended-thinking.md) |
 | `DISABLE_LOGIN_COMMAND` | Set to `1` to hide the `/login` command. Useful when authentication is handled externally via API keys or `apiKeyHelper` |
 | `DISABLE_LOGOUT_COMMAND` | Set to `1` to hide the `/logout` command |
-| `DISABLE_PROMPT_CACHING` | Set to `1` to disable prompt caching for all models (takes precedence over per-model settings) |
+| `DISABLE_PROMPT_CACHING` | Set to `1` to disable [prompt caching](prompt-caching.md) for all models (takes precedence over per-model settings) |
 | `DISABLE_PROMPT_CACHING_HAIKU` | Set to `1` to disable prompt caching for Haiku models |
 | `DISABLE_PROMPT_CACHING_OPUS` | Set to `1` to disable prompt caching for Opus models |
 | `DISABLE_PROMPT_CACHING_SONNET` | Set to `1` to disable prompt caching for Sonnet models |
-| `DISABLE_TELEMETRY` | Set to `1` to opt out of telemetry. Telemetry events do not include user data like code, file paths, or bash commands. Also disables feature flags, so some features that are still rolling out may not be available |
+| `DISABLE_TELEMETRY` | Set to `1` to opt out of telemetry. Telemetry events do not include user data like code, file paths, or bash commands. Also disables feature-flag fetching with the same effect as `DISABLE_GROWTHBOOK`, so some flagged features may be unavailable |
 | `DISABLE_UPDATES` | Set to `1` to block all updates including manual `claude update` and `claude install`. Stricter than `DISABLE_AUTOUPDATER`. Use when distributing Claude Code through your own channels and users should not self-update |
 | `DISABLE_UPGRADE_COMMAND` | Set to `1` to hide the `/upgrade` command |
 | `DO_NOT_TRACK` | Set to `1` to opt out of telemetry. Equivalent to setting `DISABLE_TELEMETRY`. Honored as the [standard cross-tool convention](https://consoledonottrack.com/) |
 | `ENABLE_CLAUDEAI_MCP_SERVERS` | Set to `false` to disable [claude.ai MCP servers](mcp.md) in Claude Code. Enabled by default for logged-in users |
-| `ENABLE_PROMPT_CACHING_1H` | Set to `1` to request a 1-hour prompt cache TTL instead of the default 5 minutes. Intended for API key, [Bedrock](amazon-bedrock.md), [Vertex](google-vertex-ai.md), [Foundry](microsoft-foundry.md), and [Claude Platform on AWS](claude-platform-on-aws.md) users. Subscription users receive 1-hour TTL automatically. 1-hour cache writes are billed at a higher rate |
+| `ENABLE_PROMPT_CACHING_1H` | Set to `1` to request a 1-hour [prompt cache TTL](prompt-caching.md) instead of the default 5 minutes. Intended for API key, [Bedrock](amazon-bedrock.md), [Vertex](google-vertex-ai.md), [Foundry](microsoft-foundry.md), and [Claude Platform on AWS](claude-platform-on-aws.md) users. Subscription users within included usage receive 1-hour TTL automatically. 1-hour cache writes are billed at a higher rate |
 | `ENABLE_PROMPT_CACHING_1H_BEDROCK` | Deprecated. Use `ENABLE_PROMPT_CACHING_1H` instead |
 | `ENABLE_TOOL_SEARCH` | Controls [MCP tool search](mcp.md). Unset: all MCP tools deferred by default, but loaded upfront on Vertex AI or when `ANTHROPIC_BASE_URL` points to a non-first-party host. Values: `true` (always defer and send the beta header, requests fail on Vertex AI models earlier than Sonnet 4.5 or Opus 4.5, or on proxies that do not support `tool_reference`), `auto` (threshold mode: load upfront if tools fit within 10% of context), `auto:N` (custom threshold, e.g., `auto:5` for 5%), `false` (load all upfront) |
 | `FALLBACK_FOR_ALL_PRIMARY_MODELS` | Set to any non-empty value to trigger fallback to [`--fallback-model`](cli-reference.md) after repeated overload errors on any primary model. By default, only Opus models trigger the fallback |
@@ -259,7 +332,7 @@ Standard OpenTelemetry exporter variables (`OTEL_METRICS_EXPORTER`, `OTEL_LOGS_E
 
 ## [​](#see-also) See also
 
-- [Settings](settings.md): configure environment variables in `settings.json` so they apply to every session
+- [Settings](settings.md): all `settings.json` configuration, including the `env` key
 - [CLI reference](cli-reference.md): launch-time flags
 - [Network configuration](network-config.md): proxy and TLS setup
 - [Monitoring](monitoring-usage.md): OpenTelemetry configuration

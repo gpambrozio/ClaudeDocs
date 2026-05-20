@@ -41,6 +41,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 description: string
 
 Project description
@@ -57,9 +61,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -92,11 +100,13 @@ Response 200
   "attachments_count": 0,
   "chats_count": 0,
   "created_at": "2019-12-27T18:11:19.117Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "instructions": "instructions",
   "is_private": true,
   "name": "name",
   "organization_id": "organization_id",
+  "organization_uuid": "organization_uuid",
   "updated_at": "2019-12-27T18:11:19.117Z",
   "user": {
     "id": "id",
@@ -115,11 +125,13 @@ Response 200
   "attachments_count": 0,
   "chats_count": 0,
   "created_at": "2019-12-27T18:11:19.117Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "instructions": "instructions",
   "is_private": true,
   "name": "name",
   "organization_id": "organization_id",
+  "organization_uuid": "organization_uuid",
   "updated_at": "2019-12-27T18:11:19.117Z",
   "user": {
     "id": "id",

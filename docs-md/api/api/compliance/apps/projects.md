@@ -18,13 +18,9 @@ GET/v1/compliance/apps/projects/{project\_id}
 
 DELETE/v1/compliance/apps/projects/{project\_id}
 
-##### [List project attachments](api/compliance/apps/projects/attachments.md)
-
-GET/v1/compliance/apps/projects/{project\_id}/attachments
-
 ##### ModelsExpand Collapse
 
-ProjectListResponse = object { id, created\_at, is\_private, 4 more }
+ProjectListResponse = object { id, created\_at, deleted\_at, 6 more }
 
 Project information for compliance responses.
 
@@ -36,6 +32,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 is\_private: boolean
 
 If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
@@ -44,9 +44,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -64,7 +68,7 @@ email\_address: string
 
 User's email address
 
-ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 8 more }
+ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 10 more }
 
 Detailed project information for compliance responses.
 
@@ -84,6 +88,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 description: string
 
 Project description
@@ -100,9 +108,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -132,13 +144,17 @@ type: optional "claude\_project\_deleted"
 
 Constant string confirming deletion.
 
-ProjectAttachmentsResponse = object { data, has\_more, next\_page }
+#### ProjectsAttachments
 
-List of project attachments with pagination info.
+##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
 
-data: array of object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
+GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-List of attachments sorted chronologically by created\_at, tie break by id
+##### ModelsExpand Collapse
+
+AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object { id, created\_at, filename, 2 more }
+
+File attachment reference for compliance responses.
 
 Accepts one of the following:
 
@@ -190,19 +206,15 @@ type: "project\_doc"
 
 Discriminator marking this as a plain text document
 
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string
-
-To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
-
 #### ProjectsDocuments
 
 ##### [Get project document content](api/compliance/apps/projects/documents/retrieve.md)
 
 GET/v1/compliance/apps/projects/documents/{document\_id}
+
+##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
+
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
 ##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
 
@@ -229,6 +241,53 @@ Document creation timestamp
 filename: string
 
 Document filename
+
+user: object { id, email\_address }
+
+User information for project creator.
+
+id: string
+
+User identifier (tagged ID)
+
+email\_address: string
+
+User's email address
+
+DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+
+Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
+
+Returns metadata only. Use the sibling endpoint (without `/metadata`)
+to fetch the document text content.
+
+id: string
+
+Project document identifier (tagged ID)
+
+claude\_project\_id: string
+
+The project this document belongs to
+
+created\_at: string
+
+Document creation timestamp
+
+filename: string
+
+Document filename
+
+md5: string
+
+Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+
+mime\_type: "text/plain"
+
+MIME type of the document content, always plain text
+
+size\_bytes: number
+
+Size in bytes of the document content (UTF-8 encoded)
 
 user: object { id, email\_address }
 

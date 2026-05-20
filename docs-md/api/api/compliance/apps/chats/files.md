@@ -14,13 +14,13 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Download file content](api/compliance/apps/chats/files/content.md)
+##### [Download file content](api/compliance/apps/chats/files/download.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse = object { id, created\_at, filename, 3 more }
+FileRetrieveResponse = object { id, created\_at, filename, 4 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -38,6 +38,10 @@ File creation timestamp
 filename: string
 
 Display name of the file, if set
+
+md5: string
+
+Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
 message\_ids: array of string
 
@@ -62,8 +66,6 @@ The ID of the file that was deleted
 type: optional "claude\_file\_deleted"
 
 Constant string confirming deletion
-
-FileContentResponse = unknown
 
 ---
 

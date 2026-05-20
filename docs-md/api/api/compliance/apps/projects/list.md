@@ -53,7 +53,7 @@ Filter by user IDs. Enumerate IDs via `GET /v1/compliance/organizations/{org_uui
 
 ##### ReturnsExpand Collapse
 
-data: array of object { id, created\_at, is\_private, 4 more }
+data: array of object { id, created\_at, deleted\_at, 6 more }
 
 List of projects sorted by creation date ascending
 
@@ -65,6 +65,10 @@ created\_at: string
 
 Project creation timestamp
 
+deleted\_at: string
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
 is\_private: boolean
 
 If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
@@ -73,9 +77,13 @@ name: string
 
 Project name
 
-organization\_id: string
+Deprecatedorganization\_id: string
 
 Organization identifier (tagged ID)
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
 
 updated\_at: string
 
@@ -120,6 +128,7 @@ Response 200
       "updated_at": "2025-06-15T14:30:00Z",
       "is_private": true,
       "organization_id": "org_abc123",
+      "organization_uuid": "abc12345-6789-0abc-def0-123456789abc",
       "user": {
         "id": "user_xyz456",
         "email_address": "user@example.com"
@@ -145,6 +154,7 @@ Response 200
       "updated_at": "2025-06-15T14:30:00Z",
       "is_private": true,
       "organization_id": "org_abc123",
+      "organization_uuid": "abc12345-6789-0abc-def0-123456789abc",
       "user": {
         "id": "user_xyz456",
         "email_address": "user@example.com"
