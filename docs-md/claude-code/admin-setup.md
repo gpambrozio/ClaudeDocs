@@ -65,6 +65,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Managed policy CLAUDE.md](memory.md) | Org-wide instructions loaded in every session, cannot be excluded | File at the managed policy path |
 | [MCP server control](mcp.md) | Restrict which MCP servers users can add or connect to | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly` |
 | [Plugin marketplace control](plugin-marketplaces.md) | Restrict which marketplace sources users can add and install from | `strictKnownMarketplaces`, `blockedMarketplaces` |
+| [Customization lockdown](settings.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
 | [Hook restrictions](settings.md) | Only managed hooks load; restrict HTTP hook URLs | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
 | [Version floor](settings.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |

@@ -16,7 +16,7 @@ Claude Managed Agents is also available on Claude Platform on AWS, with some dif
 
 [Quickstart
 
-Create your first agent session](managed-agents/quickstart.md)[API Reference
+Create your first agent session](managed-agents/quickstart.md)[API reference
 
 Full endpoint documentation](managed-agents/sessions.md)
 
@@ -90,7 +90,9 @@ To get started, you need:
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](managed-agents/define-outcomes.md) and [multiagent](managed-agents/multi-agent.md)) are in beta (research preview). [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Certain features ([MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) and [dreaming](managed-agents/dreams.md)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+
+Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, container state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](manage-claude/api-and-data-retention.md) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](managed-agents/sessions.md), and separately delete any [files](build-with-claude/files.md) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 ## Rate limits
 

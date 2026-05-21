@@ -10,10 +10,23 @@ Every organization has a **Default Workspace** that cannot be renamed, archived,
 
 Key characteristics:
 
-- **Workspace identifiers** use the `wrkspc_` prefix (e.g., `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
+- **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
 - **Maximum 100 workspaces** per organization (archived workspaces don't count)
 - **Default Workspace** has no ID and doesn't appear in list endpoints
 - **API keys** are scoped to a single workspace and can only access resources within that workspace
+
+### Claude Code workspace
+
+When a member of your organization first signs in to [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) with their Claude Console account, Anthropic automatically creates a **Claude Code** workspace in the organization and adds that member to it. Every subsequent member who signs in to Claude Code is added the same way.
+
+The Claude Code workspace keeps Claude Code traffic separate from your other API workloads:
+
+- Claude Code mints a per-user API key in this workspace at sign-in. You cannot create keys in it manually from the Console.
+- A Claude Code key stops working if its owner is removed from the workspace or organization, unlike standard workspace keys.
+- Claude Code usage is rate-limited separately, and admins can cap its share of the organization's limits under [Settings > Workspaces](/settings/workspaces).
+- It is the only workspace that supports per-user monthly spend limits.
+
+Archiving the Claude Code workspace disables Claude Code sign-in through Console billing for the whole organization.
 
 ## Workspace roles and permissions
 
@@ -104,7 +117,7 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 - Deactivates the workspace and all associated API keys
 - Cannot be undone
 
-Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone.
+Archiving a workspace immediately revokes all API keys in that workspace. This action cannot be undone. If you archive the [Claude Code workspace](#claude-code-workspace), members of your organization can no longer sign in to Claude Code through Console billing.
 
 ### Using the Admin API
 
@@ -254,7 +267,7 @@ Create workspaces for specific projects or products to track usage and costs sep
 
    Use meaningful names
 
-   Name workspaces clearly to indicate their purpose (e.g., "Production - Customer Chatbot", "Dev - Internal Tools").
+   Name workspaces clearly to indicate their purpose (for example, "Production - Customer Chatbot", "Dev - Internal Tools").
 3. 3
 
    Set appropriate limits
@@ -274,6 +287,8 @@ Create workspaces for specific projects or products to track usage and costs sep
 ## FAQ
 
 ### What's the Default Workspace?
+
+### What's the Claude Code workspace?
 
 ### Are there limits on workspaces?
 

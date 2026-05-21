@@ -160,6 +160,8 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 | [Files API](build-with-claude/files.md) | `/v1/files` | No | No | Files retained until explicitly deleted. See [Files API](build-with-claude/files.md). |
 | [Agent skills](agents-and-tools/agent-skills/overview.md) | `/v1/messages` (with `skills`) / `/v1/skills` | No | No | Skill data retained per standard policy. See [Agent skills](agents-and-tools/agent-skills/overview.md). |
 | [MCP connector](agents-and-tools/mcp-connector.md) | `/v1/messages` (with `mcp_servers`) | No | No | Data retained per standard policy. See [MCP connector](agents-and-tools/mcp-connector.md). |
+| [Claude Managed Agents](managed-agents/overview.md) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | No | No | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md). |
+| [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) | `/v1/organizations/tunnels` | No | No | Research preview. See [MCP tunnels security](agents-and-tools/mcp-tunnels/security.md) for the data-flow boundary and subprocessor details. |
 
 1 [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA.
 

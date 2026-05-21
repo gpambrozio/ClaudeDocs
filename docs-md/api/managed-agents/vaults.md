@@ -12,7 +12,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 Vaults and credentials are workspace-scoped, meaning anyone with API key access can use them for authorizing an agent to complete a task. To revoke access, delete the vault or credential.
 
-A vault is the collection of `credentials` associated with an end-user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
+A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -54,7 +54,7 @@ Use `mcp_oauth` when the MCP server uses OAuth 2.0. If you supply a `refresh` bl
 The `refresh.token_endpoint_auth.type` field indicates how to authenticate the refresh call:
 
 - `none`: public client
-- `client_secret_basic`: HTTP Basic auth with the client secret
+- `client_secret_basic`: HTTP Basic authentication with the client secret
 - `client_secret_post`: client secret in the POST body
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -83,13 +83,13 @@ EOF
 
 Secret fields (`token`, `access_token`, `refresh_token`, `client_secret`) are write-only. They are never returned in API responses.
 
-Credentials are stored as provided and are not validated until session runtime. A bad token surfaces as an MCP auth error during the session, which is emitted but does not block the session from continuing.
+Credentials are stored as provided and are not validated until session runtime. A bad token surfaces as an MCP authentication error during the session, which is emitted but does not block the session from continuing.
 
 Constraints:
 
 - **One active credential per `mcp_server_url` per vault.** Creating a second credential for the same URL returns a 409.
 - **`mcp_server_url` is immutable.** To point at a different server, archive this credential and create a new one.
-- **Maximum 20 credentials per vault.** This matches the maximum amount of MCP servers per agent.
+- **Maximum 20 credentials per vault.** This matches the maximum number of MCP servers per agent.
 
 ## Reference the vault at session creation
 
@@ -110,12 +110,13 @@ Runtime behavior:
 
 - When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error if the server requires authentication.
 - When multiple vaults cover the MCP server, the first vault with a match wins.
+- In [multiagent sessions](managed-agents/multi-agent.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multi-agent.md).
 
 ## Credential refresh
 
 Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
 
-To be notified if a credential is archived, deleted, or fails to refresh you can subscribe to the vault and credential [webhooks](managed-agents/webhooks.md) associated with those lifecycle changes.
+To be notified if a credential is archived, deleted, or fails to refresh, you can subscribe to the vault and credential [webhooks](managed-agents/webhooks.md) associated with those lifecycle changes.
 
 | Event | Trigger |
 | --- | --- |
@@ -123,13 +124,13 @@ To be notified if a credential is archived, deleted, or fails to refresh you can
 | `vault.deleted` | Vault deleted. A `vault_credential.deleted` event is also emitted for each underlying credential. |
 | `vault_credential.archived` | Credential archived, either directly or as a result of vault archival. |
 | `vault_credential.deleted` | Credential deleted, either directly or as a result of vault deletion. |
-| `vault_credential.refresh_failed` | A `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
+| `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
 
-This is a non-exhaustive list of webhooks; visit the [webhooks documentation](managed-agents/webhooks.md) for a complete list.
+This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](managed-agents/webhooks.md) for the complete list.
 
 ### Diagnose an OAuth refresh failure
 
-To diagnose why a refresh failed, use the `/mcp_oauth_validate` endpoint. This enables you to determine how to handle the failure, which is distinct by error type.
+To diagnose why a refresh failed, use the `/mcp_oauth_validate` endpoint. This allows you to determine how to handle the failure, which is distinct by error type.
 
 The top-level `status` tells you what to do next:
 

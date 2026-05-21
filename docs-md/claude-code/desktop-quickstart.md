@@ -95,7 +95,7 @@ If you reject a change, Claude will ask how you’d like to proceed differently.
 ## [​](#now-what) Now what?
 
 You’ve made your first edit. For the full reference on everything Desktop can do, see [Use Claude Code Desktop](desktop.md). Here are some things to try next.
-**Interrupt and steer.** You can interrupt Claude at any point. If it’s going down the wrong path, click the stop button or type your correction and press **Enter**. Claude stops what it’s doing and adjusts based on your input. You don’t have to wait for it to finish or start over.
+**Interrupt and steer.** You can redirect Claude at any point. Click the stop button to interrupt immediately, or type a correction and press **Enter** to send it without stopping the running action. Either way, you don’t have to wait for it to finish or start over.
 **Give Claude more context.** Type `@filename` in the prompt box to pull a specific file into the conversation, attach images and PDFs using the attachment button, or drag and drop files directly into the prompt. The more context Claude has, the better the results. See [Add files and context](desktop.md).
 **Use skills for repeatable tasks.** Type `/` or click **+** → **Slash commands** to browse [built-in commands](commands.md), [custom skills](skills.md), and plugin skills. Skills are reusable prompts you can invoke whenever you need them, like code review checklists or deployment steps.
 **Review changes before committing.** After Claude edits files, a `+12 -1` indicator appears. Click it to open the [diff view](desktop.md), review modifications file by file, and comment on specific lines. Claude reads your comments and revises. Click **Review code** to have Claude evaluate the diffs itself and leave inline suggestions.

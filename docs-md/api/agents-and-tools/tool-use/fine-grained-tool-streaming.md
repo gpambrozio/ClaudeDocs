@@ -14,7 +14,7 @@ Fine-grained tool streaming is supported on the Claude API, [Claude Platform on 
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
-cURLCLIPythonTypeScript
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
@@ -50,46 +50,24 @@ with client.messages.stream(
         }
     ],
 ) as stream:
-    for event in stream:
-        pass
     final_message = stream.get_final_message()
 
-print(final_message.usage)
+print(f"Input tokens: {final_message.usage.input_tokens}")
+print(f"Output tokens: {final_message.usage.output_tokens}")
 ```
 
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
 
-With fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is because of differences in chunking behavior.
-
-Example:
-
-Without fine-grained streaming (15s delay):
-
-```inline-block
-Chunk 1: '{"'
-Chunk 2: 'query": "Ty'
-Chunk 3: 'peScri'
-Chunk 4: 'pt 5.0 5.1 '
-Chunk 5: '5.2 5'
-Chunk 6: '.3'
-Chunk 7: ' new f'
-Chunk 8: 'eatur'
-...
-```
-
-With fine-grained streaming (3s delay):
-
-```inline-block
-Chunk 1: '{"query": "TypeScript 5.0 5.1 5.2 5.3'
-Chunk 2: ' new features comparison'
-```
+With fine-grained tool streaming, tool input chunks start arriving sooner because the server skips JSON-validation buffering. Chunks are typically longer and contain fewer mid-token breaks as a side effect.
 
 Because fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.
 Particularly, if the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You generally have to write specific support to handle when `max_tokens` is reached.
 
 ## Accumulating tool input deltas
 
-When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. Your code must concatenate these fragments and parse the result once the block closes.
+When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. To assemble the full input, concatenate these fragments and parse the result when the block closes.
+
+Where your SDK provides an accumulator helper (as used in the first example on this page), it handles this for you. The manual pattern is for SDKs without a helper, or when you need to react to partial input before the block closes.
 
 The accumulation contract:
 
@@ -99,15 +77,12 @@ The accumulation contract:
 
 The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array; the delta strings build the real value.
 
-PythonTypeScript
+PythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
-import json
-import anthropic
-
 client = anthropic.Anthropic()
 
-tool_inputs = {}  # index -> accumulated JSON string
+tool_inputs: dict[int, str] = {}  # index -> accumulated JSON string
 
 with client.messages.stream(
     model="claude-opus-4-7",
@@ -127,22 +102,17 @@ with client.messages.stream(
     messages=[{"role": "user", "content": "Weather in Paris?"}],
 ) as stream:
     for event in stream:
-        if (
-            event.type == "content_block_start"
-            and event.content_block.type == "tool_use"
-        ):
-            tool_inputs[event.index] = ""
-        elif (
-            event.type == "content_block_delta"
-            and event.delta.type == "input_json_delta"
-        ):
-            tool_inputs[event.index] += event.delta.partial_json
-        elif event.type == "content_block_stop" and event.index in tool_inputs:
-            parsed = json.loads(tool_inputs[event.index])
-            print(f"Tool input: {parsed}")
+        match event.type:
+            case "content_block_start" if event.content_block.type == "tool_use":
+                tool_inputs[event.index] = ""
+            case "content_block_delta" if event.delta.type == "input_json_delta":
+                tool_inputs[event.index] += event.delta.partial_json
+            case "content_block_stop" if event.index in tool_inputs:
+                parsed = json.loads(tool_inputs[event.index])
+                print(f"Tool input: {parsed}")
 ```
 
-The Python and TypeScript SDKs provide higher-level stream helpers (`stream.get_final_message()`, `stream.finalMessage()`) that perform this accumulation for you. Use the preceding manual pattern only when you need to react to partial input before the block closes, such as rendering a progress indicator or starting a downstream request early.
+Reach for the manual pattern when you need to react to partial input before the block closes (for example, rendering a progress indicator). Otherwise, prefer your SDK's accumulator helper where the first example on this page uses one.
 
 ## Handling invalid JSON in tool responses
 
