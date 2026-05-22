@@ -62,13 +62,13 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 ## [​](#windows) Windows
 
-Follow these steps to install Git, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md) for full details.
+Follow these steps to optionally install Git for Windows, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md) for full details.
 
 1
 
-Install Git for Windows
+Install Git for Windows (optional)
 
-Git is a tool that Claude Code uses internally to track changes to your code. You won’t need to learn Git yourself.If you don’t already have it:
+Git for Windows provides Git Bash, which enables the Bash tool. Without it, Claude Code uses PowerShell instead. You won’t need to learn Git yourself.If you don’t already have it:
 
 1. Go to [git-scm.com/downloads/win](https://git-scm.com/downloads/win) and download the installer
 2. Run the installer. Click Next on each screen to accept the defaults. The installer has many screens, but you don’t need to change anything.
@@ -241,10 +241,11 @@ irm https://claude.ai/install.ps1 | iex
 
 'Claude Code on Windows requires either Git for Windows (for bash) or PowerShell'
 
-Neither Git for Windows nor PowerShell was found. Claude Code needs at least one shell. If only PowerShell is found, Claude Code uses the PowerShell tool instead of Bash.
+Neither PowerShell nor Git Bash was found. Claude Code needs at least one shell.
 
-1. If you haven’t installed Git yet, go back to the [first step in the Windows section](#windows). Alternatively, install [PowerShell 7](https://aka.ms/powershell).
-2. If Git is installed but Claude Code can’t find it, tell it where to look:
+1. Ensure `powershell.exe` is on your `PATH`. Its default location is `C:\Windows\System32\WindowsPowerShell\v1.0\`. Alternatively, install [PowerShell 7](https://aka.ms/powershell), which provides `pwsh`.
+2. If you’d rather use Git Bash, install [Git for Windows](https://git-scm.com/downloads/win) per the [first step in the Windows section](#windows).
+3. If Git is installed but Claude Code can’t find it, tell it where to look:
 
    ```shiki
    $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"

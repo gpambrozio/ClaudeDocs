@@ -2,7 +2,7 @@
 
 Copy page
 
-MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with manually supplied credentials, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) or [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md).
 
@@ -123,7 +123,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
    Windows (PowerShell)
 
    ```shiki
-   cat > config/mcp-gateway.yaml <<EOF
+   cat > config/mcp-proxy.yaml <<EOF
    listen_addr: ":8080"
    tunnel_domain: ${TUNNEL_DOMAIN}
    tls:
@@ -135,10 +135,10 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
 
    cat > docker-compose.yaml <<'EOF'
    services:
-     mcp-gateway:
+     mcp-proxy:
        image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
        volumes:
-         - ./config/mcp-gateway.yaml:/etc/mcp-gateway/config.yaml:ro
+         - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
          - ./data:/data:ro
        restart: unless-stopped
 
@@ -147,7 +147,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
        command: tunnel --no-autoupdate run --url http://localhost:8080
        environment:
          - TUNNEL_TOKEN
-       network_mode: "service:mcp-gateway"
+       network_mode: "service:mcp-proxy"
        restart: unless-stopped
 
      hello-mcp:
@@ -173,7 +173,7 @@ A three-container stack on your machine: a sample MCP server, the tunnel proxy, 
 
    ```shiki
    docker compose up -d
-   docker compose logs mcp-gateway | grep "route configured"
+   docker compose logs mcp-proxy | grep "route configured"
    docker compose logs cloudflared | grep "Registered tunnel connection"
    ```
 

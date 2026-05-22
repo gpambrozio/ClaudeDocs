@@ -2,7 +2,7 @@
 
 Copy page
 
-MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 A tunnel that won't accept traffic can fail at three layers; diagnose them in order: the outbound connection to the tunnel edge, the inner TLS handshake from Anthropic to your proxy, then upstream routing and IP validation.
 
@@ -11,8 +11,8 @@ A tunnel that won't accept traffic can fail at three layers; diagnose them in or
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | Tunnel doesn't appear in the agent **+ MCP Server** picker | The picker only lists tunnels in the session's workspace that have at least one active certificate. | Register a CA certificate, or open the session in the workspace the tunnel was created in. |
-| Caller sees HTTP 500; cloudflared logs `No ingress rules were defined` | cloudflared has no local target. | Add `--url http://localhost:8080` and `network_mode: "service:mcp-gateway"` to the cloudflared service. |
-| Proxy logs `no route for host` | `tunnel_domain` doesn't match the assigned domain, or `config.yaml` was edited without restarting (`docker compose restart mcp-gateway`). | Set `tunnel_domain` to the exact domain shown on the tunnel detail page. |
+| Caller sees HTTP 500; cloudflared logs `No ingress rules were defined` | cloudflared has no local target. | Add `--url http://localhost:8080` and `network_mode: "service:mcp-proxy"` to the cloudflared service. |
+| Proxy logs `no route for host` | `tunnel_domain` doesn't match the assigned domain, or `config.yaml` was edited without restarting (`docker compose restart mcp-proxy`). | Set `tunnel_domain` to the exact domain shown on the tunnel detail page. |
 | Proxy logs `IP validation failed: <ip> is not a private address` | Upstream resolves outside RFC1918. | See [Upstream IP validation](#upstream-ip-validation). |
 | Proxy exits with `cannot unmarshal !!seq into map[string]string` | `routes` is a YAML list. | Use `routes: { name: http://host:port }`. |
 | Proxy exits with `open /data/tls.key: permission denied` | The key is `0600`; the proxy container runs non-root. | `chmod 644 data/tls.key`. |
@@ -32,7 +32,7 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
      auth: http://your-auth-server:8080
    ```
 
-   Restart the proxy after editing `routes` (`docker compose restart mcp-gateway`, or `helm upgrade`).
+   Restart the proxy after editing `routes` (`docker compose restart mcp-proxy`, or `helm upgrade`).
 2. 2
 
    Serve split-endpoint discovery metadata
@@ -106,7 +106,7 @@ If the proxy logs `IP validation failed: <ip> is not a private address`, the ups
 
 If the address is legitimate, add the narrowest covering CIDR to `upstream.allowed_ips`. Setting `allowed_ips` **replaces** the RFC1918 default rather than extending it, so include the private ranges your other upstreams use:
 
-config/mcp-gateway.yaml
+config/mcp-proxy.yaml
 
 ```shiki
 upstream:

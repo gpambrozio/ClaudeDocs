@@ -2,7 +2,7 @@
 
 Copy page
 
-MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 The Anthropic Helm chart installs the MCP tunnel stack as a single Deployment and attaches it to the tunnel you created in the [Console](agents-and-tools/mcp-tunnels/console.md).
 

@@ -2,7 +2,7 @@
 
 Copy page
 
-MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the tunneled servers to an agent. [Deploy MCP tunnels with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md) cover running the stack inside your network.
 

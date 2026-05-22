@@ -2,7 +2,7 @@
 
 Copy page
 
-MCP tunnels is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
 This guide deploys the MCP tunnel stack as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
@@ -103,7 +103,7 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
        environment:
          - TUNNEL_TOKEN
        # Share the proxy's netns so localhost:8080 reaches it.
-       network_mode: "service:mcp-gateway"
+       network_mode: "service:mcp-proxy"
        restart: unless-stopped
        user: "65532:65532"
        read_only: true
@@ -117,10 +117,10 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
            max-size: "10m"
            max-file: "3"
 
-     mcp-gateway:
+     mcp-proxy:
        image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:6b9adedbf2763143ec72f106ecaf0ce7fd3294e89b208f54a1db97a33d14c5ba
        volumes:
-         - ./config/mcp-gateway.yaml:/etc/mcp-gateway/config.yaml:ro
+         - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
          - ./data:/data:ro
        restart: unless-stopped
        user: "65532:65532"
@@ -194,7 +194,7 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
    `tunnel_domain` is **required**: the proxy uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL.
 
    ```shiki
-   cat > config/mcp-gateway.yaml <<EOF
+   cat > config/mcp-proxy.yaml <<EOF
    listen_addr: ":8080"
    log_level: info
    shutdown_timeout: 30s
